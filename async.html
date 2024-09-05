@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+    function hello1() {
+        return new Promise((resolve, reject) => {
+            resolve("hello1");
+        });
+
+        return "hello1";
+    }
+    function div(a, b) {
+        return a / b;
+    }
+
+    window.onload = async () => { // 包住await的function要加async
+        hello1()
+            .then(ret => {
+                console.log(ret);
+                throw "錯誤";
+                return ret.toUpperCase();
+            })
+            .then(ret => {
+                console.log(ret);
+            })
+            .catch(reasob => {
+                console.log(reason);
+            })
+
+        console.log("done");
+    }
+</script>
+
+<body>
+
+</body>
+
+</html>
