@@ -1,0 +1,292 @@
+
+* {
+    font-family: "Noto Sans TC", system-ui;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.nav-logo img{
+    height: 50px;
+    align-items: center;
+    padding: 20px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.end-photo { /*最下面的照片*/
+    position: absolute;
+    bottom: 15px; 
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+.end-photo img { 
+    max-width: 100%; 
+    height: auto;
+}
+
+.overlay .closebtn {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    font-size: 36px;
+}
+
+.overlay {
+    height: 100%;
+    width: 0;
+    padding-top: 20px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-image: url('./material/Oreti.png');
+    background-repeat: repeat; /* 確保圖案會平鋪 */
+    background-size: auto; /* 保持圖案原尺寸 */
+    overflow-x: hidden;
+    transition: 0.5s;
+}
+
+.overlay-content {
+    position: relative;
+    top: 25%;
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.overlay >a,
+.overlay-content >a,
+.dropdown-btn  {
+    padding: 8px;
+    text-decoration: none;
+    font-size: 36px;
+    color: black;
+    display: block;
+    transition: 0.3s;
+    font-weight: bolder;
+}
+
+
+.overlay .closebtn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 60px;
+}
+
+.sidenav a, .dropdown-btn {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 20px;
+    display: block;
+    border: none;
+    background: none;
+    width: 100%;
+    cursor: pointer;
+    outline: none;
+}
+
+/*下拉式選單一開始保持閉合*/
+.dropdown-content-1 , 
+.dropdown-content-2 {
+    display: none;
+
+}
+
+.dropdown-content-1 a, 
+.dropdown-content-2 a{
+    font-size: 24px;
+    padding: 8px;
+    text-decoration: none;
+    display: block;
+    color: black;
+    transition: 0.3s;
+}
+
+.overlay-content>a:hover, 
+.dropdown-btn:hover, 
+.dropdown-content-1>a:hover, 
+.dropdown-content-2>a:hover {
+    background-color: rgba(245, 245, 245, 0.8);
+} 
+
+.active {
+    background-color: rgba(245, 245, 245, 0.4);
+}
+
+.dropdown-btn{
+    font-size: 36px;
+}
+
+.dropdown-btn img {
+    height: 20px;
+}
+  
+/* header */
+.header {
+    text-align: center;
+    position: sticky;
+}
+
+.header-content {
+    height: 40px;
+    background-image: url('./material/Vorderrhein3.png');
+    background-repeat: repeat; 
+    background-size: auto;
+    background-position: 1500px 3197px; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 20px;
+}
+
+.menu-icon {
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.logo{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    animation-duration: 2s
+}
+
+
+.logo img {
+    height: 50px;
+}
+
+.header-icons img{
+    height: 30px;
+}
+
+.icon  :hover{
+   height: 35px;
+}
+.header-icons a {
+    margin: 0 10px;
+    font-size: 24px;
+    text-decoration: none;
+    color: black;
+    justify-content: center;
+}
+
+.breadcrumb {
+    padding: 10px 20px;
+    text-align: left;
+    font-size: 14px;
+}
+
+.breadcrumb a {
+    color: black;
+    text-decoration: none;
+}
+
+.breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+.footer {
+    background-image: url('./material/Vorderrhein3.png');
+    background-repeat: repeat;
+    background-size: auto; 
+    background-position: 1940px 774px;
+    padding: 20px;
+    text-align: center;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+.footer-content {
+    display: flex;
+    justify-content:center;
+    flex-wrap: wrap;
+}
+
+.footer-content div {
+    padding: 20px 30px;
+    text-align: left;
+    min-width: 200px;  
+    box-sizing: border-box; 
+    text-align: left;  
+}
+
+.footer-content div span{ /* media icon */
+    float: left;
+    text-align: left;
+    padding-top: 10px;
+}
+
+.footer-content h3 {
+    margin-bottom: 10px;
+    color: black;
+}
+
+.footer-content ul {
+    list-style: none;
+}
+
+.footer-content ul li {
+    margin-bottom: 5px;
+    color: black;
+}
+
+.contact-info p, .registration-info p {
+    color: black;
+    margin-bottom: 5px;
+}
+
+.social-media {
+    display: flex;
+    justify-content: center;
+}
+
+.social-media a {
+    margin: 0 10px;
+}
+
+.social-media img {
+    height: 30px;
+    width: 30px;
+}
+
+/*響應式*/
+@media ((min-width:400px) and (max-width: 1100px)) {
+    .footer-content {
+        justify-content: center;
+        flex-direction: column;  
+    }
+
+    .sidenav {
+        padding-top: 15px;
+    }
+
+    .overlay-content >a , .dropdown-btn  {
+        font-size: 20px;
+    }
+
+    .dropdown-btn img {
+        height: 16px;
+    }
+
+    .dropdown-content-1 a,
+    .dropdown-content-2 a{
+        font-size: 16px;
+    }
+    .overlay .closebtn {
+        font-size: 40px;
+        top: 15px;
+        right: 35px;
+    }
+}
+
