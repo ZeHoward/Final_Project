@@ -12,7 +12,7 @@
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap');
     </style>
     <link rel="stylesheet" href="./style.css">
-
+    <script src="./home.js"></script>
 </head>
 <body>
     <!-- sidenav start-->
@@ -76,6 +76,32 @@
     </header>
     <!-- header end -->
     
+    <!-- slideshow start -->
+    <div class="slideshow-container">
+        <div class="mySlides fade">
+          <img src="./material/slide1.png" style="width:100%">
+        </div>
+        
+        <div class="mySlides fade">
+          <img src="./material/slide1.png" style="width:100%">
+        </div>
+        
+        <div class="mySlides fade">
+          <img src="./material/slide1.png" style="width:100%">
+        </div>
+        
+        <a class="prev" onclick="plusSlides(-1)">❮</a>
+        <a class="next" onclick="plusSlides(1)">❯</a> 
+    </div>
+    <br>
+        
+    <div style="text-align:center">
+        <span class="dot" onclick="currentSlide(1)"></span> 
+        <span class="dot" onclick="currentSlide(2)"></span> 
+        <span class="dot" onclick="currentSlide(3)"></span> 
+    </div>
+    <!-- slideshow end -->
+
     <!-- footer start -->
     <footer class="footer">
         <div class="footer-content">
@@ -115,27 +141,5 @@
         </div>
     </footer>
     <!-- footer end -->
-    <script>
-        function openSidenav() { //打開menu
-            document.getElementById("sidenav").style.width= "100%";
-        }
-        function closeSidenav() {//menu
-            document.getElementById("sidenav").style.width= "0%" ; 
-        }
-        var dropdown = document.getElementsByClassName("dropdown-btn");
-        var i;
-
-        for (i = 0; i < dropdown.length; i++) {
-        dropdown[i].addEventListener("click", function() {
-            this.classList.toggle("active");
-            var dropdownContent = this.nextElementSibling;
-            if (dropdownContent.style.display === "block") {
-            dropdownContent.style.display = "none";
-            } else {
-            dropdownContent.style.display = "block";
-            }
-        });
-        }
-    </script>
 </body>
 </html>
