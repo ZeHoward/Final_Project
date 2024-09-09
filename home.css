@@ -270,7 +270,8 @@ img {
 
 /* 生鮮食材包專區 */
 .container {
-    max-width: 1000px;
+    align-items: center;
+    /* max-width: 1000px; */
     margin: 0 auto;
 }
 h1 {
@@ -287,6 +288,7 @@ h1 {
     display: flex;
     justify-content: center;
     gap: 20px;
+    margin: 60px;
     transition: transform 0.5s ease;
 }
 .product {
