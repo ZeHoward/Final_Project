@@ -478,8 +478,12 @@ canvas {
 
 /* 新增的 row-group 讓多個選項佈局在一行 */
 .row-group {
-    display: flex;
-    justify-content: space-between; /* 讓每個項目等間隔 */
+    display:flex;
+    justify-content: space-around; /* 讓每個項目等間隔 */
+}
+
+.row-group #skulabel {
+    margin-bottom: 13px;
 }
 
 .row-group .field {
