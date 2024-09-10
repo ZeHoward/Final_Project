@@ -11,18 +11,16 @@
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap");
     </style>
-    <link rel="stylesheet" href="./template.css" />
+    <link rel="stylesheet" href="./home.css" />
   </head>
   <body>
     <!-- sidenav start-->
     <div id="sidenav" class="overlay">
-      <a href="javascript:void(0)" class="closebtn" onclick="closeSidenav()"
-        >&times;</a
-      >
-      <div class="nav-logo">
-        <img src="./material/logo.png" alt="logo" />
+      <div class="nav">
+        <button class="closebtn" onclick="closeSidenav()">
+          <img src="./material/icon/close.png" alt="" />
+        </button>
       </div>
-
       <div class="overlay-content">
         <a href="#home">首頁</a>
         <a href="#about">關於我們</a>
@@ -35,7 +33,7 @@
               id="updown1"
             />
           </button>
-          <div class="dropdown-content-1">
+          <div class="dropdown-content">
             <a href="#ready">調理包專區</a>
             <a href="#mealkit">生鮮食材包專區</a>
           </div>
@@ -49,7 +47,7 @@
               id="updown2"
             />
           </button>
-          <div class="dropdown-content-2">
+          <div class="dropdown-content">
             <a href="#QA">Ｑ＆Ａ</a>
             <a href="#noticet">購買須知</a>
             <a href="#contact">聯絡我們</a>
@@ -58,6 +56,7 @@
         <a href="#share">討論區</a>
         <a href="#join">加入我們</a>
       </div>
+      <div id="add"></div>
       <div class="end-photo">
         <img src="./material/cook.png" alt="" />
       </div>
@@ -65,7 +64,7 @@
     <!-- sidenav end-->
 
     <!-- header start -->
-    <header class="header">
+    <div class="header">
       <div class="header-content">
         <div class="header-icons">
           <div class="icon menu-icon" onclick="openSidenav()">
@@ -90,11 +89,11 @@
       <div class="breadcrumb">
         <a href="#">首頁</a>
       </div>
-    </header>
+    </div>
     <!-- header end -->
 
     <!-- footer start -->
-    <footer class="footer">
+    <div class="footer">
       <div class="footer-content">
         <div class="about-us">
           <h3>關於我們</h3>
@@ -136,8 +135,8 @@
           <p>本公司產品皆投保產品責任保險</p>
         </div>
       </div>
-    </footer>
+    </div>
     <!-- footer end -->
-    <script src="./template.js"></script>
+    <script src="./home.js"></script>
   </body>
 </html>
