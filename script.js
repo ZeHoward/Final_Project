@@ -5,7 +5,7 @@ const chartData = {
     revenue: {
         week: {
             labels: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
-            data: [3000, 4000, 3500, 5000, 4500, 6000, 5500],
+            data: [3000, 40, 3500, 5000, 4500, 6000, 5500],
             label: '每周營業額'
         },
         month: {
@@ -104,7 +104,7 @@ const products = [
         stock: '50',
     },
     {
-        index: '1',
+        index: '2',
         sku: 'ABC-652',
         image: '紅大頭.png',
         name: '商品名稱2',
@@ -113,7 +113,7 @@ const products = [
         stock: '30',
     },
     {
-        index: '1',
+        index: '3',
         sku: 'ABC-67',
         image: '紅大頭.png',
         name: '商品名稱3',
@@ -310,17 +310,15 @@ function generateProductUploadForm() {
             </div>
 
             <form>
-            <div class="row-group">
-                <div class="form-group" style="width:48.5%">
+                <div class="form-group">
                     <label for="description">商品名稱</label>
-                    <textarea id="description" rows="1"></textarea>
+                    <textarea id="description" rows="1" placeholder="商品名稱"></textarea>
                 </div>
-                <div class="form-group" style="width:48.5%">
+                <div class="form-group">
                     <label for="sku" id="skulabel">SKU</label>
                     <textarea id="sku" rows="1"></textarea>
                 </div>
-            </div>
-
+            
                 <!-- 類別選擇 -->
                 <div class="form-group">
                     <label for="category">菜品分類</label>
@@ -397,82 +395,6 @@ function generateProductUploadForm() {
     `;
     mainContent.innerHTML = productUploadForm;
 }
-
-// 點擊"商品管理"時生成內容的函數，包含修改與刪除按鈕
-// function generateProductManagementWithActionsContent() {
-//     const mainContent = document.querySelector('.main-content');
-//     mainContent.innerHTML = '';  // 清空之前的內容
-
-//     // 動態生成商品管理的標題和表格
-//     const productManagementSection = `
-//         <section class="product-management">
-//             <h1>商品管理</h1>
-//             <div class="productControls">
-//                 <label>每頁顯示結果數：</label>
-//                 <select>
-//                     <option value="25">25</option>
-//                     <option value="50">50</option>
-//                     <option value="100">100</option>
-//                 </select>
-
-//                 <label>排序：</label>
-//                 <select>
-//                     <option value="dateASC">價格(遞增)</option>
-//                     <option value="dateDESC">價格(遞減)</option>
-//                     <option value="amountASC">庫存(遞增)</option>
-//                     <option value="amountDESC">庫存(遞減)</option>
-//                 </select>
-
-//                 <label>：</label>
-//                 <select>
-//                     <option value="all">全部</option>
-//                     <option value="home">家常料理</option>
-//                     <option value="kid">兒童友善</option>
-//                     <option value="senior">銀髮友善</option>
-//                     <option value="international">異國料理</option>
-//                     <option value="multi">多人料理</option>
-//                 </select>
-//             </div>
-//             <!-- 商品表格 -->
-//             <table class="product-table">
-//                 <thead>
-//                     <tr>
-//                         <th>商品圖片</th>
-//                         <th>商品名稱</th>
-//                         <th>類別</th>
-//                         <th>價格</th>
-//                         <th>操作</th>
-//                     </tr>
-//                 </thead>
-//                 <tbody>
-//                     <!-- 這裡插入動態生成的商品 -->
-//                 </tbody>
-//             </table>
-//         </section>
-//     `;
-//     mainContent.innerHTML = productManagementSection;
-//     const tbody = document.querySelector('.product-table tbody');
-
-//     // 動態生成每個商品的管理按鈕（修改、刪除）
-//     products.forEach((product, index) => {
-//         const tr = document.createElement('tr');
-
-//         tr.innerHTML = `
-//             <td>
-//                 <img src="${product.image}" alt="${product.name}" style="width: 50px; height: 50px;">
-//             </td>
-//             <td>${product.name}</td>
-//             <td>${product.category}</td>
-//             <td class="stock-quantity">${product.price}</td>
-//             <td>
-//                 <button class="edit-button" data-index="${index}">修改</button>
-//                 <button class="delete-button" data-index="${index}">刪除</button>
-//             </td>
-//         `;
-
-//         tbody.appendChild(tr);
-//     });
-// }
 
 // 點擊"商品管理"時生成內容的函數
 function generateProductManagementWithActionsContent() {

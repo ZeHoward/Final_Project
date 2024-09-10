@@ -7,6 +7,10 @@ html {
     background-color: #e4efe1;
 }
 
+textarea {
+    resize: none; /* 沒辦法拉右下角縮放 */
+}
+
 div tbody td {
     width: auto;
     height: auto;
