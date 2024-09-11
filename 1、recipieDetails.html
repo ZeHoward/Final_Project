@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>食譜>泰式冬蔭功海鮮湯</title>
+  <title>線上食譜>食譜細節</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -31,6 +31,7 @@
     .receipeTitle {
       text-align: left;
       font-size: 24px;
+      padding-top: 30px
     }
     .receipeDetails {
       font-size: medium;
@@ -45,7 +46,12 @@
       margin-bottom: 20px;
       border-radius: 25px; /* 圓角效果 */
     }
-    .button-top{
+    .btns{
+      display: flex; 
+      justify-content: space-between; 
+      width: 100%;
+    }
+    .btn-top{
       display: inline-block;
       width: 150px;
       height: 40px;
@@ -59,7 +65,7 @@
       margin: 10px;
       transition: background-color 0.3s, transform 0.3s;
     }
-    .button-red {
+    .btn-red {
       display: inline-block;
         width: 50%; /* 佔用 50% 寬度 */
         height: 40px;
@@ -74,11 +80,11 @@
         transition: background-color 0.3s, transform 0.3s;
         background-color: #D35B50; /* 紅色背景 */
     }
-    .button-red:hover {
+    .btn-red:hover {
       background-color: #c0392b;
       transform: scale(1.05);
     }
-    .button-yellow {
+    .btn-yellow {
       display: inline-block;
         width: 50%; /* 佔用 50% 寬度 */
         height: 40px;
@@ -93,7 +99,7 @@
         transition: background-color 0.3s, transform 0.3s;
         background-color: #F3CE6E; /* 黃色背景 */
     }
-    .button-yellow:hover {
+    .btn-yellow:hover {
       background-color: #f39c12;
       transform: scale(1.05);
     }
@@ -116,7 +122,7 @@
 <body>
   <div class="container">
     <div style="text-align: center">
-      <h3 class="button-top" style="background-color: #E0912F">線上食譜</h3>
+      <h3 class="btn-top" style="background-color: #E0912F">線上食譜</h3>
     </div>
     <h1 class="foodName">泰式冬蔭功海鮮湯</h1>
     <p>
@@ -126,14 +132,14 @@
     </p>
     <div class="main">
       <img src="image/西半牙海鮮燉飯.jpg" alt="泰式冬蔭功海鮮湯" class="image" />
-      <div style="display: flex; justify-content: space-between; width: 100%;">
-        <a class="button-red">收藏食譜</a>
-        <a class="button-yellow">查看商品</a>
+      <div class="btns">
+        <a class="btn-red">收藏食譜</a>
+        <a class="btn-yellow">查看商品</a>
       </div>
     </div>
     <div>
       <div>
-        <h4 class="receipeTitle" style="padding-top: 30px">食材：</h4>
+        <h4 class="receipeTitle">食材：</h4>
         <ul class="receipeDetails">
           <li>蝦 (約12隻，中等大小，去殼留尾)</li>
           <li>魷魚 (150克，切圈)</li>

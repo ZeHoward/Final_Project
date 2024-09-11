@@ -151,11 +151,11 @@
 
             <div style="margin-top: 36%;">
                 <!-- 修改資料按鈕 -->
-                <a href="" style="text-decoration: none;" class="goBack"> <修改資料</a>
+                <a href="" class="goBack"> <修改資料</a>
 
                 <!-- 確認付款按鈕 -->
-                <button  class=checkBtn>
-                <a href="" style="color: white;text-decoration: none;">確認付款</a>
+                <button  class=checkBtn id="checkBtn">
+                <a id="paymentLink" href=" " style="color: white;text-decoration: none;">確認付款</a>
                 </button>
             </div>
         </div>
@@ -203,5 +203,37 @@
             </div>
         </div>
     </div>
+
+    <!-- <script>
+        async function fetchPaymentUrl() {
+            try {
+                // 向後端請求付款 URL
+                const response = await fetch('/api/get-payment-url');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+
+                // 設置付款 URL 到按鈕的鏈接
+                const paymentLink = document.getElementById('paymentLink');
+                paymentLink.href = data.url;
+
+                // 可選：在按鈕上添加事件處理器，確保 URL 正確（如果需要）
+                document.getElementById('checkBtn').addEventListener('click', function() {
+                    if (!paymentLink.href) {
+                        alert('付款 URL 尚未加載，請稍後再試。');
+                        return false;
+                    }
+                });
+
+            } catch (error) {
+                console.error('Error fetching payment URL:', error);
+                alert('無法獲取付款 URL');
+            }
+        }
+
+        // 頁面加載完成後調用函數
+        window.onload = fetchPaymentUrl;
+    </script> -->
 </body>
 </html>

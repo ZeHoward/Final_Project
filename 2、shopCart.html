@@ -6,140 +6,142 @@
     <title>購物車</title>
     <style>
       body {
-        font-family: Arial, sans-serif; /* 設定字體 */
-        margin: 20px; /* 設定邊距 */
-        position: relative; /* 設定相對定位 */
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        position: relative;
       }
       .container {
-        width: 80%; /* 設定容器寬度為頁面寬度的80% */
-        max-width: 800px; /* 最大寬度為800px */
-        margin: 0 auto; /* 水平居中 */
-        padding: 20px; /* 設定內邊距 */
+        width: 80%;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
       }
       h1 {
-        text-align: center; /* 標題置中 */
+        text-align: center;
+        margin-bottom: 50px;
       }
       .back-button {
-        font-size: 16px; /* 字體大小 */
-        color: #007bff; /* 字體顏色 */
-        cursor: pointer; /* 鼠標變成手形 */
-        text-decoration: none; /* 去掉文字裝飾 */
-        margin-bottom: 20px; /* 下邊距 */
-        display: inline-block; /* 設為行內區塊元素 */
+        font-size: 16px;
+        font-weight: bolder;
+        color: #007bff;
+        cursor: pointer;
+        text-decoration: none;
+        margin-bottom: 20px;
+        display: inline-block;
       }
       table {
-        width: 100%; /* 設定表格寬度為100% */
-        border-collapse: collapse; /* 合併邊框 */
-        margin-bottom: 20px; /* 下邊距 */
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
       }
       thead th {
-        border-bottom: 2px solid #ddd; /* 表頭的底部邊框 */
-        text-align: center; /* 標題置中 */
+        border-bottom: 2px solid #ddd;
+        text-align: center;
       }
       tfoot td {
-        border-top: 2px solid #ddd; /* 表腳的上邊框 */
+        border-top: 2px solid #ddd;
       }
       tbody td {
-        border-bottom: 1px solid #ddd; /* 表格內容的底部邊框 */
-        text-align: center; /* 內容置中 */
+        border-bottom: 1px solid #ddd;
+        text-align: center;
       }
       tbody tr:last-child td {
-        border-bottom: none; /* 最下面一行的底部邊框 */
+        border-bottom: none;
       }
       td {
-        padding: 10px; /* 單元格內邊距 */
-        text-align: center; /* 文字置中 */
+        padding: 10px;
+        text-align: center;
       }
       .total {
-        font-weight: bold; /* 文字加粗 */
-        font-size: 1.2em; /* 字體大小 */
-        text-align: left; /* 文字左對齊 */
-        margin-top: 20px; /* 上邊距 */
-        border-top: 2px solid #ddd; /* 上邊框 */
-        padding-top: 10px; /* 上內邊距 */
+        font-weight: bold;
+        font-size: 1.2em;
+        text-align: left;
+        margin-top: 20px;
+        border-top: 2px solid #ddd;
+        padding-top: 10px;
       }
       .product-image {
-        width: 100px; /* 圖片寬度 */
-        height: 100px; /* 圖片高度 */
-        margin: 10px; /* 外邊距 */
-        object-fit: cover; /* 圖片填滿 */
+        width: 100px;
+        height: 100px;
+        margin: 10px;
+        object-fit: cover;
       }
       .coupon-container {
-        display: flex; /* 使用彈性布局 */
-        justify-content: flex-end; /* 內容右對齊 */
-        align-items: center; /* 內容垂直居中 */
-        margin-top: 10px; /* 上邊距 */
-        gap: 10px; /* 內部元素之間的間距 */
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin-top: 10px;
+        gap: 10px;
       }
       .coupon-container input {
-        width: 200px; /* 輸入框寬度 */
-        padding: 10px; /* 內邊距 */
+        width: 200px;
+        padding: 10px;
       }
       .button {
-        background-color: #857d7b; /* 背景顏色 */
-        color: white; /* 字體顏色 */
-        padding: 10px 20px; /* 內邊距 */
-        border: none; /* 無邊框 */
-        cursor: pointer; /* 鼠標變成手形 */
-        text-align: center; /* 文字置中 */
-        width: auto; /* 自動寬度 */
+        background-color: #857d7b;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        text-align: center;
+        width: auto;
       }
       .button:hover {
-        background-color: #564a4d; /* 滑鼠懸停時的背景顏色 */
+        background-color: #564a4d;
       }
       .quantity {
-        display: flex; /* 使用彈性布局 */
-        align-items: center; /* 內容垂直居中 */
+        display: flex;
+        align-items: center;
       }
       .quantity button {
-        background-color: transparent; /* 背景透明 */
-        border: 1px solid #ddd; /* 邊框樣式 */
-        color: #007bff; /* 字體顏色 */
-        font-size: 14px; /* 字體大小 */
-        cursor: pointer; /* 鼠標變成手形 */
-        padding: 5px 10px; /* 內邊距 */
-        text-align: center; /* 文字置中 */
+        background-color: transparent;
+        border: 1px solid #ddd;
+        color: #007bff;
+        font-size: 14px;
+        cursor: pointer;
+        padding: 5px 10px;
+        text-align: center;
       }
       .quantity span {
-        margin: 0 10px; /* 左右外邊距 */
+        margin: 0 10px;
       }
       .actions {
-        display: flex; /* 使用彈性布局 */
-        justify-content: flex-end; /* 內容右對齊 */
-        margin-top: 20px; /* 上邊距 */
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 20px;
       }
       .submit-button {
-        background-color: #ff5733; /* 背景顏色 */
-        border-radius: 8px; /* 邊框圓角 */
-        color: white; /* 字體顏色 */
-        padding: 10px 15px; /* 內邊距 */
-        border: none; /* 無邊框 */
-        cursor: pointer; /* 鼠標變成手形 */
-        text-align: center; /* 文字置中 */
-        margin-left: 10px; /* 左邊距 */
-        width: 290px; /* 寬度 */
+        background-color: #ff5733;
+        border-radius: 8px;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        cursor: pointer;
+        text-align: center;
+        margin-left: 10px;
+        width: 290px;
         margin-top: 25px;
       }
       .submit-button:hover {
-        background-color: #c70039; /* 滑鼠懸停時的背景顏色 */
+        background-color: #c70039;
       }
       /* 刪除按鈕樣式 */
       td button {
-        background-color: transparent; /* 背景透明 */
-        border: none; /* 無邊框 */
-        color: #ff5733; /* 字體顏色 */
-        font-size: 16px; /* 字體大小 */
-        cursor: pointer; /* 鼠標變成手形 */
-        padding: 0; /* 無內邊距 */
-        text-align: center; /* 文字置中 */
+        background-color: transparent;
+        border: none;
+        color: #ff5733;
+        font-size: 16px;
+        cursor: pointer;
+        padding: 0;
+        text-align: center;
       }
     </style>
   </head>
   <body>
     <div class="container">
       <!-- 返回購物車的連結 -->
-      <a href="#" class="back-button"> <返回購物車</a>
-      <h1 style="margin-bottom: 50px;">你的購物車</h1>
+      <a href="#" class="back-button"> &lt;返回購物</a>
+      <h1>你的購物車</h1>
       <table>
         <thead>
           <tr>
@@ -152,10 +154,11 @@
           </tr>
         </thead>
         <tbody>
+          
           <tr>
             <td>
               <img
-                src="image\印度雞肉香飯.jpg"
+                src="image/印度雞肉香飯.jpg"
                 alt="商品圖片"
                 class="product-image"
               />
@@ -178,7 +181,7 @@
           <tr>
             <td>
               <img
-                src="image\西半牙海鮮燉飯.jpg"
+                src="image/西半牙海鮮燉飯.jpg"
                 alt="商品圖片"
                 class="product-image"
               />
@@ -201,7 +204,7 @@
           <tr>
             <td>
               <img
-                src="image\越南牛肉河粉.jpg"
+                src="image/越南牛肉河粉.jpg"
                 alt="商品圖片"
                 class="product-image"
               />
@@ -224,15 +227,13 @@
         </tbody>
       </table>
 
-      <div style="display: flex a">
-        <!-- 商品總額顯示 -->
-        <div class="total">商品總額 NT$600</div>
-        <!-- 優惠券輸入框和按鈕 -->
-        <div class="coupon-container">
-          <input type="text" placeholder="輸入優惠碼" style="width: 150px" />
-          <button class="button">使用優惠券</button>
-        </div>
+      <div class="total">商品總額 NT$600</div>
+
+      <div class="coupon-container">
+        <input type="text" placeholder="輸入優惠碼" />
+        <button class="button">使用優惠券</button>
       </div>
+
       <div class="actions">
         <!-- 提交訂單按鈕 -->
         <button class="submit-button">提交訂單</button>
