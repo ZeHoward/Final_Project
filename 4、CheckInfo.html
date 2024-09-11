@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>確認資訊</title>
+    <style>
+        body {
+            display: flex;
+            margin: 0;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            display: flex;
+            width: 100%;
+            margin: 0;
+            box-shadow: none;
+            border-radius: 0;
+            overflow: hidden;
+        }
+        .left,
+        .right {
+            width: 50%;
+            padding: 20px;
+            box-sizing: border-box;
+            background-color: white;
+            margin: 10px 5%;
+            position: relative;
+        }
+        
+        .steps {
+            position: absolute;
+            top: 1%;
+            left: 20px;
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            color: #333;
+        }
+        .steps a {
+            color: #000000;
+            text-decoration: none;
+            margin: 0 5px;
+        }
+        .steps a:not(:last-child)::after {
+            content: '>';
+            margin: 0 5px;
+        }
+       
+        .item {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        .item img {
+            width: 80px;
+            height: 80px;
+            margin-right: 15px;
+        }
+        .item-details {
+            flex: 1;
+            font-weight: bold;
+        }
+        .item-name .item-quantity {
+            text-align: left;
+        }
+        .item-price {
+            text-align: right;
+        }
+        .total {
+            margin-top: 20px;
+            font-weight: bolder;
+        }
+        .contact-info {  
+            background-color: #ffffff;  
+            border: 2px solid #D1DE74; /* 框線顏色 */  
+            border-radius: 5px;  
+            padding: 20px;  
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);  
+            color: #333; /* 文字顏色 */  
+            width: 100%;
+            margin-top: 30px;
+        }
+        .info-item {  
+            margin-bottom: 10px;  
+            padding: 10px; /* 調整內邊距以增加框線顯示的清晰度 */
+            border-bottom: 1px solid #ddd; /* 底部邊框 */
+        } 
+        .info-item:last-child {  
+            border-bottom: none; /* 最後一項去掉底部邊框 */
+        }
+        .header-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 55px;
+        }
+ 
+        .goBack{
+          text-decoration: none; /* 去掉下劃線 */
+          color: #D35B50; /* 設定未點選時的顏色 */
+        }
+      
+        .goBack:hover {
+            color: #c5111a; /* 設定滑鼠懸停時的顏色 (可選) */
+        }
+
+        .item {
+            border-bottom: 1px solid #7c7b7b;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+
+        .item:last-child {
+            border-bottom: none;
+        }
+
+        .checkBtn{
+            margin-left: 70%;
+            height: 30px;
+            width: 150px;
+            background-color: #D35B50;
+            border: none;
+            font-size: large;
+            border-radius: 5px;
+            }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="left">
+            <div class="steps">
+                <a href="#" style="color: #D35B50;">購物車</a>
+                <a href="#" style="color: #D35B50;">填寫資料</a>
+                <a href="#" style="font-weight: bolder;">確認資訊</a>
+                <a href="#">付款</a>
+            </div>
+            <div class="header-row">
+                <div class="contact-info">  
+                    <div class="info-item"><strong>收件人：</strong>不來的</div>  
+                    <div class="info-item"><strong>聯絡信箱：</strong>bradchao@brad.com</div>  
+                    <div class="info-item"><strong>聯絡電話：</strong>02-23123456</div>  
+                    <div class="info-item"><strong>配送地址：</strong>100台北市中正區中山南路7號</div>  
+                    <div class="info-item"><strong>配送方式：</strong>冷凍-黑貓宅急便</div>  
+                </div>  
+            </div>
+
+            <div style="margin-top: 36%;">
+                <!-- 修改資料按鈕 -->
+                <a href="" style="text-decoration: none;" class="goBack"> <修改資料</a>
+
+                <!-- 確認付款按鈕 -->
+                <button  class=checkBtn>
+                <a href="" style="color: white;text-decoration: none;">確認付款</a>
+                </button>
+            </div>
+        </div>
+        <div class="right">
+            <div style="width: 80%;justify-items: center;">
+                <h1 style="top: 1%;text-align: center;">商品明細</h1>
+                <div class="item">
+                    <img src="image\印度雞肉香飯.jpg" alt="宮保雞丁" />
+                    <div class="item-details">
+                        <div class="item-name">宮保雞丁</div>
+                        <div class="item-price">NT$200</div>
+                        <div class="item-quantity">數量：1</div>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="image\西半牙海鮮燉飯.jpg" alt="泰式咖哩雞" />
+                    <div class="item-details">
+                        <div class="item-name">泰式咖哩雞</div>
+                        <div class="item-price">NT$200</div>
+                        <div class="item-quantity">數量：1</div>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="image\越南牛肉河粉.jpg" alt="紅豆湯" />
+                    <div class="item-details">
+                        <div class="item-name">紅豆湯</div>
+                        <div class="item-price">NT$80</div>
+                        <div class="item-quantity">數量：5</div>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="image\西半牙海鮮燉飯.jpg" alt="南瓜濃湯" />
+                    <div class="item-details">
+                        <div class="item-name">南瓜濃湯</div>
+                        <div class="item-price">NT$150</div>
+                        <div class="item-quantity">數量：2</div>
+                    </div>
+                </div>
+                <div class="total">
+                    <p>商品小計：NT$1100</p>
+                    <p>優惠碼折抵：NT$0</p>
+                    <p>運費：NT$120</p>
+                    <p>付款總金額：NT$1220</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

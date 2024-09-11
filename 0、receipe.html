@@ -63,16 +63,7 @@
         height: 180px;
         object-fit: cover;
       }
-      /* 愛心按鈕的樣式 */
-      .heart-btn {
-        cursor: pointer;
-        color: gray;
-        font-size: 24px;
-        transition: color 0.3s;
-      }
-      .heart-btn.liked {
-        color: red;
-      }
+     
       /* 卡片內容的排列 */
       .card-content {
         display: flex;
@@ -93,6 +84,16 @@
         text-align: center;
         padding-left: 15px;
         padding-top: 15px;
+      }
+       /* 愛心按鈕的樣式 */
+       .heart-btn {
+        cursor: pointer;
+        color: gray;
+        font-size: 24px;
+        transition: color 0.3s;
+      }
+      .heart-btn.liked {
+        color: red;
       }
       .card-details button {
         margin-left: 15px; /* 愛心按鈕和閱讀按鈕之間的距離 */
@@ -120,7 +121,9 @@
 
       <!-- 右側主要內容區域 -->
       <div class="right">
+
         <!-- 標題和排序選擇框 -->
+         
         <div class="flex justify-between items-center mb-4">
           <h1 style="font-size: x-large; font-weight: bold">| 異國料理</h1>
 
