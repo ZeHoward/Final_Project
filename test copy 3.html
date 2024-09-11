@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>配送資訊</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      label {
+        display: block;
+        margin: 10px 0 5px;
+      }
+      .input-group {
+        display: flex;
+        justify-content: space-between;
+      }
+      input,
+      select {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+      }
+      .half-width {
+        width: 48%;
+      }
+      input::placeholder {
+        color: #aaa;
+      }
+      .delivery-method {
+        margin-top: 20px;
+      }
+      .checkbox-label {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px; /* 讓勾選框與其他元素有適當間距 */
+      }
+      .checkbox-label input {
+        margin-right: 5px; /* 勾選框與文字之間的距離 */
+      }
+      .delivery-options {
+        display: flex;
+        align-items: center;
+        justify-content: space-between; /* 讓項目之間有適當間距 */
+      }
+      .delivery-options label {
+        margin: 0;
+      }
+      .delivery-options p {
+        margin: 0;
+      }
+      .delivery-options .amount {
+        margin-left: auto; /* 讓金額靠右對齊 */
+      }
+    </style>
+  </head>
+  <body>
+    <h1>配送資訊</h1>
+    <form>
+      <div class="checkbox-label">
+        <input type="checkbox" name="same_as_billing" />
+        <label>收件人資料與帳單資料相同</label>
+      </div>
+
+      <label for="recipient_name">收件人姓名</label>
+      <div class="input-group">
+        <input
+          type="text"
+          id="recipient_name"
+          name="recipient_name"
+          class="half-width"
+          placeholder="收件人姓名"
+          required
+        />
+        <input
+          type="text"
+          id="recipient_lastname"
+          name="recipient_lastname"
+          class="half-width"
+          placeholder="收件人姓氏"
+          required
+        />
+      </div>
+
+      <label for="email">電子郵件</label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        placeholder="電子郵件"
+        required
+      />
+
+      <label for="phone">聯絡電話</label>
+      <input
+        type="tel"
+        id="phone"
+        name="phone"
+        placeholder="聯絡電話"
+        required
+      />
+
+      <label for="city">城市</label>
+      <input
+        type="text"
+        id="city"
+        name="city"
+        value="臺北市"
+        placeholder="城市"
+        required
+      />
+
+      <label for="district">區域</label>
+      <select id="district" name="district" required>
+        <option value="" disabled selected>選擇區域</option>
+        <option value="中正區">中正區</option>
+        <option value="大安區">大安區</option>
+        <option value="信義區">信義區</option>
+      </select>
+
+      <label for="address">地址</label>
+      <input
+        type="text"
+        id="address"
+        name="address"
+        placeholder="地址"
+        required
+      />
+
+      <div class="delivery-method">
+        <h2>配送方式</h2>
+        <div class="delivery-options">
+          <label>
+            <input
+              type="radio"
+              name="delivery_method"
+              value="冷凍-黑貓快速到達"
+              checked
+            />
+            冷凍-黑貓快速到達
+          </label>
+          <p class="amount">NT$120</p>
+        </div>
+      </div>
+
+      <button type="submit">提交</button>
+    </form>
+  </body>
+</html>

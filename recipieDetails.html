@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>泰式冬蔭功海鮮湯</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      width: 50vw;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .foodName {
+      font-size: 48px;
+      color: #333;
+      margin-top: 0;
+    }
+    .main {
+      display: flex;
+      justify-content: center;
+      flex-direction: column; /* 垂直排列 */
+      align-items: center; /* 垂直置中 */
+    }
+    .receipeTitle {
+      text-align: left;
+      font-size: 24px;
+    }
+    .receipeDetails {
+      font-size: medium;
+      margin-top: 20px;
+      margin-bottom: 15px;
+      font-weight: bold;
+    }
+    .image {
+      width: 100%; /* 圖片寬度設置為容器的 100% */
+      max-width: 100%; /* 防止圖片超過其父容器的寬度 */
+      height: auto; /* 保持圖片的長寬比 */
+      margin-bottom: 20px;
+      border-radius: 25px; /* 圓角效果 */
+    }
+    .button-top{
+      display: inline-block;
+      width: 150px;
+      height: 40px;
+      line-height: 40px;
+      color: #fff;
+      text-align: center;
+      border-radius: 25px;
+      text-decoration: none;
+      font-size: large;
+      font-weight: bold;
+      margin: 10px;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+    .button-red {
+      display: inline-block;
+        width: 50%; /* 佔用 50% 寬度 */
+        height: 40px;
+        line-height: 40px;
+        color: #fff;
+        text-align: center;
+        border-radius: 25px; /* 圓角效果 */
+        text-decoration: none;
+        font-size: large;
+        font-weight: bold;
+        margin: 10px;
+        transition: background-color 0.3s, transform 0.3s;
+        background-color: #D35B50; /* 紅色背景 */
+    }
+    .button-red:hover {
+      background-color: #c0392b;
+      transform: scale(1.05);
+    }
+    .button-yellow {
+      display: inline-block;
+        width: 50%; /* 佔用 50% 寬度 */
+        height: 40px;
+        line-height: 40px;
+        color: #fff;
+        text-align: center;
+        border-radius: 25px; /* 圓角效果 */
+        text-decoration: none;
+        font-size: large;
+        font-weight: bold;
+        margin: 10px;
+        transition: background-color 0.3s, transform 0.3s;
+        background-color: #F3CE6E; /* 黃色背景 */
+    }
+    .button-yellow:hover {
+      background-color: #f39c12;
+      transform: scale(1.05);
+    }
+    ul {
+      list-style-type: disc;
+      padding: 0;
+      text-align: left;
+      margin: 0;
+      padding-left: 40px;
+    }
+    li {
+      margin-bottom: 10px;
+      text-align: left;
+      font-weight: bold;
+      font-size: 18px;
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+</head>
+<body>
+  <div class="container">
+    <div style="text-align: center">
+      <h3 class="button-top" style="background-color: #E0912F">線上食譜</h3>
+    </div>
+    <h1 class="foodName">泰式冬蔭功海鮮湯</h1>
+    <p>
+      <i class="fas fa-clock"></i> 烹飪時間30-35分鐘 ．
+      <i class="fas fa-briefcase"></i> 烹飪難度：中等 ．
+      <i class="fa fa-child" aria-hidden="true"></i> 份量：1-2人
+    </p>
+    <div class="main">
+      <img src="image/西半牙海鮮燉飯.jpg" alt="泰式冬蔭功海鮮湯" class="image" />
+      <div style="display: flex; justify-content: space-between; width: 100%;">
+        <a class="button-red">收藏食譜</a>
+        <a class="button-yellow">查看商品</a>
+      </div>
+    </div>
+    <div>
+      <div>
+        <h4 class="receipeTitle" style="padding-top: 30px">食材：</h4>
+        <ul class="receipeDetails">
+          <li>蝦 (約12隻，中等大小，去殼留尾)</li>
+          <li>魷魚 (150克，切圈)</li>
+          <li>淡菜 (100克，清洗乾淨)</li>
+          <li>香茅 (2根，切段並拍扁)</li>
+          <li>檸檬葉 (4片，撕成小片)</li>
+          <li>泰國辣椒 (2-3根，根據個人口味調整)</li>
+          <li>魚露 (2湯匙)</li>
+          <li>青檸檬汁 (2湯匙)</li>
+          <li>椰奶 (100毫升，可選)</li>
+          <li>冬蔭醬 (2湯匙，可自行調整)</li>
+          <li>鮮香菇 (100克，切片)</li>
+          <li>洋蔥 (1個，切絲)</li>
+          <li>番茄 (1個，切塊)</li>
+          <li>雞湯或高湯 (500毫升)</li>
+          <li>糖 (1茶匙)</li>
+          <li>香菜 (少許，作為裝飾)</li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="receipeTitle">食譜步驟：</h4>
+        <ol type="a" class="receipeDetails">
+          <li>準備高湯：在鍋中加入雞湯或高湯，將高湯煮滾。</li>
+          <li>加入香料：加入香茅、檸檬葉和泰國辣椒，讓湯底煮出香味。</li>
+          <li>煮海鮮：加入蝦、魷魚和淡菜，煮至海鮮變色且熟透。</li>
+          <li>調味：加入冬蔭醬、魚露和糖，攪拌均勻。</li>
+          <li>加酸辣味：加入椰奶（若使用），然後關火，加入青檸檬汁調味。</li>
+          <li>加配料：加入洋蔥、番茄和香菇，煮至蔬菜稍微軟化。</li>
+          <li>裝飾：湯盛入碗中，用香菜裝飾，馬上享用。</li>
+        </ol>
+      </div>
+
+      <div>
+        <h4 class="receipeTitle">貼心小提醒：</h4>
+        <!-- 小提醒標題 -->
+        <ul class="receipeDetails">
+          <li>
+            控制酸辣味道：冬蔭功湯的精髓在於酸與辣的平衡。檸檬汁和辣椒的用量可以根據個人口味調整。
+          </li>
+          <li>
+            煮海鮮的火候：海鮮容易過熟，建議在湯煮滾後再加入海鮮，並及時關火，以保留海鮮的鮮嫩口感。
+          </li>
+          <li>
+            使用新鮮食材：香茅、檸檬葉等香料要新鮮，這樣才能釋放出足夠的香味，使湯品更美味。
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+

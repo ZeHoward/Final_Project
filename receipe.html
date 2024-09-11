@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>食譜頁面</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      /* 設定頁面佈局為左右兩欄 */
+      .container {
+        display: flex;
+        height: 100vh; /* 全螢幕高度 */
+      }
+      /* 左邊區域的樣式 */
+      .left {
+        flex: 1; /* 左邊區域佔1份空間 */
+        padding: 30px;
+      }
+      /* 右邊區域的樣式 */
+      .right {
+        flex: 2; /*右邊區域佔6份空間*/
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        margin-top: 65px;
+      }
+      /* 左側菜單的樣式 */
+      .menu {
+        list-style-type: none; /* 移除預設的項目符號 */
+        padding: 0;
+        margin: 0;
+        width: 200px;
+      }
+      /* 菜單項目樣式 */
+       .menu li {
+          padding: 10px;
+          cursor: pointer;
+          transition: background-color 0.3s; /* 滑鼠移過時的背景變化 */
+          border-bottom: 1px solid transparent; /* 項目之間的邊界 */
+          font-weight: bold;
+          font-size: large;
+          display: flex;
+          justify-content: space-between; /* 讓文字和箭頭分開 */
+          align-items: center; /* 垂直居中 */
+        }
+      
+      /* 滑鼠移到菜單項目時的變化 */
+      .menu li:hover {
+        background-color: #f3ce6e; /* 背景變為黃色 */
+      }
+      /* 子選單預設隱藏 */
+      .submenu {
+        display: none;
+        font-size: larger;
+      }
+      /* 調整圖片大小 */
+      .card-img {
+        width: 180px;
+        height: 180px;
+        object-fit: cover;
+      }
+      /* 愛心按鈕的樣式 */
+      .heart-btn {
+        cursor: pointer;
+        color: gray;
+        font-size: 24px;
+        transition: color 0.3s;
+      }
+      .heart-btn.liked {
+        color: red;
+      }
+      /* 卡片內容的排列 */
+      .card-content {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: center;
+      }
+      .card-details {
+        display: flex;
+        align-items: center;
+        margin-top: 10px;
+        margin-left: 15px; /* 保持與圖片對齊的邊距 */
+      }
+      .card-title {
+        font-size: 1.25rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+        text-align: center;
+        padding-left: 15px;
+        padding-top: 15px;
+      }
+      .card-details button {
+        margin-left: 15px; /* 愛心按鈕和閱讀按鈕之間的距離 */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- 左側菜單 -->
+      <div class="left">
+        <ul class="menu">
+          <!-- 點擊後可展開子選單 -->
+          <li onclick="toggleSubmenu()" style="font-size: x-large">
+            </i>線上食譜<i class="fas fa-chevron-down" id="arrow-icon"></i>
+          </li>
+          <ul class="submenu">
+            <li>家常料理</li>
+            <li>兒童友善</li>
+            <li>銀髮友善</li>
+            <li>異國料理</li>
+            <li>多人料理</li>
+          </ul>
+        </ul>
+      </div>
+
+      <!-- 右側主要內容區域 -->
+      <div class="right">
+        <!-- 標題和排序選擇框 -->
+        <div class="flex justify-between items-center mb-4">
+          <h1 style="font-size: x-large; font-weight: bold">| 異國料理</h1>
+
+          <!-- 排序選擇框 -->
+          <select class="border rounded p-2">
+            <option>預設排序</option>
+            <option>烹飪難易度：由易至難</option>
+            <option>烹飪難易度：由難至易</option>
+          </select>
+        </div>
+
+        <!-- 食物卡片區域 -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+          <!-- 12個商品 -->
+          <div class="bg-white rounded-lg p-4">
+            <div class="card-content">
+              <img
+                src="image\西半牙海鮮燉飯.jpg"
+                alt="西班牙海鮮燉飯"
+                class="card-img rounded"
+              />
+
+              <div class="card-title">西班牙海鮮燉飯</div>
+
+              <div class="card-details">
+                <i
+                  class="heart-btn fas fa-heart"
+                  onclick="toggleHeart(this)"
+                ></i>
+                <button class="bg-red-500 text-white rounded py-1 px-4">
+                  閱讀食譜
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-lg p-4">
+            <div class="card-content">
+              <img
+                src="image\西半牙海鮮燉飯.jpg"
+                alt="西班牙海鮮燉飯"
+                class="card-img rounded"
+              />
+              <div class="card-title">西班牙海鮮燉飯</div>
+              <div class="card-details">
+                <i
+                  class="heart-btn fas fa-heart"
+                  onclick="toggleHeart(this)"
+                ></i>
+                <button class="bg-red-500 text-white rounded py-1 px-4">
+                  閱讀食譜
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-lg p-4">
+            <div class="card-content">
+              <img
+                src="image\西半牙海鮮燉飯.jpg"
+                alt="西班牙海鮮燉飯"
+                class="card-img rounded"
+              />
+              <div class="card-title">西班牙海鮮燉飯</div>
+              <div class="card-details">
+                <i
+                  class="heart-btn fas fa-heart"
+                  onclick="toggleHeart(this)"
+                ></i>
+                <button class="bg-red-500 text-white rounded py-1 px-4">
+                  閱讀食譜
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-lg p-4">
+            <div class="card-content">
+              <img
+                src="image\西半牙海鮮燉飯.jpg"
+                alt="西班牙海鮮燉飯"
+                class="card-img rounded"
+              />
+              <div class="card-title">西班牙海鮮燉飯</div>
+              <div class="card-details">
+                <i
+                  class="heart-btn fas fa-heart"
+                  onclick="toggleHeart(this)"
+                ></i>
+                <button class="bg-red-500 text-white rounded py-1 px-4">
+                  閱讀食譜
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-lg p-4">
+            <div class="card-content">
+              <img
+                src="image\西半牙海鮮燉飯.jpg"
+                alt="西班牙海鮮燉飯"
+                class="card-img rounded"
+              />
+              <div class="card-title">西班牙海鮮燉飯</div>
+              <div class="card-details">
+                <i
+                  class="heart-btn fas fa-heart"
+                  onclick="toggleHeart(this)"
+                ></i>
+                <button class="bg-red-500 text-white rounded py-1 px-4">
+                  閱讀食譜
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-lg p-4">
+            <div class="card-content">
+              <img
+                src="image\西半牙海鮮燉飯.jpg"
+                alt="西班牙海鮮燉飯"
+                class="card-img rounded"
+              />
+              <div class="card-title">西班牙海鮮燉飯</div>
+              <div class="card-details">
+                <i
+                  class="heart-btn fas fa-heart"
+                  onclick="toggleHeart(this)"
+                ></i>
+                <button class="bg-red-500 text-white rounded py-1 px-4">
+                  閱讀食譜
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-lg p-4">
+            <div class="card-content">
+              <img
+                src="image\西半牙海鮮燉飯.jpg"
+                alt="西班牙海鮮燉飯"
+                class="card-img rounded"
+              />
+              <div class="card-title">西班牙海鮮燉飯</div>
+              <div class="card-details">
+                <i
+                  class="heart-btn fas fa-heart"
+                  onclick="toggleHeart(this)"
+                ></i>
+                <button class="bg-red-500 text-white rounded py-1 px-4">
+                  閱讀食譜
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-lg p-4">
+            <div class="card-content">
+              <img
+                src="image\西半牙海鮮燉飯.jpg"
+                alt="西班牙海鮮燉飯"
+                class="card-img rounded"
+              />
+              <div class="card-title">西班牙海鮮燉飯</div>
+              <div class="card-details">
+                <i
+                  class="heart-btn fas fa-heart"
+                  onclick="toggleHeart(this)"
+                ></i>
+                <button class="bg-red-500 text-white rounded py-1 px-4">
+                  閱讀食譜
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-lg p-4">
+            <div class="card-content">
+              <img
+                src="image\西半牙海鮮燉飯.jpg"
+                alt="西班牙海鮮燉飯"
+                class="card-img rounded"
+              />
+              <div class="card-title">西班牙海鮮燉飯</div>
+              <div class="card-details">
+                <i
+                  class="heart-btn fas fa-heart"
+                  onclick="toggleHeart(this)"
+                ></i>
+                <button class="bg-red-500 text-white rounded py-1 px-4">
+                  閱讀食譜
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-lg p-4">
+            <div class="card-content">
+              <img
+                src="image\西半牙海鮮燉飯.jpg"
+                alt="西班牙海鮮燉飯"
+                class="card-img rounded"
+              />
+              <div class="card-title">西班牙海鮮燉飯</div>
+              <div class="card-details">
+                <i
+                  class="heart-btn fas fa-heart"
+                  onclick="toggleHeart(this)"
+                ></i>
+                <button class="bg-red-500 text-white rounded py-1 px-4">
+                  閱讀食譜
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-lg p-4">
+            <div class="card-content">
+              <img
+                src="image\西半牙海鮮燉飯.jpg"
+                alt="西班牙海鮮燉飯"
+                class="card-img rounded"
+              />
+              <div class="card-title">西班牙海鮮燉飯</div>
+              <div class="card-details">
+                <i
+                  class="heart-btn fas fa-heart"
+                  onclick="toggleHeart(this)"
+                ></i>
+                <button class="bg-red-500 text-white rounded py-1 px-4">
+                  閱讀食譜
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- 其他卡片類似上面結構 -->
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // 切換子選單的顯示與隱藏
+      function toggleSubmenu() {
+        const submenu = document.querySelector(".submenu");
+        const arrowIcon = document.getElementById("arrow-icon");
+
+        if (submenu.style.display === "block") {
+          submenu.style.display = "none";
+          arrowIcon.classList.remove("fa-chevron-up");
+          arrowIcon.classList.add("fa-chevron-down");
+        } else {
+          submenu.style.display = "block";
+          arrowIcon.classList.remove("fa-chevron-down");
+          arrowIcon.classList.add("fa-chevron-up");
+        }
+      }
+
+      // 切換愛心按鈕的顯示狀態
+      function toggleHeart(heartIcon) {
+        heartIcon.classList.toggle("liked");
+      }
+    </script>
+  </body>
+</html>

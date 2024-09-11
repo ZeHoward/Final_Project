@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>購物車</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif; /* 設定字體 */
+        margin: 20px; /* 設定邊距 */
+        position: relative; /* 設定相對定位 */
+      }
+      .container {
+        width: 80%; /* 設定容器寬度為頁面寬度的80% */
+        max-width: 800px; /* 最大寬度為800px */
+        margin: 0 auto; /* 水平居中 */
+        padding: 20px; /* 設定內邊距 */
+      }
+      h1 {
+        text-align: center; /* 標題置中 */
+      }
+      .back-button {
+        font-size: 16px; /* 字體大小 */
+        color: #007bff; /* 字體顏色 */
+        cursor: pointer; /* 鼠標變成手形 */
+        text-decoration: none; /* 去掉文字裝飾 */
+        margin-bottom: 20px; /* 下邊距 */
+        display: inline-block; /* 設為行內區塊元素 */
+      }
+      table {
+        width: 100%; /* 設定表格寬度為100% */
+        border-collapse: collapse; /* 合併邊框 */
+        margin-bottom: 20px; /* 下邊距 */
+      }
+      thead th {
+        border-bottom: 2px solid #ddd; /* 表頭的底部邊框 */
+        text-align: center; /* 標題置中 */
+      }
+      tfoot td {
+        border-top: 2px solid #ddd; /* 表腳的上邊框 */
+      }
+      tbody td {
+        border-bottom: 1px solid #ddd; /* 表格內容的底部邊框 */
+        text-align: center; /* 內容置中 */
+      }
+      tbody tr:last-child td {
+        border-bottom: none; /* 最下面一行的底部邊框 */
+      }
+      td {
+        padding: 10px; /* 單元格內邊距 */
+        text-align: center; /* 文字置中 */
+      }
+      .total {
+        font-weight: bold; /* 文字加粗 */
+        font-size: 1.2em; /* 字體大小 */
+        text-align: left; /* 文字左對齊 */
+        margin-top: 20px; /* 上邊距 */
+        border-top: 2px solid #ddd; /* 上邊框 */
+        padding-top: 10px; /* 上內邊距 */
+      }
+      .product-image {
+        width: 100px; /* 圖片寬度 */
+        height: 100px; /* 圖片高度 */
+        margin: 10px; /* 外邊距 */
+        object-fit: cover; /* 圖片填滿 */
+      }
+      .coupon-container {
+        display: flex; /* 使用彈性布局 */
+        justify-content: flex-end; /* 內容右對齊 */
+        align-items: center; /* 內容垂直居中 */
+        margin-top: 10px; /* 上邊距 */
+        gap: 10px; /* 內部元素之間的間距 */
+      }
+      .coupon-container input {
+        width: 200px; /* 輸入框寬度 */
+        padding: 10px; /* 內邊距 */
+      }
+      .button {
+        background-color: #857d7b; /* 背景顏色 */
+        color: white; /* 字體顏色 */
+        padding: 10px 20px; /* 內邊距 */
+        border: none; /* 無邊框 */
+        cursor: pointer; /* 鼠標變成手形 */
+        text-align: center; /* 文字置中 */
+        width: auto; /* 自動寬度 */
+      }
+      .button:hover {
+        background-color: #564a4d; /* 滑鼠懸停時的背景顏色 */
+      }
+      .quantity {
+        display: flex; /* 使用彈性布局 */
+        align-items: center; /* 內容垂直居中 */
+      }
+      .quantity button {
+        background-color: transparent; /* 背景透明 */
+        border: 1px solid #ddd; /* 邊框樣式 */
+        color: #007bff; /* 字體顏色 */
+        font-size: 14px; /* 字體大小 */
+        cursor: pointer; /* 鼠標變成手形 */
+        padding: 5px 10px; /* 內邊距 */
+        text-align: center; /* 文字置中 */
+      }
+      .quantity span {
+        margin: 0 10px; /* 左右外邊距 */
+      }
+      .actions {
+        display: flex; /* 使用彈性布局 */
+        justify-content: flex-end; /* 內容右對齊 */
+        margin-top: 20px; /* 上邊距 */
+      }
+      .submit-button {
+        background-color: #ff5733; /* 背景顏色 */
+        border-radius: 8px; /* 邊框圓角 */
+        color: white; /* 字體顏色 */
+        padding: 10px 15px; /* 內邊距 */
+        border: none; /* 無邊框 */
+        cursor: pointer; /* 鼠標變成手形 */
+        text-align: center; /* 文字置中 */
+        margin-left: 10px; /* 左邊距 */
+        width: 290px; /* 寬度 */
+      }
+      .submit-button:hover {
+        background-color: #c70039; /* 滑鼠懸停時的背景顏色 */
+      }
+      /* 刪除按鈕樣式 */
+      td button {
+        background-color: transparent; /* 背景透明 */
+        border: none; /* 無邊框 */
+        color: #ff5733; /* 字體顏色 */
+        font-size: 16px; /* 字體大小 */
+        cursor: pointer; /* 鼠標變成手形 */
+        padding: 0; /* 無內邊距 */
+        text-align: center; /* 文字置中 */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- 返回購物車的連結 -->
+      <a href="#" class="back-button"> <返回購物車</a>
+      <h1>你的購物車</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>商品</th>
+            <th></th>
+            <th>價格</th>
+            <th>數量</th>
+            <th>小計</th>
+            <th>刪除</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <img
+                src="image\印度雞肉香飯.jpg"
+                alt="商品圖片"
+                class="product-image"
+              />
+            </td>
+            <td>泰式冬蔭功海鮮湯</td>
+            <td>NT$200</td>
+            <td>
+              <div class="quantity">
+                <!-- 減少數量按鈕 -->
+                <button class="decrease">–</button>
+                <!-- 數量顯示 -->
+                <span class="amount">1</span>
+                <!-- 增加數量按鈕 -->
+                <button class="increase">+</button>
+              </div>
+            </td>
+            <td class="subtotal">NT$200</td>
+            <td><button>🗑️</button></td>
+          </tr>
+          <tr>
+            <td>
+              <img
+                src="image\西半牙海鮮燉飯.jpg"
+                alt="商品圖片"
+                class="product-image"
+              />
+            </td>
+            <td>越式冬蔭功海鮮湯</td>
+            <td>NT$200</td>
+            <td>
+              <div class="quantity">
+                <!-- 減少數量按鈕 -->
+                <button class="decrease">–</button>
+                <!-- 數量顯示 -->
+                <span class="amount">1</span>
+                <!-- 增加數量按鈕 -->
+                <button class="increase">+</button>
+              </div>
+            </td>
+            <td class="subtotal">NT$200</td>
+            <td><button>🗑️</button></td>
+          </tr>
+          <tr>
+            <td>
+              <img
+                src="image\越南牛肉河粉.jpg"
+                alt="商品圖片"
+                class="product-image"
+              />
+            </td>
+            <td>美式冬蔭功海鮮湯</td>
+            <td>NT$200</td>
+            <td>
+              <div class="quantity">
+                <!-- 減少數量按鈕 -->
+                <button class="decrease">–</button>
+                <!-- 數量顯示 -->
+                <span class="amount">1</span>
+                <!-- 增加數量按鈕 -->
+                <button class="increase">+</button>
+              </div>
+            </td>
+            <td class="subtotal">NT$200</td>
+            <td><button>🗑️</button></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div style="display: flex a">
+        <!-- 商品總額顯示 -->
+        <div class="total">商品總額 NT$600</div>
+        <!-- 優惠券輸入框和按鈕 -->
+        <div class="coupon-container">
+          <input type="text" placeholder="輸入優惠碼" style="width: 150px" />
+          <button class="button">使用優惠券</button>
+        </div>
+      </div>
+      <div class="actions">
+        <!-- 提交訂單按鈕 -->
+        <button class="submit-button">提交訂單</button>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // 獲取所有增加和減少按鈕
+        const quantityControls = document.querySelectorAll(".quantity");
+
+        quantityControls.forEach((control) => {
+          const decreaseButton = control.querySelector(".decrease");
+          const increaseButton = control.querySelector(".increase");
+          const amountSpan = control.querySelector(".amount");
+          const subtotalCell = control.closest("tr").querySelector(".subtotal");
+          const price = parseInt(
+            control
+              .closest("tr")
+              .querySelector("td:nth-child(3)")
+              .innerText.replace("NT$", ""),
+            10
+          );
+
+          // 增加數量
+          increaseButton.addEventListener("click", function () {
+            let currentAmount = parseInt(amountSpan.innerText, 10);
+            currentAmount++;
+            amountSpan.innerText = currentAmount;
+            subtotalCell.innerText = `NT$${currentAmount * price}`;
+            updateTotal();
+          });
+
+          // 減少數量
+          decreaseButton.addEventListener("click", function () {
+            let currentAmount = parseInt(amountSpan.innerText, 10);
+            if (currentAmount > 1) {
+              currentAmount--;
+              amountSpan.innerText = currentAmount;
+              subtotalCell.innerText = `NT$${currentAmount * price}`;
+              updateTotal();
+            }
+          });
+        });
+
+        // 更新總額
+        function updateTotal() {
+          const subtotals = document.querySelectorAll(".subtotal");
+          let total = 0;
+          subtotals.forEach((cell) => {
+            total += parseInt(cell.innerText.replace("NT$", ""), 10);
+          });
+          document.querySelector(".total").innerText = `商品總額 NT$${total}`;
+        }
+      });
+    </script>
+  </body>
+</html>
