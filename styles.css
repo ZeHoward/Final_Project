@@ -9,6 +9,16 @@ html {
 
 textarea {
     resize: none; /* 沒辦法拉右下角縮放 */
+    height: 20px;
+}
+
+select {
+    height: 40px;
+}
+
+textarea[readonly] {
+    background-color: #f0f0f0; /* 灰色背景 */
+    color: #666; /* 灰色文字 */
 }
 
 div tbody td {
@@ -497,12 +507,12 @@ canvas {
 
 .row-group .field .time {
     height: 16.5px;
-    width: 95%;
+    width: 98%;
 }
 
 /* 移除最後一個欄位的右邊距 */
 .row-group .field:last-child {
-    margin-right: 0;
+    margin-right: 10px;
 }
 
 
@@ -553,11 +563,6 @@ canvas {
 
 .product-table td p {
     margin: 5px 0;
-}
-
-.product-table .actions {
-    display: flex;
-    gap: 10px;
 }
 
 .product-table .edit-button, .product-table .delete-button {

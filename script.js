@@ -96,30 +96,51 @@ const orders = [
 const products = [
     {
         index: '1',
+        name: '商品名稱1',
         sku: 'ABC-66',
         image: '紅大頭.png',
-        name: '商品名稱1',
         category: '異國料理',
-        price: '1000',
+        servings: 3,
+        difficulty: '中等',
+        vegan: '否',
+        time: '40',
+        price: 500,
+        description: '一道經典的肉醬義大利麵，肉醬味道濃郁，搭配煮得恰到好處的義大利麵，簡單且美味，適合全家人享用',
+        Ingredients: '義大利麵200g,牛絞肉 150g,番茄醬 1 杯,洋蔥 1 顆（切丁）,大蒜 2 瓣（切碎）,橄欖油 2 湯匙',
+        steps: '用手做，再說一次用手做',
         stock: '50',
     },
     {
         index: '2',
-        sku: 'ABC-652',
-        image: '紅大頭.png',
         name: '商品名稱2',
-        category: '多人料理',
-        price: '2000',
-        stock: '30',
+        sku: 'ABC-66',
+        image: '紅大頭.png',
+        category: '異國料理',
+        servings: 3,
+        difficulty: '中等',
+        vegan: '否',
+        time: '40',
+        price: 500,
+        description: '一道經典的肉醬義大利麵，肉醬味道濃郁，搭配煮得恰到好處的義大利麵，簡單且美味，適合全家人享用',
+        Ingredients: '義大利麵200g,牛絞肉 150g,番茄醬 1 杯,洋蔥 1 顆（切丁）,大蒜 2 瓣（切碎）,橄欖油 2 湯匙',
+        steps: '用手做，再說一次用手做',
+        stock: '50',
     },
     {
         index: '3',
-        sku: 'ABC-67',
-        image: '紅大頭.png',
         name: '商品名稱3',
-        category: '家常料理',
-        price: '1500',
-        stock: '20',
+        sku: 'ABC-66',
+        image: '紅大頭.png',
+        category: '異國料理',
+        servings: 3,
+        difficulty: '中等',
+        vegan: '否',
+        time: '80',
+        price: 500,
+        description: '一道經典的肉醬義大利麵，肉醬味道濃郁，搭配煮得恰到好處的義大利麵，簡單且美味，適合全家人享用',
+        Ingredients: '義大利麵200g,牛絞肉 150g,番茄醬 1 杯,洋蔥 1 顆（切丁）,大蒜 2 瓣（切碎）,橄欖油 2 湯匙',
+        steps: '用手做，再說一次用手做',
+        stock: '50',
     }
 ];
 
@@ -311,12 +332,12 @@ function generateProductUploadForm() {
 
             <form>
                 <div class="form-group">
-                    <label for="description">商品名稱</label>
-                    <textarea id="description" rows="1" placeholder="商品名稱"></textarea>
-                </div>
-                <div class="form-group">
                     <label for="sku" id="skulabel">SKU</label>
                     <textarea id="sku" rows="1"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="description">商品名稱</label>
+                    <textarea id="description" rows="1" placeholder="商品名稱"></textarea>
                 </div>
             
                 <!-- 類別選擇 -->
@@ -356,15 +377,15 @@ function generateProductUploadForm() {
                     <div class="field">
                         <label for="vagan">素食</label>
                         <select id="vagan">
-                            <option value="easy">否</option>
-                            <option value="medium">全素</option>
-                            <option value="hard">奶蛋素</option>
+                            <option value="no">否</option>
+                            <option value="vagen">全素</option>
+                            <option value="halfvagen">奶蛋素</option>
                         </select>
                     </div>
 
                     <div class="field time">
-                        <label for="description">製作時間</label>
-                        <textarea id="description" rows="1" class="time"></textarea>
+                        <label for="time">製作時間</label>
+                        <textarea id="time" rows="1" class="time"></textarea>
                     </div>
                 </div>
 
@@ -381,7 +402,7 @@ function generateProductUploadForm() {
                 </div>
 
                 <div class="form-group">
-                    <label for="steps">做法步驟</label>
+                    <label for="steps">作法步驟</label>
                     <textarea id="steps" rows="8"></textarea>
                 </div>
 
@@ -483,18 +504,79 @@ function generateProductManagementEdit(product) {
 
             <form>
                 <div class="form-group">
-                    <label for="productName">商品名稱</label>
-                    <input type="text" id="productName" value="${product.name}" />
+                     <label for="sku">SKU</label>
+                     <textarea id="sku" rows="1" readonly>${product.sku}</textarea>
+                </div>
+
+                <div class="form-group">
+                     <label for="name">商品名稱</label>
+                     <textarea id="name" rows="1">${product.name}</textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="category">類別</label>
+                    <select id="category">
+                        <option value="家常料理" ${product.category === '家常料理' ? 'selected' : ''}>家常料理</option>
+                        <option value="兒童友善" ${product.category === '兒童友善' ? 'selected' : ''}>兒童友善</option>
+                        <option value="銀髮友善" ${product.category === '銀髮友善' ? 'selected' : ''}>銀髮友善</option>
+                        <option value="異國料理" ${product.category === '異國料理' ? 'selected' : ''}>異國料理</option>
+                        <option value="多人料理" ${product.category === '多人料理' ? 'selected' : ''}>多人料理</option>
+                    </select>
+                </div>
+                <div class="form-group row-group">
+                    <div class="field">
+                        <label for="servings">人數份量</label>
+                        <select id="servings">
+                            <option value="1" ${product.servings === 1 ? 'selected' : ''}>1人</option>
+                            <option value="2" ${product.servings === 2 ? 'selected' : ''}>2人</option>
+                            <option value="3" ${product.servings === 3 ? 'selected' : ''}>3人</option>
+                            <option value="4" ${product.servings === 4 ? 'selected' : ''}>4人</option>
+                            <option value="5" ${product.servings === 5 ? 'selected' : ''}>5人</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label for="difficulty">難度</label>
+                        <select id="difficulty">
+                            <option value="簡單" ${product.difficulty === '簡單' ? 'selected' : ''}>簡單</option>
+                            <option value="中等" ${product.difficulty === '中等' ? 'selected' : ''}>中等</option>
+                            <option value="困難" ${product.difficulty === '困難' ? 'selected' : ''}>困難</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label for="vegan">素食</label>
+                        <select id="vegan">
+                            <option value="否" ${product.vegan === '否' ? 'selected' : ''}>否</option>
+                            <option value="全素" ${product.vegan === '全素' ? 'selected' : ''}>全素</option>
+                            <option value="奶蛋素" ${product.vegan === '奶蛋素' ? 'selected' : ''}>奶蛋素</option>
+                        </select>
+                    </div>
+
+                    <div class="field time">
+                        <label for="time">製作時間 (分鐘)</label>
+                        <textarea id="time" rows="1">${product.time}</textarea>
+                    </div>
                 </div>
 
                 <div class="form-group">
                     <label for="price">價格</label>
-                    <input type="number" id="price" value="${product.price}" />
+                    <textarea id="price" rows="1">${product.price}</textarea>
                 </div>
 
                 <div class="form-group">
-                    <label for="stock">庫存</label>
-                    <input type="number" id="stock" value="${product.stock}" />
+                    <label for="description">食譜描述</label>
+                    <textarea id="description" rows="4">${product.description}</textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="ingredients">食材成分</label>
+                    <textarea id="ingredients" rows="4">${product.Ingredients}</textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="steps">作法步驟</label>
+                    <textarea id="steps" rows="4">${product.steps}</textarea>
                 </div>
 
                 <div class="form-group">
@@ -506,83 +588,100 @@ function generateProductManagementEdit(product) {
     `;
     mainContent.innerHTML = productEditForm;
 
+    // **在生成表單後立即綁定事件**
+    document.getElementById('submitButton').addEventListener('click', function (event) {
+        event.preventDefault();
+
+        // 更新商品屬性
+        product.sku = document.getElementById('sku').value;
+        product.name = document.getElementById('name').value;
+        product.category = document.getElementById('category').value;
+        product.servings = parseInt(document.getElementById('servings').value, 10);
+        product.difficulty = document.getElementById('difficulty').value;
+        product.vegan = document.getElementById('vegan').value;
+        product.time = parseInt(document.getElementById('time').value, 10);
+        product.price = parseFloat(document.getElementById('price').value);
+        product.description = document.getElementById('description').value;
+        product.Ingredients = document.getElementById('ingredients').value;
+        product.steps = document.getElementById('steps').value;
+
+        alert('商品已修改！');
+        generateProductManagementWithActionsContent();  // 返回商品管理頁面
+    });
+
     // 添加取消按鈕的功能
     document.getElementById('cancelButton').addEventListener('click', function () {
         generateProductManagementWithActionsContent();  // 返回商品管理頁面
     });
 
-    // 添加保存按鈕的功能
-    document.getElementById('submitButton').addEventListener('click', function (event) {
-        event.preventDefault();
-        product.name = document.getElementById('productName').value;
-        product.price = document.getElementById('price').value;
-        product.stock = document.getElementById('stock').value;
-        alert('商品已修改！');
-        generateProductManagementWithActionsContent();  // 返回商品管理頁面
+    // 如果需要處理圖片上傳，可以在這裡添加事件監聽器
+    document.getElementById('uploadImageButton').addEventListener('click', function () {
+        // 這裡可以添加圖片上傳的功能
+        alert('上傳新圖片的功能尚未實現。');
     });
 }
 
 // 生成商品管理頁面後，為「修改」按鈕重新綁定事件
-function generateProductManagementContent() {
-    const mainContent = document.querySelector('.main-content');
-    mainContent.innerHTML = '';  // 清空之前的內容
+// function generateProductManagementContent() {
+//     const mainContent = document.querySelector('.main-content');
+//     mainContent.innerHTML = '';  // 清空之前的內容
 
-    // 動態生成商品管理的標題和表格
-    const productManagementSection = `
-        <section class="product-management">
-            <h1>商品管理</h1>
-            <table class="product-table">
-                <thead>
-                    <tr>
-                        <th>商品圖片</th>
-                        <th>商品名稱</th>
-                        <th>價格</th>
-                        <th>庫存</th>
-                        <th>操作</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- 這裡插入動態生成的商品 -->
-                </tbody>
-            </table>
-        </section>
-    `;
-    mainContent.innerHTML = productManagementSection;
+//     // 動態生成商品管理的標題和表格
+//     const productManagementSection = `
+//         <section class="product-management">
+//             <h1>商品管理</h1>
+//             <table class="product-table">
+//                 <thead>
+//                     <tr>
+//                         <th>商品圖片</th>
+//                         <th>商品名稱</th>
+//                         <th>價格</th>
+//                         <th>庫存</th>
+//                         <th>操作</th>
+//                     </tr>
+//                 </thead>
+//                 <tbody>
+//                     <!-- 這裡插入動態生成的商品 -->
+//                 </tbody>
+//             </table>
+//         </section>
+//     `;
+//     mainContent.innerHTML = productManagementSection;
 
-    const tbody = document.querySelector('.product-table tbody');
+//     const tbody = document.querySelector('.product-table tbody');
 
-    // 動態生成每個商品的表格行
-    products.forEach((product, index) => {
-        const tr = document.createElement('tr');
+//     // 動態生成每個商品的表格行
+//     products.forEach((product, index) => {
+//         const tr = document.createElement('tr');
 
-        tr.innerHTML = `
-            <td><img src="${product.image}" alt="${product.name}" style="width: 50px; height: 50px;"></td>
-            <td>${product.name}</td>
-            <td>${product.price}</td>
-            <td>${product.stock}</td>
-            <td class="actions">
-                <button class="edit-button" data-index="${index}">修改</button>
-                <button class="delete-button" data-index="${index}">刪除</button>
-            </td>
-        `;
+//         tr.innerHTML = `
+//             <td><img src="${product.image}" alt="${product.name}" style="width: 50px; height: 50px;"></td>
+//             <td>${product.name}</td>
+//             <td>${product.price}</td>
+//             <td>${product.stock}</td>
+//             <td class="actions">
+//                 <button class="edit-button" data-index="${index}">修改</button>
+//                 <button class="delete-button" data-index="${index}">刪除</button>
+//             </td>
+//         `;
 
-        tbody.appendChild(tr);
-    });
+//         tbody.appendChild(tr);
+//     });
 
-    // 重新為動態生成的按鈕綁定事件
-    document.querySelectorAll('.edit-button').forEach(button => {
-        button.addEventListener('click', function () {
-            const productIndex = this.getAttribute('data-index');
-            generateProductManagementEdit(products[productIndex]); // 調用商品修改頁面並傳入對應商品數據
-        });
-    });
-}
+//     // 重新為動態生成的按鈕綁定事件
+//     document.querySelectorAll('.edit-button').forEach(button => {
+//         button.addEventListener('click', function () {
+//             const productIndex = this.getAttribute('data-index');
+//             generateProductManagementEdit(products[productIndex]); // 調用商品修改頁面並傳入對應商品數據
+//         });
+//     });
+// }
 
 // 刪除商品的函數
-function deleteProduct(index) {
-    products.splice(index, 1);  // 從數組中移除商品
-    generateProductManagementContent();  // 更新商品管理頁面
-}
+// function deleteProduct(index) {
+//     products.splice(index, 1);  // 從數組中移除商品
+//     generateProductManagementContent();  // 更新商品管理頁面
+// }
 
 // 點擊"庫存管理"時生成內容的函數
 function generateStockManagementContent() {
