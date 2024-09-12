@@ -14,7 +14,7 @@ window.onload = function () {
   var dropdowns = document.getElementsByClassName("tem-dropdown-btn");
   for (var i = 0; i < dropdowns.length; i++) {
     dropdowns[i].addEventListener("click", function () {
-      this.classList.toggle("active");
+      this.classList.toggle("tem-active");
       var dropdownContent = this.nextElementSibling;
       if (dropdownContent.style.display === "block") {
         dropdownContent.style.display = "none";
