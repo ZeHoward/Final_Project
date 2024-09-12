@@ -11,7 +11,7 @@
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap");
     </style>
-    <link rel="stylesheet" href="./template.css" />
+    <link rel="stylesheet" href="./product.css" />
   </head>
   <body>
     <!-- sidenav start-->
@@ -92,6 +92,52 @@
     </div>
     <!-- header end -->
 
+    <!-- 中間區塊:側邊選單+商品區 -->
+    <div class="mid">
+       <!-- 側邊選單 -->
+    <div class="list">
+        <button class="down-btn">
+          調理包專區<img src="./material/icon/down.png" alt="down" id="updown3" />
+        </button>
+        <div class="down-container"">
+          <a href="">家常料理</a>
+          <a href="">兒童友善</a>
+          <a href="">銀髮有善</a>
+          <a href="">異國料理</a>
+          <a href="">多人料理</a>
+        </div>
+        <button class="down-btn">
+          生鮮食材包專區<img
+            src="./material/icon/down.png"
+            alt="down"
+            id="updown4"
+          />
+        </button>
+        <div class="down-container">
+          <a href="">家常料理</a>
+          <a href="">兒童友善</a>
+          <a href="">銀髮有善</a>
+          <a href="">異國料理</a>
+          <a href="">多人料理</a>
+        </div>
+      </div>
+
+      <!-- 商品區 -->
+       <div class="pzone">
+          <div class="sort">
+            <label for="sort">排序:
+              <select name="sort" id="sort" onchange="sortProducts()">
+                <option value="priceLowHigh">價格從低到高</option>
+                <option value="priceHighLow">價格從高到低</option>
+                <option value="dateNewOld">最新上架</option>
+                <option value="dateOldNew">最早上架</option>
+              </select>
+            </label>
+          </div>
+          <div id="pcontainer"></div>
+       </div>
+    </div>
+   
     <!-- footer start -->
     <div class="footer">
       <div class="footer-content">
@@ -137,6 +183,6 @@
       </div>
     </div>
     <!-- footer end -->
-    <script src="./home.js"></script>
+    <script src="./product.js"></script>
   </body>
 </html>

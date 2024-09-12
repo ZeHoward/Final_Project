@@ -45,7 +45,7 @@ body {
   z-index: 1;
   top: 0;
   left: 0;
-  background-image: url("./material/background.png");
+  background-color: #fbf4e2;
   overflow-x: hidden; /*移除水平卷軸*/
   transition: 0.5s;
   text-align: center;
@@ -125,10 +125,7 @@ body {
   align-items: center;
   width: 100vw;
   height: 80px;
-  background-image: url("./material/Vorderrhein3.png");
-  background-repeat: repeat;
-  background-size: auto;
-  background-position: 1500px 3197px;
+  background-color: #fbf4e2;
   padding: 20px;
 }
 
@@ -165,6 +162,7 @@ body {
 }
 
 .breadcrumb {
+  height: 40px;
   padding: 10px 20px;
   text-align: left;
   font-size: 14px;
@@ -179,18 +177,125 @@ body {
   text-decoration: underline;
 }
 
+/* 中間區塊 */
+.mid {
+  display: flex;
+  flex: 1;
+}
+/* 菜單 */
+.list {
+  flex: 1;
+  border-right: 1px solid #ccc;
+  padding: 20px;
+}
+
+.list a,
+.down-btn {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #000000;
+  display: block;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  outline: none;
+}
+
+.down-btn:hover {
+  color: rgb(0, 0, 0);
+}
+
+.down-btn > img {
+  width: 20px;
+}
+
+.active2 {
+  background-color: rgb(222, 202, 21);
+  color: rgb(0, 0, 0);
+}
+
+.down-container {
+  display: none;
+  padding-left: 8px;
+}
+
+/* 商品區 */
+.pzone {
+  flex: 4;
+  padding: 20px;
+}
+
+#pcontainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.product-card {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin: 10px 0;
+  padding: 15px;
+  width: calc(25% - 10px);
+  border-radius: 5%;
+  text-align: center;
+  justify-content: space-between;
+}
+
+.product-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 2%;
+}
+
+.product-price {
+  font-size: 20px;
+  color: rgb(0, 0, 0);
+}
+
+.button {
+  width: 80%;
+  margin: 5px 0;
+  padding: 8px;
+  background-color: #e0912f;
+  color: white;
+  border: none;
+  border-radius: 2%;
+  cursor: pointer;
+  text-align: center;
+}
+
+.button:hover {
+  background-color: #d57d10;
+}
+
+.button.favorite {
+  background-color: #d14545;
+}
+
+.button.favorite:hover {
+  background-color: #cb2828;
+}
+
+.sort {
+  text-align: right;
+  margin-bottom: 20px;
+}
+
 /* footer */
 .footer {
+  height: 250px;
   width: 100%;
   max-width: 100vw;
   margin: 0 auto;
+  background-color: #fbf4e2;
   padding: 20px;
   text-align: center;
   position: relative;
-  background-image: url("./material/Vorderrhein3.png");
-  background-repeat: repeat;
-  background-size: auto;
-  background-position: 750px 250px;
+  bottom: 0;
 }
 
 .footer-content {

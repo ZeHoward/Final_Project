@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>即食享熱-關於我們</title>
+    <title>即食享熱-首頁</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
@@ -16,40 +16,47 @@
   <body>
     <!-- sidenav start-->
     <div id="sidenav" class="overlay">
-      <a href="javascript:void(0)" class="closebtn" onclick="closeSidenav()"
-        >&times;</a
-      >
-      <div class="nav-logo">
-        <img src="./material/logo.png" alt="logo" />
+      <div class="nav">
+        <button class="closebtn" onclick="closeSidenav()">
+          <img src="./material/icon/close.png" alt="" />
+        </button>
       </div>
-
       <div class="overlay-content">
         <a href="#home">首頁</a>
         <a href="#about">關於我們</a>
 
         <div class="dropdown-div">
           <button class="dropdown-btn" onclick="togglePic1()">
-            商品列表&nbsp;<img src="./material/icon/down.png" alt="down" />
+            商品列表&nbsp;<img
+              src="./material/icon/down.png"
+              alt="down"
+              id="updown1"
+            />
           </button>
-          <div class="dropdown-content-1">
+          <div class="dropdown-content">
             <a href="#ready">調理包專區</a>
             <a href="#mealkit">生鮮食材包專區</a>
           </div>
         </div>
 
-        <div class="dropdown-div" onclick="togglePic2()">
-          <button class="dropdown-btn">
-            常見問題&nbsp;<img src="./material/icon/down.png" alt="down" />
+        <div class="dropdown-div">
+          <button class="dropdown-btn" onclick="togglePic2()">
+            常見問題&nbsp;<img
+              src="./material/icon/down.png"
+              alt="down"
+              id="updown2"
+            />
           </button>
-          <div class="dropdown-content-2">
-            <a href="#ready">Ｑ＆Ａ</a>
-            <a href="#mealkit">購買須知</a>
-            <a href="#">聯絡我們</a>
+          <div class="dropdown-content">
+            <a href="#QA">Ｑ＆Ａ</a>
+            <a href="#noticet">購買須知</a>
+            <a href="#contact">聯絡我們</a>
           </div>
         </div>
-        <a href="#">討論區</a>
-        <a href="#">加入我們</a>
+        <a href="#share">討論區</a>
+        <a href="#join">加入我們</a>
       </div>
+      <div id="add"></div>
       <div class="end-photo">
         <img src="./material/cook.png" alt="" />
       </div>
@@ -57,16 +64,14 @@
     <!-- sidenav end-->
 
     <!-- header start -->
-    <header class="header">
+    <div class="header">
       <div class="header-content">
         <div class="header-icons">
           <div class="icon menu-icon" onclick="openSidenav()">
             <a href="#"><img src="./material/icon/menu.png" alt="menu" /></a>
           </div>
         </div>
-        <div
-          class="logo animate__animated animate__fadeIn animate__slow 3s animate__infinite infinite"
-        >
+        <div class="logo animate__animated animate__fadeIn animate__slow 3s">
           <img src="./material/logo.png" alt="Logo" class="" />
         </div>
         <div class="header-icons">
@@ -82,13 +87,16 @@
         </div>
       </div>
       <div class="breadcrumb">
-        <a href="#">關於我們</a>
+        <a href="#">首頁</a>
       </div>
-    </header>
+    </div>
     <!-- header end -->
 
     <main>
       <div class="story">
+        <div class="main-photo">
+          <img src="./material/about.jpeg" alt="關於我們" />
+        </div>
         <div class="title">
           <h1>品牌故事</h1>
         </div>
@@ -122,7 +130,7 @@
         </div>
         <div class="container">
           <div class="content">
-            <div>
+            <div class="image">
               <img src="./material/farmer.png" alt="" />
             </div>
             <div>
@@ -141,13 +149,13 @@
             </div>
           </div>
           <div class="content">
-            <div>
+            <div class="image">
               <img src="./material//ecosystem.png" alt="" />
             </div>
             <div>
               <h2>永續循環</h2>
             </div>
-            <div class="">
+            <div>
               <p>
                 使用環保包裝<br />
                 低碳運輸<br />
@@ -160,7 +168,7 @@
             </div>
           </div>
           <div class="content">
-            <div>
+            <div class="image">
               <img src="./material/healthyfood.png" alt="" />
             </div>
             <div>
@@ -173,6 +181,7 @@
                 精準控制熱量<br />
                 滿足多元飲食需求<br />
                 用科學烹調<br />
+                鎖住食材美味<br />
                 守護您與家人的健康<br />
               </p>
             </div>
@@ -181,7 +190,7 @@
       </div>
 
       <div class="text">
-        <p>
+        <p style="font-size: 24px">
           無論您是想快速解決一餐，還是精心準備一頓豐盛饗宴，這裡都有適合您的選擇
         </p>
       </div>
@@ -191,7 +200,7 @@
     </main>
 
     <!-- footer start -->
-    <footer class="footer">
+    <div class="footer">
       <div class="footer-content">
         <div class="about-us">
           <h3>關於我們</h3>
@@ -233,7 +242,7 @@
           <p>本公司產品皆投保產品責任保險</p>
         </div>
       </div>
-    </footer>
+    </div>
     <!-- footer end -->
     <script src="./home.js"></script>
   </body>
