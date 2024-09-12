@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>線上食譜>食譜細節</title>
+  <title>閱讀食譜</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -11,49 +12,107 @@
       margin: 0;
       padding: 0;
     }
+
     .container {
       width: 50vw;
       max-width: 800px;
       margin: 0 auto;
       padding: 20px;
     }
-    .foodName {
-      font-size: 48px;
+
+    .foodName {   /*料理名稱*/
+      font-size: 46px;
       color: #333;
-      margin-top: 0;
+      margin-top: 0; /*與線上食譜的距離*/
+      margin-bottom: 50px;
     }
+
     .main {
+      /*照片至按鈕區域*/
       display: flex;
       justify-content: center;
       flex-direction: column; /* 垂直排列 */
-      align-items: center; /* 垂直置中 */
+      align-items: center;/* 垂直置中 */
     }
-    .receipeTitle {
+
+     /*文字說明的小標*/
+    .receipeTitle {     
       text-align: left;
-      font-size: 24px;
-      padding-top: 30px
+      font-size: 20px;
+      padding-top: 30px;
     }
+
+     /*文字說明的內容*/
     .receipeDetails {
-      font-size: medium;
+      font-size: 16px;
       margin-top: 20px;
       margin-bottom: 15px;
       font-weight: bold;
+      text-align: left; /*水平居左*/
+      font-weight: bold;
     }
+
     .image {
-      width: 100%; /* 圖片寬度設置為容器的 100% */
-      max-width: 100%; /* 防止圖片超過其父容器的寬度 */
-      height: auto; /* 保持圖片的長寬比 */
-      margin-bottom: 20px;
-      border-radius: 25px; /* 圓角效果 */
-    }
-    .btns{
-      display: flex; 
-      justify-content: space-between; 
+      /*料理圖片*/
       width: 100%;
+      /* 圖片寬度設置為容器的 100% */
+      max-width: 100%;
+      /* 圖片與父容器的寬度相同 */
+      height: auto;
+      /* 保持圖片的長寬比 */
+      margin-bottom: 20px;
+      border-radius: 25px;
+      /* 圓角效果 */
     }
-    .btn-top{
+
+    .topTag {
+      /*線上食譜*/
       display: inline-block;
-      width: 150px;
+      width: 120px;
+      height: 35px;
+      line-height: 35px;
+      background-color: #E0912F;
+      color: #fff;
+      text-align: center;
+      border-radius: 15px;
+      text-decoration: none;
+      font-size: large;
+      font-weight: bold;
+      margin: 10px;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .btns {
+      /* 按鈕容器 */
+      display: flex;
+      justify-content: space-between;/* 在容器內部均勻分配按鈕之間的空間 */
+      width: 100%;/* 容器的寬度設為 100%，即填滿父容器的寬度 */
+    }
+
+    .btnRed {
+      display: inline-block;
+      width: 50%;/* 佔用 50% 寬度 */
+      height: 40px;
+      line-height: 40px;
+      color: #fff;
+      text-align: center;
+      border-radius: 25px;/* 圓角效果 */
+      text-decoration: none;/*去除底線*/
+      font-size: large;
+      font-weight: bold;
+      margin: 10px;
+      transition: background-color 0.3s, transform 0.3s;
+      background-color: #D35B50;/* 紅色背景 */
+    }
+
+    .btnRed:hover {  /*鼠標經過的過渡效果-浮動、變色*/
+      background-color: #c0392b;
+      transform: scale(1.05);
+    }
+
+    .btnYellow {
+      display: inline-block;
+      width: 50%;
       height: 40px;
       line-height: 40px;
       color: #fff;
@@ -64,65 +123,22 @@
       font-weight: bold;
       margin: 10px;
       transition: background-color 0.3s, transform 0.3s;
+      background-color: #F3CE6E;
     }
-    .btn-red {
-      display: inline-block;
-        width: 50%; /* 佔用 50% 寬度 */
-        height: 40px;
-        line-height: 40px;
-        color: #fff;
-        text-align: center;
-        border-radius: 25px; /* 圓角效果 */
-        text-decoration: none;
-        font-size: large;
-        font-weight: bold;
-        margin: 10px;
-        transition: background-color 0.3s, transform 0.3s;
-        background-color: #D35B50; /* 紅色背景 */
-    }
-    .btn-red:hover {
-      background-color: #c0392b;
-      transform: scale(1.05);
-    }
-    .btn-yellow {
-      display: inline-block;
-        width: 50%; /* 佔用 50% 寬度 */
-        height: 40px;
-        line-height: 40px;
-        color: #fff;
-        text-align: center;
-        border-radius: 25px; /* 圓角效果 */
-        text-decoration: none;
-        font-size: large;
-        font-weight: bold;
-        margin: 10px;
-        transition: background-color 0.3s, transform 0.3s;
-        background-color: #F3CE6E; /* 黃色背景 */
-    }
-    .btn-yellow:hover {
+
+    .btnYellow:hover {
       background-color: #f39c12;
       transform: scale(1.05);
     }
-    ul {
-      list-style-type: disc;
-      padding: 0;
-      text-align: left;
-      margin: 0;
-      padding-left: 40px;
-    }
-    li {
-      margin-bottom: 10px;
-      text-align: left;
-      font-weight: bold;
-      font-size: 18px;
-    }
+
   </style>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 </head>
+
 <body>
   <div class="container">
     <div style="text-align: center">
-      <h3 class="btn-top" style="background-color: #E0912F">線上食譜</h3>
+      <h3 class="topTag">線上食譜</h3>
     </div>
     <h1 class="foodName">泰式冬蔭功海鮮湯</h1>
     <p>
@@ -133,8 +149,8 @@
     <div class="main">
       <img src="image/西半牙海鮮燉飯.jpg" alt="泰式冬蔭功海鮮湯" class="image" />
       <div class="btns">
-        <a class="btn-red">收藏食譜</a>
-        <a class="btn-yellow">查看商品</a>
+        <a class="btnRed">收藏食譜</a>
+        <a class="btnYellow">查看商品</a>
       </div>
     </div>
     <div>
@@ -190,5 +206,5 @@
     </div>
   </div>
 </body>
-</html>
 
+</html>

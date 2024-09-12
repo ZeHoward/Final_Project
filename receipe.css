@@ -1,0 +1,149 @@
+/* 設定頁面佈局為左右兩欄 */
+.container {
+  display: flex;
+  height: 100vh; /* 全螢幕高度 */
+}
+/* 左邊區域的樣式 */
+.left {
+  flex: 1; /* 左邊區域佔1份空間 */
+  padding: 30px;
+}
+/* 右邊區域的樣式 */
+.right {
+  flex: 2; /* 右邊區域佔2份空間 */
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 65px;
+}
+/* 左側菜單的樣式 */
+.menu {
+  list-style-type: none; /* 移除預設的項目符號 */
+  padding: 0;
+  margin: 0;
+  width: 200px;
+}
+/* 菜單項目樣式 */
+.menu li {
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s; /* 滑鼠移過時的背景變化 */
+  border-bottom: 1px solid transparent; /* 項目之間的邊界 */
+  font-weight: bold;
+  font-size: large;
+  display: flex;
+  justify-content: space-between; /* 讓文字和箭頭分開 */
+  align-items: center; /* 垂直居中 */
+}
+/* 滑鼠移到菜單項目時的變化 */
+.menu li:hover {
+  background-color: #f3ce6e; /* 背景變為黃色 */
+}
+/* 子選單預設隱藏 */
+.submenu {
+  display: none;
+  font-size: larger;
+}
+/* 調整圖片大小 */
+.card-img {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+}
+/* 卡片內容的排列 */
+.card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: center;
+}
+.card-details {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  margin-left: 15px; /* 保持與圖片對齊的邊距 */
+}
+.card-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+  padding-left: 15px;
+  padding-top: 15px;
+}
+/* 愛心按鈕的樣式 */
+.heart-btn {
+  cursor: pointer;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  position: relative;
+  margin: 0;
+}
+.heart-btn::before, .heart-btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 12px;
+  height: 21px;
+  border-radius: 12px 12px 0 0;
+  background-color: gray;
+  transition: background-color 0.3s;
+}
+.heart-btn::before {
+  left: 12px;
+  transform: rotate(-45deg);
+  transform-origin: 0 100%;
+}
+.heart-btn::after {
+  left: 0;
+  transform: rotate(45deg);
+  transform-origin: 100% 100%;
+}
+.heart-btn.liked::before, .heart-btn.liked::after {
+  background-color: red;
+}
+.card-details button {
+  margin-left: 15px; /* 愛心按鈕和閱讀按鈕之間的距離 */
+}
+.typeName {
+  display: flex; /* 設置為彈性容器 */
+  justify-content: space-between; /* 子元素在水平方向上均勻分佈 */
+  align-items: center; /* 在垂直方向上居中對齊 */
+  margin-bottom: 1rem; /* 設置底部外邊距為 1rem */
+}
+.selectList {
+  border: 1px solid #ccc; /* 設置邊框為 1px 寬的實線，顏色為 #ccc */
+  border-radius: 4px; /* 設置邊框圓角半徑為 4px */
+  padding: 0.5rem; /* 設置內邊距為 0.5rem (8px) */
+  box-sizing: border-box; /* 確保內邊距和邊框計算在總寬度和高度內 */
+}
+.foodCards {
+  display: grid; /* 使用 grid 布局 */
+  grid-template-columns: repeat(1, 1fr); /* 設置一列，每列占滿可用空間 */
+  gap: 1rem; /* 設置網格項目之間的間距為 1rem (16px) */
+}
+@media (min-width: 640px) { /* 在螢幕寬度達到 640px 時應用 */
+  .foodCards {
+    grid-template-columns: repeat(2, 1fr); /* 設置兩列，每列占滿可用空間 */
+  }
+}
+@media (min-width: 768px) { /* 在螢幕寬度達到 768px 時應用 */
+  .foodCards {
+    grid-template-columns: repeat(3, 1fr); /* 設置三列，每列占滿可用空間 */
+  }
+}
+.onlineReceipes {
+  font-size: 1.2rem;
+}
+.receipes {
+  background-color: white; /* 背景顏色為白色 */
+  border-radius: 0.5rem; /* 圓角半徑為 0.5rem (8px) */
+  padding: 1rem; /* 內邊距為 1rem (16px) */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 添加陰影效果 */
+  transition: transform 0.3s, box-shadow 0.3s; /* 滑鼠懸停時的變化過渡效果 */
+}
+.read-btn:hover {
+  transform: scale(1.05); /* 懸停時放大 */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* 懸停時加強陰影效果 */
+}
