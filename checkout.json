@@ -1,0 +1,32 @@
+{
+    "items": [
+        {
+            "name": "宮保雞丁",
+            "price": 200,
+            "quantity": 1,
+            "image": "image/印度雞肉香飯.jpg"
+        },
+        {
+            "name": "泰式咖哩雞",
+            "price": 200,
+            "quantity": 1,
+            "image": "image/西班牙海鮮燉飯.jpg"
+        },
+        {
+            "name": "紅豆湯",
+            "price": 80,
+            "quantity": 5,
+            "image": "image/越南牛肉河粉.jpg"
+        },
+        {
+            "name": "南瓜濃湯",
+            "price": 150,
+            "quantity": 2,
+            "image": "image/西班牙海鮮燉飯.jpg"
+        }
+    ],
+    "subtotal": 1100,
+    "discount": 0,
+    "shipping": 120,
+    "total": 1220
+}

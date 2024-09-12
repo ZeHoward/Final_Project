@@ -1,0 +1,152 @@
+body {
+  display: flex;
+  margin: 0;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, sans-serif;
+}
+.container {
+  display: flex;
+  width: 100%;
+  margin: 0;
+  box-shadow: none;
+  border-radius: 0;
+  overflow: hidden;
+  margin-top: 5%;
+}
+.left,
+.right {
+  width: 50%;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: white;
+  margin: 10px 5%;
+  position: relative;
+}
+
+.steps {
+  position: absolute;
+  top: 1%;
+  left: 20px;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #333;
+}
+.steps a {
+  color: #000000;
+  text-decoration: none;
+  margin: 0 5px;
+}
+.steps a:not(:last-child)::after {
+  content: ">";
+  margin: 0 5px;
+}
+h1 {
+  text-align: center;
+}
+.item {
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+}
+.item img {
+  width: 80px;
+  height: 80px;
+  margin-right: 15px;
+}
+.item-details {
+  flex: 1;
+  font-weight: bold;
+}
+.item-name .item-quantity {
+  text-align: left;
+}
+.item-price {
+  text-align: right;
+}
+.total {
+  margin-top: 20px;
+  font-weight: bolder;
+}
+.form-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+.form-row label,
+.form-row input,
+.form-row select {
+  flex: 1;
+  margin-right: 10px;
+}
+.form-row input,
+.form-row select {
+  margin-right: 0;
+}
+.form-row .half-width {
+  flex: 1;
+  margin-right: 5px;
+}
+.form-row .half-width:last-child {
+  margin-right: 0;
+}
+.form-row .full-width {
+  flex: 2;
+}
+input,
+select {
+  height: 40px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+input::placeholder {
+  color: #888;
+}
+select::placeholder {
+  color: #888;
+}
+.form-row select::-ms-expand {
+  display: none;
+}
+.header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 55px;
+}
+.checkbox-container {
+  display: flex;
+  align-items: center;
+}
+.checkbox-container input {
+  margin-right: 10px;
+}
+
+.goBack {
+  text-decoration: none; /* 去掉下劃線 */
+  color: #d35b50; /* 設定未點選時的顏色 */
+}
+
+.goBack:hover {
+  color: #c5111a; /* 設定滑鼠懸停時的顏色 (可選) */
+}
+
+.item {
+  border-bottom: 1px solid #7c7b7b;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.item:last-child {
+  border-bottom: none;
+}

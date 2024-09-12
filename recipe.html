@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>線上食譜</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="recipe.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    
+  </head>
+  <body>
+    <div class="container">
+      <!-- 左側菜單 -->
+      <div class="left">
+        <ul class="menu">
+          <!-- 點擊後可展開子選單 -->
+          <li onclick="toggleSubmenu()" style="font-size: x-large">
+            線上食譜<i class="fas fa-chevron-down" id="arrow-icon"></i>
+          </li>
+          <ul class="submenu">
+            <li>家常料理</li>
+            <li>兒童友善</li>
+            <li>銀髮友善</li>
+            <li>異國料理</li>
+            <li>多人料理</li>
+          </ul>
+        </ul>
+      </div>
+
+      <!-- 右側主要內容區域 -->
+      <div class="right">
+        <!-- 標題和排序選擇框 -->
+        <div class="recipeType">
+          <h1 style="font-size: x-large; font-weight: bold">| 異國料理</h1>
+          <!-- 排序選擇框 -->
+          <select class="selectList">
+            <option>預設排序</option>
+            <option>烹飪難易度：由易至難</option>
+            <option>烹飪難易度：由難至易</option>
+            <option>上架時間：由舊至新</option>
+            <option>上架時間：由新至舊</option>
+          </select>
+        </div>
+
+        <!-- 食物卡片區域 -->       
+          <div class="foodCards" id="foodCards">
+            <!-- 食物卡片將會由 JavaScript 動態生成 -->
+          </div>
+        
+        </div>
+      </div>
+    </div>
+
+    <script src="recipe.js"></script>
+  
+  </body>
+</html>

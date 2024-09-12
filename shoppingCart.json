@@ -1,0 +1,31 @@
+[
+    {
+      "productId": 1,
+      "productName": "印度雞肉香飯",
+      "price": 200,
+      "quantity": 1,
+      "img": "image/印度雞肉香飯.jpg"
+    },
+    {
+      "productId": 2,
+      "productName": "西班牙海鮮燉飯",
+      "price": 200,
+      "quantity": 1,
+      "img": "image/西班牙海鮮燉飯.jpg"
+    },
+    {
+      "productId": 3,
+      "productName": "越南牛肉河粉",
+      "price": 200,
+      "quantity": 1,
+      "img": "image/越南牛肉河粉.jpg"
+    },
+    {
+      "productId": 4,
+      "productName": "日式親子丼",
+      "price": 200,
+      "quantity": 1,
+      "img": "image/越南牛肉河粉.jpg"
+    }
+  ]
+  

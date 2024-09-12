@@ -4,136 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>購物車</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        margin: 20px;
-        position: relative;
-      }
-      .container {
-        width: 80%;
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 20px;
-      }
-      .title {
-        text-align: center;
-        margin-bottom: 50px;
-      }
-      .back-button {
-        font-size: 16px;
-        font-weight: bolder;
-        color: #007bff;
-        cursor: pointer;
-        text-decoration: none;
-        margin-bottom: 20px;
-        display: inline-block;
-      }
-      table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-bottom: 20px;
-      }
-      thead th {
-        border-bottom: 2px solid #ddd;
-        text-align: center;
-      }
-  
-      tbody td {
-        border-bottom: 1px solid #ddd;
-        text-align: center;
-      }
-      tbody tr:last-child td {
-        border-bottom: none;
-      }
-      td {
-        padding: 10px;
-        text-align: center;
-      }
-      .total {
-        font-weight: bold;
-        font-size: 1.2em;
-        text-align: left;
-        margin-top: 20px;
-        border-top: 2px solid #ddd;
-        padding-top: 10px;
-      }
-      .product-image {
-        width: 100px;
-        height: 100px;
-        margin: 10px;
-        object-fit: cover;
-      }
-      .coupon-container {
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        margin-top: 10px;
-        gap: 10px;
-      }
-      .coupon-container input {
-        width: 200px;
-        padding: 10px;
-      }
-      .button {
-        background-color: #857d7b;
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        cursor: pointer;
-        text-align: center;
-        width: auto;
-      }
-      .button:hover {
-        background-color: #564a4d;
-      }
-      .quantity {
-        display: flex;
-        align-items: center;
-      }
-      .quantity button {
-        background-color: transparent;
-        border: 1px solid #ddd;
-        color: #007bff;
-        font-size: 14px;
-        cursor: pointer;
-        padding: 5px 10px;
-        text-align: center;
-      }
-      .quantity span {
-        margin: 0 10px;
-      }
-      .actions {
-        display: flex;
-        justify-content: flex-end;
-        margin-top: 20px;
-      }
-      .submit-button {
-        background-color: #ff5733;
-        border-radius: 8px;
-        color: white;
-        padding: 10px 15px;
-        border: none;
-        cursor: pointer;
-        text-align: center;
-        margin-left: 10px;
-        width: 290px;
-        margin-top: 25px;
-      }
-      .submit-button:hover {
-        background-color: #c70039;
-      }
-      /* 刪除按鈕樣式 */
-      td button {
-        background-color: transparent;
-        border: none;
-        color: #ff5733;
-        font-size: 16px;
-        cursor: pointer;
-        padding: 0;
-        text-align: center;
-      }
-    </style>
+    <link rel="stylesheet" href="shoppingCart.css" />
   </head>
   <body>
     <div class="container">
@@ -151,81 +22,10 @@
             <th>刪除</th>
           </tr>
         </thead>
-        <tbody>
-          
-          <tr>
-            <td>
-              <img
-                src="image/印度雞肉香飯.jpg"
-                alt="商品圖片"
-                class="product-image"
-              />
-            </td>
-            <td>泰式冬蔭功海鮮湯</td>
-            <td>NT$200</td>
-            <td>
-              <div class="quantity">
-                <!-- 減少數量按鈕 -->
-                <button class="decrease">–</button>
-                <!-- 數量顯示 -->
-                <span class="amount">1</span>
-                <!-- 增加數量按鈕 -->
-                <button class="increase">+</button>
-              </div>
-            </td>
-            <td class="subtotal">NT$200</td>
-            <td><button>🗑️</button></td>
-          </tr>
-          <tr>
-            <td>
-              <img
-                src="image/西半牙海鮮燉飯.jpg"
-                alt="商品圖片"
-                class="product-image"
-              />
-            </td>
-            <td>越式冬蔭功海鮮湯</td>
-            <td>NT$200</td>
-            <td>
-              <div class="quantity">
-                <!-- 減少數量按鈕 -->
-                <button class="decrease">–</button>
-                <!-- 數量顯示 -->
-                <span class="amount">1</span>
-                <!-- 增加數量按鈕 -->
-                <button class="increase">+</button>
-              </div>
-            </td>
-            <td class="subtotal">NT$200</td>
-            <td><button>🗑️</button></td>
-          </tr>
-          <tr>
-            <td>
-              <img
-                src="image/越南牛肉河粉.jpg"
-                alt="商品圖片"
-                class="product-image"
-              />
-            </td>
-            <td>美式冬蔭功海鮮湯</td>
-            <td>NT$200</td>
-            <td>
-              <div class="quantity">
-                <!-- 減少數量按鈕 -->
-                <button class="decrease">–</button>
-                <!-- 數量顯示 -->
-                <span class="amount">1</span>
-                <!-- 增加數量按鈕 -->
-                <button class="increase">+</button>
-              </div>
-            </td>
-            <td class="subtotal">NT$200</td>
-            <td><button>🗑️</button></td>
-          </tr>
-        </tbody>
+        <tbody id="cartItems"></tbody>
       </table>
 
-      <div class="total">商品總額 NT$600</div>
+      <div class="total">商品總額 NT$0</div>
 
       <div class="coupon-container">
         <input type="text" placeholder="輸入優惠碼" />
@@ -233,60 +33,10 @@
       </div>
 
       <div class="actions">
-        <!-- 提交訂單按鈕 -->
         <button class="submit-button">提交訂單</button>
       </div>
     </div>
 
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        // 獲取所有增加和減少按鈕
-        const quantityControls = document.querySelectorAll(".quantity");
-
-        quantityControls.forEach((control) => {
-          const decreaseButton = control.querySelector(".decrease");
-          const increaseButton = control.querySelector(".increase");
-          const amountSpan = control.querySelector(".amount");
-          const subtotalCell = control.closest("tr").querySelector(".subtotal");
-          const price = parseInt(
-            control
-              .closest("tr")
-              .querySelector("td:nth-child(3)")
-              .innerText.replace("NT$", ""),
-            10
-          );
-
-          // 增加數量
-          increaseButton.addEventListener("click", function () {
-            let currentAmount = parseInt(amountSpan.innerText, 10);
-            currentAmount++;
-            amountSpan.innerText = currentAmount;
-            subtotalCell.innerText = `NT$${currentAmount * price}`;
-            updateTotal();
-          });
-
-          // 減少數量
-          decreaseButton.addEventListener("click", function () {
-            let currentAmount = parseInt(amountSpan.innerText, 10);
-            if (currentAmount > 1) {
-              currentAmount--;
-              amountSpan.innerText = currentAmount;
-              subtotalCell.innerText = `NT$${currentAmount * price}`;
-              updateTotal();
-            }
-          });
-        });
-
-        // 更新總額
-        function updateTotal() {
-          const subtotals = document.querySelectorAll(".subtotal");
-          let total = 0;
-          subtotals.forEach((cell) => {
-            total += parseInt(cell.innerText.replace("NT$", ""), 10);
-          });
-          document.querySelector(".total").innerText = `商品總額 NT$${total}`;
-        }
-      });
-    </script>
+    <script src="shoppingCart.js"></script>
   </body>
 </html>

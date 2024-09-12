@@ -1,0 +1,124 @@
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 50vw;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.foodName {
+  /*料理名稱*/
+  font-size: 46px;
+  color: #333;
+  margin-top: 0; /*與線上食譜的距離*/
+  margin-bottom: 20px;
+}
+
+.main {
+  /*照片至按鈕區域*/
+  display: flex;
+  justify-content: center;
+  flex-direction: column; /* 垂直排列 */
+  align-items: center; /* 垂直置中 */
+}
+
+.recipeTitle {
+  text-align: left;
+  font-size: 20px;
+  padding-top: 10px;
+}
+
+.recipeDetails {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 15px;
+  font-weight: bold;
+  text-align: left; /*水平居左*/
+  font-weight: bold;
+}
+
+.image {
+  /*料理圖片*/
+  width: 100%;
+  /* 圖片寬度設置為容器的 100% */
+  max-width: 100%;
+  /* 圖片與父容器的寬度相同 */
+  height: auto;
+  /* 保持圖片的長寬比 */
+  margin-bottom: 15px;
+  border-radius: 25px;
+  /* 圓角效果 */
+}
+
+.topTag {
+  /*線上食譜*/
+  display: inline-block;
+  width: 120px;
+  height: 35px;
+  line-height: 35px;
+  background-color: #e0912f;
+  color: #fff;
+  text-align: center;
+  border-radius: 15px;
+  text-decoration: none;
+  font-size: large;
+  font-weight: bold;
+  margin: 10px;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.btns {
+  /* 按鈕容器 */
+  display: flex;
+  justify-content: space-between; /* 在容器內部均勻分配按鈕之間的空間 */
+  width: 100%; /* 容器的寬度設為 100%，即填滿父容器的寬度 */
+}
+
+.btnRed {
+  display: inline-block;
+  width: 50%; /* 佔用 50% 寬度 */
+  height: 40px;
+  line-height: 40px;
+  color: #fff;
+  text-align: center;
+  border-radius: 25px; /* 圓角效果 */
+  text-decoration: none; /*去除底線*/
+  font-size: large;
+  font-weight: bold;
+  margin: 10px;
+  transition: background-color 0.3s, transform 0.3s;
+  background-color: #d35b50; /* 紅色背景 */
+}
+
+.btnRed:hover {
+  /*鼠標經過的過渡效果-浮動、變色*/
+  background-color: #c0392b;
+  transform: scale(1.05);
+}
+
+.btnYellow {
+  display: inline-block;
+  width: 50%;
+  height: 40px;
+  line-height: 40px;
+  color: #fff;
+  text-align: center;
+  border-radius: 25px;
+  text-decoration: none;
+  font-size: large;
+  font-weight: bold;
+  margin: 10px;
+  transition: background-color 0.3s, transform 0.3s;
+  background-color: #f3ce6e;
+}
+
+.btnYellow:hover {
+  background-color: #f39c12;
+  transform: scale(1.05);
+}
