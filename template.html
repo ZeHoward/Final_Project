@@ -3,120 +3,118 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>即食享熱-首頁</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-    />
+    <title>即食享熱</title>
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap");
     </style>
     <link rel="stylesheet" href="./template.css" />
   </head>
   <body>
-    <!-- sidenav start-->
-    <div id="sidenav" class="overlay">
-      <div class="nav">
-        <button class="closebtn" onclick="closeSidenav()">
+    <!-- menu start-->
+    <div id="sidenav" class="tem-overlay">
+      <div class="tem-nav">
+        <button class="tem-closebtn" onclick="closeSidenav()">
           <img src="./material/icon/close.png" alt="" />
         </button>
       </div>
-      <div class="overlay-content">
+      <div class="tem-overlay-content">
         <a href="#home">首頁</a>
         <a href="#about">關於我們</a>
 
-        <div class="dropdown-div">
-          <button class="dropdown-btn" onclick="togglePic1()">
+        <div class="tem-dropdown-div">
+          <button class="tem-dropdown-btn" onclick="togglePic1()">
             商品列表&nbsp;<img
               src="./material/icon/down.png"
               alt="down"
               id="updown1"
             />
           </button>
-          <div class="dropdown-content">
+          <div class="tem-dropdown-content">
             <a href="#ready">調理包專區</a>
             <a href="#mealkit">生鮮食材包專區</a>
           </div>
         </div>
 
-        <div class="dropdown-div">
-          <button class="dropdown-btn" onclick="togglePic2()">
+        <div class="tem-dropdown-div">
+          <button class="tem-dropdown-btn" onclick="togglePic2()">
             常見問題&nbsp;<img
               src="./material/icon/down.png"
               alt="down"
               id="updown2"
             />
           </button>
-          <div class="dropdown-content">
+          <div class="tem-dropdown-content">
             <a href="#QA">Ｑ＆Ａ</a>
             <a href="#noticet">購買須知</a>
             <a href="#contact">聯絡我們</a>
           </div>
         </div>
-        <a href="#share">討論區</a>
-        <a href="#join">加入我們</a>
+        <a href="#share">響食部落格</a>
+        <a href="#join">登入 / 註冊</a>
       </div>
       <div id="add"></div>
-      <div class="end-photo">
+      <div class="tem-end-photo">
         <img src="./material/cook.png" alt="" />
       </div>
     </div>
-    <!-- sidenav end-->
+    <!-- menu end-->
 
     <!-- header start -->
-    <div class="header">
-      <div class="header-content">
-        <div class="header-icons">
-          <div class="icon menu-icon" onclick="openSidenav()">
+    <header class="tem-header">
+      <div class="tem-header-content">
+        <div class="tem-header-icons">
+          <div class="tem-icon tem-menu-icon" onclick="openSidenav()">
             <a href="#"><img src="./material/icon/menu.png" alt="menu" /></a>
           </div>
         </div>
-        <div class="logo animate__animated animate__fadeIn animate__slow 3s">
+        <div class="tem-logo">
           <img src="./material/logo.png" alt="Logo" class="" />
         </div>
-        <div class="header-icons">
-          <a href="#" class="icon cart-icon"
+        <div class="tem-header-icons">
+          <a href="#" class="tem-icon tem-cart-icon"
             ><img src="./material/icon/cart.png" alt="cart"
           /></a>
-          <a href="#" class="icon user-icon"
+          <a href="#" class="tem-icon tem-user-icon"
             ><img src="./material/icon/account.png" alt="sign in"
           /></a>
-          <a href="#" class="icon search-icon"
+          <a href="#" class="tem-icon tem-search-icon"
             ><img src="./material/icon/search.png" alt="search"
           /></a>
         </div>
       </div>
-      <div class="breadcrumb">
+      <div class="tem-breadcrumb">
         <a href="#">首頁</a>
       </div>
-    </div>
+    </header>
     <!-- header end -->
 
+    <!-- 開始編輯 -->
+
     <!-- footer start -->
-    <div class="footer">
-      <div class="footer-content">
-        <div class="about-us">
-          <h3>關於我們</h3>
+    <footer class="tem-footer">
+      <div class="tem-footer-content">
+        <div class="tem-about-us">
+          <h2>關於我們</h2>
           <ul>
             <li>公司簡介</li>
             <li>使命與願景</li>
             <li>品牌故事</li>
           </ul>
         </div>
-        <div class="customer-service">
-          <h3>客戶服務</h3>
+        <div class="tem-customer-service">
+          <h2>客戶服務</h2>
           <ul>
             <li>常見問題</li>
             <li>送貨與退貨政策</li>
             <li>隱私政策</li>
           </ul>
         </div>
-        <div class="contact-info">
-          <h3>聯絡我們</h3>
+        <div class="tem-contact-info">
+          <h2>聯絡我們</h2>
           <p>電話: 04-2326-5860</p>
           <p>電郵: service@fastgourmet.com</p>
           <p>地址: 台中市南屯區公益路二段51號18樓</p>
-          <span class="social-media">
+          <span class="tem-social-media">
             <a href="#"
               ><img src="./material/icon/facebook.png" alt="Facebook"
             /></a>
@@ -128,15 +126,15 @@
             /></a>
           </span>
         </div>
-        <div class="registration-info">
-          <h3>登錄字號</h3>
+        <div class="tem-registration-info">
+          <h2>登錄字號</h2>
           <p>即食享熱餐飲無限公司</p>
           <p>食品業者登錄字號: A-123456789-54321-0</p>
           <p>本公司產品皆投保產品責任保險</p>
         </div>
       </div>
-    </div>
+    </footer>
     <!-- footer end -->
-    <script src="./home.js"></script>
+    <script src="./template.js"></script>
   </body>
 </html>

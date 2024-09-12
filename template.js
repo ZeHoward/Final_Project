@@ -11,7 +11,7 @@ window.onload = function () {
   };
 
   //展開菜單選項
-  var dropdowns = document.getElementsByClassName("dropdown-btn");
+  var dropdowns = document.getElementsByClassName("tem-dropdown-btn");
   for (var i = 0; i < dropdowns.length; i++) {
     dropdowns[i].addEventListener("click", function () {
       this.classList.toggle("active");
@@ -24,12 +24,12 @@ window.onload = function () {
     });
   }
 
-  //menu toggle up/down
+  //menu toggle up/down 圖案
   window.togglePic1 = function () {
     var margin1 = document.getElementById("add");
     var img1 = document.getElementById("updown1");
     if (img1.src.includes("down.png")) {
-      img1.src = "./material/icon/upload.png";
+      img1.src = "./material/icon/up.png";
       margin1.style.margin = "40px 0";
     } else {
       img1.src = "./material/icon/down.png";
@@ -40,7 +40,7 @@ window.onload = function () {
     var margin2 = document.getElementById("add");
     var img2 = document.getElementById("updown2");
     if (img2.src.includes("down.png")) {
-      img2.src = "./material/icon/upload.png";
+      img2.src = "./material/icon/up.png";
       margin2.style.margin = "40px 0";
     } else {
       img2.src = "./material/icon/down.png";
