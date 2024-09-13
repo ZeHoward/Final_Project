@@ -184,12 +184,6 @@ body {
   text-decoration: underline;
 }
 
-.home-product-btn {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-
 /* 中間區塊 */
 .mid {
   display: flex;
@@ -200,6 +194,7 @@ body {
   flex: 1;
   border-right: 1px solid #ccc;
   padding: 20px;
+  font-weight: 600;
 }
 
 .list a,
@@ -215,6 +210,7 @@ body {
   text-align: left;
   cursor: pointer;
   outline: none;
+  font-weight: 600;
 }
 
 .down-btn:hover {
@@ -226,28 +222,35 @@ body {
 }
 
 .active2 {
-  background-color: rgb(222, 202, 21);
+  background-color: #f3cd6ea2;
   color: rgb(0, 0, 0);
 }
 
 .down-container {
   display: none;
-  padding-left: 8px;
+  /* padding-left: 8px; */
+}
+
+.down-container > a:hover {
+  background-color: #f3ce6e;
+}
+.down-container > a:active {
+  background-color: #edc150;
 }
 
 /* 商品區 */
-.pzone {
+.product-zone {
   flex: 4;
   padding: 20px;
 }
 
-#pcontainer {
+#productContainer {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
 }
 
-.product-card {
+.product {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   margin: 10px 0;
   padding: 15px;
@@ -258,7 +261,7 @@ body {
 }
 
 .product-image {
-  width: 100%;
+  width: 90%;
   height: 200px;
   object-fit: cover;
   border-radius: 2%;
@@ -266,7 +269,8 @@ body {
 
 .product-price {
   font-size: 20px;
-  color: rgb(0, 0, 0);
+  color: #d35b50;
+  font-weight: 700;
 }
 
 .sort {
@@ -283,34 +287,37 @@ body {
   background-color: #e0912f;
   color: white;
   border: none;
-  padding: 10px 15px;
+  padding: 10px 0;
   border-radius: 5px;
   margin-top: 5px;
   cursor: pointer;
+  font-size: 16px;
   width: 60%;
 }
 
+.home-product-btn {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
 .add-to-favorite {
   margin-top: 10px;
   display: flex;
   align-items: center; /* 垂直置中 */
   justify-content: center; /* 水平置中 */
   border: none;
-  color: #787575;
   background-color: transparent;
+  color: #787575; /* 默認未收藏的顏色 */
+  cursor: pointer;
+}
+
+.add-to-favorite.favorited {
+  color: #cc4235; /* 收藏後的顏色 */
 }
 
 .add-to-cart:hover,
 .add-to-cart:active {
   background-color: #de8415;
-}
-
-.add-to-favorite:hover {
-  color: #686666;
-}
-
-.add-to-favorite:active {
-  color: #cc4235;
 }
 
 /* footer */
