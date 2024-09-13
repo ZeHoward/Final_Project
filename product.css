@@ -12,12 +12,12 @@ body {
   overflow-x: hidden;
 }
 
-.nav {
+.tem-nav {
   height: 80px;
   display: block;
 }
 
-.closebtn {
+.tem-closebtn {
   position: absolute;
   border: none;
   background-color: transparent;
@@ -25,40 +25,41 @@ body {
   top: 15px;
 }
 
-.closebtn > img {
+.tem-closebtn > img {
   height: 35px;
   width: 35px;
 }
 
-.end-photo {
+.tem-end-photo {
   justify-content: center;
 }
 
-.end-photo img {
+.tem-end-photo img {
   width: 65%;
 }
 
-.overlay {
+.tem-overlay {
   position: fixed;
   height: 100%;
   width: 0;
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: #fbf4e2;
+  background-color: #fff6d0;
+  backdrop-filter: blur(10px);
   overflow-x: hidden; /*移除水平卷軸*/
   transition: 0.5s;
   text-align: center;
 }
 
-.overlay-content {
+.tem-overlay-content {
   padding-top: 2vh;
   width: 100%;
   margin-bottom: 0;
 }
 
-.overlay-content > a,
-.dropdown-btn {
+.tem-overlay-content > a,
+.tem-dropdown-btn {
   padding: 8px;
   text-decoration: none;
   font-size: 36px;
@@ -68,8 +69,8 @@ body {
   font-weight: bolder;
 }
 
-.sidenav a,
-.dropdown-btn {
+.tem-sidenav a,
+.tem-dropdown-btn {
   padding: 6px 8px 6px 16px;
   text-decoration: none;
   font-size: 20px;
@@ -81,79 +82,86 @@ body {
   outline: none;
 }
 
-/*下拉式選單一開始保持閉合*/
-.dropdown-content {
-  display: none;
+.tem-dropdown-content {
+  display: none; /*讓下拉選單一開始保持閉合*/
 }
 
-.dropdown-content a {
+.tem-dropdown-content a {
   font-size: 24px;
   padding: 8px;
   text-decoration: none;
   display: block;
   color: black;
   transition: 0.3s;
+  font-weight: 700;
 }
 
-.overlay-content > a:hover,
-.dropdown-btn:hover,
-.dropdown-content > a:hover {
+.tem-overlay-content > a:hover,
+.tem-dropdown-btn:hover,
+.tem-dropdown-content > a:hover {
   background-color: #e0912f;
 }
 
-.active {
+.tem-active {
   background-color: #e0902fbe;
 }
 
-.dropdown-btn {
+.tem-dropdown-btn {
   font-size: 36px;
 }
 
-.dropdown-btn img {
-  height: 20px;
+.tem-dropdown-btn img {
+  height: 25px;
 }
 
 /* header */
-.header {
+.tem-header {
   text-align: center;
   position: sticky;
 }
 
-.header-content {
+.tem-header-content {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100vw;
   height: 80px;
-  background-color: #fbf4e2;
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.4),
+      rgba(255, 255, 255, 0.4)
+    ),
+    url("./material/Vorderrhein3.png");
+  background-repeat: repeat;
+  background-size: auto;
+  background-position: 1500px 3197px;
   padding: 20px;
 }
 
-.menu-icon {
+.tem-menu-icon {
   font-size: 24px;
   cursor: pointer;
 }
 
-.logo {
+.tem-logo {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
   animation-duration: 2s;
 }
 
-.logo img {
+.tem-logo img {
   height: 50px;
 }
 
-.header-icons img {
+.tem-header-icons img {
   height: 30px;
 }
 
-.icon :hover {
+.tem-icon :hover {
   height: 35px;
 }
 
-.header-icons a {
+.tem-header-icons a {
   margin: 0 10px;
   font-size: 24px;
   text-decoration: none;
@@ -161,20 +169,25 @@ body {
   justify-content: center;
 }
 
-.breadcrumb {
-  height: 40px;
+.tem-breadcrumb {
   padding: 10px 20px;
   text-align: left;
   font-size: 14px;
 }
 
-.breadcrumb a {
+.tem-breadcrumb a {
   color: black;
   text-decoration: none;
 }
 
-.breadcrumb a:hover {
+.tem-breadcrumb a:hover {
   text-decoration: underline;
+}
+
+.home-product-btn {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 /* 中間區塊 */
@@ -256,54 +269,74 @@ body {
   color: rgb(0, 0, 0);
 }
 
-.button {
-  width: 80%;
-  margin: 5px 0;
-  padding: 8px;
-  background-color: #e0912f;
-  color: white;
-  border: none;
-  border-radius: 2%;
-  cursor: pointer;
-  text-align: center;
-}
-
-.button:hover {
-  background-color: #d57d10;
-}
-
-.button.favorite {
-  background-color: #d14545;
-}
-
-.button.favorite:hover {
-  background-color: #cb2828;
-}
-
 .sort {
   text-align: right;
   margin-bottom: 20px;
 }
 
+.fa-heart {
+  font-size: 25px;
+  align-items: center;
+}
+
+.add-to-cart {
+  background-color: #e0912f;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  margin-top: 5px;
+  cursor: pointer;
+  width: 60%;
+}
+
+.add-to-favorite {
+  margin-top: 10px;
+  display: flex;
+  align-items: center; /* 垂直置中 */
+  justify-content: center; /* 水平置中 */
+  border: none;
+  color: #787575;
+  background-color: transparent;
+}
+
+.add-to-cart:hover,
+.add-to-cart:active {
+  background-color: #de8415;
+}
+
+.add-to-favorite:hover {
+  color: #686666;
+}
+
+.add-to-favorite:active {
+  color: #cc4235;
+}
+
 /* footer */
-.footer {
-  height: 250px;
+.tem-footer {
   width: 100%;
   max-width: 100vw;
   margin: 0 auto;
-  background-color: #fbf4e2;
   padding: 20px;
   text-align: center;
   position: relative;
-  bottom: 0;
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.3),
+      rgba(255, 255, 255, 0.3)
+    ),
+    url("./material/Vorderrhein3.png");
+  background-repeat: repeat;
+  background-size: auto;
+  background-position: 1940px 774px;
 }
 
-.footer-content {
+.tem-footer-content {
   display: flex;
   justify-content: space-around;
 }
 
-.footer-content div {
+.tem-footer-content div {
   padding: 20px 30px;
   text-align: left;
   min-width: 200px;
@@ -311,68 +344,70 @@ body {
   text-align: left;
 }
 
-.footer-content div span {
-  /* media icon */
+.tem-footer-content div span {
+  /* 社群icon */
   float: left;
   text-align: left;
   padding-top: 10px;
 }
 
-.footer-content h3 {
+.tem-footer-content h2 {
   margin-bottom: 10px;
   color: black;
 }
 
-.footer-content ul {
+.tem-footer-content ul {
   list-style: none;
 }
 
-.footer-content ul li {
+.tem-footer-content ul li {
   margin-bottom: 5px;
   color: black;
+  font-weight: 700;
 }
 
-.contact-info p,
-.registration-info p {
+.tem-contact-info p,
+.tem-registration-info p {
   color: black;
   margin-bottom: 5px;
+  font-weight: 700;
 }
 
-.social-media {
+.tem-social-media {
   display: flex;
   justify-content: center;
 }
 
-.social-media a {
+.tem-social-media a {
   margin: 0 10px;
 }
 
-.social-media img {
+.tem-social-media img {
   height: 30px;
   width: 30px;
 }
 
 /*響應式*/
 @media ((min-width: 400px) and (max-width: 1100px)) {
-  .footer-content {
+  .tem-footer-content {
     justify-content: center;
     flex-direction: column;
   }
 
-  .sidenav {
+  .tem-sidenav {
     padding-top: 15px;
   }
 
-  .overlay-content > a,
-  .dropdown-btn {
+  .tem-overlay-content > a,
+  .tem-dropdown-btn {
     font-size: 20px;
   }
 
-  .dropdown-btn img {
+  .tem-dropdown-btn img {
     height: 16px;
   }
 
-  .dropdown-content {
+  .tem-dropdown-content {
     font-size: 16px;
   }
 }

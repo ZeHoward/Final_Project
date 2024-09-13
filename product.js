@@ -11,10 +11,10 @@ window.onload = function () {
   };
 
   //展開菜單選項
-  var dropdowns = document.getElementsByClassName("dropdown-btn");
+  var dropdowns = document.getElementsByClassName("tem-dropdown-btn");
   for (var i = 0; i < dropdowns.length; i++) {
     dropdowns[i].addEventListener("click", function () {
-      this.classList.toggle("active");
+      this.classList.toggle("tem-active");
       var dropdownContent = this.nextElementSibling;
       if (dropdownContent.style.display === "block") {
         dropdownContent.style.display = "none";
@@ -24,24 +24,23 @@ window.onload = function () {
     });
   }
 
-  //menu toggle up/down
+  //menu toggle up/down 圖案
   window.togglePic1 = function () {
     var margin1 = document.getElementById("add");
     var img1 = document.getElementById("updown1");
     if (img1.src.includes("down.png")) {
-      img1.src = "./material/icon/upload.png";
+      img1.src = "./material/icon/up.png";
       margin1.style.margin = "40px 0";
     } else {
       img1.src = "./material/icon/down.png";
       margin1.style.margin = "";
     }
   };
-
   window.togglePic2 = function () {
     var margin2 = document.getElementById("add");
     var img2 = document.getElementById("updown2");
     if (img2.src.includes("down.png")) {
-      img2.src = "./material/icon/upload.png";
+      img2.src = "./material/icon/up.png";
       margin2.style.margin = "40px 0";
     } else {
       img2.src = "./material/icon/down.png";
@@ -130,10 +129,31 @@ window.onload = function () {
                   <img class="product-image" src="${product.image}" alt="${product.name}">
                   <h3>${product.name}</h3>
                   <p class="product-price">$${product.price}</p>
-                  <button class="button cart" onclick="addToCart('${product.name}')">加入購物車</button>
-                  <button class="button favorite" onclick="favoriteProduct('${product.name}')">收藏商品</button>
+                  <div class="home-product-btn">
+                    <button class="add-to-favorite"><i class="fa-solid fa-heart"></i></button>
+                    <button class="add-to-cart"><i class="fa-solid fa-cart-shopping"></i>&nbsp;&nbsp;&nbsp;加入購物車</button>
+                  </div>
               </div>
           `;
+    });
+
+    // 加入購物車按鈕事件處理
+    document.querySelectorAll(".add-to-cart").forEach((button) => {
+      button.addEventListener("click", function () {
+        const productName =
+          this.closest(".product-card").querySelector("h3").textContent;
+        alert(`已將 ${productName} 加入購物車！`);
+      });
+    });
+
+    // 收藏商品按鈕事件處理
+    document.querySelectorAll(".add-to-favorite").forEach((button) => {
+      button.addEventListener("click", function () {
+        const productName =
+          this.closest(".product-card").querySelector("h3").textContent;
+        alert(`已將 ${productName} 加入收藏！`);
+        this.style.color = "#cc4235";
+      });
     });
   };
 
