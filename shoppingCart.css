@@ -2,6 +2,7 @@ body {
   font-family: Arial, sans-serif;
   margin: 20px;
   position: relative;
+
 }
 .container {
   width: 80%;
@@ -19,7 +20,7 @@ body {
   color: #007bff;
   cursor: pointer;
   text-decoration: none;
-  margin-bottom: 20px;
+  /* margin-bottom: 10px; */
   display: inline-block;
   border: none;
 }
