@@ -534,39 +534,36 @@ h1 {
 }
 .product-container {
   display: flex;
-  justify-content: center;
-  gap: 40px;
-  margin: 20px;
-  transition: transform 0.5s ease;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
+
 .product {
-  width: 250px;
-  text-align: center;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  padding: 20px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  position: relative;
+  margin: 15px;
+  padding: 15px;
+  width: 250px;
+  border-radius: 5%;
+  text-align: center;
+  justify-content: space-between;
 }
-.product img {
-  width: 100%;
+
+.product-image {
+  width: 90%;
   height: 200px;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 2%;
 }
-.product h4 {
+
+.product-price {
   font-size: 20px;
-  margin-top: 5px;
+  color: #d35b50;
+  font-weight: 700;
 }
-.product p {
-  font-size: 20px;
-  font-weight: bolder;
-  color: #cc4235;
-}
-.home-product-btn {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+
+.sort {
+  text-align: right;
+  margin-bottom: 20px;
 }
 
 .fa-heart {
@@ -574,14 +571,21 @@ h1 {
   align-items: center;
 }
 
+.home-product-btn {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
 .add-to-cart {
   background-color: #e0912f;
   color: white;
   border: none;
-  padding: 10px 15px;
+  padding: 10px 0;
   border-radius: 5px;
   margin-top: 5px;
   cursor: pointer;
+  font-size: 16px;
   width: 60%;
 }
 
@@ -591,8 +595,13 @@ h1 {
   align-items: center; /* 垂直置中 */
   justify-content: center; /* 水平置中 */
   border: none;
-  color: #787575;
   background-color: transparent;
+  color: #787575; /* 默認未收藏的顏色 */
+  cursor: pointer;
+}
+
+.add-to-favorite.favorited {
+  color: #cc4235; /* 收藏後的顏色 */
 }
 
 .add-to-cart:hover,
@@ -600,18 +609,10 @@ h1 {
   background-color: #de8415;
 }
 
-.add-to-favorite:hover {
-  color: #686666;
-}
-
-.add-to-favorite:active {
-  color: #cc4235;
-}
-
 .nav-button {
   position: relative;
   top: 0;
-  margin: 0 10px;
+  margin: 0 20px;
   background: #fef9f9;
   border: none;
   border-radius: 15%;
