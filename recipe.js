@@ -1,113 +1,139 @@
+window.onload = function () {
+  
+  // 菜單展開、關閉
+  window.openSidenav = function () {
+    document.getElementById("sidenav").style.width = "100%";
+    document.body.style.overflow = "hidden";
+  };
 
-// 切換子選單的顯示與隱藏
-function toggleSubmenu() {
-  const submenu = document.querySelector(".submenu");
-  const arrowIcon = document.getElementById("arrow-icon");
+  window.closeSidenav = function () {
+    document.getElementById("sidenav").style.width = "0%";
+    document.body.style.overflow = "";
+  };
+ //展開菜單選項
+ var dropdowns = document.getElementsByClassName("tem-dropdown-btn");
+ for (var i = 0; i < dropdowns.length; i++) {
+   dropdowns[i].addEventListener("click", function () {
+     this.classList.toggle("tem-active");
+     var dropdownContent = this.nextElementSibling;
+     if (dropdownContent.style.display === "block") {
+       dropdownContent.style.display = "none";
+     } else {
+       dropdownContent.style.display = "block";
+     }
+   });
+ }
 
-  if (submenu.style.display === "block") {
-    submenu.style.display = "none";
-    arrowIcon.classList.remove("fa-chevron-up");
-    arrowIcon.classList.add("fa-chevron-down");
+ //menu toggle up/down 圖案
+ window.togglePic1 = function () {
+   var margin1 = document.getElementById("add");
+   var img1 = document.getElementById("updown1");
+   if (img1.src.includes("down.png")) {
+     img1.src = "./material/icon/up.png";
+     margin1.style.margin = "40px 0";
+   } else {
+     img1.src = "./material/icon/down.png";
+     margin1.style.margin = "";
+   }
+ };
+ window.togglePic2 = function () {
+  var margin2 = document.getElementById("add");
+  var img2 = document.getElementById("updown2");
+  if (img2.src.includes("down.png")) {
+    img2.src = "./material/icon/up.png";
+    margin2.style.margin = "40px 0";
   } else {
-    submenu.style.display = "block";
-    arrowIcon.classList.remove("fa-chevron-down");
-    arrowIcon.classList.add("fa-chevron-up");
+    img2.src = "./material/icon/down.png";
+    margin2.style.margin = "";
   }
-}
+};
 
-// 切換愛心按鈕的顯示狀態
-function toggleHeart(heartIcon) {
-  heartIcon.classList.toggle("liked");
-}
+var dropdown2 = document.getElementsByClassName("down-btn");
+var x;
 
-
-document.addEventListener('DOMContentLoaded', async () => {
-    try {
-      const response = await fetch('recipe.json');  // 確保這裡的文件名與實際一致
-      if (!response.ok) {
-        throw new Error(`Network response was not ok: ${response.statusText}`);
-      }
-      const recipes = await response.json();
-  
-      // 檢查數據是否正確
-      console.log('Recipes Data:', recipes);
-  
-      const foodCardsContainer = document.getElementById('foodCards');
-  
-      recipes.forEach(recipe => {
-        const card = document.createElement('div');
-        card.className = 'recipes';
-  
-        card.innerHTML = `
-          <div class="cardContent">
-            <img src="${recipe.img}" alt="${recipe.name}" class="cardImg" />
-            <div class="card-title">${recipe.name}</div>
-            <div class="card-details">
-              <div class="heart-btn" onclick="toggleHeart(this)"></div>
-              <button class="readBtn">閱讀食譜</button>
-            </div>
-          </div>
-        `;
-  
-        foodCardsContainer.appendChild(card);
-      });
-    } catch (error) {
-      console.error('載入食譜數據時出錯：', error);
+for (x = 0; x < dropdown2.length; x++) {
+  dropdown2[x].addEventListener("click", function () {
+    this.classList.toggle("active2");
+    var dropdownContent2 = this.nextElementSibling;
+    if (dropdownContent2.style.display === "block") {
+      dropdownContent2.style.display = "none";
+    } else {
+      dropdownContent2.style.display = "block";
     }
   });
-  
-  
-  window.onload = function () {
-      //菜單展開、關閉
-      window.openSidenav = function () {
-        document.getElementById("sidenav").style.width = "100%";
-        document.body.style.overflow = "hidden";
-      };
-    
-      window.closeSidenav = function () {
-        document.getElementById("sidenav").style.width = "0%";
-        document.body.style.overflow = "";
-      };
-    
-      //展開菜單選項
-      var dropdowns = document.getElementsByClassName("tem-dropdown-btn");
-      for (var i = 0; i < dropdowns.length; i++) {
-        dropdowns[i].addEventListener("click", function () {
-          this.classList.toggle("tem-active");
-          var dropdownContent = this.nextElementSibling;
-          if (dropdownContent.style.display === "block") {
-            dropdownContent.style.display = "none";
-          } else {
-            dropdownContent.style.display = "block";
-          }
-        });
-      }
-    
-      //menu toggle up/down 圖案
-      window.togglePic1 = function () {
-        var margin1 = document.getElementById("add");
-        var img1 = document.getElementById("updown1");
-        if (img1.src.includes("down.png")) {
-          img1.src = "./material/icon/up.png";
-          margin1.style.margin = "40px 0";
-        } else {
-          img1.src = "./material/icon/down.png";
-          margin1.style.margin = "";
-        }
-      };
-      window.togglePic2 = function () {
-        var margin2 = document.getElementById("add");
-        var img2 = document.getElementById("updown2");
-        if (img2.src.includes("down.png")) {
-          img2.src = "./material/icon/up.png";
-          margin2.style.margin = "40px 0";
-        } else {
-          img2.src = "./material/icon/down.png";
-          margin2.style.margin = "";
-        }
-      };
-    };
-    
+}
 
-    // 現在的位置
-    
+  // 使用 fetch 從 product.json 載入商品資料
+  fetch('./recipe.json')
+    .then(response => response.json())
+    .then(products => {
+      // 顯示商品資料
+      displayProducts(products);
+
+      // 定義難易度排序的對應表
+      const difficultyOrder = {
+        "簡易": 1,
+        "中等": 2,
+        "困難": 3
+      };
+
+      // 商品排序功能
+      window.sortProducts = function () {
+        const sortBy = document.getElementById("sort").value;
+        if (sortBy === "easyToHard") {
+          // 依難易度由簡單到困難排序
+          products.sort((a, b) => difficultyOrder[a.difficulty] - difficultyOrder[b.difficulty]);
+        } else if (sortBy === "hardToEasy") {
+          // 依難易度由困難到簡單排序
+          products.sort((a, b) => difficultyOrder[b.difficulty] - difficultyOrder[a.difficulty]);
+        } else if (sortBy === "priceLowHigh") {
+          products.sort((a, b) => a.price - b.price);
+        } else if (sortBy === "priceHighLow") {
+          products.sort((a, b) => b.price - a.price);
+        } else if (sortBy === "dateNewOld") {
+          products.sort((a, b) => new Date(b.releaseDate) - new Date(a.releaseDate));
+        } else if (sortBy === "dateOldNew") {
+          products.sort((a, b) => new Date(a.releaseDate) - new Date(b.releaseDate));
+        }
+        displayProducts(products);
+      };
+    })
+    .catch(error => console.error('Error loading products:', error));
+
+  // 顯示商品資料的函數
+  window.displayProducts = function (products) {
+    const container = document.getElementById("pcontainer");
+    container.innerHTML = ""; // 清空現有商品
+    products.forEach((product) => {
+      container.innerHTML += `
+        <div class="product-card">
+          <img class="product-image" src="${product.image}" alt="${product.name}">
+          <h3>${product.name}</h3>
+          
+          <p class="product-difficulty">難易度: ${product.difficulty}</p>
+          <div class="home-product-btn">
+            <button class="add-to-favorite"><i class="fa-solid fa-heart"></i></button>
+            <button class="add-to-cart"><i class="fa-solid fa-cart-shopping"></i>&nbsp;&nbsp;&nbsp;加入購物車</button>
+          </div>
+        </div>
+      `;
+    });
+
+    // 加入購物車按鈕事件處理
+    document.querySelectorAll(".add-to-cart").forEach((button) => {
+      button.addEventListener("click", function () {
+        const productName = this.closest(".product-card").querySelector("h3").textContent;
+        alert(`已將 ${productName} 加入購物車！`);
+      });
+    });
+
+    // 收藏商品按鈕事件處理
+    document.querySelectorAll(".add-to-favorite").forEach((button) => {
+      button.addEventListener("click", function () {
+        const productName = this.closest(".product-card").querySelector("h3").textContent;
+        alert(`已將 ${productName} 加入收藏！`);
+        this.style.color = "#cc4235";
+      });
+    });
+  };
+};
