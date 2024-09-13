@@ -109,7 +109,7 @@ for (x = 0; x < dropdown2.length; x++) {
         <div class="product-card">
           <img class="product-image" src="${product.image}" alt="${product.name}">
           <h3>${product.name}</h3>
-          
+           
           <p class="product-difficulty">難易度: ${product.difficulty}</p>
           <div class="home-product-btn">
             <button class="add-to-favorite"><i class="fa-solid fa-heart"></i></button>
