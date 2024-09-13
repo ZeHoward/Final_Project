@@ -135,10 +135,13 @@ select::placeholder {
 .goBack {
   text-decoration: none; /* 去掉下劃線 */
   color: #d35b50; /* 設定未點選時的顏色 */
+  border: none;
 }
 
 .goBack:hover {
-  color: #c5111a; /* 設定滑鼠懸停時的顏色 (可選) */
+  color:  #ca2a1c; /* 設定滑鼠懸停時的顏色 (可選) */
+  font-weight: bold;
+
 }
 
 .item {
@@ -150,3 +153,18 @@ select::placeholder {
 .item:last-child {
   border-bottom: none;
 }
+
+.nextstepBtn{ 
+  margin-left: 70%;
+  height: 40px;
+  width: 150px;
+  background-color: #d35b50;
+  border: none;
+  font-size: large;
+  border-radius: 5px;
+  color: white; text-decoration: none
+}
+.nextstepBtn:hover{
+  background-color:  #ca2a1c;
+}
+

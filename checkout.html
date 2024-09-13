@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>資料填寫</title>
+    <link rel="stylesheet" href="checkout.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="left">
+        <div class="steps">
+          <a href="#" style="color: #d35b50">購物車</a>
+          <a href="#" style="font-weight: bolder">填寫資料</a>
+          <a href="#">確認資訊</a>
+          <a href="#">付款</a>
+        </div>
+        <div class="header-row">
+          <h2>配送資訊</h2>
+          <div class="checkbox-container">
+            <input type="checkbox" id="same-info" name="same-info" />
+            <label for="same-info">收件人資訊與會員資訊相同</label>
+          </div>
+        </div>
+        <form>
+          <div class="form-row">
+            <input type="text" id="first-name" name="first-name" class="half-width" placeholder="收件人名字"/>
+            <input type="text" id="last-name" name="last-name"  class="half-width" placeholder="收件人姓氏"/>
+          </div>
+          <div class="form-row">
+            <input type="email" id="email" name="email" class="full-width" placeholder="電子信箱"/>
+          </div>
+          <div class="form-row">
+            <input type="tel" id="phone" name="phone"  class="full-width"  placeholder="聯絡電話"/>
+          </div>
+          <div class="form-row">
+            <select id="city" name="city" class="half-width">
+              <option value="" disabled selected>選擇縣市</option>
+              <!-- 台灣縣市 -->
+              <option value="taipei">台北市</option>
+              <option value="newtaipei">新北市</option>
+              <option value="keelung">基隆市</option>
+              <option value="taoyuan">桃園市</option>
+              <option value="hsinchu">新竹市</option>
+              <option value="hsinchucounty">新竹縣</option>
+              <option value="miaoli">苗栗縣</option>
+              <option value="taichung">台中市</option>
+              <option value="chiayi">嘉義市</option>
+              <option value="chiayicounty">嘉義縣</option>
+              <option value="tainan">台南市</option>
+              <option value="kaohsiung">高雄市</option>
+              <option value="pingtung">屏東縣</option>
+              <option value="yilan">宜蘭縣</option>
+              <option value="hualien">花蓮縣</option>
+              <option value="taitung">台東縣</option>
+              <option value="penghu">澎湖縣</option>
+              <option value="jinmen">金門縣</option>
+              <option value="lienchiang">連江縣</option>
+            </select>
+            <select id="district" name="district" class="half-width">
+              <option value="" disabled selected>選擇區域</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <input
+              type="text" id="zipcode" name="zipcode" class="half-width"  placeholder="郵遞區號" readonly/>
+          </div>
+          <div class="form-row">
+            <input type="text" id="address" name="address"  class="full-width" placeholder="地址"/>
+          </div>
+          <h3>配送方式</h3>
+
+          <div class="checkbox-container">
+            <input type="radio" id="delivery" name="delivery" />
+            <label for="delivery">冷凍-黑貓宅急便 </label>
+            <p>運費：NT$120</p>
+          </div>
+
+          <div style="margin-top: 15%">
+            <!-- 返回購物按鈕  待修改 -->
+            <button  type="button" class="goBack" onclick="window.location.href='shoppingCart.html';"> &lt;修改資料</button>
+
+            <!-- 下一步按鈕 -->
+            <button type="button" class="nextstepBtn" onclick="window.location.href='checkInfo.html';">下一步
+            </button>
+          </div>
+        </form>
+      </div>
+      <div class="right">
+        <div id="checkout-container" style="width: 80%; justify-items: center">
+          <h1 style="top: 1%; text-align: center">商品明細</h1>
+          <div id="items-container"></div>
+          <div id="total-container" class="total">
+            <p id="subtotal"></p>
+            <p id="discount"></p>
+            <p id="shipping"></p>
+            <p id="total" style="font-size: large;"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="checkout.js"></script>
+  </body>
+</html>

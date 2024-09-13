@@ -12,6 +12,8 @@ body {
   padding: 20px;
 }
 
+
+
 .foodName {
   /*料理名稱*/
   font-size: 46px;
@@ -28,13 +30,16 @@ body {
   align-items: center; /* 垂直置中 */
 }
 
+  
 .recipeTitle {
+  /*說明的小標*/
   text-align: left;
   font-size: 20px;
   padding-top: 10px;
 }
 
 .recipeDetails {
+  /*說明的內文*/
   font-size: 16px;
   margin-top: 20px;
   margin-bottom: 15px;
@@ -98,7 +103,7 @@ body {
 
 .btnRed:hover {
   /*鼠標經過的過渡效果-浮動、變色*/
-  background-color: #c0392b;
+  background-color:  #ca2a1c;
   transform: scale(1.05);
 }
 

@@ -25,9 +25,18 @@
             "image": "image/西班牙海鮮燉飯.jpg"
         }
     ],
-    
     "subtotal": 1100,
     "discount": 0,
     "shipping": 120,
-    "total": 1220
+    "total": 1220,
+    "name": "不來的",
+    "email": "bradchao@brad.com",
+    "phone": "02-23123456",
+    "address": {
+        "zipcode": "100",
+        "city": "台北市",
+        "district": "中正區",
+        "street": "中山南路7號"
+    },
+    "delivery_method": "冷凍-黑貓宅急便"
 }

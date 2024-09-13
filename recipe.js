@@ -39,12 +39,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         card.className = 'recipes';
   
         card.innerHTML = `
-          <div class="card-content">
-            <img src="${recipe.img}" alt="${recipe.name}" class="card-img" />
+          <div class="cardContent">
+            <img src="${recipe.img}" alt="${recipe.name}" class="cardImg" />
             <div class="card-title">${recipe.name}</div>
             <div class="card-details">
               <div class="heart-btn" onclick="toggleHeart(this)"></div>
-              <button class="read-btn">閱讀食譜</button>
+              <button class="readBtn">閱讀食譜</button>
             </div>
           </div>
         `;

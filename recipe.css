@@ -14,7 +14,7 @@
   /* padding: 20px; */
   display: flex;
   flex-direction: column;
-  margin-top: 65px;
+  margin-top: 90px;
   margin-right: 5%;
 }
 
@@ -28,6 +28,7 @@
 /* 菜單項目樣式 */
 .menu li {
   padding: 10px;
+  margin-top: 30px;
   cursor: pointer;
   transition: background-color 0.3s; /* 滑鼠移過時的背景變化 */
   border-bottom: 1px solid transparent; /* 項目之間的邊界 */
@@ -47,13 +48,13 @@
   font-size: larger;
 }
 /* 調整圖片大小 */
-.card-img {
-  width: 180px;
-  height: 180px;
+.cardImg {
+  width: 200px;
+  height: 200px;
   object-fit: cover;
 }
 /* 卡片內容的排列 */
-.card-content {
+.cardContent {
   display: flex;
   flex-direction: column;
   align-items: center; /* 垂直方向上居中對齊 */
@@ -77,8 +78,9 @@
 }
 
 .heart-btn,
-.read-btn {
+.readtn {
   margin: 0 10px; /* 增加按鈕之間的間距，可以根據需要調整 */
+
 }
 
 /* 愛心按鈕的樣式 */
@@ -124,6 +126,11 @@
   align-items: center; /* 在垂直方向上居中對齊 */
   margin-bottom: 1rem; /* 設置底部外邊距為 1rem */
 }
+
+.recipeType h1{
+   font-size: x-large; 
+   font-weight: bold;
+}
 .selectList {
   border: 1px solid #ccc; /* 設置邊框為 1px 寬的實線，顏色為 #ccc */
   border-radius: 4px; /* 設置邊框圓角半徑為 4px */
@@ -154,8 +161,8 @@
   transition: transform 0.3s, box-shadow 0.3s; /* 滑鼠懸停時的變化過渡效果 */
 }
 
-.read-btn {
-  background-color: #ef4444; /* bg-red-500 的顏色 */
+.readBtn {
+  background-color: #D35B50;
   color: white; /* text-white */
   border-radius: 5px; /* rounded */
   padding: 2px 14px; /* py-1 px-4，padding 上下為 8px，左右為 16px */
@@ -163,7 +170,8 @@
   cursor: pointer; /* 設定滑鼠指標為手型 */
   transition: background-color 0.3s; /* 背景顏色變化過渡效果 */
 }
-.read-btn:hover {
+.readBtn:hover {
+  background-color:  #ca2a1c;
   transform: scale(1.05); /* 懸停時放大 */
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* 懸停時加強陰影效果 */
 }

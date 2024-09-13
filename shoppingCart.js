@@ -67,3 +67,12 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   });
   
+  /*提交訂單後跳轉頁面*/
+
+  document.querySelector('.submitButton').addEventListener('click', function() {
+      // 假設需要提交訂單的表單或數據在這裡處理
+      // 提交表單或進行其他操作
+
+      // 重定向到輸入訂單資訊頁面
+      window.location.href = '/checkout.html'; // 替換為實際的頁面路徑
+  });

@@ -21,6 +21,7 @@ body {
   text-decoration: none;
   margin-bottom: 20px;
   display: inline-block;
+  border: none;
 }
 table {
   width: 100%;
@@ -40,11 +41,15 @@ tbody tr:last-child td {
 }
 td {
   padding: 10px;
-  text-align: center;
+  text-align: center; /* 確保所有 td 的內容都是水平置中 */
 }
-.total {
+th{
+  font-weight: bolder;
+  font-size: large;
+}
+.total {  /*商品總額*/
   font-weight: bold;
-  font-size: 1.2em;
+  font-size: 20px;
   text-align: left;
   margin-top: 20px;
   border-top: 2px solid #ddd;
@@ -60,8 +65,7 @@ td {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  margin-top: 10px;
-  gap: 10px;
+  gap: 10px; /*序號框跟按鈕的距離*/
 }
 .coupon-container input {
   width: 200px;
@@ -82,6 +86,8 @@ td {
 .quantity {
   display: flex;
   align-items: center;
+  justify-content: center; /* 水平置中 */
+
 }
 .quantity button {
   background-color: transparent;
@@ -100,10 +106,11 @@ td {
   justify-content: flex-end;
   margin-top: 20px;
 }
-.submit-button {
-  background-color: #ff5733;
-  border-radius: 8px;
+.submitButton {
+  background-color: #D35B50;
+  font-size: medium;
   color: white;
+  border-radius: 8px;
   padding: 10px 15px;
   border: none;
   cursor: pointer;
@@ -112,13 +119,15 @@ td {
   width: 290px;
   margin-top: 25px;
 }
-.submit-button:hover {
-  background-color: #c70039;
+.submitButton:hover {
+  background-color: #ca2a1c;
 }
+
+/*刪除按鈕*/
 td button {
   background-color: transparent;
   border: none;
-  color: #ff5733;
+  /* color: #D35B50; */
   font-size: 16px;
   cursor: pointer;
   padding: 0;
