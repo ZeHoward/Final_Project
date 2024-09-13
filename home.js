@@ -49,16 +49,16 @@ window.onload = function () {
   };
 
   // Slideshow
-  let slideIndex = 1;
+  var slideIndex = 1;
   showSlides(slideIndex);
+  var autoPlayInterval;
 
-  window.plusSlides = function (n) {
-    showSlides((slideIndex += n));
-  };
-
-  window.currentSlide = function (n) {
-    showSlides((slideIndex = n));
-  };
+  function startAutoPlay() {
+    autoPlayInterval = setInterval(function () {
+      slideIndex++;
+      showSlides(slideIndex);
+    }, 5000); // 每3秒自動切換到下一張圖片
+  }
 
   function showSlides(n) {
     let slides = document.getElementsByClassName("mySlides");
@@ -80,6 +80,14 @@ window.onload = function () {
 
     slides[slideIndex - 1].style.display = "block";
     dots[slideIndex - 1].className += " dotActive";
+  }
+
+  // 啟動自動輪播
+  startAutoPlay();
+
+  // 如果需要，也可以增加函數來停止自動輪播
+  function stopAutoPlay() {
+    clearInterval(autoPlayInterval);
   }
 
   //精選調理包專區
