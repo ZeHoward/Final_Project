@@ -11,10 +11,10 @@ window.onload = function () {
   };
 
   //展開菜單選項
-  var dropdowns = document.getElementsByClassName("dropdown-btn");
+  var dropdowns = document.getElementsByClassName("tem-dropdown-btn");
   for (var i = 0; i < dropdowns.length; i++) {
     dropdowns[i].addEventListener("click", function () {
-      this.classList.toggle("active");
+      this.classList.toggle("tem-active");
       var dropdownContent = this.nextElementSibling;
       if (dropdownContent.style.display === "block") {
         dropdownContent.style.display = "none";
@@ -23,6 +23,30 @@ window.onload = function () {
       }
     });
   }
+
+  //menu toggle up/down 圖案
+  window.togglePic1 = function () {
+    var margin1 = document.getElementById("add");
+    var img1 = document.getElementById("updown1");
+    if (img1.src.includes("down.png")) {
+      img1.src = "./material/icon/up.png";
+      margin1.style.margin = "40px 0";
+    } else {
+      img1.src = "./material/icon/down.png";
+      margin1.style.margin = "";
+    }
+  };
+  window.togglePic2 = function () {
+    var margin2 = document.getElementById("add");
+    var img2 = document.getElementById("updown2");
+    if (img2.src.includes("down.png")) {
+      img2.src = "./material/icon/up.png";
+      margin2.style.margin = "40px 0";
+    } else {
+      img2.src = "./material/icon/down.png";
+      margin2.style.margin = "";
+    }
+  };
 
   // Slideshow
   let slideIndex = 1;
@@ -118,8 +142,10 @@ window.onload = function () {
                 <img src="${product.image}" alt="${product.name}">
                 <h4>${product.name}</h4>
                 <p>$${product.price}</p>
-                <button class="add-to-cart">加入購物車</button>
-                <button class="add-to-favorite">收藏商品</button>
+                <div class="home-product-btn">
+                  <button class="add-to-favorite"><i class="fa-solid fa-heart"></i></button>
+                  <button class="add-to-cart"><i class="fa-solid fa-cart-shopping"></i>&nbsp;&nbsp;&nbsp;加入購物車</button>
+                </div>
             `;
       container.appendChild(productElement);
     }
@@ -139,6 +165,7 @@ window.onload = function () {
         const productName =
           this.closest(".product").querySelector("h4").textContent;
         alert(`已將 ${productName} 加入收藏！`);
+        this.style.color = "#cc4235";
       });
     });
   }
@@ -217,8 +244,10 @@ window.onload = function () {
                 <img src="${product2.image}" alt="${product2.name}">
                 <h4>${product2.name}</h4>
                 <p>$${product2.price}</p>
-                <button class="add-to-cart">加入購物車</button>
-                <button class="add-to-favorite">收藏商品</button>
+                <div class="home-product-btn">
+                  <button class="add-to-favorite"><i class="fa-solid fa-heart"></i></button>
+                  <button class="add-to-cart"><i class="fa-solid fa-cart-shopping"></i>&nbsp;&nbsp;&nbsp;加入購物車</button>
+                </div>
             `;
       container2.appendChild(productElement2); // 使用 productElement2 而不是 productElement
     }
@@ -238,6 +267,7 @@ window.onload = function () {
         const productName2 =
           this.closest(".product").querySelector("h4").textContent;
         alert(`已將 ${productName2} 加入收藏！`);
+        this.style.color = "#cc4235";
       });
     });
   }
@@ -254,28 +284,4 @@ window.onload = function () {
   });
 
   renderProducts2();
-
-  //menu toggle up/down
-  window.togglePic1 = function () {
-    var margin1 = document.getElementById("add");
-    var img1 = document.getElementById("updown1");
-    if (img1.src.includes("down.png")) {
-      img1.src = "./material/icon/upload.png";
-      margin1.style.margin = "40px 0";
-    } else {
-      img1.src = "./material/icon/down.png";
-      margin1.style.margin = "";
-    }
-  };
-  window.togglePic2 = function () {
-    var margin2 = document.getElementById("add");
-    var img2 = document.getElementById("updown2");
-    if (img2.src.includes("down.png")) {
-      img2.src = "./material/icon/upload.png";
-      margin2.style.margin = "40px 0";
-    } else {
-      img2.src = "./material/icon/down.png";
-      margin2.style.margin = "";
-    }
-  };
 };

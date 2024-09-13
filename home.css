@@ -176,6 +176,281 @@ body {
   text-decoration: underline;
 }
 
+/* footer */
+.footer {
+  width: 100%;
+  max-width: 100vw;
+  margin: 0 auto;
+  background-color: #fbf4e2;
+  padding: 20px;
+  text-align: center;
+  position: relative;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-around;
+}
+
+.footer-content div {
+  padding: 20px 30px;
+  text-align: left;
+  min-width: 200px;
+  box-sizing: border-box;
+  text-align: left;
+}
+
+.footer-content div span {
+  /* media icon */
+  float: left;
+  text-align: left;
+  padding-top: 10px;
+}
+
+.footer-content h3 {
+  margin-bottom: 10px;
+  color: black;
+}
+
+.footer-content ul {
+  list-style: none;
+}
+
+.footer-content ul li {
+  margin-bottom: 5px;
+  color: black;
+}
+
+.contact-info p,
+.registration-info p {
+  color: black;
+  margin-bottom: 5px;
+}
+
+.social-media {
+  display: flex;
+  justify-content: center;
+}
+
+.social-media a {
+  margin: 0 10px;
+}
+
+.social-media img {
+  height: 30px;
+  width: 30px;
+}
+
+/*響應式*/
+@media ((min-width: 400px) and (max-width: 1100px)) {
+  .footer-content {
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .sidenav {
+    padding-top: 15px;
+  }
+
+  .overlay-content > a,
+  .dropdown-btn {
+    font-size: 20px;
+  }
+
+  .dropdown-btn img {
+    height: 16px;
+  }
+
+  .dropdown-content {
+    font-size: 16px;
+  }
+}
+* {
+  font-family: "Noto Sans TC", system-ui;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  width: 100vw;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.tem-nav {
+  height: 80px;
+  display: block;
+}
+
+.tem-closebtn {
+  position: absolute;
+  border: none;
+  background-color: transparent;
+  right: 15px;
+  top: 15px;
+}
+
+.tem-closebtn > img {
+  height: 35px;
+  width: 35px;
+}
+
+.tem-end-photo {
+  justify-content: center;
+}
+
+.tem-end-photo img {
+  width: 65%;
+}
+
+.tem-overlay {
+  position: fixed;
+  height: 100%;
+  width: 0;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #fff6d0;
+  backdrop-filter: blur(10px);
+  overflow-x: hidden; /*移除水平卷軸*/
+  transition: 0.5s;
+  text-align: center;
+}
+
+.tem-overlay-content {
+  padding-top: 2vh;
+  width: 100%;
+  margin-bottom: 0;
+}
+
+.tem-overlay-content > a,
+.tem-dropdown-btn {
+  padding: 8px;
+  text-decoration: none;
+  font-size: 36px;
+  color: black;
+  display: block;
+  transition: 0.3s;
+  font-weight: bolder;
+}
+
+.tem-sidenav a,
+.tem-dropdown-btn {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 20px;
+  display: block;
+  border: none;
+  background: none;
+  width: 100%;
+  cursor: pointer;
+  outline: none;
+}
+
+.tem-dropdown-content {
+  display: none; /*讓下拉選單一開始保持閉合*/
+}
+
+.tem-dropdown-content a {
+  font-size: 24px;
+  padding: 8px;
+  text-decoration: none;
+  display: block;
+  color: black;
+  transition: 0.3s;
+  font-weight: 700;
+}
+
+.tem-overlay-content > a:hover,
+.tem-dropdown-btn:hover,
+.tem-dropdown-content > a:hover {
+  background-color: #e0912f;
+}
+
+.tem-active {
+  background-color: #e0902fbe;
+}
+
+.tem-dropdown-btn {
+  font-size: 36px;
+}
+
+.tem-dropdown-btn img {
+  height: 25px;
+}
+
+/* header */
+.tem-header {
+  text-align: center;
+  position: sticky;
+}
+
+.tem-header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100vw;
+  height: 80px;
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.4),
+      rgba(255, 255, 255, 0.4)
+    ),
+    url("./material/Vorderrhein3.png");
+  background-repeat: repeat;
+  background-size: auto;
+  background-position: 1500px 3197px;
+  padding: 20px;
+}
+
+.tem-menu-icon {
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.tem-logo {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  animation-duration: 2s;
+}
+
+.tem-logo img {
+  height: 50px;
+}
+
+.tem-header-icons img {
+  height: 30px;
+}
+
+.tem-icon :hover {
+  height: 35px;
+}
+
+.tem-header-icons a {
+  margin: 0 10px;
+  font-size: 24px;
+  text-decoration: none;
+  color: black;
+  justify-content: center;
+}
+
+.tem-breadcrumb {
+  padding: 10px 20px;
+  text-align: left;
+  font-size: 14px;
+}
+
+.tem-breadcrumb a {
+  color: black;
+  text-decoration: none;
+}
+
+.tem-breadcrumb a:hover {
+  text-decoration: underline;
+}
+
 /* 輪播圖片廣告 */
 
 .slideshow-container {
@@ -281,26 +556,43 @@ h1 {
 }
 .product h4 {
   font-size: 20px;
-  margin: 10px 0;
+  margin-top: 5px;
 }
 .product p {
-  font-size: 16px;
+  font-size: 20px;
   font-weight: bolder;
-  color: #333;
+  color: #cc4235;
 }
-.add-to-cart,
-.add-to-favorite {
+.home-product-btn {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.fa-heart {
+  font-size: 25px;
+  align-items: center;
+}
+
+.add-to-cart {
   background-color: #e0912f;
   color: white;
   border: none;
-  padding: 5px 10px;
+  padding: 10px 15px;
   border-radius: 5px;
-  margin-top: 10px;
+  margin-top: 5px;
   cursor: pointer;
-  width: 100%;
+  width: 60%;
 }
+
 .add-to-favorite {
-  background: #d35b50;
+  margin-top: 10px;
+  display: flex;
+  align-items: center; /* 垂直置中 */
+  justify-content: center; /* 水平置中 */
+  border: none;
+  color: #787575;
+  background-color: transparent;
 }
 
 .add-to-cart:hover,
@@ -308,9 +600,12 @@ h1 {
   background-color: #de8415;
 }
 
-.add-to-favorite:hover,
+.add-to-favorite:hover {
+  color: #686666;
+}
+
 .add-to-favorite:active {
-  background-color: #cc4235;
+  color: #cc4235;
 }
 
 .nav-button {
@@ -327,11 +622,11 @@ h1 {
 
 .view-all {
   display: block;
-  width: 200px;
-  margin: 20px auto 40px auto;
+  width: 250px;
+  margin: 0 auto 40px auto;
   background: #f3ce6e;
   border: none;
-  padding: 10px;
+  padding: 10px 20px;
   font-size: 16px;
   border-radius: 5px;
   cursor: pointer;
@@ -374,31 +669,40 @@ h1 {
   font-size: 2.3vw;
 }
 .text1 > p {
-  font-size: 1.5vw;
+  font-size: 1.7vw;
   font-weight: 600;
 }
 
 .text2 > p {
-  font-size: 1vw;
+  font-size: 1.3vw;
+  text-align: center;
+  font-weight: 500;
 }
 
 /* footer */
-.footer {
+.tem-footer {
   width: 100%;
   max-width: 100vw;
   margin: 0 auto;
-  background-color: #fbf4e2;
   padding: 20px;
   text-align: center;
   position: relative;
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.3),
+      rgba(255, 255, 255, 0.3)
+    ),
+    url("./material/Vorderrhein3.png");
+  background-repeat: repeat;
+  background-size: auto;
+  background-position: 1940px 774px;
 }
 
-.footer-content {
+.tem-footer-content {
   display: flex;
   justify-content: space-around;
 }
 
-.footer-content div {
+.tem-footer-content div {
   padding: 20px 30px;
   text-align: left;
   min-width: 200px;
@@ -406,68 +710,70 @@ h1 {
   text-align: left;
 }
 
-.footer-content div span {
-  /* media icon */
+.tem-footer-content div span {
+  /* 社群icon */
   float: left;
   text-align: left;
   padding-top: 10px;
 }
 
-.footer-content h3 {
+.tem-footer-content h2 {
   margin-bottom: 10px;
   color: black;
 }
 
-.footer-content ul {
+.tem-footer-content ul {
   list-style: none;
 }
 
-.footer-content ul li {
+.tem-footer-content ul li {
   margin-bottom: 5px;
   color: black;
+  font-weight: 700;
 }
 
-.contact-info p,
-.registration-info p {
+.tem-contact-info p,
+.tem-registration-info p {
   color: black;
   margin-bottom: 5px;
+  font-weight: 700;
 }
 
-.social-media {
+.tem-social-media {
   display: flex;
   justify-content: center;
 }
 
-.social-media a {
+.tem-social-media a {
   margin: 0 10px;
 }
 
-.social-media img {
+.tem-social-media img {
   height: 30px;
   width: 30px;
 }
 
 /*響應式*/
 @media ((min-width: 400px) and (max-width: 1100px)) {
-  .footer-content {
+  .tem-footer-content {
     justify-content: center;
     flex-direction: column;
   }
 
-  .sidenav {
+  .tem-sidenav {
     padding-top: 15px;
   }
 
-  .overlay-content > a,
-  .dropdown-btn {
+  .tem-overlay-content > a,
+  .tem-dropdown-btn {
     font-size: 20px;
   }
 
-  .dropdown-btn img {
+  .tem-dropdown-btn img {
     height: 16px;
   }
 
-  .dropdown-content {
+  .tem-dropdown-content {
     font-size: 16px;
   }
 }
