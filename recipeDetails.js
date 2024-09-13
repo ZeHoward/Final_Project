@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (!response.ok) {
             throw new Error(`Network response was not ok: ${response.statusText}`);
         }
-        
+         
         // 確認響應內容
         const text = await response.text();
         console.log('Raw Response Text:', text);

@@ -113,7 +113,7 @@ for (x = 0; x < dropdown2.length; x++) {
           <p class="product-difficulty">難易度: ${product.difficulty}</p>
           <div class="home-product-btn">
             <button class="add-to-favorite"><i class="fa-solid fa-heart"></i></button>
-            <button class="add-to-cart"><i class="fa-solid fa-cart-shopping"></i>&nbsp;&nbsp;&nbsp;加入購物車</button>
+            <button class="add-to-collection"><i class="fa-solid fa-book-open"></i>&nbsp;&nbsp;&nbsp;閱讀食譜</button>
           </div>
         </div>
       `;

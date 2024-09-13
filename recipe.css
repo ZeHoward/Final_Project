@@ -279,7 +279,7 @@ body {
   align-items: center;
 }
 
-.add-to-cart {
+.add-to-collection {
   background-color: #a1c14b;
   color: white;
   border: none;
@@ -301,7 +301,7 @@ body {
 }
 
 .add-to-cart:hover,
-.add-to-cart:active {
+.add-to-collection:active {
   background-color: #d35b50;
 }
 
