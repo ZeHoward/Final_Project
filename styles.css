@@ -9,7 +9,11 @@ html {
 
 textarea {
     resize: none; /* 沒辦法拉右下角縮放 */
-    height: 20px;
+    overflow: hidden;
+}
+
+textarea:focus {
+    overflow: auto; /* 當用戶輸入時，如果需要滾動條，自動顯示 */
 }
 
 select {

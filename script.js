@@ -426,6 +426,28 @@ function generateProductManagementWithActionsContent() {
     const productManagementSection = `
         <section class="product-management">
             <h1>商品管理</h1>
+            <div class="orderControls">
+                <label>每頁顯示結果數：</label>
+                <select>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+
+                <label>排序：</label>
+                <select>
+                    <option value="date">訂單日期(遞增)</option>
+                    <option value="amount">訂單金額(遞減)</option>
+                </select>
+
+                <label>狀態：</label>
+                <select>
+                    <option value="all">全部</option>
+                    <option value="paid">已付款</option>
+                    <option value="unpaid">尚未付款</option>
+                    <option value="cancelled">取消</option>
+                </select>
+            </div>
             <table class="product-table">
                 <thead>
                     <tr>
@@ -756,6 +778,107 @@ function generateStockManagementContent() {
     });
 }
 
+// 點擊"食譜上傳"時生成內容的函數
+function generateRecipeUploadForm() {
+    const mainContent = document.querySelector('.main-content');
+    mainContent.innerHTML = '';  // 清空之前的內容
+
+    const productUploadForm = `
+        <section class="product-upload">
+            <h1>食譜上傳</h1>
+            <div class="image-upload">
+                <div class="image-preview">
+                <img src="橘大頭.png" alt="商品圖片" style="width: 100%; height: auto;">
+                <img src="紅大頭.png" alt="商品圖片" style="width: 100%; height: auto;">
+                <img src="深綠大頭.png" alt="商品圖片" style="width: 100%; height: auto;">
+                <img src="黃大頭.png" alt="商品圖片" style="width: 100%; height: auto;">
+                <button id="uploadImageButton">圖片上傳</button>
+                </div>
+            </div>
+
+            <form>
+                <div class="form-group">
+                    <label for="description">食譜名稱</label>
+                    <textarea id="description" rows="1" placeholder="食譜名稱"></textarea>
+                </div>
+            
+                <!-- 類別選擇 -->
+                <div class="form-group">
+                    <label for="category">菜品分類</label>
+                    <select id="category">
+                        <option value="category1">家常料理</option>
+                        <option value="category2">兒童友善</option>
+                        <option value="category3">銀髮友善</option>
+                        <option value="category4">異國料理</option>
+                        <option value="category5">多人料理</option>
+                    </select>
+                </div>
+
+                <!-- 人數、難度等選項 -->
+                <div class="form-group row-group">
+                    <div class="field">
+                        <label for="people">人數</label>
+                        <select id="people">
+                            <option value="1">1人</option>
+                            <option value="2">2人</option>
+                            <option value="3">3人</option>
+                            <option value="4">4人</option>
+                            <option value="5">5人</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label for="difficulty">難度</label>
+                        <select id="difficulty">
+                            <option value="easy">簡單</option>
+                            <option value="medium">中等</option>
+                            <option value="hard">困難</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label for="vagan">素食</label>
+                        <select id="vagan">
+                            <option value="no">否</option>
+                            <option value="vagen">全素</option>
+                            <option value="halfvagen">奶蛋素</option>
+                        </select>
+                    </div>
+
+                    <div class="field time">
+                        <label for="time">製作時間</label>
+                        <textarea id="time" rows="1" class="time"></textarea>
+                    </div>
+                </div>
+
+                <!-- 食譜描述 -->
+                <div class="form-group">
+                    <label for="description">食材</label>
+                    <textarea id="description" rows="8"></textarea>
+                </div>
+
+                <!-- 食材與步驟 -->
+                <div class="form-group">
+                    <label for="ingredients">食譜步驟</label>
+                    <textarea id="ingredients" rows="8"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="steps">貼心小提醒</label>
+                    <textarea id="steps" rows="8"></textarea>
+                </div>
+
+                <!-- 提交與取消按鈕 -->
+                <div class="form-group">
+                    <button type="submit" id="submitButton">確認</button>
+                    <button type="reset" id="cancelButton">取消</button>
+                </div>
+            </form>
+        </section>
+    `;
+    mainContent.innerHTML = productUploadForm;
+}
+
 // 初始化圖表的函數
 function initChart() {
     const ctx = document.getElementById('orderChart').getContext('2d');
@@ -854,6 +977,15 @@ document.addEventListener('DOMContentLoaded', function () {
     uploadProductButton.addEventListener('click', function (event) {
         event.preventDefault();  // 防止跳轉
         generateProductUploadForm();  // 調用生成商品上傳表單的函數
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    // 點擊"食譜上傳"按鈕時生成內容
+    const uploadRecipeButton = document.getElementById('uploadRecipeButton');
+    uploadRecipeButton.addEventListener('click', function (event) {
+        event.preventDefault();  // 防止跳轉
+        generateRecipeUploadForm();  // 調用生成商品上傳表單的函數
     });
 });
 
