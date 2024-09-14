@@ -197,31 +197,27 @@ body {
 
 .container {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
+  text-align: center;
 }
 
 .content {
-  margin: 20px 60px;
+  flex: 1 1 30%;
+  padding: 20px 0;
+  margin: 0 80px;
   text-align: center;
   background-color: #68b24d;
-  border-radius: 10px 100px / 120px;
+  border-radius: 50% 40% / 10% 40%;
 }
 
-.image {
-  display: flex;
-  height: 120px;
-  width: 120px;
-  justify-content: center;
-  align-items: center;
-}
-.image > img {
-  width: 80px;
-  height: 80px;
+.step-image {
+  width: 200px;
+  margin: 0 auto;
 }
 
 .text {
-  margin: 40px;
+  margin-top: 40px;
   display: flex;
   justify-content: center;
 }
@@ -241,6 +237,12 @@ body {
 .view-all:hover,
 .view-all:active {
   background-color: #ffc940;
+}
+
+.importPage,
+.importPage:active {
+  text-decoration: none;
+  color: black;
 }
 
 /* footer */
