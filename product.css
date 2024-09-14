@@ -248,18 +248,18 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content:flex-start;
-  padding: 0 20px;
+  margin: 0 auto;
+  
 }
 
 .product {
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  margin: 10px;
-  padding: 15px;
+  /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); */
+  margin-bottom: 20px;
+  padding: 15px 10px 15px 0;
   width: 250px;
   border-radius: 5%;
   text-align: center;
-  justify-content:center;
-  box-sizing: border-box;     /* 確保 padding 與 border 不影響寬度計算 */
+  
 }
 
 .product-image {
