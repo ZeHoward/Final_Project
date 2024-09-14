@@ -65,7 +65,7 @@ const orders = [
         orderAmount: '1000',
         status: '已付款',
         statusClass: 'paid',
-        date: '01/01/20',
+        date: '2024-09-21 16:55:56',
         details: '詳細'
     },
     {
@@ -76,7 +76,7 @@ const orders = [
         orderAmount: '2000',
         status: '尚未付款',
         statusClass: 'unpaid',
-        date: '01/01/20',
+        date: '2024-09-21 16:55:56',
         details: '詳細'
     },
     {
@@ -87,7 +87,7 @@ const orders = [
         orderAmount: '1500',
         status: '取消',
         statusClass: 'cancelled',
-        date: '01/01/20',
+        date: '2024-09-21 16:55:56',
         details: '詳細'
     }
 ];
@@ -141,6 +141,46 @@ const products = [
         Ingredients: '義大利麵200g,牛絞肉 150g,番茄醬 1 杯,洋蔥 1 顆（切丁）,大蒜 2 瓣（切碎）,橄欖油 2 湯匙',
         steps: '用手做，再說一次用手做',
         stock: '50',
+    }
+];
+
+// 假資料，模擬不同食譜
+const recipes = [
+    {
+        image: '紅大頭.png',
+        name: '肉醬義大利麵',
+        description: '一道經典的肉醬義大利麵，搭配濃郁的番茄醬和牛肉，簡單美味，適合全家人享用。',
+        category: '異國料理',
+        people: 4,
+        difficulty: '中等',
+        vegan: '否',
+        time: '45',
+        ingredients: '義大利麵 200g, 牛絞肉 150g, 番茄醬 1 杯, 洋蔥 1 顆 (切丁), 大蒜 2 瓣 (切碎), 橄欖油 2 湯匙, 鹽與胡椒適量',
+        steps: '1. 先煮義大利麵，根據包裝說明進行。2. 加熱橄欖油，炒洋蔥和大蒜直到金黃。3. 加入牛絞肉，炒熟。4. 倒入番茄醬，煮滾後轉小火煨煮10分鐘。5. 將煮好的義大利麵拌入醬汁，調味後即可享用。'
+    },
+    {
+        image: '紅大頭.png',
+        name: '奶油雞肉蘑菇濃湯',
+        description: '豐富的口感與濃郁的香味，是一份溫暖又美味的湯品。',
+        category: '家常料理',
+        people: 2,
+        difficulty: '簡單',
+        vegan: '否',
+        time: '30',
+        ingredients: '雞胸肉 200g, 蘑菇 100g, 洋蔥 1 顆 (切丁), 奶油 30g, 牛奶 300ml, 麵粉 2 湯匙, 鹽與胡椒適量',
+        steps: '1. 雞胸肉切塊，蘑菇切片。2. 加熱奶油，炒洋蔥至軟。3. 加入雞肉，炒至變色。4. 加入麵粉，煮至呈糊狀。5. 慢慢倒入牛奶，拌勻。6. 加入蘑菇，煮至濃稠，調味後即可。'
+    },
+    {
+        image: '紅大頭.png',
+        name: '蔬菜炒飯',
+        description: '清爽的蔬菜炒飯，加入多樣時令蔬菜，簡單又營養，適合素食者。',
+        category: '多人料理',
+        people: 3,
+        difficulty: '簡單',
+        vegan: '全素',
+        time: '20',
+        ingredients: '白飯 300g, 青椒 1 顆, 紅蘿蔔 1 根, 洋蔥 1 顆, 玉米粒 100g, 醬油 2 湯匙, 橄欖油 1 湯匙',
+        steps: '1. 將青椒、紅蘿蔔、洋蔥切丁。2. 加熱橄欖油，炒洋蔥至透明。3. 加入其他蔬菜，翻炒至軟。4. 倒入白飯，拌炒均勻。5. 加入醬油調味，翻炒片刻後即可享用。'
     }
 ];
 
@@ -276,7 +316,7 @@ function generateOrderManagementContent() {
                         <th>商品名稱</th>
                         <th>訂單資訊</th>
                         <th>訂單狀態</th>
-                        <th>訂單日期</th>
+                        <th>訂單時間</th>
                         <th>詳細</th>
                     </tr>
                 </thead>
@@ -474,7 +514,7 @@ function generateProductManagementWithActionsContent() {
         const tr = document.createElement('tr');
 
         tr.innerHTML = `
-            <td><img src="${product.image}" alt="${product.name}" style="width: 50px; height: 50px;"></td>
+            <td><img src="${product.image}" alt="${product.name}"></td>
             <td>${product.sku}</td>
             <td>${product.name}</td>
             <td>${product.price}</td>
@@ -879,6 +919,208 @@ function generateRecipeUploadForm() {
     mainContent.innerHTML = productUploadForm;
 }
 
+// 點擊"食譜管理"時生成內容的函數
+function generateRecipeManagementContent() {
+    const mainContent = document.querySelector('.main-content');
+    mainContent.innerHTML = '';  // 清空之前的內容    
+
+    // 動態生成食譜管理的標題和表格
+    const recipeManagementSection = `
+        <section class="recipe-management">
+            <h1>食譜管理</h1>
+            <div class="recipeControls">
+                <label>每頁顯示結果數：</label>
+                <select>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+
+                <label>排序：</label>
+                <select>
+                    <option value="date">訂單日期(遞增)</option>
+                    <option value="amount">訂單金額(遞減)</option>
+                </select>
+
+                <label>狀態：</label>
+                <select>
+                    <option value="all">全部</option>
+                    <option value="paid">已付款</option>
+                    <option value="unpaid">尚未付款</option>
+                    <option value="cancelled">取消</option>
+                </select>
+            </div>
+            <table class="recipe-table">
+                <thead>
+                    <tr>
+                        <th>圖片</th>
+                        <th>名稱</th>
+                        <th>描述</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- 這裡插入動態生成的食譜 -->
+                </tbody>
+            </table>
+        </section>
+    `;
+    mainContent.innerHTML = recipeManagementSection;
+
+    const tbody = document.querySelector('.recipe-table tbody');
+
+    // 動態生成每個食譜的表格行
+    recipes.forEach((recipe, index) => {
+        const tr = document.createElement('tr');
+
+        tr.innerHTML = `
+            <td><img src="${recipe.image}" alt="${recipe.name}" class="recipe-image"></td>
+            <td>${recipe.name}</td>
+            <td style="max-width: 40vw;">${recipe.description}</td>
+            <td class="actions">
+                <button class="edit-button" data-index="${index}">修改</button>
+                <button class="delete-button" data-index="${index}">刪除</button>
+            </td>
+        `;
+
+        tbody.appendChild(tr);
+    });
+
+    // 重新為動態生成的「修改」按鈕綁定事件
+    document.querySelectorAll('.edit-button').forEach(button => {
+        button.addEventListener('click', function () {
+            const recipeIndex = this.getAttribute('data-index');
+            generateRecipeEditForm(recipes[recipeIndex]); // 調用食譜修改頁面並傳入對應食譜數據
+        });
+    });
+
+    // 重新為動態生成的「刪除」按鈕綁定事件
+    document.querySelectorAll('.delete-button').forEach(button => {
+        button.addEventListener('click', function () {
+            const recipeIndex = this.getAttribute('data-index');
+            if (confirm('確定要刪除這個食譜嗎？')) {
+                recipes.splice(recipeIndex, 1); // 刪除食譜
+                generateRecipeManagementContent(); // 刷新食譜管理頁面
+            }
+        });
+    });
+}
+
+// 點擊"食譜管理-修改"時生成內容的函數
+function generateRecipeEditForm(recipe) {
+    const mainContent = document.querySelector('.main-content');
+    mainContent.innerHTML = '';  // 清空之前的內容
+
+    // 動態生成食譜修改的表單
+    const recipeEditForm = `
+        <section class="recipe-edit">
+            <h1>修改食譜 - ${recipe.name}</h1>
+            <div class="image-upload">
+                <div class="image-preview">
+                    <img src="${recipe.image}" alt="食譜圖片" style="width: 100%; height: auto;">
+                    <button id="uploadImageButton">上傳新圖片</button>
+                </div>
+            </div>
+
+            <form>
+                <div class="form-group">
+                     <label for="name">食譜名稱</label>
+                     <textarea id="name" rows="1">${recipe.name}</textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="category">類別</label>
+                    <select id="category">
+                        <option value="多人料理" ${recipe.category === '多人料理' ? 'selected' : ''}>多人料理</option>
+                        <option value="兒童友善" ${recipe.category === '兒童友善' ? 'selected' : ''}>兒童友善</option>
+                        <option value="異國料理" ${recipe.category === '異國料理' ? 'selected' : ''}>異國料理</option>
+                    </select>
+                </div>
+
+                <div class="form-group row-group">
+                    <div class="field">
+                        <label for="people">人數</label>
+                        <select id="people">
+                            <option value="1" ${recipe.people === 1 ? 'selected' : ''}>1人</option>
+                            <option value="2" ${recipe.people === 2 ? 'selected' : ''}>2人</option>
+                            <option value="3" ${recipe.people === 3 ? 'selected' : ''}>3人</option>
+                            <option value="4" ${recipe.people === 4 ? 'selected' : ''}>4人</option>
+                            <option value="5" ${recipe.people === 5 ? 'selected' : ''}>5人</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label for="difficulty">難度</label>
+                        <select id="difficulty">
+                            <option value="簡單" ${recipe.difficulty === '簡單' ? 'selected' : ''}>簡單</option>
+                            <option value="中等" ${recipe.difficulty === '中等' ? 'selected' : ''}>中等</option>
+                            <option value="困難" ${recipe.difficulty === '困難' ? 'selected' : ''}>困難</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label for="vegan">素食</label>
+                        <select id="vegan">
+                            <option value="否" ${recipe.vegan === '否' ? 'selected' : ''}>否</option>
+                            <option value="全素" ${recipe.vegan === '全素' ? 'selected' : ''}>全素</option>
+                        </select>
+                    </div>
+
+                    <div class="field time">
+                        <label for="time">製作時間 (分鐘)</label>
+                        <textarea id="time" rows="1">${recipe.time}</textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">食譜描述</label>
+                    <textarea id="description" rows="4">${recipe.description}</textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="ingredients">食材成分</label>
+                    <textarea id="ingredients" rows="4">${recipe.ingredients}</textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="steps">作法步驟</label>
+                    <textarea id="steps" rows="4">${recipe.steps}</textarea>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" id="submitButton">保存修改</button>
+                    <button type="button" id="cancelButton">取消</button>
+                </div>
+            </form>
+        </section>
+    `;
+    mainContent.innerHTML = recipeEditForm;
+
+    // 綁定保存按鈕事件
+    document.getElementById('submitButton').addEventListener('click', function (event) {
+        event.preventDefault();
+
+        // 更新食譜屬性
+        recipe.name = document.getElementById('name').value;
+        recipe.category = document.getElementById('category').value;
+        recipe.people = parseInt(document.getElementById('people').value, 10);
+        recipe.difficulty = document.getElementById('difficulty').value;
+        recipe.vegan = document.getElementById('vegan').value;
+        recipe.time = parseInt(document.getElementById('time').value, 10);
+        recipe.description = document.getElementById('description').value;
+        recipe.ingredients = document.getElementById('ingredients').value;
+        recipe.steps = document.getElementById('steps').value;
+
+        alert('食譜已修改！');
+        generateRecipeManagementContent();  // 返回食譜管理頁面
+    });
+
+    // 添加取消按鈕的功能
+    document.getElementById('cancelButton').addEventListener('click', function () {
+        generateRecipeManagementContent();  // 返回食譜管理頁面
+    });
+}
+
 // 初始化圖表的函數
 function initChart() {
     const ctx = document.getElementById('orderChart').getContext('2d');
@@ -994,6 +1236,14 @@ document.addEventListener('DOMContentLoaded', function () {
     editProductButton.addEventListener('click', function (event) {
         event.preventDefault();  // 防止跳轉
         generateProductManagementWithActionsContent();  // 調用生成商品管理頁面的函數
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    const editProductButton = document.getElementById('recipeEditButton');
+    editProductButton.addEventListener('click', function (event) {
+        event.preventDefault();  // 防止跳轉
+        generateRecipeManagementContent();  // 調用生成食譜管理頁面的函數
     });
 });
 
