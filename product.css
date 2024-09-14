@@ -254,10 +254,11 @@ body {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   margin: 10px 0;
   padding: 15px;
-  width: calc(25% - 10px);
+  /* width: calc(25% - 10px); */
+  width: 250px;
   border-radius: 5%;
   text-align: center;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .product-image {
