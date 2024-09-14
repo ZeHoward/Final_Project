@@ -136,9 +136,9 @@ window.onload = function () {
       const productElement = document.createElement("div");
       productElement.className = "product";
       productElement.innerHTML = `
-                <img class="product-image" src="${product.image}" alt="${product.name}">
-                <h3 class="product-name">${product.name}</h3>
-                <p class="product-price">$NT${product.price}</p>
+                <img class="related-product-image" src="${product.image}" alt="${product.name}">
+                <p class="related-product-name">${product.name}</p>
+                <p class="related-product-price">$NT${product.price}</p>
                   <div class="home-product-btn">
                     <button class="add-to-favorite"><i class="fa-solid fa-heart"></i></button>
                     <button class="add-to-cart"><i class="fa-solid fa-cart-shopping"></i>&nbsp;&nbsp;&nbsp;加入購物車</button>
