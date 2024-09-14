@@ -459,7 +459,7 @@ body {
   margin: 0 auto;
 }
 
-/* 添加淡入效果 */
+/* 添加淡化效果 */
 .fade {
   -webkit-animation-name: fade;
   -webkit-animation-duration: 1.5s;
@@ -467,7 +467,6 @@ body {
   animation-duration: 1.5s;
 }
 
-/* 淡入效果的关键帧 */
 @-webkit-keyframes fade {
   from {
     opacity: 0.4;
@@ -491,7 +490,7 @@ body {
   position: relative;
 }
 
-img {
+.mySlides >img {
   vertical-align: middle;
 }
 
@@ -676,6 +675,7 @@ h1 {
 
 .bt {
   margin-top: 80px;
+  margin-bottom: 50px;
   font-weight: bold;
 }
 .content {
