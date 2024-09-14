@@ -204,7 +204,6 @@ body {
   flex: 1 1 50%;
   align-items: center;
   justify-content: center;
-  border-right: #333 1px solid;
 }
 
 .main-image img {
@@ -240,8 +239,10 @@ body {
   margin: 10px 0;
 }
 
-.detail {
-  margin: 5vw;
+.info,
+.detail,
+.related-product {
+  margin: 2vw 5vw;
 }
 
 label {
@@ -310,14 +311,14 @@ h1 {
   justify-content: space-between;
 }
 
-.product-image {
+.related-product-image {
   width: 90%;
   height: 200px;
   object-fit: cover;
   border-radius: 2%;
 }
 
-.product-price {
+.related-product-price {
   font-size: 20px;
   color: #d35b50;
   font-weight: 700;
