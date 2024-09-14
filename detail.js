@@ -49,6 +49,7 @@ window.onload = function () {
   };
 
   // 相關商品
+  //精選調理包專區
   const products = [
     {
       id: 1,
@@ -58,39 +59,69 @@ window.onload = function () {
     },
     {
       id: 2,
-      name: "義大利餃",
-      price: 120,
-      image: "./material/mealkit/dumpling.jpg",
-    },
-    {
-      id: 3,
       name: "南洋叻沙海鮮湯麵",
       price: 135,
       image: "./material/mealkit/laksa.jpg",
     },
     {
-      id: 4,
+      id: 3,
       name: "奶油松露百菇燉飯",
       price: 220,
-      image: "./material/mealkit/奶油松露百菇燉飯.jpg",
+      image: "./material/mealkit/CreamyRisotto.jpg",
     },
     {
-      id: 5,
+      id: 4,
       name: "泰式冬蔭功酸辣海鮮湯",
       price: 170,
       image: "./material/mealkit/soup.png",
     },
     {
-      id: 6,
+      id: 5,
       name: "印度雞肉香飯",
       price: 140,
-      image: "./material/mealkit/印度雞肉香飯.jpg",
+      image: "./material/mealkit/ChickenBiryani.jpg",
+    },
+    {
+      id: 6,
+      name: "新加坡海南雞飯",
+      price: 150,
+      image: "./material/mealkit/HainaneseChickenRice.jpg",
     },
     {
       id: 7,
-      name: "新加坡海南雞飯",
+      name: "韓式五色石鍋拌飯",
+      price: 140,
+      image: "./material/mealkit/KoreanBibimbap.png",
+    },
+    {
+      id: 8,
+      name: "馬來西亞椰漿飯",
+      price: 190,
+      image: "./material/mealkit/NasiLemak.jpg",
+    },
+    {
+      id: 9,
+      name: "馬來西亞椰漿飯",
       price: 150,
-      image: "./material/mealkit/新加坡海南雞飯.jpg",
+      image: "./material/mealkit/thaiPork.jpg",
+    },
+    {
+      id: 10,
+      name: "越南牛肉河粉",
+      price: 130,
+      image: "./material/mealkit/BeefPho.png",
+    },
+    {
+      id: 11,
+      name: "希臘酥炸櫛瓜薯泥球",
+      price: 160,
+      image: "./material/mealkit/PotatoBalls.jpg",
+    },
+    {
+      id: 12,
+      name: "西班牙海鮮燉飯",
+      price: 220,
+      image: "./material/mealkit/SeafoodPaella.jpg",
     },
   ];
 
@@ -105,11 +136,13 @@ window.onload = function () {
       const productElement = document.createElement("div");
       productElement.className = "product";
       productElement.innerHTML = `
-                <img src="${product.image}" alt="${product.name}">
-                <h4>${product.name}</h4>
-                <p>$${product.price}</p>
-                <button class="add-to-cart">加入購物車</button>
-                <button class="add-to-favorite">收藏商品</button>
+                <img class="product-image" src="${product.image}" alt="${product.name}">
+                <h3 class="product-name">${product.name}</h3>
+                <p class="product-price">$NT${product.price}</p>
+                  <div class="home-product-btn">
+                    <button class="add-to-favorite"><i class="fa-solid fa-heart"></i></button>
+                    <button class="add-to-cart"><i class="fa-solid fa-cart-shopping"></i>&nbsp;&nbsp;&nbsp;加入購物車</button>
+                  </div>
             `;
       container.appendChild(productElement);
     }
@@ -118,7 +151,7 @@ window.onload = function () {
     document.querySelectorAll(".add-to-cart").forEach((button) => {
       button.addEventListener("click", function () {
         const productName =
-          this.closest(".product").querySelector("h4").textContent;
+          this.closest(".product").querySelector("h3").textContent;
         alert(`已將 ${productName} 加入購物車！`);
       });
     });
@@ -127,12 +160,29 @@ window.onload = function () {
     document.querySelectorAll(".add-to-favorite").forEach((button) => {
       button.addEventListener("click", function () {
         const productName =
-          this.closest(".product").querySelector("h4").textContent;
-        alert(`已將 ${productName} 加入收藏！`);
+          this.closest(".product").querySelector("h3").textContent;
+
+        // 切換收藏狀態
+        if (this.classList.contains("favorited")) {
+          this.classList.remove("favorited");
+
+          // 先更改顏色，然後延遲彈跳框
+          setTimeout(() => {
+            alert(`已將 ${productName} 取消收藏！`);
+          }, 500); // 300 毫秒延遲
+        } else {
+          this.classList.add("favorited");
+
+          // 先更改顏色，然後延遲彈跳框
+          setTimeout(() => {
+            alert(`已將 ${productName} 加入收藏！`);
+          }, 500); // 300 毫秒延遲
+        }
       });
     });
   }
 
+  //上下一個商品
   document.getElementById("prevBtn").addEventListener("click", () => {
     currentIndex = (currentIndex - 1 + products.length) % products.length;
     renderProducts();
@@ -157,16 +207,17 @@ window.onload = function () {
   // 建立商品資訊 HTML 結構
   const infoSection = document.querySelector(".spec");
   const productHtml = `
-      <h1>${product.name}</h1>
-      <h2>NT$ ${product.price}</h2>
+      <p class="product-name">${product.name}</p>
+      <p class="product-price">NT$ ${product.price}</p>
       <div class="quantity-selector">
         <label for="quantity">數量:</label>
         <input type="number" id="quantity" name="quantity" value="1" min="1" />
       </div>
-      <button class="btn cart">加入購物車</button>
-      <button class="btn like">收藏商品</button>
+      <button class="btn cart"><i class="fa-solid fa-cart-shopping"></i>&nbsp;加入購物車</button>
+      <button class="btn like"><i class="fa-regular fa-heart"></i>&nbsp;收藏商品</button>
+      <button class="btn keep"><i class="fa-solid fa-book-open"></i>&nbsp;收藏食譜</button>
       <div class="promotion">
-        <strong>優惠活動:</strong> ${product.promotion}
+        <strong>優惠活動:</strong> <p> ${product.promotion}</p>
       </div>
     `;
 
