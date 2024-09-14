@@ -254,11 +254,10 @@ body {
 .product {
   /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); */
   margin-bottom: 20px;
-  padding: 15px;
+  padding: 15px 10px 15px 0;
   width: 250px;
   border-radius: 5%;
   text-align: center;
-  justify-content: center;
 }
 
 .product-image {
