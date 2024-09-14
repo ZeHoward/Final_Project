@@ -1,136 +1,396 @@
+* {
+  font-family: "Noto Sans TC", system-ui;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 body {
-    display: flex;
-    margin: 0;
-    height: 100vh;
-    justify-content: center;
-    align-items: center;
-    font-family: Arial, sans-serif;
+  font-family: Arial, sans-serif;
+  width: 100vw;
+  max-width: 100%;
+  overflow-x: hidden;
 }
+
+.tem-nav {
+  height: 80px;
+  display: block;
+}
+
+.tem-closebtn {
+  position: absolute;
+  border: none;
+  background-color: transparent;
+  right: 15px;
+  top: 15px;
+}
+
+.tem-closebtn > img {
+  height: 35px;
+  width: 35px;
+}
+
+.tem-end-photo {
+  justify-content: center;
+}
+
+.tem-end-photo img {
+  width: 65%;
+}
+
+.tem-overlay {
+  position: fixed;
+  height: 100%;
+  width: 0;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  background-color: #fff6d0;
+  backdrop-filter: blur(10px);
+  overflow-x: hidden; /*移除水平卷軸*/
+  transition: 0.5s;
+  text-align: center;
+}
+
+.tem-overlay-content {
+  padding-top: 2vh;
+  width: 100%;
+  margin-bottom: 0;
+}
+
+.tem-overlay-content > a,
+.tem-dropdown-btn {
+  padding: 8px;
+  text-decoration: none;
+  font-size: 36px;
+  color: black;
+  display: block;
+  transition: 0.3s;
+  font-weight: bolder;
+}
+
+.tem-sidenav a,
+.tem-dropdown-btn {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 20px;
+  display: block;
+  border: none;
+  background: none;
+  width: 100%;
+  cursor: pointer;
+  outline: none;
+}
+
+.tem-dropdown-content {
+  display: none; /*讓下拉選單一開始保持閉合*/
+}
+
+.tem-dropdown-content a {
+  font-size: 24px;
+  padding: 8px;
+  text-decoration: none;
+  display: block;
+  color: black;
+  transition: 0.3s;
+  font-weight: 700;
+}
+
+.tem-overlay-content > a:hover,
+.tem-dropdown-btn:hover,
+.tem-dropdown-content > a:hover {
+  background-color: #e0912f;
+}
+
+.tem-active {
+  background-color: #e0902fbe;
+}
+
+.tem-dropdown-btn {
+  font-size: 36px;
+}
+
+.tem-dropdown-btn img {
+  height: 25px;
+}
+
+/* header */
+.tem-header {
+  text-align: center;
+  position: static;
+}
+
+.tem-header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100vw;
+  height: 80px;
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.4),
+      rgba(255, 255, 255, 0.4)
+    ),
+    url("./material/Vorderrhein3.png");
+  background-repeat: repeat;
+  background-size: auto;
+  background-position: 1500px 3197px;
+  padding: 20px;
+}
+
+.tem-menu-icon {
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.tem-logo {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  animation-duration: 2s;
+}
+
+.tem-logo img {
+  height: 50px;
+}
+
+.tem-header-icons img {
+  height: 30px;
+}
+
+.tem-icon :hover {
+  height: 35px;
+}
+
+.tem-header-icons a {
+  margin: 0 10px;
+  font-size: 24px;
+  text-decoration: none;
+  color: black;
+  justify-content: center;
+}
+
+/* footer */
+.tem-footer {
+  width: 100%;
+  max-width: 100vw;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+  position: relative;
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.3),
+      rgba(255, 255, 255, 0.3)
+    ),
+    url("./material/Vorderrhein3.png");
+  background-repeat: repeat;
+  background-size: auto;
+  background-position: 1940px 774px;
+}
+
+.tem-footer-content {
+  display: flex;
+  justify-content: space-around;
+}
+
+.tem-footer-content div {
+  padding: 20px 30px;
+  text-align: left;
+  min-width: 200px;
+  box-sizing: border-box;
+  text-align: left;
+}
+
+.tem-footer-content div span {
+  /* 社群icon */
+  float: left;
+  text-align: left;
+  padding-top: 10px;
+}
+
+.tem-footer-content h2 {
+  margin-bottom: 10px;
+  color: black;
+}
+
+.tem-footer-content ul {
+  list-style: none;
+}
+
+.tem-footer-content ul li {
+  margin-bottom: 5px;
+  color: black;
+  font-weight: 700;
+}
+
+.tem-contact-info p,
+.tem-registration-info p {
+  color: black;
+  margin-bottom: 5px;
+  font-weight: 700;
+}
+
+.tem-social-media {
+  display: flex;
+  justify-content: center;
+}
+
+.tem-social-media a {
+  margin: 0 10px;
+}
+
+.tem-social-media img {
+  height: 30px;
+  width: 30px;
+}
+
+/*響應式*/
+@media ((min-width: 400px) and (max-width: 1100px)) {
+  .tem-footer-content {
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .tem-sidenav {
+    padding-top: 15px;
+  }
+
+  .tem-overlay-content > a,
+  .tem-dropdown-btn {
+    font-size: 20px;
+  }
+
+  .tem-dropdown-btn img {
+    height: 16px;
+  }
+
+  .tem-dropdown-content {
+    font-size: 16px;
+  }
+}
+/* 以下為主畫面 */
 .container {
-    display: flex;
-    width: 100%;
-    margin: 0;
-    box-shadow: none;
-    border-radius: 0;
-    overflow: hidden;
+  display: flex;
+  width: 100%;
+  margin: 0;
+  box-shadow: none;
+  border-radius: 0;
+  overflow: hidden;
 }
 .left,
 .right {
-    width: 50%;
-    padding: 20px;
-    box-sizing: border-box;
-    background-color: white;
-    margin: 10px 5%;
-    position: relative;
+  width: 50%;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: white;
+  margin: 10px 5%;
+  position: relative;
+  border: none;
 }
-
 .steps {
-    position: absolute;
-    top: 1%;
-    left: 20px;
-    display: flex;
-    align-items: center;
-    font-size: 14px;
-    color: #333;
+  padding: 10px 20px;
+  text-align: left;
 }
 .steps a {
-    color: #000000;
-    text-decoration: none;
-    margin: 0 5px;
+  color: #000000;
+  text-decoration: none;
+  margin: 0 5px;
+  margin-top: 100px;
 }
 .steps a:not(:last-child)::after {
-    content: '>';
-    margin: 0 5px;
+  content: ">";
+  margin: 0 5px;
 }
 
+h1 {
+  text-align: center;
+  /* top: 1%; */
+  margin-bottom: 40px;
+}
 .item {
-    margin-bottom: 15px;
-    display: flex;
-    align-items: center;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
 }
 .item img {
-    width: 80px;
-    height: 80px;
-    margin-right: 15px;
+  width: 80px;
+  height: 80px;
+  margin-right: 15px;
 }
 .item-details {
-    flex: 1;
-    font-weight: bold;
+  flex: 1;
+  font-weight: bold;
 }
 .item-name .item-quantity {
-    text-align: left;
+  text-align: left;
 }
 .item-price {
-    text-align: right;
+  text-align: right;
 }
 .total {
-    margin-top: 20px;
-    font-weight: bolder;
-}
-.contact-info {  
-    background-color: #ffffff;  
-    border: 1px solid #D1DE74;  
-    border-radius: 5px;  
-    padding: 20px;  
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);  
-    color: #333; /* 文字顏色 */  
-    width: 100%;
-    margin-top: 30px;
-
+  margin-top: 20px;
+  font-weight: bolder;
 }
 
-.contact-info hr {
-    border: 0; /* 去掉默認的邊框樣式 */
-    height: 1px; /* 設定橫線的高度 */
-    background-color: #D1DE74; /* 設定橫線的顏色 */
-    margin: 10px 0; /* 增加上下邊距以提高可讀性 */
-  }
-
-.info-item {  
-    margin-bottom: 5px;  
-} 
-
-.header-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 55px;
-}
-
-.goBack{
+.goBack {
   text-decoration: none; /* 去掉下劃線 */
-  color: #D35B50; /* 設定未點選時的顏色 */
+  color: #d35b50; /* 設定未點選時的顏色 */
   border: none;
-  
+  margin-top: 36%;
+  background-color: rgba(255, 255, 255, 0); /* 完全透明 */
 }
 
 .goBack:hover {
-    color: #ca2a1c; /* 設定滑鼠懸停時的顏色 (可選) */
-    font-weight: bold;
-    cursor: pointer;
+  color: #ca2a1c; /* 設定滑鼠懸停時的顏色 (可選) */
+  font-weight: bold;
+  cursor: pointer;
 }
 
 .item {
-    border-bottom: 1px solid #7c7b7b;
-    padding-bottom: 10px;
-    margin-bottom: 10px;
+  border-bottom: 1px solid #7c7b7b;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .item:last-child {
-    border-bottom: none;
+  border-bottom: none;
 }
 
-.checkBtn{
-    margin-left: 70%;
-    height: 40px;
-    width: 150px;
-    background-color: #D35B50;
-    border: none;
-    font-size: large;
-    border-radius: 5px;
-    }
+header.tem-header {
+  border: none; /* 确保没有边框 */
+  box-shadow: none; /* 确保没有阴影 */
+  padding: 0;
+}
 
-    .checkBtn:hover{
-        background-color:  #ca2a1c;
-    }
+/* info頁面 */
+.contact-info {
+  border: 2px solid #d1de74;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 90px;
+}
+
+.contact-info hr {
+  border: 0; /* 去掉默認的邊框樣式 */
+  height: 1px; /* 設定橫線的高度 */
+  background-color: #d1de74; /* 設定橫線的顏色 */
+  margin: 15px 0; /* 增加上下邊距以提高可讀性 */
+  width: 500px;
+}
+
+.info-item {
+  margin-bottom: 5px;
+}
+
+.checkBtn {
+  margin-left: 70%;
+  height: 40px;
+  width: 150px;
+  background-color: #d35b50;
+  border: none;
+  font-size: large;
+  border-radius: 5px;
+}
+
+.checkBtn:hover {
+  background-color: #ca2a1c;
+}
