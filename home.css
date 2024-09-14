@@ -490,7 +490,7 @@ body {
   position: relative;
 }
 
-.mySlides >img {
+.mySlides > img {
   vertical-align: middle;
 }
 

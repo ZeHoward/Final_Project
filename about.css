@@ -188,11 +188,16 @@ body {
   width: 100%;
 }
 
-.title,
 .paragraph {
   display: flex;
   justify-content: center;
-  margin: 40px 60px;
+  margin: 0 100px;
+}
+
+.title {
+  margin: 50px;
+  display: flex;
+  justify-content: center;
 }
 
 .container {
@@ -204,11 +209,12 @@ body {
 
 .content {
   flex: 1 1 30%;
-  padding: 20px 0;
-  margin: 0 80px;
+  padding: 60px 0;
+  margin: 20px 80px;
   text-align: center;
-  background-color: #68b24d;
-  border-radius: 50% 40% / 10% 40%;
+  background-color: #d1de74;
+  /* border-radius: 50% 50% 50% 50%; */
+  border-radius: 50% 20% / 10% 40%;
 }
 
 .step-image {
@@ -217,7 +223,7 @@ body {
 }
 
 .text {
-  margin-top: 40px;
+  margin: 20px 0;
   display: flex;
   justify-content: center;
 }
@@ -225,7 +231,7 @@ body {
 .view-all {
   display: block;
   width: 300px;
-  margin: 30px auto;
+  margin: 50px auto;
   background: #f3ce6e;
   border: none;
   padding: 10px;
