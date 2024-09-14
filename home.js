@@ -1,3 +1,58 @@
+// 全局变量
+var slideIndex = 1;
+var autoPlayInterval;
+
+// 启动自动轮播
+function startAutoPlay() {
+  autoPlayInterval = setInterval(function () {
+    slideIndex++;
+    showSlides(slideIndex);
+  }, 5000); // 每5秒自动切换到下一张图片
+}
+
+// 手动切换 - 下一张
+function plusSlides(n) {
+  clearInterval(autoPlayInterval); // 停止自动播放
+  slideIndex += n;
+  showSlides(slideIndex);
+  startAutoPlay(); // 重新启动自动播放
+}
+
+// 当前图片的显示
+function currentSlide(n) {
+  clearInterval(autoPlayInterval); // 停止自动播放
+  slideIndex = n;
+  showSlides(slideIndex);
+  startAutoPlay(); // 重新启动自动播放
+}
+
+// 显示幻灯片
+function showSlides(n) {
+  let slides = document.getElementsByClassName("mySlides");
+  let dots = document.getElementsByClassName("dot");
+
+  if (n > slides.length) {
+    slideIndex = 1;
+  }
+  if (n < 1) {
+    slideIndex = slides.length;
+  }
+
+  // 隐藏所有幻灯片
+  for (let i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+
+  // 移除所有圆点的活动状态
+  for (let i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" dotActive", "");
+  }
+
+  // 显示当前幻灯片，并激活当前的圆点
+  slides[slideIndex - 1].style.display = "block";
+  dots[slideIndex - 1].className += " dotActive";
+}
+
 window.onload = function () {
   //菜單展開、關閉
   window.openSidenav = function () {
@@ -49,46 +104,8 @@ window.onload = function () {
   };
 
   // Slideshow
-  var slideIndex = 1;
   showSlides(slideIndex);
-  var autoPlayInterval;
-
-  function startAutoPlay() {
-    autoPlayInterval = setInterval(function () {
-      slideIndex++;
-      showSlides(slideIndex);
-    }, 5000); // 每3秒自動切換到下一張圖片
-  }
-
-  function showSlides(n) {
-    let slides = document.getElementsByClassName("mySlides");
-    let dots = document.getElementsByClassName("dot");
-
-    if (n > slides.length) {
-      slideIndex = 1;
-    }
-    if (n < 1) {
-      slideIndex = slides.length;
-    }
-
-    for (let i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";
-    }
-    for (let i = 0; i < dots.length; i++) {
-      dots[i].className = dots[i].className.replace(" dotActive", "");
-    }
-
-    slides[slideIndex - 1].style.display = "block";
-    dots[slideIndex - 1].className += " dotActive";
-  }
-
-  // 啟動自動輪播
   startAutoPlay();
-
-  // 如果需要，也可以增加函數來停止自動輪播
-  function stopAutoPlay() {
-    clearInterval(autoPlayInterval);
-  }
 
   //精選調理包專區
   const products = [

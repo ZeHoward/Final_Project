@@ -456,13 +456,39 @@ body {
 .slideshow-container {
   max-width: 100vw;
   position: relative;
-  align-items: center;
-  justify-content: center;
   margin: 0 auto;
+}
+
+/* 添加淡入效果 */
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+/* 淡入效果的关键帧 */
+@-webkit-keyframes fade {
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .mySlides {
   display: none;
+  position: relative;
 }
 
 img {
@@ -509,11 +535,6 @@ img {
 .dotActive,
 .dot:hover {
   background-color: #787575;
-}
-
-.fade {
-  animation-name: fade;
-  animation-duration: 1.5s;
 }
 
 /* 生鮮食材包專區 */
