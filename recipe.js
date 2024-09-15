@@ -181,11 +181,11 @@ window.onload = function () {
 
         // 更新麵包屑
         const categoryElement = document.getElementById('recipe-category');
-        categoryElement.textContent = type === 'home' ? '家常料理' :
+        categoryElement.textContent =`\\ ${type === 'home' ? '家常料理' :
           type === 'kids' ? '兒童友善' :
           type === 'elderly' ? '銀髮友善' :
           type === 'international' ? '異國料理' :
-          type === 'group' ? '多人料理' : '';
+          type === 'group' ? '多人料理' : ''}`;
 
         // 清除排序選擇
         document.getElementById("sort").selectedIndex = 0;
