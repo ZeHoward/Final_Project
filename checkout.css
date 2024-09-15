@@ -349,6 +349,7 @@ h1 {
   display: flex;
   justify-content: space-between;
   margin-bottom: 15px;
+  flex-wrap: wrap; /* 允许子项在容器宽度不足时换行 */
 }
 .form-row label,
 .form-row input,
@@ -372,7 +373,7 @@ h1 {
 }
 input,
 select {
-  height: 40px;
+  height: 45px;
   padding: 10px;
   font-size: 16px;
   border: 1px solid #ccc;
@@ -380,6 +381,7 @@ select {
   box-sizing: border-box;
 }
 select {
+  /*移除表單中 <select> 元素的默認瀏覽器樣式*/
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -407,7 +409,7 @@ select::placeholder {
   margin-right: 10px;
 }
 
-.goBack {
+.gobackBtn {
   text-decoration: none; /* 去掉下劃線 */
   color: #d35b50; /* 設定未點選時的顏色 */
   border: none;
@@ -415,7 +417,7 @@ select::placeholder {
   font-weight: bold;
 }
 
-.goBack:hover {
+.gobackBtn:hover {
   color: #ca2a1c; /* 設定滑鼠懸停時的顏色 (可選) */
 }
 
