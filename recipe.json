@@ -4,35 +4,35 @@
     "price": 130,
     "image": "./material/mealkit/katsudon.jpg",
     "releaseDate": "2023-04-22",
-    "difficulty":"中等"
+    "level":"中等"
   },
   {
     "name": "義大利餃",
     "price": 120,
     "image": "./material/mealkit/dumpling.jpg",
     "releaseDate": "2021-03-22",
-    "difficulty":"簡易"
+    "level":"簡易"
   },
   {
     "name": "南洋叻沙海鮮湯麵",
     "price": 135,
     "image": "./material/mealkit/laksa.jpg",
     "releaseDate": "2021-04-24",
-    "difficulty":"中等"
+    "level":"中等"
   },
   {
     "name": "奶油松露百菇燉飯",
     "price": 220,
     "image": "./material/mealkit/奶油松露百菇燉飯.jpg",
     "releaseDate": "2024-06-22",
-    "difficulty":"困難"
+    "level":"困難"
   },
   {
     "name": "泰式冬蔭功酸辣海鮮湯",
     "price": 170,
     "image": "./material/mealkit/soup.png",
     "releaseDate": "2021-04-02",
-    "difficulty":"簡易"
+    "level":"簡易"
  
   }
 ]

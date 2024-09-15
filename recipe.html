@@ -13,6 +13,7 @@
     </style>
     <link rel="stylesheet" href="./recipe.css" />
   </head>
+
   <body>
     <!-- menu start-->
     <div id="sidenav" class="tem-overlay">
@@ -109,21 +110,24 @@
         </div>
       </div>
 
-      <!--食譜區 -->
-      <div class="pzone">
+      <!--食譜區-->
+      <div class="recipeZone">
         <div class="sort">
           <label for="sort"
             >排序方式:
-            <select name="sort" id="sort" onchange="sortProducts()">
+            <select name="sort" id="sort" onchange="sortRecipes()">
               <option value="" disabled selected>請選擇</option>
               <option value="easyToHard">烹飪難易度:由易至難</option>
               <option value="hardToEasy">烹飪難易度:由難至易</option>
               <option value="dateNewOld">上架時間：由新至舊</option>
               <option value="dateOldNew">上架時間：由舊至新</option>
+              <option value="dateNewOld">價格：由低至高</option>
+              <option value="dateOldNew">價格：由高至低</option>
             </select>
           </label>
         </div>
-        <div id="pcontainer"></div>
+        <!-- 食譜卡顯示區 -->
+        <div id="rcontainer"></div>
       </div>
     </div>
 
