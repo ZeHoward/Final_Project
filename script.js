@@ -184,6 +184,52 @@ const recipes = [
     }
 ];
 
+// 假資料，模擬不同用戶
+const users = [
+    {
+        userId: '1',
+        username: 'john_doe',
+        firstName: 'John',
+        lastName: 'Doe',
+        email: 'john.doe@example.com',
+        password: 'password123',
+        phoneNumber: '123-456-7890',
+        address: '123 Main St',
+        city: '台中市',
+        postalCode: '400',
+        createdAt: '2023-01-15 14:30:00',
+        updatedAt: '2023-09-10 09:20:00'
+    },
+    {
+        userId: '2',
+        username: 'jane_smith',
+        firstName: 'Jane',
+        lastName: 'Smith',
+        email: 'jane.smith@example.com',
+        password: 'password456',
+        phoneNumber: '987-654-3210',
+        address: '456 Maple Ave',
+        city: '台北市',
+        postalCode: '100',
+        createdAt: '2023-02-20 16:45:00',
+        updatedAt: '2023-09-05 10:10:00'
+    },
+    {
+        userId: '3',
+        username: 'alice_wang',
+        firstName: 'Alice',
+        lastName: 'Wang',
+        email: 'alice.wang@example.com',
+        password: 'alice789',
+        phoneNumber: '456-123-7890',
+        address: '789 Oak St',
+        city: '高雄市',
+        postalCode: '800',
+        createdAt: '2023-03-10 11:50:00',
+        updatedAt: '2023-09-12 14:00:00'
+    }
+];
+
 // 點擊"總覽"時生成內容的函數
 function generateOverviewContent() {
     const mainContent = document.querySelector('.main-content');
@@ -236,7 +282,7 @@ function generateOverviewContent() {
     // 生成下載按鈕
     const downloadButton = document.createElement('button');
     downloadButton.id = 'downloadButton';
-    downloadButton.textContent = '下載圖表';
+    downloadButton.textContent = '下載報表';
 
     // 生成下拉選單
     const timeRangeSelect = document.createElement('select');
@@ -683,141 +729,6 @@ function generateProductManagementEdit(product) {
     });
 }
 
-// 生成商品管理頁面後，為「修改」按鈕重新綁定事件
-// function generateProductManagementContent() {
-//     const mainContent = document.querySelector('.main-content');
-//     mainContent.innerHTML = '';  // 清空之前的內容
-
-//     // 動態生成商品管理的標題和表格
-//     const productManagementSection = `
-//         <section class="product-management">
-//             <h1>商品管理</h1>
-//             <table class="product-table">
-//                 <thead>
-//                     <tr>
-//                         <th>商品圖片</th>
-//                         <th>商品名稱</th>
-//                         <th>價格</th>
-//                         <th>庫存</th>
-//                         <th>操作</th>
-//                     </tr>
-//                 </thead>
-//                 <tbody>
-//                     <!-- 這裡插入動態生成的商品 -->
-//                 </tbody>
-//             </table>
-//         </section>
-//     `;
-//     mainContent.innerHTML = productManagementSection;
-
-//     const tbody = document.querySelector('.product-table tbody');
-
-//     // 動態生成每個商品的表格行
-//     products.forEach((product, index) => {
-//         const tr = document.createElement('tr');
-
-//         tr.innerHTML = `
-//             <td><img src="${product.image}" alt="${product.name}" style="width: 50px; height: 50px;"></td>
-//             <td>${product.name}</td>
-//             <td>${product.price}</td>
-//             <td>${product.stock}</td>
-//             <td class="actions">
-//                 <button class="edit-button" data-index="${index}">修改</button>
-//                 <button class="delete-button" data-index="${index}">刪除</button>
-//             </td>
-//         `;
-
-//         tbody.appendChild(tr);
-//     });
-
-//     // 重新為動態生成的按鈕綁定事件
-//     document.querySelectorAll('.edit-button').forEach(button => {
-//         button.addEventListener('click', function () {
-//             const productIndex = this.getAttribute('data-index');
-//             generateProductManagementEdit(products[productIndex]); // 調用商品修改頁面並傳入對應商品數據
-//         });
-//     });
-// }
-
-// 刪除商品的函數
-// function deleteProduct(index) {
-//     products.splice(index, 1);  // 從數組中移除商品
-//     generateProductManagementContent();  // 更新商品管理頁面
-// }
-
-// 點擊"庫存管理"時生成內容的函數
-function generateStockManagementContent() {
-    const mainContent = document.querySelector('.main-content');
-    mainContent.innerHTML = '';  // 清空之前的內容
-
-    // 動態生成庫存管理的標題和表格
-    const stockManagementSection = `
-        <section class="stock-management">
-            <h1>庫存管理</h1>
-            <div class="stockControls">
-                <label>每頁顯示結果數：</label>
-                <select>
-                    <option value="25">25</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
-                </select>
-
-                <label>排序：</label>
-                <select>
-                    <option value="dateASC">價格(遞增)</option>
-                    <option value="dateDESC">價格(遞減)</option>
-                    <option value="amountASC">庫存(遞增)</option>
-                    <option value="amountDESC">庫存(遞減)</option>
-                </select>
-
-                <label>狀態：</label>
-                <select>
-                    <option value="all">全部</option>
-                    <option value="nomore">無庫存</option>
-                </select>
-            </div>
-            <!-- 庫存表格 -->
-            <table class="stock-table">
-                <thead>
-                    <tr>
-                        <th>商品圖片</th>
-                        <th>SKU</th>
-                        <th>商品名稱</th>
-                        <th>價格</th>
-                        <th>庫存數量</th>
-                        <th>操作</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- 這裡插入動態生成的商品庫存 -->
-                </tbody>
-            </table>
-        </section>
-    `;
-    mainContent.innerHTML = stockManagementSection;
-    const tbody = document.querySelector('.stock-table tbody');
-
-    // 動態生成每個商品的庫存數量和操作按鈕
-    products.forEach((product, index) => {
-        const tr = document.createElement('tr');
-
-        tr.innerHTML = `
-            <td>
-                <img src="${product.image}" alt="${product.name}" style="width: 50px; height: 50px;">
-            </td>
-            <td>${product.sku}</td>
-            <td>${product.name}</td>
-            <td>${product.price}</td>
-            <td class="stock-quantity">${product.stock}</td>
-            <td>
-                <button class="details-link" data-index="${index}">詳情</button>
-            </td>
-        `;
-
-        tbody.appendChild(tr);
-    });
-}
-
 // 點擊"食譜上傳"時生成內容的函數
 function generateRecipeUploadForm() {
     const mainContent = document.querySelector('.main-content');
@@ -1121,6 +1032,269 @@ function generateRecipeEditForm(recipe) {
     });
 }
 
+// 點擊"庫存管理"時生成內容的函數
+function generateStockManagementContent() {
+    const mainContent = document.querySelector('.main-content');
+    mainContent.innerHTML = '';  // 清空之前的內容
+
+    // 動態生成庫存管理的標題和表格
+    const stockManagementSection = `
+        <section class="stock-management">
+            <h1>庫存管理</h1>
+            <div class="stockControls">
+                <label>每頁顯示結果數：</label>
+                <select>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+
+                <label>排序：</label>
+                <select>
+                    <option value="dateASC">價格(遞增)</option>
+                    <option value="dateDESC">價格(遞減)</option>
+                    <option value="amountASC">庫存(遞增)</option>
+                    <option value="amountDESC">庫存(遞減)</option>
+                </select>
+
+                <label>狀態：</label>
+                <select>
+                    <option value="all">全部</option>
+                    <option value="nomore">無庫存</option>
+                </select>
+            </div>
+            <!-- 庫存表格 -->
+            <table class="stock-table">
+                <thead>
+                    <tr>
+                        <th>商品圖片</th>
+                        <th>SKU</th>
+                        <th>商品名稱</th>
+                        <th>價格</th>
+                        <th>庫存數量</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- 這裡插入動態生成的商品庫存 -->
+                </tbody>
+            </table>
+        </section>
+    `;
+    mainContent.innerHTML = stockManagementSection;
+    const tbody = document.querySelector('.stock-table tbody');
+
+    // 動態生成每個商品的庫存數量和操作按鈕
+    products.forEach((product, index) => {
+        const tr = document.createElement('tr');
+
+        tr.innerHTML = `
+            <td>
+                <img src="${product.image}" alt="${product.name}" style="width: 50px; height: 50px;">
+            </td>
+            <td>${product.sku}</td>
+            <td>${product.name}</td>
+            <td>${product.price}</td>
+            <td class="stock-quantity">${product.stock}</td>
+            <td>
+                <button class="details-link" data-index="${index}">詳情</button>
+            </td>
+        `;
+
+        tbody.appendChild(tr);
+    });
+}
+
+// 點擊"用戶管理"時生成內容的函數
+function generateUserManagementContent() {
+    const mainContent = document.querySelector('.main-content');
+    mainContent.innerHTML = '';  // 清空之前的內容    
+
+    // 動態生成用戶管理的標題和表格
+    const userManagementSection = `
+        <section class="user-management">
+            <h1>用戶管理</h1>
+            <div class="userControls">
+                <label>每頁顯示結果數：</label>
+                <select>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+            </div>
+            <table class="user-table">
+                <thead>
+                    <tr>
+                        <th>用戶ID</th>
+                        <th>用戶名</th>
+                        <th>電子郵件</th>
+                        <th>電話號碼</th>
+                        <th>創建時間</th>
+                        <th>更新時間</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- 這裡插入動態生成的用戶 -->
+                </tbody>
+            </table>
+        </section>
+    `;
+    mainContent.innerHTML = userManagementSection;
+
+    const tbody = document.querySelector('.user-table tbody');
+
+    // 動態生成每個用戶的表格行
+    users.forEach((user, index) => {
+        const tr = document.createElement('tr');
+
+        tr.innerHTML = `
+            <td>${user.userId}</td>
+            <td>${user.username}</td>
+            <td>${user.email}</td>
+            <td>${user.phoneNumber}</td>
+            <td>${user.createdAt}</td>
+            <td>${user.updatedAt}</td>
+            <td class="actions">
+                <button class="edit-button" data-index="${index}">詳情</button>
+            </td>
+        `;
+
+        tbody.appendChild(tr);
+    });
+
+    // 綁定詳情按鈕的事件
+    document.querySelectorAll('.edit-button').forEach(button => {
+        button.addEventListener('click', function () {
+            const userIndex = this.getAttribute('data-index');
+            generateUserEditForm(users[userIndex]);  // 調用用戶修改表單
+        });
+    });
+}
+
+// 點擊"用戶管理-詳情"時生成內容的函數
+function generateUserEditForm(user) {
+    const mainContent = document.querySelector('.main-content');
+    mainContent.innerHTML = '';  // 清空之前的內容
+
+    // 動態生成用戶修改的表單
+    const userEditForm = `
+        <section class="user-edit">
+            <h1>修改用戶 - ${user.username}</h1>
+
+            <form>
+                <div class="form-group">
+                    <label for="userId">用戶ID</label>
+                    <textarea id="userId" rows="1" readonly>${user.userId}</textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="username">用戶名</label>
+                    <textarea id="username" rows="1">${user.username}</textarea>
+                </div>
+                <div class="form-group row-group">
+                    <div class="field name">
+                        <label for="firstName">姓氏</label>
+                        <textarea id="firstName" rows="1">${user.lastName}</textarea>
+                    </div>
+
+                    <div class="field name">
+                        <label for="lastName">名字</label>
+                        <textarea id="lastName" rows="1">${user.firstName}</textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">電子郵件</label>
+                    <textarea id="email" rows="1">${user.email}</textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">密碼</label>
+                    <textarea id="password" rows="1">${user.password}</textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="phoneNumber">電話號碼</label>
+                    <textarea id="phoneNumber" rows="1">${user.phoneNumber}</textarea>
+                </div>
+                
+                <div class="form-group row-group">
+                    <div class="field post">
+                        <label for="city">城市</label>
+                        <textarea id="city" rows="1">${user.city}</textarea>
+                    </div>
+                    
+                    <div class="field post">
+                        <label for="postalCode">郵遞區號</label>
+                        <textarea id="postalCode" rows="1">${user.postalCode}</textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="address">地址</label>
+                    <textarea id="address" rows="1">${user.address}</textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="createdAt">創建時間</label>
+                    <textarea id="createdAt" rows="1" readonly>${user.createdAt}</textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="updatedAt">更新時間</label>
+                    <textarea id="updatedAt" rows="1" readonly>${user.updatedAt}</textarea>
+                </div>
+
+                <div class="form-group action-buttons">
+                    <div>
+                        <button id="saveButton">確認修改</button>
+                        <button id="cancelButton">取消</button>
+                    </div>
+                    <div>
+                        <button id="deleteButton">刪除用戶</button>
+                    </div>
+                </div>
+            </form>
+        </section>
+    `;
+    mainContent.innerHTML = userEditForm;
+
+    // 綁定按鈕事件
+    document.getElementById('saveButton').addEventListener('click', function (event) {
+        event.preventDefault();
+
+        // 更新用戶屬性
+        user.username = document.getElementById('username').value;
+        user.firstName = document.getElementById('firstName').value;
+        user.lastName = document.getElementById('lastName').value;
+        user.email = document.getElementById('email').value;
+        user.password = document.getElementById('password').value;
+        user.phoneNumber = document.getElementById('phoneNumber').value;
+        user.address = document.getElementById('address').value;
+        user.city = document.getElementById('city').value;
+        user.postalCode = document.getElementById('postalCode').value;
+
+        alert('用戶已修改！');
+        generateUserManagementContent();  // 返回用戶管理頁面
+    });
+
+    document.getElementById('cancelButton').addEventListener('click', function () {
+        generateUserManagementContent();  // 返回用戶管理頁面
+    });
+
+    document.getElementById('deleteButton').addEventListener('click', function () {
+        if (confirm('確定要刪除這個用戶嗎？')) {
+            const userIndex = users.indexOf(user);
+            if (userIndex !== -1) {
+                users.splice(userIndex, 1);  // 刪除用戶
+                generateUserManagementContent();  // 返回用戶管理頁面
+            }
+        }
+    });
+}
+
+
 // 初始化圖表的函數
 function initChart() {
     const ctx = document.getElementById('orderChart').getContext('2d');
@@ -1184,6 +1358,10 @@ function initChart() {
         chart.update(); // 更新圖表
     });
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+    initChart();
+});
 
 document.addEventListener('DOMContentLoaded', function () {
     // 點擊logo時生成內容
@@ -1252,6 +1430,14 @@ document.addEventListener('DOMContentLoaded', function () {
     manageStockButton.addEventListener('click', function (event) {
         event.preventDefault();  // 防止跳轉
         generateStockManagementContent();  // 調用生成庫存管理頁面的函數
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    const manageStockButton = document.getElementById('userManagementButton');
+    manageStockButton.addEventListener('click', function (event) {
+        event.preventDefault();  // 防止跳轉
+        generateUserManagementContent();  // 調用生成庫存管理頁面的函數
     });
 });
 

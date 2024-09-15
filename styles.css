@@ -493,7 +493,7 @@ canvas {
 /* 新增的 row-group 讓多個選項佈局在一行 */
 .row-group {
     display:flex;
-    justify-content: space-around; /* 讓每個項目等間隔 */
+    justify-content: space-between; /* 讓每個項目等間隔 */
 }
 
 .row-group #skulabel {
@@ -508,6 +508,10 @@ canvas {
 .row-group .field .time {
     height: 16.5px;
     width: 98%;
+}
+
+.row-group .field.name, .row-group .field.post {
+    margin-right: 35px
 }
 
 /* 移除最後一個欄位的右邊距 */
@@ -733,4 +737,134 @@ canvas {
 /* 圖片上傳區域 */
 .image-upload {
     margin-bottom: 20px;
+}
+
+/* 用戶管理樣式 */
+.user-management {
+    padding-left: 0;
+}
+
+.user-management h1 {
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.userControls {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.userControls label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.userControls select {
+    padding: 8px;
+    margin-right: 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+/* 用戶表格樣式 */
+.user-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    background-color: white;
+}
+
+.user-table th, .user-table td {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.user-table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+.user-edit h1 {
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.user-edit form {
+    display: flex;
+    flex-direction: column;
+    margin-right: 2%;
+}
+
+.user-edit .form-group {
+    margin-bottom: 20px;
+}
+
+.user-edit .form-group label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.user-edit textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none;
+}
+
+.user-edit textarea[readonly] {
+    background-color: #f4f4f4;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: space-between; /* 讓左右兩側的按鈕分開 */
+    width: 100%;
+}
+
+.action-buttons div:first-child {
+    display: flex; /* 讓左側按鈕橫向排列 */
+    gap: 10px; /* 增加按鈕間的距離 */
+}
+
+.user-edit button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.user-edit #saveButton {
+    background-color: #88BF4B;
+    color: white;
+}
+
+.user-edit #cancelButton {
+    background-color: #ccc;
+}
+
+.user-edit #deleteButton {
+    margin-left: auto;
+    background-color: #f44336;
+    color: white;
+}
+
+.user-edit #saveButton:hover {
+    background-color: #77a73f;
+}
+
+.user-edit #cancelButton:hover {
+    background-color: #aaa;
+}
+
+.user-edit #deleteButton:hover {
+    background-color: #d32f2f;
 }
