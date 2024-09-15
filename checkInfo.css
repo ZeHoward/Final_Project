@@ -374,7 +374,7 @@ header.tem-header {
   height: 1px; /* 設定橫線的高度 */
   background-color: #d1de74; /* 設定橫線的顏色 */
   margin: 15px 0; /* 增加上下邊距以提高可讀性 */
-  width: 500px;
+  width: 100%;
 }
 
 .info-item {
