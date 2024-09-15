@@ -90,6 +90,8 @@
       <div class="tem-breadcrumb">
         <a href="#">首頁</a>\
         <a href="#">線上食譜</a>
+        <span id="recipe-category"></span>
+        <!-- 顯示當前選擇的食譜類別 -->
       </div>
     </header>
     <!-- header end -->
@@ -98,15 +100,28 @@
     <div class="mid">
       <!-- 側邊選單 -->
       <div class="list">
-        <button class="down-btn">
+        <button class="down-btn" data-type="all">
           線上食譜<img src="./material/icon/down.png" alt="down" id="updown4" />
         </button>
         <div class="down-container">
-          <a href="">家常料理</a>
-          <a href="">兒童友善</a>
-          <a href="">銀髮友善</a>
-          <a href="">異國料理</a>
-          <a href="">多人料理</a>
+          <a href="#" data-type="home" onclick="filterRecipes('home')"
+            >家常料理</a
+          >
+          <a href="#" data-type="kids" onclick="filterRecipes('kids')"
+            >兒童友善</a
+          >
+          <a href="#" data-type="elderly" onclick="filterRecipes('elderly')"
+            >銀髮友善</a
+          >
+          <a
+            href="#"
+            data-type="international"
+            onclick="filterRecipes('international')"
+            >異國料理</a
+          >
+          <a href="#" data-type="group" onclick="filterRecipes('group')"
+            >多人料理</a
+          >
         </div>
       </div>
 

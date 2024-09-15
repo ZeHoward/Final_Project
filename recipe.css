@@ -368,7 +368,7 @@ body {
 #rcontainer {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  /* justify-content: space-between; */
 }
 
 /*食譜卡*/
