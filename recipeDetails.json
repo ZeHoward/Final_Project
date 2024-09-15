@@ -3,8 +3,8 @@
     "name": "西班牙海鮮燉飯",
     "img": "./image/西班牙海鮮燉飯.jpg",
     "cookingTime": "烹調時間：30-35分鐘．",
-    "difficulty": "難易度：中等．",
-    "quantity": "份量：1-2人．",
+    "level": "難易度：中等",
+    "quantity": "份量：1-2人",
     "ingredients": [
         "蝦 (約12隻，中等大小，去殼留尾)",
         "魷魚 (150克，切圈)",

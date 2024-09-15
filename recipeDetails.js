@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.getElementById('foodName').textContent = recipe.name || '無名稱';
         document.getElementById('foodImage').src = recipe.img || 'default-image.jpg';
         document.getElementById('cookingTime').textContent = recipe.cookingTime || '未提供';
-        document.getElementById('difficulty').textContent = recipe.difficulty || '未提供';
+        document.getElementById('level').textContent = recipe.level || '未提供';
         document.getElementById('quantity').textContent = recipe.quantity || '未提供';
   
         const ingredientsList = document.getElementById('ingredientsList');

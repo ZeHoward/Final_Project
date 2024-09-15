@@ -1,12 +1,6 @@
-html,
-body {
-  height: 100%; /* 確保 html 和 body 佔滿全頁面 */
-  margin: 0; /* 去掉預設的 margin */
-}
-
 /*header footer*/
 * {
-  font-family: "Noto Sans TC", system-ui;
+  /* font-family: "Noto Sans TC", system-ui; */
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -17,6 +11,7 @@ body {
   width: 100vw;
   max-width: 100%;
   overflow-x: hidden;
+  text-align: center; /*新增*/
 }
 
 .tem-nav {
@@ -290,132 +285,118 @@ body {
     font-size: 16px;
   }
 }
-
 /*↑header footer*/
 
-body {
-  font-family: Arial, sans-serif;
-  text-align: center;
-  margin: 0;
-  padding: 0;
-}
+/*主畫面*/
 
 .container {
   width: 50vw;
   max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
+  margin: 0 auto; /*水平置中*/
 }
-
-.foodName {
-  /*料理名稱*/
-  font-size: 46px;
-  color: #333;
-  margin-top: 0; /*與線上食譜的距離*/
-  margin-bottom: 20px;
-}
-
-.main {
-  /*照片至按鈕區域*/
-  display: flex;
-  justify-content: center;
-  flex-direction: column; /* 垂直排列 */
-  align-items: center; /* 垂直置中 */
-}
-
-.recipeTitle {
-  /*說明的小標*/
-  text-align: left;
-  font-size: 20px;
-  padding-top: 10px;
-}
-
-.recipeDetails {
-  /*說明的內文*/
-  font-size: 16px;
-  margin-top: 20px;
-  margin-bottom: 15px;
-  font-weight: bold;
-  text-align: left; /*水平居左*/
-  font-weight: bold;
-}
-
-.image {
-  /*料理圖片*/
-  width: 100%;
-  /* 圖片寬度設置為容器的 100% */
-  max-width: 100%;
-  /* 圖片與父容器的寬度相同 */
-  height: auto;
-  /* 保持圖片的長寬比 */
-  margin-bottom: 15px;
-  border-radius: 25px;
-  /* 圓角效果 */
-}
-
 .topTag {
   /*線上食譜*/
   display: inline-block;
   width: 120px;
-  height: 35px;
   line-height: 35px;
   background-color: #e0912f;
   color: #fff;
-  text-align: center;
   border-radius: 15px;
-  text-decoration: none;
-  font-size: large;
-  font-weight: bold;
   margin: 10px;
-  transition: background-color 0.3s, transform 0.3s;
+}
+  /*料理名稱*/
+.foodName {
+  font-size: xxx-large;
+  color: #000000;
+}
+  /*料理圖片*/
+.foodImage {
+  width: 80%;
+  margin-bottom: 15px;
+  border-radius: 25px;
+  /* 圓角效果 */
+  margin: 0 auto; /* 自動水平居中 */
+  display: block; /* 使圖片顯示為塊級元素 */
 }
 
+.recipe-container{
+  display: flex;
+  flex-direction: column; /* 垂直排列內容 */
+  align-items: center; /* 確保內容水平居中 */
+}
+  /*照片至按鈕區域*/
+.main {
+  display: flex;
+  justify-content: center;
+  flex-direction: column; /*垂直排列*/
+  align-items: center; /*確保子元素在主軸上居中*/
+}
+  /*說明的小標*/
+.recipeTitle {
+  font-size: 20px;
+  margin: 15px 0 5px 0;
+  text-align: left;
+  margin-left: 8%;
+}
+ /*說明的內文*/
+.recipeDetails {
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 15px;
+  text-align: left; /*水平居左*/
+  margin-left: 12%;
+}
+/* 按鈕容器 */
 .btns {
-  /* 按鈕容器 */
   display: flex;
   justify-content: space-between; /* 在容器內部均勻分配按鈕之間的空間 */
-  width: 100%; /* 容器的寬度設為 100%，即填滿父容器的寬度 */
+  width: 79%; /* 容器的寬度設為 100%，即填滿父容器的寬度 */
+  margin-top: 5px; /* 添加上邊距 */
 }
 
-.btnRed {
+.btnRed,
+.btnYellow {
   display: inline-block;
-  width: 50%; /* 佔用 50% 寬度 */
+  width: 48%; 佔用 48% 寬度，留有間距
   height: 40px;
   line-height: 40px;
   color: #fff;
   text-align: center;
-  border-radius: 25px; /* 圓角效果 */
-  text-decoration: none; /*去除底線*/
+  border-radius: 25px;
+  text-decoration: none;
   font-size: large;
   font-weight: bold;
-  margin: 10px;
+  margin: 0;
   transition: background-color 0.3s, transform 0.3s;
-  background-color: #d35b50; /* 紅色背景 */
+}
+.btnRed {
+  background-color: #d35b50;
 }
 
+.btnYellow {
+  background-color: #f3ce6e;
+}
 .btnRed:hover {
   /*鼠標經過的過渡效果-浮動、變色*/
   background-color: #ca2a1c;
   transform: scale(1.05);
 }
-
-.btnYellow {
-  display: inline-block;
-  width: 50%;
-  height: 40px;
-  line-height: 40px;
-  color: #fff;
-  text-align: center;
-  border-radius: 25px;
-  text-decoration: none;
-  font-size: large;
-  font-weight: bold;
-  margin: 10px;
-  transition: background-color 0.3s, transform 0.3s;
-  background-color: #f3ce6e;
-}
-
 .btnYellow:hover {
   background-color: #f39c12;
   transform: scale(1.05);
 }
+
+/* 響應式設置 */
+@media (max-width: 800px) {
+  .container {
+    width: 95vw; /* 在小螢幕上稍微增加寬度 */
+  }
+
+  .recipeTitle {
+    font-size: 18px; /* 調整標題字型大小 */
+  }
+
+  .recipeDetails {
+    font-size: 14px; /* 調整內容字型大小 */
+  }
+} 
