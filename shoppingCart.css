@@ -285,7 +285,16 @@
   }
 }
 
-/*以下為購物車*/
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden; /* 防止水平滾動條 */
+}
+
+/*以下為主畫面*/
 
 .container {
   width: 100%;
@@ -297,25 +306,23 @@
   text-align: center;
   margin-bottom: 50px;
 }
-.back-button {
+
+/*返回購物按鈕*/
+.gobackButton {
   font-size: 16px;
   font-weight: bolder;
   color: #007bff;
+  background-color: #fff;
   cursor: pointer;
   text-decoration: none;
-  margin-bottom: 10px;
-  display: inline-block;
   border: none;
-  background-color: #fff;
 }
 table {
   width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 20px;
+  border-collapse: collapse; /*邊框合併*/
 }
 thead th {
   border-bottom: 2px solid #ddd;
-  text-align: center;
 }
 tbody td {
   border-bottom: 1px solid #ddd;
@@ -332,6 +339,7 @@ th {
   font-weight: bolder;
   font-size: large;
 }
+
 .total {
   /*商品總額*/
   font-weight: bold;
@@ -341,10 +349,10 @@ th {
   border-top: 2px solid #ddd;
   padding-top: 30px;
 }
+
 .product-image {
   width: 100px;
   height: 100px;
-  margin: 10px;
   object-fit: cover;
 }
 .coupon-container {
@@ -354,10 +362,10 @@ th {
   gap: 10px; /*序號框跟按鈕的距離*/
 }
 .coupon-container input {
-  width: 200px;
+  width: 100px;
   padding: 10px;
 }
-.button {
+.useCouponBtn {
   background-color: #857d7b;
   color: white;
   padding: 10px 20px;
@@ -366,7 +374,7 @@ th {
   text-align: center;
   width: auto;
 }
-.button:hover {
+.useCouponBtn:hover {
   background-color: #564a4d;
 }
 .quantity {
@@ -386,10 +394,11 @@ th {
 .quantity span {
   margin: 0 10px;
 }
+/* 提交訂單 */
 .actions {
   display: flex;
   justify-content: flex-end;
-  margin-top: 20px;
+  margin-top: 30px;
 }
 .submitButton {
   background-color: #d35b50;
@@ -401,8 +410,7 @@ th {
   cursor: pointer;
   text-align: center;
   margin-left: 10px;
-  width: 340px;
-  margin-top: 25px;
+  width: 240px;
   font-weight: bold;
   margin: 30px 0 100px 0;
 }
@@ -414,45 +422,18 @@ th {
 td button {
   background-color: transparent;
   border: none;
-  /* color: #D35B50; */
-  font-size: 16px;
+  font-size: 18px;
   cursor: pointer;
   padding: 0;
   text-align: center;
 }
 
-/* 以上為購物車 */
-html,
-body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  overflow-x: hidden; /* 防止水平滾動條 */
+.fa-trash:hover {
+  color: #d35b50;
 }
-
-/* 確保 container 也沒有外邊距和內邊距 */
-/* .container {
-  margin: 0;
-  padding: 20px;
-  width: 100%;
-  box-sizing: border-box; 包括 padding 和 border 在內的寬度計算 */
-}
-
-/* 確保 table 和其他元素填滿容器 */
-/* table {
-  width: 100%;
-  border-collapse: collapse;
-} */
-
-.total {
-  margin: 20px 0;
-  border-top: 2px solid #ddd;
-  padding-top: 10px;
-}
-
-.coupon-container {
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
+/* 響應式設置 */
+@media (max-width: 800px) {
+  .container {
+    width: 80vw; /* 在小螢幕上稍微增加寬度 */
+  }
 }

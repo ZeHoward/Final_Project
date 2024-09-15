@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
               </div>
             </td>
             <td class="subtotal">NT$${subtotal}</td>
-            <td><button>🗑️</button></td>
+            <td><button><i class="fa-solid fa-trash"></i></button></td>
           `;
   
           cartItems.appendChild(tr);
