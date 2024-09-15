@@ -304,12 +304,12 @@ body {
   border-radius: 15px;
   margin: 10px;
 }
-  /*料理名稱*/
+/*料理名稱*/
 .foodName {
   font-size: xxx-large;
   color: #000000;
 }
-  /*料理圖片*/
+/*料理圖片*/
 .foodImage {
   width: 80%;
   margin-bottom: 15px;
@@ -319,26 +319,26 @@ body {
   display: block; /* 使圖片顯示為塊級元素 */
 }
 
-.recipe-container{
+.recipe-container {
   display: flex;
   flex-direction: column; /* 垂直排列內容 */
   align-items: center; /* 確保內容水平居中 */
 }
-  /*照片至按鈕區域*/
+/*照片至按鈕區域*/
 .main {
   display: flex;
   justify-content: center;
   flex-direction: column; /*垂直排列*/
   align-items: center; /*確保子元素在主軸上居中*/
 }
-  /*說明的小標*/
+/*說明的小標*/
 .recipeTitle {
   font-size: 20px;
   margin: 15px 0 5px 0;
   text-align: left;
   margin-left: 8%;
 }
- /*說明的內文*/
+/*說明的內文*/
 .recipeDetails {
   font-size: 16px;
   margin-top: 20px;
@@ -357,7 +357,7 @@ body {
 .btnRed,
 .btnYellow {
   display: inline-block;
-  width: 48%; 佔用 48% 寬度，留有間距
+  width: 48%; /*佔用 48% 寬度，留有間距*/
   height: 40px;
   line-height: 40px;
   color: #fff;
@@ -399,4 +399,4 @@ body {
   .recipeDetails {
     font-size: 14px; /* 調整內容字型大小 */
   }
-} 
+}
