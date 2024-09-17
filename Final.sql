@@ -1,29 +1,32 @@
 CREATE TABLE `products` (
-  `productId` int(255) PRIMARY KEY,
+  `productId` int PRIMARY KEY,
+  `type` varchar(255) COMMENT 'mealkit, preparedFood',
   `sku` varchar(50),
   `name` varchar(255),
   `description` text,
   `price` int,
-  `catagoryId` int,
+  `categoryId` int,
   `stockQuantity` int,
   `createdAt` timestamp,
-  `updatedAt` timestamp
+  `updatedAt` timestamp,
+  `token` varchar(255)
 );
 
 CREATE TABLE `users` (
-  `userId` int(255) PRIMARY KEY,
+  `userId` int PRIMARY KEY,
   `username` varchar(50),
   `email` varchar(100),
   `password` varchar(255),
   `phoneNumber` varchar(15),
   `createdAt` timestamp,
-  `updatedAt` timestamp
+  `updatedAt` timestamp,
+  `token` varchar(255)
 );
 
 CREATE TABLE `orders` (
-  `orderId` int(255) PRIMARY KEY,
-  `userId` int(255),
-  `cartId` int(255),
+  `orderId` int PRIMARY KEY,
+  `userId` int,
+  `cartId` int,
   `orderDate` timestamp,
   `totalAmount` int,
   `discount` double,
@@ -31,54 +34,54 @@ CREATE TABLE `orders` (
 );
 
 CREATE TABLE `orderDetails` (
-  `orderDetailsID` int(255),
-  `orderId` int(255),
-  `productId` int(255),
+  `orderDetailsID` int,
+  `orderId` int,
+  `productId` int,
   `quantity` int,
   `price` int,
   `Address` varchar(255)
 );
 
 CREATE TABLE `tag` (
-  `tagId` int(255) PRIMARY KEY,
+  `tagId` int PRIMARY KEY,
   `name` varchar(100),
   `description` text
 );
 
 CREATE TABLE `productTag` (
-  `productId` int(255),
-  `tagId` int(255)
+  `productId` int,
+  `tagId` int
 );
 
 CREATE TABLE `productImages` (
-  `id` int(255) PRIMARY KEY,
-  `productId` int(255),
+  `id` int PRIMARY KEY,
+  `productId` int,
   `image` blob
 );
 
 CREATE TABLE `userinfo` (
-  `id` int(255) PRIMARY KEY,
-  `userId` int(255),
+  `id` int PRIMARY KEY,
+  `userId` int,
   `firstName` varchar(50),
   `lastName` varchar(50),
   `address` varchar(255),
   `city` varchar(100),
   `postalCode` varchar(10),
   `createdAt` timestamp,
-  `updateAt` timestamp
+  `updatedAt` timestamp
 );
 
 CREATE TABLE `payment` (
-  `paymentId` int(255),
-  `orderId` int(255),
+  `paymentId` int,
+  `orderId` int,
   `paymentAmount` int,
   `paymentDate` timestamp
 );
 
 CREATE TABLE `recipies` (
-  `recipeId` int(255) PRIMARY KEY,
+  `recipeId` int PRIMARY KEY,
   `title` varchar(255),
-  `productId` int(255),
+  `productId` int,
   `steps` text(2000),
   `ingredients` text(2000),
   `notes` text(2000),
@@ -87,31 +90,31 @@ CREATE TABLE `recipies` (
 );
 
 CREATE TABLE `cart` (
-  `cartId` int(255) PRIMARY KEY,
-  `userId` int(255),
+  `cartId` int PRIMARY KEY,
+  `userId` int,
   `status` varchar(20) COMMENT '狀態：進行中、已結帳、已取消'
 );
 
 CREATE TABLE `cartItems` (
-  `cartItemId` int(255) PRIMARY KEY,
-  `cartId` int(255),
-  `productId` int(255),
+  `cartItemId` int PRIMARY KEY,
+  `cartId` int,
+  `productId` int,
   `quantity` int,
   `price` int
 );
 
 CREATE TABLE `orderHistory` (
-  `historyId` int(255) PRIMARY KEY,
-  `orderId` int(255),
+  `historyId` int PRIMARY KEY,
+  `orderId` int,
   `status` varchar(50) COMMENT '狀態：已成立、已取消、已完成、出貨中、備貨中',
   `changedBy` varchar(50) COMMENT '狀態：買家、賣家',
   `changedAt` timestamp,
   `comment` text
 );
 
-CREATE TABLE `catagory` (
-  `catagoryId` int(255) PRIMARY KEY,
-  `catagoryName` varchar(50)
+CREATE TABLE `category` (
+  `categoryId` int PRIMARY KEY,
+  `categoryName` varchar(50)
 );
 
 CREATE UNIQUE INDEX `orderDetails_index_0` ON `orderDetails` (`orderId`, `productId`);
@@ -120,7 +123,7 @@ CREATE UNIQUE INDEX `productTag_index_1` ON `productTag` (`productId`, `tagId`);
 
 CREATE UNIQUE INDEX `cartItems_index_2` ON `cartItems` (`cartId`, `productId`);
 
-ALTER TABLE `products` ADD FOREIGN KEY (`catagoryId`) REFERENCES `catagory` (`catagoryId`);
+ALTER TABLE `products` ADD FOREIGN KEY (`categoryId`) REFERENCES `category` (`categoryId`);
 
 ALTER TABLE `orders` ADD FOREIGN KEY (`userId`) REFERENCES `users` (`userId`);
 
