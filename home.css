@@ -581,11 +581,6 @@ h1 {
   font-weight: 700;
 }
 
-.sort {
-  text-align: right;
-  margin-bottom: 20px;
-}
-
 .fa-heart {
   font-size: 25px;
   align-items: center;
@@ -644,7 +639,7 @@ h1 {
 .view-all {
   display: block;
   width: 250px;
-  margin: 0 auto 40px auto;
+  margin: 50px auto;
   background: #f3ce6e;
   border: none;
   padding: 10px 20px;
@@ -662,8 +657,7 @@ h1 {
   width: 100%;
   max-width: 100vw;
   margin: 0 auto;
-  /* display: flex; */
-  justify-content: center;
+  background-color: #fff6d0;
 }
 
 .bt,
@@ -674,9 +668,12 @@ h1 {
 }
 
 .bt {
-  margin-top: 80px;
-  margin-bottom: 50px;
+  padding-top: 50px;
   font-weight: bold;
+}
+
+.step {
+  padding-bottom: 50px;
 }
 .content {
   text-align: center;

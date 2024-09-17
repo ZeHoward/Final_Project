@@ -188,6 +188,7 @@ body {
 .info {
   display: flex;
   flex: 1;
+  border-bottom: black 1px solid;
 }
 
 .spec {
@@ -233,16 +234,15 @@ body {
   border: 2px solid #3c4f6d;
 }
 
-.product-name {
-  font-size: 40px;
-  font-weight: 700;
-  margin: 10px 0;
-}
-
 .info,
 .detail,
 .related-product {
   margin: 2vw 5vw;
+}
+
+.detail {
+  padding-bottom: 40px;
+  border-bottom: black solid 1px;
 }
 
 label {
@@ -295,7 +295,9 @@ h1 {
   justify-content: center;
   align-items: center;
 }
+
 .product-container {
+  margin: 20px 0;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -311,6 +313,18 @@ h1 {
   justify-content: space-between;
 }
 
+.product-name {
+  font-size: 40px;
+  font-weight: 700;
+  margin: 10px 0;
+}
+.product-price {
+  font-size: 30px;
+  color: #d35b50;
+  font-weight: 700;
+  margin: 5px 0;
+}
+
 .related-product-image {
   width: 90%;
   height: 200px;
@@ -322,11 +336,6 @@ h1 {
   font-size: 20px;
   color: #d35b50;
   font-weight: 700;
-}
-
-.sort {
-  text-align: right;
-  margin-bottom: 20px;
 }
 
 .fa-heart {
