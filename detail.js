@@ -130,14 +130,14 @@ window.onload = function () {
   function renderProducts() {
     const container = document.getElementById("productContainer");
     container.innerHTML = "";
-    for (let i = -1; i <= 1; i++) {
+    for (let i = -1; i <= 2; i++) {
       const index = (currentIndex + i + products.length) % products.length;
       const product = products[index];
       const productElement = document.createElement("div");
       productElement.className = "product";
       productElement.innerHTML = `
                 <img class="related-product-image" src="${product.image}" alt="${product.name}">
-                <p class="related-product-name">${product.name}</p>
+                <h3 class="related-product-name">${product.name}</h3>
                 <p class="related-product-price">$NT${product.price}</p>
                   <div class="home-product-btn">
                     <button class="add-to-favorite"><i class="fa-solid fa-heart"></i></button>
