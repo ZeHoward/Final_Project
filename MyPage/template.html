@@ -7,8 +7,7 @@
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap");
     </style>
-    <link rel="stylesheet" href="./Regist.css" />
-    <script src="./Regist.js"></script>
+    <link rel="stylesheet" href="./template.css" />
   </head>
   <body>
     <!-- menu start-->
@@ -75,57 +74,30 @@
           <a href="#" class="tem-icon tem-cart-icon"
             ><img src="./material/icon/cart.png" alt="cart"
           /></a>
-          <a href="#" class="tem-icon tem-user-icon"
+          <button id="memberIcon" href="#" class="tem-icon tem-user-icon"
             ><img src="./material/icon/account.png" alt="sign in"
-          /></a>
+          /></button>
+          <div id="memberInfoDiv" class="">
+            <p><a href="./MemberBasicInfo.css">會員基本資料</a></p>
+            <p><a href="./UpdatePassword.html">更改密碼</a></p>
+            <p><a href="">我的收藏</a></p>
+            <p><a href="">訂單管理</a></p>
+            <p><a href="./CouponPage.html">優惠券</a></p>
+            
+          </div>
           <a href="#" class="tem-icon tem-search-icon"
             ><img src="./material/icon/search.png" alt="search"
           /></a>
         </div>
       </div>
+      
       <div class="tem-breadcrumb">
         <a href="#">首頁</a>
       </div>
     </header>
     <!-- header end -->
 
-    <!-- Regist START -->
-
-    <div class="regist">
-        <p class="registTopP">會員註冊</p>
-        <div>
-            <p  style="text-align: left;">電子信箱</p><input id="registEmailInput" type="email" class="registInput" placeholder="example@gmail.com">
-        </div>
-
-        <div>
-            <p  style="text-align: left;">建立密碼</p><input type="password" class="registInput" placeholder="必須有包含數字、英文字母大小寫">
-        </div>
-
-        <div>
-            <p  style="text-align: left;">確認密碼</p><input type="password" class="registInput">
-        </div>
-
-        <div class="registName">
-            <div class="registFirstName">
-                <p  style="text-align: left;">名字</p><input class="registInput">
-            </div>
-            <div class="registLastName">
-                <p  style="text-align: left;">姓氏</p><input class="registInput">
-            </div>
-        </div>
-
-        <div>
-          <p  style="text-align: left;">生日</p><input id="registEmailInput" type="date" class="registInput">
-      </div>
-
-
-      <button class="registButton">註冊</button>
-
-      <p class="isMemberP">已經是會員嗎?<a class="isMemberA" href="./Login.html">登入</a></p>
-    </div>
-
-
-    <!-- Regist END -->
+    <!-- 開始編輯 -->
 
     <!-- footer start -->
     <footer class="tem-footer">
@@ -172,6 +144,6 @@
       </div>
     </footer>
     <!-- footer end -->
-    
+    <script src="./template.js"></script>
   </body>
 </html>

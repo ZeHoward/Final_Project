@@ -7,7 +7,8 @@
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap");
     </style>
-    <link rel="stylesheet" href="./AccountCenter.css" />
+    <link rel="stylesheet" href="./MemberBasicInfo.css" />
+    <script src="./MemberBasicInfo.js"></script>
   </head>
   <body>
     <!-- menu start-->
@@ -88,17 +89,88 @@
     </header>
     <!-- header end -->
 
-    <!-- AccountCenter START -->
+    <!-- MemberBasicInfo START -->
+    <div class="memberBasicInfo">
+        <p style="font-size:xx-large; margin-bottom: 50px;">會員基本資料</p>
+        <div>
+            <p style="text-align: start; margin-bottom: 10px;">電子信箱</p>
+            <input id="email" class="memberBasicInfoInput" type="email">
+        </div>
+    
+        <div>
+            <p style="text-align: start; margin-bottom: 10px;">密碼</p>
+            <a class="memberBasicInfoA" href="./UpdatePassword.html">更新密碼</a>
+        </div>
+    
+        <div class="memberBasicInfoName">
+            <div class="memberBasicInfoFirstName">
+                <p  style="text-align: left;">名字</p><input id="firstName" class="memberBasicInfoInput">
+            </div>
+            <div class="memberBasicInfoLastName">
+                <p style="text-align: left;">姓氏</p><input id="lastName" class="memberBasicInfoInput">
+            </div>
+        </div>
+    
+        <div>
+            <p style="text-align: start; margin-bottom: 10px;">性別</p>
+            <input id="gender" class="memberBasicInfoInput" type="text">
+        </div>
+    
+        <div>
+            <p style="text-align: start; margin-bottom: 10px;">生日</p>
+            <input id="birthday" class="memberBasicInfoInput" type="date">
+        </div>
+    
+        <div>
+            <p style="text-align: start; margin-bottom: 10px;">電話</p>
+            <input id="telephone" class="memberBasicInfoInput" type="tel">
+        </div>
+    
+        <div  class="divOfSelect">
+          <div>
+            <label for="county">選擇縣/市：</label><br>
+            <select id="county" name="county">
+                <option type="default">選擇縣/市</option>
+                <option value="taipei">台北市</option>
+                <option value="newTaipei">新北市</option>
+                <option value="taoyuan">桃園市</option>
+                <option value="taichung">台中市</option>
+                <option value="tainan">台南市</option>
+                <option value="kaohsiung">高雄市</option>
+                <option value="keelung">基隆市</option>
+                <option value="hsinchuCounty">新竹縣</option>
+                <option value="hsinchuCity">新竹市</option>
+                <option value="miaoli">苗栗縣</option>
+                <option value="changhua">彰化縣</option>
+                <option value="nantou">南投縣</option>
+                <option value="yunlin">雲林縣</option>
+                <option value="chiayi">嘉義縣</option>
+                <option value="pingtung">屏東縣</option>
+                <option value="yilan">宜蘭縣</option>
+                <option value="hualien">花蓮縣</option>
+                <option value="taitung">台東縣</option>
+                <option value="penghu">澎湖縣</option>
+                <option value="kinmen">金門縣</option>
+                <option value="lienchiang">連江縣</option>
+            </select>
+          </div>
+          <div style="margin-left: 23px;">
+            <label for="district">選擇市/區：</label><br>
+              <select id="district">
+              <option value="">選擇市/區</option>
+            </select>
+          </div>
+          
+        </div>
 
-    <div class="accountCenter">
-        <p class="accountCenterTopP">會員中心</p>
-        <img src="./material/橘大頭.png" style="width: 30px;" alt="">
+        <p style="text-align: start; margin-bottom: 10px;">地址</p>
+        <input id="address" class="memberBasicInfoInput" type="text">
         
+        <button id="updateButton">更新資料</button>
 
     </div>
 
-
-    <!-- AccountCenter END -->
+    <!-- MemberBasicInfo END -->
 
     <!-- footer start -->
     <footer class="tem-footer">
@@ -145,6 +217,6 @@
       </div>
     </footer>
     <!-- footer end -->
-    <script src="./AccountCenter.js"></script>
+    
   </body>
 </html>

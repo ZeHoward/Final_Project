@@ -47,8 +47,4 @@ window.onload = function () {
         margin2.style.margin = "";
       }
     };
-
-    
-
-
   };

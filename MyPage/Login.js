@@ -55,9 +55,26 @@ window.onload = function () {
         document.getElementsByClassName("noAccountP")[0].style.opacity = 1; 
       }else{
         document.getElementsByClassName("noAccountP")[0].style.opacity = 0; 
-
       }
     });
+
+    document.getElementsByClassName("loginButton")[0].onclick = () =>{
+      let userEmail = document.getElementById("emailInput").value;
+      let userPassword = document.getElementById("passwordInput").value;
+      alert("您輸入的帳號 : " + userEmail + "\n密碼 : " + userPassword);
+      fetch:('http://',{
+        method: 'POST',
+        headers:{
+          'Content-Type': 'application/json'
+        },
+        body:{
+          
+        }
+      }).then()
+    }
+    
+
+
   };
 
 
