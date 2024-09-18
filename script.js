@@ -862,7 +862,7 @@ function generateRecipeManagementContent() {
                      <option value="category3">銀髮友善</option>
                       <option value="category4">異國料理</option>
                       <option value="category5">多人料理</option>
-                 </select>
+                </select>
             </div>
             <table class="recipe-table">
                 <thead>
@@ -1121,7 +1121,7 @@ function generateUserManagementContent() {
         <section class="user-management">
             <h1>用戶管理</h1>
             <div class="userControls">
-                <label>搜尋商品：</label>
+                <label>搜尋：</label>
                 <input type="text" id="productSearchInput" class="SearchInput">
                 
                 <label>每頁顯示結果數：</label>
