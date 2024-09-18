@@ -310,6 +310,11 @@ body {
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   z-index: 1000; 
   display: none;
-  text-align: center;
+  flex-direction: column;
+}
+
+.fa-solid{
+  font-size: 15px;
+  color: black;
 }
 
