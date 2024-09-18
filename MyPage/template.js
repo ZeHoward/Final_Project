@@ -49,15 +49,49 @@ window.onload = function () {
   };
   
   /////////////////////////////////////////////////
+  let memberInfoDiv = document.getElementById("memberInfoDiv");
 
   document.getElementById('memberIcon').addEventListener('click', () => {
-    let memberInfoDiv = document.getElementById("memberInfoDiv");
     if (memberInfoDiv.style.display == 'none' || memberInfoDiv.style.display == '') {
       memberInfoDiv.style.display = 'flex';
     } else if (memberInfoDiv.style.display == 'flex') {
       memberInfoDiv.style.display = 'none';
     }
   })
+
+    let isOpen = false;
+    let searchDiv = document.getElementById('searchDiv');
+    let searchIcon = document.getElementById('searchIcon');
+    searchIcon.addEventListener('click', () => {
+      if( !isOpen ) {
+        searchDiv.style.width = '200px';
+        searchDiv.style.border = '1px solid #a1c14b';
+        isOpen = true;
+      }else{
+        searchDiv.style.width = '0';
+        searchDiv.style.border = '0px';
+        isOpen = false;
+      }
+    });
+
+    let searchInput = document.getElementById('searchInput');
+
+    searchInput.addEventListener('keydown', (event) => {
+      if(event.key === "Enter"){
+        let keyword = searchInput.value;
+        alert('您輸入的關鍵字是 : ' + keyword);
+      }
+      
+    })
+
+    document.getElementById('myContainer').addEventListener('click', () => {
+        searchDiv.style.width = '0';
+        searchDiv.style.border = '0px';
+        isOpen = false;
+    
+        memberInfoDiv.style.display = 'none';
+    });
+  
 
 };
 

@@ -303,6 +303,7 @@
 .couponPageImg{
   margin-bottom: 20px;
   width: 600px;
+  border-radius: 10px;
   transition: transform 0.3s ease;
 }
 
