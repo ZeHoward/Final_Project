@@ -513,6 +513,9 @@ function generateProductManagementWithActionsContent() {
         <section class="product-management">
             <h1>商品管理</h1>
             <div class="orderControls">
+                <label>搜尋商品：</label>
+                <input type="text" id="productSearchInput" placeholder="輸入名稱或SKU" class="SearchInput">
+                
                 <label>每頁顯示結果數：</label>
                 <select>
                     <option value="25">25</option>
@@ -522,16 +525,18 @@ function generateProductManagementWithActionsContent() {
 
                 <label>排序：</label>
                 <select>
-                    <option value="date">訂單日期(遞增)</option>
-                    <option value="amount">訂單金額(遞減)</option>
+                    <option value="skuASC">SKU (A-Z)</option>
+                    <option value="skuDESC">SKU (Z-A)</option>
+                    <option value="stockValuesASC">庫存量(遞增)</option>
+                    <option value="stockValuesDESC">庫存量(遞減)</option>
+                    <option value="priceASC">價格(遞增)</option>
+                    <option value="priceDESC">價格(遞減)</option>
                 </select>
 
                 <label>狀態：</label>
                 <select>
                     <option value="all">全部</option>
-                    <option value="paid">已付款</option>
-                    <option value="unpaid">尚未付款</option>
-                    <option value="cancelled">取消</option>
+                    <option value="stockNull">零庫存</option>
                 </select>
             </div>
             <table class="product-table">
@@ -840,6 +845,9 @@ function generateRecipeManagementContent() {
         <section class="recipe-management">
             <h1>食譜管理</h1>
             <div class="recipeControls">
+                <label>搜尋商品：</label>
+                <input type="text" id="productSearchInput" placeholder="輸入名稱" class="SearchInput">
+                
                 <label>每頁顯示結果數：</label>
                 <select>
                     <option value="25">25</option>
@@ -847,19 +855,14 @@ function generateRecipeManagementContent() {
                     <option value="100">100</option>
                 </select>
 
-                <label>排序：</label>
-                <select>
-                    <option value="date">訂單日期(遞增)</option>
-                    <option value="amount">訂單金額(遞減)</option>
-                </select>
-
-                <label>狀態：</label>
-                <select>
-                    <option value="all">全部</option>
-                    <option value="paid">已付款</option>
-                    <option value="unpaid">尚未付款</option>
-                    <option value="cancelled">取消</option>
-                </select>
+                <label>分類：</label>
+                <select id="category">
+                     <option value="category1">家常料理</option>
+                     <option value="category2">兒童友善</option>
+                     <option value="category3">銀髮友善</option>
+                      <option value="category4">異國料理</option>
+                      <option value="category5">多人料理</option>
+                 </select>
             </div>
             <table class="recipe-table">
                 <thead>
@@ -1042,6 +1045,9 @@ function generateStockManagementContent() {
         <section class="stock-management">
             <h1>庫存管理</h1>
             <div class="stockControls">
+                <label>搜尋商品：</label>
+                <input type="text" id="productSearchInput" placeholder="輸入名稱或SKU" class="SearchInput">
+                
                 <label>每頁顯示結果數：</label>
                 <select>
                     <option value="25">25</option>
@@ -1115,11 +1121,22 @@ function generateUserManagementContent() {
         <section class="user-management">
             <h1>用戶管理</h1>
             <div class="userControls">
+                <label>搜尋商品：</label>
+                <input type="text" id="productSearchInput" class="SearchInput">
+                
                 <label>每頁顯示結果數：</label>
                 <select>
                     <option value="25">25</option>
                     <option value="50">50</option>
                     <option value="100">100</option>
+                </select>
+
+                <label>排序：</label>
+                <select>
+                    <option value="dateASC">用戶名(遞增)</option>
+                    <option value="dateDESC">價格(遞減)</option>
+                    <option value="amountASC">庫存(遞增)</option>
+                    <option value="amountDESC">庫存(遞減)</option>
                 </select>
             </div>
             <table class="user-table">
