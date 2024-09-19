@@ -28,7 +28,8 @@
     "price": 220,
     "image": "./material/mealkit/奶油松露百菇燉飯.jpg",
     "releaseDate": "2024-06-22",
-    "level":"困難"
+    "level":"困難",
+    "category": "international"
   },
   {
     "name": "泰式冬蔭功酸辣海鮮湯",
@@ -61,7 +62,7 @@
     "image": "./material/mealkit/soup.png",
     "releaseDate": "2021-04-02",
     "level":"簡易",
-     "category": "elderly"
+     "category": "home"
   },
   {
     "name": "酸菜白肉鍋",
@@ -190,6 +191,94 @@
     "releaseDate": "2022-01-02",
     "level":"中等",
      "category": "home" 
+  },
+  {
+    "name": "酸菜白肉鍋",
+    "price": 170,
+    "image": "./material/mealkit/soup.png",
+    "releaseDate": "2021-04-02",
+    "level":"簡易",
+     "category": "group"
+  },
+  {
+    "name": "酸菜白肉鍋",
+    "price": 170,
+    "image": "./material/mealkit/soup.png",
+    "releaseDate": "2021-04-02",
+    "level":"簡易",
+     "category": "group"
+  },
+  {
+    "name": "酸菜白肉鍋",
+    "price": 170,
+    "image": "./material/mealkit/soup.png",
+    "releaseDate": "2021-04-02",
+    "level":"簡易",
+     "category": "group"
+  },
+  {
+    "name": "酸菜白肉鍋",
+    "price": 170,
+    "image": "./material/mealkit/soup.png",
+    "releaseDate": "2021-04-02",
+    "level":"簡易",
+     "category": "group"
+  },
+  {
+    "name": "酸菜白肉鍋",
+    "price": 170,
+    "image": "./material/mealkit/soup.png",
+    "releaseDate": "2021-04-02",
+    "level":"簡易",
+     "category": "group"
+  },
+  {
+    "name": "莓果巧克力鬆餅",
+    "price": 150,
+    "image": "./material/mealkit/soup.png",
+    "releaseDate": "2022-11-05",
+    "level": "困難",
+    "category": "kids"
+  },
+  {
+    "name": "莓果巧克力鬆餅",
+    "price": 150,
+    "image": "./material/mealkit/soup.png",
+    "releaseDate": "2022-11-05",
+    "level": "困難",
+    "category": "kids"
+  },
+  {
+    "name": "莓果巧克力鬆餅",
+    "price": 150,
+    "image": "./material/mealkit/soup.png",
+    "releaseDate": "2022-11-05",
+    "level": "困難",
+    "category": "kids"
+  },
+  {
+    "name": "皮蛋瘦肉粥",
+    "price": 170,
+    "image": "./material/mealkit/soup.png",
+    "releaseDate": "2021-04-02",
+    "level":"簡易",
+     "category": "home"
+  },
+  {
+    "name": "皮蛋瘦肉粥",
+    "price": 170,
+    "image": "./material/mealkit/soup.png",
+    "releaseDate": "2021-04-02",
+    "level":"簡易",
+     "category": "home"
+  },
+  {
+    "name": "皮蛋瘦肉粥",
+    "price": 170,
+    "image": "./material/mealkit/soup.png",
+    "releaseDate": "2021-04-02",
+    "level":"簡易",
+     "category": "home"
   }
 
 ]
