@@ -373,17 +373,16 @@ body {
 
 /*食譜卡*/
 .recipe-card {
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  margin: 10px 0;
-  padding: 15px;
-  width: calc(25% - 10px);
-  border-radius: 5%;
+  margin: 10px;
+  width: 230px;
   text-align: center;
-  justify-content: space-between;
+  border: #edc150 2px solid;
 }
 
 .recipe-image {
-  width: 100%;
+  display: block; /* 讓圖片被當作塊級元素，這樣才能由父容器的 text-align 來置中 */
+  margin: 10px auto; /* 確保圖片水平置中 */
+  width: 90%;
   height: 200px;
   object-fit: cover;
   border-radius: 2%;
@@ -391,7 +390,13 @@ body {
 
 .recipeLevel {
   font-size: medium;
-  margin-top: 5px 0;
+  font-weight: bold;
+  margin-top: 10px 0;
+  color: #cc4235;
+}
+
+p.recipeLevel{
+  margin: 10px;
 }
 
 .sort {
@@ -413,6 +418,7 @@ body {
   padding: 10px 15px;
   border-radius: 5px;
   margin-top: 5px;
+  margin-bottom: 10px;
   cursor: pointer;
   width: 60%;
 }
