@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>即食享熱</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap");
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./about2.css" />
+  </head>
+  <body>
+    <!-- menu start-->
+    <div id="sidenav" class="tem-overlay">
+      <div class="tem-nav">
+        <button class="tem-closebtn" onclick="closeSidenav()">
+          <img src="./material/icon/close.png" alt="" />
+        </button>
+      </div>
+      <div class="tem-overlay-content">
+        <a href="#home">首頁</a>
+        <a href="#about">關於我們</a>
+
+        <div class="tem-dropdown-div">
+          <button class="tem-dropdown-btn" onclick="togglePic1()">
+            商品列表&nbsp;<img
+              src="./material/icon/down.png"
+              alt="down"
+              id="updown1"
+            />
+          </button>
+          <div class="tem-dropdown-content">
+            <a href="#ready">調理包專區</a>
+            <a href="#mealkit">生鮮食材包專區</a>
+          </div>
+        </div>
+
+        <div class="tem-dropdown-div">
+          <button class="tem-dropdown-btn" onclick="togglePic2()">
+            常見問題&nbsp;<img
+              src="./material/icon/down.png"
+              alt="down"
+              id="updown2"
+            />
+          </button>
+          <div class="tem-dropdown-content">
+            <a href="#QA">Ｑ＆Ａ</a>
+            <a href="#noticet">購買須知</a>
+            <a href="#contact">聯絡我們</a>
+          </div>
+        </div>
+        <a href="#share">響食部落格</a>
+        <a href="#join">登入 / 註冊</a>
+      </div>
+      <div id="add"></div>
+      <div class="tem-end-photo">
+        <img src="./material/cook.png" alt="" />
+      </div>
+    </div>
+    <!-- menu end-->
+
+    <!-- header start -->
+    <header class="tem-header">
+      <div class="tem-header-content">
+        <div class="tem-header-icons">
+          <div class="tem-icon tem-menu-icon" onclick="openSidenav()">
+            <a href="#"><img src="./material/icon/menu.png" alt="menu" /></a>
+          </div>
+        </div>
+        <div class="tem-logo">
+          <img src="./material/logo.png" alt="Logo" class="" />
+        </div>
+        <div class="tem-header-icons">
+          <a href="#" class="tem-icon tem-cart-icon"
+            ><img src="./material/icon/cart.png" alt="cart"
+          /></a>
+          <a href="#" class="tem-icon tem-user-icon"
+            ><img src="./material/icon/account.png" alt="sign in"
+          /></a>
+          <a href="#" class="tem-icon tem-search-icon"
+            ><img src="./material/icon/search.png" alt="search"
+          /></a>
+        </div>
+      </div>
+      <div class="tem-breadcrumb">
+        <a href="#">首頁</a>
+      </div>
+    </header>
+    <!-- header end -->
+
+    <main>
+      <div class="story">
+        <div class="main-photo">
+          <img src="./material/about.jpeg" alt="關於我們" />
+        </div>
+        <div class="title">
+          <h1>品牌故事</h1>
+        </div>
+        <div class="paragraph">
+          <p>
+            在現代快節奏的生活中，人們常常為了追求效率而忽略了對健康飲食的需求。忙碌的工作和緊湊的行程，讓人們難以花時間在食物的準備上，經常選擇方便卻不夠營養的選擇，甚至犧牲了與家人共享美好時光的機會。即食享熱的創辦人深刻體會到這些挑戰，於是創立了這個品牌，希望為每個人帶來一種全新的飲食體驗——「即食享熱」。
+            <br /><br />
+            「即食」象徵著我們對時間的尊重與對便利的追求，「享」與「熱」的元素巧妙的延伸出了「烹」，體現了我們對烹飪的熱愛與對美食的期待。這不僅僅是一個品牌名，更是一種生活哲學的表達。我們將這些理念融入每一份調理包和處理食材中，力求讓每一餐都充滿簡便的美味與健康。
+            <br /><br />
+            我們的調理包經過精心設計，選用優質的新鮮食材，讓您在最短的時間內享受溫暖的熱食，而不必繁瑣地備料。我們的目標是讓每一位顧客都能在忙碌的生活中找到簡單卻不失美味的飲食方式，感受到健康與幸福的雙重滋養。
+            <br /><br />
+            即食享熱，不僅僅是一個品牌，更是我們對生活的一種熱情表達。每一份產品背後都蘊藏著對美食的深情與對顧客的關懷。我們相信，即使在匆忙的時光中，美味與健康也應該是隨手可得的。即食享熱，讓每一餐都成為一場愉悅的美食旅程，讓健康和便利完美融合，讓每一刻的用餐時光都成為值得珍惜的美好瞬間。
+          </p>
+        </div>
+      </div>
+      <div class="duty">
+        <div class="title">
+          <h1>品牌使命</h1>
+        </div>
+        <div class="paragraph">
+          <p>
+            我們的使命是為忙碌的現代人提供雙重選擇：快速方便的即食調理包，以及精心準備的料理食材包。我們明白，時間寶貴，但這不應該妨礙您在家中享受烹飪的樂趣。無論您是烹飪新手還是經驗豐富的家庭主廚，我們的產品都能讓您輕鬆上手，優雅上菜。
+            <br /><br />
+            我們致力於讓每個人都能在廚房中展現自信與創意，無需為挑選食材或複雜的準備工作煩惱。只需按照我們簡單易懂的食譜步驟，您就能輕鬆完成一道美味的料理。即便是最繁忙的日子，我們也希望能幫助您找到那一份專屬於您的烹飪時光，讓您在品味美食的同時，與親朋好友共享溫馨的時刻。
+          </p>
+        </div>
+      </div>
+
+      <!-- 品牌堅持-->
+      <div class="feature-section">
+        <div class="feature-row">
+          <div class="feature-column wow fadeIn" data-wow-delay="0.1s">
+            <div class="ourfeature">
+              <i class="fa-solid fa-wheat-awn"></i>
+              <h3>安心饗食</h3>
+              <h5>
+                與在地小農合作<br />
+                從田地到餐桌<br />
+                全程把關<br />
+                保留食物原始風味<br />
+                提供完整溯源資訊<br />
+                將健康帶進每一道菜<br />
+                讓您食在安心<br />
+              </h5>
+            </div>
+          </div>
+          <div class="feature-column wow fadeIn" data-wow-delay="0.3s">
+            <div class="ourfeature">
+              <i class="fa-solid fa-recycle"></i>
+              <h3>永續循環</h3>
+              <h5>
+                使用環保包裝<br />
+                低碳運輸<br />
+                選用有機食材<br />
+                推廣綠色飲食<br />
+                減少碳足跡<br />
+                與您一同守護地球<br />
+                永續共生<br />
+              </h5>
+            </div>
+          </div>
+          <div class="feature-column wow fadeIn" data-wow-delay="0.5s">
+            <div class="ourfeature">
+              <i class="fa-solid fa-utensils"></i>
+              <h3>健康守護</h3>
+              <h5>
+                專業營養師把關<br />
+                營養均衡搭配<br />
+                精準控制熱量<br />
+                滿足多元飲食需求<br />
+                用科學烹調<br />
+                鎖住食材美味<br />
+                守護您與家人的健康<br />
+              </h5>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text">
+        <p style="font-size: 24px">
+          無論您是想快速解決一餐，還是精心準備一頓豐盛饗宴，這裡都有適合您的選擇
+        </p>
+      </div>
+      <div>
+        <button class="view-all">
+          <a class="importPage" href="product.html">即刻展開您的味蕾探索之旅</a>
+        </button>
+      </div>
+    </main>
+
+    <!-- footer start -->
+    <footer class="tem-footer">
+      <div class="tem-footer-content">
+        <div class="tem-about-us">
+          <h2>關於我們</h2>
+          <ul>
+            <li>公司簡介</li>
+            <li>使命與願景</li>
+            <li>品牌故事</li>
+          </ul>
+        </div>
+        <div class="tem-customer-service">
+          <h2>客戶服務</h2>
+          <ul>
+            <li>常見問題</li>
+            <li>送貨與退貨政策</li>
+            <li>隱私政策</li>
+          </ul>
+        </div>
+        <div class="tem-contact-info">
+          <h2>聯絡我們</h2>
+          <p>電話: 04-2326-5860</p>
+          <p>電郵: service@fastgourmet.com</p>
+          <p>地址: 台中市南屯區公益路二段51號18樓</p>
+          <span class="tem-social-media">
+            <a href="#"
+              ><img src="./material/icon/facebook.png" alt="Facebook"
+            /></a>
+            <a href="#"
+              ><img src="./material/icon/instagram.png" alt="Instagram"
+            /></a>
+            <a href="#"
+              ><img src="./material/icon/youtube.png" alt="YouTube"
+            /></a>
+          </span>
+        </div>
+        <div class="tem-registration-info">
+          <h2>登錄字號</h2>
+          <p>即食享熱餐飲無限公司</p>
+          <p>食品業者登錄字號: A-123456789-54321-0</p>
+          <p>本公司產品皆投保產品責任保險</p>
+        </div>
+      </div>
+    </footer>
+    <!-- footer end -->
+    <script src="./home.js"></script>
+  </body>
+</html>
