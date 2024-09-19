@@ -1,3 +1,16 @@
+// function openTab(evt, tabName) {
+//   var i, tabcontent, tablinks;
+//   tabcontent = document.getElementsByClassName("tabcontent");
+//   for (i = 0; i < tabcontent.length; i++) {
+//     tabcontent[i].style.display = "none";
+//   }
+//   tablinks = document.getElementsByClassName("tablinks");
+//   for (i = 0; i < tablinks.length; i++) {
+//     tablinks[i].className = tablinks[i].className.replace(" active", "");
+//   }
+//   document.getElementById(tabName).style.display = "block";
+//   evt.currentTarget.className += " active";
+// }
 window.onload = function () {
   //菜單menu展開
   window.openSidenav = function () {
@@ -200,29 +213,53 @@ window.onload = function () {
     name: "日式豬排飯",
     price: 130,
     image: "./material/mealkit/katsudon.jpg",
-    promotion:
-      "免運優惠來囉！新會員七天內於官網下單，即食享熱幫你付運費，最高可折100元",
+    promotion: "輸入優惠代碼EEIT85，不限消費金額，皆可享85元折扣",
+    stockQuantity: 10,
   };
 
-  // 建立商品資訊 HTML 結構
   const infoSection = document.querySelector(".spec");
   const productHtml = `
-      <p class="product-name">${product.name}</p>
-      <p class="product-price">NT$ ${product.price}</p>
-      <div class="quantity-selector">
-        <label for="quantity">數量:</label>
-        <input type="number" id="quantity" name="quantity" value="1" min="1" />
-      </div>
-      <button class="btn cart"><i class="fa-solid fa-cart-shopping"></i>&nbsp;加入購物車</button>
-      <button class="btn like"><i class="fa-regular fa-heart"></i>&nbsp;收藏商品</button>
-      <button class="btn keep"><i class="fa-solid fa-book-open"></i>&nbsp;收藏食譜</button>
-      <div class="promotion">
-        <strong>優惠活動:</strong> <p> ${product.promotion}</p>
-      </div>
-    `;
+  <p class="product-name">${product.name}</p>
+  <p class="product-price">NT$ ${product.price}</p>
+  <div class="quantity-selector">
+    <label for="quantity">數量選擇：</label>
+    <button id="decrease" class="btn-quantity"><i class="fa-solid fa-minus"></i></button>
+    <input type="text" id="quantity" value="1" readonly />
+    <button id="increase" class="btn-quantity"><i class="fa-solid fa-plus"></i></button>
+    <span>&nbsp;&nbsp;商品剩最後 ${product.stockQuantity} 件</span>
+  </div>
+  <button class="btn cart"><i class="fa-solid fa-cart-shopping"></i>&nbsp;加入購物車</button>
+  <button class="btn like"><i class="fa-regular fa-heart"></i>&nbsp;收藏商品</button>
+  <button class="btn keep"><i class="fa-solid fa-book-open"></i>&nbsp;收藏食譜</button>
+  <div class="promotion">
+    <strong>優惠活動:</strong> <p>${product.promotion}</p>
+  </div>
+`;
 
   // 將 HTML 插入到 info 區塊
   infoSection.innerHTML = productHtml;
+
+  // 控制加減按鈕和數量的邏輯
+  var stockQuantity = product.stockQuantity; // 假設庫存數量存在 product 物件中
+  var quantityInput = document.getElementById("quantity");
+  var decreaseButton = document.getElementById("decrease");
+  var increaseButton = document.getElementById("increase");
+
+  // 點擊減少按鈕
+  decreaseButton.addEventListener("click", function () {
+    var currentQuantity = parseInt(quantityInput.value);
+    if (currentQuantity > 1) {
+      quantityInput.value = currentQuantity - 1;
+    }
+  });
+
+  // 點擊增加按鈕
+  increaseButton.addEventListener("click", function () {
+    var currentQuantity = parseInt(quantityInput.value);
+    if (currentQuantity < stockQuantity) {
+      quantityInput.value = currentQuantity + 1;
+    }
+  });
 
   // 商品詳細資料
   const productDetail = {
@@ -277,7 +314,7 @@ window.onload = function () {
     // 這裡可以是 AJAX 或者 Fetch 從後端取得資料
     const imageList = [
       { src: "./material/mealkit/katsudon.jpg", alt: "縮略圖1" },
-      { src: "./material/mealkit/pasta.png", alt: "縮略圖2" },
+      { src: "./material/mealkit/katsudon2.jpg", alt: "縮略圖2" },
     ];
     return imageList;
   }
@@ -319,4 +356,54 @@ window.onload = function () {
 
   // 當頁面載入時，從資料庫抓取圖片並生成畫廊
   fetchProductImages().then((images) => generateGallery(images));
+
+  window.openTab = function (evt, tabName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " active";
+
+    // 檢查是否是評論標籤，並動態生成評論
+    if (tabName === "Reviews") {
+      generateReviews();
+    }
+  };
+
+  function generateReviews() {
+    const reviews = [
+      {
+        name: "Brad",
+        rating: 4,
+        message: "調理包真的很方便，調味恰到好處，也比超商很健康",
+      },
+      {
+        name: "Kevin",
+        rating: 4,
+        message: "物流很迅速，中午下訂單，還沒下班商品就已經送到家了",
+      },
+    ];
+
+    const reviewsContainer = document.getElementById("Reviews");
+    reviewsContainer.innerHTML = `<p class="title"> | ${reviews.length} 則評論</p><br>`; // 更新評論計數
+
+    reviews.forEach((review) => {
+      const starRating =
+        "⭐".repeat(review.rating) + "☆".repeat(5 - review.rating);
+      const reviewHtml = `
+        <div class="review">
+          <div>${review.name}</div>
+          <div class="rating">${starRating}</div>
+          <p class="message">${review.message}</p>
+        </div><br>
+      `;
+      reviewsContainer.innerHTML += reviewHtml;
+    });
+  }
 };

@@ -2,31 +2,31 @@
 var slideIndex = 1;
 var autoPlayInterval;
 
-// 启动自动轮播
+// 自動撥放
 function startAutoPlay() {
   autoPlayInterval = setInterval(function () {
     slideIndex++;
     showSlides(slideIndex);
-  }, 5000); // 每5秒自动切换到下一张图片
+  }, 5000); // 每5秒自動切換
 }
 
-// 手动切换 - 下一张
+// 手動切換下一張
 function plusSlides(n) {
-  clearInterval(autoPlayInterval); // 停止自动播放
+  clearInterval(autoPlayInterval); // 停止自動撥放
   slideIndex += n;
   showSlides(slideIndex);
-  startAutoPlay(); // 重新启动自动播放
+  startAutoPlay(); // 重新啟動自動播放
 }
 
-// 当前图片的显示
+// 目前圖片的顯示
 function currentSlide(n) {
-  clearInterval(autoPlayInterval); // 停止自动播放
+  clearInterval(autoPlayInterval); // 停止自動撥放
   slideIndex = n;
   showSlides(slideIndex);
-  startAutoPlay(); // 重新启动自动播放
+  startAutoPlay(); // 重新啟動自動播放
 }
 
-// 显示幻灯片
+// 顯示輪播圖
 function showSlides(n) {
   let slides = document.getElementsByClassName("mySlides");
   let dots = document.getElementsByClassName("dot");

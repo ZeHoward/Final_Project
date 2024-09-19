@@ -92,8 +92,6 @@
     </header>
     <!-- header end -->
 
-    <!-- 開始編輯 -->
-
     <!--  商品資訊 -->
 
     <div class="info">
@@ -106,11 +104,33 @@
           <!-- 縮略圖 -->
         </div>
       </div>
-
       <div class="spec"></div>
     </div>
 
-    <div class="detail"></div>
+    <div class="tab">
+      <button class="tablinks" onclick="openTab(event, 'Description')">
+        商品描述
+      </button>
+      <button class="tablinks" onclick="openTab(event, 'Reviews')">
+        商品評論
+      </button>
+    </div>
+
+    <div
+      class="detail tabcontent"
+      id="Description"
+      style="display: block"
+    ></div>
+
+    <div id="Reviews" class="tabcontent" style="display: none">
+      <p>There are no reviews yet.</p>
+      <!-- 評價表單 -->
+      <label>Your rating</label>
+      <div>⭐⭐⭐⭐⭐</div>
+      <label>Your message</label>
+      <textarea placeholder="Type your review here..."></textarea>
+      <button>Submit Review</button>
+    </div>
 
     <div class="related-product" id="related-product">
       <p class="title">| 相關商品</p>
