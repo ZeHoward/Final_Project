@@ -51,13 +51,25 @@ window.onload = function () {
   /////////////////////////////////////////////////
   let memberInfoDiv = document.getElementById("memberInfoDiv");
 
-  document.getElementById('memberIcon').addEventListener('click', () => {
-    if (memberInfoDiv.style.display == 'none' || memberInfoDiv.style.display == '') {
-      memberInfoDiv.style.display = 'flex';
-    } else if (memberInfoDiv.style.display == 'flex') {
-      memberInfoDiv.style.display = 'none';
-    }
-  })
+  // document.getElementById('memberIcon').addEventListener('click', () => {
+  //   if (memberInfoDiv.style.display == 'none' || memberInfoDiv.style.display == '') {
+  //     memberInfoDiv.style.display = 'flex';
+  //   } else if (memberInfoDiv.style.display == 'flex') {
+  //     memberInfoDiv.style.display = 'none';
+  //   }
+  // })
+
+      document.getElementById('memberIcon').addEventListener('click', () => {
+        let memberInfoDiv = document.getElementById('memberInfoDiv');
+        
+        if (memberInfoDiv.classList.contains('show')) {
+          memberInfoDiv.classList.remove('show');
+        } else {
+          memberInfoDiv.classList.add('show');
+        }
+
+
+      });
 
     let isOpen = false;
     let searchDiv = document.getElementById('searchDiv');
@@ -89,7 +101,7 @@ window.onload = function () {
         searchDiv.style.border = '0px';
         isOpen = false;
     
-        memberInfoDiv.style.display = 'none';
+        memberInfoDiv.style.opacity = 0;
     });
   
 
