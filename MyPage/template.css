@@ -316,19 +316,13 @@ body {
   border: 1px solid #ddd;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   z-index: 1000; 
-  /* display: none; */
   flex-direction: column;
   text-align: start;
   border-radius: 10px;
   transition: opacity 0.5s ease, height 0.5s ease;
   opacity: 0;
-  visibility: visible;
 }
 
-#memberInfoDiv.show {
-  opacity: 1;
-  visibility: visible;
-}
 
 
 .fa-solid{
@@ -344,7 +338,7 @@ body {
 
 #memberInfoDiv > div{
   padding: 15px 0;
-  transition: transform 0.3s ease;
+  transition: transform 0.2s ease;
 }
 
 #memberInfoDiv > div:hover{
