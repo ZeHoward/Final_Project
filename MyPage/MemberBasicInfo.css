@@ -408,3 +408,21 @@ select{
 .alignRight {
   margin-left: 25px;
 }
+
+#deleteButton{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background-color: red;
+  color: white; 
+  border: none; 
+  padding: 15px 60px;
+  border-radius: 10px; 
+  font-size: 16px; 
+  cursor: pointer;
+  width: 100%;
+}
+
+#deleteButton:hover{
+  color: black;
+}
+

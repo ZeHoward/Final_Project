@@ -236,6 +236,8 @@ window.onload = function () {
      let address = document.getElementById("address").value;
       
       alert(email + firstName + lastName + gender + birthday + telephone + county + district + address);
+
+      
     })
 
   };
