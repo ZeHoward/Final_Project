@@ -310,21 +310,6 @@
     width: 100%;
 }
 
-.registName{
-    display: flex;
-    gap: 20px;
-}
-
-.registFirstName{
-    display: flex;
-    flex-direction: column;
-}
-
-.registLastName{
-    display: flex;
-    flex-direction: column;
-}
-
 .registButton{
   margin-top: 50px;
     margin-bottom: 20px;
@@ -355,3 +340,20 @@
 }
 
 
+#passwordRegexCheck{
+  color: red;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+#passwordDifferent{
+  color: red;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+#emailRegexCheck{
+  color: red;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
