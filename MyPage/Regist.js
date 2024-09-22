@@ -115,7 +115,7 @@ window.onload = function () {
             email : finallyEmail,
             password : finallyPassword,
             phoneNumber : telephone
-          }).then(response => {
+          })}).then(response => {
             if(!response.ok){
               throw new Error('Error : ')
             }
@@ -125,10 +125,9 @@ window.onload = function () {
           }).catch(error => {
             console.log('error:', error)
           })
-        } )
-      }else{
-        
-      }
+          }else{
+            console.log('console註冊失敗')
+          }
       
     });
 

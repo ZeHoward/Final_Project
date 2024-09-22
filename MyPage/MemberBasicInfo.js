@@ -197,6 +197,12 @@ window.onload = function () {
       '南竿鄉': '209', '北竿鄉': '210', '莒光鄉': '211', '東引鄉': '212'
     }
     
+    let userId = null;
+    
+    
+
+    
+
 
     document.getElementById("county").addEventListener('change', (event) => {
       let county = event.target.value;
@@ -221,23 +227,65 @@ window.onload = function () {
     });
 
 
+    fetch('http://localhost:8080/users/userAllInfo?email=bill16523@yahoo.com.tw',{
+      method : 'GET'
+    }).then(response => {
+      if(!response.ok){
+        console.log('查詢會員失敗')
+      }
+      return response.json();
+    }).then(data => {
+      userId = data.userId;
+      console.log(userId);
+      document.getElementById("userName").value = data.username;
+      document.getElementById("email").value = data.email;
+      document.getElementById("telephone").value = data.phoneNumber;
+      document.getElementById("firstName").value = data.firstName;
+      document.getElementById("lastName").value = data.lastName;
+      document.getElementById("address").value = data.address;
+      document.getElementById("county").value = data.county;
+      document.getElementById("district").value = data.district;
+      document.getElementById("zipCode").value = data.postalCode;
+      document.getElementById("birthday").value = data.birthday;
+    }).catch(error => {
+      console.log('error', error)
+    });
+
+
 
 
     document.getElementById("updateButton").addEventListener("click", () => {
+      let userName = document.getElementById("userName").value;
+      let email = document.getElementById("email").value;
+      let telephone = document.getElementById("telephone").value;
+      let firstName = document.getElementById("firstName").value;
+      let lastName = document.getElementById("lastName").value;
+      let address = document.getElementById("address").value;
+      let county = document.getElementById("county").value;
+      let district = document.getElementById("district").value;
+      let zipCode = document.getElementById("zipCode").value;
+      let birthday = document.getElementById("birthday").value;
+     
+      fetch('http://localhost:8080/users/update',{
+        method : 'POST',
+        headers : {'Content-Type' : 'application/json'},
+        body : JSON.stringify({
+          userId : userId,
+          username : userName,
+          email : email,
+          phoneNumber : telephone,
+          firstName : firstName,
+          lastName : lastName,
+          address : address,
+          postalCode : zipCode,
+          county : county,
+          district : district,
+          birthday : birthday
+        })
+      }).then(response => {
+        console.log(response)
+      })
       
-     let email = document.getElementById("email").value;
-     let firstName = document.getElementById("firstName").value;
-     let lastName = document.getElementById("lastName").value;
-     let gender = document.getElementById("gender").value;
-     let birthday = document.getElementById("birthday").value;
-     let telephone = document.getElementById("telephone").value;
-     let county = document.getElementById("county").value;
-     let district = document.getElementById("district").value;
-     let address = document.getElementById("address").value;
-      
-      alert(email + firstName + lastName + gender + birthday + telephone + county + district + address);
-
-      
-    })
+    });
 
   };
