@@ -225,14 +225,17 @@ body {
 .list a:hover {
   background-color: #f3ce6e;
 }
+.list a.active {
+  background-color: #f3ce6e;
+}
 
 .down-btn > img {
   width: 20px;
 }
 
 .active2 {
-  background-color: #f3ce6e; /*修改顏色*/
-  /* color: rgb(0, 0, 0); */
+  background-color: #f3cd6ea2; /*修改顏色*/
+  color: rgb(0, 0, 0);
 }
 
 .down-container {
