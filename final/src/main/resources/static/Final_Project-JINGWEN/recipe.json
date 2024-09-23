@@ -1,0 +1,285 @@
+[
+  {
+    "name": "日式豬排飯",
+    "price": 130,
+    "image": "./material/mealkit/katsudon.jpg",
+    "releaseDate": "2023-04-22",
+    "level":"中等",
+    "category": "international"
+  },
+  {
+    "name": "義大利餃",
+    "price": 120,
+    "image": "./material/mealkit/dumpling.jpg",
+    "releaseDate": "2021-03-22",
+    "level":"簡易",
+    "category": "international"
+  },
+  {
+    "name": "南洋叻沙海鮮湯麵",
+    "price": 135,
+    "image": "./material/mealkit/laksa.jpg",
+    "releaseDate": "2021-04-24",
+    "level":"中等",
+    "category": "international"
+  },
+  {
+    "name": "奶油松露百菇燉飯",
+    "price": 220,
+    "image": "./material/mealkit/奶油松露百菇燉飯.jpg",
+    "releaseDate": "2024-06-22",
+    "level":"困難",
+    "category": "international"
+  },
+  {
+    "name": "泰式冬蔭功酸辣海鮮湯",
+    "price": 170,
+    "image": "./material/mealkit/soup.png",
+    "releaseDate": "2021-04-02",
+    "level":"簡易",
+     "category": "international"
+ 
+  },
+  {
+    "name": "紅燒豆腐",
+    "price": 170,
+    "image": "./material/mealkit/soup.png",
+    "releaseDate": "2021-04-02",
+    "level":"簡易",
+     "category": "home" 
+  },
+  {
+    "name": "蝦醬高麗菜",
+    "price": 150,
+    "image": "./material/mealkit/soup.png",
+    "releaseDate": "2022-04-02",
+    "level":"簡易",
+     "category": "home" 
+  },
+  {
+    "name": "皮蛋瘦肉粥",
+    "price": 170,
+    "image": "./material/mealkit/soup.png",
+    "releaseDate": "2021-04-02",
+    "level":"簡易",
+     "category": "home"
+  },
+  {
+    "name": "酸菜白肉鍋",
+    "price": 170,
+    "image": "./material/mealkit/soup.png",
+    "releaseDate": "2021-04-02",
+    "level":"簡易",
+     "category": "group"
+  },
+  {
+    "name": "雞蛋羹",
+    "price": 170,
+    "image": "./material/mealkit/soup.png",
+    "releaseDate": "2021-04-02",
+    "level":"簡易",
+     "category": "kids"
+  },
+  {
+    "name": "紅豆湯圓",
+    "price": 150,
+    "image": "./material/mealkit/soup.png",
+    "releaseDate": "2022-02-01",
+    "level": "簡易",
+    "category": "elderly"
+  },
+  {
+    "name": "薑絲魚片粥",
+    "price": 180,
+    "image": "./material/mealkit/soup.png",
+    "releaseDate": "2022-03-15",
+    "level": "中等",
+    "category": "elderly"
+  },
+  {
+    "name": "綠豆湯",
+    "price": 130,
+    "image": "./material/mealkit/soup.png",
+    "releaseDate": "2022-04-10",
+    "level": "簡易",
+    "category": "elderly"
+  },
+  {
+    "name": "南瓜百合粥",
+    "price": 160,
+    "image": "./material/mealkit/soup.png",
+    "releaseDate": "2022-05-05",
+    "level": "簡易",
+    "category": "elderly"
+  },
+  {
+    "name": "銀耳蓮子湯",
+    "price": 170,
+    "image": "./material/mealkit/soup.png",
+    "releaseDate": "2022-06-20",
+    "level": "中等",
+    "category": "elderly"
+  },
+  {
+    "name": "海鮮滑蛋粥",
+    "price": 190,
+    "image": "./material/mealkit/soup.png",
+    "releaseDate": "2022-07-15",
+    "level": "中等",
+    "category": "elderly"
+  },
+  {
+    "name": "八寶粥",
+    "price": 180,
+    "image": "./material/mealkit/soup.png",
+    "releaseDate": "2022-08-01",
+    "level": "困難",
+    "category": "elderly"
+  },
+  {
+    "name": "蓮藕排骨湯",
+    "price": 200,
+    "image": "./material/mealkit/soup.png",
+    "releaseDate": "2022-09-25",
+    "level": "中等",
+    "category": "elderly"
+  },
+  {
+    "name": "燕麥蘋果粥",
+    "price": 140,
+    "image": "./material/mealkit/soup.png",
+    "releaseDate": "2022-10-10",
+    "level": "簡易",
+    "category": "elderly"
+  },
+  {
+    "name": "黑芝麻核桃糊",
+    "price": 170,
+    "image": "./material/mealkit/soup.png",
+    "releaseDate": "2022-11-09",
+    "level": "中等",
+    "category": "elderly"
+  },
+  {
+    "name": "佛跳牆",
+    "price": 800,
+    "image": "./material/mealkit/soup.png",
+    "releaseDate": "2023-11-05",
+    "level": "中等",
+    "category": "group"
+  },
+  {
+    "name": "雞蛋糕",
+    "price": 130,
+    "image": "./material/mealkit/soup.png",
+    "releaseDate": "2020-11-05",
+    "level": "簡易",
+    "category": "kids"
+  },
+  {
+    "name": "莓果巧克力鬆餅",
+    "price": 150,
+    "image": "./material/mealkit/soup.png",
+    "releaseDate": "2022-11-05",
+    "level": "困難",
+    "category": "kids"
+  },
+  {
+    "name": "馬鈴薯燉肉",
+    "price": 150,
+    "image": "./material/mealkit/soup.png",
+    "releaseDate": "2022-01-02",
+    "level":"中等",
+     "category": "home" 
+  },
+  {
+    "name": "酸菜白肉鍋",
+    "price": 170,
+    "image": "./material/mealkit/soup.png",
+    "releaseDate": "2021-04-02",
+    "level":"簡易",
+     "category": "group"
+  },
+  {
+    "name": "酸菜白肉鍋",
+    "price": 170,
+    "image": "./material/mealkit/soup.png",
+    "releaseDate": "2021-04-02",
+    "level":"簡易",
+     "category": "group"
+  },
+  {
+    "name": "酸菜白肉鍋",
+    "price": 170,
+    "image": "./material/mealkit/soup.png",
+    "releaseDate": "2021-04-02",
+    "level":"簡易",
+     "category": "group"
+  },
+  {
+    "name": "酸菜白肉鍋",
+    "price": 170,
+    "image": "./material/mealkit/soup.png",
+    "releaseDate": "2021-04-02",
+    "level":"簡易",
+     "category": "group"
+  },
+  {
+    "name": "酸菜白肉鍋",
+    "price": 170,
+    "image": "./material/mealkit/soup.png",
+    "releaseDate": "2021-04-02",
+    "level":"簡易",
+     "category": "group"
+  },
+  {
+    "name": "莓果巧克力鬆餅",
+    "price": 150,
+    "image": "./material/mealkit/soup.png",
+    "releaseDate": "2022-11-05",
+    "level": "困難",
+    "category": "kids"
+  },
+  {
+    "name": "莓果巧克力鬆餅",
+    "price": 150,
+    "image": "./material/mealkit/soup.png",
+    "releaseDate": "2022-11-05",
+    "level": "困難",
+    "category": "kids"
+  },
+  {
+    "name": "莓果巧克力鬆餅",
+    "price": 150,
+    "image": "./material/mealkit/soup.png",
+    "releaseDate": "2022-11-05",
+    "level": "困難",
+    "category": "kids"
+  },
+  {
+    "name": "皮蛋瘦肉粥",
+    "price": 170,
+    "image": "./material/mealkit/soup.png",
+    "releaseDate": "2021-04-02",
+    "level":"簡易",
+     "category": "home"
+  },
+  {
+    "name": "皮蛋瘦肉粥",
+    "price": 170,
+    "image": "./material/mealkit/soup.png",
+    "releaseDate": "2021-04-02",
+    "level":"簡易",
+     "category": "home"
+  },
+  {
+    "name": "皮蛋瘦肉粥",
+    "price": 170,
+    "image": "./material/mealkit/soup.png",
+    "releaseDate": "2021-04-02",
+    "level":"簡易",
+     "category": "home"
+  }
+
+]
+

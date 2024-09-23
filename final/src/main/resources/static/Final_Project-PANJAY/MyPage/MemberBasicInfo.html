@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>即食享熱</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap");
+    </style>
+    <link rel="stylesheet" href="./MemberBasicInfo.css" />
+    <script src="./MemberBasicInfo.js"></script>
+  </head>
+  <body>
+    <!-- menu start-->
+    <div id="sidenav" class="tem-overlay">
+      <div class="tem-nav">
+        <button class="tem-closebtn" onclick="closeSidenav()">
+          <img src="./material/icon/close.png" alt="" />
+        </button>
+      </div>
+      <div class="tem-overlay-content">
+        <a href="#home">首頁</a>
+        <a href="#about">關於我們</a>
+
+        <div class="tem-dropdown-div">
+          <button class="tem-dropdown-btn" onclick="togglePic1()">
+            商品列表&nbsp;<img
+              src="./material/icon/down.png"
+              alt="down"
+              id="updown1"
+            />
+          </button>
+          <div class="tem-dropdown-content">
+            <a href="#ready">調理包專區</a>
+            <a href="#mealkit">生鮮食材包專區</a>
+          </div>
+        </div>
+
+        <div class="tem-dropdown-div">
+          <button class="tem-dropdown-btn" onclick="togglePic2()">
+            常見問題&nbsp;<img
+              src="./material/icon/down.png"
+              alt="down"
+              id="updown2"
+            />
+          </button>
+          <div class="tem-dropdown-content">
+            <a href="#QA">Ｑ＆Ａ</a>
+            <a href="#noticet">購買須知</a>
+            <a href="#contact">聯絡我們</a>
+          </div>
+        </div>
+        <a href="#share">響食部落格</a>
+        <a href="#join">登入 / 註冊</a>
+      </div>
+      <div id="add"></div>
+      <div class="tem-end-photo">
+        <img src="./material/cook.png" alt="" />
+      </div>
+    </div>
+    <!-- menu end-->
+
+    <!-- header start -->
+    <header class="tem-header">
+      <div class="tem-header-content">
+        <div class="tem-header-icons">
+          <div class="tem-icon tem-menu-icon" onclick="openSidenav()">
+            <a href="#"><img src="./material/icon/menu.png" alt="menu" /></a>
+          </div>
+        </div>
+        <div class="tem-logo">
+          <img src="./material/logo.png" alt="Logo" class="" />
+        </div>
+        <div class="tem-header-icons">
+          <a href="#" class="tem-icon tem-cart-icon"
+            ><img src="./material/icon/cart.png" alt="cart"
+          /></a>
+          <a href="#" class="tem-icon tem-user-icon"
+            ><img src="./material/icon/account.png" alt="sign in"
+          /></a>
+          <a href="#" class="tem-icon tem-search-icon"
+            ><img src="./material/icon/search.png" alt="search"
+          /></a>
+        </div>
+      </div>
+      <div class="tem-breadcrumb">
+        <a href="#">首頁</a>
+      </div>
+    </header>
+    <!-- header end -->
+
+    <!-- MemberBasicInfo START -->
+    <div class="memberBasicInfo">
+        <p style="font-size:xx-large; margin-bottom: 50px;">會員基本資料</p>
+        <div>
+            <p style="text-align: start; margin-bottom: 10px;">電子信箱</p>
+            <input id="email" class="memberBasicInfoInput" type="email">
+        </div>
+    
+        <div>
+            <p style="text-align: start; margin-bottom: 10px;">密碼</p>
+            <a class="memberBasicInfoA" href="./UpdatePassword.html">更新密碼</a>
+        </div>
+        <div class="memberBasicInfoUserName">
+          <p  style="text-align: left;">使用者名稱</p><input id="userName" class="memberBasicInfoInput">
+        </div>
+        <div class="memberBasicInfoName">
+          <div class="memberBasicInfoLastName">
+            <p style="text-align: left;">姓氏</p><input id="lastName" class="memberBasicInfoInput">
+          </div>
+          <div class="memberBasicInfoFirstName">
+              <p  style="text-align: left;">名字</p><input id="firstName" class="memberBasicInfoInput">
+          </div>
+        </div>
+    
+        <div>
+            <p style="text-align: start; margin-bottom: 10px;">生日</p>
+            <input id="birthday" class="memberBasicInfoInput" type="date">
+        </div>
+    
+        <div>
+            <p style="text-align: start; margin-bottom: 10px;">電話</p>
+            <input id="telephone" class="memberBasicInfoInput" type="tel">
+        </div>
+    
+        <div  class="divOfSelect">
+          <div>
+            <label for="county">選擇縣/市：</label><br>
+            <select id="county" name="county">
+                <option>選擇縣/市</option>
+                <option value="台北市">台北市</option>
+                <option value="新北市">新北市</option>
+                <option value="桃園市">桃園市</option>
+                <option value="台中市">台中市</option>
+                <option value="台南市">台南市</option>
+                <option value="高雄市">高雄市</option>
+                <option value="基隆市">基隆市</option>
+                <option value="新竹縣">新竹縣</option>
+                <option value="新竹市">新竹市</option>
+                <option value="苗栗縣">苗栗縣</option>
+                <option value="彰化縣">彰化縣</option>
+                <option value="南投縣">南投縣</option>
+                <option value="雲林縣">雲林縣</option>
+                <option value="嘉義縣">嘉義縣</option>
+                <option value="嘉義市">嘉義市</option>
+                <option value="屏東縣">屏東縣</option>
+                <option value="宜蘭縣">宜蘭縣</option>
+                <option value="花蓮縣">花蓮縣</option>
+                <option value="台東縣">台東縣</option>
+                <option value="澎湖縣">澎湖縣</option>
+                <option value="金門縣">金門縣</option>
+                <option value="連江縣">連江縣</option>
+            </select>
+          </div>
+          <div style="margin-left: 23px;">
+            <label for="district">選擇市/區/鄉/鎮：</label><br>
+              <select id="district">
+              <option value="">選擇市/區</option>
+            </select>
+          </div>
+        </div>
+
+
+        <div id="memberAddress">
+          <p class="addressLabel" style="text-align: start; margin-bottom: 10px;"><span>郵遞區號</span><span class="alignRight">地址</span></p>
+          <div class="addressContainer">
+            <input id="zipCode" type="text" class="memberBasicInfoInput zipInput">
+            <input id="address" class="memberBasicInfoInput addressInput" type="text">
+          </div>
+        </div>
+        <button id="updateButton">更新資料</button>
+        <button id="deleteButton">刪除帳號</button>
+
+    </div>
+
+    <!-- MemberBasicInfo END -->
+
+    <!-- footer start -->
+    <footer class="tem-footer">
+      <div class="tem-footer-content">
+        <div class="tem-about-us">
+          <h2>關於我們</h2>
+          <ul>
+            <li>公司簡介</li>
+            <li>使命與願景</li>
+            <li>品牌故事</li>
+          </ul>
+        </div>
+        <div class="tem-customer-service">
+          <h2>客戶服務</h2>
+          <ul>
+            <li>常見問題</li>
+            <li>送貨與退貨政策</li>
+            <li>隱私政策</li>
+          </ul>
+        </div>
+        <div class="tem-contact-info">
+          <h2>聯絡我們</h2>
+          <p>電話: 04-2326-5860</p>
+          <p>電郵: service@fastgourmet.com</p>
+          <p>地址: 台中市南屯區公益路二段51號18樓</p>
+          <span class="tem-social-media">
+            <a href="#"
+              ><img src="./material/icon/facebook.png" alt="Facebook"
+            /></a>
+            <a href="#"
+              ><img src="./material/icon/instagram.png" alt="Instagram"
+            /></a>
+            <a href="#"
+              ><img src="./material/icon/youtube.png" alt="YouTube"
+            /></a>
+          </span>
+        </div>
+        <div class="tem-registration-info">
+          <h2>登錄字號</h2>
+          <p>即食享熱餐飲無限公司</p>
+          <p>食品業者登錄字號: A-123456789-54321-0</p>
+          <p>本公司產品皆投保產品責任保險</p>
+        </div>
+      </div>
+    </footer>
+    <!-- footer end -->
+    
+  </body>
+</html>

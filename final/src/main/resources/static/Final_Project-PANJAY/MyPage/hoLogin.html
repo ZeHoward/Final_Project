@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>後台登入</title>
+    <style>
+body,
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+.login-container {
+    width: 300px;
+    padding: 30px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    text-align: center;
+}
+
+.login-container h1 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+.login-container input[type="text"],
+.login-container input[type="password"] {
+    width: 93%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.login-container input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+    background-color: #88BF4B;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.login-container input[type="submit"]:hover {
+    background-color: #7AAD44;
+}
+    </style>
+</head>
+
+<body>
+
+    <div class="loginContainer"></div>
+        <h1>後台登入</h1>
+        <form>
+            <input type="text" placeholder="使用者名稱" required>
+            <input type="password" placeholder="密碼" required>
+            <input type="submit" value="登入">
+        </form>
+    </div>
+
+</body>
+
+</html>
