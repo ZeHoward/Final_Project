@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： localhost:3306
--- 產生時間： 2024-09-19 17:22:22
+-- 產生時間： 2024-09-23 08:00:41
 -- 伺服器版本： 8.0.39
 -- PHP 版本： 8.3.1
 
@@ -397,9 +397,11 @@ CREATE TABLE `userinfo` (
   `userId` int NOT NULL,
   `firstName` varchar(50) NOT NULL,
   `lastName` varchar(50) NOT NULL,
-  `address` varchar(255) DEFAULT NULL,
-  `city` varchar(100) DEFAULT NULL,
+  `birthday` varchar(1000) NOT NULL,
   `postalCode` varchar(10) DEFAULT NULL,
+  `county` varchar(1000) DEFAULT NULL,
+  `district` varchar(1000) DEFAULT NULL,
+  `address` varchar(1000) DEFAULT NULL,
   `createdAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updatedAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -408,10 +410,10 @@ CREATE TABLE `userinfo` (
 -- 傾印資料表的資料 `userinfo`
 --
 
-INSERT INTO `userinfo` (`id`, `userId`, `firstName`, `lastName`, `address`, `city`, `postalCode`, `createdAt`, `updatedAt`) VALUES
-(1, 1, 'John', 'Doe', '123 Main St', NULL, '12345', '2024-09-19 10:56:09', '2024-09-19 10:56:09'),
-(2, 2, 'Jane', 'Smith', '456 Side St', NULL, '67890', '2024-09-19 10:56:09', '2024-09-19 10:56:09'),
-(3, 3, 'Bob', 'Johnson', '789 Hill Rd', NULL, '11223', '2024-09-19 10:56:09', '2024-09-19 10:56:09');
+INSERT INTO `userinfo` (`id`, `userId`, `firstName`, `lastName`, `birthday`, `postalCode`, `county`, `district`, `address`, `createdAt`, `updatedAt`) VALUES
+(1, 1, 'John', 'Doe', '2024-09-12', '545', '南投縣', '埔里鎮', '機鬼股滾更', '2024-09-19 10:56:09', '2024-09-23 06:47:36'),
+(2, 2, 'Jane', 'Smith', '', '67890', NULL, NULL, NULL, '2024-09-19 10:56:09', '2024-09-19 10:56:09'),
+(3, 3, 'Bob', 'Johnson', '', '11223', NULL, NULL, NULL, '2024-09-19 10:56:09', '2024-09-19 10:56:09');
 
 -- --------------------------------------------------------
 
@@ -424,7 +426,7 @@ CREATE TABLE `users` (
   `username` varchar(50) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `phoneNumber` varchar(15) DEFAULT NULL,
+  `phoneNumber` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `createdAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updatedAt` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `token` varchar(255) DEFAULT NULL,
@@ -436,7 +438,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`userId`, `username`, `email`, `password`, `phoneNumber`, `createdAt`, `updatedAt`, `token`, `isDel`) VALUES
-(1, 'johndoe', 'john.doe@example.com', 'password123', '123456789', '2024-09-19 08:18:16', '2024-09-19 08:18:16', NULL, 0),
+(1, '新johndoe', 'john.doe@example.com', '123456789', '123456789', '2024-09-19 08:18:16', '2024-09-23 06:47:36', NULL, 0),
 (2, 'janesmith', 'jane.smith@example.com', 'password456', '987654321', '2024-09-19 08:18:16', '2024-09-19 08:18:16', NULL, 0),
 (3, 'bobjohnson', 'bob.johnson@example.com', 'password789', '555666777', '2024-09-19 08:18:16', '2024-09-19 08:18:16', NULL, 0);
 
@@ -602,6 +604,12 @@ ALTER TABLE `productimages`
 --
 ALTER TABLE `userinfo`
   MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- 使用資料表自動遞增(AUTO_INCREMENT) `users`
+--
+ALTER TABLE `users`
+  MODIFY `userId` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- 已傾印資料表的限制式
