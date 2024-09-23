@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>即食享熱</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap");
+    </style>
+    <link rel="stylesheet" href="./home.css" />
+  </head>
+  <body>
+    <!-- menu start-->
+    <div id="sidenav" class="tem-overlay">
+      <div class="tem-nav">
+        <button class="tem-closebtn" onclick="closeSidenav()">
+          <img src="./material/icon/close.png" alt="" />
+        </button>
+      </div>
+      <div class="tem-overlay-content">
+        <a href="#home">首頁&nbsp;<i class="fa-solid fa-spoon"></i></a>
+        <a href="#about">關於我們&nbsp;<i class="fa-solid fa-spoon"></i></a>
+
+        <div class="tem-dropdown-div">
+          <button class="tem-dropdown-btn" onclick="togglePic1()">
+            商品列表&nbsp;<img
+              src="./material/icon/down.png"
+              alt="down"
+              id="updown1"
+            />
+            <i class="fa-solid fa-spoon"></i>
+          </button>
+          <div class="tem-dropdown-content">
+            <a href="#ready"
+              >調理包專區&nbsp;<i class="fa-solid fa-spoon"></i
+            ></a>
+            <a href="#mealkit"
+              >生鮮食材包專區&nbsp;<i class="fa-solid fa-spoon"></i
+            ></a>
+          </div>
+        </div>
+
+        <div class="tem-dropdown-div">
+          <button class="tem-dropdown-btn" onclick="togglePic2()">
+            常見問題&nbsp;<img
+              src="./material/icon/down.png"
+              alt="down"
+              id="updown2"
+            />
+            <i class="fa-solid fa-spoon"></i>
+          </button>
+          <div class="tem-dropdown-content">
+            <a href="#QA">Ｑ＆Ａ<i class="fa-solid fa-spoon"></i></a>
+            <a href="#noticet">購買須知<i class="fa-solid fa-spoon"></i></a>
+            <a href="#contact">聯絡我們<i class="fa-solid fa-spoon"></i></a>
+          </div>
+        </div>
+        <a href="#share">響食部落格&nbsp;<i class="fa-solid fa-spoon"></i></a>
+        <a href="#join">登入 / 註冊&nbsp;<i class="fa-solid fa-spoon"></i></a>
+      </div>
+      <div id="add"></div>
+      <div class="tem-end-photo">
+        <img src="./material/cook.png" alt="" />
+      </div>
+    </div>
+    <!-- menu end-->
+
+    <!-- header start -->
+    <header class="tem-header">
+      <div class="tem-header-content">
+        <div class="tem-header-icons">
+          <div class="tem-icon tem-menu-icon" onclick="openSidenav()">
+            <a href="#"><img src="./material/icon/menu.png" alt="menu" /></a>
+          </div>
+        </div>
+        <div class="tem-logo">
+          <img src="./material/logo.png" alt="Logo" class="" />
+        </div>
+        <div class="tem-header-icons">
+          <a href="#" class="tem-icon tem-cart-icon"
+            ><img src="./material/icon/cart.png" alt="cart"
+          /></a>
+          <a href="#" class="tem-icon tem-user-icon"
+            ><img src="./material/icon/account.png" alt="sign in"
+          /></a>
+          <a href="#" class="tem-icon tem-search-icon"
+            ><img src="./material/icon/search.png" alt="search"
+          /></a>
+        </div>
+      </div>
+      <div class="tem-breadcrumb">
+        <a href="#">首頁</a>
+      </div>
+    </header>
+    <!-- header end -->
+
+    <!-- slideshow start -->
+    <div class="slideshow-container">
+      <div class="mySlides fade">
+        <img src="./material/slide1.png" style="width: 100%" />
+      </div>
+      <div class="mySlides fade">
+        <img src="./material/slide2.png" style="width: 100%" />
+      </div>
+      <div class="mySlides fade">
+        <img src="./material/slide3.png" style="width: 100%" />
+      </div>
+      <div class="mySlides fade">
+        <img src="./material/slide4.png" style="width: 100%" />
+      </div>
+
+      <a class="prev" onclick="plusSlides(-1)">❮</a>
+      <a class="next" onclick="plusSlides(1)">❯</a>
+    </div>
+    <br />
+
+    <div style="text-align: center">
+      <span class="dot" onclick="currentSlide(1)"></span>
+      <span class="dot" onclick="currentSlide(2)"></span>
+      <span class="dot" onclick="currentSlide(3)"></span>
+      <span class="dot" onclick="currentSlide(4)"></span>
+    </div>
+    <!-- slideshow end -->
+
+    <!-- 商品精選 -->
+    <div class="container">
+      <div class="bt">
+        <p>- 主廚精選，即刻嘗鮮 | 調理包專區 -</p>
+      </div>
+      <div class="carousel">
+        <button class="nav-button" id="prevBtn">❮</button>
+        <div class="product-container" id="productContainer1"></div>
+        <button class="nav-button" id="nextBtn">❯</button>
+      </div>
+      <button class="view-all">前往調理包專區選購</button>
+    </div>
+    <!-- 商品精選 -->
+
+    <!-- 產品特色 -->
+    <div class="feature-section2">
+      <div class="container">
+        <div class="title-row">
+          <h1>
+            即食享熱&nbsp;
+            <span style="font-size: 3rem; color: #d35b50">六大特色</span>
+          </h1>
+        </div>
+        <div class="product-row">
+          <div class="product-column fadeIn">
+            <div class="row">
+              <div class="content">
+                <div class="icon-container">
+                  <i class="fa-regular fa-circle-check"></i>
+                </div>
+                <div class="text">
+                  <h2>新鮮直送，嚴選食材</h2>
+                  <!-- <hr class="line" /> -->
+                  <p>
+                    確保每日挑選最新鮮的食材，直接從產地送到您家門口，讓您隨時享受最優質的美味。
+                  </p>
+                </div>
+              </div>
+              <div class="content">
+                <div class="icon-container">
+                  <i class="fa-regular fa-circle-check"></i>
+                </div>
+                <div class="text">
+                  <h2>豐富選擇，滿足需求</h2>
+                  <p>
+                    提供多種口味選擇，無論是單人份、多人套餐還是特殊飲食需求，都有合適的產品。
+                  </p>
+                </div>
+              </div>
+              <div class="content">
+                <div class="icon-container">
+                  <i class="fa-regular fa-circle-check"></i>
+                </div>
+                <div class="text">
+                  <h2>簡單料理，輕鬆上桌</h2>
+                  <p>
+                    每個調理包與生鮮食材包都設計成簡單易用的方式，讓您只需幾個步驟就能快速享用美味餐點。
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="product-column fadeIn">
+            <div class="img-container">
+              <img
+                class="img-fluid animated pulse infinite"
+                src="./material/orangehead.png"
+              />
+            </div>
+          </div>
+          <div class="product-column fadeIn">
+            <div class="row">
+              <div class="content">
+                <div class="icon-container">
+                  <i class="fa-regular fa-circle-check"></i>
+                </div>
+                <div class="text">
+                  <h2>嚴格控管，品質保證</h2>
+                  <p>
+                    每項產品都經過嚴格的品質檢測，確保顧客品嚐的每道料理都保持最高品質標準。
+                  </p>
+                </div>
+              </div>
+              <div class="content">
+                <div class="icon-container">
+                  <i class="fa-regular fa-circle-check"></i>
+                </div>
+                <div class="text">
+                  <h2>綠色包裝，資源永續</h2>
+                  <p>
+                    採用環保材質包裝，既能保存食物的新鮮，又符合現代社會對永續環保的要求。
+                  </p>
+                </div>
+              </div>
+              <div class="content">
+                <div class="icon-container">
+                  <i class="fa-regular fa-circle-check"></i>
+                </div>
+                <div class="text">
+                  <h2>即時配送，安全保鮮</h2>
+                  <p>
+                    與專業物流公司合作，採用低溫配送技術，確保食材在運輸過程中保持新鮮與安全。
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feature End -->
+
+    <!-- 商品精選 -->
+    <div class="container">
+      <div class="bt">
+        <p>- 甄選生鮮，營養滿分 | 生鮮食材包專區 -</p>
+      </div>
+      <div class="carousel">
+        <button class="nav-button" id="prevBtn2">❮</button>
+        <div class="product-container" id="productContainer2"></div>
+        <button class="nav-button" id="nextBtn2">❯</button>
+      </div>
+      <button class="view-all">前往生鮮食材包專區選購</button>
+    </div>
+    <!-- 商品精選 -->
+
+    <!-- footer start -->
+    <footer class="tem-footer">
+      <div class="tem-footer-content">
+        <div class="tem-about-us">
+          <h2>關於我們</h2>
+          <ul>
+            <li>公司簡介</li>
+            <li>使命與願景</li>
+            <li>品牌故事</li>
+          </ul>
+        </div>
+        <div class="tem-customer-service">
+          <h2>客戶服務</h2>
+          <ul>
+            <li>常見問題</li>
+            <li>送貨與退貨政策</li>
+            <li>隱私政策</li>
+          </ul>
+        </div>
+        <div class="tem-contact-info">
+          <h2>聯絡我們</h2>
+          <p>電話: 04-2326-5860</p>
+          <p>電郵: service@fastgourmet.com</p>
+          <p>地址: 台中市南屯區公益路二段51號18樓</p>
+          <span class="tem-social-media">
+            <a href="#"
+              ><img src="./material/icon/facebook.png" alt="Facebook"
+            /></a>
+            <a href="#"
+              ><img src="./material/icon/instagram.png" alt="Instagram"
+            /></a>
+            <a href="#"
+              ><img src="./material/icon/youtube.png" alt="YouTube"
+            /></a>
+          </span>
+        </div>
+        <div class="tem-registration-info">
+          <h2>登錄字號</h2>
+          <p>即食享熱餐飲無限公司</p>
+          <p>食品業者登錄字號: A-123456789-54321-0</p>
+          <p>本公司產品皆投保產品責任保險</p>
+        </div>
+      </div>
+    </footer>
+    <!-- footer end -->
+    <script src="./home.js"></script>
+  </body>
+</html>
