@@ -279,6 +279,14 @@
     "releaseDate": "2021-04-02",
     "level":"簡易",
      "category": "home"
+  },
+  {
+    "name": "南洋叻沙海鮮湯麵",
+    "price": 135,
+    "image": "./material/mealkit/laksa.jpg",
+    "releaseDate": "2021-04-24",
+    "level":"中等",
+    "category": "international"
   }
 
 ]
