@@ -118,6 +118,8 @@ public class UsersServiceImpl {
 		usersRepository.save(users);
 		usersInfoReposity.save(userinfo);
 		
+		System.out.println("testgit");
+		
 		
 		
 		
