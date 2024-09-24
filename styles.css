@@ -953,7 +953,7 @@ canvas {
     color: #555;
 }
 
-#delete-button {
+#delete-button, .delete-coupon-button {
     background-color: #f44336;
     color: white;
     padding: 8px 12px;
@@ -963,7 +963,7 @@ canvas {
     cursor: pointer;
 }
 
-#delete-button:hover {
+#delete-button:hover, .delete-coupon-button:hover {
     background-color: #d32f2f;
 }
 

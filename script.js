@@ -75,7 +75,7 @@ const orders = [
         changedBy: "Admin",
         changedAt: "2024-09-22 08:00",
         address: "100台北市中正區鄭州路8號",
-        userId: "1", 
+        userId: "1",
         items: [
             {
                 name: "商品1",
@@ -111,7 +111,7 @@ const orders = [
         changedBy: "Admin",
         changedAt: "2024-09-22 09:00",
         address: "100台北市中正區忠孝西路一段49號",
-        userId: "1",  
+        userId: "1",
         items: [
             {
                 name: "商品3",
@@ -525,7 +525,6 @@ function generateOrderDetailsContent(order) {
         console.warn("沒有購買商品");
     }
 }
-
 
 // 點擊"商品上傳"時生成內容的函數
 function generateProductUploadForm() {
@@ -1554,7 +1553,7 @@ function generateCouponManagementForm() {
                 <td>${coupon.discountValue}</td>
                 <td>${coupon.expiryDate}</td>
                 <td>
-                    <button id="delete-button" data-index="${index}">刪除</button>
+                    <button class="delete-coupon-button" data-index="${index}">刪除</button>
                 </td>
             `;
             couponTableBody.appendChild(tr);
@@ -1564,10 +1563,17 @@ function generateCouponManagementForm() {
         document.querySelectorAll('.delete-coupon-button').forEach(button => {
             button.addEventListener('click', function () {
                 const index = this.getAttribute('data-index');
-                coupons.splice(index, 1); // 刪除該優惠券
-                displayCoupons(); // 刷新優惠券表格
+
+                // 顯示確認刪除的彈窗
+                const isConfirmed = confirm('確定要刪除此優惠券嗎？');
+
+                if (isConfirmed) {
+                    coupons.splice(index, 1); // 刪除該優惠券
+                    displayCoupons(); // 刷新優惠券表格
+                }
             });
         });
+
     }
 }
 
