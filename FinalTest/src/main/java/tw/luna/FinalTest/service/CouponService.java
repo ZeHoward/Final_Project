@@ -131,11 +131,6 @@ public class CouponService {
 	    couponRepository.save(coupon);
 	}
 
-
-	   	// 查詢所有優惠券
-		public List<Coupon> getAllCoupons() {
-	        return couponRepository.findAll();
-	    }
 		
 		// 發送優惠券給所有用戶
 		 public void issueCouponToAllUsers(long couponId) {
@@ -156,6 +151,13 @@ public class CouponService {
 		                userCouponRepository.save(userCoupon);
 		            }
 		        }
+		    }
+		 
+		
+
+		    // 獲取所有優惠券
+		    public List<Coupon> getAllCoupons() {
+		        return couponRepository.findAll();
 		    }
 		
 		 
