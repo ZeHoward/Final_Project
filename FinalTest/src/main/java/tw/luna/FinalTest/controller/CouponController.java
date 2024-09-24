@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,8 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import tw.luna.FinalTest.model.Coupon;
 import tw.luna.FinalTest.model.UserCoupon;
 import tw.luna.FinalTest.service.CouponService;
-
 @RestController
+@CrossOrigin(origins = "http://127.0.0.1:5500", allowCredentials = "true")
 @RequestMapping("/api/coupons")
 public class CouponController {
 
