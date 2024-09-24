@@ -306,7 +306,7 @@ canvas {
     padding-left: 0px;
 }
 
-.order-management h1 {
+.order-management h1, .order-details h1 {
     font-size: 2em;
     font-weight: bold;
     margin-bottom: 20px;
@@ -333,20 +333,20 @@ canvas {
 }
 
 /* 訂單表格樣式 */
-.order-table {
+.order-table, .order-items-table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 10px;
     background-color: white;
 }
 
-.order-table th, .order-table td {
+.order-table th, .order-table td,.order-items-table th, .order-items-table td {
     padding: 15px;
     text-align: center;
     border-bottom: 1px solid #ddd;
 }
 
-.order-table th {
+.order-table th, .order-items-table th {
     background-color: #f4f4f4;
     font-weight: bold;
 }
@@ -395,6 +395,38 @@ canvas {
 
 .order-table a:hover {
     text-decoration: underline;
+}
+
+/* 訂單詳情頁面 */
+.order-summary {
+    margin-top: 20px;
+}
+
+.order-summary p {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.order-summary p strong {
+    color: #333;
+}
+
+.order-and-user-info {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.order-info, .user-info2 {
+    flex: 1;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.order-info {
+    margin-right: 20px;
 }
 
 /* 庫存管理樣式 */
@@ -881,4 +913,77 @@ canvas {
 
 .user-edit #deleteButton:hover {
     background-color: #d32f2f;
+}
+
+.coupon-management h1, .existing-coupons h1 {
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* 表格樣式 */
+.coupon-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    background-color: white;
+}
+
+.coupon-table thead {
+    background-color: #f4f4f4;
+}
+
+.coupon-table th, .coupon-table td {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.coupon-table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+.coupon-table tr:hover {
+    background-color: #f9f9f9;
+}
+
+.coupon-table td {
+    color: #555;
+}
+
+#delete-button {
+    background-color: #f44336;
+    color: white;
+    padding: 8px 12px;
+    margin-right: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#delete-button:hover {
+    background-color: #d32f2f;
+}
+
+input[type="date"] {
+    width: 20%;
+    padding: 10px;
+    font-size: 16px;
+    height: 40px;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    background-color: #fafafa;
+    box-sizing: border-box;
+}
+
+input[type="date"]:focus {
+    border-color: #4CAF50;
+    outline: none;
+}
+
+input[type="date"]:hover {
+    background-color: #f1f1f1;
+    border-color: #bbb;
 }

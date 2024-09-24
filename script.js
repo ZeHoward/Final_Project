@@ -58,37 +58,69 @@ const chartData = {
 // 假資料，模擬不同訂單
 const orders = [
     {
-        image: '紅大頭.png',
-        name: '產品名稱1',
-        orderNumber: 'XXXX1',
-        deliveryMethod: '快遞',
-        orderAmount: '1000',
-        status: '已付款',
-        statusClass: 'paid',
-        date: '2024-09-21 16:55:56',
-        details: '詳細'
+        orderNumber: "XXXX1",
+        name: "產品名稱1",
+        deliveryMethod: "快遞",
+        orderAmount: 1000,
+        status: "已付款",
+        statusClass: "paid",
+        date: "2024-09-21 16:55:56",
+        couponId: "COUPON123",
+        orderDate: "2024-09-20",
+        percentageDiscount: 10,  // 百分比折扣
+        amountDiscount: 100,  // 折扣金額
+        totalAmount: 1000,  // 訂單總金額
+        finalAmount: 900,  // 最終金額
+        comment: "快速配送，無問題",
+        changedBy: "Admin",
+        changedAt: "2024-09-22 08:00",
+        address: "100台北市中正區鄭州路8號",
+        userId: "1", 
+        items: [
+            {
+                name: "商品1",
+                sku: "SKU123",
+                quantity: 2,
+                price: 50,
+                image: "紅大頭.png"
+            },
+            {
+                name: "商品2",
+                sku: "SKU456",
+                quantity: 1,
+                price: 100,
+                image: "紅大頭.png"
+            }
+        ]
     },
     {
-        image: '黃大頭.png',
-        name: '產品名稱2',
-        orderNumber: 'XXXX2',
-        deliveryMethod: '快遞',
-        orderAmount: '2000',
-        status: '尚未付款',
-        statusClass: 'unpaid',
-        date: '2024-09-21 16:55:56',
-        details: '詳細'
-    },
-    {
-        image: '橘大頭.png',
-        name: '產品名稱3',
-        orderNumber: 'XXXX3',
-        deliveryMethod: '快遞',
-        orderAmount: '1500',
-        status: '取消',
-        statusClass: 'cancelled',
-        date: '2024-09-21 16:55:56',
-        details: '詳細'
+        orderNumber: "XXXX2",
+        name: "產品名稱2",
+        deliveryMethod: "郵寄",
+        orderAmount: 2000,
+        status: "尚未付款",
+        statusClass: "unpaid",
+        date: "2024-09-22 10:00:00",
+        couponId: "COUPON456",
+        orderDate: "2024-09-21",
+        percentageDiscount: 5,
+        amountDiscount: 100,
+        totalAmount: 2000,
+        finalAmount: 1900,
+        comment: "",
+        changedBy: "Admin",
+        changedAt: "2024-09-22 09:00",
+        address: "100台北市中正區忠孝西路一段49號",
+        userId: "1",  
+        items: [
+            {
+                name: "商品3",
+                sku: "SKU789",
+                quantity: 1,
+                price: 150,
+                image: "紅大頭.png"
+            }
+        ]
     }
 ];
 
@@ -376,12 +408,11 @@ function generateOrderManagementContent() {
     const tbody = document.querySelector('.order-table tbody');
 
     // 動態生成每筆訂單
-    orders.forEach(order => {
+    orders.forEach((order, index) => {
         const tr = document.createElement('tr');
 
         tr.innerHTML = `
                     <td>
-                        <img src="${order.image}" alt="${order.name}" style="width: 50px; height: 50px;">
                         <p>${order.name}</p>
                     </td>
                     <td>
@@ -391,12 +422,110 @@ function generateOrderManagementContent() {
                     </td>
                     <td class="${order.statusClass}">${order.status}</td>
                     <td>${order.date}</td>
-                    <td><a href="#">${order.details}</a></td>
+                    <td><a href="#" class="details-link" data-index="${index}" style="color: white;">詳細</a></td>
                 `;
 
         tbody.appendChild(tr);
     });
+
+    // 綁定「詳細」按鈕的點擊事件
+    document.querySelectorAll('.details-link').forEach(link => {
+        link.addEventListener('click', function (event) {
+            event.preventDefault();  // 防止預設行為
+            const orderIndex = this.getAttribute('data-index');
+            console.log("選擇的訂單索引:", orderIndex);  // 檢查是否獲取到正確的索引
+            console.log("選擇的訂單資料:", orders[orderIndex]);  // 檢查對應的訂單資料是否存在
+            generateOrderDetailsContent(orders[orderIndex]);  // 顯示該訂單的詳細頁面
+        });
+    });
 }
+
+// 點擊訂單的"詳細"連結後生成訂單詳情頁面的函數
+function generateOrderDetailsContent(order) {
+    const mainContent = document.querySelector('.main-content');
+    mainContent.innerHTML = '';  // 清空之前的內容
+
+    // 假設根據 order.userId 查找對應的用戶
+    const user = users.find(u => u.userId === order.userId);
+
+    // 如果未找到用戶，則用戶資訊顯示為 "未知"
+    const userInfo = user ? `
+        <p><strong>用戶名稱:</strong> ${user.username}</p>
+        <p><strong>姓名:</strong> ${user.firstName} ${user.lastName}</p>
+        <p><strong>電子郵件:</strong> ${user.email}</p>
+        <p><strong>電話號碼:</strong> ${user.phoneNumber}</p>
+    ` : `<p>無法找到該用戶資訊</p>`;
+
+    // 生成訂單詳情的 HTML，並在右邊顯示用戶資訊
+    const orderDetailsSection = `
+        <section class="order-details">
+            <h1>訂單詳情 - 訂單編號: ${order.orderNumber}</h1>
+
+            <div class="order-and-user-info">
+                <div class="order-info">
+                    <h2>訂單資訊</h2>
+                    <div class="order-summary">
+                        <p><strong>訂單日期:</strong> ${order.orderDate}</p>
+                        <p><strong>配送地址:</strong> ${order.address}</p>
+                        <p><strong>訂單總金額:</strong> $${order.totalAmount}</p>
+                        <p><strong>優惠券 ID:</strong> ${order.couponId || 'N/A'}</p>
+                        <p><strong>百分比折扣:</strong> ${order.percentageDiscount}%</p>
+                        <p><strong>折扣金額:</strong> $${order.amountDiscount}</p>
+                        <p><strong>最終金額:</strong> $${order.finalAmount}</p>
+                        <p><strong>訂單狀態:</strong> ${order.status}</p>
+                        <p><strong>修改者:</strong> ${order.changedBy}</p>
+                        <p><strong>修改時間:</strong> ${order.changedAt}</p>
+                        <p><strong>備註:</strong> ${order.comment || '無'}</p>
+                    </div>
+                </div>
+
+                <div class="user-info2">
+                    <h2>買家資訊</h2>
+                    ${userInfo}
+                </div>
+            </div>
+
+            <h2>購買商品</h2>
+            <table class="order-items-table">
+                <thead>
+                    <tr>
+                        <th>商品圖片</th>
+                        <th>名稱</th>
+                        <th>SKU</th>
+                        <th>數量</th>
+                        <th>價格</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- 動態生成的商品將插入到這裡 -->
+                </tbody>
+            </table>
+        </section>
+    `;
+
+    mainContent.innerHTML = orderDetailsSection;
+
+    // 選取表格的 tbody
+    const tbody = document.querySelector('.order-items-table tbody');
+
+    // 確認 items 存在且是陣列
+    if (order.items && order.items.length > 0) {
+        order.items.forEach(item => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td><img src="${item.image}" alt="${item.name}" style="width: 50px; height: 50px;"></td>
+                <td>${item.name}</td>
+                <td>${item.sku}</td>
+                <td>${item.quantity}</td>
+                <td>$${item.price}</td>
+            `;
+            tbody.appendChild(tr);  // 將每個商品插入到表格中
+        });
+    } else {
+        console.warn("沒有購買商品");
+    }
+}
+
 
 // 點擊"商品上傳"時生成內容的函數
 function generateProductUploadForm() {
@@ -1311,6 +1440,136 @@ function generateUserEditForm(user) {
     });
 }
 
+// 點擊"優惠券管理"時生成內容的函數
+function generateCouponManagementForm() {
+    const mainContent = document.querySelector('.main-content');
+    mainContent.innerHTML = '';  // 清空之前的內容
+
+    const couponManagementForm = `
+        <section class="coupon-management">
+            <h1>優惠券管理</h1>
+
+            <!-- 新增優惠券表單 -->
+            <form id="couponForm">
+                <div class="form-group">
+                    <label for="code">優惠券代碼</label>
+                    <textarea id="code" rows="1" placeholder="輸入優惠券代碼"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="name">優惠券名稱</label>
+                    <textarea id="name" rows="1" placeholder="輸入優惠券名稱"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="discountType">折扣類型</label>
+                    <select id="discountType">
+                        <option value="percentage">百分比折扣</option>
+                        <option value="fixed">固定金額折扣</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="discountValue">折扣值</label>
+                    <textarea id="discountValue" rows="1" placeholder="輸入折扣值"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="expiryDate">到期日期</label>
+                    <input type="date" id="expiryDate">
+                    <!-- 提交與取消按鈕 -->
+                    <button type="submit" id="submitCouponButton">新增優惠券</button>
+                    <button type="reset" id="cancelCouponButton">取消</button>
+                </div>
+            </form>
+
+            <!-- 已經新增的優惠券列表 -->
+            <section class="existing-coupons">
+                <h1>已新增的優惠券</h1>
+                <table class="coupon-table">
+                    <thead>
+                        <tr>
+                            <th>優惠券代碼</th>
+                            <th>名稱</th>
+                            <th>折扣類型</th>
+                            <th>折扣值</th>
+                            <th>到期日期</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="couponTableBody">
+                        <!-- 這裡插入動態生成的優惠券 -->
+                    </tbody>
+                </table>
+            </section>
+        </section>
+    `;
+    mainContent.innerHTML = couponManagementForm;
+
+    // 儲存優惠券的陣列
+    let coupons = [];
+
+    // 優惠券表單提交處理
+    const couponForm = document.getElementById('couponForm');
+    couponForm.addEventListener('submit', function (event) {
+        event.preventDefault(); // 阻止表單提交刷新
+
+        // 獲取輸入的優惠券信息
+        const code = document.getElementById('code').value;
+        const name = document.getElementById('name').value;
+        const discountType = document.getElementById('discountType').value;
+        const discountValue = document.getElementById('discountValue').value;
+        const expiryDate = document.getElementById('expiryDate').value;
+
+        // 構造優惠券對象
+        const coupon = {
+            code,
+            name,
+            discountType,
+            discountValue,
+            expiryDate
+        };
+
+        // 儲存到陣列中
+        coupons.push(coupon);
+
+        // 重置表單
+        couponForm.reset();
+
+        // 更新優惠券表格
+        displayCoupons();
+    });
+
+    // 顯示已新增的優惠券
+    function displayCoupons() {
+        const couponTableBody = document.getElementById('couponTableBody');
+        couponTableBody.innerHTML = ''; // 清空之前的內容
+
+        coupons.forEach((coupon, index) => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${coupon.code}</td>
+                <td>${coupon.name}</td>
+                <td>${coupon.discountType === 'percentage' ? '百分比' : '固定金額'}</td>
+                <td>${coupon.discountValue}</td>
+                <td>${coupon.expiryDate}</td>
+                <td>
+                    <button id="delete-button" data-index="${index}">刪除</button>
+                </td>
+            `;
+            couponTableBody.appendChild(tr);
+        });
+
+        // 綁定刪除按鈕的事件
+        document.querySelectorAll('.delete-coupon-button').forEach(button => {
+            button.addEventListener('click', function () {
+                const index = this.getAttribute('data-index');
+                coupons.splice(index, 1); // 刪除該優惠券
+                displayCoupons(); // 刷新優惠券表格
+            });
+        });
+    }
+}
 
 // 初始化圖表的函數
 function initChart() {
@@ -1454,7 +1713,15 @@ document.addEventListener('DOMContentLoaded', function () {
     const manageStockButton = document.getElementById('userManagementButton');
     manageStockButton.addEventListener('click', function (event) {
         event.preventDefault();  // 防止跳轉
-        generateUserManagementContent();  // 調用生成庫存管理頁面的函數
+        generateUserManagementContent();  // 調用生成用戶管理頁面的函數
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    const manageStockButton = document.getElementById('couponManagementButton');
+    manageStockButton.addEventListener('click', function (event) {
+        event.preventDefault();  // 防止跳轉
+        generateCouponManagementForm();  // 調用生成優惠券管理頁面的函數
     });
 });
 
@@ -1486,11 +1753,3 @@ document.getElementById('editProductButton').addEventListener('click', function 
     generateProductManagementWithActionsContent();  // 生成商品管理頁面
 });
 
-document.addEventListener('keydown', function (event) {
-    if (event.key === 'F12') {
-        event.preventDefault();
-    }
-});
-document.addEventListener('contextmenu', function (event) {
-    event.preventDefault();
-});
