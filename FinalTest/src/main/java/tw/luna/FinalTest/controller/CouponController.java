@@ -69,17 +69,25 @@ public class CouponController {
 		return ResponseEntity.ok("優惠券已使用");
 	}
 
-	// 創建新的優惠券
-	@PostMapping("/create")
-	public ResponseEntity<String> createCoupon(@RequestParam String code, @RequestParam String name,
-			@RequestParam String discountType, @RequestParam int discountValue, @RequestParam String expiryDate) {
-		try {
-			couponService.createCoupon(code, name, discountType, discountValue, expiryDate);
-			return ResponseEntity.ok("優惠券已成功創建");
-		} catch (IllegalArgumentException e) {
-			return ResponseEntity.badRequest().body(e.getMessage());
-		}
-	}
+	// 創建新的優惠券並返回所有優惠券
+    @PostMapping("/create")
+    public ResponseEntity<List<Coupon>> createCoupon(
+            @RequestParam String code,
+            @RequestParam String name,
+            @RequestParam String discountType,
+            @RequestParam int discountValue,
+            @RequestParam String expiryDate) {
+        try {
+            // 創建新的優惠券
+            couponService.createCoupon(code, name, discountType, discountValue, expiryDate);
+            
+            // 創建成功後，回傳所有優惠券的列表
+            List<Coupon> allCoupons = couponService.getAllCoupons();
+            return ResponseEntity.ok(allCoupons);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(null);
+        }
+    }
 	
 	// 發放優惠券給所有客戶
     @PostMapping("/issue/all")
