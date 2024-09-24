@@ -198,7 +198,7 @@ window.onload = function () {
     }
     
     let userId = null;
-    
+    let password = '123456789';
     
 
     
@@ -227,9 +227,10 @@ window.onload = function () {
     });
 
 
-    fetch('http://localhost:8080/users/userAllInfo?email=bill16523@yahoo.com.tw',{
+    fetch('http://localhost:8080/users/userAllInfo?email=john.doe@example.com',{
       method : 'GET'
     }).then(response => {
+      console.log("你好")
       if(!response.ok){
         console.log('查詢會員失敗')
       }
@@ -273,6 +274,7 @@ window.onload = function () {
           userId : userId,
           username : userName,
           email : email,
+          password : password,
           phoneNumber : telephone,
           firstName : firstName,
           lastName : lastName,
