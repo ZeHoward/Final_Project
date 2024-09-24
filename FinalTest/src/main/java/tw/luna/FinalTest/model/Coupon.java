@@ -14,6 +14,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "coupons")
 public class Coupon {
+	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -86,5 +87,19 @@ public class Coupon {
 	}
 
 	// 其他屬性和方法
+	
+	// 無參數建構子
+    public Coupon() {
+        // 默認建構子可以保持空，供框架使用
+    }
+
+    // 有參數建構子
+    public Coupon(String code, String name, DiscountType discountType, int discountValue, LocalDate expiryDate) {
+        this.code = code;
+        this.name = name;
+        this.discountType = discountType;
+        this.discountValue = discountValue;
+        this.expiryDate = expiryDate;
+    }
 
 }
