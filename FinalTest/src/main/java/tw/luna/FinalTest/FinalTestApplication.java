@@ -10,7 +10,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication
 @EnableJpaRepositories(basePackages = "tw.luna.FinalTest.repository")
 
-@EnableJpaAuditing //啟用審計功能自動建立與更新時間
+//@EnableJpaAuditing //啟用審計功能自動建立與更新時間
 
 public class FinalTestApplication {
 

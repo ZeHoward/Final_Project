@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>即食享熱</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap");
+    </style>
+    <link rel="stylesheet" href="./template.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  </head>
+  <body>
+    <!-- menu start-->
+    <div id="sidenav" class="tem-overlay">
+      <div class="tem-nav">
+        <button class="tem-closebtn" onclick="closeSidenav()">
+          <img src="./material/icon/close.png" alt="" />
+        </button>
+      </div>
+      <div class="tem-overlay-content">
+        <a href="#home">首頁</a>
+        <a href="#about">關於我們</a>
+
+        <div class="tem-dropdown-div">
+          <button class="tem-dropdown-btn" onclick="togglePic1()">
+            商品列表&nbsp;<img
+              src="./material/icon/down.png"
+              alt="down"
+              id="updown1"
+            />
+          </button>
+          <div class="tem-dropdown-content">
+            <a href="#ready">調理包專區</a>
+            <a href="#mealkit">生鮮食材包專區</a>
+          </div>
+        </div>
+
+        <div class="tem-dropdown-div">
+          <button class="tem-dropdown-btn" onclick="togglePic2()">
+            常見問題&nbsp;<img
+              src="./material/icon/down.png"
+              alt="down"
+              id="updown2"
+            />
+          </button>
+          <div class="tem-dropdown-content">
+            <a href="#QA">Ｑ＆Ａ</a>
+            <a href="#noticet">購買須知</a>
+            <a href="#contact">聯絡我們</a>
+          </div>
+        </div>
+        <a href="#share">響食部落格</a>
+        <a href="#join">登入 / 註冊</a>
+      </div>
+      <div id="add"></div>
+      <div class="tem-end-photo">
+        <img src="./material/cook.png" alt="" />
+      </div>
+    </div>
+    <!-- menu end-->
+
+    <!-- header start -->
+    <header class="tem-header">
+      <div class="tem-header-content">
+        <div class="tem-header-icons">
+          <div class="tem-icon tem-menu-icon" onclick="openSidenav()">
+            <a href="#"><img src="./material/icon/menu.png" alt="menu" /></a>
+          </div>
+        </div>
+        <div class="tem-logo">
+          <img src="./material/logo.png" alt="Logo" class="" />
+        </div>
+        <div class="tem-header-icons">
+          <div class="searchContainer">
+            <div id="searchDiv">
+                <input type="search" id="searchInput" placeholder="搜尋...">
+            </div>
+            <button id="searchIcon" class="tem-icon tem-search-icon">
+                <img src="./material/icon/search.png" alt="search" width="30" height="24">
+            </button>
+          </div>
+          <button id="cartIcon" href="#" class="tem-icon tem-cart-icon"
+            ><img src="./material/icon/cart.png" alt="cart"
+          /></button>
+          <button id="memberIcon" href="#" class="tem-icon tem-user-icon"
+            ><img src="./material/icon/account.png" alt="sign in"
+          /></button>
+          <div id="memberInfoDiv" class="">
+            <div><i class="fa-solid fa-user"></i><a href="./MemberBasicInfo.html">會員基本資料</a></div>
+            <div><i class="fa-solid fa-unlock"></i><a href="./UpdatePassword.html">更改密碼</a></div>
+            <div><i class="fa-regular fa-heart"></i><a href="">我的收藏</a></div>
+            <div><i class="fa-solid fa-bars"></i><a href="">訂單管理</a></div>
+            <div><i class="fa-solid fa-tag"></i><a href="./CouponPage.html">優惠券</a></div>
+            <div><i class="fa-solid fa-right-to-bracket"></i><a href="">登入</a></div>
+            <div><i class="fa-solid fa-right-from-bracket"></i><a href="">登出</a></div>
+          </div>
+          
+        </div>
+      </div>
+
+      
+      
+      <div class="tem-breadcrumb">
+        <a href="#">首頁</a>
+      </div>
+    </header>
+    <!-- header end -->
