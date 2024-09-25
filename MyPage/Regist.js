@@ -104,7 +104,7 @@ window.onload = function () {
     document.getElementById('regist').addEventListener('click', () => {
       let telephone = document.getElementById('registTelephoneInput').value;
       let userName = document.getElementById('registUserName').value;
-      let birthday = document.getElementById('registBirthdayInput').value;
+      
 
       if(finallyEmail != '' && finallyPassword != '' && userName != ''){
         fetch('http://localhost:8080/users/regist',{
