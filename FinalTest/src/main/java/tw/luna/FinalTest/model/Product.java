@@ -54,16 +54,6 @@ public class Product {
 	@Column(name = "stockQuantity", nullable = false)
 	private Integer stockQuantity;
 	
-	
-	@CreatedDate // 自動設定建立時間
-	@Column(name = "createdAt",nullable = false, updatable = false)
-	private Timestamp createdAt;
-	
-	@LastModifiedDate // 自動設定更新時間
-	@Column(name = "updatedAt",nullable = false)
-	private Timestamp updatedAt;
-	
-	
 	@Column(name = "isDel", columnDefinition = "TINYINT(1) DEFAULT 0")
 	private Boolean isDel;
 
@@ -145,27 +135,6 @@ public class Product {
 	public void setStockQuantity(Integer stockQuantity) {
 		this.stockQuantity = stockQuantity;
 	}
-
-
-	public Timestamp getCreatedAt() {
-		return createdAt;
-	}
-
-
-	public void setCreatedAt(Timestamp createdAt) {
-		this.createdAt = createdAt;
-	}
-
-
-	public Timestamp getUpdatedAt() {
-		return updatedAt;
-	}
-
-
-	public void setUpdatedAt(Timestamp updatedAt) {
-		this.updatedAt = updatedAt;
-	}
-
 
 	public Boolean getIsDel() {
 		return isDel;

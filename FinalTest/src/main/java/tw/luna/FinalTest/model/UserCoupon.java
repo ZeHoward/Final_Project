@@ -8,7 +8,7 @@ import jakarta.persistence.Table;
 
 
 @Entity
-@Table(name="userCoupons")
+@Table(name="usercoupons")
 @IdClass(UserCouponId.class)
 public class UserCoupon {
 	
