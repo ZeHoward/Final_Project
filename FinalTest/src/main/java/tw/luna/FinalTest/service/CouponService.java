@@ -9,21 +9,22 @@ import org.springframework.transaction.annotation.Transactional;
 
 import tw.luna.FinalTest.model.Coupon;
 import tw.luna.FinalTest.model.DiscountType;
-import tw.luna.FinalTest.model.User;
+import tw.luna.FinalTest.model.Users;
 import tw.luna.FinalTest.model.UserCoupon;
 import tw.luna.FinalTest.repository.CouponRepository;
 import tw.luna.FinalTest.repository.UserCouponRepository;
-import tw.luna.FinalTest.repository.UserRepository;
+import tw.luna.FinalTest.repository.UsersRepository;
+import tw.luna.FinalTest.repository.UsersRepository;
 
 @Service
 public class CouponService {
 
 	private final CouponRepository couponRepository;
 	private final UserCouponRepository userCouponRepository;
-	private final UserRepository userRepository;
+	private final UsersRepository userRepository;
 	
 
-	public CouponService(CouponRepository couponRepository, UserCouponRepository userCouponRepository, UserRepository userRepository) {
+	public CouponService(CouponRepository couponRepository, UserCouponRepository userCouponRepository, UsersRepository userRepository) {
 		this.couponRepository = couponRepository;
 		this.userCouponRepository = userCouponRepository;
 		this.userRepository = userRepository;
@@ -135,13 +136,13 @@ public class CouponService {
 		// 發送優惠券給所有用戶
 		 public void issueCouponToAllUsers(long couponId) {
 		        // 查詢所有用戶
-		        List<User> users = userRepository.findAll();
+		        List<Users> users = userRepository.findAll();
 
 		        // 查找指定的優惠券
 		        Coupon coupon = couponRepository.findById(couponId).orElseThrow(() -> new IllegalArgumentException("優惠券不存在"));
 
 		        // 發放優惠券
-		        for (User user : users) {
+		        for (Users user : users) {
 		            // 檢查用戶是否已經擁有這張優惠券
 		            if (!userCouponRepository.existsByUserIdAndCouponId(user.getUserId(), couponId)) {
 		                UserCoupon userCoupon = new UserCoupon();
