@@ -1,6 +1,7 @@
 package tw.luna.FinalTest.model;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -62,6 +63,14 @@ public class ProductImage implements Serializable{
 		this.image = image;
 	}
 	
+	@Override
+    public String toString() {
+        return "ProductImage{" +
+                "id=" + id +
+                ", product=" + product +
+                ", image=" + Arrays.toString(image) +
+                '}';
+	}
 	
-	
+
 }

@@ -15,15 +15,28 @@ public class PageController {
 	}
 
 	@GetMapping("/productList")
-	public String product() {
-		return "product";
+	public String productList() {
+		return "productList";
 	}
 	@GetMapping("/enjoyum")
 	public String enjoyum() {
 		return "enjoyum";
 	}
-	@GetMapping("/productList/detail")
+	@GetMapping("/detail")
 	public String detail() {
 		return "detail";
 	}
+	@GetMapping("/myCollection")
+	public String myCollection() {
+		return "myCollection";
+	}
+	@GetMapping("/myOrder/detail")
+	public String myOrder() {
+		return "checkOrder";
+	}
+	@GetMapping("/myOrderList")
+	public String myOrderList() {
+		return "orderManage";
+	}
+
 }

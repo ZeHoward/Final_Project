@@ -10,8 +10,11 @@ body {
   width: 100vw;
   max-width: 100%;
   overflow-x: hidden;
+  background-color: #f5f5f5;
 }
 
+
+/* 通用樣式 */
 .tem-nav {
   height: 80px;
   display: block;
@@ -42,12 +45,12 @@ body {
   position: fixed;
   height: 100%;
   width: 0;
-  z-index: 100;
+  z-index: 1;
   top: 0;
   left: 0;
   background-color: #fff6d0;
   backdrop-filter: blur(10px);
-  overflow-x: hidden; /*移除水平卷軸*/
+  overflow-x: hidden;
   transition: 0.5s;
   text-align: center;
 }
@@ -130,11 +133,11 @@ body {
       rgba(255, 255, 255, 0.4),
       rgba(255, 255, 255, 0.4)
     ),
-    url("../material/Vorderrhein3.png");
+    url("./material/Vorderrhein3.png");
   background-repeat: repeat;
   background-size: auto;
   background-position: 1500px 3197px;
-  padding: 20px;
+
 }
 
 .tem-menu-icon {
@@ -158,14 +161,7 @@ body {
 }
 
 .tem-icon :hover {
-  cursor: pointer;
-}
-
-.tem-icon {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 10px;
+  height: 35px;
 }
 
 .tem-header-icons a {
@@ -180,6 +176,7 @@ body {
   padding: 10px 20px;
   text-align: left;
   font-size: 14px;
+  background-color: white;
 }
 
 .tem-breadcrumb a {
@@ -189,6 +186,10 @@ body {
 
 .tem-breadcrumb a:hover {
   text-decoration: underline;
+}
+
+.breadcrumb {
+  color: #333;
 }
 
 /* footer */
@@ -203,12 +204,10 @@ body {
       rgba(255, 255, 255, 0.3),
       rgba(255, 255, 255, 0.3)
     ),
-    url("../material/Vorderrhein3.png");
+    url("./material/Vorderrhein3.png");
   background-repeat: repeat;
   background-size: auto;
   background-position: 1940px 774px;
-  
-  
 }
 
 .tem-footer-content {
@@ -225,7 +224,6 @@ body {
 }
 
 .tem-footer-content div span {
-  /* 社群icon */
   float: left;
   text-align: left;
   padding-top: 10px;
@@ -267,7 +265,85 @@ body {
   width: 30px;
 }
 
-/*響應式*/
+/* 訂單樣式 */
+main {
+  max-width: 800px;
+  margin: 20px auto;
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.order-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.order-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+.order-image img {
+  width: 80px;
+  height: 80px;
+}
+
+.order-details {
+  flex-grow: 1;
+  padding: 0 20px;
+}
+
+.order-details p {
+  margin: 5px 0;
+}
+
+.order-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.order-info span {
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #555;
+}
+
+button {
+  padding: 8px 12px;
+  border: 1px solid #ff9800;
+  background-color: #fff;
+  color: #ff9800;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+button:hover {
+  background-color: #ff9800;
+  color: #fff;
+}
+
+.status-icon {
+  color: #4caf50;
+  font-size: 16px;
+  margin-left: 10px;
+}
+
+/* 響應式 */
 @media ((min-width: 400px) and (max-width: 1100px)) {
   .tem-footer-content {
     justify-content: center;
@@ -293,111 +369,83 @@ body {
 }
 
 
-/******************************/
-
-#memberIcon{
-  margin-right: 10px;
-  background-color: transparent;
-  border: none;
-  transition: transform 0.3s ease;
-}
-
-#memberIcon:hover{
-  cursor: pointer;
-  transform: scale(1.5);
-}
-
-#memberInfoDiv{
-  position: absolute; 
-  top: 60px; 
-  right: 20px; 
-  width: 270px; 
-  background-color: #fff6d0;
-  border: 1px solid #ddd;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  flex-direction: column;
-  text-align: start;
-  border-radius: 10px;
-  transition: opacity 0.5s ease, height 0.5s ease;
-  display:none;
-}
 
 
-
-.memerinfo-icon{
-  font-size: 20px;
-  color: black;
-}
-
-
-#memberInfoDiv > div > i {
-  margin-right: 20px;
-  margin-left: 40px;
-}
-
-#memberInfoDiv > div{
-  padding: 15px 0;
-  transition: transform 0.2s ease;
-}
-
-#memberInfoDiv > div:hover{
-  transform: scale(1.05);
-}
-
-
-#memberInfoDiv > div:hover,
-#memberInfoDiv > div:hover i,
-#memberInfoDiv > div:hover a {
-  cursor: pointer;
-  color: #f3ce6e;
-}
-
-#searchIcon{
-  background-color: transparent;
-  border: none;
-  transition: transform 0.3s ease;
-}
-#searchIcon:hover{
-  transform: scale(1.5);
-}
-
-#searchDiv {
-  position: absolute;
-  right: 100%;
-  top: 10px;
-  width: 0;
-  height: 40px;
+.che-container {
+  width: 80%;
+  margin: 20px auto;
   background-color: white;
-  transition: width 0.3s ease-in-out;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-#searchInput {
+.che-h1 {
+  text-align: center;
+  font-size: 24px;
+}
+
+.che-h2 {
+  font-size: 20px;
+  margin-top: 20px;
+}
+
+.che-table {
   width: 100%;
-  height: 100%;
-  border: none;
-  padding: 0 10px;
-  font-size: 16px;
+  border-collapse: collapse;
 }
 
-.searchContainer {
-  position: relative;
-  display: inline-block;
+.che-td,
+.che-th {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
 }
 
-#cartIcon{
-  background-color: transparent;
-  border: none;
-  transition: transform 0.3s ease;
+.che-th {
+  background-color: #f4f4f4;
 }
 
-#cartIcon:hover{
-  transform: scale(1.5);
+.che-td img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
 }
 
-#myContainer{
-  width: 100%;
+.che-summary {
+  margin-top: 20px;
+  float: right;
+}
+
+.che-summary p {
+  margin: 5px 0;
+  text-align: right;
+}
+
+.che-recipient-info {
+  clear: both;
+  margin-top: 50px;
+}
+
+.che-recipient-info h2 {
+  font-size: 18px;
+}
+
+.che-recipient-info p {
+  margin: 5px 0;
+}
+
+.che-breadcrumb {
+  padding: 10px;
+  background-color: #d8e685;
+  margin-bottom: 20px;
+}
+
+.che-breadcrumb a {
+  color: black;
+  text-decoration: none;
+}
+
+.che-breadcrumb span {
+  margin-right: 5px;
+
 }

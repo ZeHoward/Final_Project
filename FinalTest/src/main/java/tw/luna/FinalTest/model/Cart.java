@@ -82,10 +82,6 @@ public class Cart {
 //        this.total = total;
 //    }
 //
-//    public Integer getTotalQuantity() {
-//        return totalQuantity;
-//    }
-//
 //    public void setTotalQuantity(Integer totalQuantity) {
 //        this.totalQuantity = totalQuantity;
 //    }
@@ -106,3 +102,31 @@ public class Cart {
                 '}';
     }
 }
+//	public Long getCardId() {
+//		return cardId;
+//	}
+//
+//	public void setCardId(Long cardId) {
+//		this.cardId = cardId;
+//	}
+//
+//	
+//
+//	public String getStatus() {
+//		return status;
+//	}
+//
+//	public void setStatus(String status) {
+//		this.status = status;
+//	}
+//
+////	public Users getUsers() {
+////		return users;
+////	}
+////
+////	public void setUsers(Users users) {
+////		this.users = users;
+////	}
+////	
+//	
+//}

@@ -12,7 +12,8 @@
   <body>
    	<div th:replace="header"></div>
 
-    <main>
+	<div id="myContainer">
+    	<main>
       <div class="story">
         <div class="main-photo">
           <img th:src="@{../material/about.jpeg}" alt="關於我們" />
@@ -120,7 +121,9 @@
         </button>
       </div>
     </main>
-
+    	
+	</div>
+    
     <div th:replace="footer"></div>
   </body>
 </html>
