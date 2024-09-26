@@ -1,63 +1,73 @@
 // 全局变量
-var slideIndex = 1;
-var autoPlayInterval;
+	var slideIndex = 1;
+	var autoPlayInterval;
 
-// 自動撥放
-function startAutoPlay() {
-  autoPlayInterval = setInterval(function () {
-    slideIndex++;
-    showSlides(slideIndex);
-  }, 5000); // 每5秒自動切換
-}
+	// 自動撥放
+	function startAutoPlay() {
+	  autoPlayInterval = setInterval(function () {
+	    slideIndex++;
+	    showSlides(slideIndex);
+	  }, 5000); // 每5秒自動切換
+	}
 
-// 手動切換下一張
-function plusSlides(n) {
-  clearInterval(autoPlayInterval); // 停止自動撥放
-  slideIndex += n;
-  showSlides(slideIndex);
-  startAutoPlay(); // 重新啟動自動播放
-}
+	// 手動切換下一張
+	function plusSlides(n) {
+	  clearInterval(autoPlayInterval); // 停止自動撥放
+	  slideIndex += n;
+	  showSlides(slideIndex);
+	  startAutoPlay(); // 重新啟動自動播放
+	}
 
-// 目前圖片的顯示
-function currentSlide(n) {
-  clearInterval(autoPlayInterval); // 停止自動撥放
-  slideIndex = n;
-  showSlides(slideIndex);
-  startAutoPlay(); // 重新啟動自動播放
-}
+	document.getElementById("slidesNext").addEventListener("click", () => {
+	     plusSlides(+1);
+		 console.log("Next button clicked");
+	   });
 
-// 顯示輪播圖
-function showSlides(n) {
-  let slides = document.getElementsByClassName("mySlides");
-  let dots = document.getElementsByClassName("dot");
+	document.getElementById("slidesPrev").addEventListener("click", () => {
+	     plusSlides(-1);
+		 console.log("Next button clicked");
+	   });
 
-  if (n > slides.length) {
-    slideIndex = 1;
-  }
-  if (n < 1) {
-    slideIndex = slides.length;
-  }
+	// 目前圖片的顯示
+	function currentSlide(n) {
+	  clearInterval(autoPlayInterval); // 停止自動撥放
+	  slideIndex = n;
+	  showSlides(slideIndex);
+	  startAutoPlay(); // 重新啟動自動播放
+	}
 
-  // 隐藏所有幻灯片
-  for (let i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";
-  }
+	// 顯示輪播圖
+	function showSlides(n) {
+	  let slides = document.getElementsByClassName("mySlides");
+	  let dots = document.getElementsByClassName("dot");
 
-  // 移除所有圆点的活动状态
-  for (let i = 0; i < dots.length; i++) {
-    dots[i].className = dots[i].className.replace(" dotActive", "");
-  }
+	  if (n > slides.length) {
+	    slideIndex = 1;
+	  }
+	  if (n < 1) {
+	    slideIndex = slides.length;
+	  }
 
-  // 显示当前幻灯片，并激活当前的圆点
-  slides[slideIndex - 1].style.display = "block";
-  dots[slideIndex - 1].className += " dotActive";
-}
+	  // 隐藏所有幻灯片
+	  for (let i = 0; i < slides.length; i++) {
+	    slides[i].style.display = "none";
+	  }
 
+	  // 移除所有圆点的活动状态
+	  for (let i = 0; i < dots.length; i++) {
+	    dots[i].className = dots[i].className.replace(" dotActive", "");
+	  }
+
+	  // 显示当前幻灯片，并激活当前的圆点
+	  slides[slideIndex - 1].style.display = "block";
+	  dots[slideIndex - 1].className += " dotActive";
+	}
+
+	// Slideshow
+	  showSlides(slideIndex);
+	  startAutoPlay();
+	  
 window.onload = function () {
- 
-  // Slideshow
-  showSlides(slideIndex);
-  startAutoPlay();
 
   //精選調理包專區
   const products = [
