@@ -7,8 +7,8 @@
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap");
     </style>
-    <link rel="stylesheet" href="./template.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/css/template.css}" />
   </head>
   <body>
     <!-- menu start-->
@@ -25,7 +25,7 @@
         <div class="tem-dropdown-div">
           <button class="tem-dropdown-btn" onclick="togglePic1()">
             商品列表&nbsp;<img
-              src="./material/icon/down.png"
+              th:src="@{/material/icon/down.png}"
               alt="down"
               id="updown1"
             />
@@ -39,7 +39,7 @@
         <div class="tem-dropdown-div">
           <button class="tem-dropdown-btn" onclick="togglePic2()">
             常見問題&nbsp;<img
-              src="./material/icon/down.png"
+              th:src="@{/material/icon/down.png}"
               alt="down"
               id="updown2"
             />
@@ -55,7 +55,7 @@
       </div>
       <div id="add"></div>
       <div class="tem-end-photo">
-        <img src="./material/cook.png" alt="" />
+        <img th:src="@{/material/cook.png}" alt="" />
       </div>
     </div>
     <!-- menu end-->
@@ -65,11 +65,11 @@
       <div class="tem-header-content">
         <div class="tem-header-icons">
           <div class="tem-icon tem-menu-icon" onclick="openSidenav()">
-            <a href="#"><img src="./material/icon/menu.png" alt="menu" /></a>
+            <a href="#"><img th:src="@{/material/icon/menu.png}" alt="menu" /></a>
           </div>
         </div>
         <div class="tem-logo">
-          <img src="./material/logo.png" alt="Logo" class="" />
+          <img th:src="@{/material/logo.png}" alt="Logo" class="" />
         </div>
         <div class="tem-header-icons">
           <div class="searchContainer">
@@ -77,14 +77,14 @@
                 <input type="search" id="searchInput" placeholder="搜尋...">
             </div>
             <button id="searchIcon" class="tem-icon tem-search-icon">
-                <img src="./material/icon/search.png" alt="search" width="30" height="24">
+                <img th:src="@{/material/icon/search.png}" alt="search" width="30" height="24">
             </button>
           </div>
           <button id="cartIcon" href="#" class="tem-icon tem-cart-icon"
-            ><img src="./material/icon/cart.png" alt="cart"
+            ><img th:src="@{/material/icon/cart.png}" alt="cart"
           /></button>
           <button id="memberIcon" href="#" class="tem-icon tem-user-icon"
-            ><img src="./material/icon/account.png" alt="sign in"
+            ><img th:src="@{/material/icon/account.png}" alt="sign in"
           /></button>
           <div id="memberInfoDiv" class="">
             <div><i class="fa-solid fa-user"></i><a href="./MemberBasicInfo.html">會員基本資料</a></div>
