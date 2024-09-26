@@ -50,12 +50,17 @@ public class OrderController {
 	    return orderService.getOrdersWithPagination(page, size, sortField, sortDirection);
 	}
 
-
 	// 創建新訂單
 	@PostMapping("/add")
 	public Order createOrder(@RequestBody Order order) {
 		return orderService.createOrder(order);
 	}
+	
+	@PostMapping("/checkout")
+    public ResponseEntity<Order> checkout(@RequestParam Integer cartId, @RequestParam String address) {
+        Order order = orderService.createOrderFromCart(cartId, address);
+        return ResponseEntity.ok(order);
+    }
 	
 //
 //	// 刪除訂單
