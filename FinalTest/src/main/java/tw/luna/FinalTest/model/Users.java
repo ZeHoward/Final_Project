@@ -44,19 +44,22 @@ public class Users {
 	@JsonManagedReference
 	private Userinfo userinfo;
 	
-	//連到最愛商品表
-	@OneToMany(mappedBy = "users", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<UserFavoritesProducts> userFavoritesProducts;
+//	//連到最愛商品表
+//	@OneToMany(mappedBy = "users", cascade = CascadeType.ALL, orphanRemoval = true)
+//	@JsonManagedReference
+//	private List<UserFavoritesProducts> userFavoritesProducts;
+//	
+//	
+//	//連到最愛食譜表
+//	@OneToMany(mappedBy = "users", cascade = CascadeType.ALL, orphanRemoval = true)
+//	@JsonManagedReference
+//	private List<UserFavoritesRecipes> userFavoritesRecipes;
 	
 	
-	//連到最愛食譜表
-	@OneToMany(mappedBy = "users", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<UserFavoritesRecipes> userFavoritesRecipes;
-	
-	
-	//連到購物車表
-	@OneToMany(mappedBy = "users", cascade = CascadeType.ALL, orphanRemoval = true)
-	private Cart cart;
+//	//連到購物車表
+//	@OneToMany(mappedBy = "users", cascade = CascadeType.ALL, orphanRemoval = true)
+//	@JsonManagedReference
+//	private List<Cart> cart;
 
 	public Userinfo getUserinfo() {
 		return userinfo;
@@ -114,29 +117,31 @@ public class Users {
 		this.token = token;
 	}
 
-	public List<UserFavoritesProducts> getUserFavoritesProducts() {
-		return userFavoritesProducts;
-	}
+//	public List<UserFavoritesProducts> getUserFavoritesProducts() {
+//		return userFavoritesProducts;
+//	}
+//
+//	public void setUserFavoritesProducts(List<UserFavoritesProducts> userFavoritesProducts) {
+//		this.userFavoritesProducts = userFavoritesProducts;
+//	}
+//
+//	public List<UserFavoritesRecipes> getUserFavoritesRecipes() {
+//		return userFavoritesRecipes;
+//	}
+//
+//	public void setUserFavoritesRecipes(List<UserFavoritesRecipes> userFavoritesRecipes) {
+//		this.userFavoritesRecipes = userFavoritesRecipes;
+//	}
 
-	public void setUserFavoritesProducts(List<UserFavoritesProducts> userFavoritesProducts) {
-		this.userFavoritesProducts = userFavoritesProducts;
-	}
+//	public List<Cart> getCart() {
+//		return cart;
+//	}
+//
+//	public void setCart(List<Cart> cart) {
+//		this.cart = cart;
+//	}
 
-	public List<UserFavoritesRecipes> getUserFavoritesRecipes() {
-		return userFavoritesRecipes;
-	}
-
-	public void setUserFavoritesRecipes(List<UserFavoritesRecipes> userFavoritesRecipes) {
-		this.userFavoritesRecipes = userFavoritesRecipes;
-	}
-
-	public Cart getCart() {
-		return cart;
-	}
-
-	public void setCart(Cart cart) {
-		this.cart = cart;
-	}
+	
 	
 	
 	
