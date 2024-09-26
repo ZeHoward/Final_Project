@@ -82,5 +82,6 @@ document.addEventListener("DOMContentLoaded", function () {
         searchDiv.style.border = '0';
         isOpen = false;
         memberInfoDiv.style.opacity = 0;
+		memberInfoDiv.style.visibility = 'hidden';
     });
 });
