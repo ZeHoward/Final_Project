@@ -18,16 +18,15 @@
 //	@Column(name = "cartId")
 //	private Long cardId;
 //	
-////    @Column(name = "userId")
-////	private Long userId;
-////	
+//    
+//	
 //	@Column(name = "status")
 //	private String status;
 //	
 //	
-//	@ManyToOne()
-//	@JoinColumn(name = "userId")
-//	private Users users;
+////	@ManyToOne()
+////	@JoinColumn(name = "userId")
+////	private Users users;
 //
 //	public Long getCardId() {
 //		return cardId;
@@ -37,13 +36,7 @@
 //		this.cardId = cardId;
 //	}
 //
-//	public Long getUserId() {
-//		return userId;
-//	}
-//
-//	public void setUserId(Long userId) {
-//		this.userId = userId;
-//	}
+//	
 //
 //	public String getStatus() {
 //		return status;
@@ -53,13 +46,13 @@
 //		this.status = status;
 //	}
 //
-//	public Users getUsers() {
-//		return users;
-//	}
-//
-//	public void setUsers(Users users) {
-//		this.users = users;
-//	}
-//	
+////	public Users getUsers() {
+////		return users;
+////	}
+////
+////	public void setUsers(Users users) {
+////		this.users = users;
+////	}
+////	
 //	
 //}
