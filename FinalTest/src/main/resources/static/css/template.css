@@ -319,13 +319,13 @@ body {
   text-align: start;
   border-radius: 10px;
   transition: opacity 0.5s ease, height 0.5s ease;
-  opacity: 0;
+  display:none;
 }
 
 
 
-.fa-solid{
-  font-size: 15px;
+.memerinfo-icon{
+  font-size: 20px;
   color: black;
 }
 
