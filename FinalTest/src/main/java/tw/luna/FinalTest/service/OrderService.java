@@ -70,46 +70,6 @@ public class OrderService {
 		return orderRepository.save(order);
 	}
 	
-	// 結帳處理邏輯
-    @Transactional
-    public Order checkoutCart(Integer cartId, String address) {
-        // Step 1: 查詢購物車
-        Cart cart = cartRepository.findById(cartId).orElseThrow(() -> new RuntimeException("購物車不存在"));
-
-        // Step 2: 創建訂單
-        Order order = new Order();
-        order.setUserId(cart.getUserId());
-        order.setCartId(cartId);
-        order.setOrderDate(LocalDateTime.now());
-        order.setTotalAmount(calculateTotalAmount(cart));
-        order.setFinalAmount(order.getTotalAmount());  // 假設沒有折扣
-        order.setStatus("已付款"); // 或其他狀態
-        orderRepository.save(order);
-
-        // Step 3: 創建訂單詳情
-        List<CartItems> cartItems = CartItemsRepository.findByCartId(cartId);
-        for (CartItems item : cartItems) {
-            OrderDetails orderDetails = new OrderDetails();
-            orderDetails.setOrder(order);
-            orderDetails.setProduct(item.getProduct());
-            orderDetails.setQuantity(item.getQuantity());
-            orderDetails.setPrice(item.getPrice());
-            orderDetails.setAddress(address);
-            orderDetailsRepository.save(orderDetails);
-        }
-
-        // Step 4: 清空購物車或標記購物車為已結帳
-        cart.setStatus("已結帳");
-        cartRepository.save(cart);
-
-        return order; // 回傳訂單
-    }
-
-    // 計算購物車總金額
-    private Integer calculateTotalAmount(Cart cart) {
-        List<CartItems> cartItems = cartItemsRepository.findByCartId(cart.getCartId());
-        return cartItems.stream().mapToInt(item -> item.getPrice() * item.getQuantity()).sum();
-    }
 
 //	// 刪除訂單
 //	public ResponseEntity<Void> deleteOrder(Integer id) {
