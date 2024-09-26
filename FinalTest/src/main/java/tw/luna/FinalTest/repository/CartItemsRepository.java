@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import tw.luna.FinalTest.model.CartItems;
 
 public interface CartItemsRepository extends JpaRepository<CartItems,Long> {
+    void deleteByCartCartId(Integer cartId);
 
 //    List<CartItems> findCartItemsByCartId(Long cartId);  //透過cartId找到catrItem
 //    Optional<CartItems> findByProductId(Integer productId);     //透過ProductId找到catrItem
@@ -24,3 +25,4 @@ public interface CartItemsRepository extends JpaRepository<CartItems,Long> {
 //    List<CartSelectDto> findByCart_User_Id(@Param("userId") Long userId);  //測試
 
 }
+

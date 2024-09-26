@@ -16,15 +16,17 @@ import jakarta.persistence.Table;
 @Table(name = "userinfo")
 public class Userinfo {
 
-//	@Id
-//	@GeneratedValue(strategy = GenerationType.IDENTITY)
-//	@Column(name = "id")
-//	private Long id;
-	
 	@Id
-	@Column(name = "userid")
-	private Long userid;
-	
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private Long id;
+
+	@OneToOne
+	@MapsId
+	@JoinColumn(name = "userId")
+	@JsonBackReference("Users_UserInfo")
+	private Users users;
+
 	@Column(name = "firstName")
 	private String firstName;
 	
@@ -43,11 +45,13 @@ public class Userinfo {
 	
 	@Column(name = "county")
 	private String county;
-	
+
 	@Column(name = "district")
 	private String district;
-	
-	
+
+	public Userinfo() {
+	}
+
 	public String getLastName() {
 		return lastName;
 	}
@@ -67,15 +71,6 @@ public class Userinfo {
 		this.birthday = birthday;
 	}
 
-
-	//	@OneToOne(mappedBy = "userinfo")
-	@OneToOne
-    @MapsId
-    @JoinColumn(name = "userid")
-	@JsonBackReference
-	private Users users;
-
-
 //	public Long getId() {
 //		return id;
 //	}
@@ -86,15 +81,17 @@ public class Userinfo {
 //	}
 
 
-	public Long getUserid() {
-		return userid;
+	public Userinfo(Long id, Users users, String firstName, String lastName, String address, String postalCode, String birthday, String county, String district) {
+		this.id = id;
+		this.users = users;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.address = address;
+		this.postalCode = postalCode;
+		this.birthday = birthday;
+		this.county = county;
+		this.district = district;
 	}
-
-
-	public void setUserid(Long userid) {
-		this.userid = userid;
-	}
-
 
 	public String getFirstName() {
 		return firstName;
