@@ -43,23 +43,9 @@ public class Users {
 	@JoinColumn(name = "userid", referencedColumnName = "userid")
 	@JsonManagedReference
 	private Userinfo userinfo;
-	
-//	//連到最愛商品表
-//	@OneToMany(mappedBy = "users", cascade = CascadeType.ALL, orphanRemoval = true)
-//	@JsonManagedReference
-//	private List<UserFavoritesProducts> userFavoritesProducts;
+	//	//連到最愛商品表//	@OneToMany(mappedBy = "users", cascade = CascadeType.ALL, orphanRemoval = true)//	@JsonManagedReference//	private List<UserFavoritesProducts> userFavoritesProducts;//	//	//	//連到最愛食譜表//	@OneToMany(mappedBy = "users", cascade = CascadeType.ALL, orphanRemoval = true)//	@JsonManagedReference//	private List<UserFavoritesRecipes> userFavoritesRecipes;
 //	
-//	
-//	//連到最愛食譜表
-//	@OneToMany(mappedBy = "users", cascade = CascadeType.ALL, orphanRemoval = true)
-//	@JsonManagedReference
-//	private List<UserFavoritesRecipes> userFavoritesRecipes;
-	
-	
-//	//連到購物車表
-//	@OneToMany(mappedBy = "users", cascade = CascadeType.ALL, orphanRemoval = true)
-//	@JsonManagedReference
-//	private List<Cart> cart;
+//	//	//連到購物車表//	@OneToMany(mappedBy = "users", cascade = CascadeType.ALL, orphanRemoval = true)//	@JsonManagedReference//	private List<Cart> cart;
 
 	public Userinfo getUserinfo() {
 		return userinfo;
@@ -132,7 +118,7 @@ public class Users {
 //	public void setUserFavoritesRecipes(List<UserFavoritesRecipes> userFavoritesRecipes) {
 //		this.userFavoritesRecipes = userFavoritesRecipes;
 //	}
-
+//
 //	public List<Cart> getCart() {
 //		return cart;
 //	}
