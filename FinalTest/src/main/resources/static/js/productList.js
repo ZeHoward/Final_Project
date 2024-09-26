@@ -1,15 +1,5 @@
 window.onload = function () {
-	const sortElement = document.getElementById("sort");
-	  
-	  // 檢查元素是否存在，避免 addEventListener 在 null 上出錯
-	  if (sortElement) {
-	    sortElement.addEventListener("change", function () {
-	      sortProducts();
-	    });
-	  } else {
-	    console.error("排序選單元素未找到");
-	  }
-	  
+
   var dropdown2 = document.getElementsByClassName("down-btn");
   var x;
   for (x = 0; x < dropdown2.length; x++) {
