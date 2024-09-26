@@ -26,9 +26,7 @@ public class UsersServiceImpl {
 	
 	@Autowired
 	private UsersInfoReposity usersInfoReposity;
-	
-	@Autowired
-	private HttpSession httpSession;
+
 	
 	
 	public UsersResponse isExistUser(String email) {
@@ -81,8 +79,6 @@ public class UsersServiceImpl {
 				usersResponse.setMesg("Login Success");
 				usersResponse.setUsers(userDB);
 				
-				httpSession.setAttribute("loggedInUser", userDB);
-				System.out.println(httpSession.getAttribute("loggedInUser"));
 			}else {
 				usersResponse.setUsersStatus(UsersStatus.LOGIN_FAILURE);
 				usersResponse.setMesg("Login Failure : 密碼錯誤");

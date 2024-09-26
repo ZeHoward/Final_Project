@@ -96,6 +96,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // 點擊頁面其他地方時隱藏搜索框和會員功能菜單
     document.getElementById('myContainer').addEventListener('click', () => {
+
         if (isOpen) {
             searchDiv.style.width = '0';
             searchDiv.style.border = '0';
@@ -105,5 +106,6 @@ document.addEventListener("DOMContentLoaded", function () {
             memberInfoDiv.style.display = "none";
             isMemberDivVisible = false;
         }
+
     });
 });
