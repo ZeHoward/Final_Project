@@ -318,7 +318,7 @@ body {
   flex-direction: column;
   text-align: start;
   border-radius: 10px;
-  transition: opacity 0.5s ease, height 0.5s ease;
+  /*transition: opacity 0.5s ease, height 0.5s ease;*/
   display:none;
 }
 
