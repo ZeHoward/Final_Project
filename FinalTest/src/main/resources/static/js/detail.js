@@ -346,4 +346,48 @@ window.onload = function () {
       reviewsContainer.innerHTML += reviewHtml;
     });
   }
+  
+  const productId = 5;
+  fetch(`/products/${productId}`).
+  	then(response =>{
+		if(!response.ok){
+			throw new Error("出了一點小錯誤")
+		}
+		return response.json();
+	})
+	.then(product =>{
+		//更新主圖片
+		document.getElementById("currentImage").src = product.imageUrl;
+		
+		//更新商品描述
+		
+		const infoSection = document.querySelector(".spec");
+		const productHtml =`
+		<p class="product-name">${product.name}</p>
+        <p class="product-price">NT$ ${product.price}</p>
+        <div class="quantity-selector">
+            <label for="quantity">數量選擇：</label>
+            <button id="decrease" class="btn-quantity"><i class="fa-solid fa-minus"></i></button>
+            <input type="text" id="quantity" value="1" readonly />
+            <button id="increase" class="btn-quantity"><i class="fa-solid fa-plus"></i></button>
+            <span>&nbsp;&nbsp;商品剩最後 ${product.stockQuantity} 件</span>
+        </div>
+        <button class="btn cart"><i class="fa-solid fa-cart-shopping"></i>&nbsp;加入購物車</button>
+        <button class="btn like"><i class="fa-regular fa-heart"></i>&nbsp;收藏商品</button>
+        <button class="btn keep"><i class="fa-solid fa-book-open"></i>&nbsp;收藏食譜</button>
+    	`;
+		
+		//將html插入到info區塊
+		infoSection.innerHTML = productHtml;
+		
+		//更新詳細資料
+		const detailSection = document.querySelector(".detail");
+		const detailHtml =`<p> ${product.description}</p>`;
+		
+		detailSection.innerHTML = detailHtml;
+		
+		generateGallery(product.images);	
+	})
+	.catch(error =>console.error('Error fetching product details:', error));  
+  
 };

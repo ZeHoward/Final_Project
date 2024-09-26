@@ -1,33 +1,108 @@
-//package tw.luna.FinalTest.model;
+package tw.luna.FinalTest.model;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
+import org.hibernate.annotations.DynamicUpdate;
+
+import java.util.HashSet;
+import java.util.Set;
+
+//cart表結構:cartId、userId、total、totalQuantity、status
+//建構式、getter setter
+
+@DynamicUpdate
+@Entity
+@Table(name = "cart")
+public class Cart {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "cartId",nullable = false)
+    private Integer cartId;
+
+    @OneToOne
+    @JoinColumn(name = "userId",nullable = false)
+    @JsonBackReference("Users_Cart")
+    private Users users;
+
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference("Cart_CartItems")
+    private Set<CartItems> cartItems = new HashSet<>();
+
+//    @Column(name = "total",nullable = false)
+//    private Integer total;
 //
-//import jakarta.persistence.Column;
-//import jakarta.persistence.Entity;
-//import jakarta.persistence.GeneratedValue;
-//import jakarta.persistence.GenerationType;
-//import jakarta.persistence.Id;
-//import jakarta.persistence.JoinColumn;
-//import jakarta.persistence.ManyToOne;
-//import jakarta.persistence.Table;
+//    @Column(name = "totalQuantity",nullable = false)
+//    private Integer totalQuantity;
+
+    @Column(name = "status")
+    private String status;
+
+    public Cart() {
+    }
+
+    public Cart(Integer cartId, Users users, Set<CartItems> cartItems, String status) {
+        this.cartId = cartId;
+        this.users = users;
+        this.cartItems = cartItems;
+//        this.total = total;
+//        this.totalQuantity = totalQuantity;
+        this.status = status;
+    }
+
+    public Integer getCartId() {
+        return cartId;
+    }
+
+    public void setCartId(Integer cartId) {
+        this.cartId = cartId;
+    }
+
+    public Users getUsers() {
+        return users;
+    }
+
+    public void setUsers(Users users) {
+        this.users = users;
+    }
+
+    public Set<CartItems> getCartItems() {
+        return cartItems;
+    }
+
+    public void setCartItems(Set<CartItems> cartItems) {
+        this.cartItems = cartItems;
+    }
+
+//    public Integer getTotal() {
+//        return total;
+//    }
 //
-//@Entity
-//@Table(name = "cart")
-//public class Cart {
+//    public void setTotal(Integer total) {
+//        this.total = total;
+//    }
 //
-//	@Id
-//	@GeneratedValue(strategy = GenerationType.IDENTITY)
-//	@Column(name = "cartId")
-//	private Long cardId;
-//	
-//    
-//	
-//	@Column(name = "status")
-//	private String status;
-//	
-//	
-////	@ManyToOne()
-////	@JoinColumn(name = "userId")
-////	private Users users;
-//
+//    public void setTotalQuantity(Integer totalQuantity) {
+//        this.totalQuantity = totalQuantity;
+//    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "Cart{" +
+                "cartId=" + cartId +
+                ", status='" + status + '\'' +
+                '}';
+    }
+}
 //	public Long getCardId() {
 //		return cardId;
 //	}
@@ -36,7 +111,7 @@
 //		this.cardId = cardId;
 //	}
 //
-//	
+//
 //
 //	public String getStatus() {
 //		return status;
@@ -53,6 +128,7 @@
 ////	public void setUsers(Users users) {
 ////		this.users = users;
 ////	}
-////	
-//	
+////
+//
 //}
+

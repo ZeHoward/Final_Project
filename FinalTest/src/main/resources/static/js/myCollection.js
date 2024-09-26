@@ -2,19 +2,34 @@ window.onload = function () {
   // 按鈕更換商品及食譜
   const buttons = document.querySelectorAll('.collection-tab-button');
   const content = document.querySelector('.collection-content');
-  
+
   buttons.forEach(button => {
-      button.addEventListener('click', () => {
-          buttons.forEach(btn => btn.classList.remove('active'));
-          button.classList.add('active');
-  
-          if (button.textContent === '我的商品') {
-              content.innerHTML = '<p>我收藏的商品</p>';
-          } else {
-              content.innerHTML = '<p>我收藏的食譜</p>';
-          }
-      });
+    button.addEventListener('click', () => {
+      buttons.forEach(btn => btn.classList.remove('active'));
+      button.classList.add('active');
+
+      const type = button.textContent === '我的商品' ? 'products' : 'recipes';
+
+      // 向後端 API 發送請求，根據類型獲取收藏數據
+      fetch(`/favorites?type=${type}`)
+          .then(response => response.json())
+          .then(data => {
+            content.innerHTML = ''; // 清空內容
+            data.forEach(item => {
+              content.innerHTML += `
+            <div class="product">
+              <img class="product-image" src="${item.image}" alt="${item.name}">
+              <h3 class="product-name">${item.name}</h3>
+              <p class="product-price">$NT${item.price}</p>
+              <div class="home-product-btn">
+                <button class="add-to-favorite favorited"><i class="fa-solid fa-heart"></i></button>
+              </div>
+            </div>`;
+            });
+          });
+    });
   });
+
 
 
 
@@ -123,28 +138,41 @@ window.onload = function () {
     // 收藏商品按鈕事件處理
     document.querySelectorAll(".add-to-favorite").forEach((button) => {
       button.addEventListener("click", function () {
-        const productName =
-          this.closest(".product").querySelector("h3").textContent;
+        const productName = this.closest(".product").querySelector("h3").textContent;
+        const productId = this.closest(".product").getAttribute("data-id");
+        const isFavorited = this.classList.contains("favorited");
 
-        // 切換收藏狀態
-        if (this.classList.contains("favorited")) {
-          this.classList.remove("favorited");
-
-          // 先更改顏色，然後延遲彈跳框
-          setTimeout(() => {
-            alert(`已將 ${productName} 取消收藏！`);
-          }, 500); // 300 毫秒延遲
+        if (isFavorited) {
+          // 移除收藏
+          fetch(`/favorites/${productId}`, {
+            method: 'DELETE'
+          })
+              .then(() => {
+                this.classList.remove("favorited");
+                alert(`${productName} 已取消收藏！`);
+              });
         } else {
-          this.classList.add("favorited");
-
-          // 先更改顏色，然後延遲彈跳框
-          setTimeout(() => {
-            alert(`已將 ${productName} 加入收藏！`);
-          }, 500); // 300 毫秒延遲
+          // 添加收藏
+          fetch('/favorites', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ id: productId, type: 'product' })
+          })
+              .then(() => {
+                this.classList.add("favorited");
+                alert(`${productName} 已加入收藏！`);
+              });
         }
       });
     });
-  };
-  displayProducts(products);
+    }
+
+
+
+    displayProducts(products);
 
 };
+
+

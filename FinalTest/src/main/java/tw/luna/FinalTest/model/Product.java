@@ -2,24 +2,18 @@ package tw.luna.FinalTest.model;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Set;
+import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
+import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EntityListeners;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
 
 @Entity
 @Table(name="products")
@@ -30,7 +24,19 @@ public class Product {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "productId")
 	private Integer productId;
-	
+
+	@OneToOne(mappedBy = "product")
+	@JsonManagedReference("product_recipes")
+	private Recipes recipes;
+
+	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+	@JsonManagedReference("product_productImage")
+	private List<ProductImage> productImages;
+
+	@OneToMany
+	@JsonManagedReference("cartitems_product")
+	private Set<CartItems> cartItems;
+
 	@Column(name = "type", columnDefinition = "enum('mealkit','preparedFood')")
 	private String type;
 	
@@ -57,6 +63,59 @@ public class Product {
 	@Column(name = "isDel", columnDefinition = "TINYINT(1) DEFAULT 0")
 	private Boolean isDel;
 
+	// 新增一對多關係，商品可以有多張圖片
+	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+	private List<ProductImage> images;
+
+	public List<ProductImage> getImages() {
+		return images;
+	}
+
+	public void setImages(List<ProductImage> images) {
+		this.images = images;
+	}
+
+	public Product() {
+	}
+
+	public Product(Integer productId, Recipes recipes, List<ProductImage> productImages, Set<CartItems> cartItems, String type, String sku, String name, String description, Integer price, Category category, Integer stockQuantity, Boolean isDel) {
+		this.productId = productId;
+		this.recipes = recipes;
+		this.productImages = productImages;
+		this.cartItems = cartItems;
+		this.type = type;
+		this.sku = sku;
+		this.name = name;
+		this.description = description;
+		this.price = price;
+		this.category = category;
+		this.stockQuantity = stockQuantity;
+		this.isDel = isDel;
+	}
+
+	public Recipes getRecipes() {
+		return recipes;
+	}
+
+	public void setRecipes(Recipes recipes) {
+		this.recipes = recipes;
+	}
+
+	public List<ProductImage> getProductImages() {
+		return productImages;
+	}
+
+	public void setProductImages(List<ProductImage> productImages) {
+		this.productImages = productImages;
+	}
+
+	public Set<CartItems> getCartItems() {
+		return cartItems;
+	}
+
+	public void setCartItems(Set<CartItems> cartItems) {
+		this.cartItems = cartItems;
+	}
 
 	public Integer getProductId() {
 		return productId;

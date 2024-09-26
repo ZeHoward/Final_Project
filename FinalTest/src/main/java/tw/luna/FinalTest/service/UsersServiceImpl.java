@@ -109,7 +109,7 @@ public class UsersServiceImpl {
 		users.setUsername(userAllInfo.getUsername());
 		
 		
-		userinfo.setUserid(userAllInfo.getUserId());
+//		userinfo.setUserid(userAllInfo.getUserId());
 		userinfo.setAddress(userAllInfo.getAddress());
 		userinfo.setBirthday(userAllInfo.getBirthday());
 		userinfo.setCounty(userAllInfo.getCounty());

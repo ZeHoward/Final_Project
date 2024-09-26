@@ -18,55 +18,57 @@
   
    	<div th:replace="header"></div>
 
-    <!--  商品資訊 -->
-
-    <div class="info">
-      <!-- 左邊的圖片畫廊 -->
-      <div class="product-gallery">
-        <div class="main-image">
-          <img id="currentImage" src="" alt="商品圖片" />
-        </div>
-        <div class="thumbnail-images" id="thumbnailContainer">
-          <!-- 縮略圖 -->
-        </div>
-      </div>
-      <div class="spec"></div>
-    </div>
-
-    <div class="tab">
-      <button class="tablinks" onclick="openTab(event, 'Description')">
-        商品描述
-      </button>
-      <button class="tablinks" onclick="openTab(event, 'Reviews')">
-        商品評論
-      </button>
-    </div>
-
-    <div
-      class="detail tabcontent"
-      id="Description"
-      style="display: block"
-    ></div>
-
-    <div id="Reviews" class="tabcontent" style="display: none">
-      <p>There are no reviews yet.</p>
-      <!-- 評價表單 -->
-      <label>Your rating</label>
-      <div>⭐⭐⭐⭐⭐</div>
-      <label>Your message</label>
-      <textarea placeholder="Type your review here..."></textarea>
-      <button>Submit Review</button>
-    </div>
-
-    <div class="related-product" id="related-product">
-      <p class="title">| 相關商品</p>
-      <div class="carousel">
-        <button class="nav-button" id="prevBtn">❮</button>
-        <div class="product-container" id="productContainer"></div>
-        <button class="nav-button" id="nextBtn">❯</button>
-      </div>
-    </div>
-
+	<div id="myContainer">
+	   	<!--  商品資訊 -->
+	
+	    <div class="info">
+	      <!-- 左邊的圖片畫廊 -->
+	      <div class="product-gallery">
+	        <div class="main-image">
+	          <img id="currentImage" src="" alt="商品圖片" />
+	        </div>
+	        <div class="thumbnail-images" id="thumbnailContainer">
+	          <!-- 縮略圖 -->
+	        </div>
+	      </div>
+	      <div class="spec"></div>
+	    </div>
+	
+	    <div class="tab">
+	      <button class="tablinks" onclick="openTab(event, 'Description')">
+	        商品描述
+	      </button>
+	      <button class="tablinks" onclick="openTab(event, 'Reviews')">
+	        商品評論
+	      </button>
+	    </div>
+	
+	    <div
+	      class="detail tabcontent"
+	      id="Description"
+	      style="display: block"
+	    ></div>
+	
+	    <div id="Reviews" class="tabcontent" style="display: none">
+	      <p>There are no reviews yet.</p>
+	      <!-- 評價表單 -->
+	      <label>Your rating</label>
+	      <div>⭐⭐⭐⭐⭐</div>
+	      <label>Your message</label>
+	      <textarea placeholder="Type your review here..."></textarea>
+	      <button>Submit Review</button>
+	    </div>
+	
+	    <div class="related-product" id="related-product">
+	      <p class="title">| 相關商品</p>
+	      <div class="carousel">
+	        <button class="nav-button" id="prevBtn">❮</button>
+	        <div class="product-container" id="productContainer"></div>
+	        <button class="nav-button" id="nextBtn">❯</button>
+	      </div>
+	    </div>  		
+	</div>
+	
     <div th:replace="footer"></div>
     
     <script th:src="@{js/detail.js}"></script>
