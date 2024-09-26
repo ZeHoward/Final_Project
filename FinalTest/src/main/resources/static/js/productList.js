@@ -1,4 +1,28 @@
 window.onload = function () {
+	const sortElement = document.getElementById("sort");
+	  
+	  // 檢查元素是否存在，避免 addEventListener 在 null 上出錯
+	  if (sortElement) {
+	    sortElement.addEventListener("change", function () {
+	      sortProducts();
+	    });
+	  } else {
+	    console.error("排序選單元素未找到");
+	  }
+	  
+  var dropdown2 = document.getElementsByClassName("down-btn");
+  var x;
+  for (x = 0; x < dropdown2.length; x++) {
+    dropdown2[x].addEventListener("click", function () {
+      this.classList.toggle("active2");
+      var dropdownContent2 = this.nextElementSibling;
+      if (dropdownContent2.style.display === "block") {
+        dropdownContent2.style.display = "none";
+      } else {
+        dropdownContent2.style.display = "block";
+      }
+    });
+  }
 
   //menu toggle up/down 圖案
   window.togglePic3 = function () {
@@ -12,16 +36,12 @@ window.onload = function () {
       // margin1.style.margin = "";
     }
   };
-  
   window.togglePic4 = function () {
-    // var margin2 = document.getElementById("add");
     var img4 = document.getElementById("updown4");
     if (img4.src.includes("down.png")) {
       img4.src = "./material/icon/up.png";
-      // margin2.style.margin = "40px 0";
     } else {
       img4.src = "./material/icon/down.png";
-      // margin2.style.margin = "";
     }
   };
 
@@ -171,15 +191,15 @@ window.onload = function () {
   };
 
   // 預設排序為隨機排序
-  window.onload = function () {
-    products.sort(() => Math.random() - 0.5); // 隨機排序
-    displayProducts(products);
-  };
+  products.sort(() => Math.random() - 0.5); // 隨機排序
+  displayProducts(products);
 
+	/* 
   window.filterCategory = function (category) {
     const filteredProducts = products.filter((p) => p.category === category);
     displayProducts(filteredProducts);
   };
 
   displayProducts(products);
+ */
 };
