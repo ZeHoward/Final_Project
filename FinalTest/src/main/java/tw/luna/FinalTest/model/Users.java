@@ -38,14 +38,52 @@ public class Users {
 	
 	@Column(name = "token")
 	private String token;
-	
+
 	@OneToOne(mappedBy = "users", cascade = CascadeType.ALL)
-	@JoinColumn(name = "userid", referencedColumnName = "userid")
-	@JsonManagedReference
+	@JsonManagedReference("Users_UserInfo")
 	private Userinfo userinfo;
-	//	//連到最愛商品表//	@OneToMany(mappedBy = "users", cascade = CascadeType.ALL, orphanRemoval = true)//	@JsonManagedReference//	private List<UserFavoritesProducts> userFavoritesProducts;//	//	//	//連到最愛食譜表//	@OneToMany(mappedBy = "users", cascade = CascadeType.ALL, orphanRemoval = true)//	@JsonManagedReference//	private List<UserFavoritesRecipes> userFavoritesRecipes;
-//	
-//	//	//連到購物車表//	@OneToMany(mappedBy = "users", cascade = CascadeType.ALL, orphanRemoval = true)//	@JsonManagedReference//	private List<Cart> cart;
+
+//	//連到最愛商品表
+//	@OneToMany(mappedBy = "users", cascade = CascadeType.ALL, orphanRemoval = true)
+//	@JsonManagedReference
+//	private List<UserFavoritesProducts> userFavoritesProducts;
+//
+//
+//	//連到最愛食譜表
+//	@OneToMany(mappedBy = "users", cascade = CascadeType.ALL, orphanRemoval = true)
+//	@JsonManagedReference
+//	private List<UserFavoritesRecipes> userFavoritesRecipes;
+//
+//
+//	//連到購物車表
+//	@OneToMany(mappedBy = "users", cascade = CascadeType.ALL, orphanRemoval = true)
+//	@JsonManagedReference
+//	private List<Cart> cart;
+
+	@OneToOne(mappedBy = "users", cascade = CascadeType.ALL)
+	@JsonManagedReference("Users_Cart")
+	private Cart cart;
+
+	public Users() {
+	}
+
+	public Users(Long userId, String username, String email, String password, String phoneNumber, Userinfo userinfo, Cart cart) {
+		this.userId = userId;
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.phoneNumber = phoneNumber;
+		this.userinfo = userinfo;
+		this.cart = cart;
+	}
+
+	public Cart getCart() {
+		return cart;
+	}
+
+	public void setCart(Cart cart) {
+		this.cart = cart;
+	}
 
 	public Userinfo getUserinfo() {
 		return userinfo;
@@ -127,8 +165,8 @@ public class Users {
 //		this.cart = cart;
 //	}
 
+
 	
 	
-	
-	
+
 }

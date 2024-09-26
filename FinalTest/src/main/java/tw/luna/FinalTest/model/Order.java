@@ -1,10 +1,16 @@
 package tw.luna.FinalTest.model;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -25,8 +31,8 @@ public class Order {
 	@Column(name = "couponId")
 	private Integer couponId;
 
-//	@Column(name = "orderDate")
-//	private LocalDateTime orderDate;
+	@Column(name = "orderDate")
+	private LocalDateTime orderDate;
 
 	@Column(name = "totalAmount")
 	private Integer totalAmount;
@@ -42,6 +48,12 @@ public class Order {
 
 	@Column(name = "status")
 	private String status;
+	
+	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<OrderDetails> orderDetails;
+
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Payment> payments;
 
 	public Integer getOrderId() {
 		return orderId;
@@ -75,13 +87,13 @@ public class Order {
 		this.couponId = couponId;
 	}
 
-//	public LocalDateTime getOrderDate() {
-//		return orderDate;
-//	}
-//
-//	public void setOrderDate(LocalDateTime orderDate) {
-//		this.orderDate = orderDate;
-//	}
+	public LocalDateTime getOrderDate() {
+		return orderDate;
+	}
+
+	public void setOrderDate(LocalDateTime orderDate) {
+		this.orderDate = orderDate;
+	}
 
 	public Integer getTotalAmount() {
 		return totalAmount;
