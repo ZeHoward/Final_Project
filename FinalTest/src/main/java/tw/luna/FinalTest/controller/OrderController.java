@@ -57,11 +57,6 @@ public class OrderController {
 		return orderService.createOrder(order);
 	}
 	
-	@PostMapping("/checkout/{cartId}")
-    public ResponseEntity<Order> checkout(@PathVariable Integer cartId, @RequestParam String address) {
-        Order order = orderService.checkoutCart(cartId, address);
-        return ResponseEntity.ok(order);
-    }
 //
 //	// 刪除訂單
 //	@DeleteMapping("/{id}")
