@@ -45,16 +45,34 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     };
 
-    // 會員功能菜單
+    // 會員功能菜單顯示/隱藏
     let memberInfoDiv = document.getElementById("memberInfoDiv");
-    document.getElementById('memberIcon').addEventListener('click', () => {
-        memberInfoDiv.style.opacity = (memberInfoDiv.style.opacity == 0 ? 1 : 0);
+    let isMemberDivVisible = false; // 初始為隱藏
+
+    document.getElementById('memberIcon').addEventListener('click', (e) => {
+        e.stopPropagation(); // 防止點擊會員圖標時觸發頁面其他地方的點擊事件
+        if (isMemberDivVisible) {
+            memberInfoDiv.style.display = "none";
+            isMemberDivVisible = false;
+        } else {
+            memberInfoDiv.style.display = "block";
+            isMemberDivVisible = true;
+        }
     });
 
-    // 搜索框
+    // 點擊頁面其他地方時隱藏會員功能菜單
+    document.addEventListener('click', function (e) {
+        if (isMemberDivVisible && !memberInfoDiv.contains(e.target)) {
+            memberInfoDiv.style.display = "none";
+            isMemberDivVisible = false;
+        }
+    });
+
+    // 搜索框顯示/隱藏
     let isOpen = false;
     let searchDiv = document.getElementById('searchDiv');
     let searchIcon = document.getElementById('searchIcon');
+    
     searchIcon.addEventListener('click', () => {
         if (!isOpen) {
             searchDiv.style.width = '200px';
@@ -78,10 +96,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // 點擊頁面其他地方時隱藏搜索框和會員功能菜單
     document.getElementById('myContainer').addEventListener('click', () => {
-        searchDiv.style.width = '0';
-        searchDiv.style.border = '0';
-        isOpen = false;
-        memberInfoDiv.style.opacity = 0;
-		memberInfoDiv.style.visibility = 'hidden';
+
+        if (isOpen) {
+            searchDiv.style.width = '0';
+            searchDiv.style.border = '0';
+            isOpen = false;
+        }
+        if (isMemberDivVisible) {
+            memberInfoDiv.style.display = "none";
+            isMemberDivVisible = false;
+        }
+
     });
 });
