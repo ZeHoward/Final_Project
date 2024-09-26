@@ -35,6 +35,7 @@ public class UsersServiceImpl {
 		if (users != null && users.size() > 0) {
 			usersResponse.setUsersStatus(UsersStatus.EXIST);
 			usersResponse.setMesg("帳號已存在");
+			System.out.println(users.get(0).getPassword());
 			usersResponse.setUsers(users.get(0));
 		}else {
 			usersResponse.setUsersStatus(UsersStatus.NOT_EXIST);
@@ -50,6 +51,7 @@ public class UsersServiceImpl {
 		if(usersResponse.getUsersStatus() == UsersStatus.NOT_EXIST) {
 			users.setPassword(BCrypt.hashpw(users.getPassword(), BCrypt.gensalt()));
 			Users newUsers = usersRepository.save(users);
+			newUsers.setPassword("");
 			if(newUsers.getUserId() != null) {
 				usersResponse.setUsersStatus(UsersStatus.ADD_SUCCESS);
 				usersResponse.setMesg("註冊成功");
@@ -75,8 +77,10 @@ public class UsersServiceImpl {
 		}else {
 			Users userDB = usersResponse.getUsers();
 			if (BCrypt.checkpw(users.getPassword(), userDB.getPassword())) {
+				//密碼比對成功後,需要對users表的token欄位加上uuid再拉出來
 				usersResponse.setUsersStatus(UsersStatus.LOGIN_SUCCESS);
 				usersResponse.setMesg("Login Success");
+				userDB.setPassword("");
 				usersResponse.setUsers(userDB);
 				
 			}else {
@@ -105,7 +109,7 @@ public class UsersServiceImpl {
 		users.setUsername(userAllInfo.getUsername());
 		
 		
-		userinfo.setUserid(userAllInfo.getUserId());
+//		userinfo.setUserid(userAllInfo.getUserId());
 		userinfo.setAddress(userAllInfo.getAddress());
 		userinfo.setBirthday(userAllInfo.getBirthday());
 		userinfo.setCounty(userAllInfo.getCounty());

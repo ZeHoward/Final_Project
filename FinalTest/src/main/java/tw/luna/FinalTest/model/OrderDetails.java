@@ -18,7 +18,7 @@ public class OrderDetails {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "orderDetailsID")
 	private Integer orderDetailsId;
-
+	
 	@Column(name = "quantity")
 	private Integer quantity;
 
@@ -26,7 +26,7 @@ public class OrderDetails {
 	private Integer price;
 
 	@Column(name = "Address")
-	private String address;
+	private String address;	
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "orderId", nullable = false)
