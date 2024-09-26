@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import org.hibernate.annotations.DynamicUpdate;
 
+import java.util.HashSet;
 import java.util.Set;
 
 //cart表結構:cartId、userId、total、totalQuantity、status
@@ -27,7 +28,7 @@ public class Cart {
 
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference("Cart_CartItems")
-    private Set<CartItems> cartItems;
+    private Set<CartItems> cartItems = new HashSet<>();
 
 //    @Column(name = "total",nullable = false)
 //    private Integer total;
@@ -110,7 +111,7 @@ public class Cart {
 //		this.cardId = cardId;
 //	}
 //
-//	
+//
 //
 //	public String getStatus() {
 //		return status;
@@ -127,6 +128,7 @@ public class Cart {
 ////	public void setUsers(Users users) {
 ////		this.users = users;
 ////	}
-////	
-//	
+////
+//
 //}
+
