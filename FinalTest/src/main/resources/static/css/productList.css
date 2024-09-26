@@ -80,15 +80,17 @@ body {
 }
 
 .product {
-  margin: 10px;
-  width: 230px;
+  margin: 20px;
+  width: 250px;
   text-align: center;
-  border: #edc150 2px solid;
+  border: #f4f4f4 2px solid;
+  border-radius:5px;
+  padding:10px;
 }
 
 .product:hover {
-  box-shadow: 0 2px 10px #edc05095;
-  /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); */
+  /*box-shadow: 0 2px 10px #edc05095;*/
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 .product-image {
   display: block; /* 讓圖片被當作塊級元素，這樣才能由父容器的 text-align 來置中 */
@@ -139,7 +141,8 @@ body {
   align-items: center;
 }
 .add-to-favorite {
-  margin-top: 10px;
+  margin-top: 5px;
+  padding-left:15px;
   display: flex;
   align-items: center; /* 垂直置中 */
   justify-content: center; /* 水平置中 */

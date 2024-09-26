@@ -22,6 +22,7 @@ package tw.luna.FinalTest.model;
 //	private Users users;
 
 
+
 import jakarta.persistence.*;
 
 @Entity
@@ -57,3 +58,6 @@ public class UserFavoritesProducts {
         return id.getProductId();
     }
 }
+	
+	
+//}
