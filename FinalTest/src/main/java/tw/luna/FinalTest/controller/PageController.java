@@ -38,5 +38,35 @@ public class PageController {
 	public String myOrderList() {
 		return "orderManage";
 	}
+	
+	//////////////////////////////////////////
+	@GetMapping("/registPage")
+	public String registPage() {
+		return "registPage";
+	}
+	
+	@GetMapping("/loginPage")
+	public String loginPage() {
+		return "loginPage";
+	}
 
+	@GetMapping("/memberCenterPage")
+	public String memberCenterPage() {
+		return "memberCenterPage";
+	}
+	
+	@GetMapping("/memberBasicInfoPage")
+	public String memberBasicInfoPage() {
+		return "memberBasicInfoPage";
+	}
+	
+	@GetMapping("/updatePasswordPage")
+	public String updatePasswordPage() {
+		return "updatePasswordPage";
+	}
+	
+	@GetMapping("/couponPage")
+	public String couponPage() {
+		return "couponPage";
+	}
 }
