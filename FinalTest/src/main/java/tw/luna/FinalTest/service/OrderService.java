@@ -1,15 +1,25 @@
 package tw.luna.FinalTest.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import jakarta.transaction.Transactional;
+import tw.luna.FinalTest.model.Cart;
+import tw.luna.FinalTest.model.CartItems;
 import tw.luna.FinalTest.model.Order;
+import tw.luna.FinalTest.model.OrderDetails;
+import tw.luna.FinalTest.repository.CartItemsRepository;
+import tw.luna.FinalTest.repository.CartRepository;
 import tw.luna.FinalTest.repository.OrderRepository;
 
 @Service
@@ -18,35 +28,58 @@ public class OrderService {
 	@Autowired
 	private OrderRepository orderRepository;
 
+	@Autowired
+    private CartRepository cartRepository;
+    
+    @Autowired
+    private CartItemsRepository cartItemsRepository;
+
 	// 獲取所有訂單
 	public List<Order> getAllOrders() {
 		return orderRepository.findAll();
 	}
 
-	// 獲取分頁訂單
-	public Page<Order> getOrdersWithPagination(Pageable pageable) {
-		return orderRepository.findAll(pageable); // 使用 Spring Data JPA 的內建方法來進行分頁查詢
+	public ResponseEntity<Page<Order>> getOrdersWithPagination(int page, int size, String sortField, String sortDirection) {
+	    // 根據傳入的排序方向，轉換為 Sort.Direction
+	    Sort.Direction direction = Sort.Direction.fromString(sortDirection);
+	    
+	    // 使用排序字段和方向來創建分頁請求
+	    Pageable pageable = PageRequest.of(page, size, Sort.by(direction, sortField));
+	    
+	    // 查詢訂單數據
+	    Page<Order> orders = orderRepository.findAll(pageable);
+	    
+	    return ResponseEntity.ok(orders);
 	}
 
 	// 根據 ID 獲取單個訂單
-	public Order getOrderById(Integer id) {
-		return orderRepository.findById(id).orElse(null); // 如果未找到，返回 null
+	public ResponseEntity<Order> getOrderById(Integer id) {
+	    Optional<Order> optionalOrder = orderRepository.findById(id);
+
+	    if (optionalOrder.isPresent()) {
+	        // 找到訂單，返回 200 OK 和訂單信息
+	        return ResponseEntity.ok(optionalOrder.get());
+	    } else {
+	        // 未找到訂單，返回 404 Not Found
+	        return ResponseEntity.notFound().build();
+	    }
 	}
 
 	// 創建新訂單
 	public Order createOrder(Order order) {
 		return orderRepository.save(order);
 	}
+	
 
-	// 刪除訂單
-	public ResponseEntity<Void> deleteOrder(Integer id) {
-		Optional<Order> optionalOrder = orderRepository.findById(id);
-
-		if (optionalOrder.isPresent()) {
-			orderRepository.delete(optionalOrder.get());
-			return ResponseEntity.ok().build();
-		} else {
-			return ResponseEntity.notFound().build();
-		}
-	}
+//	// 刪除訂單
+//	public ResponseEntity<Void> deleteOrder(Integer id) {
+//		Optional<Order> optionalOrder = orderRepository.findById(id);
+//
+//		if (optionalOrder.isPresent()) {
+//			orderRepository.delete(optionalOrder.get());
+//			return ResponseEntity.ok().build();
+//		} else {
+//			return ResponseEntity.notFound().build();
+//		}
+//	}
 }
