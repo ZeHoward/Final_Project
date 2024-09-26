@@ -3,6 +3,11 @@ package tw.luna.FinalTest.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +26,9 @@ public class OrderController {
 
 	@Autowired
 	private OrderService orderService;
+	
+	@Autowired
+    private PagedResourcesAssembler<Order> pagedResourcesAssembler;
 
 	// 獲取所有訂單
 	@GetMapping
@@ -41,6 +49,16 @@ public class OrderController {
 			return ResponseEntity.notFound().build();
 		}
 	}
+	
+	 // 獲取分頁的訂單列表
+	@GetMapping("/page")
+    public PagedModel<EntityModel<Order>> getOrdersWithPagination(Pageable pageable) {
+        // 使用 service 獲取分頁結果
+        Page<Order> orderPage = orderService.getOrdersWithPagination(pageable);
+
+        // 使用 PagedResourcesAssembler 將 Page 轉換為 PagedModel
+        return pagedResourcesAssembler.toModel(orderPage);
+    }
 
 	// 創建新訂單
 	@PostMapping("/add")

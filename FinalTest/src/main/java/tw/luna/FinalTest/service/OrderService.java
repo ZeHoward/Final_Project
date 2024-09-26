@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,11 @@ public class OrderService {
 	// 獲取所有訂單
 	public List<Order> getAllOrders() {
 		return orderRepository.findAll();
+	}
+
+	// 獲取分頁訂單
+	public Page<Order> getOrdersWithPagination(Pageable pageable) {
+		return orderRepository.findAll(pageable); // 使用 Spring Data JPA 的內建方法來進行分頁查詢
 	}
 
 	// 根據 ID 獲取單個訂單
