@@ -1,5 +1,5 @@
  <!-- footer start -->
-    <footer class="tem-footer">
+    <footer class="tem-footer" style="z-index: -1">
       <div class="tem-footer-content">
         <div class="tem-about-us">
           <h2>關於我們</h2>
@@ -24,13 +24,13 @@
           <p>地址: 台中市南屯區公益路二段51號18樓</p>
           <span class="tem-social-media">
             <a href="#"
-              ><img src="./material/icon/facebook.png" alt="Facebook"
+              ><img th:src="@{/material/icon/facebook.png}" alt="Facebook"
             /></a>
             <a href="#"
-              ><img src="./material/icon/instagram.png" alt="Instagram"
+              ><img th:src="@{/material/icon/instagram.png}" alt="Instagram"
             /></a>
             <a href="#"
-              ><img src="./material/icon/youtube.png" alt="YouTube"
+              ><img th:src="@{/material/icon/youtube.png}" alt="YouTube"
             /></a>
           </span>
         </div>
@@ -43,6 +43,6 @@
       </div>
     </footer>
     <!-- footer end -->
-    <script src="./template.js"></script>
+    <script th:src="@{/js/template.js}" defer="defer"></script>
   </body>
 </html>
