@@ -21,6 +21,7 @@ public class UsersController {
 	@Autowired
 	private UsersServiceImpl usersServiceImpl; 
 	
+//	@CrossOrigin(origins = "http://127.0.0.1:5500")
 	@RequestMapping("/regist")
 	public UsersResponse regist(@RequestBody Users users) {
 		return usersServiceImpl.registUsers(users);
