@@ -26,4 +26,17 @@ public class PageController {
 	public String detail() {
 		return "detail";
 	}
+	@GetMapping("/myCollection")
+	public String myCollection() {
+		return "myCollection";
+	}
+	@GetMapping("/myOrder/detail")
+	public String myOrder() {
+		return "checkOrder";
+	}
+	@GetMapping("/myOrderList")
+	public String myOrderList() {
+		return "orderManage";
+	}
+
 }
