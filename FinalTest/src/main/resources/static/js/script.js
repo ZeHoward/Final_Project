@@ -1,128 +1,128 @@
 generateOverviewContent(); // 預設總覽頁面為首頁
 
-// 假資料，模擬不同報表的數據
-const chartData = {
-    revenue: {
-        week: {
-            labels: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
-            data: [3000, 40, 3500, 5000, 4500, 6000, 5500],
-            label: '每周營業額'
-        },
-        month: {
-            labels: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
-            data: [12000, 15000, 18000, 20000, 22000, 25000, 28000, 30000, 33000, 35000, 37000, 40000],
-            label: '每月營業額'
-        },
-        year: {
-            labels: ['2019', '2020', '2021', '2022', '2023'],
-            data: [150000, 180000, 200000, 220000, 250000],
-            label: '每年營業額'
-        }
-    },
-    orders: {
-        week: {
-            labels: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
-            data: [100, 120, 150, 180, 200, 250, 300],
-            label: '每周訂單總量'
-        },
-        month: {
-            labels: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
-            data: [1000, 1500, 1800, 2000, 2200, 2500, 2800, 3000, 3500, 3700, 3900, 4000],
-            label: '每月訂單總量'
-        },
-        year: {
-            labels: ['2019', '2020', '2021', '2022', '2023'],
-            data: [15000, 18000, 20000, 22000, 25000],
-            label: '每年訂單總量'
-        }
-    },
-    users: {
-        week: {
-            labels: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
-            data: [50, 60, 75, 80, 100, 120, 150],
-            label: '每周總用戶數'
-        },
-        month: {
-            labels: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
-            data: [500, 700, 900, 1100, 1300, 1500, 1700, 2000, 2300, 2500, 2800, 3000],
-            label: '每月總用戶數'
-        },
-        year: {
-            labels: ['2019', '2020', '2021', '2022', '2023'],
-            data: [10000, 15000, 20000, 25000, 30000],
-            label: '每年總用戶數'
-        }
-    }
-};
+// // 假資料，模擬不同報表的數據
+// const chartData = {
+//     revenue: {
+//         week: {
+//             labels: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+//             data: [3000, 40, 3500, 5000, 4500, 6000, 5500],
+//             label: '每周營業額'
+//         },
+//         month: {
+//             labels: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+//             data: [12000, 15000, 18000, 20000, 22000, 25000, 28000, 30000, 33000, 35000, 37000, 40000],
+//             label: '每月營業額'
+//         },
+//         year: {
+//             labels: ['2019', '2020', '2021', '2022', '2023'],
+//             data: [150000, 180000, 200000, 220000, 250000],
+//             label: '每年營業額'
+//         }
+//     },
+//     orders: {
+//         week: {
+//             labels: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+//             data: [100, 120, 150, 180, 200, 250, 300],
+//             label: '每周訂單總量'
+//         },
+//         month: {
+//             labels: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+//             data: [1000, 1500, 1800, 2000, 2200, 2500, 2800, 3000, 3500, 3700, 3900, 4000],
+//             label: '每月訂單總量'
+//         },
+//         year: {
+//             labels: ['2019', '2020', '2021', '2022', '2023'],
+//             data: [15000, 18000, 20000, 22000, 25000],
+//             label: '每年訂單總量'
+//         }
+//     },
+//     users: {
+//         week: {
+//             labels: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+//             data: [50, 60, 75, 80, 100, 120, 150],
+//             label: '每周總用戶數'
+//         },
+//         month: {
+//             labels: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+//             data: [500, 700, 900, 1100, 1300, 1500, 1700, 2000, 2300, 2500, 2800, 3000],
+//             label: '每月總用戶數'
+//         },
+//         year: {
+//             labels: ['2019', '2020', '2021', '2022', '2023'],
+//             data: [10000, 15000, 20000, 25000, 30000],
+//             label: '每年總用戶數'
+//         }
+//     }
+// };
 
-// 假資料，模擬不同訂單
-const orders = [
-    {
-        orderNumber: "XXXX1",
-        name: "產品名稱1",
-        deliveryMethod: "快遞",
-        orderAmount: 1000,
-        status: "已付款",
-        statusClass: "paid",
-        date: "2024-09-21 16:55:56",
-        couponId: "COUPON123",
-        orderDate: "2024-09-20",
-        percentageDiscount: 10,  // 百分比折扣
-        amountDiscount: 100,  // 折扣金額
-        totalAmount: 1000,  // 訂單總金額
-        finalAmount: 900,  // 最終金額
-        comment: "快速配送，無問題",
-        changedBy: "Admin",
-        changedAt: "2024-09-22 08:00",
-        address: "100台北市中正區鄭州路8號",
-        userId: "1",
-        items: [
-            {
-                name: "商品1",
-                sku: "SKU123",
-                quantity: 2,
-                price: 50,
-                image: "紅大頭.png"
-            },
-            {
-                name: "商品2",
-                sku: "SKU456",
-                quantity: 1,
-                price: 100,
-                image: "紅大頭.png"
-            }
-        ]
-    },
-    {
-        orderNumber: "XXXX2",
-        name: "產品名稱2",
-        deliveryMethod: "郵寄",
-        orderAmount: 2000,
-        status: "尚未付款",
-        statusClass: "unpaid",
-        date: "2024-09-22 10:00:00",
-        couponId: "COUPON456",
-        orderDate: "2024-09-21",
-        percentageDiscount: 5,
-        amountDiscount: 100,
-        totalAmount: 2000,
-        finalAmount: 1900,
-        comment: "",
-        changedBy: "Admin",
-        changedAt: "2024-09-22 09:00",
-        address: "100台北市中正區忠孝西路一段49號",
-        userId: "1",
-        items: [
-            {
-                name: "商品3",
-                sku: "SKU789",
-                quantity: 1,
-                price: 150,
-                image: "紅大頭.png"
-            }
-        ]
-    }
-];
+// // 假資料，模擬不同訂單
+// const orders = [
+//     {
+//         orderNumber: "XXXX1",
+//         name: "產品名稱1",
+//         deliveryMethod: "快遞",
+//         orderAmount: 1000,
+//         status: "已付款",
+//         statusClass: "paid",
+//         date: "2024-09-21 16:55:56",
+//         couponId: "COUPON123",
+//         orderDate: "2024-09-20",
+//         percentageDiscount: 10,  // 百分比折扣
+//         amountDiscount: 100,  // 折扣金額
+//         totalAmount: 1000,  // 訂單總金額
+//         finalAmount: 900,  // 最終金額
+//         comment: "快速配送，無問題",
+//         changedBy: "Admin",
+//         changedAt: "2024-09-22 08:00",
+//         address: "100台北市中正區鄭州路8號",
+//         userId: "1",
+//         items: [
+//             {
+//                 name: "商品1",
+//                 sku: "SKU123",
+//                 quantity: 2,
+//                 price: 50,
+//                 image: "紅大頭.png"
+//             },
+//             {
+//                 name: "商品2",
+//                 sku: "SKU456",
+//                 quantity: 1,
+//                 price: 100,
+//                 image: "紅大頭.png"
+//             }
+//         ]
+//     },
+//     {
+//         orderNumber: "XXXX2",
+//         name: "產品名稱2",
+//         deliveryMethod: "郵寄",
+//         orderAmount: 2000,
+//         status: "尚未付款",
+//         statusClass: "unpaid",
+//         date: "2024-09-22 10:00:00",
+//         couponId: "COUPON456",
+//         orderDate: "2024-09-21",
+//         percentageDiscount: 5,
+//         amountDiscount: 100,
+//         totalAmount: 2000,
+//         finalAmount: 1900,
+//         comment: "",
+//         changedBy: "Admin",
+//         changedAt: "2024-09-22 09:00",
+//         address: "100台北市中正區忠孝西路一段49號",
+//         userId: "1",
+//         items: [
+//             {
+//                 name: "商品3",
+//                 sku: "SKU789",
+//                 quantity: 1,
+//                 price: 150,
+//                 image: "紅大頭.png"
+//             }
+//         ]
+//     }
+// ];
 
 // 假資料，模擬不同商品
 const products = [
@@ -216,51 +216,51 @@ const recipes = [
     }
 ];
 
-// 假資料，模擬不同用戶
-const users = [
-    {
-        userId: '1',
-        username: 'john_doe',
-        firstName: 'John',
-        lastName: 'Doe',
-        email: 'john.doe@example.com',
-        password: 'password123',
-        phoneNumber: '123-456-7890',
-        address: '123 Main St',
-        city: '台中市',
-        postalCode: '400',
-        createdAt: '2023-01-15 14:30:00',
-        updatedAt: '2023-09-10 09:20:00'
-    },
-    {
-        userId: '2',
-        username: 'jane_smith',
-        firstName: 'Jane',
-        lastName: 'Smith',
-        email: 'jane.smith@example.com',
-        password: 'password456',
-        phoneNumber: '987-654-3210',
-        address: '456 Maple Ave',
-        city: '台北市',
-        postalCode: '100',
-        createdAt: '2023-02-20 16:45:00',
-        updatedAt: '2023-09-05 10:10:00'
-    },
-    {
-        userId: '3',
-        username: 'alice_wang',
-        firstName: 'Alice',
-        lastName: 'Wang',
-        email: 'alice.wang@example.com',
-        password: 'alice789',
-        phoneNumber: '456-123-7890',
-        address: '789 Oak St',
-        city: '高雄市',
-        postalCode: '800',
-        createdAt: '2023-03-10 11:50:00',
-        updatedAt: '2023-09-12 14:00:00'
-    }
-];
+// // 假資料，模擬不同用戶
+// const users = [
+//     {
+//         userId: '1',
+//         username: 'john_doe',
+//         firstName: 'John',
+//         lastName: 'Doe',
+//         email: 'john.doe@example.com',
+//         password: 'password123',
+//         phoneNumber: '123-456-7890',
+//         address: '123 Main St',
+//         city: '台中市',
+//         postalCode: '400',
+//         createdAt: '2023-01-15 14:30:00',
+//         updatedAt: '2023-09-10 09:20:00'
+//     },
+//     {
+//         userId: '2',
+//         username: 'jane_smith',
+//         firstName: 'Jane',
+//         lastName: 'Smith',
+//         email: 'jane.smith@example.com',
+//         password: 'password456',
+//         phoneNumber: '987-654-3210',
+//         address: '456 Maple Ave',
+//         city: '台北市',
+//         postalCode: '100',
+//         createdAt: '2023-02-20 16:45:00',
+//         updatedAt: '2023-09-05 10:10:00'
+//     },
+//     {
+//         userId: '3',
+//         username: 'alice_wang',
+//         firstName: 'Alice',
+//         lastName: 'Wang',
+//         email: 'alice.wang@example.com',
+//         password: 'alice789',
+//         phoneNumber: '456-123-7890',
+//         address: '789 Oak St',
+//         city: '高雄市',
+//         postalCode: '800',
+//         createdAt: '2023-03-10 11:50:00',
+//         updatedAt: '2023-09-12 14:00:00'
+//     }
+// ];
 
 // 點擊"總覽"時生成內容的函數
 function generateOverviewContent() {
@@ -366,23 +366,24 @@ function generateOrderManagementContent() {
             <h1>訂單管理</h1>
             <div class="orderControls">
                 <label>每頁顯示結果數：</label>
-                <select>
+                <select id="resultsPerPage">
                     <option value="25">25</option>
                     <option value="50">50</option>
                     <option value="100">100</option>
                 </select>
 
                 <label>排序：</label>
-                <select>
-                    <option value="date">訂單日期(遞增)</option>
-                    <option value="amount">訂單金額(遞減)</option>
+                <select id="sortOrder">
+                    <option value="orderDate,desc">訂單日期(遞減)</option>
+                    <option value="orderDate,asc">訂單日期(遞增)</option>
+                    <option value="totalAmount,desc">訂單金額(遞減)</option>
+                    <option value="totalAmount,asc">訂單金額(遞增)</option>
                 </select>
 
                 <label>狀態：</label>
-                <select>
+                <select id="orderStatus">
                     <option value="all">全部</option>
-                    <option value="paid">已付款</option>
-                    <option value="unpaid">尚未付款</option>
+                    <option value="completed">已付款</option>
                     <option value="cancelled">取消</option>
                 </select>
             </div>
@@ -402,42 +403,130 @@ function generateOrderManagementContent() {
                     <!-- 這裡插入動態生成的訂單 -->
                 </tbody>
             </table>
+
+            <!-- 頁數切換的下拉選單 -->
+            <div class="pagination-controls" style="text-align: right; margin-top: 20px;">
+                <label for="pageSelect">選擇頁數：</label>
+                <select id="pageSelect" style="border-radius: 5px; border: 1px solid #ccc;">
+                    <!-- 動態生成頁數選項 -->
+                </select>
+            </div>
         </section>
     `;
     mainContent.innerHTML = orderManagementSection;
+
     const tbody = document.querySelector('.order-table tbody');
+    const resultsPerPageSelect = document.getElementById('resultsPerPage');
+    const sortOrderSelect = document.getElementById('sortOrder');
+    const orderStatusSelect = document.getElementById('orderStatus');
+    const pageSelect = document.getElementById('pageSelect');
 
-    // 動態生成每筆訂單
-    orders.forEach((order, index) => {
-        const tr = document.createElement('tr');
+    // 設置初始條件
+    let resultsPerPage = parseInt(resultsPerPageSelect.value);
+    let sortField = sortOrderSelect.value.split(',')[0]; // 獲取排序字段
+    let sortDirection = sortOrderSelect.value.split(',')[1]; // 獲取排序方向
+    let orderStatus = orderStatusSelect.value;
+    let currentPage = 1;
 
-        tr.innerHTML = `
+    // 調用後端 API 獲取數據
+    function fetchOrders() {
+        let url = `/api/orders/page?page=${currentPage - 1}&size=${resultsPerPage}&sortField=${sortField}&sortDirection=${sortDirection}`;
+
+        // 如果狀態不是全部，則加上 status 的參數
+        if (orderStatus !== 'all') {
+            url += `&status=${orderStatus}`;
+        }
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                renderOrders(data.content);  // 渲染訂單
+                updatePagination(data.totalPages);  // 更新分頁
+            })
+            .catch(error => {
+                console.error('Error fetching orders:', error);
+                tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: red;">無法獲取訂單資料</td></tr>`;
+            });
+    }
+
+    // 渲染訂單
+    function renderOrders(orders) {
+        tbody.innerHTML = '';  // 清空表格內容
+        if (orders.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="5" style="text-align: center;">目前沒有訂單資料</td></tr>`;
+        } else {
+            orders.forEach(order => {
+                const tr = document.createElement('tr');
+
+                tr.innerHTML = `
                     <td>
                         <p>${order.name}</p>
                     </td>
                     <td>
-                        訂單編號: ${order.orderNumber}<br>
+                        訂單編號: ${order.orderId}<br>
                         配送方式: ${order.deliveryMethod}<br>
-                        訂單金額: ${order.orderAmount}
+                        訂單金額: ${order.totalAmount}
                     </td>
-                    <td class="${order.statusClass}">${order.status}</td>
-                    <td>${order.date}</td>
-                    <td><a href="#" class="details-link" data-index="${index}" style="color: white;">詳細</a></td>
+                    <td>${order.status}</td>
+                    <td>${order.orderDate}</td>
+                    <td><a href="#" class="details-link" data-id="${order.orderId}" style="color: white;">詳細</a></td>
                 `;
 
-        tbody.appendChild(tr);
+                tbody.appendChild(tr);
+            });
+
+            // 綁定「詳細」按鈕的點擊事件
+            document.querySelectorAll('.details-link').forEach(link => {
+                link.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    const orderId = this.getAttribute('data-id');
+                    // 顯示訂單詳情頁面
+                    generateOrderDetailsContent(orderId);
+                });
+            });
+        }
+    }
+
+    // 動態生成頁數選項
+    function updatePagination(totalPages) {
+        pageSelect.innerHTML = '';  // 清空頁數選項
+        for (let i = 1; i <= totalPages; i++) {
+            const option = document.createElement('option');
+            option.value = i;
+            option.textContent = `第 ${i} 頁`;
+            pageSelect.appendChild(option);
+        }
+        pageSelect.value = currentPage;  // 設定當前頁數
+    }
+
+    // 更新顯示結果數或排序方式時，重新調用 API 並渲染
+    resultsPerPageSelect.addEventListener('change', () => {
+        resultsPerPage = parseInt(resultsPerPageSelect.value);
+        currentPage = 1;
+        fetchOrders();
     });
 
-    // 綁定「詳細」按鈕的點擊事件
-    document.querySelectorAll('.details-link').forEach(link => {
-        link.addEventListener('click', function (event) {
-            event.preventDefault();  // 防止預設行為
-            const orderIndex = this.getAttribute('data-index');
-            console.log("選擇的訂單索引:", orderIndex);  // 檢查是否獲取到正確的索引
-            console.log("選擇的訂單資料:", orders[orderIndex]);  // 檢查對應的訂單資料是否存在
-            generateOrderDetailsContent(orders[orderIndex]);  // 顯示該訂單的詳細頁面
-        });
+    sortOrderSelect.addEventListener('change', () => {
+        const sortValues = sortOrderSelect.value.split(',');
+        sortField = sortValues[0];
+        sortDirection = sortValues[1];
+        currentPage = 1;
+        fetchOrders();
     });
+
+    orderStatusSelect.addEventListener('change', () => {
+        orderStatus = orderStatusSelect.value;
+        currentPage = 1;
+        fetchOrders();
+    });
+
+    pageSelect.addEventListener('change', () => {
+        currentPage = parseInt(pageSelect.value);
+        fetchOrders();
+    });
+
+    // 初始加載數據
+    fetchOrders();
 }
 
 // 點擊訂單的"詳細"連結後生成訂單詳情頁面的函數
@@ -554,7 +643,21 @@ function generateProductUploadForm() {
                     <textarea id="description" rows="1" placeholder="商品名稱"></textarea>
                 </div>
             
+                <div class="form-group">
+                    <label for="price">價格</label>
+                    <textarea id="price" rows="1" placeholder="價格"></textarea>
+                </div>
+            
                 <!-- 類別選擇 -->
+                <div class="form-group">
+                    <label for="type">商品類型</label>
+                    <select id="type">
+                        <option value="preparedFood">調理包</option>
+                        <option value="mealkit">食材包</option>
+                    </select>
+                </div>
+
+                <!-- 菜品分類選擇 -->
                 <div class="form-group">
                     <label for="category">菜品分類</label>
                     <select id="category">
@@ -579,45 +682,12 @@ function generateProductUploadForm() {
                         </select>
                     </div>
 
-                    <div class="field">
-                        <label for="difficulty">難度</label>
-                        <select id="difficulty">
-                            <option value="easy">簡單</option>
-                            <option value="medium">中等</option>
-                            <option value="hard">困難</option>
-                        </select>
-                    </div>
-
-                    <div class="field">
-                        <label for="vagan">素食</label>
-                        <select id="vagan">
-                            <option value="no">否</option>
-                            <option value="vagen">全素</option>
-                            <option value="halfvagen">奶蛋素</option>
-                        </select>
-                    </div>
-
-                    <div class="field time">
-                        <label for="time">製作時間</label>
-                        <textarea id="time" rows="1" class="time"></textarea>
-                    </div>
                 </div>
 
-                <!-- 食譜描述 -->
+                <!-- 商品描述 -->
                 <div class="form-group">
-                    <label for="description">食譜描述</label>
+                    <label for="description">商品描述</label>
                     <textarea id="description" rows="8"></textarea>
-                </div>
-
-                <!-- 食材與步驟 -->
-                <div class="form-group">
-                    <label for="ingredients">食材成分</label>
-                    <textarea id="ingredients" rows="8"></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="steps">作法步驟</label>
-                    <textarea id="steps" rows="8"></textarea>
                 </div>
 
                 <!-- 提交與取消按鈕 -->
@@ -645,14 +715,14 @@ function generateProductManagementWithActionsContent() {
                 <input type="text" id="productSearchInput" placeholder="輸入名稱或SKU" class="SearchInput">
                 
                 <label>每頁顯示結果數：</label>
-                <select>
+                <select id="resultsPerPage">
                     <option value="25">25</option>
                     <option value="50">50</option>
                     <option value="100">100</option>
                 </select>
 
                 <label>排序：</label>
-                <select>
+                <select id="sortOrder">
                     <option value="skuASC">SKU (A-Z)</option>
                     <option value="skuDESC">SKU (Z-A)</option>
                     <option value="stockValuesASC">庫存量(遞增)</option>
@@ -662,11 +732,13 @@ function generateProductManagementWithActionsContent() {
                 </select>
 
                 <label>狀態：</label>
-                <select>
+                <select id="productStatus">
                     <option value="all">全部</option>
                     <option value="stockNull">零庫存</option>
                 </select>
             </div>
+
+            <!-- 商品表格 -->
             <table class="product-table">
                 <thead>
                     <tr>
@@ -682,49 +754,116 @@ function generateProductManagementWithActionsContent() {
                     <!-- 這裡插入動態生成的商品 -->
                 </tbody>
             </table>
+
+            <!-- 頁數切換的下拉選單 -->
+            <div class="pagination-controls" style="text-align: right; margin-top: 20px;">
+                <label for="pageSelect">選擇頁數：</label>
+                <select id="pageSelect" style="border-radius: 5px; border: 1px solid #ccc;">
+                    <!-- 動態生成頁數選項 -->
+                </select>
+            </div>
         </section>
     `;
     mainContent.innerHTML = productManagementSection;
 
     const tbody = document.querySelector('.product-table tbody');
+    const resultsPerPageSelect = document.getElementById('resultsPerPage');
+    const pageSelect = document.getElementById('pageSelect');
+    const searchInput = document.getElementById('productSearchInput');
+
+    // 設置每頁顯示的商品數量
+    let resultsPerPage = parseInt(resultsPerPageSelect.value);
+    let currentPage = 1;  // 預設為第 1 頁
+    let totalPages = Math.ceil(products.length / resultsPerPage);
 
     // 動態生成每個商品的表格行
-    products.forEach((product, index) => {
-        const tr = document.createElement('tr');
+    function renderProducts(filteredProducts) {
+        tbody.innerHTML = '';  // 清空表格內容
+        const start = (currentPage - 1) * resultsPerPage;
+        const end = start + resultsPerPage;
+        const visibleProducts = filteredProducts.slice(start, end);
 
-        tr.innerHTML = `
-            <td><img src="${product.image}" alt="${product.name}"></td>
-            <td>${product.sku}</td>
-            <td>${product.name}</td>
-            <td>${product.price}</td>
-            <td>${product.stock}</td>
-            <td class="actions">
-                <button class="edit-button" data-index="${index}">修改</button>
-                <button class="delete-button" data-index="${index}">刪除</button>
-            </td>
-        `;
+        visibleProducts.forEach((product, index) => {
+            const tr = document.createElement('tr');
 
-        tbody.appendChild(tr);
-    });
+            tr.innerHTML = `
+                <td><img src="${product.image}" alt="${product.name}"></td>
+                <td>${product.sku}</td>
+                <td>${product.name}</td>
+                <td>${product.price}</td>
+                <td>${product.stock}</td>
+                <td class="actions">
+                    <button class="edit-button" data-index="${start + index}">修改</button>
+                    <button class="delete-button" data-index="${start + index}">刪除</button>
+                </td>
+            `;
 
-    // 重新為動態生成的「修改」按鈕綁定事件
-    document.querySelectorAll('.edit-button').forEach(button => {
-        button.addEventListener('click', function () {
-            const productIndex = this.getAttribute('data-index');
-            generateProductManagementEdit(products[productIndex]); // 調用商品修改頁面並傳入對應商品數據
+            tbody.appendChild(tr);
         });
+
+        // 重新綁定「修改」按鈕事件
+        document.querySelectorAll('.edit-button').forEach(button => {
+            button.addEventListener('click', function () {
+                const productIndex = this.getAttribute('data-index');
+                generateProductManagementEdit(products[productIndex]); // 調用商品修改頁面並傳入對應商品數據
+            });
+        });
+
+        // 重新綁定「刪除」按鈕事件
+        document.querySelectorAll('.delete-button').forEach(button => {
+            button.addEventListener('click', function () {
+                const productIndex = this.getAttribute('data-index');
+                if (confirm('確定要刪除這個商品嗎？')) {
+                    products.splice(productIndex, 1); // 刪除商品
+                    generateProductManagementWithActionsContent(); // 刷新商品管理頁面
+                }
+            });
+        });
+    }
+
+    // 動態生成頁數選項
+    function updatePagination(filteredProducts) {
+        pageSelect.innerHTML = '';  // 清空頁數選項
+        totalPages = Math.ceil(filteredProducts.length / resultsPerPage); // 更新總頁數
+        for (let i = 1; i <= totalPages; i++) {
+            const option = document.createElement('option');
+            option.value = i;
+            option.textContent = `第 ${i} 頁`;
+            pageSelect.appendChild(option);
+        }
+        pageSelect.value = currentPage;  // 設定當前頁數
+    }
+
+    // 搜尋商品
+    searchInput.addEventListener('input', () => {
+        const searchTerm = searchInput.value.toLowerCase();
+        const filteredProducts = products.filter(product => 
+            product.name.toLowerCase().includes(searchTerm) || product.sku.toLowerCase().includes(searchTerm)
+        );
+        currentPage = 1;  // 搜尋時將頁面重置到第 1 頁
+        updatePagination(filteredProducts);
+        renderProducts(filteredProducts);
     });
 
-    // 重新為動態生成的「刪除」按鈕綁定事件
-    document.querySelectorAll('.delete-button').forEach(button => {
-        button.addEventListener('click', function () {
-            const productIndex = this.getAttribute('data-index');
-            if (confirm('確定要刪除這個商品嗎？')) {
-                products.splice(productIndex, 1); // 刪除商品
-                generateProductManagementWithActionsContent(); // 刷新商品管理頁面
-            }
-        });
+    // 更新顯示結果數時，重新計算頁數並渲染
+    resultsPerPageSelect.addEventListener('change', () => {
+        resultsPerPage = parseInt(resultsPerPageSelect.value);
+        currentPage = 1;  // 切換每頁顯示數時，返回到第 1 頁
+        const filteredProducts = products;
+        updatePagination(filteredProducts);
+        renderProducts(filteredProducts);
     });
+
+    // 監聽頁數切換事件
+    pageSelect.addEventListener('change', () => {
+        currentPage = parseInt(pageSelect.value);
+        const filteredProducts = products;
+        renderProducts(filteredProducts);
+    });
+
+    // 初始化頁面
+    updatePagination(products);
+    renderProducts(products);
 }
 
 // 點擊"商品管理-修改"時生成內容的函數
@@ -753,9 +892,22 @@ function generateProductManagementEdit(product) {
                      <label for="name">商品名稱</label>
                      <textarea id="name" rows="1">${product.name}</textarea>
                 </div>
+				
+                <div class="form-group">
+                     <label for="price">價格</label>
+                     <textarea id="price" rows="1">${product.price}</textarea>
+                </div>
 
                 <div class="form-group">
-                    <label for="category">類別</label>
+                    <label for="category">商品類型</label>
+                    <select id="category">
+                        <option value="調理包" ${product.type === '調理包' ? 'selected' : ''}>調理包</option>
+                        <option value="食材包" ${product.type === '食材包' ? 'selected' : ''}>食材包</option>
+                    </select>
+                </div>
+				
+                <div class="form-group">
+                    <label for="category">菜品分類</label>
                     <select id="category">
                         <option value="家常料理" ${product.category === '家常料理' ? 'selected' : ''}>家常料理</option>
                         <option value="兒童友善" ${product.category === '兒童友善' ? 'selected' : ''}>兒童友善</option>
@@ -776,28 +928,6 @@ function generateProductManagementEdit(product) {
                         </select>
                     </div>
 
-                    <div class="field">
-                        <label for="difficulty">難度</label>
-                        <select id="difficulty">
-                            <option value="簡單" ${product.difficulty === '簡單' ? 'selected' : ''}>簡單</option>
-                            <option value="中等" ${product.difficulty === '中等' ? 'selected' : ''}>中等</option>
-                            <option value="困難" ${product.difficulty === '困難' ? 'selected' : ''}>困難</option>
-                        </select>
-                    </div>
-
-                    <div class="field">
-                        <label for="vegan">素食</label>
-                        <select id="vegan">
-                            <option value="否" ${product.vegan === '否' ? 'selected' : ''}>否</option>
-                            <option value="全素" ${product.vegan === '全素' ? 'selected' : ''}>全素</option>
-                            <option value="奶蛋素" ${product.vegan === '奶蛋素' ? 'selected' : ''}>奶蛋素</option>
-                        </select>
-                    </div>
-
-                    <div class="field time">
-                        <label for="time">製作時間 (分鐘)</label>
-                        <textarea id="time" rows="1">${product.time}</textarea>
-                    </div>
                 </div>
 
                 <div class="form-group">
@@ -806,18 +936,8 @@ function generateProductManagementEdit(product) {
                 </div>
 
                 <div class="form-group">
-                    <label for="description">食譜描述</label>
+                    <label for="description">商品描述</label>
                     <textarea id="description" rows="4">${product.description}</textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="ingredients">食材成分</label>
-                    <textarea id="ingredients" rows="4">${product.Ingredients}</textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="steps">作法步驟</label>
-                    <textarea id="steps" rows="4">${product.steps}</textarea>
                 </div>
 
                 <div class="form-group">
@@ -1048,119 +1168,174 @@ function generateRecipeManagementContent() {
     });
 }
 
-// 點擊"食譜管理-修改"時生成內容的函數
-function generateRecipeEditForm(recipe) {
+// 點擊"食譜管理"時生成內容的函數
+function generateRecipeManagementContent() {
     const mainContent = document.querySelector('.main-content');
-    mainContent.innerHTML = '';  // 清空之前的內容
+    mainContent.innerHTML = '';  // 清空之前的內容    
 
-    // 動態生成食譜修改的表單
-    const recipeEditForm = `
-        <section class="recipe-edit">
-            <h1>修改食譜 - ${recipe.name}</h1>
-            <div class="image-upload">
-                <div class="image-preview">
-                    <img src="${recipe.image}" alt="食譜圖片" style="width: 100%; height: auto;">
-                    <button id="uploadImageButton">上傳新圖片</button>
-                </div>
+    // 動態生成食譜管理的標題和表格
+    const recipeManagementSection = `
+        <section class="recipe-management">
+            <h1>食譜管理</h1>
+            <div class="recipeControls">
+                <label>搜尋食譜：</label>
+                <input type="text" id="recipeSearchInput" placeholder="輸入名稱" class="SearchInput">
+                
+                <label>每頁顯示結果數：</label>
+                <select id="resultsPerPage">
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+
+                <label>分類：</label>
+                <select id="category">
+                    <option value="all">全部</option>
+                    <option value="category1">家常料理</option>
+                    <option value="category2">兒童友善</option>
+                    <option value="category3">銀髮友善</option>
+                    <option value="category4">異國料理</option>
+                    <option value="category5">多人料理</option>
+                </select>
             </div>
+            <table class="recipe-table">
+                <thead>
+                    <tr>
+                        <th>圖片</th>
+                        <th>名稱</th>
+                        <th>描述</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- 這裡插入動態生成的食譜 -->
+                </tbody>
+            </table>
 
-            <form>
-                <div class="form-group">
-                     <label for="name">食譜名稱</label>
-                     <textarea id="name" rows="1">${recipe.name}</textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="category">類別</label>
-                    <select id="category">
-                        <option value="多人料理" ${recipe.category === '多人料理' ? 'selected' : ''}>多人料理</option>
-                        <option value="兒童友善" ${recipe.category === '兒童友善' ? 'selected' : ''}>兒童友善</option>
-                        <option value="異國料理" ${recipe.category === '異國料理' ? 'selected' : ''}>異國料理</option>
-                    </select>
-                </div>
-
-                <div class="form-group row-group">
-                    <div class="field">
-                        <label for="people">人數</label>
-                        <select id="people">
-                            <option value="1" ${recipe.people === 1 ? 'selected' : ''}>1人</option>
-                            <option value="2" ${recipe.people === 2 ? 'selected' : ''}>2人</option>
-                            <option value="3" ${recipe.people === 3 ? 'selected' : ''}>3人</option>
-                            <option value="4" ${recipe.people === 4 ? 'selected' : ''}>4人</option>
-                            <option value="5" ${recipe.people === 5 ? 'selected' : ''}>5人</option>
-                        </select>
-                    </div>
-
-                    <div class="field">
-                        <label for="difficulty">難度</label>
-                        <select id="difficulty">
-                            <option value="簡單" ${recipe.difficulty === '簡單' ? 'selected' : ''}>簡單</option>
-                            <option value="中等" ${recipe.difficulty === '中等' ? 'selected' : ''}>中等</option>
-                            <option value="困難" ${recipe.difficulty === '困難' ? 'selected' : ''}>困難</option>
-                        </select>
-                    </div>
-
-                    <div class="field">
-                        <label for="vegan">素食</label>
-                        <select id="vegan">
-                            <option value="否" ${recipe.vegan === '否' ? 'selected' : ''}>否</option>
-                            <option value="全素" ${recipe.vegan === '全素' ? 'selected' : ''}>全素</option>
-                        </select>
-                    </div>
-
-                    <div class="field time">
-                        <label for="time">製作時間 (分鐘)</label>
-                        <textarea id="time" rows="1">${recipe.time}</textarea>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="description">食譜描述</label>
-                    <textarea id="description" rows="4">${recipe.description}</textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="ingredients">食材成分</label>
-                    <textarea id="ingredients" rows="4">${recipe.ingredients}</textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="steps">作法步驟</label>
-                    <textarea id="steps" rows="4">${recipe.steps}</textarea>
-                </div>
-
-                <div class="form-group">
-                    <button type="submit" id="submitButton">保存修改</button>
-                    <button type="button" id="cancelButton">取消</button>
-                </div>
-            </form>
+            <!-- 分頁控制 -->
+            <div class="pagination-controls" style="text-align: right; margin-top: 20px;">
+                <label for="pageSelect">選擇頁數：</label>
+                <select id="pageSelect" style="border-radius: 5px; border: 1px solid #ccc;">
+                    <!-- 動態生成頁數選項 -->
+                </select>
+            </div>
         </section>
     `;
-    mainContent.innerHTML = recipeEditForm;
+    mainContent.innerHTML = recipeManagementSection;
 
-    // 綁定保存按鈕事件
-    document.getElementById('submitButton').addEventListener('click', function (event) {
-        event.preventDefault();
+    const tbody = document.querySelector('.recipe-table tbody');
+    const resultsPerPageSelect = document.getElementById('resultsPerPage');
+    const pageSelect = document.getElementById('pageSelect');
+    const searchInput = document.getElementById('recipeSearchInput');
+    const categorySelect = document.getElementById('category');
 
-        // 更新食譜屬性
-        recipe.name = document.getElementById('name').value;
-        recipe.category = document.getElementById('category').value;
-        recipe.people = parseInt(document.getElementById('people').value, 10);
-        recipe.difficulty = document.getElementById('difficulty').value;
-        recipe.vegan = document.getElementById('vegan').value;
-        recipe.time = parseInt(document.getElementById('time').value, 10);
-        recipe.description = document.getElementById('description').value;
-        recipe.ingredients = document.getElementById('ingredients').value;
-        recipe.steps = document.getElementById('steps').value;
+    // 設置每頁顯示的食譜數量
+    let resultsPerPage = parseInt(resultsPerPageSelect.value);
+    let currentPage = 1;  // 預設為第 1 頁
+    let totalPages = Math.ceil(recipes.length / resultsPerPage);
 
-        alert('食譜已修改！');
-        generateRecipeManagementContent();  // 返回食譜管理頁面
+    // 根據分類篩選食譜
+    function filterRecipesByCategory(category) {
+        if (category === "all") return recipes;  // 如果選擇"全部"，返回所有食譜
+        return recipes.filter(recipe => recipe.category === category);
+    }
+
+    // 動態生成每個食譜的表格行
+    function renderRecipes(filteredRecipes) {
+        tbody.innerHTML = '';  // 清空表格內容
+        const start = (currentPage - 1) * resultsPerPage;
+        const end = start + resultsPerPage;
+        const visibleRecipes = filteredRecipes.slice(start, end);
+
+        visibleRecipes.forEach((recipe, index) => {
+            const tr = document.createElement('tr');
+
+            tr.innerHTML = `
+                <td><img src="${recipe.image}" alt="${recipe.name}" class="recipe-image"></td>
+                <td>${recipe.name}</td>
+                <td style="max-width: 40vw;">${recipe.description}</td>
+                <td class="actions">
+                    <button class="edit-button" data-index="${start + index}">修改</button>
+                    <button class="delete-button" data-index="${start + index}">刪除</button>
+                </td>
+            `;
+
+            tbody.appendChild(tr);
+        });
+
+        // 綁定「修改」按鈕事件
+        document.querySelectorAll('.edit-button').forEach(button => {
+            button.addEventListener('click', function () {
+                const recipeIndex = this.getAttribute('data-index');
+                generateRecipeEditForm(recipes[recipeIndex]); // 調用食譜修改頁面並傳入對應食譜數據
+            });
+        });
+
+        // 綁定「刪除」按鈕事件
+        document.querySelectorAll('.delete-button').forEach(button => {
+            button.addEventListener('click', function () {
+                const recipeIndex = this.getAttribute('data-index');
+                if (confirm('確定要刪除這個食譜嗎？')) {
+                    recipes.splice(recipeIndex, 1); // 刪除食譜
+                    generateRecipeManagementContent(); // 刷新食譜管理頁面
+                }
+            });
+        });
+    }
+
+    // 動態生成頁數選項
+    function updatePagination(filteredRecipes) {
+        pageSelect.innerHTML = '';  // 清空頁數選項
+        totalPages = Math.ceil(filteredRecipes.length / resultsPerPage); // 更新總頁數
+        for (let i = 1; i <= totalPages; i++) {
+            const option = document.createElement('option');
+            option.value = i;
+            option.textContent = `第 ${i} 頁`;
+            pageSelect.appendChild(option);
+        }
+        pageSelect.value = currentPage;  // 設定當前頁數
+    }
+
+    // 搜尋食譜
+    searchInput.addEventListener('input', () => {
+        const searchTerm = searchInput.value.toLowerCase();
+        const filteredRecipes = recipes.filter(recipe =>
+            recipe.name.toLowerCase().includes(searchTerm)
+        );
+        currentPage = 1;  // 搜尋時將頁面重置到第 1 頁
+        updatePagination(filteredRecipes);
+        renderRecipes(filteredRecipes);
     });
 
-    // 添加取消按鈕的功能
-    document.getElementById('cancelButton').addEventListener('click', function () {
-        generateRecipeManagementContent();  // 返回食譜管理頁面
+    // 分類篩選食譜
+    categorySelect.addEventListener('change', () => {
+        const selectedCategory = categorySelect.value;
+        const filteredRecipes = filterRecipesByCategory(selectedCategory);
+        currentPage = 1;  // 篩選時頁數重置
+        updatePagination(filteredRecipes);
+        renderRecipes(filteredRecipes);
     });
+
+    // 更新顯示結果數時，重新計算頁數並渲染
+    resultsPerPageSelect.addEventListener('change', () => {
+        resultsPerPage = parseInt(resultsPerPageSelect.value);
+        currentPage = 1;  // 切換每頁顯示數時，返回到第 1 頁
+        const filteredRecipes = filterRecipesByCategory(categorySelect.value);
+        updatePagination(filteredRecipes);
+        renderRecipes(filteredRecipes);
+    });
+
+    // 監聽頁數切換事件
+    pageSelect.addEventListener('change', () => {
+        currentPage = parseInt(pageSelect.value);
+        const filteredRecipes = filterRecipesByCategory(categorySelect.value);
+        renderRecipes(filteredRecipes);
+    });
+
+    // 初始化頁面
+    const filteredRecipes = filterRecipesByCategory(categorySelect.value);
+    updatePagination(filteredRecipes);
+    renderRecipes(filteredRecipes);
 }
 
 // 點擊"庫存管理"時生成內容的函數
@@ -1177,22 +1352,22 @@ function generateStockManagementContent() {
                 <input type="text" id="productSearchInput" placeholder="輸入名稱或SKU" class="SearchInput">
                 
                 <label>每頁顯示結果數：</label>
-                <select>
+                <select id="resultsPerPage">
                     <option value="25">25</option>
                     <option value="50">50</option>
                     <option value="100">100</option>
                 </select>
 
                 <label>排序：</label>
-                <select>
-                    <option value="dateASC">價格(遞增)</option>
-                    <option value="dateDESC">價格(遞減)</option>
-                    <option value="amountASC">庫存(遞增)</option>
-                    <option value="amountDESC">庫存(遞減)</option>
+                <select id="sortOptions">
+                    <option value="priceASC">價格(遞增)</option>
+                    <option value="priceDESC">價格(遞減)</option>
+                    <option value="stockASC">庫存(遞增)</option>
+                    <option value="stockDESC">庫存(遞減)</option>
                 </select>
 
                 <label>狀態：</label>
-                <select>
+                <select id="statusFilter">
                     <option value="all">全部</option>
                     <option value="nomore">無庫存</option>
                 </select>
@@ -1213,30 +1388,141 @@ function generateStockManagementContent() {
                     <!-- 這裡插入動態生成的商品庫存 -->
                 </tbody>
             </table>
+
+            <!-- 分頁控制 -->
+            <div class="pagination-controls" style="text-align: right; margin-top: 20px;">
+                <label for="pageSelect">選擇頁數：</label>
+                <select id="pageSelect" style="border-radius: 5px; border: 1px solid #ccc;">
+                    <!-- 動態生成頁數選項 -->
+                </select>
+            </div>
         </section>
     `;
     mainContent.innerHTML = stockManagementSection;
+
     const tbody = document.querySelector('.stock-table tbody');
+    const resultsPerPageSelect = document.getElementById('resultsPerPage');
+    const pageSelect = document.getElementById('pageSelect');
+    const searchInput = document.getElementById('productSearchInput');
+    const sortOptions = document.getElementById('sortOptions');
+    const statusFilter = document.getElementById('statusFilter');
 
-    // 動態生成每個商品的庫存數量和操作按鈕
-    products.forEach((product, index) => {
-        const tr = document.createElement('tr');
+    // 設置每頁顯示的商品數量
+    let resultsPerPage = parseInt(resultsPerPageSelect.value);
+    let currentPage = 1;  // 預設為第 1 頁
+    let totalPages = Math.ceil(products.length / resultsPerPage);
 
-        tr.innerHTML = `
-            <td>
-                <img src="${product.image}" alt="${product.name}" style="width: 50px; height: 50px;">
-            </td>
-            <td>${product.sku}</td>
-            <td>${product.name}</td>
-            <td>${product.price}</td>
-            <td class="stock-quantity">${product.stock}</td>
-            <td>
-                <button class="details-link" data-index="${index}">詳情</button>
-            </td>
-        `;
+    // 根據狀態篩選商品
+    function filterProductsByStatus(status) {
+        if (status === "all") return products;  // 如果選擇"全部"，返回所有商品
+        return products.filter(product => product.stock === 0);
+    }
 
-        tbody.appendChild(tr);
+    // 根據排序選項對商品進行排序
+    function sortProducts(productsList, sortBy) {
+        if (sortBy === "priceASC") {
+            return productsList.sort((a, b) => a.price - b.price);
+        } else if (sortBy === "priceDESC") {
+            return productsList.sort((a, b) => b.price - a.price);
+        } else if (sortBy === "stockASC") {
+            return productsList.sort((a, b) => a.stock - b.stock);
+        } else if (sortBy === "stockDESC") {
+            return productsList.sort((a, b) => b.stock - a.stock);
+        }
+        return productsList;
+    }
+
+    // 動態生成每個商品的表格行
+    function renderProducts(filteredProducts) {
+        tbody.innerHTML = '';  // 清空表格內容
+        const start = (currentPage - 1) * resultsPerPage;
+        const end = start + resultsPerPage;
+        const visibleProducts = filteredProducts.slice(start, end);
+
+        visibleProducts.forEach((product, index) => {
+            const tr = document.createElement('tr');
+
+            tr.innerHTML = `
+                <td><img src="${product.image}" alt="${product.name}" style="width: 50px; height: 50px;"></td>
+                <td>${product.sku}</td>
+                <td>${product.name}</td>
+                <td>${product.price}</td>
+                <td class="stock-quantity">${product.stock}</td>
+                <td>
+                    <button class="details-link" data-index="${start + index}">詳情</button>
+                </td>
+            `;
+
+            tbody.appendChild(tr);
+        });
+    }
+
+    // 動態生成頁數選項
+    function updatePagination(filteredProducts) {
+        pageSelect.innerHTML = '';  // 清空頁數選項
+        totalPages = Math.ceil(filteredProducts.length / resultsPerPage); // 更新總頁數
+        for (let i = 1; i <= totalPages; i++) {
+            const option = document.createElement('option');
+            option.value = i;
+            option.textContent = `第 ${i} 頁`;
+            pageSelect.appendChild(option);
+        }
+        pageSelect.value = currentPage;  // 設定當前頁數
+    }
+
+    // 搜尋商品
+    searchInput.addEventListener('input', () => {
+        const searchTerm = searchInput.value.toLowerCase();
+        const filteredProducts = products.filter(product =>
+            product.name.toLowerCase().includes(searchTerm) || product.sku.toLowerCase().includes(searchTerm)
+        );
+        currentPage = 1;  // 搜尋時將頁面重置到第 1 頁
+        updatePagination(filteredProducts);
+        renderProducts(filteredProducts);
     });
+
+    // 狀態篩選商品
+    statusFilter.addEventListener('change', () => {
+        const selectedStatus = statusFilter.value;
+        let filteredProducts = filterProductsByStatus(selectedStatus);
+        filteredProducts = sortProducts(filteredProducts, sortOptions.value);
+        currentPage = 1;  // 篩選時頁數重置
+        updatePagination(filteredProducts);
+        renderProducts(filteredProducts);
+    });
+
+    // 排序功能
+    sortOptions.addEventListener('change', () => {
+        let filteredProducts = filterProductsByStatus(statusFilter.value);
+        filteredProducts = sortProducts(filteredProducts, sortOptions.value);
+        currentPage = 1;  // 改變排序時返回到第 1 頁
+        updatePagination(filteredProducts);
+        renderProducts(filteredProducts);
+    });
+
+    // 更新顯示結果數時，重新計算頁數並渲染
+    resultsPerPageSelect.addEventListener('change', () => {
+        resultsPerPage = parseInt(resultsPerPageSelect.value);
+        currentPage = 1;  // 切換每頁顯示數時，返回到第 1 頁
+        let filteredProducts = filterProductsByStatus(statusFilter.value);
+        filteredProducts = sortProducts(filteredProducts, sortOptions.value);
+        updatePagination(filteredProducts);
+        renderProducts(filteredProducts);
+    });
+
+    // 監聽頁數切換事件
+    pageSelect.addEventListener('change', () => {
+        currentPage = parseInt(pageSelect.value);
+        let filteredProducts = filterProductsByStatus(statusFilter.value);
+        filteredProducts = sortProducts(filteredProducts, sortOptions.value);
+        renderProducts(filteredProducts);
+    });
+
+    // 初始化頁面
+    let filteredProducts = filterProductsByStatus(statusFilter.value);
+    filteredProducts = sortProducts(filteredProducts, sortOptions.value);
+    updatePagination(filteredProducts);
+    renderProducts(filteredProducts);
 }
 
 // 點擊"用戶管理"時生成內容的函數
@@ -1249,22 +1535,22 @@ function generateUserManagementContent() {
         <section class="user-management">
             <h1>用戶管理</h1>
             <div class="userControls">
-                <label>搜尋：</label>
-                <input type="text" id="productSearchInput" class="SearchInput">
-                
+                <label>搜尋用戶：</label>
+                <input type="text" id="userSearchInput" class="SearchInput" placeholder="輸入用戶名或電子郵件">
+
                 <label>每頁顯示結果數：</label>
-                <select>
+                <select id="resultsPerPage">
                     <option value="25">25</option>
                     <option value="50">50</option>
                     <option value="100">100</option>
                 </select>
 
                 <label>排序：</label>
-                <select>
-                    <option value="dateASC">用戶名(遞增)</option>
-                    <option value="dateDESC">價格(遞減)</option>
-                    <option value="amountASC">庫存(遞增)</option>
-                    <option value="amountDESC">庫存(遞減)</option>
+                <select id="sortOptions">
+                    <option value="usernameASC">用戶名(遞增)</option>
+                    <option value="usernameDESC">用戶名(遞減)</option>
+                    <option value="createdAtASC">創建時間(遞增)</option>
+                    <option value="createdAtDESC">創建時間(遞減)</option>
                 </select>
             </div>
             <table class="user-table">
@@ -1283,160 +1569,307 @@ function generateUserManagementContent() {
                     <!-- 這裡插入動態生成的用戶 -->
                 </tbody>
             </table>
+
+            <!-- 分頁控制 -->
+            <div class="pagination-controls" style="text-align: right; margin-top: 20px;">
+                <label for="pageSelect">選擇頁數：</label>
+                <select id="pageSelect">
+                    <!-- 動態生成頁數選項 -->
+                </select>
+            </div>
         </section>
     `;
     mainContent.innerHTML = userManagementSection;
 
     const tbody = document.querySelector('.user-table tbody');
+    const resultsPerPageSelect = document.getElementById('resultsPerPage');
+    const pageSelect = document.getElementById('pageSelect');
+    const searchInput = document.getElementById('userSearchInput');
+    const sortOptions = document.getElementById('sortOptions');
+
+    // 設置每頁顯示的用戶數量
+    let resultsPerPage = parseInt(resultsPerPageSelect.value);
+    let currentPage = 1;  // 預設為第 1 頁
+    let totalPages = Math.ceil(users.length / resultsPerPage);
+
+    // 根據排序選項對用戶進行排序
+    function sortUsers(usersList, sortBy) {
+        if (sortBy === "usernameASC") {
+            return usersList.sort((a, b) => a.username.localeCompare(b.username));
+        } else if (sortBy === "usernameDESC") {
+            return usersList.sort((a, b) => b.username.localeCompare(a.username));
+        } else if (sortBy === "createdAtASC") {
+            return usersList.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+        } else if (sortBy === "createdAtDESC") {
+            return usersList.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        }
+        return usersList;
+    }
 
     // 動態生成每個用戶的表格行
-    users.forEach((user, index) => {
-        const tr = document.createElement('tr');
+    function renderUsers(filteredUsers) {
+        tbody.innerHTML = '';  // 清空表格內容
+        const start = (currentPage - 1) * resultsPerPage;
+        const end = start + resultsPerPage;
+        const visibleUsers = filteredUsers.slice(start, end);
 
-        tr.innerHTML = `
-            <td>${user.userId}</td>
-            <td>${user.username}</td>
-            <td>${user.email}</td>
-            <td>${user.phoneNumber}</td>
-            <td>${user.createdAt}</td>
-            <td>${user.updatedAt}</td>
-            <td class="actions">
-                <button class="edit-button" data-index="${index}">詳情</button>
-            </td>
-        `;
+        visibleUsers.forEach((user, index) => {
+            const tr = document.createElement('tr');
 
-        tbody.appendChild(tr);
-    });
+            tr.innerHTML = `
+                <td>${user.userId}</td>
+                <td>${user.username}</td>
+                <td>${user.email}</td>
+                <td>${user.phoneNumber}</td>
+                <td>${user.createdAt}</td>
+                <td>${user.updatedAt}</td>
+                <td class="actions">
+                    <button class="edit-button" data-index="${start + index}">詳情</button>
+                </td>
+            `;
 
-    // 綁定詳情按鈕的事件
-    document.querySelectorAll('.edit-button').forEach(button => {
-        button.addEventListener('click', function () {
-            const userIndex = this.getAttribute('data-index');
-            generateUserEditForm(users[userIndex]);  // 調用用戶修改表單
+            tbody.appendChild(tr);
         });
+
+        // 綁定「詳情」按鈕的事件
+        document.querySelectorAll('.edit-button').forEach(button => {
+            button.addEventListener('click', function () {
+                const userIndex = this.getAttribute('data-index');
+                generateUserEditForm(users[userIndex]);  // 調用用戶修改表單
+            });
+        });
+    }
+
+    // 動態生成頁數選項
+    function updatePagination(filteredUsers) {
+        pageSelect.innerHTML = '';  // 清空頁數選項
+        totalPages = Math.ceil(filteredUsers.length / resultsPerPage); // 更新總頁數
+        for (let i = 1; i <= totalPages; i++) {
+            const option = document.createElement('option');
+            option.value = i;
+            option.textContent = `第 ${i} 頁`;
+            pageSelect.appendChild(option);
+        }
+        pageSelect.value = currentPage;  // 設定當前頁數
+    }
+
+    // 搜尋用戶
+    searchInput.addEventListener('input', () => {
+        const searchTerm = searchInput.value.toLowerCase();
+        const filteredUsers = users.filter(user =>
+            user.username.toLowerCase().includes(searchTerm) || user.email.toLowerCase().includes(searchTerm)
+        );
+        currentPage = 1;  // 搜尋時將頁面重置到第 1 頁
+        updatePagination(filteredUsers);
+        renderUsers(filteredUsers);
     });
+
+    // 排序功能
+    sortOptions.addEventListener('change', () => {
+        let filteredUsers = users;
+        filteredUsers = sortUsers(filteredUsers, sortOptions.value);
+        currentPage = 1;  // 改變排序時返回到第 1 頁
+        updatePagination(filteredUsers);
+        renderUsers(filteredUsers);
+    });
+
+    // 更新顯示結果數時，重新計算頁數並渲染
+    resultsPerPageSelect.addEventListener('change', () => {
+        resultsPerPage = parseInt(resultsPerPageSelect.value);
+        currentPage = 1;  // 切換每頁顯示數時，返回到第 1 頁
+        let filteredUsers = users;
+        filteredUsers = sortUsers(filteredUsers, sortOptions.value);
+        updatePagination(filteredUsers);
+        renderUsers(filteredUsers);
+    });
+
+    // 監聽頁數切換事件
+    pageSelect.addEventListener('change', () => {
+        currentPage = parseInt(pageSelect.value);
+        let filteredUsers = users;
+        filteredUsers = sortUsers(filteredUsers, sortOptions.value);
+        renderUsers(filteredUsers);
+    });
+
+    // 初始化頁面
+    let filteredUsers = users;
+    filteredUsers = sortUsers(filteredUsers, sortOptions.value);
+    updatePagination(filteredUsers);
+    renderUsers(filteredUsers);
 }
 
-// 點擊"用戶管理-詳情"時生成內容的函數
-function generateUserEditForm(user) {
+
+// 點擊"用戶管理"時生成內容的函數
+function generateUserManagementContent() {
     const mainContent = document.querySelector('.main-content');
-    mainContent.innerHTML = '';  // 清空之前的內容
+    mainContent.innerHTML = '';  // 清空之前的內容    
 
-    // 動態生成用戶修改的表單
-    const userEditForm = `
-        <section class="user-edit">
-            <h1>修改用戶 - ${user.username}</h1>
+    // 動態生成用戶管理的標題和表格
+    const userManagementSection = `
+        <section class="user-management">
+            <h1>用戶管理</h1>
+            <div class="userControls">
+                <label>搜尋用戶：</label>
+                <input type="text" id="userSearchInput" class="SearchInput" placeholder="輸入用戶名或電子郵件">
 
-            <form>
-                <div class="form-group">
-                    <label for="userId">用戶ID</label>
-                    <textarea id="userId" rows="1" readonly>${user.userId}</textarea>
-                </div>
+                <label>每頁顯示結果數：</label>
+                <select id="resultsPerPage">
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
 
-                <div class="form-group">
-                    <label for="username">用戶名</label>
-                    <textarea id="username" rows="1">${user.username}</textarea>
-                </div>
-                <div class="form-group row-group">
-                    <div class="field name">
-                        <label for="firstName">姓氏</label>
-                        <textarea id="firstName" rows="1">${user.lastName}</textarea>
-                    </div>
+                <label>排序：</label>
+                <select id="sortOptions">
+                    <option value="usernameASC">用戶名(遞增)</option>
+                    <option value="usernameDESC">用戶名(遞減)</option>
+                    <option value="createdAtASC">創建時間(遞增)</option>
+                    <option value="createdAtDESC">創建時間(遞減)</option>
+                </select>
+            </div>
+            <table class="user-table">
+                <thead>
+                    <tr>
+                        <th>用戶ID</th>
+                        <th>用戶名</th>
+                        <th>電子郵件</th>
+                        <th>電話號碼</th>
+                        <th>創建時間</th>
+                        <th>更新時間</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- 這裡插入動態生成的用戶 -->
+                </tbody>
+            </table>
 
-                    <div class="field name">
-                        <label for="lastName">名字</label>
-                        <textarea id="lastName" rows="1">${user.firstName}</textarea>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="email">電子郵件</label>
-                    <textarea id="email" rows="1">${user.email}</textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="password">密碼</label>
-                    <textarea id="password" rows="1">${user.password}</textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="phoneNumber">電話號碼</label>
-                    <textarea id="phoneNumber" rows="1">${user.phoneNumber}</textarea>
-                </div>
-                
-                <div class="form-group row-group">
-                    <div class="field post">
-                        <label for="city">城市</label>
-                        <textarea id="city" rows="1">${user.city}</textarea>
-                    </div>
-                    
-                    <div class="field post">
-                        <label for="postalCode">郵遞區號</label>
-                        <textarea id="postalCode" rows="1">${user.postalCode}</textarea>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="address">地址</label>
-                    <textarea id="address" rows="1">${user.address}</textarea>
-                </div>
-                
-                <div class="form-group">
-                    <label for="createdAt">創建時間</label>
-                    <textarea id="createdAt" rows="1" readonly>${user.createdAt}</textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="updatedAt">更新時間</label>
-                    <textarea id="updatedAt" rows="1" readonly>${user.updatedAt}</textarea>
-                </div>
-
-                <div class="form-group action-buttons">
-                    <div>
-                        <button id="saveButton">確認修改</button>
-                        <button id="cancelButton">取消</button>
-                    </div>
-                    <div>
-                        <button id="deleteButton">刪除用戶</button>
-                    </div>
-                </div>
-            </form>
+            <!-- 分頁控制 -->
+            <div class="pagination-controls" style="text-align: right; margin-top: 20px;">
+                <label for="pageSelect">選擇頁數：</label>
+                <select id="pageSelect" style="border-radius: 5px; border: 1px solid #ccc;">
+                    <!-- 動態生成頁數選項 -->
+                </select>
+            </div>
         </section>
     `;
-    mainContent.innerHTML = userEditForm;
+    mainContent.innerHTML = userManagementSection;
 
-    // 綁定按鈕事件
-    document.getElementById('saveButton').addEventListener('click', function (event) {
-        event.preventDefault();
+    const tbody = document.querySelector('.user-table tbody');
+    const resultsPerPageSelect = document.getElementById('resultsPerPage');
+    const pageSelect = document.getElementById('pageSelect');
+    const searchInput = document.getElementById('userSearchInput');
+    const sortOptions = document.getElementById('sortOptions');
 
-        // 更新用戶屬性
-        user.username = document.getElementById('username').value;
-        user.firstName = document.getElementById('firstName').value;
-        user.lastName = document.getElementById('lastName').value;
-        user.email = document.getElementById('email').value;
-        user.password = document.getElementById('password').value;
-        user.phoneNumber = document.getElementById('phoneNumber').value;
-        user.address = document.getElementById('address').value;
-        user.city = document.getElementById('city').value;
-        user.postalCode = document.getElementById('postalCode').value;
+    // 設置每頁顯示的用戶數量
+    let resultsPerPage = parseInt(resultsPerPageSelect.value);
+    let currentPage = 1;  // 預設為第 1 頁
+    let totalPages = Math.ceil(users.length / resultsPerPage);
 
-        alert('用戶已修改！');
-        generateUserManagementContent();  // 返回用戶管理頁面
-    });
-
-    document.getElementById('cancelButton').addEventListener('click', function () {
-        generateUserManagementContent();  // 返回用戶管理頁面
-    });
-
-    document.getElementById('deleteButton').addEventListener('click', function () {
-        if (confirm('確定要刪除這個用戶嗎？')) {
-            const userIndex = users.indexOf(user);
-            if (userIndex !== -1) {
-                users.splice(userIndex, 1);  // 刪除用戶
-                generateUserManagementContent();  // 返回用戶管理頁面
-            }
+    // 根據排序選項對用戶進行排序
+    function sortUsers(usersList, sortBy) {
+        if (sortBy === "usernameASC") {
+            return usersList.sort((a, b) => a.username.localeCompare(b.username));
+        } else if (sortBy === "usernameDESC") {
+            return usersList.sort((a, b) => b.username.localeCompare(a.username));
+        } else if (sortBy === "createdAtASC") {
+            return usersList.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+        } else if (sortBy === "createdAtDESC") {
+            return usersList.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
         }
+        return usersList;
+    }
+
+    // 動態生成每個用戶的表格行
+    function renderUsers(filteredUsers) {
+        tbody.innerHTML = '';  // 清空表格內容
+        const start = (currentPage - 1) * resultsPerPage;
+        const end = start + resultsPerPage;
+        const visibleUsers = filteredUsers.slice(start, end);
+
+        visibleUsers.forEach((user, index) => {
+            const tr = document.createElement('tr');
+
+            tr.innerHTML = `
+                <td>${user.userId}</td>
+                <td>${user.username}</td>
+                <td>${user.email}</td>
+                <td>${user.phoneNumber}</td>
+                <td>${user.createdAt}</td>
+                <td>${user.updatedAt}</td>
+                <td class="actions">
+                    <button class="edit-button" data-index="${start + index}">詳情</button>
+                </td>
+            `;
+
+            tbody.appendChild(tr);
+        });
+
+        // 綁定「詳情」按鈕的事件
+        document.querySelectorAll('.edit-button').forEach(button => {
+            button.addEventListener('click', function () {
+                const userIndex = this.getAttribute('data-index');
+                generateUserEditForm(users[userIndex]);  // 調用用戶修改表單
+            });
+        });
+    }
+
+    // 動態生成頁數選項
+    function updatePagination(filteredUsers) {
+        pageSelect.innerHTML = '';  // 清空頁數選項
+        totalPages = Math.ceil(filteredUsers.length / resultsPerPage); // 更新總頁數
+        for (let i = 1; i <= totalPages; i++) {
+            const option = document.createElement('option');
+            option.value = i;
+            option.textContent = `第 ${i} 頁`;
+            pageSelect.appendChild(option);
+        }
+        pageSelect.value = currentPage;  // 設定當前頁數
+    }
+
+    // 搜尋用戶
+    searchInput.addEventListener('input', () => {
+        const searchTerm = searchInput.value.toLowerCase();
+        const filteredUsers = users.filter(user =>
+            user.username.toLowerCase().includes(searchTerm) || user.email.toLowerCase().includes(searchTerm)
+        );
+        currentPage = 1;  // 搜尋時將頁面重置到第 1 頁
+        updatePagination(filteredUsers);
+        renderUsers(filteredUsers);
     });
+
+    // 排序功能
+    sortOptions.addEventListener('change', () => {
+        let filteredUsers = users;
+        filteredUsers = sortUsers(filteredUsers, sortOptions.value);
+        currentPage = 1;  // 改變排序時返回到第 1 頁
+        updatePagination(filteredUsers);
+        renderUsers(filteredUsers);
+    });
+
+    // 更新顯示結果數時，重新計算頁數並渲染
+    resultsPerPageSelect.addEventListener('change', () => {
+        resultsPerPage = parseInt(resultsPerPageSelect.value);
+        currentPage = 1;  // 切換每頁顯示數時，返回到第 1 頁
+        let filteredUsers = users;
+        filteredUsers = sortUsers(filteredUsers, sortOptions.value);
+        updatePagination(filteredUsers);
+        renderUsers(filteredUsers);
+    });
+
+    // 監聽頁數切換事件
+    pageSelect.addEventListener('change', () => {
+        currentPage = parseInt(pageSelect.value);
+        let filteredUsers = users;
+        filteredUsers = sortUsers(filteredUsers, sortOptions.value);
+        renderUsers(filteredUsers);
+    });
+
+    // 初始化頁面
+    let filteredUsers = users;
+    filteredUsers = sortUsers(filteredUsers, sortOptions.value);
+    updatePagination(filteredUsers);
+    renderUsers(filteredUsers);
 }
 
 // 點擊"優惠券管理"時生成內容的函數

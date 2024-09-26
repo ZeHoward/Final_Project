@@ -2,24 +2,14 @@ package tw.luna.FinalTest.model;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.List;
 
+import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EntityListeners;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
 
 @Entity
 @Table(name="products")
@@ -56,6 +46,18 @@ public class Product {
 	
 	@Column(name = "isDel", columnDefinition = "TINYINT(1) DEFAULT 0")
 	private Boolean isDel;
+
+	// 新增一對多關係，商品可以有多張圖片
+	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+	private List<ProductImage> images;
+
+	public List<ProductImage> getImages() {
+		return images;
+	}
+
+	public void setImages(List<ProductImage> images) {
+		this.images = images;
+	}
 
 
 	public Integer getProductId() {
