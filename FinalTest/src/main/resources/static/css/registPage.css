@@ -1,0 +1,78 @@
+
+  /************************/
+  .regist>div{
+    margin-bottom: 30px;
+  }
+
+  .regist{
+    padding: 5% 0;
+    text-align: center;
+    margin: 0 auto;
+    width: 400px;
+    font-weight: bold;
+  }
+
+  .registTopP{
+    margin-bottom: 10%;
+    font-size: 30px;
+  }
+
+  .registInput{
+    margin-top: 10px;
+    border: 1px solid #a1c14b;
+    border-radius: 10px;
+    padding: 10px;
+    width: 100%;
+}
+	
+.registButton{
+  margin-top: 50px;
+  margin-bottom: 20px;
+  background-color: #a1c14b; 
+  color: white; 
+  border: none; 
+  padding: 15px 60px;
+  border-radius: 10px; 
+  font-size: 16px; 
+  cursor: pointer;
+  width: 100%;
+}
+
+.registButton:hover{
+	color:black;
+}
+
+.isMemberP{
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  color: #656565;
+}
+
+.isMemberA{
+  text-decoration: none;
+  color: black;
+}
+
+.isMemberA:hover{
+  color: #f3ce6e ;
+}
+
+
+#passwordRegexCheck{
+  color: red;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+#passwordDifferent{
+  color: red;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+#emailRegexCheck{
+  color: red;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
