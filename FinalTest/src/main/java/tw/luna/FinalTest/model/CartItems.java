@@ -10,14 +10,13 @@ import org.hibernate.annotations.DynamicUpdate;
 
 @DynamicUpdate
 @Entity
-@Table (name = "cartitems")
+@Table(name = "cartitems")
 public class CartItems {
 
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cartitemsId")
     private Integer cartitemsId;
-
 
     @ManyToOne
     @JoinColumn(name = "cartId", nullable = false)
@@ -35,9 +34,11 @@ public class CartItems {
     @Column(name = "price", nullable = false)
     private Integer price;
 
+    // 無參數構造函數
     public CartItems() {
     }
 
+    // 全參數構造函數
     public CartItems(Integer cartitemsId, Cart cart, Product product, Integer quantity, Integer price) {
         this.cartitemsId = cartitemsId;
         this.cart = cart;
@@ -84,10 +85,6 @@ public class CartItems {
 
     public void setPrice(Integer price) {
         this.price = price;
-    }
-
-
-    public CartItems(Cart cart, Product product, Integer quantity, Integer price) {
     }
 
     @Override
