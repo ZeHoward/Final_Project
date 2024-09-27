@@ -1,10 +1,18 @@
 package tw.luna.FinalTest.model;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -16,17 +24,19 @@ public class Order {
 	@Column(name = "orderId")
 	private Integer orderId;
 
-	@Column(name = "userId")
-	private Integer userId;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "userId", nullable = false)
+    private Users user;
 
-	@Column(name = "cartId")
-	private Integer cartId;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "cartId", nullable = false)
+    private Cart cart;
 
 	@Column(name = "couponId")
 	private Integer couponId;
 
-//	@Column(name = "orderDate")
-//	private LocalDateTime orderDate;
+	@Column(name = "orderDate")
+	private LocalDateTime orderDate;
 
 	@Column(name = "totalAmount")
 	private Integer totalAmount;
@@ -42,6 +52,12 @@ public class Order {
 
 	@Column(name = "status")
 	private String status;
+	
+	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<OrderDetails> orderDetails;
+
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Payment> payments;
 
 	public Integer getOrderId() {
 		return orderId;
@@ -51,20 +67,36 @@ public class Order {
 		this.orderId = orderId;
 	}
 
-	public Integer getUserId() {
-		return userId;
+	public Users getUser() {
+		return user;
 	}
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+	public void setUser(Users user) {
+		this.user = user;
 	}
 
-	public Integer getCartId() {
-		return cartId;
+	public Cart getCart() {
+		return cart;
 	}
 
-	public void setCartId(Integer cartId) {
-		this.cartId = cartId;
+	public void setCart(Cart cart) {
+		this.cart = cart;
+	}
+
+	public List<OrderDetails> getOrderDetails() {
+		return orderDetails;
+	}
+
+	public void setOrderDetails(List<OrderDetails> orderDetails) {
+		this.orderDetails = orderDetails;
+	}
+
+	public List<Payment> getPayments() {
+		return payments;
+	}
+
+	public void setPayments(List<Payment> payments) {
+		this.payments = payments;
 	}
 
 	public Integer getCouponId() {
@@ -75,13 +107,13 @@ public class Order {
 		this.couponId = couponId;
 	}
 
-//	public LocalDateTime getOrderDate() {
-//		return orderDate;
-//	}
-//
-//	public void setOrderDate(LocalDateTime orderDate) {
-//		this.orderDate = orderDate;
-//	}
+	public LocalDateTime getOrderDate() {
+		return orderDate;
+	}
+
+	public void setOrderDate(LocalDateTime orderDate) {
+		this.orderDate = orderDate;
+	}
 
 	public Integer getTotalAmount() {
 		return totalAmount;

@@ -45,7 +45,7 @@ public class RecipesService {
 		if (recipe != null) {
 			// 更新食譜的屬性
 			recipe.setTitle(recipeDetails.getTitle());
-			recipe.setProductId(recipeDetails.getProductId());
+			recipe.setProduct(recipeDetails.getProduct());
 			recipe.setSteps(recipeDetails.getSteps());
 			recipe.setIngredients(recipeDetails.getIngredients());
 			recipe.setNotes(recipeDetails.getNotes());

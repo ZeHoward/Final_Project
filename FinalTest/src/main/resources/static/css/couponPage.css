@@ -1,0 +1,29 @@
+.couponPage{
+  padding: 2% 0;
+  text-align: center;
+  margin: 0 auto;
+  width: 600px;
+  font-weight: bold;
+  
+}
+
+.couponPage > p:first-child{
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+
+.couponPageImg{
+  margin-bottom: 20px;
+  width: 600px;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.couponPageImg:hover{
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+.couponPageImg:active{
+  transform: scale(1.03);
+}

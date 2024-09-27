@@ -13,4 +13,6 @@ public interface ProductImageService {
 	ProductImage saveProductImage(ProductImage productImage);
 
 	void deleteProductImage(Long id);
+	
+	List<ProductImage>getImagesByProductId(Integer productId);
 }

@@ -313,14 +313,14 @@ canvas {
     color: #333;
 }
 
-.orderControls {
+.orderControls, .pagination-controls {
     display: flex;
     justify-content:end;
     align-items: center;
     margin-bottom: 20px;
 }
 
-.orderControls label {
+.orderControls label, .pagination-controls {
     font-weight: bold;
     margin-right: 10px;
 }

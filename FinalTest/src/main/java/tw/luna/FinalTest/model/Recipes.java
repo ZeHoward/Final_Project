@@ -1,11 +1,7 @@
 package tw.luna.FinalTest.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "recipes")
@@ -16,11 +12,13 @@ public class Recipes {
 	@Column(name = "recipeId")
 	private Integer recipeId;
 
+	@OneToOne
+	@JoinColumn(name = "productId")
+	@JsonBackReference("product_recipes")
+	private Product product;
+
 	@Column(name = "title", length = 255)
 	private String title;
-
-	@Column(name = "productId")
-	private Integer productId;
 
 	@Column(name = "steps", columnDefinition = "TEXT")
 	private String steps;
@@ -40,6 +38,29 @@ public class Recipes {
 	@Column(name = "isDel", columnDefinition = "TINYINT(1)")
 	private Boolean isDel;
 
+	public Recipes() {
+	}
+
+	public Recipes(Integer recipeId, Product product, String title, String steps, String ingredients, String notes, Integer servings, Integer cookTime, Boolean isDel) {
+		this.recipeId = recipeId;
+		this.product = product;
+		this.title = title;
+		this.steps = steps;
+		this.ingredients = ingredients;
+		this.notes = notes;
+		this.servings = servings;
+		this.cookTime = cookTime;
+		this.isDel = isDel;
+	}
+
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+
 	public Integer getRecipeId() {
 		return recipeId;
 	}
@@ -56,13 +77,7 @@ public class Recipes {
 		this.title = title;
 	}
 
-	public Integer getProductId() {
-		return productId;
-	}
 
-	public void setProductId(Integer productId) {
-		this.productId = productId;
-	}
 
 	public String getSteps() {
 		return steps;

@@ -47,16 +47,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // 會員功能菜單顯示/隱藏
     let memberInfoDiv = document.getElementById("memberInfoDiv");
+	let slideshowContainer =document.getElementById("slideshow-container");
     let isMemberDivVisible = false; // 初始為隱藏
 
     document.getElementById('memberIcon').addEventListener('click', (e) => {
         e.stopPropagation(); // 防止點擊會員圖標時觸發頁面其他地方的點擊事件
         if (isMemberDivVisible) {
             memberInfoDiv.style.display = "none";
+			slideshowContainer.style.zIndex=5;
             isMemberDivVisible = false;
         } else {
             memberInfoDiv.style.display = "block";
             isMemberDivVisible = true;
+			slideshowContainer.style.zIndex=-1;
         }
     });
 
@@ -64,6 +67,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.addEventListener('click', function (e) {
         if (isMemberDivVisible && !memberInfoDiv.contains(e.target)) {
             memberInfoDiv.style.display = "none";
+			slideshowContainer.style.zIndex=5;
             isMemberDivVisible = false;
         }
     });
@@ -104,6 +108,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         if (isMemberDivVisible) {
             memberInfoDiv.style.display = "none";
+			slideshowContainer.style.zIndex=5;
             isMemberDivVisible = false;
         }
 
