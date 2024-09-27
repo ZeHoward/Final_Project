@@ -154,6 +154,13 @@ public class Users {
 		this.token = token;
 	}
 
+	@Override
+	public String toString() {
+		return "Users [userId=" + userId + ", username=" + username + ", email=" + email + ", password=" + password
+				+ ", phoneNumber=" + phoneNumber + ", token=" + token + ", userinfo=" + userinfo + ", cart=" + cart
+				+ "]";
+	}
+
 //	public List<UserFavoritesProducts> getUserFavoritesProducts() {
 //		return userFavoritesProducts;
 //	}
@@ -179,7 +186,15 @@ public class Users {
 //	}
 
 
-	
-	
-
+	@Override
+	public String toString() {
+		return "Users{" +
+				"token='" + token + '\'' +
+				", phoneNumber='" + phoneNumber + '\'' +
+				", password='" + password + '\'' +
+				", email='" + email + '\'' +
+				", username='" + username + '\'' +
+				", userId=" + userId +
+				'}';
+	}
 }

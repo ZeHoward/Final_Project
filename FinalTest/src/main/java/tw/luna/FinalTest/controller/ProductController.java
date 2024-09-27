@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.servlet.http.HttpSession;
 import tw.luna.FinalTest.model.Product;
+import tw.luna.FinalTest.model.Users;
 import tw.luna.FinalTest.service.ProductService;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,6 +25,10 @@ public class ProductController {
 	@Autowired
 	private ProductService productService;
 	
+	@Autowired
+	private HttpSession session;
+	
+	
 	//查詢所有商品
 	@GetMapping
 	public List<Product> getAllProducts() {
@@ -35,6 +41,16 @@ public class ProductController {
 		return productService.findProductById(id).orElse(null);
 	}
 	
+	//根據id查詢產品
+//	@GetMapping("/{id}")
+//	public Product getProductById(@PathVariable Integer id) {
+//		Users loggedInUser = (Users)session.getAttribute("loggedInUser");
+//		System.out.println(loggedInUser);
+//		Integer userId = loggedInUser.getUserId().intValue();
+//		
+//		return productService.findProductById(userId).orElse(null);
+//	}
+//	
 	//模糊查詢
 	@GetMapping("/search")
 	public List<Product> searchProductsByName(@RequestParam String keyword){

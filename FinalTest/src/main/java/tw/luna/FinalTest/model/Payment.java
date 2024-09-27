@@ -35,6 +35,16 @@ public class Payment {
     @Column(name = "paymentDate")
     private LocalDateTime paymentDate;
 
+    public Payment() {
+    }
+
+    public Payment(Integer paymentId, Order order, Integer paymentAmount, LocalDateTime paymentDate) {
+        this.paymentId = paymentId;
+        this.order = order;
+        this.paymentAmount = paymentAmount;
+        this.paymentDate = paymentDate;
+    }
+
     public Integer getPaymentId() {
         return paymentId;
     }
