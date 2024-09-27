@@ -82,6 +82,14 @@ public class Users {
 		this.cart = cart;
 	}
 
+	public List<Order> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
+	}
+
 	public Cart getCart() {
 		return cart;
 	}
