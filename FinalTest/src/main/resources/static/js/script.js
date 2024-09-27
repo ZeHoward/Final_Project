@@ -124,97 +124,97 @@ generateOverviewContent(); // 預設總覽頁面為首頁
 //     }
 // ];
 
-// 假資料，模擬不同商品
-const products = [
-    {
-        index: '1',
-        name: '商品名稱1',
-        sku: 'ABC-66',
-        image: '紅大頭.png',
-        category: '異國料理',
-        servings: 3,
-        difficulty: '中等',
-        vegan: '否',
-        time: '40',
-        price: 500,
-        description: '一道經典的肉醬義大利麵，肉醬味道濃郁，搭配煮得恰到好處的義大利麵，簡單且美味，適合全家人享用',
-        Ingredients: '義大利麵200g,牛絞肉 150g,番茄醬 1 杯,洋蔥 1 顆（切丁）,大蒜 2 瓣（切碎）,橄欖油 2 湯匙',
-        steps: '用手做，再說一次用手做',
-        stock: '50',
-    },
-    {
-        index: '2',
-        name: '商品名稱2',
-        sku: 'ABC-66',
-        image: '紅大頭.png',
-        category: '異國料理',
-        servings: 3,
-        difficulty: '中等',
-        vegan: '否',
-        time: '40',
-        price: 500,
-        description: '一道經典的肉醬義大利麵，肉醬味道濃郁，搭配煮得恰到好處的義大利麵，簡單且美味，適合全家人享用',
-        Ingredients: '義大利麵200g,牛絞肉 150g,番茄醬 1 杯,洋蔥 1 顆（切丁）,大蒜 2 瓣（切碎）,橄欖油 2 湯匙',
-        steps: '用手做，再說一次用手做',
-        stock: '50',
-    },
-    {
-        index: '3',
-        name: '商品名稱3',
-        sku: 'ABC-66',
-        image: '紅大頭.png',
-        category: '異國料理',
-        servings: 3,
-        difficulty: '中等',
-        vegan: '否',
-        time: '80',
-        price: 500,
-        description: '一道經典的肉醬義大利麵，肉醬味道濃郁，搭配煮得恰到好處的義大利麵，簡單且美味，適合全家人享用',
-        Ingredients: '義大利麵200g,牛絞肉 150g,番茄醬 1 杯,洋蔥 1 顆（切丁）,大蒜 2 瓣（切碎）,橄欖油 2 湯匙',
-        steps: '用手做，再說一次用手做',
-        stock: '50',
-    }
-];
+// // 假資料，模擬不同商品
+// const products = [
+//     {
+//         index: '1',
+//         name: '商品名稱1',
+//         sku: 'ABC-66',
+//         image: '紅大頭.png',
+//         category: '異國料理',
+//         servings: 3,
+//         difficulty: '中等',
+//         vegan: '否',
+//         time: '40',
+//         price: 500,
+//         description: '一道經典的肉醬義大利麵，肉醬味道濃郁，搭配煮得恰到好處的義大利麵，簡單且美味，適合全家人享用',
+//         Ingredients: '義大利麵200g,牛絞肉 150g,番茄醬 1 杯,洋蔥 1 顆（切丁）,大蒜 2 瓣（切碎）,橄欖油 2 湯匙',
+//         steps: '用手做，再說一次用手做',
+//         stock: '50',
+//     },
+//     {
+//         index: '2',
+//         name: '商品名稱2',
+//         sku: 'ABC-66',
+//         image: '紅大頭.png',
+//         category: '異國料理',
+//         servings: 3,
+//         difficulty: '中等',
+//         vegan: '否',
+//         time: '40',
+//         price: 500,
+//         description: '一道經典的肉醬義大利麵，肉醬味道濃郁，搭配煮得恰到好處的義大利麵，簡單且美味，適合全家人享用',
+//         Ingredients: '義大利麵200g,牛絞肉 150g,番茄醬 1 杯,洋蔥 1 顆（切丁）,大蒜 2 瓣（切碎）,橄欖油 2 湯匙',
+//         steps: '用手做，再說一次用手做',
+//         stock: '50',
+//     },
+//     {
+//         index: '3',
+//         name: '商品名稱3',
+//         sku: 'ABC-66',
+//         image: '紅大頭.png',
+//         category: '異國料理',
+//         servings: 3,
+//         difficulty: '中等',
+//         vegan: '否',
+//         time: '80',
+//         price: 500,
+//         description: '一道經典的肉醬義大利麵，肉醬味道濃郁，搭配煮得恰到好處的義大利麵，簡單且美味，適合全家人享用',
+//         Ingredients: '義大利麵200g,牛絞肉 150g,番茄醬 1 杯,洋蔥 1 顆（切丁）,大蒜 2 瓣（切碎）,橄欖油 2 湯匙',
+//         steps: '用手做，再說一次用手做',
+//         stock: '50',
+//     }
+// ];
 
-// 假資料，模擬不同食譜
-const recipes = [
-    {
-        image: '紅大頭.png',
-        name: '肉醬義大利麵',
-        description: '一道經典的肉醬義大利麵，搭配濃郁的番茄醬和牛肉，簡單美味，適合全家人享用。',
-        category: '異國料理',
-        people: 4,
-        difficulty: '中等',
-        vegan: '否',
-        time: '45',
-        ingredients: '義大利麵 200g, 牛絞肉 150g, 番茄醬 1 杯, 洋蔥 1 顆 (切丁), 大蒜 2 瓣 (切碎), 橄欖油 2 湯匙, 鹽與胡椒適量',
-        steps: '1. 先煮義大利麵，根據包裝說明進行。2. 加熱橄欖油，炒洋蔥和大蒜直到金黃。3. 加入牛絞肉，炒熟。4. 倒入番茄醬，煮滾後轉小火煨煮10分鐘。5. 將煮好的義大利麵拌入醬汁，調味後即可享用。'
-    },
-    {
-        image: '紅大頭.png',
-        name: '奶油雞肉蘑菇濃湯',
-        description: '豐富的口感與濃郁的香味，是一份溫暖又美味的湯品。',
-        category: '家常料理',
-        people: 2,
-        difficulty: '簡單',
-        vegan: '否',
-        time: '30',
-        ingredients: '雞胸肉 200g, 蘑菇 100g, 洋蔥 1 顆 (切丁), 奶油 30g, 牛奶 300ml, 麵粉 2 湯匙, 鹽與胡椒適量',
-        steps: '1. 雞胸肉切塊，蘑菇切片。2. 加熱奶油，炒洋蔥至軟。3. 加入雞肉，炒至變色。4. 加入麵粉，煮至呈糊狀。5. 慢慢倒入牛奶，拌勻。6. 加入蘑菇，煮至濃稠，調味後即可。'
-    },
-    {
-        image: '紅大頭.png',
-        name: '蔬菜炒飯',
-        description: '清爽的蔬菜炒飯，加入多樣時令蔬菜，簡單又營養，適合素食者。',
-        category: '多人料理',
-        people: 3,
-        difficulty: '簡單',
-        vegan: '全素',
-        time: '20',
-        ingredients: '白飯 300g, 青椒 1 顆, 紅蘿蔔 1 根, 洋蔥 1 顆, 玉米粒 100g, 醬油 2 湯匙, 橄欖油 1 湯匙',
-        steps: '1. 將青椒、紅蘿蔔、洋蔥切丁。2. 加熱橄欖油，炒洋蔥至透明。3. 加入其他蔬菜，翻炒至軟。4. 倒入白飯，拌炒均勻。5. 加入醬油調味，翻炒片刻後即可享用。'
-    }
-];
+// // 假資料，模擬不同食譜
+// const recipes = [ 
+//     {
+//         image: '紅大頭.png',
+//         name: '肉醬義大利麵',
+//         description: '一道經典的肉醬義大利麵，搭配濃郁的番茄醬和牛肉，簡單美味，適合全家人享用。',
+//         category: '異國料理',
+//         people: 4,
+//         difficulty: '中等',
+//         vegan: '否',
+//         time: '45',
+//         ingredients: '義大利麵 200g, 牛絞肉 150g, 番茄醬 1 杯, 洋蔥 1 顆 (切丁), 大蒜 2 瓣 (切碎), 橄欖油 2 湯匙, 鹽與胡椒適量',
+//         steps: '1. 先煮義大利麵，根據包裝說明進行。2. 加熱橄欖油，炒洋蔥和大蒜直到金黃。3. 加入牛絞肉，炒熟。4. 倒入番茄醬，煮滾後轉小火煨煮10分鐘。5. 將煮好的義大利麵拌入醬汁，調味後即可享用。'
+//     },
+//     {
+//         image: '紅大頭.png',
+//         name: '奶油雞肉蘑菇濃湯',
+//         description: '豐富的口感與濃郁的香味，是一份溫暖又美味的湯品。',
+//         category: '家常料理',
+//         people: 2,
+//         difficulty: '簡單',
+//         vegan: '否',
+//         time: '30',
+//         ingredients: '雞胸肉 200g, 蘑菇 100g, 洋蔥 1 顆 (切丁), 奶油 30g, 牛奶 300ml, 麵粉 2 湯匙, 鹽與胡椒適量',
+//         steps: '1. 雞胸肉切塊，蘑菇切片。2. 加熱奶油，炒洋蔥至軟。3. 加入雞肉，炒至變色。4. 加入麵粉，煮至呈糊狀。5. 慢慢倒入牛奶，拌勻。6. 加入蘑菇，煮至濃稠，調味後即可。'
+//     },
+//     {
+//         image: '紅大頭.png',
+//         name: '蔬菜炒飯',
+//         description: '清爽的蔬菜炒飯，加入多樣時令蔬菜，簡單又營養，適合素食者。',
+//         category: '多人料理',
+//         people: 3,
+//         difficulty: '簡單',
+//         vegan: '全素',
+//         time: '20',
+//         ingredients: '白飯 300g, 青椒 1 顆, 紅蘿蔔 1 根, 洋蔥 1 顆, 玉米粒 100g, 醬油 2 湯匙, 橄欖油 1 湯匙',
+//         steps: '1. 將青椒、紅蘿蔔、洋蔥切丁。2. 加熱橄欖油，炒洋蔥至透明。3. 加入其他蔬菜，翻炒至軟。4. 倒入白飯，拌炒均勻。5. 加入醬油調味，翻炒片刻後即可享用。'
+//     }
+// ];
 
 // // 假資料，模擬不同用戶
 // const users = [
@@ -431,61 +431,79 @@ function generateOrderManagementContent() {
     // 調用後端 API 獲取數據
     function fetchOrders() {
         let url = `/api/orders/page?page=${currentPage - 1}&size=${resultsPerPage}&sortField=${sortField}&sortDirection=${sortDirection}`;
-
-        // 如果狀態不是全部，則加上 status 的參數
+    
         if (orderStatus !== 'all') {
             url += `&status=${orderStatus}`;
         }
-
+    
         fetch(url)
             .then(response => response.json())
             .then(data => {
                 renderOrders(data.content);  // 渲染訂單
                 updatePagination(data.totalPages);  // 更新分頁
+    
+                // 防止無限迴圈的邏輯
+                if (currentPage >= data.totalPages) {
+                    console.log("已到達最後一頁，停止加載");
+                    return;
+                }
             })
             .catch(error => {
                 console.error('Error fetching orders:', error);
                 tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: red;">無法獲取訂單資料</td></tr>`;
             });
     }
+    
 
     // 渲染訂單
-    function renderOrders(orders) {
-        tbody.innerHTML = '';  // 清空表格內容
-        if (orders.length === 0) {
-            tbody.innerHTML = `<tr><td colspan="5" style="text-align: center;">目前沒有訂單資料</td></tr>`;
-        } else {
-            orders.forEach(order => {
-                const tr = document.createElement('tr');
-
-                tr.innerHTML = `
-                    <td>
-                        <p>${order.name}</p>
-                    </td>
-                    <td>
-                        訂單編號: ${order.orderId}<br>
-                        配送方式: ${order.deliveryMethod}<br>
-                        訂單金額: ${order.totalAmount}
-                    </td>
-                    <td>${order.status}</td>
-                    <td>${order.orderDate}</td>
-                    <td><a href="#" class="details-link" data-id="${order.orderId}" style="color: white;">詳細</a></td>
-                `;
-
-                tbody.appendChild(tr);
-            });
-
-            // 綁定「詳細」按鈕的點擊事件
-            document.querySelectorAll('.details-link').forEach(link => {
-                link.addEventListener('click', function (event) {
-                    event.preventDefault();
-                    const orderId = this.getAttribute('data-id');
-                    // 顯示訂單詳情頁面
-                    generateOrderDetailsContent(orderId);
-                });
-            });
-        }
+function renderOrders(orders) {
+    tbody.innerHTML = '';  // 清空表格內容
+    
+    // 確保 orders 不為 undefined 或 null
+    if (!orders || orders.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="5" style="text-align: center;">目前沒有訂單資料</td></tr>`;
+        return;
     }
+
+    orders.forEach(order => {
+        const tr = document.createElement('tr');
+
+        // 訂單名稱，如果 order.name 不存在，顯示 '無名稱'
+        const orderName = order.name ? order.name : '無名稱';
+
+        // 訂單配送方式，如果 order.deliveryMethod 不存在，顯示 '無配送方式'
+        const deliveryMethod = order.deliveryMethod ? order.deliveryMethod : '無配送方式';
+
+        // 訂單日期格式化，如果 order.orderDate 存在
+        const orderDate = order.orderDate ? new Date(order.orderDate).toLocaleDateString() : '無日期';
+
+        tr.innerHTML = `
+            <td>
+                <p>${orderName}</p>
+            </td>
+            <td>
+                訂單編號: ${order.orderId}<br>
+                配送方式: ${deliveryMethod}<br>
+                訂單金額: ${order.totalAmount}
+            </td>
+            <td>${order.status}</td>
+            <td>${orderDate}</td>
+            <td><a href="#" class="details-link" data-id="${order.orderId}" style="color: white;">詳細</a></td>
+        `;
+
+        tbody.appendChild(tr);
+    });
+
+    // 綁定「詳細」按鈕的點擊事件
+    document.querySelectorAll('.details-link').forEach(link => {
+        link.addEventListener('click', function (event) {
+            event.preventDefault();
+            const orderId = this.getAttribute('data-id');
+            // 顯示訂單詳情頁面
+            generateOrderDetailsContent(orderId);
+        });
+    });
+}
 
     // 動態生成頁數選項
     function updatePagination(totalPages) {
@@ -2183,13 +2201,13 @@ document.querySelectorAll('.details-link').forEach(link => {
     });
 });
 
-// 保存按鈕事件
-document.getElementById('saveButton').addEventListener('click', function () {
-    products.name = document.getElementById('productName').value;
-    products.price = document.getElementById('productPrice').value;
-    products.stock = document.getElementById('productStock').value;
-    generateProductManagementContent();  // 返回商品管理頁面
-});
+// // 保存按鈕事件
+// document.getElementById('saveButton').addEventListener('click', function () {
+//     products.name = document.getElementById('productName').value;
+//     products.price = document.getElementById('productPrice').value;
+//     products.stock = document.getElementById('productStock').value;
+//     generateProductManagementContent();  // 返回商品管理頁面
+// });
 
 // 取消按鈕事件
 document.getElementById('cancelButton').addEventListener('click', function () {
