@@ -8,7 +8,7 @@ import org.hibernate.annotations.DynamicUpdate;
 //cart表結構:cartId、userId、total、totalQuantity、status
 //建構式、getter setter
 
-@DynamicUpdate
+//@DynamicUpdate
 @Entity
 @Table(name = "cartitems")
 public class CartItems {
