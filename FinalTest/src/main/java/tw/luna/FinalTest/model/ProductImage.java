@@ -3,6 +3,8 @@ package tw.luna.FinalTest.model;
 import java.io.Serializable;
 import java.util.Arrays;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,6 +25,7 @@ public class ProductImage implements Serializable{
 	
 	@ManyToOne
 	@JoinColumn(name = "productId", nullable = false)
+	@JsonBackReference("product_productImage")
     private Product product;
 	
 	@Lob
