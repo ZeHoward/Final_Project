@@ -35,7 +35,6 @@ public class UsersServiceImpl {
 		if (users != null && users.size() > 0) {
 			usersResponse.setUsersStatus(UsersStatus.EXIST);
 			usersResponse.setMesg("帳號已存在");
-			System.out.println(users.get(0).getPassword());
 			usersResponse.setUsers(users.get(0));
 		}else {
 			usersResponse.setUsersStatus(UsersStatus.NOT_EXIST);
@@ -77,10 +76,10 @@ public class UsersServiceImpl {
 		}else {
 			Users userDB = usersResponse.getUsers();
 			if (BCrypt.checkpw(users.getPassword(), userDB.getPassword())) {
-				//密碼比對成功後,需要對users表的token欄位加上uuid再拉出來
 				usersResponse.setUsersStatus(UsersStatus.LOGIN_SUCCESS);
 				usersResponse.setMesg("Login Success");
 				userDB.setPassword("");
+				userDB.setPhoneNumber("");
 				usersResponse.setUsers(userDB);
 				
 			}else {

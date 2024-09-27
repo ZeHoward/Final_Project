@@ -141,6 +141,13 @@ public class Users {
 		this.token = token;
 	}
 
+	@Override
+	public String toString() {
+		return "Users [userId=" + userId + ", username=" + username + ", email=" + email + ", password=" + password
+				+ ", phoneNumber=" + phoneNumber + ", token=" + token + ", userinfo=" + userinfo + ", cart=" + cart
+				+ "]";
+	}
+
 //	public List<UserFavoritesProducts> getUserFavoritesProducts() {
 //		return userFavoritesProducts;
 //	}

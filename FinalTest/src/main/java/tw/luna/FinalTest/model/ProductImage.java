@@ -30,7 +30,7 @@ public class ProductImage implements Serializable{
 	@ManyToOne
 	@JoinColumn(name = "productId", nullable = false)
 	@JsonBackReference("product_productImage")
-	@JsonIgnore 
+//	@JsonIgnore 
     private Product product;
 	
 	@Lob
