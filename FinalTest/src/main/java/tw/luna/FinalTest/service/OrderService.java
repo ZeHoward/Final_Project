@@ -68,50 +68,50 @@ public class OrderService {
 	    }
 	}
 
-	// 創建新訂單
-	public Order createOrder(Order order) {
-		return orderRepository.save(order);
-	}
+//	// 創建新訂單
+//	public Order createOrder(Order order) {
+//		return orderRepository.save(order);
+//	}
 	
-	@Transactional
-	public Order createOrderFromCart(Integer cartId, String address) {
-	    // Step 1: 查詢 cart 和 cartitems 資料
-	    List<Object[]> cartWithItems = cartItemsRepository.findCartWithItems(cartId);
-	    
-	    if (cartWithItems.isEmpty()) {
-	        throw new RuntimeException("購物車不存在或購物車沒有商品");
-	    }
-
-	    Cart cart = (Cart) cartWithItems.get(0)[0];  // 第一個結果中的 Cart
-	    Order order = new Order();
-	    
-	    // Step 2: 創建 order
-	    order.setUser(cart.getUsers());  // 直接從 Cart 中取得 Users 實體並設置
-	    order.setCart(cart);  // 直接設置 Cart 實體
-	    order.setOrderDate(LocalDateTime.now());
-	    order.setTotalAmount(calculateTotalAmount(cartWithItems));
-	    order.setFinalAmount(order.getTotalAmount());  // 假設沒有折扣
-	    order.setStatus("已付款");
-	    orderRepository.save(order);  // 儲存訂單
-
-	    // Step 3: 創建 orderDetails
-	    for (Object[] result : cartWithItems) {
-	        CartItems cartItem = (CartItems) result[1];  // 第二個結果是 CartItems
-
-	        OrderDetails orderDetails = new OrderDetails();
-	        orderDetails.setOrder(order);  // 設置對應的訂單
-	        orderDetails.setProduct(cartItem.getProduct());  // 設置 Product 對象而非 productId
-	        orderDetails.setQuantity(cartItem.getQuantity());
-	        orderDetails.setPrice(cartItem.getPrice());
-	        orderDetails.setAddress(address);  // 用戶提供的地址
-	        orderDetailsRepository.save(orderDetails);  // 儲存訂單詳情
-	    }
-
-	    // Step 4: 更新 cart 狀態
-	    cart.setStatus("已結帳");
-	    cartRepository.save(cart);  // 儲存 Cart 狀態變更
-	    return order;
-	}
+//	@Transactional
+//	public Order createOrderFromCart(Integer cartId, String address) {
+//	    // Step 1: 查詢 cart 和 cartitems 資料
+//	    List<Object[]> cartWithItems = cartItemsRepository.findCartWithItems(cartId);
+//	    
+//	    if (cartWithItems.isEmpty()) {
+//	        throw new RuntimeException("購物車不存在或購物車沒有商品");
+//	    }
+//
+//	    Cart cart = (Cart) cartWithItems.get(0)[0];  // 第一個結果中的 Cart
+//	    Order order = new Order();
+//	    
+//	    // Step 2: 創建 order
+//	    order.setUser(cart.getUsers());  // 直接從 Cart 中取得 Users 實體並設置
+//	    order.setCart(cart);  // 直接設置 Cart 實體
+//	    order.setOrderDate(LocalDateTime.now());
+//	    order.setTotalAmount(calculateTotalAmount(cartWithItems));
+//	    order.setFinalAmount(order.getTotalAmount());  // 假設沒有折扣
+//	    order.setStatus("已付款");
+//	    orderRepository.save(order);  // 儲存訂單
+//
+//	    // Step 3: 創建 orderDetails
+//	    for (Object[] result : cartWithItems) {
+//	        CartItems cartItem = (CartItems) result[1];  // 第二個結果是 CartItems
+//
+//	        OrderDetails orderDetails = new OrderDetails();
+//	        orderDetails.setOrder(order);  // 設置對應的訂單
+//	        orderDetails.setProduct(cartItem.getProduct());  // 設置 Product 對象而非 productId
+//	        orderDetails.setQuantity(cartItem.getQuantity());
+//	        orderDetails.setPrice(cartItem.getPrice());
+//	        orderDetails.setAddress(address);  // 用戶提供的地址
+//	        orderDetailsRepository.save(orderDetails);  // 儲存訂單詳情
+//	    }
+//
+//	    // Step 4: 更新 cart 狀態
+//	    cart.setStatus("已結帳");
+//	    cartRepository.save(cart);  // 儲存 Cart 狀態變更
+//	    return order;
+//	}
 
 	private Integer calculateTotalAmount(List<Object[]> cartWithItems) {
 	    return cartWithItems.stream()

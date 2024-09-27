@@ -6,7 +6,6 @@ import java.util.Arrays;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -28,9 +27,10 @@ public class ProductImage implements Serializable{
 	private Long id;
 	
 	@ManyToOne
+
 	@JoinColumn(name = "productId", nullable = false)
-	@JsonBackReference("product_productImage")
-//	@JsonIgnore 
+	@JsonBackReference("product_productImage") 
+
     private Product product;
 	
 	@Lob

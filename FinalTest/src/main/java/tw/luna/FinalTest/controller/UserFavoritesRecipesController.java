@@ -3,6 +3,8 @@ package tw.luna.FinalTest.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import tw.luna.FinalTest.dto.FavoritesRecipeDTO;
 import tw.luna.FinalTest.model.UserFavoritesRecipes;
 import tw.luna.FinalTest.service.UserFavoritesRecipesService;
 
@@ -29,8 +31,13 @@ public class UserFavoritesRecipesController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/user/{userId}")
-    public List<UserFavoritesRecipes> getUserFavorites(@PathVariable Long userId) {
-        return service.getFavoritesByUserId(userId);
+
+    // 根據 userId 返回收藏的食譜
+    @GetMapping("/user")
+    public ResponseEntity<List<FavoritesRecipeDTO>> getFavoritesRecipesByUserId(@RequestParam
+                                                                                    Long userId) {
+        List<FavoritesRecipeDTO> favorites = service.getFavoritesRecipesByUserId(userId);
+        return ResponseEntity.ok(favorites);
     }
+
 }
