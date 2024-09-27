@@ -5,18 +5,14 @@ package tw.luna.FinalTest.dto;
 public class CartInsertDto {
 
     private Integer productId;
-    private Long usersId;
-    private Integer quantity;
-    private Integer price;
+    private Integer quantity = 1;
 
     public CartInsertDto() {
     }
 
-    public CartInsertDto(Integer productId, Long usersId, Integer quantity, Integer price) {
+    public CartInsertDto(Integer productId, Integer quantity) {
         this.productId = productId;
-        this.usersId = usersId;
         this.quantity = quantity;
-        this.price = price;
     }
 
     public Integer getProductId() {
@@ -27,14 +23,6 @@ public class CartInsertDto {
         this.productId = productId;
     }
 
-    public Long getUsersId() {
-        return usersId;
-    }
-
-    public void setUsersId(Long usersId) {
-        this.usersId = usersId;
-    }
-
     public Integer getQuantity() {
         return quantity;
     }
@@ -43,11 +31,4 @@ public class CartInsertDto {
         this.quantity = quantity;
     }
 
-    public Integer getPrice() {
-        return price;
-    }
-
-    public void setPrice(Integer price) {
-        this.price = price;
-    }
 }
