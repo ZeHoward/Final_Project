@@ -178,7 +178,15 @@ public class Users {
 //	}
 
 
-	
-	
-
+	@Override
+	public String toString() {
+		return "Users{" +
+				"token='" + token + '\'' +
+				", phoneNumber='" + phoneNumber + '\'' +
+				", password='" + password + '\'' +
+				", email='" + email + '\'' +
+				", username='" + username + '\'' +
+				", userId=" + userId +
+				'}';
+	}
 }
