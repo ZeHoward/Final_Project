@@ -1,9 +1,12 @@
 package tw.luna.FinalTest.model;
 
+
 import java.io.Serializable;
 import java.util.Arrays;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -14,6 +17,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "productimages")
@@ -26,12 +30,17 @@ public class ProductImage implements Serializable{
 	@ManyToOne
 	@JoinColumn(name = "productId", nullable = false)
 	@JsonBackReference("product_productImage")
+	@JsonIgnore 
     private Product product;
 	
 	@Lob
 	@Column(name = "image", columnDefinition="LONGBLOB")
 	private byte[] image;// 用來存放圖片的二進制數據
 
+	
+	@Transient
+	private String base64Image;
+	
 	//建構式
 	public ProductImage() {
 		
@@ -66,6 +75,14 @@ public class ProductImage implements Serializable{
 		this.image = image;
 	}
 	
+	public String getBase64Image() {
+		return base64Image;
+	}
+
+	public void setBase64Image(String base64Image) {
+		this.base64Image = base64Image;
+	}
+
 	@Override
     public String toString() {
         return "ProductImage{" +
@@ -75,5 +92,4 @@ public class ProductImage implements Serializable{
                 '}';
 	}
 	
-
 }
