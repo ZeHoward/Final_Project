@@ -39,6 +39,18 @@ public class OrderDetails {
 	@JoinColumn(name = "productId", nullable = false)
 	private Product product;
 
+	public OrderDetails() {
+	}
+
+	public OrderDetails(Integer orderDetailsId, Integer quantity, Integer price, String address, Order order, Product product) {
+		this.orderDetailsId = orderDetailsId;
+		this.quantity = quantity;
+		this.price = price;
+		this.address = address;
+		this.order = order;
+		this.product = product;
+	}
+
 	public Integer getOrderDetailsId() {
 		return orderDetailsId;
 	}
@@ -86,4 +98,6 @@ public class OrderDetails {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+
+
 }
