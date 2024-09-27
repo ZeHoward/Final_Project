@@ -32,12 +32,6 @@ public class ProductController {
 	//查詢所有商品
 	@GetMapping
 	public List<Product> getAllProducts() {
-		if(session != null) {
-			Users loggedInUser = (Users)session.getAttribute("loggedInUser");
-			if(loggedInUser != null) {
-				System.out.println("在products中獲取UserID:" + loggedInUser.getUserId());
-			}
-		}
 		return productService.findAllProducts();
 	}
 	
