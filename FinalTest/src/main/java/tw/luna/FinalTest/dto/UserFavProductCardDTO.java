@@ -1,13 +1,13 @@
-package tw.luna.FinalTest.Dto;
+package tw.luna.FinalTest.dto;
 
 
-public class ProductCardDTO {
+public class UserFavProductCardDTO {
     private Integer productId;
     private String name;
     private Integer price;
     private String imageBase64;  // Base64 編碼的圖片
 
-    public ProductCardDTO(Integer productId, String name, Integer price, String imageBase64) {
+    public UserFavProductCardDTO(Integer productId, String name, Integer price, String imageBase64) {
         this.productId = productId;
         this.name = name;
         this.price = price;

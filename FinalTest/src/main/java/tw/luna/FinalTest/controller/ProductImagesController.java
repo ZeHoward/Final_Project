@@ -1,10 +1,12 @@
 package tw.luna.FinalTest.controller;
 
 import java.io.IOException;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -49,7 +51,7 @@ public class ProductImagesController {
 	             @RequestParam("productId") Integer productId) throws IOException {
 	     Product product = productService.findProductById(productId).orElse(null);
 	     if (product == null) {
-	         return ResponseEntity.badRequest().body("无此产品ID");
+	         return ResponseEntity.badRequest().body("查無此商品id");
 	     }
 
 	     ProductImage productImage = new ProductImage();
@@ -66,9 +68,19 @@ public class ProductImagesController {
 	}
 	
 	@GetMapping("/product/{productId}")
-    public List<ProductImage> getProductImages(@PathVariable Integer productId) {
-        return productImageService.getImagesByProductId(productId);
-    }
+	public ResponseEntity<List<String>> getProductImagesByProductId(@PathVariable Integer productId) {
+	    List<ProductImage> productImages = productImageService.getImagesByProductId(productId);
+	    if (productImages.isEmpty()) {
+	        return ResponseEntity.notFound().build();
+	    }
+
+	    // 將圖片字節數組轉換成base64
+	    List<String> base64Images = productImages.stream()
+	        .map(image -> "data:image/jpeg;base64," + Base64.getEncoder().encodeToString(image.getImage())) // 根據你的圖片格式使用合適的MIME類型
+	        .collect(Collectors.toList());
+
+	    return ResponseEntity.ok(base64Images);
+	}
 
 	
 	//刪除照片

@@ -13,7 +13,12 @@ import tw.luna.FinalTest.model.Cart;
 @Repository
 public interface CartRepository extends JpaRepository<Cart, Long> {
     Cart findByUsersUserId(Long userId);
-    
+
+
+
+
+    // 將 cartId 對應的購物車每一個清單列出後數量乘以價格並加總
+
 // 將 cartId 對應的購物車每一個清單列出後數量乘以價格並加總
 //    @Query("SELECT SUM(ci.quantity * ci.price) FROM CartItems ci WHERE ci.cartId = :cartId")
 //    Integer calculateTotalPrice(@Param("cartId") Integer cartId);

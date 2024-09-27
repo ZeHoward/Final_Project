@@ -2,6 +2,7 @@ package tw.luna.FinalTest.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
@@ -42,6 +43,10 @@ public class Users {
 	@OneToOne(mappedBy = "users", cascade = CascadeType.ALL)
 	@JsonManagedReference("Users_UserInfo")
 	private Userinfo userinfo;
+	
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	@JsonManagedReference("order_user")
+	private List<Order> orders;
 
 //	//連到最愛商品表
 //	@OneToMany(mappedBy = "users", cascade = CascadeType.ALL, orphanRemoval = true)
