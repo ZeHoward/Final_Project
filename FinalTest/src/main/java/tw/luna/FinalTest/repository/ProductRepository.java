@@ -8,11 +8,13 @@ import tw.luna.FinalTest.model.Product;
 
 public interface ProductRepository extends JpaRepository<Product, Integer> {
 	
-	List<Product> findByCategoryCategoryName(String categoryName);
+	List<Product> findByCategoryCategoryId(Integer categoryId);
 
 	
 	List<Product> findByPriceBetween(Integer minPrice, Integer maxPrice);
 	
 	//模糊查詢
     List<Product> findByNameContaining(String keyword);
+
+    Product findByProductId(Integer productId);
 }

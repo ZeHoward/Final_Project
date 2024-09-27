@@ -19,7 +19,7 @@ public interface ProductService {
 	void deleteProduct(Integer id);
 	
 	// 根據類別查詢產品
-	List<Product> findProductsByCategory(String categoryName);
+	List<Product> findProductsByCategory(Integer categoryId);
 	
 	// 根據價格範圍查詢產品
     List<Product> findProductsByPriceRange(Integer minPrice, Integer maxPrice);

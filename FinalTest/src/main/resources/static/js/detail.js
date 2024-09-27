@@ -1,8 +1,5 @@
-
 window.onload = function () {
- 
-  // 相關商品
-  //精選調理包專區
+  //相關商品專區
   const products = [
     {
       id: 1,
@@ -346,48 +343,85 @@ window.onload = function () {
       reviewsContainer.innerHTML += reviewHtml;
     });
   }
-  
-  const productId = 5;
-  fetch(`/products/${productId}`).
-  	then(response =>{
-		if(!response.ok){
-			throw new Error("出了一點小錯誤")
-		}
-		return response.json();
+  const productId = 37;
+
+  fetch(`/products/${productId}`)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("無法獲取商品信息");
+      }
+      return response.json(); 
+    }).catch((err) => {
 	})
-	.then(product =>{
-		//更新主圖片
-		document.getElementById("currentImage").src = product.imageUrl;
-		
-		//更新商品描述
-		
-		const infoSection = document.querySelector(".spec");
-		const productHtml =`
-		<p class="product-name">${product.name}</p>
-        <p class="product-price">NT$ ${product.price}</p>
-        <div class="quantity-selector">
-            <label for="quantity">數量選擇：</label>
-            <button id="decrease" class="btn-quantity"><i class="fa-solid fa-minus"></i></button>
-            <input type="text" id="quantity" value="1" readonly />
-            <button id="increase" class="btn-quantity"><i class="fa-solid fa-plus"></i></button>
-            <span>&nbsp;&nbsp;商品剩最後 ${product.stockQuantity} 件</span>
-        </div>
-        <button class="btn cart"><i class="fa-solid fa-cart-shopping"></i>&nbsp;加入購物車</button>
-        <button class="btn like"><i class="fa-regular fa-heart"></i>&nbsp;收藏商品</button>
-        <button class="btn keep"><i class="fa-solid fa-book-open"></i>&nbsp;收藏食譜</button>
-    	`;
-		
-		//將html插入到info區塊
-		infoSection.innerHTML = productHtml;
-		
-		//更新詳細資料
-		const detailSection = document.querySelector(".detail");
-		const detailHtml =`<p> ${product.description}</p>`;
-		
-		detailSection.innerHTML = detailHtml;
-		
-		generateGallery(product.images);	
-	})
-	.catch(error =>console.error('Error fetching product details:', error));  
-  
+    .then((product) => {
+      // 更新商品描述
+      const infoSection = document.querySelector(".spec");
+      const productHtml = `
+          <p class="product-name">${product.name}</p>
+          <p class="product-price">NT$ ${product.price}</p>
+          <div class="quantity-selector">
+              <label for="quantity">數量選擇：</label>
+              <button id="decrease" class="btn-quantity"><i class="fa-solid fa-minus"></i></button>
+              <input type="text" id="quantity" value="1" readonly />
+              <button id="increase" class="btn-quantity"><i class="fa-solid fa-plus"></i></button>
+              <span>&nbsp;&nbsp;商品剩最後 ${product.stockQuantity} 件</span>
+          </div>
+          <button class="btn cart"><i class="fa-solid fa-cart-shopping"></i>&nbsp;加入購物車</button>
+          <button class="btn like"><i class="fa-regular fa-heart"></i>&nbsp;收藏商品</button>
+          <button class="btn keep"><i class="fa-solid fa-book-open"></i>&nbsp;收藏食譜</button>
+        `;
+      infoSection.innerHTML = productHtml;
+	  
+	  // 更新商品詳細描述
+      const detailSection = document.querySelector(".detail");
+      const detailHtml = `<p>${product.description}</p>`;
+      detailSection.innerHTML = detailHtml;
+
+      // 取得商品照片並產生主圖和略縮圖
+      fetch(`/productImages/product/${productId}`)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("無法獲取商品圖片");
+          }
+          return response.json(); 
+        })
+        .then((images) => {
+          // images 是 MIME 類型的 Base64 圖片數組
+
+          // 更新主圖片（使用指定productId的第一張圖片）
+          if (images.length > 0) {
+            document.getElementById("currentImage").src = images[0];
+          }
+
+          // 生成略縮圖
+          generateGallery(images);
+        })
+        .catch((error) => {
+          console.error("Error fetching product images:", error);
+        });
+    })
+    .catch((error) => {
+      console.error("Error fetching product details:", error);
+    });
+
+  function generateGallery(images) {
+    const thumbnailContainer = document.getElementById("thumbnailContainer");
+
+    // 清空略縮圖
+    thumbnailContainer.innerHTML = "";
+
+    // 巡訪所有圖片並生成略縮圖
+    images.forEach((base64Image, index) => {
+      const imgElement = document.createElement("img");
+      imgElement.src = base64Image; // 直接使用带有 MIME 类型的 Base64 字符串
+      imgElement.classList.add("thumbnail");
+
+      // 點擊略縮圖時更換主圖
+      imgElement.onclick = () => {
+        document.getElementById("currentImage").src = base64Image;
+      };
+
+      thumbnailContainer.appendChild(imgElement);
+    });
+  }
 };

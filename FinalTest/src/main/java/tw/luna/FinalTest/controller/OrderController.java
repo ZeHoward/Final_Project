@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.servlet.http.HttpSession;
 import tw.luna.FinalTest.model.Order;
+import tw.luna.FinalTest.model.Users;
 import tw.luna.FinalTest.service.OrderService;
 
 @RestController
@@ -30,7 +32,16 @@ public class OrderController {
 
 	// 獲取所有訂單
 	@GetMapping
-	public List<Order> getAllOrders() {
+	public List<Order> getAllOrders(HttpSession session) {
+		
+		//session測試
+		Users user = (Users)session.getAttribute("user");
+		System.out.println("getAllOrders,userEmail : " + user.getEmail());
+		System.out.println("getAllOrders,userPassword : " + user.getPassword());
+		System.out.println("getAllOrders,userId : " + user.getUserId());
+		
+		
+		//
 		return orderService.getAllOrders();
 	}
 
