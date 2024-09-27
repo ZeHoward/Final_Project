@@ -36,8 +36,8 @@ window.onload = function () {
     
 
     document.getElementById('registPasswordInput').addEventListener('blur',async () => {
-      let regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{10,}$/;
-      let password = document.getElementById('registPasswordInput').value;
+	  let regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;      
+	  let password = document.getElementById('registPasswordInput').value;
       if(!regex.test(password)){
         document.getElementById('passwordRegexCheck').style.opacity = 1;
         checkPassword = false;
@@ -85,7 +85,7 @@ window.onload = function () {
             console.log('error:', error)
           })
       }else{
-        console.log('console註冊失敗')
+        alert("註冊失敗,請再檢查電子信箱、密碼、使用者名稱是否輸入有誤!!");
       }
       
     });

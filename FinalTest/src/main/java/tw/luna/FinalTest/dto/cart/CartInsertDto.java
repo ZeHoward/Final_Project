@@ -1,11 +1,11 @@
-package tw.luna.FinalTest.dto;
+package tw.luna.FinalTest.dto.cart;
 
 
 //新增購物車內商品
 public class CartInsertDto {
 
     private Integer productId;
-    private Integer quantity = 1;
+    private Integer quantity = 1; //預設值為1
 
     public CartInsertDto() {
     }
