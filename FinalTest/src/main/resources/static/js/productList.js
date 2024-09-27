@@ -192,4 +192,63 @@ window.onload = function () {
 
   displayProducts(products);
  */
-};
+
+  const categoryId = 5;
+  fetch(`products/category/${categoryId}`)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("無法獲得商品清單");
+      }
+      return response.json();
+    })
+    .then((products) => {
+      const container = document.getElementById("productContainer");
+      container.innerHTML = ""; // 清空現有的圖片
+      products.forEach((product) => {
+        const productDiv = document.createElement('div');
+        productDiv.className = 'product';
+
+        // 建立img標籤用於商品卡
+        const imgElement = document.createElement('img');
+        imgElement.className = 'product-image';
+        imgElement.alt = product.name;
+
+        const productHtml = `
+          <h3 class="product-name">${product.name}</h3>
+          <p class="product-price">$NT${product.price}</p>
+          <div class="home-product-btn">
+            <button class="add-to-favorite"><i class="fa-solid fa-heart"></i></button>
+            <button class="add-to-cart"><i class="fa-solid fa-cart-shopping"></i>&nbsp;&nbsp;&nbsp;加入購物車</button>
+          </div>
+        `;
+        productDiv.innerHTML = productHtml;
+        productDiv.insertBefore(imgElement, productDiv.firstChild); // 將圖片放到最前面
+        container.appendChild(productDiv);
+
+        // Fetch 商品第一張圖片
+        fetch(`/productImages/product/${product.productId}`)
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("無法獲取商品圖片");
+            }
+            return response.json(); 
+          })
+          .then((images) => {
+            if (images.length > 0) {
+              // 使用 Base64Inmages
+              imgElement.src = images[0]; // imgElement.src 為 base64Images
+            } else {
+              imgElement.src = '../material/icon/default.png'; // 沒有圖片時使用默認圖片
+            }
+          })
+          .catch((error) => {
+            console.error(`Error fetching product image for product ${product.id}:`, error);
+            imgElement.src = '../material/icon/error.png'; // 如果發生錯誤使用錯誤圖片
+          });
+      });
+    })
+    .catch((error) => {
+      console.error("Error fetching products:", error);
+    });
+
+}
