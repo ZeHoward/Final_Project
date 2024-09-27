@@ -4,8 +4,9 @@ package tw.luna.FinalTest.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import tw.luna.FinalTest.Dto.CartSelectDto;
-import tw.luna.FinalTest.model.CartItems;
+
+import tw.luna.FinalTest.dto.CartInsertDto;
+import tw.luna.FinalTest.dto.CartSelectDto;
 import tw.luna.FinalTest.service.CartService;
 
 import java.util.List;
@@ -18,12 +19,38 @@ public class CartController {
     @Autowired
     CartService cartService;
 
-    //從服務層獲取指定用戶的購物車項目
+    //查詢購物車
     //顯示用戶購物車items
     @GetMapping("/{userId}")
     public List<CartSelectDto> getCartItems(@PathVariable Long userId) {
         return cartService.getCartItemsByUserId(userId);
     }
+
+    //加入購物車(新增或更新)，購物車內未存在該商品->新增；已存在->修改數量
+    @PutMapping("/add/{userId}")
+    public ResponseEntity<String> addToCart(@PathVariable Long userId, @RequestBody CartInsertDto cartInsertDto){
+        cartService.addToCart(cartInsertDto, userId);
+        return ResponseEntity.ok("成功將商品加入購物車");
+    }
+
+    //清空購物車
+    @DeleteMapping("/{userId}")
+    public ResponseEntity<String> deleteAllCartItems(@PathVariable Long userId) {
+        cartService.deleteAllCartItems(userId);
+        return ResponseEntity.ok("成功清空購物車");
+    }
+
+    //刪除購物車某項商品
+    @DeleteMapping("/{userId}/{productId}")
+    public ResponseEntity<String> deleteCartItemsByProductId(@PathVariable Long userId,@PathVariable Long productId){
+        cartService.deleteCartItemsByProductId(userId,productId);
+        return ResponseEntity.ok("成功刪除該商品");
+    }
+
+
+
+
+}
 
 //    // 新增購物車
 //    @PostMapping
@@ -39,19 +66,3 @@ public class CartController {
 //        return ResponseEntity.ok("成功刪除單一購物車品項");
 //    }
 //
-    @DeleteMapping("/{userId}")
-    public ResponseEntity<String> deleteAllCartItems(@PathVariable Long userId) {
-        cartService.deleteAllCartItems(userId);
-        return ResponseEntity.ok("成功清空購物車");
-    }
-//
-//    @PutMapping("/{cartItemId}")
-//    public ResponseEntity<String> updateCartItem(
-//            @PathVariable Long cartItemId,
-//            @RequestBody CartUpdateDto cartUpdateDto) {
-//        cartService.updateCartItem(cartItemId, cartUpdateDto);
-//        return ResponseEntity.ok("Cart item updated successfully");
-//    }
-//
-
-}

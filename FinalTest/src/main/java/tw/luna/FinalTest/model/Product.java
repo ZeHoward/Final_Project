@@ -1,24 +1,15 @@
 package tw.luna.FinalTest.model;
 
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
-import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import jakarta.persistence.*;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="products")
-@EntityListeners(AuditingEntityListener.class)  // 啟用實體的審計功能，以自動賦值或更新時間
 public class Product {
 	
 	@Id
@@ -34,7 +25,7 @@ public class Product {
 	@JsonManagedReference("product_productImage")
 	private List<ProductImage> productImages;
 
-	@OneToMany
+	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
 	@JsonManagedReference("cartitems_product")
 	private Set<CartItems> cartItems;
 
