@@ -44,13 +44,19 @@ public class ProductController {
 	//根據id查詢產品
 	@GetMapping("/{id}")
 	public Product getProductById(@PathVariable Integer id) {
-		Users loggedInUser = (Users)session.getAttribute("loggedInUser");
-//		System.out.println(loggedInUser);
-		Integer userId = loggedInUser.getUserId().intValue();
-		
-		return productService.findProductById(userId).orElse(null);
+		return productService.findProductById(id).orElse(null);
 	}
 	
+	//根據id查詢產品
+//	@GetMapping("/{id}")
+//	public Product getProductById(@PathVariable Integer id) {
+//		Users loggedInUser = (Users)session.getAttribute("loggedInUser");
+//		System.out.println(loggedInUser);
+//		Integer userId = loggedInUser.getUserId().intValue();
+//		
+//		return productService.findProductById(userId).orElse(null);
+//	}
+//	
 	//模糊查詢
 	@GetMapping("/search")
 	public List<Product> searchProductsByName(@RequestParam String keyword){
