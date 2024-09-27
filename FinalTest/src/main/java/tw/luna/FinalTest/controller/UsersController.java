@@ -20,7 +20,10 @@ import tw.luna.FinalTest.service.UsersServiceImpl;
 public class UsersController {
 	
 	@Autowired
-	private UsersServiceImpl usersServiceImpl; 
+	private UsersServiceImpl usersServiceImpl;
+	
+	@Autowired
+	private HttpSession session;
 	
 	
 	
@@ -40,11 +43,11 @@ public class UsersController {
 	
 	
 	@RequestMapping("/login")
-	public UsersResponse login(@RequestBody Users users, HttpSession session) {
+	public UsersResponse login(@RequestBody Users users) {
 		UsersResponse loginUsers = usersServiceImpl.loginUsers(users);
-			
-		System.out.println(session.getId());
-		session.setAttribute("aaa", "AAA");
+		Users loginUsers2 = loginUsers.getUsers();
+		System.out.println("login:" + session.getId());
+		session.setAttribute("user", loginUsers2);
 		
 		return loginUsers;
 	}
