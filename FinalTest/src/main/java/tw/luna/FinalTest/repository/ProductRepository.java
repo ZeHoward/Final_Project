@@ -15,4 +15,6 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 	
 	//模糊查詢
     List<Product> findByNameContaining(String keyword);
+
+    Product findByProductId(Integer productId);
 }
