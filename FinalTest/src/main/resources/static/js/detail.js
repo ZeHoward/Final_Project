@@ -351,7 +351,8 @@ window.onload = function () {
         throw new Error("無法獲取商品信息");
       }
       return response.json(); 
-    })
+    }).catch((err) => {
+	})
     .then((product) => {
       // 更新商品描述
       const infoSection = document.querySelector(".spec");

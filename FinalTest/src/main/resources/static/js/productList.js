@@ -34,7 +34,7 @@ window.onload = function () {
       img4.src = "./material/icon/down.png";
     }
   };
-
+  /*
   const products = [
     {
       name: "日式豬排飯",
@@ -126,6 +126,7 @@ window.onload = function () {
               </div>
           `;
     });
+*/
 
     // 加入購物車按鈕事件處理
     document.querySelectorAll(".add-to-cart").forEach((button) => {
@@ -251,4 +252,4 @@ window.onload = function () {
       console.error("Error fetching products:", error);
     });
 
-}
+

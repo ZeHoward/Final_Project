@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
+
 import tw.luna.FinalTest.dto.ProductCardDTO;
 import tw.luna.FinalTest.model.Product;
 import tw.luna.FinalTest.model.ProductImage;
@@ -35,11 +36,11 @@ public class UserFavoritesProductsService {
         return repository.save(favorite);
     }
 
-    public void removeFavorite(Long userId, int productId) {
+    public void removeFavorite(Long userId, Integer productId) {
         repository.deleteByIdUserIdAndIdProductId(userId, productId);
     }
 
-    public Optional<UserFavoritesProducts> getFavorite(Long userId, int productId) {
+    public Optional<UserFavoritesProducts> getFavorite(Long userId, Integer productId) {
         return repository.findByIdUserId(userId)
                 .stream()
                 .filter(favorite -> favorite.getProductId() == productId)
