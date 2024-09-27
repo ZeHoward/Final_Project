@@ -42,9 +42,9 @@ public class ProductController {
 	}
 	
 	//根據類別查詢產品	
-	@GetMapping("/category/{categoryName}")
-	public List<Product> searchProductsByCategoryName(@PathVariable String CategoryName){
-		return productService.findProductsByCategory(CategoryName);
+	@GetMapping("/category/{categoryId}")
+	public List<Product> searchProductsByCategoryId(@PathVariable("categoryId") Integer CategoryId){
+		return productService.findProductsByCategory(CategoryId);
 	} 
 	
 	//新增或更新產品	
