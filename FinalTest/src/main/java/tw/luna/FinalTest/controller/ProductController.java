@@ -45,6 +45,7 @@ public class ProductController {
 	@GetMapping("/{id}")
 	public Product getProductById(@PathVariable Integer id) {
 		Users loggedInUser = (Users)session.getAttribute("loggedInUser");
+//		System.out.println(loggedInUser);
 		Integer userId = loggedInUser.getUserId().intValue();
 		
 		return productService.findProductById(userId).orElse(null);
