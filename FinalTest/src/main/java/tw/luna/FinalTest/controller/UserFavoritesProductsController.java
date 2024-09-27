@@ -3,7 +3,7 @@ package tw.luna.FinalTest.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import tw.luna.FinalTest.dto.ProductCardDTO;
+import tw.luna.FinalTest.Dto.UserFavProductCardDTO;
 import tw.luna.FinalTest.model.Product;
 import tw.luna.FinalTest.model.UserFavoritesProducts;
 import tw.luna.FinalTest.service.UserFavoritesProductsService;
@@ -42,7 +42,7 @@ public class UserFavoritesProductsController {
 
     // 根據 userId 獲取收藏的商品
     @GetMapping("/products")
-    public List<ProductCardDTO> getFavoriteProducts(@RequestParam Long userId) {
+    public List<UserFavProductCardDTO> getFavoriteProducts(@RequestParam Long userId) {
         return service.getFavoriteProductsByUserId(userId);
     }
 
