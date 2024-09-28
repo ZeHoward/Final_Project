@@ -6,14 +6,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import tw.luna.FinalTest.model.Order;
+import tw.luna.FinalTest.model.Orders;
 
 @Repository
-public interface OrderRepository extends JpaRepository<Order, Integer> {
+public interface OrderRepository extends JpaRepository<Orders, Integer> {
 	
-	Page<Order> findAll(Pageable pageable);
+	Page<Orders> findAll(Pageable pageable);
 	
 	@Query("SELECT o FROM Order o JOIN FETCH o.user")
-    Page<Order> findAllWithUser(Pageable pageable);
+    Page<Orders> findAllWithUser(Pageable pageable);
     
 }
