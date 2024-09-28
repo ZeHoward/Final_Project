@@ -2091,6 +2091,7 @@ function generateCouponManagementForm() {
   const mainContent = document.querySelector(".main-content");
   mainContent.innerHTML = ""; // 清空之前的內容
 
+  
   const couponManagementForm = `
         <section class="coupon-management">
             <h1>優惠券管理</h1>
