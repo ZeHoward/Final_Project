@@ -1,4 +1,4 @@
-package tw.brad.config;
+package tw.luna.FinalTest.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
