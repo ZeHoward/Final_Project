@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.servlet.http.HttpSession;
+import tw.luna.FinalTest.dto.OrderWithUserDTO;
 import tw.luna.FinalTest.model.Order;
 import tw.luna.FinalTest.model.Users;
 import tw.luna.FinalTest.service.OrderService;
@@ -52,7 +53,7 @@ public class OrderController {
 	}
 	
 	@GetMapping("/page")
-	public ResponseEntity<Page<Order>> getOrdersWithPagination(
+	public ResponseEntity<Page<OrderWithUserDTO>> getOrdersWithPagination(
 	    @RequestParam("page") int page,
 	    @RequestParam("size") int size,
 	    @RequestParam("sortField") String sortField, // 排序字段

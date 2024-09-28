@@ -1,6 +1,5 @@
 package tw.luna.FinalTest.service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,11 +11,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import jakarta.transaction.Transactional;
-import tw.luna.FinalTest.model.Cart;
+import tw.luna.FinalTest.dto.OrderWithUserDTO;
 import tw.luna.FinalTest.model.CartItems;
 import tw.luna.FinalTest.model.Order;
-import tw.luna.FinalTest.model.OrderDetails;
 import tw.luna.FinalTest.repository.CartItemsRepository;
 import tw.luna.FinalTest.repository.CartRepository;
 import tw.luna.FinalTest.repository.OrderDetailsRepository;
@@ -42,7 +39,7 @@ public class OrderService {
 		return orderRepository.findAll();
 	}
 
-	public ResponseEntity<Page<Order>> getOrdersWithPagination(int page, int size, String sortField, String sortDirection) {
+	public ResponseEntity<Page<OrderWithUserDTO>> getOrdersWithPagination(int page, int size, String sortField, String sortDirection) {
 	    // 根據傳入的排序方向，轉換為 Sort.Direction
 	    Sort.Direction direction = Sort.Direction.fromString(sortDirection);
 	    
@@ -51,9 +48,29 @@ public class OrderService {
 	    
 	    // 查詢訂單數據
 	    Page<Order> orders = orderRepository.findAll(pageable);
-	    
-	    return ResponseEntity.ok(orders);
+
+	    // 將查詢到的訂單數據轉換為 DTO
+	    Page<OrderWithUserDTO> orderDTOs = orders.map(order -> {
+	        OrderWithUserDTO dto = new OrderWithUserDTO();
+	        dto.setOrderId(order.getOrderId());
+	        dto.setOrderDate(order.getOrderDate());
+	        dto.setTotalAmount(order.getTotalAmount());
+	        dto.setPercentageDiscount(order.getPercentageDiscount());
+	        dto.setAmountDiscount(order.getAmountDiscount());
+	        dto.setFinalAmount(order.getFinalAmount());
+	        dto.setStatus(order.getStatus());
+
+	        // 設置用戶相關的字段
+	        dto.setUsername(order.getUser().getUsername());
+	        dto.setEmail(order.getUser().getEmail());
+	        dto.setPhoneNumber(order.getUser().getPhoneNumber());
+
+	        return dto;
+	    });
+
+	    return ResponseEntity.ok(orderDTOs);
 	}
+
 
 	// 根據 ID 獲取單個訂單
 	public ResponseEntity<Order> getOrderById(Integer id) {

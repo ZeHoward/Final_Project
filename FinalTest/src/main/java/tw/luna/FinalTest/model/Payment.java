@@ -3,6 +3,8 @@ package tw.luna.FinalTest.model;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -24,6 +26,7 @@ public class Payment {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "orderId", nullable = false)
+    @JsonBackReference
     private Order order;
 
     @Column(name = "paymentAmount")
@@ -31,6 +34,16 @@ public class Payment {
 
     @Column(name = "paymentDate")
     private LocalDateTime paymentDate;
+
+    public Payment() {
+    }
+
+    public Payment(Integer paymentId, Order order, Integer paymentAmount, LocalDateTime paymentDate) {
+        this.paymentId = paymentId;
+        this.order = order;
+        this.paymentAmount = paymentAmount;
+        this.paymentDate = paymentDate;
+    }
 
     public Integer getPaymentId() {
         return paymentId;

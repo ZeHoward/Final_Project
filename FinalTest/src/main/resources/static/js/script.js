@@ -472,7 +472,7 @@ function renderOrders(orders) {
         const orderName = order.name ? order.name : '無名稱';
 
         // 訂單配送方式，如果 order.deliveryMethod 不存在，顯示 '無配送方式'
-        const deliveryMethod = order.deliveryMethod ? order.deliveryMethod : '無配送方式';
+        const deliveryMethod = order.deliveryMethod ? order.deliveryMethod : '到府';
 
         // 訂單日期格式化，如果 order.orderDate 存在
         const orderDate = order.orderDate ? new Date(order.orderDate).toLocaleDateString() : '無日期';
@@ -500,7 +500,23 @@ function renderOrders(orders) {
             event.preventDefault();
             const orderId = this.getAttribute('data-id');
             // 顯示訂單詳情頁面
-            generateOrderDetailsContent(orderId);
+            // generateOrderDetailsContent(orderId);
+
+             // 發送 fetch 請求到 API，根據 orderId 獲取訂單詳細資料
+            fetch(`/api/orders/${orderId}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();  // 解析成 JSON 格式
+            })
+            .then(orderData => {
+                // 將返回的訂單資料傳遞給生成訂單詳情頁面的函數
+                generateOrderDetailsContent(orderData);
+            })
+            .catch(error => {
+                console.error('Error fetching order details:', error);
+            });
         });
     });
 }
@@ -552,22 +568,15 @@ function generateOrderDetailsContent(order) {
     const mainContent = document.querySelector('.main-content');
     mainContent.innerHTML = '';  // 清空之前的內容
 
-    // 假設根據 order.userId 查找對應的用戶
-    const user = users.find(u => u.userId === order.userId);
-
-    // 如果未找到用戶，則用戶資訊顯示為 "未知"
-    const userInfo = user ? `
-        <p><strong>用戶名稱:</strong> ${user.username}</p>
-        <p><strong>姓名:</strong> ${user.firstName} ${user.lastName}</p>
-        <p><strong>電子郵件:</strong> ${user.email}</p>
-        <p><strong>電話號碼:</strong> ${user.phoneNumber}</p>
+    const userInfo = order ? `
+        <p><strong>用戶名稱:</strong> ${order.username || '未提供'}</p>
+        <p><strong>電子郵件:</strong> ${order.email || '未提供'}</p>
+        <p><strong>電話號碼:</strong> ${order.phoneNumber || '未提供'}</p>
     ` : `<p>無法找到該用戶資訊</p>`;
 
-    // 生成訂單詳情的 HTML，並在右邊顯示用戶資訊
     const orderDetailsSection = `
         <section class="order-details">
             <h1>訂單詳情 - 訂單編號: ${order.orderNumber}</h1>
-
             <div class="order-and-user-info">
                 <div class="order-info">
                     <h2>訂單資訊</h2>
@@ -585,13 +594,11 @@ function generateOrderDetailsContent(order) {
                         <p><strong>備註:</strong> ${order.comment || '無'}</p>
                     </div>
                 </div>
-
                 <div class="user-info2">
                     <h2>買家資訊</h2>
                     ${userInfo}
                 </div>
             </div>
-
             <h2>購買商品</h2>
             <table class="order-items-table">
                 <thead>
@@ -615,16 +622,21 @@ function generateOrderDetailsContent(order) {
     // 選取表格的 tbody
     const tbody = document.querySelector('.order-items-table tbody');
 
-    // 確認 items 存在且是陣列
-    if (order.items && order.items.length > 0) {
-        order.items.forEach(item => {
+    // 確認 orderDetails 存在且是陣列
+    if (order.orderDetails && order.orderDetails.length > 0) {
+        order.orderDetails.forEach(orderDetails => {
+            // 確保圖片存在，若無圖片則顯示預設圖片
+            const productImage = (orderDetails.product.images && orderDetails.product.images.length > 0)
+                ? orderDetails.product.images[0].url // 假設 image 是一個物件，且您需要取得 URL
+                : '/path/to/default-image.png'; // 預設圖片路徑
+
             const tr = document.createElement('tr');
             tr.innerHTML = `
-                <td><img src="${item.image}" alt="${item.name}" style="width: 50px; height: 50px;"></td>
-                <td>${item.name}</td>
-                <td>${item.sku}</td>
-                <td>${item.quantity}</td>
-                <td>$${item.price}</td>
+                <td><img src="${productImage}" alt="${orderDetails.product.name}" style="width: 50px; height: 50px;"></td>
+                <td>${orderDetails.product.name}</td>
+                <td>${orderDetails.product.sku}</td>
+                <td>${orderDetails.quantity}</td>
+                <td>$${orderDetails.price}</td>
             `;
             tbody.appendChild(tr);  // 將每個商品插入到表格中
         });
@@ -632,6 +644,7 @@ function generateOrderDetailsContent(order) {
         console.warn("沒有購買商品");
     }
 }
+
 
 // 點擊"商品上傳"時生成內容的函數
 function generateProductUploadForm() {

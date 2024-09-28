@@ -82,6 +82,14 @@ public class Users {
 		this.cart = cart;
 	}
 
+	public List<Order> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
+	}
+
 	public Cart getCart() {
 		return cart;
 	}
@@ -144,13 +152,6 @@ public class Users {
 
 	public void setToken(String token) {
 		this.token = token;
-	}
-
-	@Override
-	public String toString() {
-		return "Users [userId=" + userId + ", username=" + username + ", email=" + email + ", password=" + password
-				+ ", phoneNumber=" + phoneNumber + ", token=" + token + ", userinfo=" + userinfo + ", cart=" + cart
-				+ "]";
 	}
 
 //	public List<UserFavoritesProducts> getUserFavoritesProducts() {
