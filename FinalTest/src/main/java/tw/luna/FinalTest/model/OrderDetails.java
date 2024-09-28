@@ -26,14 +26,11 @@ public class OrderDetails {
 
 	@Column(name = "price")
 	private Integer price;
-
-	@Column(name = "Address")
-	private String address;	
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "orderId", nullable = false)
 	@JsonBackReference
-	private Order order;
+	private Orders orders;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "productId", nullable = false)
@@ -42,12 +39,11 @@ public class OrderDetails {
 	public OrderDetails() {
 	}
 
-	public OrderDetails(Integer orderDetailsId, Integer quantity, Integer price, String address, Order order, Product product) {
+	public OrderDetails(Integer orderDetailsId, Integer quantity, Integer price, String address, Orders orders, Product product) {
 		this.orderDetailsId = orderDetailsId;
 		this.quantity = quantity;
 		this.price = price;
-		this.address = address;
-		this.order = order;
+		this.orders = orders;
 		this.product = product;
 	}
 
@@ -59,12 +55,12 @@ public class OrderDetails {
 		this.orderDetailsId = orderDetailsId;
 	}
 
-	public Order getOrder() {
-		return order;
+	public Orders getOrder() {
+		return orders;
 	}
 
-	public void setOrder(Order order) {
-		this.order = order;
+	public void setOrder(Orders orders) {
+		this.orders = orders;
 	}
 
 	public Product getProduct() {
@@ -90,14 +86,5 @@ public class OrderDetails {
 	public void setPrice(Integer price) {
 		this.price = price;
 	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
 
 }

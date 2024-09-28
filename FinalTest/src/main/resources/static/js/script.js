@@ -177,7 +177,7 @@ generateOverviewContent(); // 預設總覽頁面為首頁
 // ];
 
 // // 假資料，模擬不同食譜
-// const recipes = [ 
+// const recipes = [  
 //     {
 //         image: '紅大頭.png',
 //         name: '肉醬義大利麵',
@@ -267,14 +267,51 @@ function generateOverviewContent() {
     const mainContent = document.querySelector('.main-content');
     mainContent.innerHTML = '';  // 清空之前的內容
 
+    // 初始化時間範圍
+    let timeRange = 'week';
+
+    // 請求訂單和營業額總數的函數
+    function fetchOverviewData(timeRange) {
+        const today = new Date();
+        let startDate, endDate;
+
+        // 根據時間範圍設定起始日期
+        switch (timeRange) {
+            case 'week':
+                startDate = new Date(today.setDate(today.getDate() - 7)).toISOString();
+                break;
+            case 'month':
+                startDate = new Date(today.setMonth(today.getMonth() - 1)).toISOString();
+                break;
+            case 'year':
+                startDate = new Date(today.setFullYear(today.getFullYear() - 1)).toISOString();
+                break;
+        }
+        endDate = new Date().toISOString();  // 今天作為結束日期
+
+        // 發送請求到後端，取得營業額和訂單總數
+        fetch(`/api/orders/overview?startDate=${startDate}&endDate=${endDate}`)
+            .then(response => response.json())
+            .then(data => {
+                // 更新營業額卡片中的值
+                document.querySelector('[data-type="revenue"] p').textContent = data.revenue;
+                // 更新訂單總數卡片中的值
+                document.querySelector('[data-type="orders"] p').textContent = data.ordersCount;
+            })
+            .catch(error => console.error('Error fetching overview data:', error));
+    }
+
+    // 初始化頁面時顯示數據
+    fetchOverviewData(timeRange);
+
     // 動態生成總覽卡片的 section
     const overviewSection = document.createElement('section');
     overviewSection.className = 'overview';
 
     const cardData = [
-        { type: 'revenue', title: '營業額', value: '1,268,358' },
-        { type: 'orders', title: '訂單總量', value: '3,056' },
-        { type: 'users', title: '總用戶數', value: '29,556' }
+        { type: 'revenue', title: '營業額', value: '0' },
+        { type: 'orders', title: '訂單總量', value: '0' },
+        { type: 'users', title: '總用戶數', value: '29,556' } // 假設這裡數據固定
     ];
 
     // 動態生成卡片
@@ -350,6 +387,12 @@ function generateOverviewContent() {
 
     // 將 chart section 插入到 main-content
     mainContent.appendChild(chartSection);
+
+    // 為時間範圍選擇添加事件監聽
+    timeRangeSelect.addEventListener('change', function () {
+        timeRange = this.value;  // 更新時間範圍
+        fetchOverviewData(timeRange);  // 請求數據
+    });
 
     // 初始化圖表
     initChart();
@@ -431,21 +474,33 @@ function generateOrderManagementContent() {
     // 調用後端 API 獲取數據
     function fetchOrders() {
         let url = `/api/orders/page?page=${currentPage - 1}&size=${resultsPerPage}&sortField=${sortField}&sortDirection=${sortDirection}`;
-    
+
         if (orderStatus !== 'all') {
             url += `&status=${orderStatus}`;
         }
-    
+
         fetch(url)
-            .then(response => response.json())
+            .then(response => {
+                // 檢查回應是否為成功
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
             .then(data => {
                 renderOrders(data.content);  // 渲染訂單
                 updatePagination(data.totalPages);  // 更新分頁
-    
+
                 // 防止無限迴圈的邏輯
                 if (currentPage >= data.totalPages) {
                     console.log("已到達最後一頁，停止加載");
                     return;
+                }
+
+                // 當有下一頁時，自動加載
+                if (currentPage < data.totalPages - 1) {
+                    currentPage++; // 自增當前頁數
+                    fetchNextPage(); // 調用函數加載下一頁
                 }
             })
             .catch(error => {
@@ -453,31 +508,31 @@ function generateOrderManagementContent() {
                 tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: red;">無法獲取訂單資料</td></tr>`;
             });
     }
-    
+
 
     // 渲染訂單
-function renderOrders(orders) {
-    tbody.innerHTML = '';  // 清空表格內容
-    
-    // 確保 orders 不為 undefined 或 null
-    if (!orders || orders.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="5" style="text-align: center;">目前沒有訂單資料</td></tr>`;
-        return;
-    }
+    function renderOrders(orders) {
+        tbody.innerHTML = '';  // 清空表格內容
 
-    orders.forEach(order => {
-        const tr = document.createElement('tr');
+        // 確保 orders 不為 undefined 或 null
+        if (!orders || orders.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="5" style="text-align: center;">目前沒有訂單資料</td></tr>`;
+            return;
+        }
 
-        // 訂單名稱，如果 order.name 不存在，顯示 '無名稱'
-        const orderName = order.name ? order.name : '無名稱';
+        orders.forEach(order => {
+            const tr = document.createElement('tr');
 
-        // 訂單配送方式，如果 order.deliveryMethod 不存在，顯示 '無配送方式'
-        const deliveryMethod = order.deliveryMethod ? order.deliveryMethod : '到府';
+            // 訂單名稱，如果 order.name 不存在，顯示 '無名稱'
+            const orderName = order.name ? order.name : '無名稱';
 
-        // 訂單日期格式化，如果 order.orderDate 存在
-        const orderDate = order.orderDate ? new Date(order.orderDate).toLocaleDateString() : '無日期';
+            // 訂單配送方式，如果 order.deliveryMethod 不存在，顯示 '無配送方式'
+            const deliveryMethod = order.deliveryMethod ? order.deliveryMethod : '到府';
 
-        tr.innerHTML = `
+            // 訂單日期格式化，如果 order.orderDate 存在
+            const orderDate = order.orderDate ? new Date(order.orderDate).toLocaleDateString() : '無日期';
+
+            tr.innerHTML = `
             <td>
                 <p>${orderName}</p>
             </td>
@@ -491,35 +546,35 @@ function renderOrders(orders) {
             <td><a href="#" class="details-link" data-id="${order.orderId}" style="color: white;">詳細</a></td>
         `;
 
-        tbody.appendChild(tr);
-    });
+            tbody.appendChild(tr);
+        });
 
-    // 綁定「詳細」按鈕的點擊事件
-    document.querySelectorAll('.details-link').forEach(link => {
-        link.addEventListener('click', function (event) {
-            event.preventDefault();
-            const orderId = this.getAttribute('data-id');
-            // 顯示訂單詳情頁面
-            // generateOrderDetailsContent(orderId);
+        // 綁定「詳細」按鈕的點擊事件
+        document.querySelectorAll('.details-link').forEach(link => {
+            link.addEventListener('click', function (event) {
+                event.preventDefault();
+                const orderId = this.getAttribute('data-id');
+                // 顯示訂單詳情頁面
+                // generateOrderDetailsContent(orderId);
 
-             // 發送 fetch 請求到 API，根據 orderId 獲取訂單詳細資料
-            fetch(`/api/orders/${orderId}`)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.json();  // 解析成 JSON 格式
-            })
-            .then(orderData => {
-                // 將返回的訂單資料傳遞給生成訂單詳情頁面的函數
-                generateOrderDetailsContent(orderData);
-            })
-            .catch(error => {
-                console.error('Error fetching order details:', error);
+                // 發送 fetch 請求到 API，根據 orderId 獲取訂單詳細資料
+                fetch(`/api/orders/${orderId}`)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+                        return response.json();  // 解析成 JSON 格式
+                    })
+                    .then(orderData => {
+                        // 將返回的訂單資料傳遞給生成訂單詳情頁面的函數
+                        generateOrderDetailsContent(orderData);
+                    })
+                    .catch(error => {
+                        console.error('Error fetching order details:', error);
+                    });
             });
         });
-    });
-}
+    }
 
     // 動態生成頁數選項
     function updatePagination(totalPages) {
@@ -644,7 +699,6 @@ function generateOrderDetailsContent(order) {
         console.warn("沒有購買商品");
     }
 }
-
 
 // 點擊"商品上傳"時生成內容的函數
 function generateProductUploadForm() {
@@ -868,7 +922,7 @@ function generateProductManagementWithActionsContent() {
     // 搜尋商品
     searchInput.addEventListener('input', () => {
         const searchTerm = searchInput.value.toLowerCase();
-        const filteredProducts = products.filter(product => 
+        const filteredProducts = products.filter(product =>
             product.name.toLowerCase().includes(searchTerm) || product.sku.toLowerCase().includes(searchTerm)
         );
         currentPage = 1;  // 搜尋時將頁面重置到第 1 頁
@@ -1993,24 +2047,24 @@ function generateCouponManagementForm() {
             expiryDate
         };
 
-     // 發送 POST 請求到後端
-    fetch('localhost:8080/api/coupons/create', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: new URLSearchParams(couponData)
-    })
-    .then(response => response.json()) // 解析 JSON 回應
-    .then(data => {
-        // 使用返回的優惠券陣列更新表格
-        coupons = data;  // 假設後端返回的是最新的優惠券列表
-        displayCoupons(); // 顯示優惠券
-    })
-    .catch(error => console.error('Error:', error));
+        // 發送 POST 請求到後端
+        fetch('localhost:8080/api/coupons/create', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: new URLSearchParams(couponData)
+        })
+            .then(response => response.json()) // 解析 JSON 回應
+            .then(data => {
+                // 使用返回的優惠券陣列更新表格
+                coupons = data;  // 假設後端返回的是最新的優惠券列表
+                displayCoupons(); // 顯示優惠券
+            })
+            .catch(error => console.error('Error:', error));
 
-    // 重置表單
-    couponForm.reset();
+        // 重置表單
+        couponForm.reset();
     });
 
     // 顯示已新增的優惠券

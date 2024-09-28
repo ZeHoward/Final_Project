@@ -27,7 +27,7 @@ public class Payment {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "orderId", nullable = false)
     @JsonBackReference
-    private Order order;
+    private Orders orders;
 
     @Column(name = "paymentAmount")
     private Integer paymentAmount;
@@ -38,9 +38,9 @@ public class Payment {
     public Payment() {
     }
 
-    public Payment(Integer paymentId, Order order, Integer paymentAmount, LocalDateTime paymentDate) {
+    public Payment(Integer paymentId, Orders orders, Integer paymentAmount, LocalDateTime paymentDate) {
         this.paymentId = paymentId;
-        this.order = order;
+        this.orders = orders;
         this.paymentAmount = paymentAmount;
         this.paymentDate = paymentDate;
     }
@@ -53,12 +53,12 @@ public class Payment {
         this.paymentId = paymentId;
     }
 
-    public Order getOrder() {
-        return order;
+    public Orders getOrder() {
+        return orders;
     }
 
-    public void setOrder(Order order) {
-        this.order = order;
+    public void setOrder(Orders orders) {
+        this.orders = orders;
     }
 
     public Integer getPaymentAmount() {

@@ -20,7 +20,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "orders")
-public class Order {
+public class Orders {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -57,23 +57,23 @@ public class Order {
 
 	@Column(name = "status")
 	private String status;
-
-	@Column(name = "address")
+	
+	@Column(name = "Address")
 	private String address;
 
-	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "orders", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JsonManagedReference
 	private List<OrderDetails> orderDetails;
 
-	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "orders", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Payment> payments;
 
-	public Order() {
+	public Orders() {
 
 	}
 
 
-	public Order(Integer orderId, Users user, Cart cart, Coupon coupon, LocalDateTime orderDate, Integer totalAmount, Integer percentageDiscount, Integer amountDiscount, Integer finalAmount, String status, String address, List<OrderDetails> orderDetails, List<Payment> payments) {
+	public Orders(Integer orderId, Users user, Cart cart, Coupon coupon, LocalDateTime orderDate, Integer totalAmount, Integer percentageDiscount, Integer amountDiscount, Integer finalAmount, String status, String address, List<OrderDetails> orderDetails, List<Payment> payments) {
 		this.orderId = orderId;
 		this.user = user;
 		this.cart = cart;
@@ -84,7 +84,6 @@ public class Order {
 		this.amountDiscount = amountDiscount;
 		this.finalAmount = finalAmount;
 		this.status = status;
-		this.address = address;
 		this.orderDetails = orderDetails;
 		this.payments = payments;
 	}
@@ -169,14 +168,6 @@ public class Order {
 		this.status = status;
 	}
 
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
 	public List<OrderDetails> getOrderDetails() {
 		return orderDetails;
 	}
@@ -192,6 +183,16 @@ public class Order {
 	public void setPayments(List<Payment> payments) {
 		this.payments = payments;
 	}
+
+	public String getAddress() {
+		return address;
+	}
+
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
 
 	@Override
 	public String toString() {
