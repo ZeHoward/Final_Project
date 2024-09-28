@@ -15,4 +15,5 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
 	
 	@Query("SELECT o FROM Order o JOIN FETCH o.user")
     Page<Order> findAllWithUser(Pageable pageable);
+    
 }

@@ -67,6 +67,7 @@ public class UsersController {
 	@GetMapping("/userAllInfo")
 	public UserAllInfo userAllInfo() {
 		Users loggedInUser = (Users)session.getAttribute("loggedInUser");
+		System.out.println(loggedInUser.getEmail());
 		return usersServiceImpl.userAllInfo(loggedInUser.getEmail());
 	}
 	

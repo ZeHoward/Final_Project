@@ -58,8 +58,7 @@ public class Order {
 	@Column(name = "status")
 	private String status;
 
-	@Column(name = "address")
-	private String address;
+
 
 	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JsonManagedReference
@@ -84,7 +83,6 @@ public class Order {
 		this.amountDiscount = amountDiscount;
 		this.finalAmount = finalAmount;
 		this.status = status;
-		this.address = address;
 		this.orderDetails = orderDetails;
 		this.payments = payments;
 	}
@@ -169,14 +167,6 @@ public class Order {
 		this.status = status;
 	}
 
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
 	public List<OrderDetails> getOrderDetails() {
 		return orderDetails;
 	}
@@ -203,7 +193,6 @@ public class Order {
 				", amountDiscount=" + amountDiscount +
 				", finalAmount=" + finalAmount +
 				", status='" + status + '\'' +
-				", address='" + address + '\'' +
 				", payments=" + payments +
 				", orderDate=" + orderDate +
 				'}';

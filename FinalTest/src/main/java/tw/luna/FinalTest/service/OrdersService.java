@@ -16,6 +16,7 @@ import java.util.UUID;
 
 @Service
 public class OrdersService {
+	
     @Autowired
     OrderRepository orderRepository;
 
@@ -33,6 +34,7 @@ public class OrdersService {
         Users user = userRepository.getReferenceById(userId);
 
         order.setUser(user);
+        
         List<OrderDetails> orderDetails = order.getOrderDetails();
 
         Cart cart = cartRepository.findByUsersUserId(userId);

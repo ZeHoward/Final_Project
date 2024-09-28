@@ -43,27 +43,11 @@ public class Users {
 	@OneToOne(mappedBy = "users", cascade = CascadeType.ALL)
 	@JsonManagedReference("Users_UserInfo")
 	private Userinfo userinfo;
-	
+
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	@JsonManagedReference("order_user")
 	private List<Order> orders;
 
-//	//連到最愛商品表
-//	@OneToMany(mappedBy = "users", cascade = CascadeType.ALL, orphanRemoval = true)
-//	@JsonManagedReference
-//	private List<UserFavoritesProducts> userFavoritesProducts;
-//
-//
-//	//連到最愛食譜表
-//	@OneToMany(mappedBy = "users", cascade = CascadeType.ALL, orphanRemoval = true)
-//	@JsonManagedReference
-//	private List<UserFavoritesRecipes> userFavoritesRecipes;
-//
-//
-//	//連到購物車表
-//	@OneToMany(mappedBy = "users", cascade = CascadeType.ALL, orphanRemoval = true)
-//	@JsonManagedReference
-//	private List<Cart> cart;
 
 	@OneToOne(mappedBy = "users", cascade = CascadeType.ALL)
 	@JsonManagedReference("Users_Cart")
@@ -89,6 +73,7 @@ public class Users {
 	public void setOrders(List<Order> orders) {
 		this.orders = orders;
 	}
+
 
 	public Cart getCart() {
 		return cart;
