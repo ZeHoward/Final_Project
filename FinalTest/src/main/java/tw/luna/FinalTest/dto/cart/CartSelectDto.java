@@ -1,4 +1,4 @@
-package tw.luna.FinalTest.dto;
+package tw.luna.FinalTest.dto.cart;
 
 import java.util.Arrays;
 
