@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpSession;
 import tw.luna.FinalTest.model.UserAllInfo;
 import tw.luna.FinalTest.model.Users;
 import tw.luna.FinalTest.model.UsersResponse;
+import tw.luna.FinalTest.model.UsersStatus;
 import tw.luna.FinalTest.service.UsersServiceImpl;
 
 
@@ -35,7 +36,6 @@ public class UsersController {
 	
 	@GetMapping("/checkEmail")
 	public boolean checkEmail(@RequestParam String email) {
-		
 		if(usersServiceImpl.isExistUser(email).getUsers() != null) {
 			return true;
 		}
@@ -46,10 +46,11 @@ public class UsersController {
 	@RequestMapping("/login")
 	public UsersResponse login(@RequestBody Users users) {
 		UsersResponse loginUsers = usersServiceImpl.loginUsers(users);
-		Users sessionUser = loginUsers.getUsers();
-		session.setAttribute("loggedInUser", sessionUser);
-		System.out.println("創建JSESSIONID:" + session.getId());
-
+		if(loginUsers.getUsersStatus() == UsersStatus.LOGIN_SUCCESS) {
+			Users sessionUser = loginUsers.getUsers();
+			session.setAttribute("loggedInUser", sessionUser);
+//			System.out.println("創建JSESSIONID:" + session.getId());
+		}
 		return loginUsers;
 	}
 	
@@ -64,9 +65,9 @@ public class UsersController {
 	}
 	
 	@GetMapping("/userAllInfo")
-	public UserAllInfo userAllInfo(@RequestParam String email) {
-		
-		return usersServiceImpl.userAllInfo(email);
+	public UserAllInfo userAllInfo() {
+		Users loggedInUser = (Users)session.getAttribute("loggedInUser");
+		return usersServiceImpl.userAllInfo(loggedInUser.getEmail());
 	}
 	
 	@RequestMapping("/update")
