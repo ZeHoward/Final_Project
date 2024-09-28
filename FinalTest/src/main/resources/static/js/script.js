@@ -124,110 +124,97 @@ generateOverviewContent(); // 預設總覽頁面為首頁
 //     }
 // ];
 
-// 假資料，模擬不同商品
-const products = [
-  {
-    index: "1",
-    name: "商品名稱1",
-    sku: "ABC-66",
-    image: "紅大頭.png",
-    category: "異國料理",
-    servings: 3,
-    difficulty: "中等",
-    vegan: "否",
-    time: "40",
-    price: 500,
-    description:
-      "一道經典的肉醬義大利麵，肉醬味道濃郁，搭配煮得恰到好處的義大利麵，簡單且美味，適合全家人享用",
-    Ingredients:
-      "義大利麵200g,牛絞肉 150g,番茄醬 1 杯,洋蔥 1 顆（切丁）,大蒜 2 瓣（切碎）,橄欖油 2 湯匙",
-    steps: "用手做，再說一次用手做",
-    stock: "50",
-  },
-  {
-    index: "2",
-    name: "商品名稱2",
-    sku: "ABC-66",
-    image: "紅大頭.png",
-    category: "異國料理",
-    servings: 3,
-    difficulty: "中等",
-    vegan: "否",
-    time: "40",
-    price: 500,
-    description:
-      "一道經典的肉醬義大利麵，肉醬味道濃郁，搭配煮得恰到好處的義大利麵，簡單且美味，適合全家人享用",
-    Ingredients:
-      "義大利麵200g,牛絞肉 150g,番茄醬 1 杯,洋蔥 1 顆（切丁）,大蒜 2 瓣（切碎）,橄欖油 2 湯匙",
-    steps: "用手做，再說一次用手做",
-    stock: "50",
-  },
-  {
-    index: "3",
-    name: "商品名稱3",
-    sku: "ABC-66",
-    image: "紅大頭.png",
-    category: "異國料理",
-    servings: 3,
-    difficulty: "中等",
-    vegan: "否",
-    time: "80",
-    price: 500,
-    description:
-      "一道經典的肉醬義大利麵，肉醬味道濃郁，搭配煮得恰到好處的義大利麵，簡單且美味，適合全家人享用",
-    Ingredients:
-      "義大利麵200g,牛絞肉 150g,番茄醬 1 杯,洋蔥 1 顆（切丁）,大蒜 2 瓣（切碎）,橄欖油 2 湯匙",
-    steps: "用手做，再說一次用手做",
-    stock: "50",
-  },
-];
+// // 假資料，模擬不同商品
+// const products = [
+//     {
+//         index: '1',
+//         name: '商品名稱1',
+//         sku: 'ABC-66',
+//         image: '紅大頭.png',
+//         category: '異國料理',
+//         servings: 3,
+//         difficulty: '中等',
+//         vegan: '否',
+//         time: '40',
+//         price: 500,
+//         description: '一道經典的肉醬義大利麵，肉醬味道濃郁，搭配煮得恰到好處的義大利麵，簡單且美味，適合全家人享用',
+//         Ingredients: '義大利麵200g,牛絞肉 150g,番茄醬 1 杯,洋蔥 1 顆（切丁）,大蒜 2 瓣（切碎）,橄欖油 2 湯匙',
+//         steps: '用手做，再說一次用手做',
+//         stock: '50',
+//     },
+//     {
+//         index: '2',
+//         name: '商品名稱2',
+//         sku: 'ABC-66',
+//         image: '紅大頭.png',
+//         category: '異國料理',
+//         servings: 3,
+//         difficulty: '中等',
+//         vegan: '否',
+//         time: '40',
+//         price: 500,
+//         description: '一道經典的肉醬義大利麵，肉醬味道濃郁，搭配煮得恰到好處的義大利麵，簡單且美味，適合全家人享用',
+//         Ingredients: '義大利麵200g,牛絞肉 150g,番茄醬 1 杯,洋蔥 1 顆（切丁）,大蒜 2 瓣（切碎）,橄欖油 2 湯匙',
+//         steps: '用手做，再說一次用手做',
+//         stock: '50',
+//     },
+//     {
+//         index: '3',
+//         name: '商品名稱3',
+//         sku: 'ABC-66',
+//         image: '紅大頭.png',
+//         category: '異國料理',
+//         servings: 3,
+//         difficulty: '中等',
+//         vegan: '否',
+//         time: '80',
+//         price: 500,
+//         description: '一道經典的肉醬義大利麵，肉醬味道濃郁，搭配煮得恰到好處的義大利麵，簡單且美味，適合全家人享用',
+//         Ingredients: '義大利麵200g,牛絞肉 150g,番茄醬 1 杯,洋蔥 1 顆（切丁）,大蒜 2 瓣（切碎）,橄欖油 2 湯匙',
+//         steps: '用手做，再說一次用手做',
+//         stock: '50',
+//     }
+// ];
 
-// 假資料，模擬不同食譜
-const recipes = [
-  {
-    image: "紅大頭.png",
-    name: "肉醬義大利麵",
-    description:
-      "一道經典的肉醬義大利麵，搭配濃郁的番茄醬和牛肉，簡單美味，適合全家人享用。",
-    category: "異國料理",
-    people: 4,
-    difficulty: "中等",
-    vegan: "否",
-    time: "45",
-    ingredients:
-      "義大利麵 200g, 牛絞肉 150g, 番茄醬 1 杯, 洋蔥 1 顆 (切丁), 大蒜 2 瓣 (切碎), 橄欖油 2 湯匙, 鹽與胡椒適量",
-    steps:
-      "1. 先煮義大利麵，根據包裝說明進行。2. 加熱橄欖油，炒洋蔥和大蒜直到金黃。3. 加入牛絞肉，炒熟。4. 倒入番茄醬，煮滾後轉小火煨煮10分鐘。5. 將煮好的義大利麵拌入醬汁，調味後即可享用。",
-  },
-  {
-    image: "紅大頭.png",
-    name: "奶油雞肉蘑菇濃湯",
-    description: "豐富的口感與濃郁的香味，是一份溫暖又美味的湯品。",
-    category: "家常料理",
-    people: 2,
-    difficulty: "簡單",
-    vegan: "否",
-    time: "30",
-    ingredients:
-      "雞胸肉 200g, 蘑菇 100g, 洋蔥 1 顆 (切丁), 奶油 30g, 牛奶 300ml, 麵粉 2 湯匙, 鹽與胡椒適量",
-    steps:
-      "1. 雞胸肉切塊，蘑菇切片。2. 加熱奶油，炒洋蔥至軟。3. 加入雞肉，炒至變色。4. 加入麵粉，煮至呈糊狀。5. 慢慢倒入牛奶，拌勻。6. 加入蘑菇，煮至濃稠，調味後即可。",
-  },
-  {
-    image: "紅大頭.png",
-    name: "蔬菜炒飯",
-    description: "清爽的蔬菜炒飯，加入多樣時令蔬菜，簡單又營養，適合素食者。",
-    category: "多人料理",
-    people: 3,
-    difficulty: "簡單",
-    vegan: "全素",
-    time: "20",
-    ingredients:
-      "白飯 300g, 青椒 1 顆, 紅蘿蔔 1 根, 洋蔥 1 顆, 玉米粒 100g, 醬油 2 湯匙, 橄欖油 1 湯匙",
-    steps:
-      "1. 將青椒、紅蘿蔔、洋蔥切丁。2. 加熱橄欖油，炒洋蔥至透明。3. 加入其他蔬菜，翻炒至軟。4. 倒入白飯，拌炒均勻。5. 加入醬油調味，翻炒片刻後即可享用。",
-  },
-];
+// // 假資料，模擬不同食譜
+// const recipes = [
+//     {
+//         image: '紅大頭.png',
+//         name: '肉醬義大利麵',
+//         description: '一道經典的肉醬義大利麵，搭配濃郁的番茄醬和牛肉，簡單美味，適合全家人享用。',
+//         category: '異國料理',
+//         people: 4,
+//         difficulty: '中等',
+//         vegan: '否',
+//         time: '45',
+//         ingredients: '義大利麵 200g, 牛絞肉 150g, 番茄醬 1 杯, 洋蔥 1 顆 (切丁), 大蒜 2 瓣 (切碎), 橄欖油 2 湯匙, 鹽與胡椒適量',
+//         steps: '1. 先煮義大利麵，根據包裝說明進行。2. 加熱橄欖油，炒洋蔥和大蒜直到金黃。3. 加入牛絞肉，炒熟。4. 倒入番茄醬，煮滾後轉小火煨煮10分鐘。5. 將煮好的義大利麵拌入醬汁，調味後即可享用。'
+//     },
+//     {
+//         image: '紅大頭.png',
+//         name: '奶油雞肉蘑菇濃湯',
+//         description: '豐富的口感與濃郁的香味，是一份溫暖又美味的湯品。',
+//         category: '家常料理',
+//         people: 2,
+//         difficulty: '簡單',
+//         vegan: '否',
+//         time: '30',
+//         ingredients: '雞胸肉 200g, 蘑菇 100g, 洋蔥 1 顆 (切丁), 奶油 30g, 牛奶 300ml, 麵粉 2 湯匙, 鹽與胡椒適量',
+//         steps: '1. 雞胸肉切塊，蘑菇切片。2. 加熱奶油，炒洋蔥至軟。3. 加入雞肉，炒至變色。4. 加入麵粉，煮至呈糊狀。5. 慢慢倒入牛奶，拌勻。6. 加入蘑菇，煮至濃稠，調味後即可。'
+//     },
+//     {
+//         image: '紅大頭.png',
+//         name: '蔬菜炒飯',
+//         description: '清爽的蔬菜炒飯，加入多樣時令蔬菜，簡單又營養，適合素食者。',
+//         category: '多人料理',
+//         people: 3,
+//         difficulty: '簡單',
+//         vegan: '全素',
+//         time: '20',
+//         ingredients: '白飯 300g, 青椒 1 顆, 紅蘿蔔 1 根, 洋蔥 1 顆, 玉米粒 100g, 醬油 2 湯匙, 橄欖油 1 湯匙',
+//         steps: '1. 將青椒、紅蘿蔔、洋蔥切丁。2. 加熱橄欖油，炒洋蔥至透明。3. 加入其他蔬菜，翻炒至軟。4. 倒入白飯，拌炒均勻。5. 加入醬油調味，翻炒片刻後即可享用。'
+//     }
+// ];
 
 // // 假資料，模擬不同用戶
 // const users = [
@@ -599,48 +586,48 @@ function generateOrderManagementContent() {
       });
     });
   }
-}
 
-// 動態生成頁數選項
-function updatePagination(totalPages) {
-  pageSelect.innerHTML = ""; // 清空頁數選項
-  for (let i = 1; i <= totalPages; i++) {
-    const option = document.createElement("option");
-    option.value = i;
-    option.textContent = `第 ${i} 頁`;
-    pageSelect.appendChild(option);
+  // 動態生成頁數選項
+  function updatePagination(totalPages) {
+    pageSelect.innerHTML = ""; // 清空頁數選項
+    for (let i = 1; i <= totalPages; i++) {
+      const option = document.createElement("option");
+      option.value = i;
+      option.textContent = `第 ${i} 頁`;
+      pageSelect.appendChild(option);
+    }
+    pageSelect.value = currentPage; // 設定當前頁數
   }
-  pageSelect.value = currentPage; // 設定當前頁數
+
+  // 更新顯示結果數或排序方式時，重新調用 API 並渲染
+  resultsPerPageSelect.addEventListener("change", () => {
+    resultsPerPage = parseInt(resultsPerPageSelect.value);
+    currentPage = 1;
+    fetchOrders();
+  });
+
+  sortOrderSelect.addEventListener("change", () => {
+    const sortValues = sortOrderSelect.value.split(",");
+    sortField = sortValues[0];
+    sortDirection = sortValues[1];
+    currentPage = 1;
+    fetchOrders();
+  });
+
+  orderStatusSelect.addEventListener("change", () => {
+    orderStatus = orderStatusSelect.value;
+    currentPage = 1;
+    fetchOrders();
+  });
+
+  pageSelect.addEventListener("change", () => {
+    currentPage = parseInt(pageSelect.value);
+    fetchOrders();
+  });
+
+  // 初始加載數據
+  fetchOrders();
 }
-
-// 更新顯示結果數或排序方式時，重新調用 API 並渲染
-resultsPerPageSelect.addEventListener("change", () => {
-  resultsPerPage = parseInt(resultsPerPageSelect.value);
-  currentPage = 1;
-  fetchOrders();
-});
-
-sortOrderSelect.addEventListener("change", () => {
-  const sortValues = sortOrderSelect.value.split(",");
-  sortField = sortValues[0];
-  sortDirection = sortValues[1];
-  currentPage = 1;
-  fetchOrders();
-});
-
-orderStatusSelect.addEventListener("change", () => {
-  orderStatus = orderStatusSelect.value;
-  currentPage = 1;
-  fetchOrders();
-});
-
-pageSelect.addEventListener("change", () => {
-  currentPage = parseInt(pageSelect.value);
-  fetchOrders();
-});
-
-// 初始加載數據
-fetchOrders();
 
 // 點擊訂單的"詳細"連結後生成訂單詳情頁面的函數
 function generateOrderDetailsContent(order) {
@@ -654,6 +641,62 @@ function generateOrderDetailsContent(order) {
         <p><strong>電話號碼:</strong> ${order.phoneNumber || "未提供"}</p>
     `
     : `<p>無法找到該用戶資訊</p>`;
+
+  const orderDetailsSection = `
+        <section class="order-details">
+            <h1>訂單詳情 - 訂單編號: ${order.orderNumber}</h1>
+            <div class="order-and-user-info">
+                <div class="order-info">
+                    <h2>訂單資訊</h2>
+                    <div class="order-summary">
+                        <p><strong>訂單日期:</strong> ${order.orderDate}</p>
+                        <p><strong>配送地址:</strong> ${order.address}</p>
+                        <p><strong>訂單總金額:</strong> $${
+                          order.totalAmount
+                        }</p>
+                        <p><strong>優惠券 ID:</strong> ${
+                          order.couponId || "N/A"
+                        }</p>
+                        <p><strong>百分比折扣:</strong> ${
+                          order.percentageDiscount
+                        }%</p>
+                        <p><strong>折扣金額:</strong> $${
+                          order.amountDiscount
+                        }</p>
+                        <p><strong>最終金額:</strong> $${order.finalAmount}</p>
+                        <p><strong>訂單狀態:</strong> ${order.status}</p>
+                        <p><strong>修改者:</strong> ${order.changedBy}</p>
+                        <p><strong>修改時間:</strong> ${order.changedAt}</p>
+                        <p><strong>備註:</strong> ${order.comment || "無"}</p>
+                    </div>
+                </div>
+                <div class="user-info2">
+                    <h2>買家資訊</h2>
+                    ${userInfo}
+                </div>
+            </div>
+            <h2>購買商品</h2>
+            <table class="order-items-table">
+                <thead>
+                    <tr>
+                        <th>商品圖片</th>
+                        <th>名稱</th>
+                        <th>SKU</th>
+                        <th>數量</th>
+                        <th>價格</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- 動態生成的商品將插入到這裡 -->
+                </tbody>
+            </table>
+        </section>
+    `;
+
+  mainContent.innerHTML = orderDetailsSection;
+
+  // 選取表格的 tbody
+  const tbody = document.querySelector(".order-items-table tbody");
 
   // 確認 orderDetails 存在且是陣列
   if (order.orderDetails && order.orderDetails.length > 0) {
