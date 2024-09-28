@@ -1,12 +1,11 @@
 package tw.luna.FinalTest.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import tw.luna.FinalTest.dto.ProductCardDTO;
-
+import tw.luna.FinalTest.dto.UserFavProductCardDTO;
 import tw.luna.FinalTest.model.Product;
 import tw.luna.FinalTest.model.ProductImage;
 import tw.luna.FinalTest.model.UserFavoritesProducts;
@@ -37,11 +36,12 @@ public class UserFavoritesProductsService {
         return repository.save(favorite);
     }
 
-    public void removeFavorite(Long userId, Integer productId) {
+    @Transactional
+    public void removeFavorite(Long userId, int productId) {
         repository.deleteByIdUserIdAndIdProductId(userId, productId);
     }
 
-    public Optional<UserFavoritesProducts> getFavorite(Long userId, Integer productId) {
+    public Optional<UserFavoritesProducts> getFavorite(Long userId, int productId) {
         return repository.findByIdUserId(userId)
                 .stream()
                 .filter(favorite -> favorite.getProductId() == productId)
@@ -51,7 +51,7 @@ public class UserFavoritesProductsService {
         return productRepository.findById(productId);
     }
     // 根據 userId 獲取收藏的商品卡片
-    public List<ProductCardDTO> getFavoriteProductsByUserId(Long userId) {
+    public List<UserFavProductCardDTO> getFavoriteProductsByUserId(Long userId) {
         List<UserFavoritesProducts> favorites = repository.findByIdUserId(userId);
 
         return favorites.stream().map(favorite -> {
@@ -68,9 +68,9 @@ public class UserFavoritesProductsService {
                 }
 
                 // 返回 DTO，包含商品的 id、名稱、價格、Base64 編碼的圖片
-                return new ProductCardDTO(product.getProductId(), product.getName(), product.getPrice(), imageBase64);
+                return new UserFavProductCardDTO(product.getProductId(), product.getName(), product.getPrice(), imageBase64);
             }
             return null;
-        }).filter(productCardDTO -> productCardDTO != null).collect(Collectors.toList());
+        }).filter(UserFavProductCardDTO -> UserFavProductCardDTO != null).collect(Collectors.toList());
     }
 }

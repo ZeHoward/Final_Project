@@ -1,5 +1,7 @@
 package tw.luna.FinalTest.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -24,17 +26,26 @@ public class OrderDetails {
 
 	@Column(name = "price")
 	private Integer price;
-
-	@Column(name = "Address")
-	private String address;	
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "orderId", nullable = false)
-	private Order order;
+	@JsonBackReference
+	private Orders orders;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "productId", nullable = false)
 	private Product product;
+
+	public OrderDetails() {
+	}
+
+	public OrderDetails(Integer orderDetailsId, Integer quantity, Integer price, String address, Orders orders, Product product) {
+		this.orderDetailsId = orderDetailsId;
+		this.quantity = quantity;
+		this.price = price;
+		this.orders = orders;
+		this.product = product;
+	}
 
 	public Integer getOrderDetailsId() {
 		return orderDetailsId;
@@ -44,12 +55,12 @@ public class OrderDetails {
 		this.orderDetailsId = orderDetailsId;
 	}
 
-	public Order getOrder() {
-		return order;
+	public Orders getOrder() {
+		return orders;
 	}
 
-	public void setOrder(Order order) {
-		this.order = order;
+	public void setOrder(Orders orders) {
+		this.orders = orders;
 	}
 
 	public Product getProduct() {
@@ -76,11 +87,4 @@ public class OrderDetails {
 		this.price = price;
 	}
 
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
 }

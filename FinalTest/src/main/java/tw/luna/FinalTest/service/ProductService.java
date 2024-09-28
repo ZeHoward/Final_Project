@@ -3,7 +3,6 @@ package tw.luna.FinalTest.service;
 import java.util.List;
 import java.util.Optional;
 
-import tw.luna.FinalTest.dto.ProductCardDTO;
 import tw.luna.FinalTest.model.Product;
 
 public interface ProductService {
@@ -36,7 +35,5 @@ public interface ProductService {
     
     //批次新增產品
     List<Product> saveProductsInBatch(List<Product> products);
-
-	List<ProductCardDTO> getProductsByCategoryId(Integer categoryId);
     
 }

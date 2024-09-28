@@ -2,6 +2,7 @@ package tw.luna.FinalTest.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
@@ -43,22 +44,10 @@ public class Users {
 	@JsonManagedReference("Users_UserInfo")
 	private Userinfo userinfo;
 
-//	//連到最愛商品表
-//	@OneToMany(mappedBy = "users", cascade = CascadeType.ALL, orphanRemoval = true)
-//	@JsonManagedReference
-//	private List<UserFavoritesProducts> userFavoritesProducts;
-//
-//
-//	//連到最愛食譜表
-//	@OneToMany(mappedBy = "users", cascade = CascadeType.ALL, orphanRemoval = true)
-//	@JsonManagedReference
-//	private List<UserFavoritesRecipes> userFavoritesRecipes;
-//
-//
-//	//連到購物車表
-//	@OneToMany(mappedBy = "users", cascade = CascadeType.ALL, orphanRemoval = true)
-//	@JsonManagedReference
-//	private List<Cart> cart;
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	@JsonManagedReference("order_user")
+	private List<Orders> orders;
+
 
 	@OneToOne(mappedBy = "users", cascade = CascadeType.ALL)
 	@JsonManagedReference("Users_Cart")
@@ -76,6 +65,15 @@ public class Users {
 		this.userinfo = userinfo;
 		this.cart = cart;
 	}
+
+	public List<Orders> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(List<Orders> orders) {
+		this.orders = orders;
+	}
+
 
 	public Cart getCart() {
 		return cart;

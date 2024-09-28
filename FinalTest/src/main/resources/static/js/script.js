@@ -124,6 +124,7 @@ generateOverviewContent(); // 預設總覽頁面為首頁
 //     }
 // ];
 
+
 // 假資料，模擬不同商品
 const products = [
   {
@@ -182,6 +183,58 @@ const products = [
   },
 ];
 
+// // 假資料，模擬不同商品
+// const products = [
+//     {
+//         index: '1',
+//         name: '商品名稱1',
+//         sku: 'ABC-66',
+//         image: '紅大頭.png',
+//         category: '異國料理',
+//         servings: 3,
+//         difficulty: '中等',
+//         vegan: '否',
+//         time: '40',
+//         price: 500,
+//         description: '一道經典的肉醬義大利麵，肉醬味道濃郁，搭配煮得恰到好處的義大利麵，簡單且美味，適合全家人享用',
+//         Ingredients: '義大利麵200g,牛絞肉 150g,番茄醬 1 杯,洋蔥 1 顆（切丁）,大蒜 2 瓣（切碎）,橄欖油 2 湯匙',
+//         steps: '用手做，再說一次用手做',
+//         stock: '50',
+//     },
+//     {
+//         index: '2',
+//         name: '商品名稱2',
+//         sku: 'ABC-66',
+//         image: '紅大頭.png',
+//         category: '異國料理',
+//         servings: 3,
+//         difficulty: '中等',
+//         vegan: '否',
+//         time: '40',
+//         price: 500,
+//         description: '一道經典的肉醬義大利麵，肉醬味道濃郁，搭配煮得恰到好處的義大利麵，簡單且美味，適合全家人享用',
+//         Ingredients: '義大利麵200g,牛絞肉 150g,番茄醬 1 杯,洋蔥 1 顆（切丁）,大蒜 2 瓣（切碎）,橄欖油 2 湯匙',
+//         steps: '用手做，再說一次用手做',
+//         stock: '50',
+//     },
+//     {
+//         index: '3',
+//         name: '商品名稱3',
+//         sku: 'ABC-66',
+//         image: '紅大頭.png',
+//         category: '異國料理',
+//         servings: 3,
+//         difficulty: '中等',
+//         vegan: '否',
+//         time: '80',
+//         price: 500,
+//         description: '一道經典的肉醬義大利麵，肉醬味道濃郁，搭配煮得恰到好處的義大利麵，簡單且美味，適合全家人享用',
+//         Ingredients: '義大利麵200g,牛絞肉 150g,番茄醬 1 杯,洋蔥 1 顆（切丁）,大蒜 2 瓣（切碎）,橄欖油 2 湯匙',
+//         steps: '用手做，再說一次用手做',
+//         stock: '50',
+//     }
+// ];
+
 // 假資料，模擬不同食譜
 const recipes = [
   {
@@ -228,6 +281,47 @@ const recipes = [
       "1. 將青椒、紅蘿蔔、洋蔥切丁。2. 加熱橄欖油，炒洋蔥至透明。3. 加入其他蔬菜，翻炒至軟。4. 倒入白飯，拌炒均勻。5. 加入醬油調味，翻炒片刻後即可享用。",
   },
 ];
+=======
+// // 假資料，模擬不同食譜
+// const recipes = [  
+//     {
+//         image: '紅大頭.png',
+//         name: '肉醬義大利麵',
+//         description: '一道經典的肉醬義大利麵，搭配濃郁的番茄醬和牛肉，簡單美味，適合全家人享用。',
+//         category: '異國料理',
+//         people: 4,
+//         difficulty: '中等',
+//         vegan: '否',
+//         time: '45',
+//         ingredients: '義大利麵 200g, 牛絞肉 150g, 番茄醬 1 杯, 洋蔥 1 顆 (切丁), 大蒜 2 瓣 (切碎), 橄欖油 2 湯匙, 鹽與胡椒適量',
+//         steps: '1. 先煮義大利麵，根據包裝說明進行。2. 加熱橄欖油，炒洋蔥和大蒜直到金黃。3. 加入牛絞肉，炒熟。4. 倒入番茄醬，煮滾後轉小火煨煮10分鐘。5. 將煮好的義大利麵拌入醬汁，調味後即可享用。'
+//     },
+//     {
+//         image: '紅大頭.png',
+//         name: '奶油雞肉蘑菇濃湯',
+//         description: '豐富的口感與濃郁的香味，是一份溫暖又美味的湯品。',
+//         category: '家常料理',
+//         people: 2,
+//         difficulty: '簡單',
+//         vegan: '否',
+//         time: '30',
+//         ingredients: '雞胸肉 200g, 蘑菇 100g, 洋蔥 1 顆 (切丁), 奶油 30g, 牛奶 300ml, 麵粉 2 湯匙, 鹽與胡椒適量',
+//         steps: '1. 雞胸肉切塊，蘑菇切片。2. 加熱奶油，炒洋蔥至軟。3. 加入雞肉，炒至變色。4. 加入麵粉，煮至呈糊狀。5. 慢慢倒入牛奶，拌勻。6. 加入蘑菇，煮至濃稠，調味後即可。'
+//     },
+//     {
+//         image: '紅大頭.png',
+//         name: '蔬菜炒飯',
+//         description: '清爽的蔬菜炒飯，加入多樣時令蔬菜，簡單又營養，適合素食者。',
+//         category: '多人料理',
+//         people: 3,
+//         difficulty: '簡單',
+//         vegan: '全素',
+//         time: '20',
+//         ingredients: '白飯 300g, 青椒 1 顆, 紅蘿蔔 1 根, 洋蔥 1 顆, 玉米粒 100g, 醬油 2 湯匙, 橄欖油 1 湯匙',
+//         steps: '1. 將青椒、紅蘿蔔、洋蔥切丁。2. 加熱橄欖油，炒洋蔥至透明。3. 加入其他蔬菜，翻炒至軟。4. 倒入白飯，拌炒均勻。5. 加入醬油調味，翻炒片刻後即可享用。'
+//     }
+// ];
+>>>>>>> branch 'testAPI' of https://github.com/ZeHoward/Final_Project.git
 
 // // 假資料，模擬不同用戶
 // const users = [
@@ -280,15 +374,66 @@ function generateOverviewContent() {
   const mainContent = document.querySelector(".main-content");
   mainContent.innerHTML = ""; // 清空之前的內容
 
+<<<<<<< HEAD
   // 動態生成總覽卡片的 section
   const overviewSection = document.createElement("section");
   overviewSection.className = "overview";
+=======
+    // 初始化時間範圍
+    let timeRange = 'week';
 
+    // 請求訂單和營業額總數的函數
+    function fetchOverviewData(timeRange) {
+        const today = new Date();
+        let startDate, endDate;
+
+        // 根據時間範圍設定起始日期
+        switch (timeRange) {
+            case 'week':
+                startDate = new Date(today.setDate(today.getDate() - 7)).toISOString();
+                break;
+            case 'month':
+                startDate = new Date(today.setMonth(today.getMonth() - 1)).toISOString();
+                break;
+            case 'year':
+                startDate = new Date(today.setFullYear(today.getFullYear() - 1)).toISOString();
+                break;
+        }
+        endDate = new Date().toISOString();  // 今天作為結束日期
+
+        // 發送請求到後端，取得營業額和訂單總數
+        fetch(`/api/orders/overview?startDate=${startDate}&endDate=${endDate}`)
+            .then(response => response.json())
+            .then(data => {
+                // 更新營業額卡片中的值
+                document.querySelector('[data-type="revenue"] p').textContent = data.revenue;
+                // 更新訂單總數卡片中的值
+                document.querySelector('[data-type="orders"] p').textContent = data.ordersCount;
+            })
+            .catch(error => console.error('Error fetching overview data:', error));
+    }
+
+    // 初始化頁面時顯示數據
+    fetchOverviewData(timeRange);
+
+    // 動態生成總覽卡片的 section
+    const overviewSection = document.createElement('section');
+    overviewSection.className = 'overview';
+>>>>>>> branch 'testAPI' of https://github.com/ZeHoward/Final_Project.git
+
+<<<<<<< HEAD
   const cardData = [
     { type: "revenue", title: "營業額", value: "1,268,358" },
     { type: "orders", title: "訂單總量", value: "3,056" },
     { type: "users", title: "總用戶數", value: "29,556" },
   ];
+=======
+    const cardData = [
+        { type: 'revenue', title: '營業額', value: '0' },
+        { type: 'orders', title: '訂單總量', value: '0' },
+        { type: 'users', title: '總用戶數', value: '29,556' } // 假設這裡數據固定
+    ];
+>>>>>>> branch 'testAPI' of https://github.com/ZeHoward/Final_Project.git
 
   // 動態生成卡片
   cardData.forEach((card) => {
@@ -364,8 +509,19 @@ function generateOverviewContent() {
   // 將 chart section 插入到 main-content
   mainContent.appendChild(chartSection);
 
+<<<<<<< HEAD
   // 初始化圖表
   initChart();
+=======
+    // 為時間範圍選擇添加事件監聽
+    timeRangeSelect.addEventListener('change', function () {
+        timeRange = this.value;  // 更新時間範圍
+        fetchOverviewData(timeRange);  // 請求數據
+    });
+
+    // 初始化圖表
+    initChart();
+>>>>>>> branch 'testAPI' of https://github.com/ZeHoward/Final_Project.git
 }
 
 // 點擊"訂單管理"時生成內容的函數
@@ -447,11 +603,47 @@ function generateOrderManagementContent() {
       currentPage - 1
     }&size=${resultsPerPage}&sortField=${sortField}&sortDirection=${sortDirection}`;
 
+<<<<<<< HEAD
     // 如果狀態不是全部，則加上 status 的參數
     if (orderStatus !== "all") {
       url += `&status=${orderStatus}`;
+=======
+        if (orderStatus !== 'all') {
+            url += `&status=${orderStatus}`;
+        }
+
+        fetch(url)
+            .then(response => {
+                // 檢查回應是否為成功
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                renderOrders(data.content);  // 渲染訂單
+                updatePagination(data.totalPages);  // 更新分頁
+
+                // 防止無限迴圈的邏輯
+                if (currentPage >= data.totalPages) {
+                    console.log("已到達最後一頁，停止加載");
+                    return;
+                }
+
+                // 當有下一頁時，自動加載
+                if (currentPage < data.totalPages - 1) {
+                    currentPage++; // 自增當前頁數
+                    fetchNextPage(); // 調用函數加載下一頁
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching orders:', error);
+                tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: red;">無法獲取訂單資料</td></tr>`;
+            });
+>>>>>>> branch 'testAPI' of https://github.com/ZeHoward/Final_Project.git
     }
 
+<<<<<<< HEAD
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
@@ -499,6 +691,73 @@ function generateOrderManagementContent() {
           generateOrderDetailsContent(orderId);
         });
       });
+=======
+
+    // 渲染訂單
+    function renderOrders(orders) {
+        tbody.innerHTML = '';  // 清空表格內容
+
+        // 確保 orders 不為 undefined 或 null
+        if (!orders || orders.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="5" style="text-align: center;">目前沒有訂單資料</td></tr>`;
+            return;
+        }
+
+        orders.forEach(order => {
+            const tr = document.createElement('tr');
+
+            // 訂單名稱，如果 order.name 不存在，顯示 '無名稱'
+            const orderName = order.name ? order.name : '無名稱';
+
+            // 訂單配送方式，如果 order.deliveryMethod 不存在，顯示 '無配送方式'
+            const deliveryMethod = order.deliveryMethod ? order.deliveryMethod : '到府';
+
+            // 訂單日期格式化，如果 order.orderDate 存在
+            const orderDate = order.orderDate ? new Date(order.orderDate).toLocaleDateString() : '無日期';
+
+            tr.innerHTML = `
+            <td>
+                <p>${orderName}</p>
+            </td>
+            <td>
+                訂單編號: ${order.orderId}<br>
+                配送方式: ${deliveryMethod}<br>
+                訂單金額: ${order.totalAmount}
+            </td>
+            <td>${order.status}</td>
+            <td>${orderDate}</td>
+            <td><a href="#" class="details-link" data-id="${order.orderId}" style="color: white;">詳細</a></td>
+        `;
+
+            tbody.appendChild(tr);
+        });
+
+        // 綁定「詳細」按鈕的點擊事件
+        document.querySelectorAll('.details-link').forEach(link => {
+            link.addEventListener('click', function (event) {
+                event.preventDefault();
+                const orderId = this.getAttribute('data-id');
+                // 顯示訂單詳情頁面
+                // generateOrderDetailsContent(orderId);
+
+                // 發送 fetch 請求到 API，根據 orderId 獲取訂單詳細資料
+                fetch(`/api/orders/${orderId}`)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+                        return response.json();  // 解析成 JSON 格式
+                    })
+                    .then(orderData => {
+                        // 將返回的訂單資料傳遞給生成訂單詳情頁面的函數
+                        generateOrderDetailsContent(orderData);
+                    })
+                    .catch(error => {
+                        console.error('Error fetching order details:', error);
+                    });
+            });
+        });
+>>>>>>> branch 'testAPI' of https://github.com/ZeHoward/Final_Project.git
     }
   }
 
@@ -549,6 +808,7 @@ function generateOrderDetailsContent(order) {
   const mainContent = document.querySelector(".main-content");
   mainContent.innerHTML = ""; // 清空之前的內容
 
+<<<<<<< HEAD
   // 假設根據 order.userId 查找對應的用戶
   const user = users.find((u) => u.userId === order.userId);
 
@@ -561,12 +821,22 @@ function generateOrderDetailsContent(order) {
         <p><strong>電話號碼:</strong> ${user.phoneNumber}</p>
     `
     : `<p>無法找到該用戶資訊</p>`;
+=======
+    const userInfo = order ? `
+        <p><strong>用戶名稱:</strong> ${order.username || '未提供'}</p>
+        <p><strong>電子郵件:</strong> ${order.email || '未提供'}</p>
+        <p><strong>電話號碼:</strong> ${order.phoneNumber || '未提供'}</p>
+    ` : `<p>無法找到該用戶資訊</p>`;
+>>>>>>> branch 'testAPI' of https://github.com/ZeHoward/Final_Project.git
 
+<<<<<<< HEAD
   // 生成訂單詳情的 HTML，並在右邊顯示用戶資訊
   const orderDetailsSection = `
+=======
+    const orderDetailsSection = `
+>>>>>>> branch 'testAPI' of https://github.com/ZeHoward/Final_Project.git
         <section class="order-details">
             <h1>訂單詳情 - 訂單編號: ${order.orderNumber}</h1>
-
             <div class="order-and-user-info">
                 <div class="order-info">
                     <h2>訂單資訊</h2>
@@ -592,13 +862,11 @@ function generateOrderDetailsContent(order) {
                         <p><strong>備註:</strong> ${order.comment || "無"}</p>
                     </div>
                 </div>
-
                 <div class="user-info2">
                     <h2>買家資訊</h2>
                     ${userInfo}
                 </div>
             </div>
-
             <h2>購買商品</h2>
             <table class="order-items-table">
                 <thead>
@@ -622,6 +890,7 @@ function generateOrderDetailsContent(order) {
   // 選取表格的 tbody
   const tbody = document.querySelector(".order-items-table tbody");
 
+<<<<<<< HEAD
   // 確認 items 存在且是陣列
   if (order.items && order.items.length > 0) {
     order.items.forEach((item) => {
@@ -632,6 +901,23 @@ function generateOrderDetailsContent(order) {
                 <td>${item.sku}</td>
                 <td>${item.quantity}</td>
                 <td>$${item.price}</td>
+=======
+    // 確認 orderDetails 存在且是陣列
+    if (order.orderDetails && order.orderDetails.length > 0) {
+        order.orderDetails.forEach(orderDetails => {
+            // 確保圖片存在，若無圖片則顯示預設圖片
+            const productImage = (orderDetails.product.images && orderDetails.product.images.length > 0)
+                ? orderDetails.product.images[0].url // 假設 image 是一個物件，且您需要取得 URL
+                : '/path/to/default-image.png'; // 預設圖片路徑
+
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td><img src="${productImage}" alt="${orderDetails.product.name}" style="width: 50px; height: 50px;"></td>
+                <td>${orderDetails.product.name}</td>
+                <td>${orderDetails.product.sku}</td>
+                <td>${orderDetails.quantity}</td>
+                <td>$${orderDetails.price}</td>
+>>>>>>> branch 'testAPI' of https://github.com/ZeHoward/Final_Project.git
             `;
       tbody.appendChild(tr); // 將每個商品插入到表格中
     });
@@ -898,6 +1184,7 @@ function generateProductManagementWithActionsContent() {
     pageSelect.value = currentPage; // 設定當前頁數
   }
 
+<<<<<<< HEAD
   // 搜尋商品
   searchInput.addEventListener("input", () => {
     const searchTerm = searchInput.value.toLowerCase();
@@ -910,6 +1197,18 @@ function generateProductManagementWithActionsContent() {
     updatePagination(filteredProducts);
     renderProducts(filteredProducts);
   });
+=======
+    // 搜尋商品
+    searchInput.addEventListener('input', () => {
+        const searchTerm = searchInput.value.toLowerCase();
+        const filteredProducts = products.filter(product =>
+            product.name.toLowerCase().includes(searchTerm) || product.sku.toLowerCase().includes(searchTerm)
+        );
+        currentPage = 1;  // 搜尋時將頁面重置到第 1 頁
+        updatePagination(filteredProducts);
+        renderProducts(filteredProducts);
+    });
+>>>>>>> branch 'testAPI' of https://github.com/ZeHoward/Final_Project.git
 
   // 更新顯示結果數時，重新計算頁數並渲染
   resultsPerPageSelect.addEventListener("change", () => {
@@ -2094,6 +2393,7 @@ function generateCouponManagementForm() {
       expiryDate,
     };
 
+<<<<<<< HEAD
     // 發送 POST 請求到後端
     fetch("localhost:8080/api/coupons/create", {
       method: "POST",
@@ -2109,10 +2409,33 @@ function generateCouponManagementForm() {
         displayCoupons(); // 顯示優惠券
       })
       .catch((error) => console.error("Error:", error));
+=======
+        // 發送 POST 請求到後端
+        fetch('localhost:8080/api/coupons/create', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: new URLSearchParams(couponData)
+        })
+            .then(response => response.json()) // 解析 JSON 回應
+            .then(data => {
+                // 使用返回的優惠券陣列更新表格
+                coupons = data;  // 假設後端返回的是最新的優惠券列表
+                displayCoupons(); // 顯示優惠券
+            })
+            .catch(error => console.error('Error:', error));
+>>>>>>> branch 'testAPI' of https://github.com/ZeHoward/Final_Project.git
 
+<<<<<<< HEAD
     // 重置表單
     couponForm.reset();
   });
+=======
+        // 重置表單
+        couponForm.reset();
+    });
+>>>>>>> branch 'testAPI' of https://github.com/ZeHoward/Final_Project.git
 
   // 顯示已新增的優惠券
   function displayCoupons() {
@@ -2327,6 +2650,7 @@ document.querySelectorAll(".details-link").forEach((link) => {
   });
 });
 
+<<<<<<< HEAD
 // 保存按鈕事件
 document.getElementById("saveButton").addEventListener("click", function () {
   products.name = document.getElementById("productName").value;
@@ -2334,6 +2658,15 @@ document.getElementById("saveButton").addEventListener("click", function () {
   products.stock = document.getElementById("productStock").value;
   generateProductManagementContent(); // 返回商品管理頁面
 });
+=======
+// // 保存按鈕事件
+// document.getElementById('saveButton').addEventListener('click', function () {
+//     products.name = document.getElementById('productName').value;
+//     products.price = document.getElementById('productPrice').value;
+//     products.stock = document.getElementById('productStock').value;
+//     generateProductManagementContent();  // 返回商品管理頁面
+// });
+>>>>>>> branch 'testAPI' of https://github.com/ZeHoward/Final_Project.git
 
 // 取消按鈕事件
 document.getElementById("cancelButton").addEventListener("click", function () {
