@@ -178,7 +178,7 @@ window.onload = function () {
 	   });
 
 
-	   fetch('http://localhost:8080/users/userAllInfo?email=john.doe@example.com',{
+	   fetch('http://localhost:8080/users/userAllInfo',{
 	     method : 'GET'
 	   }).then(response => {
 	     console.log("你好")

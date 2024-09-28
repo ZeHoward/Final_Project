@@ -1,4 +1,4 @@
-package tw.luna.FinalTest.dto;
+package tw.luna.FinalTest.dto.cart;
 
 import java.util.Arrays;
 
@@ -10,8 +10,8 @@ public class CartSelectDto {
     private Integer cartitemsId;
     private Integer price;
     private Integer quantity;
-    private String productName;            //要看商品表??     products表內欄位叫做name
-    private byte[] image;               //這個又在另一張表  productimages表內欄位叫做image
+    private String productName;
+    private byte[] image;
 
     public CartSelectDto() {
     }

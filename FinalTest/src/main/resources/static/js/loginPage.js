@@ -1,6 +1,6 @@
 window.onload = function () {
 	
-
+	console.log("進入loginPage.js");
 	let emailInput = document.getElementById("emailInput");
 
 	emailInput.addEventListener("change", () => {

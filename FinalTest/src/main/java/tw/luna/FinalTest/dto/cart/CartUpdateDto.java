@@ -1,4 +1,4 @@
-package tw.luna.FinalTest.dto;
+package tw.luna.FinalTest.dto.cart;
 
 
 //更新購物車數量

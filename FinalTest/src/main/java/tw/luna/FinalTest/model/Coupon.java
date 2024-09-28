@@ -1,3 +1,4 @@
+
 package tw.luna.FinalTest.model;
 
 import java.time.LocalDate;
@@ -14,7 +15,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "coupons")
 public class Coupon {
-	
+
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,7 +29,7 @@ public class Coupon {
 	private String name;
 
 	@Enumerated(EnumType.STRING)
-    @Column(name = "discountType")
+	@Column(name = "discountType")
 	private DiscountType discountType; // 使用枚舉
 
 	@Column(name = "discountValue")
@@ -36,6 +37,15 @@ public class Coupon {
 
 	@Column(name = "expiryDate")
 	private LocalDate expiryDate;
+
+	public Coupon(long couponId, String code, String name, DiscountType discountType, int discountValue, LocalDate expiryDate) {
+		this.couponId = couponId;
+		this.code = code;
+		this.name = name;
+		this.discountType = discountType;
+		this.discountValue = discountValue;
+		this.expiryDate = expiryDate;
+	}
 
 	// Getters and Setters
 	public DiscountType getDiscountType() {
@@ -87,19 +97,19 @@ public class Coupon {
 	}
 
 	// 其他屬性和方法
-	
-	// 無參數建構子
-    public Coupon() {
-        // 默認建構子可以保持空，供框架使用
-    }
 
-    // 有參數建構子
-    public Coupon(String code, String name, DiscountType discountType, int discountValue, LocalDate expiryDate) {
-        this.code = code;
-        this.name = name;
-        this.discountType = discountType;
-        this.discountValue = discountValue;
-        this.expiryDate = expiryDate;
-    }
+	// 無參數建構子
+	public Coupon() {
+		// 默認建構子可以保持空，供框架使用
+	}
+
+	// 有參數建構子
+	public Coupon(String code, String name, DiscountType discountType, int discountValue, LocalDate expiryDate) {
+		this.code = code;
+		this.name = name;
+		this.discountType = discountType;
+		this.discountValue = discountValue;
+		this.expiryDate = expiryDate;
+	}
 
 }

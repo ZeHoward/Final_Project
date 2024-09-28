@@ -40,7 +40,6 @@ public class OrderDetailsService {
 			OrderDetails existingOrderDetails = optionalOrderDetails.get();
 			existingOrderDetails.setQuantity(orderDetailsDetails.getQuantity());
 			existingOrderDetails.setPrice(orderDetailsDetails.getPrice());
-			existingOrderDetails.setAddress(orderDetailsDetails.getAddress());
 			existingOrderDetails.setOrder(orderDetailsDetails.getOrder());
 			existingOrderDetails.setProduct(orderDetailsDetails.getProduct());
 			OrderDetails updatedOrderDetails = orderDetailsRepository.save(existingOrderDetails);
