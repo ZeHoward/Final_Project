@@ -1,6 +1,6 @@
-window.onloade = () => {
-	
-document.addEventListener("DOMContentLoaded", function () {
+
+	console.log("進入template.js");
+	document.addEventListener("DOMContentLoaded", function () {
     // 菜單展開、關閉功能
     window.openSidenav = function () {
         document.getElementById("sidenav").style.width = "100%";
@@ -53,7 +53,9 @@ document.addEventListener("DOMContentLoaded", function () {
     let isMemberDivVisible = false; // 初始為隱藏
 
     document.getElementById('memberIcon').addEventListener('click', (e) => {
+		console.log("before,e.stop");
         e.stopPropagation(); // 防止點擊會員圖標時觸發頁面其他地方的點擊事件
+		console.log("after,e.stop")
         if (isMemberDivVisible) {
             memberInfoDiv.style.display = "none";
 			slideshowContainer.style.zIndex=5;
@@ -136,4 +138,3 @@ document.addEventListener("DOMContentLoaded", function () {
 	    })
 	});
 });
-}
