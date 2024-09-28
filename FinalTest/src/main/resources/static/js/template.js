@@ -1,3 +1,5 @@
+window.onloade = () => {
+	
 document.addEventListener("DOMContentLoaded", function () {
     // 菜單展開、關閉功能
     window.openSidenav = function () {
@@ -113,4 +115,25 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
     });
+	
+	//登出
+	document.getElementById('logout').addEventListener('click', () => {
+		fetch('http://localhost:8080/users/logout',{
+			method : 'GET'
+		}).then(response => {
+			if (typeof data === 'boolean') {
+	            if (data) {
+					alert('成功登出');
+					window.location.href = '/enjoyum';
+	            } else {
+					alert('登出失敗,請稍後再試');
+	            }
+	        } else {
+	            console.log('Unexpected response data:', data);
+	        }
+	    }).catch(error => {
+	        console.error('Error:', error);
+	    })
+	});
 });
+}
