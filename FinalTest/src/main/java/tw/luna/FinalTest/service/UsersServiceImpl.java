@@ -26,13 +26,13 @@ public class UsersServiceImpl {
 	
 	@Autowired
 	private UsersInfoReposity usersInfoReposity;
-
 	
+
 	
 	public UsersResponse isExistUser(String email) {
 		UsersResponse usersResponse = new UsersResponse();
 		List<Users> users = usersRepository.findByEmail(email);
-		if (users != null && users.size() > 0) {
+		if (users != null && users.size() > 0 && !users.get(0).getIsDel()) {
 			usersResponse.setUsersStatus(UsersStatus.EXIST);
 			usersResponse.setMesg("帳號已存在");
 			usersResponse.setUsers(users.get(0));
@@ -89,8 +89,6 @@ public class UsersServiceImpl {
 			if (BCrypt.checkpw(users.getPassword(), userDB.getPassword())) {
 				usersResponse.setUsersStatus(UsersStatus.LOGIN_SUCCESS);
 				usersResponse.setMesg("Login Success");
-				userDB.setPassword("");
-				userDB.setPhoneNumber("");
 				usersResponse.setUsers(userDB);
 				
 			}else {
@@ -119,12 +117,13 @@ public class UsersServiceImpl {
 	            (String) result[8],   // postalCode
 	            (String) result[9],   // county
 	            (String) result[10],  // district
-	            (String) result[11]);
+	            (String) result[11],  // birthday
+	            (boolean) result[12]);  //isDel
 		return userAllInfo;
 		
 	}
 	
-	public void updateUser(UserAllInfo userAllInfo) {
+	public boolean updateUser(UserAllInfo userAllInfo) {
 		Users users = new Users();
 		Userinfo userinfo = new Userinfo();
 		
@@ -135,7 +134,7 @@ public class UsersServiceImpl {
 		users.setUsername(userAllInfo.getUsername());
 		
 		
-//		userinfo.setId(userAllInfo.getUserId());
+		userinfo.setId(userAllInfo.getUserId());
 		userinfo.setAddress(userAllInfo.getAddress());
 		userinfo.setBirthday(userAllInfo.getBirthday());
 		userinfo.setCounty(userAllInfo.getCounty());
@@ -144,9 +143,21 @@ public class UsersServiceImpl {
 		userinfo.setLastName(userAllInfo.getLastName());
 		userinfo.setPostalCode(userAllInfo.getPostalCode());
 		
-		usersRepository.save(users);
-		usersInfoReposity.save(userinfo);
-		
-		
+		Users save = usersRepository.save(users);
+		Userinfo save2 = usersInfoReposity.save(userinfo);
+		if(save != null && save2 != null) {
+			return true;
+		}
+		return false;
+	}
+	
+	public int deleteUser(Long userId) {
+		int del = usersRepository.updateUserByUserId(userId);
+		System.out.println("刪除帳號後的返回int" + del);
+		return del;
+	}
+	
+	public int updatePassword(String newPassword, Long userId) {
+		return usersRepository.updatePasswordByUserId(BCrypt.hashpw(newPassword, BCrypt.gensalt()), userId);
 	}
 }
