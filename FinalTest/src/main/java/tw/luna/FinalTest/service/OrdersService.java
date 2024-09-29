@@ -3,7 +3,10 @@ package tw.luna.FinalTest.service;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.UUID;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -14,18 +17,15 @@ import org.springframework.stereotype.Service;
 
 import tw.luna.FinalTest.dto.OrderWithUserDTO;
 import tw.luna.FinalTest.dto.orders.OrdersInsertDto;
-import tw.luna.FinalTest.model.Cart;
-import tw.luna.FinalTest.model.CartItems;
-import tw.luna.FinalTest.model.OrderDetails;
-import tw.luna.FinalTest.model.Orders;
-import tw.luna.FinalTest.model.Users;
+import tw.luna.FinalTest.model.*;
 import tw.luna.FinalTest.repository.CartRepository;
+import tw.luna.FinalTest.repository.CouponRepository;
 import tw.luna.FinalTest.repository.OrdersRepository;
 import tw.luna.FinalTest.repository.UsersRepository;
 
 @Service
 public class OrdersService {
-	
+
     @Autowired
     OrdersRepository ordersRepository;
 
@@ -35,6 +35,12 @@ public class OrdersService {
     @Autowired
     UsersRepository userRepository;
 
+    @Autowired
+    CouponRepository couponRepository;
+
+
+
+    @Transactional
     public void insertOrder(OrdersInsertDto ordersInsertDto,Long userId) {
     Orders orders = new Orders();
 
@@ -47,19 +53,57 @@ public class OrdersService {
         List<OrderDetails> orderDetails = orders.getOrderDetails();
 
         Cart cart = cartRepository.findByUsersUserId(userId);
+        orders.setCart(cart);
+        Set<CartItems> cartItems = cart.getCartItems();
+        for (CartItems cartItem : cartItems) {
+            OrderDetails orderDetail = new OrderDetails();
+            orderDetail.setOrder(orders);
+            orderDetail.setProduct(cartItem.getProduct());
+            orderDetail.setQuantity(cartItem.getQuantity());
+            orderDetail.setPrice(cartItem.getPrice());
+            orderDetails.add(orderDetail);
+            System.out.println("1" + orderDetail);
+            System.out.println(orderDetails);
+        }
+        orders.setOrderDetails(orderDetails);
+
+        if (ordersInsertDto.getCode() != null) {
+            Coupon coupon = couponRepository.findCouponByCode(ordersInsertDto.getCode());
+            if(coupon.getDiscountType() == DiscountType.percentage) {
+                orders.setPercentageDiscount(coupon.getDiscountValue());
+            }else if(coupon.getDiscountType() == DiscountType.amount) {
+                orders.setAmountDiscount(coupon.getDiscountValue());
+            }
+            orders.setCoupon(coupon);
+        }
+        orders.setOrderDate(LocalDateTime.now());
+        orders.setTotalAmount(ordersInsertDto.getTotalAmount());
+        orders.setFinalAmount(ordersInsertDto.getFinalAmount());
+        orders.setStatus("pending");
+        orders.setAddress(ordersInsertDto.getAddress());
+
 
 //        Set<CartItems> cartItems = cart.getCartItems();
 //        cartItems.stream().map(cartItem -> {
 //            orderDetails.stream().map(orderDetails1 -> {
 //
-//
-//
 //            });
 //
-//
 //        });
+
+        String random = UUID.randomUUID().toString().replaceAll("-", "").substring(0,
+                8);
+
+        Payment payment = new Payment();
+        payment.setOrder(orders);
+        payment.setPaymentAmount(ordersInsertDto.getPaymentAmount());
+        payment.setPaymentDate(LocalDateTime.now());
+        payment.setMerchantNo(random);
+        orders.setPayment(payment);
+
+        ordersRepository.save(orders);
     }
-    
+
  // 獲取所有訂單
  	public List<Orders> getAllOrders() {
  		return ordersRepository.findAll();
@@ -68,10 +112,10 @@ public class OrdersService {
  	public ResponseEntity<Page<OrderWithUserDTO>> getOrdersWithPagination(int page, int size, String sortField, String sortDirection) {
  	    // 根據傳入的排序方向，轉換為 Sort.Direction
  	    Sort.Direction direction = Sort.Direction.fromString(sortDirection);
- 	    
+
  	    // 使用排序字段和方向來創建分頁請求
  	    Pageable pageable = PageRequest.of(page, size, Sort.by(direction, sortField));
- 	    
+
  	    // 查詢訂單數據
  	    Page<Orders> orders = ordersRepository.findAll(pageable);
 
@@ -110,11 +154,11 @@ public class OrdersService {
  	        return ResponseEntity.notFound().build();
  	    }
  	}
- 	
+
  	public Integer getTotalRevenue(LocalDateTime startDate, LocalDateTime endDate) {
          return ordersRepository.findTotalRevenueWithinPeriod(startDate, endDate);
     }
- 	
+
  	public Integer getTotalOrders(LocalDateTime startDate, LocalDateTime endDate) {
  	    return ordersRepository.countOrdersWithinPeriod(startDate, endDate);
  	}
@@ -127,7 +171,7 @@ public class OrdersService {
  	            }).sum();
  	}
 
- 	
+
 
 // 	// 刪除訂單
 // 	public ResponseEntity<Void> deleteOrder(Integer id) {
@@ -140,4 +184,8 @@ public class OrdersService {
 // 			return ResponseEntity.notFound().build();
 // 		}
 // 	}
+
+
+
+
 }

@@ -6,17 +6,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "orders")
@@ -65,8 +55,9 @@ public class Orders {
 	@JsonManagedReference
 	private List<OrderDetails> orderDetails;
 
-	@OneToMany(mappedBy = "orders", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private List<Payment> payments;
+	@OneToOne(mappedBy = "orders", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private Payment payment;
+
 
 	public Orders() {
 
@@ -84,8 +75,9 @@ public class Orders {
 		this.amountDiscount = amountDiscount;
 		this.finalAmount = finalAmount;
 		this.status = status;
+		this.payment = payment;
+		this.address = address;
 		this.orderDetails = orderDetails;
-		this.payments = payments;
 	}
 
 	public Integer getOrderId() {
@@ -176,13 +168,14 @@ public class Orders {
 		this.orderDetails = orderDetails;
 	}
 
-	public List<Payment> getPayments() {
-		return payments;
+	public Payment getPayment() {
+		return payment;
 	}
 
-	public void setPayments(List<Payment> payments) {
-		this.payments = payments;
+	public void setPayment(Payment payment) {
+		this.payment = payment;
 	}
+
 
 	public String getAddress() {
 		return address;
@@ -194,18 +187,4 @@ public class Orders {
 	}
 
 
-	@Override
-	public String toString() {
-		return "Order{" +
-				"orderId=" + orderId +
-				", user=" + user +
-				", totalAmount=" + totalAmount +
-				", percentageDiscount=" + percentageDiscount +
-				", amountDiscount=" + amountDiscount +
-				", finalAmount=" + finalAmount +
-				", status='" + status + '\'' +
-				", payments=" + payments +
-				", orderDate=" + orderDate +
-				'}';
-	}
 }

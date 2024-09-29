@@ -26,6 +26,8 @@ public class OrderDetails {
 
 	@Column(name = "price")
 	private Integer price;
+
+
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "orderId", nullable = false)
@@ -39,7 +41,7 @@ public class OrderDetails {
 	public OrderDetails() {
 	}
 
-	public OrderDetails(Integer orderDetailsId, Integer quantity, Integer price, String address, Orders orders, Product product) {
+	public OrderDetails(Integer orderDetailsId, Integer quantity, Integer price, Orders orders, Product product) {
 		this.orderDetailsId = orderDetailsId;
 		this.quantity = quantity;
 		this.price = price;
@@ -86,5 +88,7 @@ public class OrderDetails {
 	public void setPrice(Integer price) {
 		this.price = price;
 	}
+
+
 
 }

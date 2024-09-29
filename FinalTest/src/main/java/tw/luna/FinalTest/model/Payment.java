@@ -35,6 +35,9 @@ public class Payment {
     @Column(name = "paymentDate")
     private LocalDateTime paymentDate;
 
+    @Column(name = "merchantNo")
+    private String 	merchantNo;
+
     public Payment() {
     }
 
@@ -43,6 +46,7 @@ public class Payment {
         this.orders = orders;
         this.paymentAmount = paymentAmount;
         this.paymentDate = paymentDate;
+        this.merchantNo = merchantNo;
     }
 
     public Integer getPaymentId() {
@@ -75,5 +79,13 @@ public class Payment {
 
     public void setPaymentDate(LocalDateTime paymentDate) {
         this.paymentDate = paymentDate;
+    }
+
+    public String getMerchantNo() {
+        return merchantNo;
+    }
+
+    public void setMerchantNo(String merchantNo) {
+        this.merchantNo = merchantNo;
     }
 }
