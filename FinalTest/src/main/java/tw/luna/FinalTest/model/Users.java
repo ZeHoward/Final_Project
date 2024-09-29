@@ -39,6 +39,9 @@ public class Users {
 	
 	@Column(name = "token")
 	private String token;
+	
+	@Column(name = "isDel")
+	private boolean isDel;
 
 	@OneToOne(mappedBy = "users", cascade = CascadeType.ALL)
 	@JsonManagedReference("Users_UserInfo")
@@ -137,6 +140,14 @@ public class Users {
 
 	public void setToken(String token) {
 		this.token = token;
+	}
+
+	public boolean getIsDel() {
+		return isDel;
+	}
+
+	public void setIsDel(boolean isDel) {
+		this.isDel = isDel;
 	}
 
 //	public List<UserFavoritesProducts> getUserFavoritesProducts() {
