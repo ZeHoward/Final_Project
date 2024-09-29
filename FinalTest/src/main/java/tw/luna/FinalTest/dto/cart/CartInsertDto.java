@@ -4,23 +4,24 @@ package tw.luna.FinalTest.dto.cart;
 //新增購物車內商品
 public class CartInsertDto {
 
-    private Integer productId;
-    private Integer quantity = 1; //預設值為1
+    private String productName;
+    private Integer quantity; //預設值為1
 
     public CartInsertDto() {
     }
 
-    public CartInsertDto(Integer productId, Integer quantity) {
-        this.productId = productId;
+
+    public CartInsertDto(String productName, Integer quantity) {
+        this.productName = productName;
         this.quantity = quantity;
     }
 
-    public Integer getProductId() {
-        return productId;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setProductId(Integer productId) {
-        this.productId = productId;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
     public Integer getQuantity() {
