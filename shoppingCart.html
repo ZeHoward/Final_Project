@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>即食想熱</title>
+    <title>即食享熱</title>
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap");
     </style>
@@ -12,6 +12,9 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
+    <!-- vue -->
+    <script src="https://unpkg.com/vue@3.2.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   </head>
 
   <body>
@@ -96,45 +99,68 @@
     <!-- header end -->
 
     <!-- 開始編輯 -->
-    <div class="container">
-      <!-- 返回購物車的連結 -->
-      <button
-        type="button"
-        class="gobackButton"
-        onclick="window.location.href='recipe.html';"
-      >
-        &lt;返回購物
-      </button>
+    <div id="myContainer">
+      <div class="container">
+        <!-- 返回購物車的連結 -->
+        <button
+          type="button"
+          class="gobackButton"
+          onclick="window.location.href='recipe.html';"
+        >
+          &lt;返回購物
+        </button>
 
-      <h1 class="title">你的購物車</h1>
-      <table>
-        <thead>
-          <tr>
-            <th>商品</th>
-            <th></th>
-            <th>價格</th>
-            <th>數量</th>
-            <th>小計</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody id="cartItems"></tbody>
-      </table>
+        <h1 class="title">你的購物車</h1>
+        <table>
+          <thead>
+            <tr>
+              <th>商品</th>
+              <th></th>
+              <th>價格</th>
+              <th>數量</th>
+              <th>小計</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="cartItems" v-for="(product, i) in products" :index="i">
+            <td>
+              <img src="" alt="圖片" class="product-image" />
+            </td>
 
-      <!--商品總額-->
-      <div class="total"></div>
+            <td>{{ product.productName }}</td>
 
-      <!--優惠碼-->
-      <div class="coupon-container">
-        <input type="text" placeholder="輸入優惠序號" />
-        <button class="useCouponBtn">使用優惠券</button>
-      </div>
+            <td>NT{{product.price}}</td>
 
-      <div class="actions">
-        <button class="submitButton">提交訂單</button>
+            <td>
+              <div class="quantity">
+                <button class="decrease" @click="decrease(product)">–</button>
+                <span class="amount">{{product.quantity}}</span>
+                <button class="increase" @click="add(product)">+</button>
+              </div>
+            </td>
+
+            <td class="subtotal">NT{{product.quantity * product.price}}</td>
+
+            <td>
+              <button><i class="fa-solid fa-trash"></i></button>
+            </td>
+          </tbody>
+        </table>
+
+        <!--商品總額-->
+        <div class="total"></div>
+
+        <!--優惠碼-->
+        <div class="coupon-container">
+          <input type="text" placeholder="輸入優惠序號" />
+          <button class="useCouponBtn">使用優惠券</button>
+        </div>
+
+        <div class="actions">
+          <button class="submitButton" @click="toCheckout()">提交訂單</button>
+        </div>
       </div>
     </div>
-
     <!-- footer start -->
     <footer class="tem-footer">
       <div class="tem-footer-content">
@@ -181,5 +207,70 @@
     </footer>
     <!-- footer end -->
     <script src="./shoppingCart.js"></script>
+    <script type="module">
+      const { createApp, ref, onMounted } = Vue;
+
+      createApp({
+        setup() {
+          const api = ref("http://localhost:8080/api");
+          const userId = ref(2); // 使用者 ID，這裡假設為 2
+          const products = ref([]); // 用來儲存產品的數組
+          // 定義獲取資料的函式
+          const getCart = async () => {
+            const res = await axios.get(`${api.value}/cart/${userId.value}`);
+            products.value = res.data; // 將獲取的資料儲存到 products 中
+          };
+          // 定義增加產品數量的函式
+          const add = async (product) => {
+            console.log(product.productName); // 輸出要增加的產品名稱
+            await axios.put(`${api.value}/cart/put/${userId.value}`, {
+              productName: product.productName, // 傳送產品名稱
+              quantity: product.quantity + 1, // 增加產品數量
+            });
+            getCart(); // 更新購物車資料
+          };
+
+          // 定義減少產品數量的函式
+          const decrease = async (product) => {
+            console.log(product.productName); // 輸出要減少的產品名稱
+            await axios.put(`${api.value}/cart/put/${userId.value}`, {
+              productName: product.productName, // 傳送產品名稱
+              quantity: product.quantity - 1, // 增加產品數量
+            });
+            getCart(); // 更新購物車資料
+          };
+
+          //還有折扣碼沒寫!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+          const toCheckout = () => {
+            const totalAmount = products.value.reduce(
+              (total, product) => total + product.quantity * product.price,
+              0
+            );
+            console.log(totalAmount);
+            const finalAmount = totalAmount + 120;
+            console.log(finalAmount);
+            const queryParams = new URLSearchParams({
+              userId: userId.value,
+              totalAmount: totalAmount,
+              finalAmount: finalAmount,
+            }).toString();
+
+            // 跳轉到 checkout 頁面，並帶上參數
+            window.location.href = `checkout.html?${queryParams}`;
+          };
+
+          onMounted(() => {
+            getCart(); // 在組件掛載後獲取資料
+          });
+
+          return {
+            products, // 將 products 暴露給模板
+            add, // 將 add 函式暴露給模板
+            decrease,
+            toCheckout,
+          };
+        },
+      }).mount("#myContainer"); // 將應用程式掛載到指定的 DOM 元素上
+    </script>
   </body>
 </html>
