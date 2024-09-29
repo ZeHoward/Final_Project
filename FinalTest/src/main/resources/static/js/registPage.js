@@ -54,7 +54,7 @@ window.onload = function () {
     document.getElementById('regist').addEventListener('click', () => {
       let telephone = document.getElementById('registTelephoneInput').value;
       let userName = document.getElementById('registUserName').value;
-      
+      let birthday = document.getElementById('registBirthday').value;
 
       if(finallyEmail != '' && finallyPassword != '' && userName != ''){
         fetch('http://localhost:8080/users/regist',{
@@ -64,7 +64,8 @@ window.onload = function () {
             username : userName,
             email : finallyEmail,
             password : finallyPassword,
-			phoneNumber : telephone
+			phoneNumber : telephone,
+			birthday : birthday
           })}).then(response => {
             if(!response.ok){
               throw new Error('Error : ')
