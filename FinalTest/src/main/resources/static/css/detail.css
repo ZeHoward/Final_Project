@@ -122,6 +122,7 @@ input,
   border: none;
   border-radius: 5px;
   padding: 8px 16px;
+  cursor: pointer;
 }
 
 .like {
@@ -272,4 +273,3 @@ h1 {
   padding: 30px 12px;
   border-top: none;
 }
-

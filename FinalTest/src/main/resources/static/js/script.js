@@ -177,7 +177,7 @@ generateOverviewContent(); // 預設總覽頁面為首頁
 // ];
 
 // // 假資料，模擬不同食譜
-// const recipes = [  
+// const recipes = [
 //     {
 //         image: '紅大頭.png',
 //         name: '肉醬義大利麵',
@@ -264,147 +264,153 @@ generateOverviewContent(); // 預設總覽頁面為首頁
 
 // 點擊"總覽"時生成內容的函數
 function generateOverviewContent() {
-    const mainContent = document.querySelector('.main-content');
-    mainContent.innerHTML = '';  // 清空之前的內容
+  const mainContent = document.querySelector(".main-content");
+  mainContent.innerHTML = ""; // 清空之前的內容
 
-    // 初始化時間範圍
-    let timeRange = 'week';
+  // 初始化時間範圍
+  let timeRange = "week";
 
-    // 請求訂單和營業額總數的函數
-    function fetchOverviewData(timeRange) {
-        const today = new Date();
-        let startDate, endDate;
+  // 請求訂單和營業額總數的函數
+  function fetchOverviewData(timeRange) {
+    const today = new Date();
+    let startDate, endDate;
 
-        // 根據時間範圍設定起始日期
-        switch (timeRange) {
-            case 'week':
-                startDate = new Date(today.setDate(today.getDate() - 7)).toISOString();
-                break;
-            case 'month':
-                startDate = new Date(today.setMonth(today.getMonth() - 1)).toISOString();
-                break;
-            case 'year':
-                startDate = new Date(today.setFullYear(today.getFullYear() - 1)).toISOString();
-                break;
-        }
-        endDate = new Date().toISOString();  // 今天作為結束日期
-
-        // 發送請求到後端，取得營業額和訂單總數
-        fetch(`/api/orders/overview?startDate=${startDate}&endDate=${endDate}`)
-            .then(response => response.json())
-            .then(data => {
-                // 更新營業額卡片中的值
-                document.querySelector('[data-type="revenue"] p').textContent = data.revenue;
-                // 更新訂單總數卡片中的值
-                document.querySelector('[data-type="orders"] p').textContent = data.ordersCount;
-            })
-            .catch(error => console.error('Error fetching overview data:', error));
+    // 根據時間範圍設定起始日期
+    switch (timeRange) {
+      case "week":
+        startDate = new Date(today.setDate(today.getDate() - 7)).toISOString();
+        break;
+      case "month":
+        startDate = new Date(
+          today.setMonth(today.getMonth() - 1)
+        ).toISOString();
+        break;
+      case "year":
+        startDate = new Date(
+          today.setFullYear(today.getFullYear() - 1)
+        ).toISOString();
+        break;
     }
+    endDate = new Date().toISOString(); // 今天作為結束日期
 
-    // 初始化頁面時顯示數據
-    fetchOverviewData(timeRange);
+    // 發送請求到後端，取得營業額和訂單總數
+    fetch(`/api/orders/overview?startDate=${startDate}&endDate=${endDate}`)
+      .then((response) => response.json())
+      .then((data) => {
+        // 更新營業額卡片中的值
+        document.querySelector('[data-type="revenue"] p').textContent =
+          data.revenue;
+        // 更新訂單總數卡片中的值
+        document.querySelector('[data-type="orders"] p').textContent =
+          data.ordersCount;
+      })
+      .catch((error) => console.error("Error fetching overview data:", error));
+  }
 
-    // 動態生成總覽卡片的 section
-    const overviewSection = document.createElement('section');
-    overviewSection.className = 'overview';
+  // 初始化頁面時顯示數據
+  fetchOverviewData(timeRange);
 
-    const cardData = [
-        { type: 'revenue', title: '營業額', value: '0' },
-        { type: 'orders', title: '訂單總量', value: '0' },
-        { type: 'users', title: '總用戶數', value: '29,556' } // 假設這裡數據固定
-    ];
+  // 動態生成總覽卡片的 section
+  const overviewSection = document.createElement("section");
+  overviewSection.className = "overview";
 
-    // 動態生成卡片
-    cardData.forEach(card => {
-        const cardDiv = document.createElement('div');
-        cardDiv.className = 'card';
-        cardDiv.setAttribute('data-type', card.type);
+  const cardData = [
+    { type: "revenue", title: "營業額", value: "0" },
+    { type: "orders", title: "訂單總量", value: "0" },
+    { type: "users", title: "總用戶數", value: "29,556" }, // 假設這裡數據固定
+  ];
 
-        const h2 = document.createElement('h2');
-        h2.textContent = card.title;
+  // 動態生成卡片
+  cardData.forEach((card) => {
+    const cardDiv = document.createElement("div");
+    cardDiv.className = "card";
+    cardDiv.setAttribute("data-type", card.type);
 
-        const p = document.createElement('p');
-        p.textContent = card.value;
+    const h2 = document.createElement("h2");
+    h2.textContent = card.title;
 
-        cardDiv.appendChild(h2);
-        cardDiv.appendChild(p);
+    const p = document.createElement("p");
+    p.textContent = card.value;
 
-        overviewSection.appendChild(cardDiv);
-    });
+    cardDiv.appendChild(h2);
+    cardDiv.appendChild(p);
 
-    // 將 overview section 插入到 main-content
-    mainContent.appendChild(overviewSection);
+    overviewSection.appendChild(cardDiv);
+  });
 
-    // 動態生成圖表區域的 section
-    const chartSection = document.createElement('section');
-    chartSection.className = 'chart-section';
+  // 將 overview section 插入到 main-content
+  mainContent.appendChild(overviewSection);
 
-    const chartHeader = document.createElement('div');
-    chartHeader.className = 'chart-header';
+  // 動態生成圖表區域的 section
+  const chartSection = document.createElement("section");
+  chartSection.className = "chart-section";
 
-    const chartTitle = document.createElement('h3');
-    chartTitle.textContent = '圖表';
+  const chartHeader = document.createElement("div");
+  chartHeader.className = "chart-header";
 
-    const controlsDiv = document.createElement('div');
-    controlsDiv.className = 'controls';
+  const chartTitle = document.createElement("h3");
+  chartTitle.textContent = "圖表";
 
-    // 生成下載按鈕
-    const downloadButton = document.createElement('button');
-    downloadButton.id = 'downloadButton';
-    downloadButton.textContent = '下載報表';
+  const controlsDiv = document.createElement("div");
+  controlsDiv.className = "controls";
 
-    // 生成下拉選單
-    const timeRangeSelect = document.createElement('select');
-    timeRangeSelect.id = 'timeRange';
+  // 生成下載按鈕
+  const downloadButton = document.createElement("button");
+  downloadButton.id = "downloadButton";
+  downloadButton.textContent = "下載報表";
 
-    const timeOptions = [
-        { value: 'week', text: '周' },
-        { value: 'month', text: '月' },
-        { value: 'year', text: '年' }
-    ];
+  // 生成下拉選單
+  const timeRangeSelect = document.createElement("select");
+  timeRangeSelect.id = "timeRange";
 
-    timeOptions.forEach(optionData => {
-        const option = document.createElement('option');
-        option.value = optionData.value;
-        option.textContent = optionData.text;
-        timeRangeSelect.appendChild(option);
-    });
+  const timeOptions = [
+    { value: "week", text: "周" },
+    { value: "month", text: "月" },
+    { value: "year", text: "年" },
+  ];
 
-    controlsDiv.appendChild(downloadButton);
-    controlsDiv.appendChild(timeRangeSelect);
+  timeOptions.forEach((optionData) => {
+    const option = document.createElement("option");
+    option.value = optionData.value;
+    option.textContent = optionData.text;
+    timeRangeSelect.appendChild(option);
+  });
 
-    // 將 chart header 部分組合起來
-    chartHeader.appendChild(chartTitle);
-    chartHeader.appendChild(controlsDiv);
+  controlsDiv.appendChild(downloadButton);
+  controlsDiv.appendChild(timeRangeSelect);
 
-    // 生成 canvas 元素
-    const canvas = document.createElement('canvas');
-    canvas.id = 'orderChart';
+  // 將 chart header 部分組合起來
+  chartHeader.appendChild(chartTitle);
+  chartHeader.appendChild(controlsDiv);
 
-    // 組合 chart section
-    chartSection.appendChild(chartHeader);
-    chartSection.appendChild(canvas);
+  // 生成 canvas 元素
+  const canvas = document.createElement("canvas");
+  canvas.id = "orderChart";
 
-    // 將 chart section 插入到 main-content
-    mainContent.appendChild(chartSection);
+  // 組合 chart section
+  chartSection.appendChild(chartHeader);
+  chartSection.appendChild(canvas);
 
-    // 為時間範圍選擇添加事件監聽
-    timeRangeSelect.addEventListener('change', function () {
-        timeRange = this.value;  // 更新時間範圍
-        fetchOverviewData(timeRange);  // 請求數據
-    });
+  // 將 chart section 插入到 main-content
+  mainContent.appendChild(chartSection);
 
-    // 初始化圖表
-    initChart();
+  // 為時間範圍選擇添加事件監聽
+  timeRangeSelect.addEventListener("change", function () {
+    timeRange = this.value; // 更新時間範圍
+    fetchOverviewData(timeRange); // 請求數據
+  });
+
+  // 初始化圖表
+  initChart();
 }
 
 // 點擊"訂單管理"時生成內容的函數
 function generateOrderManagementContent() {
-    const mainContent = document.querySelector('.main-content');
-    mainContent.innerHTML = '';  // 清空之前的內容
+  const mainContent = document.querySelector(".main-content");
+  mainContent.innerHTML = ""; // 清空之前的內容
 
-    // 動態生成訂單管理的標題和控制選項
-    const orderManagementSection = `
+  // 動態生成訂單管理的標題和控制選項
+  const orderManagementSection = `
         <section class="order-management">
             <h1>訂單管理</h1>
             <div class="orderControls">
@@ -456,83 +462,88 @@ function generateOrderManagementContent() {
             </div>
         </section>
     `;
-    mainContent.innerHTML = orderManagementSection;
+  mainContent.innerHTML = orderManagementSection;
 
-    const tbody = document.querySelector('.order-table tbody');
-    const resultsPerPageSelect = document.getElementById('resultsPerPage');
-    const sortOrderSelect = document.getElementById('sortOrder');
-    const orderStatusSelect = document.getElementById('orderStatus');
-    const pageSelect = document.getElementById('pageSelect');
+  const tbody = document.querySelector(".order-table tbody");
+  const resultsPerPageSelect = document.getElementById("resultsPerPage");
+  const sortOrderSelect = document.getElementById("sortOrder");
+  const orderStatusSelect = document.getElementById("orderStatus");
+  const pageSelect = document.getElementById("pageSelect");
 
-    // 設置初始條件
-    let resultsPerPage = parseInt(resultsPerPageSelect.value);
-    let sortField = sortOrderSelect.value.split(',')[0]; // 獲取排序字段
-    let sortDirection = sortOrderSelect.value.split(',')[1]; // 獲取排序方向
-    let orderStatus = orderStatusSelect.value;
-    let currentPage = 1;
+  // 設置初始條件
+  let resultsPerPage = parseInt(resultsPerPageSelect.value);
+  let sortField = sortOrderSelect.value.split(",")[0]; // 獲取排序字段
+  let sortDirection = sortOrderSelect.value.split(",")[1]; // 獲取排序方向
+  let orderStatus = orderStatusSelect.value;
+  let currentPage = 1;
 
-    // 調用後端 API 獲取數據
-    function fetchOrders() {
-        let url = `/api/orders/page?page=${currentPage - 1}&size=${resultsPerPage}&sortField=${sortField}&sortDirection=${sortDirection}`;
+  // 調用後端 API 獲取數據
+  function fetchOrders() {
+    let url = `/api/orders/page?page=${
+      currentPage - 1
+    }&size=${resultsPerPage}&sortField=${sortField}&sortDirection=${sortDirection}`;
 
-        if (orderStatus !== 'all') {
-            url += `&status=${orderStatus}`;
-        }
-
-        fetch(url)
-            .then(response => {
-                // 檢查回應是否為成功
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                renderOrders(data.content);  // 渲染訂單
-                updatePagination(data.totalPages);  // 更新分頁
-
-                // 防止無限迴圈的邏輯
-                if (currentPage >= data.totalPages) {
-                    console.log("已到達最後一頁，停止加載");
-                    return;
-                }
-
-                // 當有下一頁時，自動加載
-                if (currentPage < data.totalPages - 1) {
-                    currentPage++; // 自增當前頁數
-                    fetchNextPage(); // 調用函數加載下一頁
-                }
-            })
-            .catch(error => {
-                console.error('Error fetching orders:', error);
-                tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: red;">無法獲取訂單資料</td></tr>`;
-            });
+    if (orderStatus !== "all") {
+      url += `&status=${orderStatus}`;
     }
 
+    fetch(url)
+      .then((response) => {
+        // 檢查回應是否為成功
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        renderOrders(data.content); // 渲染訂單
+        updatePagination(data.totalPages); // 更新分頁
 
-    // 渲染訂單
-    function renderOrders(orders) {
-        tbody.innerHTML = '';  // 清空表格內容
-
-        // 確保 orders 不為 undefined 或 null
-        if (!orders || orders.length === 0) {
-            tbody.innerHTML = `<tr><td colspan="5" style="text-align: center;">目前沒有訂單資料</td></tr>`;
-            return;
+        // 防止無限迴圈的邏輯
+        if (currentPage >= data.totalPages) {
+          console.log("已到達最後一頁，停止加載");
+          return;
         }
 
-        orders.forEach(order => {
-            const tr = document.createElement('tr');
+        // 當有下一頁時，自動加載
+        if (currentPage < data.totalPages - 1) {
+          currentPage++; // 自增當前頁數
+          fetchNextPage(); // 調用函數加載下一頁
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching orders:", error);
+        tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: red;">無法獲取訂單資料</td></tr>`;
+      });
+  }
 
-            // 訂單名稱，如果 order.name 不存在，顯示 '無名稱'
-            const orderName = order.name ? order.name : '無名稱';
+  // 渲染訂單
+  function renderOrders(orders) {
+    tbody.innerHTML = ""; // 清空表格內容
 
-            // 訂單配送方式，如果 order.deliveryMethod 不存在，顯示 '無配送方式'
-            const deliveryMethod = order.deliveryMethod ? order.deliveryMethod : '到府';
+    // 確保 orders 不為 undefined 或 null
+    if (!orders || orders.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="5" style="text-align: center;">目前沒有訂單資料</td></tr>`;
+      return;
+    }
 
-            // 訂單日期格式化，如果 order.orderDate 存在
-            const orderDate = order.orderDate ? new Date(order.orderDate).toLocaleDateString() : '無日期';
+    orders.forEach((order) => {
+      const tr = document.createElement("tr");
 
-            tr.innerHTML = `
+      // 訂單名稱，如果 order.name 不存在，顯示 '無名稱'
+      const orderName = order.name ? order.name : "無名稱";
+
+      // 訂單配送方式，如果 order.deliveryMethod 不存在，顯示 '無配送方式'
+      const deliveryMethod = order.deliveryMethod
+        ? order.deliveryMethod
+        : "到府";
+
+      // 訂單日期格式化，如果 order.orderDate 存在
+      const orderDate = order.orderDate
+        ? new Date(order.orderDate).toLocaleDateString()
+        : "無日期";
+
+      tr.innerHTML = `
             <td>
                 <p>${orderName}</p>
             </td>
@@ -546,90 +557,92 @@ function generateOrderManagementContent() {
             <td><a href="#" class="details-link" data-id="${order.orderId}" style="color: white;">詳細</a></td>
         `;
 
-            tbody.appendChild(tr);
-        });
+      tbody.appendChild(tr);
+    });
 
-        // 綁定「詳細」按鈕的點擊事件
-        document.querySelectorAll('.details-link').forEach(link => {
-            link.addEventListener('click', function (event) {
-                event.preventDefault();
-                const orderId = this.getAttribute('data-id');
-                // 顯示訂單詳情頁面
-                // generateOrderDetailsContent(orderId);
+    // 綁定「詳細」按鈕的點擊事件
+    document.querySelectorAll(".details-link").forEach((link) => {
+      link.addEventListener("click", function (event) {
+        event.preventDefault();
+        const orderId = this.getAttribute("data-id");
+        // 顯示訂單詳情頁面
+        // generateOrderDetailsContent(orderId);
 
-                // 發送 fetch 請求到 API，根據 orderId 獲取訂單詳細資料
-                fetch(`/api/orders/${orderId}`)
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error(`HTTP error! status: ${response.status}`);
-                        }
-                        return response.json();  // 解析成 JSON 格式
-                    })
-                    .then(orderData => {
-                        // 將返回的訂單資料傳遞給生成訂單詳情頁面的函數
-                        generateOrderDetailsContent(orderData);
-                    })
-                    .catch(error => {
-                        console.error('Error fetching order details:', error);
-                    });
-            });
-        });
+        // 發送 fetch 請求到 API，根據 orderId 獲取訂單詳細資料
+        fetch(`/api/orders/${orderId}`)
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json(); // 解析成 JSON 格式
+          })
+          .then((orderData) => {
+            // 將返回的訂單資料傳遞給生成訂單詳情頁面的函數
+            generateOrderDetailsContent(orderData);
+          })
+          .catch((error) => {
+            console.error("Error fetching order details:", error);
+          });
+      });
+    });
+  }
+
+  // 動態生成頁數選項
+  function updatePagination(totalPages) {
+    pageSelect.innerHTML = ""; // 清空頁數選項
+    for (let i = 1; i <= totalPages; i++) {
+      const option = document.createElement("option");
+      option.value = i;
+      option.textContent = `第 ${i} 頁`;
+      pageSelect.appendChild(option);
     }
+    pageSelect.value = currentPage; // 設定當前頁數
+  }
 
-    // 動態生成頁數選項
-    function updatePagination(totalPages) {
-        pageSelect.innerHTML = '';  // 清空頁數選項
-        for (let i = 1; i <= totalPages; i++) {
-            const option = document.createElement('option');
-            option.value = i;
-            option.textContent = `第 ${i} 頁`;
-            pageSelect.appendChild(option);
-        }
-        pageSelect.value = currentPage;  // 設定當前頁數
-    }
-
-    // 更新顯示結果數或排序方式時，重新調用 API 並渲染
-    resultsPerPageSelect.addEventListener('change', () => {
-        resultsPerPage = parseInt(resultsPerPageSelect.value);
-        currentPage = 1;
-        fetchOrders();
-    });
-
-    sortOrderSelect.addEventListener('change', () => {
-        const sortValues = sortOrderSelect.value.split(',');
-        sortField = sortValues[0];
-        sortDirection = sortValues[1];
-        currentPage = 1;
-        fetchOrders();
-    });
-
-    orderStatusSelect.addEventListener('change', () => {
-        orderStatus = orderStatusSelect.value;
-        currentPage = 1;
-        fetchOrders();
-    });
-
-    pageSelect.addEventListener('change', () => {
-        currentPage = parseInt(pageSelect.value);
-        fetchOrders();
-    });
-
-    // 初始加載數據
+  // 更新顯示結果數或排序方式時，重新調用 API 並渲染
+  resultsPerPageSelect.addEventListener("change", () => {
+    resultsPerPage = parseInt(resultsPerPageSelect.value);
+    currentPage = 1;
     fetchOrders();
+  });
+
+  sortOrderSelect.addEventListener("change", () => {
+    const sortValues = sortOrderSelect.value.split(",");
+    sortField = sortValues[0];
+    sortDirection = sortValues[1];
+    currentPage = 1;
+    fetchOrders();
+  });
+
+  orderStatusSelect.addEventListener("change", () => {
+    orderStatus = orderStatusSelect.value;
+    currentPage = 1;
+    fetchOrders();
+  });
+
+  pageSelect.addEventListener("change", () => {
+    currentPage = parseInt(pageSelect.value);
+    fetchOrders();
+  });
+
+  // 初始加載數據
+  fetchOrders();
 }
 
 // 點擊訂單的"詳細"連結後生成訂單詳情頁面的函數
 function generateOrderDetailsContent(order) {
-    const mainContent = document.querySelector('.main-content');
-    mainContent.innerHTML = '';  // 清空之前的內容
+  const mainContent = document.querySelector(".main-content");
+  mainContent.innerHTML = ""; // 清空之前的內容
 
-    const userInfo = order ? `
-        <p><strong>用戶名稱:</strong> ${order.username || '未提供'}</p>
-        <p><strong>電子郵件:</strong> ${order.email || '未提供'}</p>
-        <p><strong>電話號碼:</strong> ${order.phoneNumber || '未提供'}</p>
-    ` : `<p>無法找到該用戶資訊</p>`;
+  const userInfo = order
+    ? `
+        <p><strong>用戶名稱:</strong> ${order.username || "未提供"}</p>
+        <p><strong>電子郵件:</strong> ${order.email || "未提供"}</p>
+        <p><strong>電話號碼:</strong> ${order.phoneNumber || "未提供"}</p>
+    `
+    : `<p>無法找到該用戶資訊</p>`;
 
-    const orderDetailsSection = `
+  const orderDetailsSection = `
         <section class="order-details">
             <h1>訂單詳情 - 訂單編號: ${order.orderNumber}</h1>
             <div class="order-and-user-info">
@@ -638,15 +651,23 @@ function generateOrderDetailsContent(order) {
                     <div class="order-summary">
                         <p><strong>訂單日期:</strong> ${order.orderDate}</p>
                         <p><strong>配送地址:</strong> ${order.address}</p>
-                        <p><strong>訂單總金額:</strong> $${order.totalAmount}</p>
-                        <p><strong>優惠券 ID:</strong> ${order.couponId || 'N/A'}</p>
-                        <p><strong>百分比折扣:</strong> ${order.percentageDiscount}%</p>
-                        <p><strong>折扣金額:</strong> $${order.amountDiscount}</p>
+                        <p><strong>訂單總金額:</strong> $${
+                          order.totalAmount
+                        }</p>
+                        <p><strong>優惠券 ID:</strong> ${
+                          order.couponId || "N/A"
+                        }</p>
+                        <p><strong>百分比折扣:</strong> ${
+                          order.percentageDiscount
+                        }%</p>
+                        <p><strong>折扣金額:</strong> $${
+                          order.amountDiscount
+                        }</p>
                         <p><strong>最終金額:</strong> $${order.finalAmount}</p>
                         <p><strong>訂單狀態:</strong> ${order.status}</p>
                         <p><strong>修改者:</strong> ${order.changedBy}</p>
                         <p><strong>修改時間:</strong> ${order.changedAt}</p>
-                        <p><strong>備註:</strong> ${order.comment || '無'}</p>
+                        <p><strong>備註:</strong> ${order.comment || "無"}</p>
                     </div>
                 </div>
                 <div class="user-info2">
@@ -672,48 +693,45 @@ function generateOrderDetailsContent(order) {
         </section>
     `;
 
-    mainContent.innerHTML = orderDetailsSection;
+  mainContent.innerHTML = orderDetailsSection;
 
-    // 選取表格的 tbody
-    const tbody = document.querySelector('.order-items-table tbody');
+  // 選取表格的 tbody
+  const tbody = document.querySelector(".order-items-table tbody");
 
-    // 確認 orderDetails 存在且是陣列
-    if (order.orderDetails && order.orderDetails.length > 0) {
-        order.orderDetails.forEach(orderDetails => {
-            // 確保圖片存在，若無圖片則顯示預設圖片
-            const productImage = (orderDetails.product.images && orderDetails.product.images.length > 0)
-                ? orderDetails.product.images[0].url // 假設 image 是一個物件，且您需要取得 URL
-                : '/path/to/default-image.png'; // 預設圖片路徑
+  // 確認 orderDetails 存在且是陣列
+  if (order.orderDetails && order.orderDetails.length > 0) {
+    order.orderDetails.forEach((orderDetails) => {
+      // 確保圖片存在，若無圖片則顯示預設圖片
+      const productImage =
+        orderDetails.product.images && orderDetails.product.images.length > 0
+          ? orderDetails.product.images[0].url // 假設 image 是一個物件，且您需要取得 URL
+          : "/path/to/default-image.png"; // 預設圖片路徑
 
-            const tr = document.createElement('tr');
-            tr.innerHTML = `
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
                 <td><img src="${productImage}" alt="${orderDetails.product.name}" style="width: 50px; height: 50px;"></td>
                 <td>${orderDetails.product.name}</td>
                 <td>${orderDetails.product.sku}</td>
                 <td>${orderDetails.quantity}</td>
                 <td>$${orderDetails.price}</td>
             `;
-            tbody.appendChild(tr);  // 將每個商品插入到表格中
-        });
-    } else {
-        console.warn("沒有購買商品");
-    }
+      tbody.appendChild(tr); // 將每個商品插入到表格中
+    });
+  } else {
+    console.warn("沒有購買商品");
+  }
 }
 
 // 點擊"商品上傳"時生成內容的函數
 function generateProductUploadForm() {
-    const mainContent = document.querySelector('.main-content');
-    mainContent.innerHTML = '';  // 清空之前的內容
+  const mainContent = document.querySelector(".main-content");
+  mainContent.innerHTML = ""; // 清空之前的內容
 
-    const productUploadForm = `
+  const productUploadForm = `
         <section class="product-upload">
             <h1>商品上傳</h1>
             <div class="image-upload">
                 <div class="image-preview">
-                <img src="橘大頭.png" alt="商品圖片" style="width: 100%; height: auto;">
-                <img src="紅大頭.png" alt="商品圖片" style="width: 100%; height: auto;">
-                <img src="深綠大頭.png" alt="商品圖片" style="width: 100%; height: auto;">
-                <img src="黃大頭.png" alt="商品圖片" style="width: 100%; height: auto;">
                 <button id="uploadImageButton">圖片上傳</button>
                 </div>
             </div>
@@ -724,8 +742,8 @@ function generateProductUploadForm() {
                     <textarea id="sku" rows="1"></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="description">商品名稱</label>
-                    <textarea id="description" rows="1" placeholder="商品名稱"></textarea>
+                    <label for="name">商品名稱</label>
+                    <textarea id="name" rows="1" placeholder="商品名稱"></textarea>
                 </div>
             
                 <div class="form-group">
@@ -746,33 +764,24 @@ function generateProductUploadForm() {
                 <div class="form-group">
                     <label for="category">菜品分類</label>
                     <select id="category">
-                        <option value="category1">家常料理</option>
-                        <option value="category2">兒童友善</option>
-                        <option value="category3">銀髮友善</option>
-                        <option value="category4">異國料理</option>
-                        <option value="category5">多人料理</option>
+                        <option value="5">家常料理</option>
+                        <option value="3">兒童友善</option>
+                        <option value="4">銀髮友善</option>
+                        <option value="1">異國料理</option>
+                        <option value="2">多人料理</option>
                     </select>
-                </div>
-
-                <!-- 人數、難度等選項 -->
-                <div class="form-group row-group">
-                    <div class="field">
-                        <label for="people">人數</label>
-                        <select id="people">
-                            <option value="1">1人</option>
-                            <option value="2">2人</option>
-                            <option value="3">3人</option>
-                            <option value="4">4人</option>
-                            <option value="5">5人</option>
-                        </select>
-                    </div>
-
                 </div>
 
                 <!-- 商品描述 -->
                 <div class="form-group">
                     <label for="description">商品描述</label>
                     <textarea id="description" rows="8"></textarea>
+                </div>
+
+                <!-- 庫存 -->
+                <div class="form-group">
+                    <label for="stockQuantity">庫存數量</label>
+                    <textarea id="stockQuantity" rows="1" placeholder="庫存"></textarea>
                 </div>
 
                 <!-- 提交與取消按鈕 -->
@@ -783,16 +792,64 @@ function generateProductUploadForm() {
             </form>
         </section>
     `;
-    mainContent.innerHTML = productUploadForm;
+  mainContent.innerHTML = productUploadForm;
+
+  function uploadProduct(productData) {
+    fetch(`http://localhost:8080/products`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(productData),
+      mode: "cors",
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("上傳商品失敗");
+        }
+        return response.json();
+      })
+      .then((result) => {
+        console.log("商品上傳成功", result);
+      })
+      .catch((error) => {
+        console.error("上傳商品時發生錯誤", error);
+        console.log(JSON.stringify(productData));
+      });
+  }
+
+  // 綁定事件監聽器
+  const submitButton = document.getElementById("submitButton");
+  if (submitButton) {
+    submitButton.addEventListener("click", (event) => {
+      event.preventDefault(); // 防止表單提交刷新頁面
+
+      const productData = {
+        type: document.getElementById("type").value, // "preparedFood"
+        sku: document.getElementById("sku").value, // 例如 "SKU506"
+        name: document.getElementById("name").value, // 例如 "冷凍日式春雨調理包"
+        description: document.getElementById("description").value, // 例如 商品描述文本
+        price: parseInt(document.getElementById("price").value), // 例如 110
+        category: {
+          categoryId: parseInt(document.getElementById("category").value), // 例如 5
+        },
+        stockQuantity: parseInt(document.getElementById("stockQuantity").value), // 例如 50
+        isDel: false, // 如果這是固定的值，可以直接設定
+      };
+      uploadProduct(productData); // 在按鈕點擊後調用上傳功能
+    });
+  } else {
+    console.error("submitButton 元素未找到");
+  }
 }
 
 // 點擊"商品管理"時生成內容的函數
 function generateProductManagementWithActionsContent() {
-    const mainContent = document.querySelector('.main-content');
-    mainContent.innerHTML = '';  // 清空之前的內容    
+  const mainContent = document.querySelector(".main-content");
+  mainContent.innerHTML = ""; // 清空之前的內容
 
-    // 動態生成商品管理的標題和表格
-    const productManagementSection = `
+  // 動態生成商品管理的標題和表格
+  const productManagementSection = `
         <section class="product-management">
             <h1>商品管理</h1>
             <div class="orderControls">
@@ -849,120 +906,128 @@ function generateProductManagementWithActionsContent() {
             </div>
         </section>
     `;
-    mainContent.innerHTML = productManagementSection;
+  mainContent.innerHTML = productManagementSection;
 
-    const tbody = document.querySelector('.product-table tbody');
-    const resultsPerPageSelect = document.getElementById('resultsPerPage');
-    const pageSelect = document.getElementById('pageSelect');
-    const searchInput = document.getElementById('productSearchInput');
+  const tbody = document.querySelector(".product-table tbody");
+  const resultsPerPageSelect = document.getElementById("resultsPerPage");
+  const pageSelect = document.getElementById("pageSelect");
+  const searchInput = document.getElementById("productSearchInput");
 
-    // 設置每頁顯示的商品數量
-    let resultsPerPage = parseInt(resultsPerPageSelect.value);
-    let currentPage = 1;  // 預設為第 1 頁
-    let totalPages = Math.ceil(products.length / resultsPerPage);
+  // 設置每頁顯示的商品數量
+  let resultsPerPage = parseInt(resultsPerPageSelect.value);
+  let currentPage = 1; // 預設為第 1 頁
+  let totalPages = Math.ceil(products.length / resultsPerPage);
 
-    // 動態生成每個商品的表格行
-    function renderProducts(filteredProducts) {
-        tbody.innerHTML = '';  // 清空表格內容
-        const start = (currentPage - 1) * resultsPerPage;
-        const end = start + resultsPerPage;
-        const visibleProducts = filteredProducts.slice(start, end);
+  // 動態生成每個商品的表格行
+  function renderProducts(filteredProducts) {
+    tbody.innerHTML = ""; // 清空表格內容
+    const start = (currentPage - 1) * resultsPerPage;
+    const end = start + resultsPerPage;
+    const visibleProducts = filteredProducts.slice(start, end);
 
-        visibleProducts.forEach((product, index) => {
-            const tr = document.createElement('tr');
+    visibleProducts.forEach((product, index) => {
+      const tr = document.createElement("tr");
 
-            tr.innerHTML = `
+      tr.innerHTML = `
                 <td><img src="${product.image}" alt="${product.name}"></td>
                 <td>${product.sku}</td>
                 <td>${product.name}</td>
                 <td>${product.price}</td>
                 <td>${product.stock}</td>
                 <td class="actions">
-                    <button class="edit-button" data-index="${start + index}">修改</button>
-                    <button class="delete-button" data-index="${start + index}">刪除</button>
+                    <button class="edit-button" data-index="${
+                      start + index
+                    }">修改</button>
+                    <button class="delete-button" data-index="${
+                      start + index
+                    }">刪除</button>
                 </td>
             `;
 
-            tbody.appendChild(tr);
-        });
+      tbody.appendChild(tr);
+    });
 
-        // 重新綁定「修改」按鈕事件
-        document.querySelectorAll('.edit-button').forEach(button => {
-            button.addEventListener('click', function () {
-                const productIndex = this.getAttribute('data-index');
-                generateProductManagementEdit(products[productIndex]); // 調用商品修改頁面並傳入對應商品數據
-            });
-        });
+    // 重新綁定「修改」按鈕事件
+    document.querySelectorAll(".edit-button").forEach((button) => {
+      button.addEventListener("click", function () {
+        const productIndex = this.getAttribute("data-index");
+        generateProductManagementEdit(products[productIndex]); // 調用商品修改頁面並傳入對應商品數據
+      });
+    });
 
-        // 重新綁定「刪除」按鈕事件
-        document.querySelectorAll('.delete-button').forEach(button => {
-            button.addEventListener('click', function () {
-                const productIndex = this.getAttribute('data-index');
-                if (confirm('確定要刪除這個商品嗎？')) {
-                    products.splice(productIndex, 1); // 刪除商品
-                    generateProductManagementWithActionsContent(); // 刷新商品管理頁面
-                }
-            });
-        });
-    }
-
-    // 動態生成頁數選項
-    function updatePagination(filteredProducts) {
-        pageSelect.innerHTML = '';  // 清空頁數選項
-        totalPages = Math.ceil(filteredProducts.length / resultsPerPage); // 更新總頁數
-        for (let i = 1; i <= totalPages; i++) {
-            const option = document.createElement('option');
-            option.value = i;
-            option.textContent = `第 ${i} 頁`;
-            pageSelect.appendChild(option);
+    // 重新綁定「刪除」按鈕事件
+    document.querySelectorAll(".delete-button").forEach((button) => {
+      button.addEventListener("click", function () {
+        const productIndex = this.getAttribute("data-index");
+        if (confirm("確定要刪除這個商品嗎？")) {
+          products.splice(productIndex, 1); // 刪除商品
+          generateProductManagementWithActionsContent(); // 刷新商品管理頁面
         }
-        pageSelect.value = currentPage;  // 設定當前頁數
+      });
+    });
+  }
+
+  // 動態生成頁數選項
+  function updatePagination(filteredProducts) {
+    pageSelect.innerHTML = ""; // 清空頁數選項
+    totalPages = Math.ceil(filteredProducts.length / resultsPerPage); // 更新總頁數
+    for (let i = 1; i <= totalPages; i++) {
+      const option = document.createElement("option");
+      option.value = i;
+      option.textContent = `第 ${i} 頁`;
+      pageSelect.appendChild(option);
     }
+    pageSelect.value = currentPage; // 設定當前頁數
+  }
 
-    // 搜尋商品
-    searchInput.addEventListener('input', () => {
-        const searchTerm = searchInput.value.toLowerCase();
-        const filteredProducts = products.filter(product =>
-            product.name.toLowerCase().includes(searchTerm) || product.sku.toLowerCase().includes(searchTerm)
-        );
-        currentPage = 1;  // 搜尋時將頁面重置到第 1 頁
-        updatePagination(filteredProducts);
-        renderProducts(filteredProducts);
-    });
+  // 搜尋商品
+  searchInput.addEventListener("input", () => {
+    const searchTerm = searchInput.value.toLowerCase();
+    const filteredProducts = products.filter(
+      (product) =>
+        product.name.toLowerCase().includes(searchTerm) ||
+        product.sku.toLowerCase().includes(searchTerm)
+    );
+    currentPage = 1; // 搜尋時將頁面重置到第 1 頁
+    updatePagination(filteredProducts);
+    renderProducts(filteredProducts);
+  });
 
-    // 更新顯示結果數時，重新計算頁數並渲染
-    resultsPerPageSelect.addEventListener('change', () => {
-        resultsPerPage = parseInt(resultsPerPageSelect.value);
-        currentPage = 1;  // 切換每頁顯示數時，返回到第 1 頁
-        const filteredProducts = products;
-        updatePagination(filteredProducts);
-        renderProducts(filteredProducts);
-    });
+  // 更新顯示結果數時，重新計算頁數並渲染
+  resultsPerPageSelect.addEventListener("change", () => {
+    resultsPerPage = parseInt(resultsPerPageSelect.value);
+    currentPage = 1; // 切換每頁顯示數時，返回到第 1 頁
+    const filteredProducts = products;
+    updatePagination(filteredProducts);
+    renderProducts(filteredProducts);
+  });
 
-    // 監聽頁數切換事件
-    pageSelect.addEventListener('change', () => {
-        currentPage = parseInt(pageSelect.value);
-        const filteredProducts = products;
-        renderProducts(filteredProducts);
-    });
+  // 監聽頁數切換事件
+  pageSelect.addEventListener("change", () => {
+    currentPage = parseInt(pageSelect.value);
+    const filteredProducts = products;
+    renderProducts(filteredProducts);
+  });
 
-    // 初始化頁面
-    updatePagination(products);
-    renderProducts(products);
+  // 初始化頁面
+  updatePagination(products);
+  renderProducts(products);
 }
 
 // 點擊"商品管理-修改"時生成內容的函數
 function generateProductManagementEdit(product) {
-    const mainContent = document.querySelector('.main-content');
-    mainContent.innerHTML = '';  // 清空之前的內容
+  const mainContent = document.querySelector(".main-content");
+  mainContent.innerHTML = ""; // 清空之前的內容
 
-    // 動態生成商品修改的表單
-    const productEditForm = `
+  // 動態生成商品修改的表單
+  const productEditForm = `
         <section class="product-edit">
             <h1>修改商品 - ${product.name}</h1>
             <div class="image-upload">
                 <div class="image-preview">
-                    <img src="${product.image}" alt="商品圖片" style="width: 100%; height: auto;">
+                    <img src="${
+                      product.image
+                    }" alt="商品圖片" style="width: 100%; height: auto;">
                     <button id="uploadImageButton">上傳新圖片</button>
                 </div>
             </div>
@@ -970,7 +1035,9 @@ function generateProductManagementEdit(product) {
             <form>
                 <div class="form-group">
                      <label for="sku">SKU</label>
-                     <textarea id="sku" rows="1" readonly>${product.sku}</textarea>
+                     <textarea id="sku" rows="1" readonly>${
+                       product.sku
+                     }</textarea>
                 </div>
 
                 <div class="form-group">
@@ -986,30 +1053,54 @@ function generateProductManagementEdit(product) {
                 <div class="form-group">
                     <label for="category">商品類型</label>
                     <select id="category">
-                        <option value="調理包" ${product.type === '調理包' ? 'selected' : ''}>調理包</option>
-                        <option value="食材包" ${product.type === '食材包' ? 'selected' : ''}>食材包</option>
+                        <option value="調理包" ${
+                          product.type === "調理包" ? "selected" : ""
+                        }>調理包</option>
+                        <option value="食材包" ${
+                          product.type === "食材包" ? "selected" : ""
+                        }>食材包</option>
                     </select>
                 </div>
 				
                 <div class="form-group">
                     <label for="category">菜品分類</label>
                     <select id="category">
-                        <option value="家常料理" ${product.category === '家常料理' ? 'selected' : ''}>家常料理</option>
-                        <option value="兒童友善" ${product.category === '兒童友善' ? 'selected' : ''}>兒童友善</option>
-                        <option value="銀髮友善" ${product.category === '銀髮友善' ? 'selected' : ''}>銀髮友善</option>
-                        <option value="異國料理" ${product.category === '異國料理' ? 'selected' : ''}>異國料理</option>
-                        <option value="多人料理" ${product.category === '多人料理' ? 'selected' : ''}>多人料理</option>
+                        <option value="家常料理" ${
+                          product.category === "家常料理" ? "selected" : ""
+                        }>家常料理</option>
+                        <option value="兒童友善" ${
+                          product.category === "兒童友善" ? "selected" : ""
+                        }>兒童友善</option>
+                        <option value="銀髮友善" ${
+                          product.category === "銀髮友善" ? "selected" : ""
+                        }>銀髮友善</option>
+                        <option value="異國料理" ${
+                          product.category === "異國料理" ? "selected" : ""
+                        }>異國料理</option>
+                        <option value="多人料理" ${
+                          product.category === "多人料理" ? "selected" : ""
+                        }>多人料理</option>
                     </select>
                 </div>
                 <div class="form-group row-group">
                     <div class="field">
                         <label for="servings">人數份量</label>
                         <select id="servings">
-                            <option value="1" ${product.servings === 1 ? 'selected' : ''}>1人</option>
-                            <option value="2" ${product.servings === 2 ? 'selected' : ''}>2人</option>
-                            <option value="3" ${product.servings === 3 ? 'selected' : ''}>3人</option>
-                            <option value="4" ${product.servings === 4 ? 'selected' : ''}>4人</option>
-                            <option value="5" ${product.servings === 5 ? 'selected' : ''}>5人</option>
+                            <option value="1" ${
+                              product.servings === 1 ? "selected" : ""
+                            }>1人</option>
+                            <option value="2" ${
+                              product.servings === 2 ? "selected" : ""
+                            }>2人</option>
+                            <option value="3" ${
+                              product.servings === 3 ? "selected" : ""
+                            }>3人</option>
+                            <option value="4" ${
+                              product.servings === 4 ? "selected" : ""
+                            }>4人</option>
+                            <option value="5" ${
+                              product.servings === 5 ? "selected" : ""
+                            }>5人</option>
                         </select>
                     </div>
 
@@ -1022,7 +1113,9 @@ function generateProductManagementEdit(product) {
 
                 <div class="form-group">
                     <label for="description">商品描述</label>
-                    <textarea id="description" rows="4">${product.description}</textarea>
+                    <textarea id="description" rows="4">${
+                      product.description
+                    }</textarea>
                 </div>
 
                 <div class="form-group">
@@ -1032,47 +1125,56 @@ function generateProductManagementEdit(product) {
             </form>
         </section>
     `;
-    mainContent.innerHTML = productEditForm;
+  mainContent.innerHTML = productEditForm;
 
-    // **在生成表單後立即綁定事件**
-    document.getElementById('submitButton').addEventListener('click', function (event) {
-        event.preventDefault();
+  // **在生成表單後立即綁定事件**
+  document
+    .getElementById("submitButton")
+    .addEventListener("click", function (event) {
+      event.preventDefault();
 
-        // 更新商品屬性
-        product.sku = document.getElementById('sku').value;
-        product.name = document.getElementById('name').value;
-        product.category = document.getElementById('category').value;
-        product.servings = parseInt(document.getElementById('servings').value, 10);
-        product.difficulty = document.getElementById('difficulty').value;
-        product.vegan = document.getElementById('vegan').value;
-        product.time = parseInt(document.getElementById('time').value, 10);
-        product.price = parseFloat(document.getElementById('price').value);
-        product.description = document.getElementById('description').value;
-        product.Ingredients = document.getElementById('ingredients').value;
-        product.steps = document.getElementById('steps').value;
+      // 更新商品屬性
+      product.sku = document.getElementById("sku").value;
+      product.name = document.getElementById("name").value;
+      product.category = document.getElementById("category").value;
+      product.servings = parseInt(
+        document.getElementById("servings").value,
+        10
+      );
+      product.difficulty = document.getElementById("difficulty").value;
+      product.vegan = document.getElementById("vegan").value;
+      product.time = parseInt(document.getElementById("time").value, 10);
+      product.price = parseFloat(document.getElementById("price").value);
+      product.description = document.getElementById("description").value;
+      product.Ingredients = document.getElementById("ingredients").value;
+      product.steps = document.getElementById("steps").value;
 
-        alert('商品已修改！');
-        generateProductManagementWithActionsContent();  // 返回商品管理頁面
+      alert("商品已修改！");
+      generateProductManagementWithActionsContent(); // 返回商品管理頁面
     });
 
-    // 添加取消按鈕的功能
-    document.getElementById('cancelButton').addEventListener('click', function () {
-        generateProductManagementWithActionsContent();  // 返回商品管理頁面
+  // 添加取消按鈕的功能
+  document
+    .getElementById("cancelButton")
+    .addEventListener("click", function () {
+      generateProductManagementWithActionsContent(); // 返回商品管理頁面
     });
 
-    // 如果需要處理圖片上傳，可以在這裡添加事件監聽器
-    document.getElementById('uploadImageButton').addEventListener('click', function () {
-        // 這裡可以添加圖片上傳的功能
-        alert('上傳新圖片的功能尚未實現。');
+  // 如果需要處理圖片上傳，可以在這裡添加事件監聽器
+  document
+    .getElementById("uploadImageButton")
+    .addEventListener("click", function () {
+      // 這裡可以添加圖片上傳的功能
+      alert("上傳新圖片的功能尚未實現。");
     });
 }
 
 // 點擊"食譜上傳"時生成內容的函數
 function generateRecipeUploadForm() {
-    const mainContent = document.querySelector('.main-content');
-    mainContent.innerHTML = '';  // 清空之前的內容
+  const mainContent = document.querySelector(".main-content");
+  mainContent.innerHTML = ""; // 清空之前的內容
 
-    const productUploadForm = `
+  const productUploadForm = `
         <section class="product-upload">
             <h1>食譜上傳</h1>
             <div class="image-upload">
@@ -1165,16 +1267,16 @@ function generateRecipeUploadForm() {
             </form>
         </section>
     `;
-    mainContent.innerHTML = productUploadForm;
+  mainContent.innerHTML = productUploadForm;
 }
 
 // 點擊"食譜管理"時生成內容的函數
 function generateRecipeManagementContent() {
-    const mainContent = document.querySelector('.main-content');
-    mainContent.innerHTML = '';  // 清空之前的內容    
+  const mainContent = document.querySelector(".main-content");
+  mainContent.innerHTML = ""; // 清空之前的內容
 
-    // 動態生成食譜管理的標題和表格
-    const recipeManagementSection = `
+  // 動態生成食譜管理的標題和表格
+  const recipeManagementSection = `
         <section class="recipe-management">
             <h1>食譜管理</h1>
             <div class="recipeControls">
@@ -1212,15 +1314,15 @@ function generateRecipeManagementContent() {
             </table>
         </section>
     `;
-    mainContent.innerHTML = recipeManagementSection;
+  mainContent.innerHTML = recipeManagementSection;
 
-    const tbody = document.querySelector('.recipe-table tbody');
+  const tbody = document.querySelector(".recipe-table tbody");
 
-    // 動態生成每個食譜的表格行
-    recipes.forEach((recipe, index) => {
-        const tr = document.createElement('tr');
+  // 動態生成每個食譜的表格行
+  recipes.forEach((recipe, index) => {
+    const tr = document.createElement("tr");
 
-        tr.innerHTML = `
+    tr.innerHTML = `
             <td><img src="${recipe.image}" alt="${recipe.name}" class="recipe-image"></td>
             <td>${recipe.name}</td>
             <td style="max-width: 40vw;">${recipe.description}</td>
@@ -1230,36 +1332,36 @@ function generateRecipeManagementContent() {
             </td>
         `;
 
-        tbody.appendChild(tr);
-    });
+    tbody.appendChild(tr);
+  });
 
-    // 重新為動態生成的「修改」按鈕綁定事件
-    document.querySelectorAll('.edit-button').forEach(button => {
-        button.addEventListener('click', function () {
-            const recipeIndex = this.getAttribute('data-index');
-            generateRecipeEditForm(recipes[recipeIndex]); // 調用食譜修改頁面並傳入對應食譜數據
-        });
+  // 重新為動態生成的「修改」按鈕綁定事件
+  document.querySelectorAll(".edit-button").forEach((button) => {
+    button.addEventListener("click", function () {
+      const recipeIndex = this.getAttribute("data-index");
+      generateRecipeEditForm(recipes[recipeIndex]); // 調用食譜修改頁面並傳入對應食譜數據
     });
+  });
 
-    // 重新為動態生成的「刪除」按鈕綁定事件
-    document.querySelectorAll('.delete-button').forEach(button => {
-        button.addEventListener('click', function () {
-            const recipeIndex = this.getAttribute('data-index');
-            if (confirm('確定要刪除這個食譜嗎？')) {
-                recipes.splice(recipeIndex, 1); // 刪除食譜
-                generateRecipeManagementContent(); // 刷新食譜管理頁面
-            }
-        });
+  // 重新為動態生成的「刪除」按鈕綁定事件
+  document.querySelectorAll(".delete-button").forEach((button) => {
+    button.addEventListener("click", function () {
+      const recipeIndex = this.getAttribute("data-index");
+      if (confirm("確定要刪除這個食譜嗎？")) {
+        recipes.splice(recipeIndex, 1); // 刪除食譜
+        generateRecipeManagementContent(); // 刷新食譜管理頁面
+      }
     });
+  });
 }
 
 // 點擊"食譜管理"時生成內容的函數
 function generateRecipeManagementContent() {
-    const mainContent = document.querySelector('.main-content');
-    mainContent.innerHTML = '';  // 清空之前的內容    
+  const mainContent = document.querySelector(".main-content");
+  mainContent.innerHTML = ""; // 清空之前的內容
 
-    // 動態生成食譜管理的標題和表格
-    const recipeManagementSection = `
+  // 動態生成食譜管理的標題和表格
+  const recipeManagementSection = `
         <section class="recipe-management">
             <h1>食譜管理</h1>
             <div class="recipeControls">
@@ -1306,130 +1408,136 @@ function generateRecipeManagementContent() {
             </div>
         </section>
     `;
-    mainContent.innerHTML = recipeManagementSection;
+  mainContent.innerHTML = recipeManagementSection;
 
-    const tbody = document.querySelector('.recipe-table tbody');
-    const resultsPerPageSelect = document.getElementById('resultsPerPage');
-    const pageSelect = document.getElementById('pageSelect');
-    const searchInput = document.getElementById('recipeSearchInput');
-    const categorySelect = document.getElementById('category');
+  const tbody = document.querySelector(".recipe-table tbody");
+  const resultsPerPageSelect = document.getElementById("resultsPerPage");
+  const pageSelect = document.getElementById("pageSelect");
+  const searchInput = document.getElementById("recipeSearchInput");
+  const categorySelect = document.getElementById("category");
 
-    // 設置每頁顯示的食譜數量
-    let resultsPerPage = parseInt(resultsPerPageSelect.value);
-    let currentPage = 1;  // 預設為第 1 頁
-    let totalPages = Math.ceil(recipes.length / resultsPerPage);
+  // 設置每頁顯示的食譜數量
+  let resultsPerPage = parseInt(resultsPerPageSelect.value);
+  let currentPage = 1; // 預設為第 1 頁
+  let totalPages = Math.ceil(recipes.length / resultsPerPage);
 
-    // 根據分類篩選食譜
-    function filterRecipesByCategory(category) {
-        if (category === "all") return recipes;  // 如果選擇"全部"，返回所有食譜
-        return recipes.filter(recipe => recipe.category === category);
-    }
+  // 根據分類篩選食譜
+  function filterRecipesByCategory(category) {
+    if (category === "all") return recipes; // 如果選擇"全部"，返回所有食譜
+    return recipes.filter((recipe) => recipe.category === category);
+  }
 
-    // 動態生成每個食譜的表格行
-    function renderRecipes(filteredRecipes) {
-        tbody.innerHTML = '';  // 清空表格內容
-        const start = (currentPage - 1) * resultsPerPage;
-        const end = start + resultsPerPage;
-        const visibleRecipes = filteredRecipes.slice(start, end);
+  // 動態生成每個食譜的表格行
+  function renderRecipes(filteredRecipes) {
+    tbody.innerHTML = ""; // 清空表格內容
+    const start = (currentPage - 1) * resultsPerPage;
+    const end = start + resultsPerPage;
+    const visibleRecipes = filteredRecipes.slice(start, end);
 
-        visibleRecipes.forEach((recipe, index) => {
-            const tr = document.createElement('tr');
+    visibleRecipes.forEach((recipe, index) => {
+      const tr = document.createElement("tr");
 
-            tr.innerHTML = `
-                <td><img src="${recipe.image}" alt="${recipe.name}" class="recipe-image"></td>
+      tr.innerHTML = `
+                <td><img src="${recipe.image}" alt="${
+        recipe.name
+      }" class="recipe-image"></td>
                 <td>${recipe.name}</td>
                 <td style="max-width: 40vw;">${recipe.description}</td>
                 <td class="actions">
-                    <button class="edit-button" data-index="${start + index}">修改</button>
-                    <button class="delete-button" data-index="${start + index}">刪除</button>
+                    <button class="edit-button" data-index="${
+                      start + index
+                    }">修改</button>
+                    <button class="delete-button" data-index="${
+                      start + index
+                    }">刪除</button>
                 </td>
             `;
 
-            tbody.appendChild(tr);
-        });
+      tbody.appendChild(tr);
+    });
 
-        // 綁定「修改」按鈕事件
-        document.querySelectorAll('.edit-button').forEach(button => {
-            button.addEventListener('click', function () {
-                const recipeIndex = this.getAttribute('data-index');
-                generateRecipeEditForm(recipes[recipeIndex]); // 調用食譜修改頁面並傳入對應食譜數據
-            });
-        });
+    // 綁定「修改」按鈕事件
+    document.querySelectorAll(".edit-button").forEach((button) => {
+      button.addEventListener("click", function () {
+        const recipeIndex = this.getAttribute("data-index");
+        generateRecipeEditForm(recipes[recipeIndex]); // 調用食譜修改頁面並傳入對應食譜數據
+      });
+    });
 
-        // 綁定「刪除」按鈕事件
-        document.querySelectorAll('.delete-button').forEach(button => {
-            button.addEventListener('click', function () {
-                const recipeIndex = this.getAttribute('data-index');
-                if (confirm('確定要刪除這個食譜嗎？')) {
-                    recipes.splice(recipeIndex, 1); // 刪除食譜
-                    generateRecipeManagementContent(); // 刷新食譜管理頁面
-                }
-            });
-        });
-    }
-
-    // 動態生成頁數選項
-    function updatePagination(filteredRecipes) {
-        pageSelect.innerHTML = '';  // 清空頁數選項
-        totalPages = Math.ceil(filteredRecipes.length / resultsPerPage); // 更新總頁數
-        for (let i = 1; i <= totalPages; i++) {
-            const option = document.createElement('option');
-            option.value = i;
-            option.textContent = `第 ${i} 頁`;
-            pageSelect.appendChild(option);
+    // 綁定「刪除」按鈕事件
+    document.querySelectorAll(".delete-button").forEach((button) => {
+      button.addEventListener("click", function () {
+        const recipeIndex = this.getAttribute("data-index");
+        if (confirm("確定要刪除這個食譜嗎？")) {
+          recipes.splice(recipeIndex, 1); // 刪除食譜
+          generateRecipeManagementContent(); // 刷新食譜管理頁面
         }
-        pageSelect.value = currentPage;  // 設定當前頁數
+      });
+    });
+  }
+
+  // 動態生成頁數選項
+  function updatePagination(filteredRecipes) {
+    pageSelect.innerHTML = ""; // 清空頁數選項
+    totalPages = Math.ceil(filteredRecipes.length / resultsPerPage); // 更新總頁數
+    for (let i = 1; i <= totalPages; i++) {
+      const option = document.createElement("option");
+      option.value = i;
+      option.textContent = `第 ${i} 頁`;
+      pageSelect.appendChild(option);
     }
+    pageSelect.value = currentPage; // 設定當前頁數
+  }
 
-    // 搜尋食譜
-    searchInput.addEventListener('input', () => {
-        const searchTerm = searchInput.value.toLowerCase();
-        const filteredRecipes = recipes.filter(recipe =>
-            recipe.name.toLowerCase().includes(searchTerm)
-        );
-        currentPage = 1;  // 搜尋時將頁面重置到第 1 頁
-        updatePagination(filteredRecipes);
-        renderRecipes(filteredRecipes);
-    });
+  // 搜尋食譜
+  searchInput.addEventListener("input", () => {
+    const searchTerm = searchInput.value.toLowerCase();
+    const filteredRecipes = recipes.filter((recipe) =>
+      recipe.name.toLowerCase().includes(searchTerm)
+    );
+    currentPage = 1; // 搜尋時將頁面重置到第 1 頁
+    updatePagination(filteredRecipes);
+    renderRecipes(filteredRecipes);
+  });
 
-    // 分類篩選食譜
-    categorySelect.addEventListener('change', () => {
-        const selectedCategory = categorySelect.value;
-        const filteredRecipes = filterRecipesByCategory(selectedCategory);
-        currentPage = 1;  // 篩選時頁數重置
-        updatePagination(filteredRecipes);
-        renderRecipes(filteredRecipes);
-    });
+  // 分類篩選食譜
+  categorySelect.addEventListener("change", () => {
+    const selectedCategory = categorySelect.value;
+    const filteredRecipes = filterRecipesByCategory(selectedCategory);
+    currentPage = 1; // 篩選時頁數重置
+    updatePagination(filteredRecipes);
+    renderRecipes(filteredRecipes);
+  });
 
-    // 更新顯示結果數時，重新計算頁數並渲染
-    resultsPerPageSelect.addEventListener('change', () => {
-        resultsPerPage = parseInt(resultsPerPageSelect.value);
-        currentPage = 1;  // 切換每頁顯示數時，返回到第 1 頁
-        const filteredRecipes = filterRecipesByCategory(categorySelect.value);
-        updatePagination(filteredRecipes);
-        renderRecipes(filteredRecipes);
-    });
-
-    // 監聽頁數切換事件
-    pageSelect.addEventListener('change', () => {
-        currentPage = parseInt(pageSelect.value);
-        const filteredRecipes = filterRecipesByCategory(categorySelect.value);
-        renderRecipes(filteredRecipes);
-    });
-
-    // 初始化頁面
+  // 更新顯示結果數時，重新計算頁數並渲染
+  resultsPerPageSelect.addEventListener("change", () => {
+    resultsPerPage = parseInt(resultsPerPageSelect.value);
+    currentPage = 1; // 切換每頁顯示數時，返回到第 1 頁
     const filteredRecipes = filterRecipesByCategory(categorySelect.value);
     updatePagination(filteredRecipes);
     renderRecipes(filteredRecipes);
+  });
+
+  // 監聽頁數切換事件
+  pageSelect.addEventListener("change", () => {
+    currentPage = parseInt(pageSelect.value);
+    const filteredRecipes = filterRecipesByCategory(categorySelect.value);
+    renderRecipes(filteredRecipes);
+  });
+
+  // 初始化頁面
+  const filteredRecipes = filterRecipesByCategory(categorySelect.value);
+  updatePagination(filteredRecipes);
+  renderRecipes(filteredRecipes);
 }
 
 // 點擊"庫存管理"時生成內容的函數
 function generateStockManagementContent() {
-    const mainContent = document.querySelector('.main-content');
-    mainContent.innerHTML = '';  // 清空之前的內容
+  const mainContent = document.querySelector(".main-content");
+  mainContent.innerHTML = ""; // 清空之前的內容
 
-    // 動態生成庫存管理的標題和表格
-    const stockManagementSection = `
+  // 動態生成庫存管理的標題和表格
+  const stockManagementSection = `
         <section class="stock-management">
             <h1>庫存管理</h1>
             <div class="stockControls">
@@ -1483,140 +1591,146 @@ function generateStockManagementContent() {
             </div>
         </section>
     `;
-    mainContent.innerHTML = stockManagementSection;
+  mainContent.innerHTML = stockManagementSection;
 
-    const tbody = document.querySelector('.stock-table tbody');
-    const resultsPerPageSelect = document.getElementById('resultsPerPage');
-    const pageSelect = document.getElementById('pageSelect');
-    const searchInput = document.getElementById('productSearchInput');
-    const sortOptions = document.getElementById('sortOptions');
-    const statusFilter = document.getElementById('statusFilter');
+  const tbody = document.querySelector(".stock-table tbody");
+  const resultsPerPageSelect = document.getElementById("resultsPerPage");
+  const pageSelect = document.getElementById("pageSelect");
+  const searchInput = document.getElementById("productSearchInput");
+  const sortOptions = document.getElementById("sortOptions");
+  const statusFilter = document.getElementById("statusFilter");
 
-    // 設置每頁顯示的商品數量
-    let resultsPerPage = parseInt(resultsPerPageSelect.value);
-    let currentPage = 1;  // 預設為第 1 頁
-    let totalPages = Math.ceil(products.length / resultsPerPage);
+  // 設置每頁顯示的商品數量
+  let resultsPerPage = parseInt(resultsPerPageSelect.value);
+  let currentPage = 1; // 預設為第 1 頁
+  let totalPages = Math.ceil(products.length / resultsPerPage);
 
-    // 根據狀態篩選商品
-    function filterProductsByStatus(status) {
-        if (status === "all") return products;  // 如果選擇"全部"，返回所有商品
-        return products.filter(product => product.stock === 0);
+  // 根據狀態篩選商品
+  function filterProductsByStatus(status) {
+    if (status === "all") return products; // 如果選擇"全部"，返回所有商品
+    return products.filter((product) => product.stock === 0);
+  }
+
+  // 根據排序選項對商品進行排序
+  function sortProducts(productsList, sortBy) {
+    if (sortBy === "priceASC") {
+      return productsList.sort((a, b) => a.price - b.price);
+    } else if (sortBy === "priceDESC") {
+      return productsList.sort((a, b) => b.price - a.price);
+    } else if (sortBy === "stockASC") {
+      return productsList.sort((a, b) => a.stock - b.stock);
+    } else if (sortBy === "stockDESC") {
+      return productsList.sort((a, b) => b.stock - a.stock);
     }
+    return productsList;
+  }
 
-    // 根據排序選項對商品進行排序
-    function sortProducts(productsList, sortBy) {
-        if (sortBy === "priceASC") {
-            return productsList.sort((a, b) => a.price - b.price);
-        } else if (sortBy === "priceDESC") {
-            return productsList.sort((a, b) => b.price - a.price);
-        } else if (sortBy === "stockASC") {
-            return productsList.sort((a, b) => a.stock - b.stock);
-        } else if (sortBy === "stockDESC") {
-            return productsList.sort((a, b) => b.stock - a.stock);
-        }
-        return productsList;
-    }
+  // 動態生成每個商品的表格行
+  function renderProducts(filteredProducts) {
+    tbody.innerHTML = ""; // 清空表格內容
+    const start = (currentPage - 1) * resultsPerPage;
+    const end = start + resultsPerPage;
+    const visibleProducts = filteredProducts.slice(start, end);
 
-    // 動態生成每個商品的表格行
-    function renderProducts(filteredProducts) {
-        tbody.innerHTML = '';  // 清空表格內容
-        const start = (currentPage - 1) * resultsPerPage;
-        const end = start + resultsPerPage;
-        const visibleProducts = filteredProducts.slice(start, end);
+    visibleProducts.forEach((product, index) => {
+      const tr = document.createElement("tr");
 
-        visibleProducts.forEach((product, index) => {
-            const tr = document.createElement('tr');
-
-            tr.innerHTML = `
-                <td><img src="${product.image}" alt="${product.name}" style="width: 50px; height: 50px;"></td>
+      tr.innerHTML = `
+                <td><img src="${product.image}" alt="${
+        product.name
+      }" style="width: 50px; height: 50px;"></td>
                 <td>${product.sku}</td>
                 <td>${product.name}</td>
                 <td>${product.price}</td>
                 <td class="stock-quantity">${product.stock}</td>
                 <td>
-                    <button class="details-link" data-index="${start + index}">詳情</button>
+                    <button class="details-link" data-index="${
+                      start + index
+                    }">詳情</button>
                 </td>
             `;
 
-            tbody.appendChild(tr);
-        });
+      tbody.appendChild(tr);
+    });
+  }
+
+  // 動態生成頁數選項
+  function updatePagination(filteredProducts) {
+    pageSelect.innerHTML = ""; // 清空頁數選項
+    totalPages = Math.ceil(filteredProducts.length / resultsPerPage); // 更新總頁數
+    for (let i = 1; i <= totalPages; i++) {
+      const option = document.createElement("option");
+      option.value = i;
+      option.textContent = `第 ${i} 頁`;
+      pageSelect.appendChild(option);
     }
+    pageSelect.value = currentPage; // 設定當前頁數
+  }
 
-    // 動態生成頁數選項
-    function updatePagination(filteredProducts) {
-        pageSelect.innerHTML = '';  // 清空頁數選項
-        totalPages = Math.ceil(filteredProducts.length / resultsPerPage); // 更新總頁數
-        for (let i = 1; i <= totalPages; i++) {
-            const option = document.createElement('option');
-            option.value = i;
-            option.textContent = `第 ${i} 頁`;
-            pageSelect.appendChild(option);
-        }
-        pageSelect.value = currentPage;  // 設定當前頁數
-    }
+  // 搜尋商品
+  searchInput.addEventListener("input", () => {
+    const searchTerm = searchInput.value.toLowerCase();
+    const filteredProducts = products.filter(
+      (product) =>
+        product.name.toLowerCase().includes(searchTerm) ||
+        product.sku.toLowerCase().includes(searchTerm)
+    );
+    currentPage = 1; // 搜尋時將頁面重置到第 1 頁
+    updatePagination(filteredProducts);
+    renderProducts(filteredProducts);
+  });
 
-    // 搜尋商品
-    searchInput.addEventListener('input', () => {
-        const searchTerm = searchInput.value.toLowerCase();
-        const filteredProducts = products.filter(product =>
-            product.name.toLowerCase().includes(searchTerm) || product.sku.toLowerCase().includes(searchTerm)
-        );
-        currentPage = 1;  // 搜尋時將頁面重置到第 1 頁
-        updatePagination(filteredProducts);
-        renderProducts(filteredProducts);
-    });
+  // 狀態篩選商品
+  statusFilter.addEventListener("change", () => {
+    const selectedStatus = statusFilter.value;
+    let filteredProducts = filterProductsByStatus(selectedStatus);
+    filteredProducts = sortProducts(filteredProducts, sortOptions.value);
+    currentPage = 1; // 篩選時頁數重置
+    updatePagination(filteredProducts);
+    renderProducts(filteredProducts);
+  });
 
-    // 狀態篩選商品
-    statusFilter.addEventListener('change', () => {
-        const selectedStatus = statusFilter.value;
-        let filteredProducts = filterProductsByStatus(selectedStatus);
-        filteredProducts = sortProducts(filteredProducts, sortOptions.value);
-        currentPage = 1;  // 篩選時頁數重置
-        updatePagination(filteredProducts);
-        renderProducts(filteredProducts);
-    });
+  // 排序功能
+  sortOptions.addEventListener("change", () => {
+    let filteredProducts = filterProductsByStatus(statusFilter.value);
+    filteredProducts = sortProducts(filteredProducts, sortOptions.value);
+    currentPage = 1; // 改變排序時返回到第 1 頁
+    updatePagination(filteredProducts);
+    renderProducts(filteredProducts);
+  });
 
-    // 排序功能
-    sortOptions.addEventListener('change', () => {
-        let filteredProducts = filterProductsByStatus(statusFilter.value);
-        filteredProducts = sortProducts(filteredProducts, sortOptions.value);
-        currentPage = 1;  // 改變排序時返回到第 1 頁
-        updatePagination(filteredProducts);
-        renderProducts(filteredProducts);
-    });
-
-    // 更新顯示結果數時，重新計算頁數並渲染
-    resultsPerPageSelect.addEventListener('change', () => {
-        resultsPerPage = parseInt(resultsPerPageSelect.value);
-        currentPage = 1;  // 切換每頁顯示數時，返回到第 1 頁
-        let filteredProducts = filterProductsByStatus(statusFilter.value);
-        filteredProducts = sortProducts(filteredProducts, sortOptions.value);
-        updatePagination(filteredProducts);
-        renderProducts(filteredProducts);
-    });
-
-    // 監聽頁數切換事件
-    pageSelect.addEventListener('change', () => {
-        currentPage = parseInt(pageSelect.value);
-        let filteredProducts = filterProductsByStatus(statusFilter.value);
-        filteredProducts = sortProducts(filteredProducts, sortOptions.value);
-        renderProducts(filteredProducts);
-    });
-
-    // 初始化頁面
+  // 更新顯示結果數時，重新計算頁數並渲染
+  resultsPerPageSelect.addEventListener("change", () => {
+    resultsPerPage = parseInt(resultsPerPageSelect.value);
+    currentPage = 1; // 切換每頁顯示數時，返回到第 1 頁
     let filteredProducts = filterProductsByStatus(statusFilter.value);
     filteredProducts = sortProducts(filteredProducts, sortOptions.value);
     updatePagination(filteredProducts);
     renderProducts(filteredProducts);
+  });
+
+  // 監聽頁數切換事件
+  pageSelect.addEventListener("change", () => {
+    currentPage = parseInt(pageSelect.value);
+    let filteredProducts = filterProductsByStatus(statusFilter.value);
+    filteredProducts = sortProducts(filteredProducts, sortOptions.value);
+    renderProducts(filteredProducts);
+  });
+
+  // 初始化頁面
+  let filteredProducts = filterProductsByStatus(statusFilter.value);
+  filteredProducts = sortProducts(filteredProducts, sortOptions.value);
+  updatePagination(filteredProducts);
+  renderProducts(filteredProducts);
 }
 
 // 點擊"用戶管理"時生成內容的函數
 function generateUserManagementContent() {
-    const mainContent = document.querySelector('.main-content');
-    mainContent.innerHTML = '';  // 清空之前的內容    
+  const mainContent = document.querySelector(".main-content");
+  mainContent.innerHTML = ""; // 清空之前的內容
 
-    // 動態生成用戶管理的標題和表格
-    const userManagementSection = `
+  // 動態生成用戶管理的標題和表格
+  const userManagementSection = `
         <section class="user-management">
             <h1>用戶管理</h1>
             <div class="userControls">
@@ -1664,44 +1778,48 @@ function generateUserManagementContent() {
             </div>
         </section>
     `;
-    mainContent.innerHTML = userManagementSection;
+  mainContent.innerHTML = userManagementSection;
 
-    const tbody = document.querySelector('.user-table tbody');
-    const resultsPerPageSelect = document.getElementById('resultsPerPage');
-    const pageSelect = document.getElementById('pageSelect');
-    const searchInput = document.getElementById('userSearchInput');
-    const sortOptions = document.getElementById('sortOptions');
+  const tbody = document.querySelector(".user-table tbody");
+  const resultsPerPageSelect = document.getElementById("resultsPerPage");
+  const pageSelect = document.getElementById("pageSelect");
+  const searchInput = document.getElementById("userSearchInput");
+  const sortOptions = document.getElementById("sortOptions");
 
-    // 設置每頁顯示的用戶數量
-    let resultsPerPage = parseInt(resultsPerPageSelect.value);
-    let currentPage = 1;  // 預設為第 1 頁
-    let totalPages = Math.ceil(users.length / resultsPerPage);
+  // 設置每頁顯示的用戶數量
+  let resultsPerPage = parseInt(resultsPerPageSelect.value);
+  let currentPage = 1; // 預設為第 1 頁
+  let totalPages = Math.ceil(users.length / resultsPerPage);
 
-    // 根據排序選項對用戶進行排序
-    function sortUsers(usersList, sortBy) {
-        if (sortBy === "usernameASC") {
-            return usersList.sort((a, b) => a.username.localeCompare(b.username));
-        } else if (sortBy === "usernameDESC") {
-            return usersList.sort((a, b) => b.username.localeCompare(a.username));
-        } else if (sortBy === "createdAtASC") {
-            return usersList.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
-        } else if (sortBy === "createdAtDESC") {
-            return usersList.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-        }
-        return usersList;
+  // 根據排序選項對用戶進行排序
+  function sortUsers(usersList, sortBy) {
+    if (sortBy === "usernameASC") {
+      return usersList.sort((a, b) => a.username.localeCompare(b.username));
+    } else if (sortBy === "usernameDESC") {
+      return usersList.sort((a, b) => b.username.localeCompare(a.username));
+    } else if (sortBy === "createdAtASC") {
+      return usersList.sort(
+        (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
+      );
+    } else if (sortBy === "createdAtDESC") {
+      return usersList.sort(
+        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+      );
     }
+    return usersList;
+  }
 
-    // 動態生成每個用戶的表格行
-    function renderUsers(filteredUsers) {
-        tbody.innerHTML = '';  // 清空表格內容
-        const start = (currentPage - 1) * resultsPerPage;
-        const end = start + resultsPerPage;
-        const visibleUsers = filteredUsers.slice(start, end);
+  // 動態生成每個用戶的表格行
+  function renderUsers(filteredUsers) {
+    tbody.innerHTML = ""; // 清空表格內容
+    const start = (currentPage - 1) * resultsPerPage;
+    const end = start + resultsPerPage;
+    const visibleUsers = filteredUsers.slice(start, end);
 
-        visibleUsers.forEach((user, index) => {
-            const tr = document.createElement('tr');
+    visibleUsers.forEach((user, index) => {
+      const tr = document.createElement("tr");
 
-            tr.innerHTML = `
+      tr.innerHTML = `
                 <td>${user.userId}</td>
                 <td>${user.username}</td>
                 <td>${user.email}</td>
@@ -1709,88 +1827,91 @@ function generateUserManagementContent() {
                 <td>${user.createdAt}</td>
                 <td>${user.updatedAt}</td>
                 <td class="actions">
-                    <button class="edit-button" data-index="${start + index}">詳情</button>
+                    <button class="edit-button" data-index="${
+                      start + index
+                    }">詳情</button>
                 </td>
             `;
 
-            tbody.appendChild(tr);
-        });
+      tbody.appendChild(tr);
+    });
 
-        // 綁定「詳情」按鈕的事件
-        document.querySelectorAll('.edit-button').forEach(button => {
-            button.addEventListener('click', function () {
-                const userIndex = this.getAttribute('data-index');
-                generateUserEditForm(users[userIndex]);  // 調用用戶修改表單
-            });
-        });
+    // 綁定「詳情」按鈕的事件
+    document.querySelectorAll(".edit-button").forEach((button) => {
+      button.addEventListener("click", function () {
+        const userIndex = this.getAttribute("data-index");
+        generateUserEditForm(users[userIndex]); // 調用用戶修改表單
+      });
+    });
+  }
+
+  // 動態生成頁數選項
+  function updatePagination(filteredUsers) {
+    pageSelect.innerHTML = ""; // 清空頁數選項
+    totalPages = Math.ceil(filteredUsers.length / resultsPerPage); // 更新總頁數
+    for (let i = 1; i <= totalPages; i++) {
+      const option = document.createElement("option");
+      option.value = i;
+      option.textContent = `第 ${i} 頁`;
+      pageSelect.appendChild(option);
     }
+    pageSelect.value = currentPage; // 設定當前頁數
+  }
 
-    // 動態生成頁數選項
-    function updatePagination(filteredUsers) {
-        pageSelect.innerHTML = '';  // 清空頁數選項
-        totalPages = Math.ceil(filteredUsers.length / resultsPerPage); // 更新總頁數
-        for (let i = 1; i <= totalPages; i++) {
-            const option = document.createElement('option');
-            option.value = i;
-            option.textContent = `第 ${i} 頁`;
-            pageSelect.appendChild(option);
-        }
-        pageSelect.value = currentPage;  // 設定當前頁數
-    }
+  // 搜尋用戶
+  searchInput.addEventListener("input", () => {
+    const searchTerm = searchInput.value.toLowerCase();
+    const filteredUsers = users.filter(
+      (user) =>
+        user.username.toLowerCase().includes(searchTerm) ||
+        user.email.toLowerCase().includes(searchTerm)
+    );
+    currentPage = 1; // 搜尋時將頁面重置到第 1 頁
+    updatePagination(filteredUsers);
+    renderUsers(filteredUsers);
+  });
 
-    // 搜尋用戶
-    searchInput.addEventListener('input', () => {
-        const searchTerm = searchInput.value.toLowerCase();
-        const filteredUsers = users.filter(user =>
-            user.username.toLowerCase().includes(searchTerm) || user.email.toLowerCase().includes(searchTerm)
-        );
-        currentPage = 1;  // 搜尋時將頁面重置到第 1 頁
-        updatePagination(filteredUsers);
-        renderUsers(filteredUsers);
-    });
+  // 排序功能
+  sortOptions.addEventListener("change", () => {
+    let filteredUsers = users;
+    filteredUsers = sortUsers(filteredUsers, sortOptions.value);
+    currentPage = 1; // 改變排序時返回到第 1 頁
+    updatePagination(filteredUsers);
+    renderUsers(filteredUsers);
+  });
 
-    // 排序功能
-    sortOptions.addEventListener('change', () => {
-        let filteredUsers = users;
-        filteredUsers = sortUsers(filteredUsers, sortOptions.value);
-        currentPage = 1;  // 改變排序時返回到第 1 頁
-        updatePagination(filteredUsers);
-        renderUsers(filteredUsers);
-    });
-
-    // 更新顯示結果數時，重新計算頁數並渲染
-    resultsPerPageSelect.addEventListener('change', () => {
-        resultsPerPage = parseInt(resultsPerPageSelect.value);
-        currentPage = 1;  // 切換每頁顯示數時，返回到第 1 頁
-        let filteredUsers = users;
-        filteredUsers = sortUsers(filteredUsers, sortOptions.value);
-        updatePagination(filteredUsers);
-        renderUsers(filteredUsers);
-    });
-
-    // 監聽頁數切換事件
-    pageSelect.addEventListener('change', () => {
-        currentPage = parseInt(pageSelect.value);
-        let filteredUsers = users;
-        filteredUsers = sortUsers(filteredUsers, sortOptions.value);
-        renderUsers(filteredUsers);
-    });
-
-    // 初始化頁面
+  // 更新顯示結果數時，重新計算頁數並渲染
+  resultsPerPageSelect.addEventListener("change", () => {
+    resultsPerPage = parseInt(resultsPerPageSelect.value);
+    currentPage = 1; // 切換每頁顯示數時，返回到第 1 頁
     let filteredUsers = users;
     filteredUsers = sortUsers(filteredUsers, sortOptions.value);
     updatePagination(filteredUsers);
     renderUsers(filteredUsers);
-}
+  });
 
+  // 監聽頁數切換事件
+  pageSelect.addEventListener("change", () => {
+    currentPage = parseInt(pageSelect.value);
+    let filteredUsers = users;
+    filteredUsers = sortUsers(filteredUsers, sortOptions.value);
+    renderUsers(filteredUsers);
+  });
+
+  // 初始化頁面
+  let filteredUsers = users;
+  filteredUsers = sortUsers(filteredUsers, sortOptions.value);
+  updatePagination(filteredUsers);
+  renderUsers(filteredUsers);
+}
 
 // 點擊"用戶管理"時生成內容的函數
 function generateUserManagementContent() {
-    const mainContent = document.querySelector('.main-content');
-    mainContent.innerHTML = '';  // 清空之前的內容    
+  const mainContent = document.querySelector(".main-content");
+  mainContent.innerHTML = ""; // 清空之前的內容
 
-    // 動態生成用戶管理的標題和表格
-    const userManagementSection = `
+  // 動態生成用戶管理的標題和表格
+  const userManagementSection = `
         <section class="user-management">
             <h1>用戶管理</h1>
             <div class="userControls">
@@ -1838,44 +1959,48 @@ function generateUserManagementContent() {
             </div>
         </section>
     `;
-    mainContent.innerHTML = userManagementSection;
+  mainContent.innerHTML = userManagementSection;
 
-    const tbody = document.querySelector('.user-table tbody');
-    const resultsPerPageSelect = document.getElementById('resultsPerPage');
-    const pageSelect = document.getElementById('pageSelect');
-    const searchInput = document.getElementById('userSearchInput');
-    const sortOptions = document.getElementById('sortOptions');
+  const tbody = document.querySelector(".user-table tbody");
+  const resultsPerPageSelect = document.getElementById("resultsPerPage");
+  const pageSelect = document.getElementById("pageSelect");
+  const searchInput = document.getElementById("userSearchInput");
+  const sortOptions = document.getElementById("sortOptions");
 
-    // 設置每頁顯示的用戶數量
-    let resultsPerPage = parseInt(resultsPerPageSelect.value);
-    let currentPage = 1;  // 預設為第 1 頁
-    let totalPages = Math.ceil(users.length / resultsPerPage);
+  // 設置每頁顯示的用戶數量
+  let resultsPerPage = parseInt(resultsPerPageSelect.value);
+  let currentPage = 1; // 預設為第 1 頁
+  let totalPages = Math.ceil(users.length / resultsPerPage);
 
-    // 根據排序選項對用戶進行排序
-    function sortUsers(usersList, sortBy) {
-        if (sortBy === "usernameASC") {
-            return usersList.sort((a, b) => a.username.localeCompare(b.username));
-        } else if (sortBy === "usernameDESC") {
-            return usersList.sort((a, b) => b.username.localeCompare(a.username));
-        } else if (sortBy === "createdAtASC") {
-            return usersList.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
-        } else if (sortBy === "createdAtDESC") {
-            return usersList.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-        }
-        return usersList;
+  // 根據排序選項對用戶進行排序
+  function sortUsers(usersList, sortBy) {
+    if (sortBy === "usernameASC") {
+      return usersList.sort((a, b) => a.username.localeCompare(b.username));
+    } else if (sortBy === "usernameDESC") {
+      return usersList.sort((a, b) => b.username.localeCompare(a.username));
+    } else if (sortBy === "createdAtASC") {
+      return usersList.sort(
+        (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
+      );
+    } else if (sortBy === "createdAtDESC") {
+      return usersList.sort(
+        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+      );
     }
+    return usersList;
+  }
 
-    // 動態生成每個用戶的表格行
-    function renderUsers(filteredUsers) {
-        tbody.innerHTML = '';  // 清空表格內容
-        const start = (currentPage - 1) * resultsPerPage;
-        const end = start + resultsPerPage;
-        const visibleUsers = filteredUsers.slice(start, end);
+  // 動態生成每個用戶的表格行
+  function renderUsers(filteredUsers) {
+    tbody.innerHTML = ""; // 清空表格內容
+    const start = (currentPage - 1) * resultsPerPage;
+    const end = start + resultsPerPage;
+    const visibleUsers = filteredUsers.slice(start, end);
 
-        visibleUsers.forEach((user, index) => {
-            const tr = document.createElement('tr');
+    visibleUsers.forEach((user, index) => {
+      const tr = document.createElement("tr");
 
-            tr.innerHTML = `
+      tr.innerHTML = `
                 <td>${user.userId}</td>
                 <td>${user.username}</td>
                 <td>${user.email}</td>
@@ -1883,86 +2008,91 @@ function generateUserManagementContent() {
                 <td>${user.createdAt}</td>
                 <td>${user.updatedAt}</td>
                 <td class="actions">
-                    <button class="edit-button" data-index="${start + index}">詳情</button>
+                    <button class="edit-button" data-index="${
+                      start + index
+                    }">詳情</button>
                 </td>
             `;
 
-            tbody.appendChild(tr);
-        });
+      tbody.appendChild(tr);
+    });
 
-        // 綁定「詳情」按鈕的事件
-        document.querySelectorAll('.edit-button').forEach(button => {
-            button.addEventListener('click', function () {
-                const userIndex = this.getAttribute('data-index');
-                generateUserEditForm(users[userIndex]);  // 調用用戶修改表單
-            });
-        });
+    // 綁定「詳情」按鈕的事件
+    document.querySelectorAll(".edit-button").forEach((button) => {
+      button.addEventListener("click", function () {
+        const userIndex = this.getAttribute("data-index");
+        generateUserEditForm(users[userIndex]); // 調用用戶修改表單
+      });
+    });
+  }
+
+  // 動態生成頁數選項
+  function updatePagination(filteredUsers) {
+    pageSelect.innerHTML = ""; // 清空頁數選項
+    totalPages = Math.ceil(filteredUsers.length / resultsPerPage); // 更新總頁數
+    for (let i = 1; i <= totalPages; i++) {
+      const option = document.createElement("option");
+      option.value = i;
+      option.textContent = `第 ${i} 頁`;
+      pageSelect.appendChild(option);
     }
+    pageSelect.value = currentPage; // 設定當前頁數
+  }
 
-    // 動態生成頁數選項
-    function updatePagination(filteredUsers) {
-        pageSelect.innerHTML = '';  // 清空頁數選項
-        totalPages = Math.ceil(filteredUsers.length / resultsPerPage); // 更新總頁數
-        for (let i = 1; i <= totalPages; i++) {
-            const option = document.createElement('option');
-            option.value = i;
-            option.textContent = `第 ${i} 頁`;
-            pageSelect.appendChild(option);
-        }
-        pageSelect.value = currentPage;  // 設定當前頁數
-    }
+  // 搜尋用戶
+  searchInput.addEventListener("input", () => {
+    const searchTerm = searchInput.value.toLowerCase();
+    const filteredUsers = users.filter(
+      (user) =>
+        user.username.toLowerCase().includes(searchTerm) ||
+        user.email.toLowerCase().includes(searchTerm)
+    );
+    currentPage = 1; // 搜尋時將頁面重置到第 1 頁
+    updatePagination(filteredUsers);
+    renderUsers(filteredUsers);
+  });
 
-    // 搜尋用戶
-    searchInput.addEventListener('input', () => {
-        const searchTerm = searchInput.value.toLowerCase();
-        const filteredUsers = users.filter(user =>
-            user.username.toLowerCase().includes(searchTerm) || user.email.toLowerCase().includes(searchTerm)
-        );
-        currentPage = 1;  // 搜尋時將頁面重置到第 1 頁
-        updatePagination(filteredUsers);
-        renderUsers(filteredUsers);
-    });
+  // 排序功能
+  sortOptions.addEventListener("change", () => {
+    let filteredUsers = users;
+    filteredUsers = sortUsers(filteredUsers, sortOptions.value);
+    currentPage = 1; // 改變排序時返回到第 1 頁
+    updatePagination(filteredUsers);
+    renderUsers(filteredUsers);
+  });
 
-    // 排序功能
-    sortOptions.addEventListener('change', () => {
-        let filteredUsers = users;
-        filteredUsers = sortUsers(filteredUsers, sortOptions.value);
-        currentPage = 1;  // 改變排序時返回到第 1 頁
-        updatePagination(filteredUsers);
-        renderUsers(filteredUsers);
-    });
-
-    // 更新顯示結果數時，重新計算頁數並渲染
-    resultsPerPageSelect.addEventListener('change', () => {
-        resultsPerPage = parseInt(resultsPerPageSelect.value);
-        currentPage = 1;  // 切換每頁顯示數時，返回到第 1 頁
-        let filteredUsers = users;
-        filteredUsers = sortUsers(filteredUsers, sortOptions.value);
-        updatePagination(filteredUsers);
-        renderUsers(filteredUsers);
-    });
-
-    // 監聽頁數切換事件
-    pageSelect.addEventListener('change', () => {
-        currentPage = parseInt(pageSelect.value);
-        let filteredUsers = users;
-        filteredUsers = sortUsers(filteredUsers, sortOptions.value);
-        renderUsers(filteredUsers);
-    });
-
-    // 初始化頁面
+  // 更新顯示結果數時，重新計算頁數並渲染
+  resultsPerPageSelect.addEventListener("change", () => {
+    resultsPerPage = parseInt(resultsPerPageSelect.value);
+    currentPage = 1; // 切換每頁顯示數時，返回到第 1 頁
     let filteredUsers = users;
     filteredUsers = sortUsers(filteredUsers, sortOptions.value);
     updatePagination(filteredUsers);
     renderUsers(filteredUsers);
+  });
+
+  // 監聽頁數切換事件
+  pageSelect.addEventListener("change", () => {
+    currentPage = parseInt(pageSelect.value);
+    let filteredUsers = users;
+    filteredUsers = sortUsers(filteredUsers, sortOptions.value);
+    renderUsers(filteredUsers);
+  });
+
+  // 初始化頁面
+  let filteredUsers = users;
+  filteredUsers = sortUsers(filteredUsers, sortOptions.value);
+  updatePagination(filteredUsers);
+  renderUsers(filteredUsers);
 }
 
 // 點擊"優惠券管理"時生成內容的函數
 function generateCouponManagementForm() {
-    const mainContent = document.querySelector('.main-content');
-    mainContent.innerHTML = '';  // 清空之前的內容
+  const mainContent = document.querySelector(".main-content");
+  mainContent.innerHTML = ""; // 清空之前的內容
 
-    const couponManagementForm = `
+  
+  const couponManagementForm = `
         <section class="coupon-management">
             <h1>優惠券管理</h1>
 
@@ -2021,251 +2151,263 @@ function generateCouponManagementForm() {
             </section>
         </section>
     `;
-    mainContent.innerHTML = couponManagementForm;
+  mainContent.innerHTML = couponManagementForm;
 
-    // 儲存優惠券的陣列
-    let coupons = [];
+  // 儲存優惠券的陣列
+  let coupons = [];
 
-    // 優惠券表單提交處理
-    const couponForm = document.getElementById('couponForm');
-    couponForm.addEventListener('submit', function (event) {
-        event.preventDefault(); // 阻止表單提交刷新
+  // 優惠券表單提交處理
+  const couponForm = document.getElementById("couponForm");
+  couponForm.addEventListener("submit", function (event) {
+    event.preventDefault(); // 阻止表單提交刷新
 
-        // 獲取輸入的優惠券信息
-        const code = document.getElementById('code').value;
-        const name = document.getElementById('name').value;
-        const discountType = document.getElementById('discountType').value;
-        const discountValue = document.getElementById('discountValue').value;
-        const expiryDate = document.getElementById('expiryDate').value;
+    // 獲取輸入的優惠券信息
+    const code = document.getElementById("code").value;
+    const name = document.getElementById("name").value;
+    const discountType = document.getElementById("discountType").value;
+    const discountValue = document.getElementById("discountValue").value;
+    const expiryDate = document.getElementById("expiryDate").value;
 
-        // 構造優惠券對象
-        const couponData = {
-            code,
-            name,
-            discountType,
-            discountValue,
-            expiryDate
-        };
+    // 構造優惠券對象
+    const couponData = {
+      code,
+      name,
+      discountType,
+      discountValue,
+      expiryDate,
+    };
 
-        // 發送 POST 請求到後端
-        fetch('localhost:8080/api/coupons/create', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: new URLSearchParams(couponData)
-        })
-            .then(response => response.json()) // 解析 JSON 回應
-            .then(data => {
-                // 使用返回的優惠券陣列更新表格
-                coupons = data;  // 假設後端返回的是最新的優惠券列表
-                displayCoupons(); // 顯示優惠券
-            })
-            .catch(error => console.error('Error:', error));
+    // 發送 POST 請求到後端
+    fetch("localhost:8080/api/coupons/create", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: new URLSearchParams(couponData),
+    })
+      .then((response) => response.json()) // 解析 JSON 回應
+      .then((data) => {
+        // 使用返回的優惠券陣列更新表格
+        coupons = data; // 假設後端返回的是最新的優惠券列表
+        displayCoupons(); // 顯示優惠券
+      })
+      .catch((error) => console.error("Error:", error));
 
-        // 重置表單
-        couponForm.reset();
-    });
+    // 重置表單
+    couponForm.reset();
+  });
 
-    // 顯示已新增的優惠券
-    function displayCoupons() {
-        const couponTableBody = document.getElementById('couponTableBody');
-        couponTableBody.innerHTML = ''; // 清空之前的內容
+  // 顯示已新增的優惠券
+  function displayCoupons() {
+    const couponTableBody = document.getElementById("couponTableBody");
+    couponTableBody.innerHTML = ""; // 清空之前的內容
 
-        coupons.forEach((coupon, index) => {
-            const tr = document.createElement('tr');
-            tr.innerHTML = `
+    coupons.forEach((coupon, index) => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
                 <td>${coupon.code}</td>
                 <td>${coupon.name}</td>
-                <td>${coupon.discountType === 'percentage' ? '百分比' : '固定金額'}</td>
+                <td>${
+                  coupon.discountType === "percentage" ? "百分比" : "固定金額"
+                }</td>
                 <td>${coupon.discountValue}</td>
                 <td>${coupon.expiryDate}</td>
                 <td>
                     <button class="delete-coupon-button" data-index="${index}">刪除</button>
                 </td>
             `;
-            couponTableBody.appendChild(tr);
-        });
+      couponTableBody.appendChild(tr);
+    });
 
-        // 綁定刪除按鈕的事件
-        document.querySelectorAll('.delete-coupon-button').forEach(button => {
-            button.addEventListener('click', function () {
-                const index = this.getAttribute('data-index');
+    // 綁定刪除按鈕的事件
+    document.querySelectorAll(".delete-coupon-button").forEach((button) => {
+      button.addEventListener("click", function () {
+        const index = this.getAttribute("data-index");
 
-                // 顯示確認刪除的彈窗
-                const isConfirmed = confirm('確定要刪除此優惠券嗎？');
+        // 顯示確認刪除的彈窗
+        const isConfirmed = confirm("確定要刪除此優惠券嗎？");
 
-                if (isConfirmed) {
-                    coupons.splice(index, 1); // 刪除該優惠券
-                    displayCoupons(); // 刷新優惠券表格
-                }
-            });
-        });
-
-    }
+        if (isConfirmed) {
+          coupons.splice(index, 1); // 刪除該優惠券
+          displayCoupons(); // 刷新優惠券表格
+        }
+      });
+    });
+  }
 }
 
 // 初始化圖表的函數
 function initChart() {
-    const ctx = document.getElementById('orderChart').getContext('2d');
+  const ctx = document.getElementById("orderChart").getContext("2d");
 
-    let chart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-            datasets: [{
-                label: '每周營業額',
-                data: [3000, 4000, 3500, 5000, 4500, 6000, 5500], // 初始數據
-                backgroundColor: 'rgba(136, 191, 75, 0.2)', // 綠色背景
-                borderColor: 'rgba(136, 191, 75, 1)', // 綠色邊框
-                borderWidth: 2,
-                pointBackgroundColor: 'white',
-                pointBorderColor: 'rgba(136, 191, 75, 1)',
-                pointBorderWidth: 3
-            }]
+  let chart = new Chart(ctx, {
+    type: "line",
+    data: {
+      labels: [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+      ],
+      datasets: [
+        {
+          label: "每周營業額",
+          data: [3000, 4000, 3500, 5000, 4500, 6000, 5500], // 初始數據
+          backgroundColor: "rgba(136, 191, 75, 0.2)", // 綠色背景
+          borderColor: "rgba(136, 191, 75, 1)", // 綠色邊框
+          borderWidth: 2,
+          pointBackgroundColor: "white",
+          pointBorderColor: "rgba(136, 191, 75, 1)",
+          pointBorderWidth: 3,
         },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-                x: {
-                    beginAtZero: true
-                },
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        x: {
+          beginAtZero: true,
+        },
+        y: {
+          beginAtZero: true,
+        },
+      },
+    },
+  });
+
+  let currentCard = "revenue"; // 初始化當前顯示的卡片類型
+
+  // 為卡片添加點擊事件
+  document.querySelectorAll(".card").forEach((card) => {
+    card.addEventListener("click", function () {
+      currentCard = this.getAttribute("data-type"); // 更新當前卡片類型
+      const timeRange = document.getElementById("timeRange").value; // 獲取當前選擇的時間範圍
+      const selectedData = chartData[currentCard][timeRange];
+
+      // 更新圖表數據
+      chart.data.labels = selectedData.labels;
+      chart.data.datasets[0].data = selectedData.data;
+      chart.data.datasets[0].label = selectedData.label;
+      chart.update(); // 更新圖表
     });
+  });
 
-    let currentCard = 'revenue'; // 初始化當前顯示的卡片類型
+  // 為下拉選單添加事件監聽器
+  const timeRangeSelect = document.getElementById("timeRange");
+  timeRangeSelect.addEventListener("change", function () {
+    const timeRange = this.value;
+    const selectedData = chartData[currentCard][timeRange]; // 根據當前卡片和時間範圍獲取數據
 
-    // 為卡片添加點擊事件
-    document.querySelectorAll('.card').forEach(card => {
-        card.addEventListener('click', function () {
-            currentCard = this.getAttribute('data-type'); // 更新當前卡片類型
-            const timeRange = document.getElementById('timeRange').value; // 獲取當前選擇的時間範圍
-            const selectedData = chartData[currentCard][timeRange];
-
-            // 更新圖表數據
-            chart.data.labels = selectedData.labels;
-            chart.data.datasets[0].data = selectedData.data;
-            chart.data.datasets[0].label = selectedData.label;
-            chart.update(); // 更新圖表
-        });
-    });
-
-    // 為下拉選單添加事件監聽器
-    const timeRangeSelect = document.getElementById('timeRange');
-    timeRangeSelect.addEventListener('change', function () {
-        const timeRange = this.value;
-        const selectedData = chartData[currentCard][timeRange]; // 根據當前卡片和時間範圍獲取數據
-
-        // 更新圖表數據和標籤
-        chart.data.labels = selectedData.labels;
-        chart.data.datasets[0].data = selectedData.data;
-        chart.data.datasets[0].label = selectedData.label;
-        chart.update(); // 更新圖表
-    });
+    // 更新圖表數據和標籤
+    chart.data.labels = selectedData.labels;
+    chart.data.datasets[0].data = selectedData.data;
+    chart.data.datasets[0].label = selectedData.label;
+    chart.update(); // 更新圖表
+  });
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-    initChart();
+document.addEventListener("DOMContentLoaded", function () {
+  initChart();
 });
 
-document.addEventListener('DOMContentLoaded', function () {
-    // 點擊logo時生成內容
-    const logo = document.getElementById('logo');
-    logo.addEventListener('click', function (event) {
-        event.preventDefault();  // 防止跳轉
-        generateOverviewContent();   // 調用生成函數
-    });
+document.addEventListener("DOMContentLoaded", function () {
+  // 點擊logo時生成內容
+  const logo = document.getElementById("logo");
+  logo.addEventListener("click", function (event) {
+    event.preventDefault(); // 防止跳轉
+    generateOverviewContent(); // 調用生成函數
+  });
 });
 
-document.addEventListener('DOMContentLoaded', function () {
-    // 點擊"總覽"按鈕時生成內容
-    const overviewButton = document.getElementById('overviewButton');
-    overviewButton.addEventListener('click', function (event) {
-        event.preventDefault();  // 防止跳轉
-        generateOverviewContent();   // 調用生成函數
-    });
+document.addEventListener("DOMContentLoaded", function () {
+  // 點擊"總覽"按鈕時生成內容
+  const overviewButton = document.getElementById("overviewButton");
+  overviewButton.addEventListener("click", function (event) {
+    event.preventDefault(); // 防止跳轉
+    generateOverviewContent(); // 調用生成函數
+  });
 });
 
-
-document.addEventListener('DOMContentLoaded', function () {
-    // 點擊"訂單管理"按鈕時生成內容
-    const orderManagementButton = document.getElementById('orderManagementButton');
-    orderManagementButton.addEventListener('click', function (event) {
-        event.preventDefault();  // 防止跳轉
-        generateOrderManagementContent();  // 調用生成訂單管理內容的函數
-    });
+document.addEventListener("DOMContentLoaded", function () {
+  // 點擊"訂單管理"按鈕時生成內容
+  const orderManagementButton = document.getElementById(
+    "orderManagementButton"
+  );
+  orderManagementButton.addEventListener("click", function (event) {
+    event.preventDefault(); // 防止跳轉
+    generateOrderManagementContent(); // 調用生成訂單管理內容的函數
+  });
 });
 
-document.addEventListener('DOMContentLoaded', function () {
-    // 點擊"商品上傳"按鈕時生成內容
-    const uploadProductButton = document.getElementById('uploadProductButton');
-    uploadProductButton.addEventListener('click', function (event) {
-        event.preventDefault();  // 防止跳轉
-        generateProductUploadForm();  // 調用生成商品上傳表單的函數
-    });
+document.addEventListener("DOMContentLoaded", function () {
+  // 點擊"商品上傳"按鈕時生成內容
+  const uploadProductButton = document.getElementById("uploadProductButton");
+  uploadProductButton.addEventListener("click", function (event) {
+    event.preventDefault(); // 防止跳轉
+    generateProductUploadForm(); // 調用生成商品上傳表單的函數
+  });
 });
 
-document.addEventListener('DOMContentLoaded', function () {
-    // 點擊"食譜上傳"按鈕時生成內容
-    const uploadRecipeButton = document.getElementById('uploadRecipeButton');
-    uploadRecipeButton.addEventListener('click', function (event) {
-        event.preventDefault();  // 防止跳轉
-        generateRecipeUploadForm();  // 調用生成商品上傳表單的函數
-    });
+document.addEventListener("DOMContentLoaded", function () {
+  // 點擊"食譜上傳"按鈕時生成內容
+  const uploadRecipeButton = document.getElementById("uploadRecipeButton");
+  uploadRecipeButton.addEventListener("click", function (event) {
+    event.preventDefault(); // 防止跳轉
+    generateRecipeUploadForm(); // 調用生成商品上傳表單的函數
+  });
 });
 
-document.addEventListener('DOMContentLoaded', function () {
-    const editProductButton = document.getElementById('editProductButton');
-    editProductButton.addEventListener('click', function (event) {
-        event.preventDefault();  // 防止跳轉
-        generateProductManagementWithActionsContent();  // 調用生成商品管理頁面的函數
-    });
+document.addEventListener("DOMContentLoaded", function () {
+  const editProductButton = document.getElementById("editProductButton");
+  editProductButton.addEventListener("click", function (event) {
+    event.preventDefault(); // 防止跳轉
+    generateProductManagementWithActionsContent(); // 調用生成商品管理頁面的函數
+  });
 });
 
-document.addEventListener('DOMContentLoaded', function () {
-    const editProductButton = document.getElementById('recipeEditButton');
-    editProductButton.addEventListener('click', function (event) {
-        event.preventDefault();  // 防止跳轉
-        generateRecipeManagementContent();  // 調用生成食譜管理頁面的函數
-    });
+document.addEventListener("DOMContentLoaded", function () {
+  const editProductButton = document.getElementById("recipeEditButton");
+  editProductButton.addEventListener("click", function (event) {
+    event.preventDefault(); // 防止跳轉
+    generateRecipeManagementContent(); // 調用生成食譜管理頁面的函數
+  });
 });
 
-document.addEventListener('DOMContentLoaded', function () {
-    const manageStockButton = document.getElementById('manageStockButton');
-    manageStockButton.addEventListener('click', function (event) {
-        event.preventDefault();  // 防止跳轉
-        generateStockManagementContent();  // 調用生成庫存管理頁面的函數
-    });
+document.addEventListener("DOMContentLoaded", function () {
+  const manageStockButton = document.getElementById("manageStockButton");
+  manageStockButton.addEventListener("click", function (event) {
+    event.preventDefault(); // 防止跳轉
+    generateStockManagementContent(); // 調用生成庫存管理頁面的函數
+  });
 });
 
-document.addEventListener('DOMContentLoaded', function () {
-    const manageStockButton = document.getElementById('userManagementButton');
-    manageStockButton.addEventListener('click', function (event) {
-        event.preventDefault();  // 防止跳轉
-        generateUserManagementContent();  // 調用生成用戶管理頁面的函數
-    });
+document.addEventListener("DOMContentLoaded", function () {
+  const manageStockButton = document.getElementById("userManagementButton");
+  manageStockButton.addEventListener("click", function (event) {
+    event.preventDefault(); // 防止跳轉
+    generateUserManagementContent(); // 調用生成用戶管理頁面的函數
+  });
 });
 
-document.addEventListener('DOMContentLoaded', function () {
-    const manageStockButton = document.getElementById('couponManagementButton');
-    manageStockButton.addEventListener('click', function (event) {
-        event.preventDefault();  // 防止跳轉
-        generateCouponManagementForm();  // 調用生成優惠券管理頁面的函數
-    });
+document.addEventListener("DOMContentLoaded", function () {
+  const manageStockButton = document.getElementById("couponManagementButton");
+  manageStockButton.addEventListener("click", function (event) {
+    event.preventDefault(); // 防止跳轉
+    generateCouponManagementForm(); // 調用生成優惠券管理頁面的函數
+  });
 });
 
 // 為 "詳情" 按鈕添加點擊事件
-document.querySelectorAll('.details-link').forEach(link => {
-    link.addEventListener('click', function (event) {
-        event.preventDefault();
-        const productIndex = this.getAttribute('data-index');
-        generateProductEditForm(products[productIndex]); // 調用商品修改頁面並傳入對應商品數據
-    });
+document.querySelectorAll(".details-link").forEach((link) => {
+  link.addEventListener("click", function (event) {
+    event.preventDefault();
+    const productIndex = this.getAttribute("data-index");
+    generateProductEditForm(products[productIndex]); // 調用商品修改頁面並傳入對應商品數據
+  });
 });
 
 // // 保存按鈕事件
@@ -2277,13 +2419,14 @@ document.querySelectorAll('.details-link').forEach(link => {
 // });
 
 // 取消按鈕事件
-document.getElementById('cancelButton').addEventListener('click', function () {
-    generateProductManagementContent();  // 返回商品管理頁面
+document.getElementById("cancelButton").addEventListener("click", function () {
+  generateProductManagementContent(); // 返回商品管理頁面
 });
 
 // 綁定"商品修改"按鈕的點擊事件
-document.getElementById('editProductButton').addEventListener('click', function (event) {
+document
+  .getElementById("editProductButton")
+  .addEventListener("click", function (event) {
     event.preventDefault();
-    generateProductManagementWithActionsContent();  // 生成商品管理頁面
-});
-
+    generateProductManagementWithActionsContent(); // 生成商品管理頁面
+  });

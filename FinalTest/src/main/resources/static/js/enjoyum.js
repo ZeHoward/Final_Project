@@ -1,365 +1,198 @@
-// 全局变量
-	var slideIndex = 1;
-	var autoPlayInterval;
+var slideIndex = 1;
+var autoPlayInterval;
+let currentIndex1 = 0; // 第一區域的索引
+let currentIndex2 = 0; // 第二區域的索引
 
-	// 自動撥放
-	function startAutoPlay() {
-	  autoPlayInterval = setInterval(function () {
-	    slideIndex++;
-	    showSlides(slideIndex);
-	  }, 5000); // 每5秒自動切換
-	}
+// 自動播放幻燈片
+function startAutoPlay() {
+  autoPlayInterval = setInterval(function () {
+    slideIndex++;
+    showSlides(slideIndex);
+  }, 5000); // 每5秒自動切換
+}
 
-	// 手動切換下一張
-	function plusSlides(n) {
-	  clearInterval(autoPlayInterval); // 停止自動撥放
-	  slideIndex += n;
-	  showSlides(slideIndex);
-	  startAutoPlay(); // 重新啟動自動播放
-	}
+// 手動切換幻燈片
+function plusSlides(n) {
+  clearInterval(autoPlayInterval); // 停止自動播放
+  slideIndex += n;
+  showSlides(slideIndex);
+  startAutoPlay(); // 重新啟動自動播放
+}
 
-	document.getElementById("slidesNext").addEventListener("click", () => {
-	     plusSlides(+1);
-		 console.log("Next button clicked");
-	   });
+// 顯示幻燈片
+function showSlides(n) {
+  let slides = document.getElementsByClassName("mySlides");
+  let dots = document.getElementsByClassName("dot");
 
-	document.getElementById("slidesPrev").addEventListener("click", () => {
-	     plusSlides(-1);
-		 console.log("Next button clicked");
-	   });
-
-	// 目前圖片的顯示
-	function currentSlide(n) {
-	  clearInterval(autoPlayInterval); // 停止自動撥放
-	  slideIndex = n;
-	  showSlides(slideIndex);
-	  startAutoPlay(); // 重新啟動自動播放
-	}
-
-	// 顯示輪播圖
-	function showSlides(n) {
-	  let slides = document.getElementsByClassName("mySlides");
-	  let dots = document.getElementsByClassName("dot");
-
-	  if (n > slides.length) {
-	    slideIndex = 1;
-	  }
-	  if (n < 1) {
-	    slideIndex = slides.length;
-	  }
-
-	  // 隐藏所有幻灯片
-	  for (let i = 0; i < slides.length; i++) {
-	    slides[i].style.display = "none";
-	  }
-
-	  // 移除所有圆点的活动状态
-	  for (let i = 0; i < dots.length; i++) {
-	    dots[i].className = dots[i].className.replace(" dotActive", "");
-	  }
-
-	  // 显示当前幻灯片，并激活当前的圆点
-	  slides[slideIndex - 1].style.display = "block";
-	  dots[slideIndex - 1].className += " dotActive";
-	}
-
-	// Slideshow
-	  showSlides(slideIndex);
-	  startAutoPlay();
-	  
-window.onload = function () {
-
-  //精選調理包專區
-  const products = [
-    {
-      id: 1,
-      name: "日式豬排飯",
-      price: 130,
-      image: "./material/mealkit/katsudon.jpg",
-    },
-    {
-      id: 2,
-      name: "南洋叻沙海鮮湯麵",
-      price: 135,
-      image: "./material/mealkit/laksa.jpg",
-    },
-    {
-      id: 3,
-      name: "奶油松露百菇燉飯",
-      price: 220,
-      image: "./material/mealkit/CreamyRisotto.jpg",
-    },
-    {
-      id: 4,
-      name: "泰式冬蔭功酸辣海鮮湯",
-      price: 170,
-      image: "./material/mealkit/soup.png",
-    },
-    {
-      id: 5,
-      name: "印度雞肉香飯",
-      price: 140,
-      image: "./material/mealkit/ChickenBiryani.jpg",
-    },
-    {
-      id: 6,
-      name: "新加坡海南雞飯",
-      price: 150,
-      image: "./material/mealkit/HainaneseChickenRice.jpg",
-    },
-    {
-      id: 7,
-      name: "韓式五色石鍋拌飯",
-      price: 140,
-      image: "./material/mealkit/KoreanBibimbap.png",
-    },
-    {
-      id: 8,
-      name: "馬來西亞椰漿飯",
-      price: 190,
-      image: "./material/mealkit/NasiLemak.jpg",
-    },
-    {
-      id: 9,
-      name: "馬來西亞椰漿飯",
-      price: 150,
-      image: "./material/mealkit/thaiPork.jpg",
-    },
-    {
-      id: 10,
-      name: "越南牛肉河粉",
-      price: 130,
-      image: "./material/mealkit/BeefPho.png",
-    },
-    {
-      id: 11,
-      name: "希臘酥炸櫛瓜薯泥球",
-      price: 160,
-      image: "./material/mealkit/PotatoBalls.jpg",
-    },
-    {
-      id: 12,
-      name: "西班牙海鮮燉飯",
-      price: 220,
-      image: "./material/mealkit/SeafoodPaella.jpg",
-    },
-  ];
-
-  let currentIndex = 0;
-
-  function renderProducts() {
-    const container = document.getElementById("productContainer1");
-    container.innerHTML = "";
-    for (let i = -1; i <= 2; i++) {
-      const index = (currentIndex + i + products.length) % products.length;
-      const product = products[index];
-      const productElement = document.createElement("div");
-      productElement.className = "product";
-      productElement.innerHTML = `
-                <img class="product-image" src="${product.image}" alt="${product.name}">
-                <h3 class="product-name">${product.name}</h3>
-                <p class="product-price">$NT${product.price}</p>
-                  <div class="home-product-btn">
-                    <button class="add-to-favorite"><i class="fa-solid fa-heart"></i></button>
-                    <button class="add-to-cart"><i class="fa-solid fa-cart-shopping"></i>&nbsp;&nbsp;&nbsp;加入購物車</button>
-                  </div>
-            `;
-      container.appendChild(productElement);
-    }
-
-    // 加入購物車按鈕事件處理
-    document.querySelectorAll(".add-to-cart").forEach((button) => {
-      button.addEventListener("click", function () {
-        const productName =
-          this.closest(".product").querySelector("h3").textContent;
-        alert(`已將 ${productName} 加入購物車！`);
-      });
-    });
-
-    // 收藏商品按鈕事件處理
-    document.querySelectorAll(".add-to-favorite").forEach((button) => {
-      button.addEventListener("click", function () {
-        const productName =
-          this.closest(".product").querySelector("h3").textContent;
-
-        // 切換收藏狀態
-        if (this.classList.contains("favorited")) {
-          this.classList.remove("favorited");
-
-          // 先更改顏色，然後延遲彈跳框
-          setTimeout(() => {
-            alert(`已將 ${productName} 取消收藏！`);
-          }, 500); // 300 毫秒延遲
-        } else {
-          this.classList.add("favorited");
-
-          // 先更改顏色，然後延遲彈跳框
-          setTimeout(() => {
-            alert(`已將 ${productName} 加入收藏！`);
-          }, 500); // 300 毫秒延遲
-        }
-      });
-    });
+  if (n > slides.length) {
+    slideIndex = 1;
+  }
+  if (n < 1) {
+    slideIndex = slides.length;
   }
 
-  //上下一個商品
-  document.getElementById("prevBtn").addEventListener("click", () => {
-    currentIndex = (currentIndex - 1 + products.length) % products.length;
-    renderProducts();
-  });
-
-  document.getElementById("nextBtn").addEventListener("click", () => {
-    currentIndex = (currentIndex + 1) % products.length;
-    renderProducts();
-  });
-
-  renderProducts();
-
-  //精選生鮮食材包專區
-  const meal_kit_products = [
-    {
-      id: 1,
-      name: "日式豬排飯",
-      price: 130,
-      image: "./material/mealkit/katsudon.jpg",
-    },
-    {
-      id: 2,
-      name: "南洋叻沙海鮮湯麵",
-      price: 135,
-      image: "./material/mealkit/laksa.jpg",
-    },
-    {
-      id: 3,
-      name: "奶油松露百菇燉飯",
-      price: 220,
-      image: "./material/mealkit/CreamyRisotto.jpg",
-    },
-    {
-      id: 4,
-      name: "泰式冬蔭功酸辣海鮮湯",
-      price: 170,
-      image: "./material/mealkit/soup.png",
-    },
-    {
-      id: 5,
-      name: "印度雞肉香飯",
-      price: 140,
-      image: "./material/mealkit/ChickenBiryani.jpg",
-    },
-    {
-      id: 6,
-      name: "新加坡海南雞飯",
-      price: 150,
-      image: "./material/mealkit/HainaneseChickenRice.jpg",
-    },
-    {
-      id: 7,
-      name: "韓式五色石鍋拌飯",
-      price: 140,
-      image: "./material/mealkit/KoreanBibimbap.png",
-    },
-    {
-      id: 8,
-      name: "馬來西亞椰漿飯",
-      price: 190,
-      image: "./material/mealkit/NasiLemak.jpg",
-    },
-    {
-      id: 9,
-      name: "馬來西亞椰漿飯",
-      price: 150,
-      image: "./material/mealkit/thaiPork.jpg",
-    },
-    {
-      id: 10,
-      name: "越南牛肉河粉",
-      price: 130,
-      image: "./material/mealkit/BeefPho.png",
-    },
-    {
-      id: 11,
-      name: "希臘酥炸櫛瓜薯泥球",
-      price: 160,
-      image: "./material/mealkit/PotatoBalls.jpg",
-    },
-    {
-      id: 12,
-      name: "西班牙海鮮燉飯",
-      price: 220,
-      image: "./material/mealkit/SeafoodPaella.jpg",
-    },
-  ];
-
-  let currentIndex2 = 0;
-
-  function renderProducts2() {
-    const container2 = document.getElementById("productContainer2");
-    container2.innerHTML = "";
-    for (let i = -1; i <= 2; i++) {
-      const index =
-        (currentIndex2 + i + meal_kit_products.length) %
-        meal_kit_products.length;
-      const product2 = meal_kit_products[index];
-      const productElement2 = document.createElement("div");
-      productElement2.className = "product";
-      productElement2.innerHTML = `
-                <img class="product-image" src="${product2.image}" alt="${product2.name}">
-                <h3 class="product-name">${product2.name}</h3>
-                <p class="product-price">$NT${product2.price}</p>
-                  <div class="home-product-btn">
-                    <button class="add-to-favorite"><i class="fa-solid fa-heart"></i></button>
-                    <button class="add-to-cart"><i class="fa-solid fa-cart-shopping"></i>&nbsp;&nbsp;&nbsp;加入購物車</button>
-                  </div>  
-            `;
-      container2.appendChild(productElement2);
-    }
-
-    // 加入購物車按鈕事件處理
-    document.querySelectorAll(".add-to-cart").forEach((button) => {
-      button.addEventListener("click", function () {
-        const productName2 =
-          this.closest(".product").querySelector("h3").textContent;
-        alert(`已將 ${productName2} 加入購物車！`);
-      });
-    });
-
-    // 收藏商品按鈕事件處理
-    document.querySelectorAll(".add-to-favorite").forEach((button) => {
-      button.addEventListener("click", function () {
-        const productName =
-          this.closest(".product").querySelector("h3").textContent;
-
-        // 切換收藏狀態
-        if (this.classList.contains("favorited")) {
-          this.classList.remove("favorited");
-
-          // 先更改顏色，然後延遲彈跳框
-          setTimeout(() => {
-            alert(`已將 ${productName} 取消收藏！`);
-          }, 500); // 300 毫秒延遲
-        } else {
-          this.classList.add("favorited");
-
-          // 先更改顏色，然後延遲彈跳框
-          setTimeout(() => {
-            alert(`已將 ${productName} 加入收藏！`);
-          }, 500); // 300 毫秒延遲
-        }
-      });
-    });
+  // 隱藏所有幻燈片
+  for (let i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
   }
 
-  document.getElementById("prevBtn2").addEventListener("click", () => {
-    currentIndex2 =
-      (currentIndex2 - 1 + meal_kit_products.length) % meal_kit_products.length;
-    renderProducts2();
-  });
+  // 移除所有圓點的活動狀態
+  for (let i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" dotActive", "");
+  }
 
-  document.getElementById("nextBtn2").addEventListener("click", () => {
-    currentIndex2 = (currentIndex2 + 1) % meal_kit_products.length;
-    renderProducts2();
-  });
+  // 顯示當前幻燈片，並激活當前的圓點
+  slides[slideIndex - 1].style.display = "block";
+  dots[slideIndex - 1].className += " dotActive";
+}
 
-  renderProducts2();
-};
+// 初始化幻燈片
+showSlides(slideIndex);
+startAutoPlay();
+
+const type1 = "mealkit";
+const type2 = "preparedFood";
+
+document.addEventListener("DOMContentLoaded", function () {
+  // 調理包推薦商品
+  fetch(`products/type/${type1}`)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("無法獲得第一區域推薦商品清單");
+      }
+      return response.json();
+    })
+    .then((products1) => {
+      renderProducts(products1, "productContainer1", currentIndex1);
+
+      // 上一個商品
+      document.getElementById("prevBtn").addEventListener("click", () => {
+        currentIndex1 =
+          (currentIndex1 - 1 + products1.length) % products1.length;
+        renderProducts(products1, "productContainer1", currentIndex1);
+      });
+
+      // 下一個商品
+      document.getElementById("nextBtn").addEventListener("click", () => {
+        currentIndex1 = (currentIndex1 + 1) % products1.length;
+        renderProducts(products1, "productContainer1", currentIndex1);
+      });
+    })
+    .catch((error) => {
+      console.error("無法獲得第一區域商品清單:", error);
+    });
+
+  // 生鮮食材包推薦商品
+  fetch(`products/type/${type2}`)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("無法獲得第二區域推薦商品清單");
+      }
+      return response.json();
+    })
+    .then((products2) => {
+      renderProducts(products2, "productContainer2", currentIndex2);
+
+      // 上一個商品
+      document.getElementById("prevBtn2").addEventListener("click", () => {
+        currentIndex2 =
+          (currentIndex2 - 1 + products2.length) % products2.length;
+        renderProducts(products2, "productContainer2", currentIndex2);
+      });
+
+      // 下一個商品
+      document.getElementById("nextBtn2").addEventListener("click", () => {
+        currentIndex2 = (currentIndex2 + 1) % products2.length;
+        renderProducts(products2, "productContainer2", currentIndex2);
+      });
+    })
+    .catch((error) => {
+      console.error("無法獲得第二區域商品清單:", error);
+    });
+});
+
+function renderProducts(products, containerId, currentIndex) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = ""; // 清空容器
+
+  for (let i = -1; i <= 2; i++) {
+    const index = (currentIndex + i + products.length) % products.length;
+    const product = products[index];
+
+    // 創建商品卡
+    const productDiv = document.createElement("div");
+    productDiv.className = "product";
+    productDiv.style.cursor = "pointer";
+
+    // 創建 img 元素
+    const imgElement = document.createElement("img");
+    imgElement.className = "product-image";
+    imgElement.alt = `${product.name}`; // 動態設置 alt 屬性
+
+    // 設置商品卡的 HTML 內容
+    const productHtml = `
+      <h3 class="product-name">${product.name}</h3>
+      <p class="product-price">$NT${product.price}</p>
+      <div class="home-product-btn">
+        <button class="add-to-favorite"><i class="fa-solid fa-heart"></i></button>
+        <button class="add-to-cart"><i class="fa-solid fa-cart-shopping"></i>&nbsp;&nbsp;&nbsp;加入購物車</button>
+      </div>
+    `;
+
+    productDiv.innerHTML = productHtml;
+    productDiv.insertBefore(imgElement, productDiv.firstChild); // 插入圖片在第一位
+    container.appendChild(productDiv);
+
+    // 獲取商品圖片
+    fetch(`productImages/product/${product.productId}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("無法獲取商品圖片");
+        }
+        return response.json();
+      })
+      .then((images) => {
+        if (images.length > 0) {
+          imgElement.src = images[0];
+        } else {
+          imgElement.src = "../material/icon/default.png"; // 默認圖片
+        }
+      })
+      .catch((error) => {
+        console.error(
+          `Error fetching product image for product ${product.productId}:`,
+          error
+        );
+        imgElement.src = "../material/icon/error.png"; // 錯誤圖片
+      });
+
+    // 商品卡點擊事件跳轉到商品詳情頁面
+    productDiv.addEventListener("click", () => {
+      window.location.href = `/detail?productId=${product.productId}`;
+    });
+
+    productDiv
+      .querySelector(".add-to-cart")
+      .addEventListener("click", (event) => {
+        event.stopPropagation();
+        Swal.fire({
+          title: "成功",
+          text: "已將商品加入購物車",
+          icon: "success",
+          timer: 1500,
+        });
+      });
+
+    productDiv
+      .querySelector(".add-to-favorite")
+      .addEventListener("click", (event1) => {
+        event1.stopPropagation();
+        Swal.fire({
+          title: "成功",
+          text: `已將${product.name}加入收藏`,
+          icon: "success",
+          timer: 1500,
+        });
+      });
+  }
+}

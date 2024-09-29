@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.servlet.http.HttpSession;
+
 import tw.luna.FinalTest.model.Product;
-import tw.luna.FinalTest.model.Users;
 import tw.luna.FinalTest.service.ProductService;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -57,11 +57,30 @@ public class ProductController {
 		return productService.findProductsByName(keyword);
 	}
 	
+	//根據類型查詢商品
+	@GetMapping("/type/{type}")
+	public List<Product> searchProductsByType(@PathVariable("type") String type){
+		return productService.finProductsByType(type);
+	}
+	
 	//根據類別查詢產品	
 	@GetMapping("/category/{categoryId}")
 	public List<Product> searchProductsByCategoryId(@PathVariable("categoryId") Integer CategoryId){
 		return productService.findProductsByCategory(CategoryId);
 	} 
+	
+	//
+	@GetMapping("/filter")
+	public List<Product>searchProductsByTypeAndCategoryId(@RequestParam("type") String type,
+			@RequestParam("categoryId")Integer categoryId){
+		return productService.findProductsByTypeAndCategory(type, categoryId);
+	}
+
+    // 使用構造方法注入 ProductService
+    public ProductController(ProductService productService) {
+        this.productService = productService;
+    }
+
 	
 	//新增或更新產品	
 	@PostMapping
