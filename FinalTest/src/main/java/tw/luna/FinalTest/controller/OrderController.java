@@ -62,4 +62,17 @@ public class OrderController {
 ////	public ResponseEntity<Void> deleteOrder(@PathVariable Integer id) {
 ////		return orderService.deleteOrder(id);
 ////	}
+//
+//	@PostMapping("/checkout")
+//    public ResponseEntity<Order> checkout(@RequestParam Integer cartId, @RequestParam String address) {
+//        Order order = orderService.createOrderFromCart(cartId, address);
+//        return ResponseEntity.ok(order);
+//    }
+
+//
+	// 刪除訂單
+//	@DeleteMapping("/{id}")
+//	public ResponseEntity<Void> deleteOrder(@PathVariable Integer id) {
+//		return orderService.deleteOrder(id);
+//	}
 }

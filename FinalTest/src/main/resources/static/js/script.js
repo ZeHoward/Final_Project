@@ -162,7 +162,7 @@ function generateOverviewContent() {
 }
 
 // 獲取初始圖表數據
-function fetchInitialChartData() {
+function fetchInitialChartData() { 
     // 設置默認的時間範圍，例如 'week'
     document.getElementById('timeRange').value = 'week';
 
@@ -2384,4 +2384,6 @@ document.getElementById('editProductButton').addEventListener('click', function 
 //         updatedAt: '2023-09-12 14:00:00'
 //     }
 // ];
+
+
 

@@ -19,9 +19,9 @@ public class UserAllInfo {
 		
 	}
 
-
-	public UserAllInfo(Long userId, String username, String email, String password, String phoneNumber, String firstName,
-			String lastName, String address, String postalCode, String county, String district, String birthday) {
+	public UserAllInfo(Long userId, String username, String email, String password, String phoneNumber,
+			String firstName, String lastName, String address, String postalCode, String county, String district,
+			String birthday) {
 		this.userId = userId;
 		this.username = username;
 		this.email = email;
@@ -35,6 +35,9 @@ public class UserAllInfo {
 		this.district = district;
 		this.birthday = birthday;
 	}
+
+
+
 
 
 	public String getCounty() {
@@ -120,6 +123,15 @@ public class UserAllInfo {
 
 	public void setUserId(Long userId) {
 		this.userId = userId;
+	}
+
+
+	@Override
+	public String toString() {
+		return "UserAllInfo [userId=" + userId + ", username=" + username + ", email=" + email + ", password="
+				+ password + ", phoneNumber=" + phoneNumber + ", firstName=" + firstName + ", lastName=" + lastName
+				+ ", address=" + address + ", postalCode=" + postalCode + ", county=" + county + ", district="
+				+ district + ", birthday=" + birthday + "]";
 	}
 
 
