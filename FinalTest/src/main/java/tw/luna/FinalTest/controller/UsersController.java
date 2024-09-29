@@ -1,7 +1,7 @@
 package tw.luna.FinalTest.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import tw.luna.FinalTest.BCrypt;
 import tw.luna.FinalTest.dto.UpdatePasswordDTO;
@@ -108,6 +107,12 @@ public class UsersController {
 			return true;
 		}
 		return false;
+	}
+	
+	// 返回 isDel = 0 的用戶總數
+	@GetMapping("/count-active")
+	public long getActiveUserCount() {
+	    return usersServiceImpl.getActiveUserCount();
 	}
 	
 	

@@ -160,4 +160,9 @@ public class UsersServiceImpl {
 	public int updatePassword(String newPassword, Long userId) {
 		return usersRepository.updatePasswordByUserId(BCrypt.hashpw(newPassword, BCrypt.gensalt()), userId);
 	}
+	
+	// 活躍用戶數
+	public long getActiveUserCount() {
+        return usersRepository.countActiveUsers();
+    }
 }

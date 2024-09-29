@@ -112,4 +112,15 @@ public class Coupon {
 		this.expiryDate = expiryDate;
 	}
 
+	@Override
+	public String toString() {
+		return "Coupon{" +
+				"couponId=" + couponId +
+				", code='" + code + '\'' +
+				", name='" + name + '\'' +
+				", discountType=" + discountType +
+				", discountValue=" + discountValue +
+				", expiryDate=" + expiryDate +
+				'}';
+	}
 }
