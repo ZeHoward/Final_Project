@@ -1,281 +1,19 @@
 generateOverviewContent(); // 預設總覽頁面為首頁
 
-// // 假資料，模擬不同報表的數據
-// const chartData = {
-//     revenue: {
-//         week: {
-//             labels: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
-//             data: [3000, 40, 3500, 5000, 4500, 6000, 5500],
-//             label: '每周營業額'
-//         },
-//         month: {
-//             labels: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
-//             data: [12000, 15000, 18000, 20000, 22000, 25000, 28000, 30000, 33000, 35000, 37000, 40000],
-//             label: '每月營業額'
-//         },
-//         year: {
-//             labels: ['2019', '2020', '2021', '2022', '2023'],
-//             data: [150000, 180000, 200000, 220000, 250000],
-//             label: '每年營業額'
-//         }
-//     },
-//     orders: {
-//         week: {
-//             labels: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
-//             data: [100, 120, 150, 180, 200, 250, 300],
-//             label: '每周訂單總量'
-//         },
-//         month: {
-//             labels: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
-//             data: [1000, 1500, 1800, 2000, 2200, 2500, 2800, 3000, 3500, 3700, 3900, 4000],
-//             label: '每月訂單總量'
-//         },
-//         year: {
-//             labels: ['2019', '2020', '2021', '2022', '2023'],
-//             data: [15000, 18000, 20000, 22000, 25000],
-//             label: '每年訂單總量'
-//         }
-//     },
-//     users: {
-//         week: {
-//             labels: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
-//             data: [50, 60, 75, 80, 100, 120, 150],
-//             label: '每周總用戶數'
-//         },
-//         month: {
-//             labels: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
-//             data: [500, 700, 900, 1100, 1300, 1500, 1700, 2000, 2300, 2500, 2800, 3000],
-//             label: '每月總用戶數'
-//         },
-//         year: {
-//             labels: ['2019', '2020', '2021', '2022', '2023'],
-//             data: [10000, 15000, 20000, 25000, 30000],
-//             label: '每年總用戶數'
-//         }
-//     }
-// };
-
-// // 假資料，模擬不同訂單
-// const orders = [
-//     {
-//         orderNumber: "XXXX1",
-//         name: "產品名稱1",
-//         deliveryMethod: "快遞",
-//         orderAmount: 1000,
-//         status: "已付款",
-//         statusClass: "paid",
-//         date: "2024-09-21 16:55:56",
-//         couponId: "COUPON123",
-//         orderDate: "2024-09-20",
-//         percentageDiscount: 10,  // 百分比折扣
-//         amountDiscount: 100,  // 折扣金額
-//         totalAmount: 1000,  // 訂單總金額
-//         finalAmount: 900,  // 最終金額
-//         comment: "快速配送，無問題",
-//         changedBy: "Admin",
-//         changedAt: "2024-09-22 08:00",
-//         address: "100台北市中正區鄭州路8號",
-//         userId: "1",
-//         items: [
-//             {
-//                 name: "商品1",
-//                 sku: "SKU123",
-//                 quantity: 2,
-//                 price: 50,
-//                 image: "紅大頭.png"
-//             },
-//             {
-//                 name: "商品2",
-//                 sku: "SKU456",
-//                 quantity: 1,
-//                 price: 100,
-//                 image: "紅大頭.png"
-//             }
-//         ]
-//     },
-//     {
-//         orderNumber: "XXXX2",
-//         name: "產品名稱2",
-//         deliveryMethod: "郵寄",
-//         orderAmount: 2000,
-//         status: "尚未付款",
-//         statusClass: "unpaid",
-//         date: "2024-09-22 10:00:00",
-//         couponId: "COUPON456",
-//         orderDate: "2024-09-21",
-//         percentageDiscount: 5,
-//         amountDiscount: 100,
-//         totalAmount: 2000,
-//         finalAmount: 1900,
-//         comment: "",
-//         changedBy: "Admin",
-//         changedAt: "2024-09-22 09:00",
-//         address: "100台北市中正區忠孝西路一段49號",
-//         userId: "1",
-//         items: [
-//             {
-//                 name: "商品3",
-//                 sku: "SKU789",
-//                 quantity: 1,
-//                 price: 150,
-//                 image: "紅大頭.png"
-//             }
-//         ]
-//     }
-// ];
-
-// // 假資料，模擬不同商品
-// const products = [
-//     {
-//         index: '1',
-//         name: '商品名稱1',
-//         sku: 'ABC-66',
-//         image: '紅大頭.png',
-//         category: '異國料理',
-//         servings: 3,
-//         difficulty: '中等',
-//         vegan: '否',
-//         time: '40',
-//         price: 500,
-//         description: '一道經典的肉醬義大利麵，肉醬味道濃郁，搭配煮得恰到好處的義大利麵，簡單且美味，適合全家人享用',
-//         Ingredients: '義大利麵200g,牛絞肉 150g,番茄醬 1 杯,洋蔥 1 顆（切丁）,大蒜 2 瓣（切碎）,橄欖油 2 湯匙',
-//         steps: '用手做，再說一次用手做',
-//         stock: '50',
-//     },
-//     {
-//         index: '2',
-//         name: '商品名稱2',
-//         sku: 'ABC-66',
-//         image: '紅大頭.png',
-//         category: '異國料理',
-//         servings: 3,
-//         difficulty: '中等',
-//         vegan: '否',
-//         time: '40',
-//         price: 500,
-//         description: '一道經典的肉醬義大利麵，肉醬味道濃郁，搭配煮得恰到好處的義大利麵，簡單且美味，適合全家人享用',
-//         Ingredients: '義大利麵200g,牛絞肉 150g,番茄醬 1 杯,洋蔥 1 顆（切丁）,大蒜 2 瓣（切碎）,橄欖油 2 湯匙',
-//         steps: '用手做，再說一次用手做',
-//         stock: '50',
-//     },
-//     {
-//         index: '3',
-//         name: '商品名稱3',
-//         sku: 'ABC-66',
-//         image: '紅大頭.png',
-//         category: '異國料理',
-//         servings: 3,
-//         difficulty: '中等',
-//         vegan: '否',
-//         time: '80',
-//         price: 500,
-//         description: '一道經典的肉醬義大利麵，肉醬味道濃郁，搭配煮得恰到好處的義大利麵，簡單且美味，適合全家人享用',
-//         Ingredients: '義大利麵200g,牛絞肉 150g,番茄醬 1 杯,洋蔥 1 顆（切丁）,大蒜 2 瓣（切碎）,橄欖油 2 湯匙',
-//         steps: '用手做，再說一次用手做',
-//         stock: '50',
-//     }
-// ];
-
-// // 假資料，模擬不同食譜
-// const recipes = [  
-//     {
-//         image: '紅大頭.png',
-//         name: '肉醬義大利麵',
-//         description: '一道經典的肉醬義大利麵，搭配濃郁的番茄醬和牛肉，簡單美味，適合全家人享用。',
-//         category: '異國料理',
-//         people: 4,
-//         difficulty: '中等',
-//         vegan: '否',
-//         time: '45',
-//         ingredients: '義大利麵 200g, 牛絞肉 150g, 番茄醬 1 杯, 洋蔥 1 顆 (切丁), 大蒜 2 瓣 (切碎), 橄欖油 2 湯匙, 鹽與胡椒適量',
-//         steps: '1. 先煮義大利麵，根據包裝說明進行。2. 加熱橄欖油，炒洋蔥和大蒜直到金黃。3. 加入牛絞肉，炒熟。4. 倒入番茄醬，煮滾後轉小火煨煮10分鐘。5. 將煮好的義大利麵拌入醬汁，調味後即可享用。'
-//     },
-//     {
-//         image: '紅大頭.png',
-//         name: '奶油雞肉蘑菇濃湯',
-//         description: '豐富的口感與濃郁的香味，是一份溫暖又美味的湯品。',
-//         category: '家常料理',
-//         people: 2,
-//         difficulty: '簡單',
-//         vegan: '否',
-//         time: '30',
-//         ingredients: '雞胸肉 200g, 蘑菇 100g, 洋蔥 1 顆 (切丁), 奶油 30g, 牛奶 300ml, 麵粉 2 湯匙, 鹽與胡椒適量',
-//         steps: '1. 雞胸肉切塊，蘑菇切片。2. 加熱奶油，炒洋蔥至軟。3. 加入雞肉，炒至變色。4. 加入麵粉，煮至呈糊狀。5. 慢慢倒入牛奶，拌勻。6. 加入蘑菇，煮至濃稠，調味後即可。'
-//     },
-//     {
-//         image: '紅大頭.png',
-//         name: '蔬菜炒飯',
-//         description: '清爽的蔬菜炒飯，加入多樣時令蔬菜，簡單又營養，適合素食者。',
-//         category: '多人料理',
-//         people: 3,
-//         difficulty: '簡單',
-//         vegan: '全素',
-//         time: '20',
-//         ingredients: '白飯 300g, 青椒 1 顆, 紅蘿蔔 1 根, 洋蔥 1 顆, 玉米粒 100g, 醬油 2 湯匙, 橄欖油 1 湯匙',
-//         steps: '1. 將青椒、紅蘿蔔、洋蔥切丁。2. 加熱橄欖油，炒洋蔥至透明。3. 加入其他蔬菜，翻炒至軟。4. 倒入白飯，拌炒均勻。5. 加入醬油調味，翻炒片刻後即可享用。'
-//     }
-// ];
-
-// // 假資料，模擬不同用戶
-// const users = [
-//     {
-//         userId: '1',
-//         username: 'john_doe',
-//         firstName: 'John',
-//         lastName: 'Doe',
-//         email: 'john.doe@example.com',
-//         password: 'password123',
-//         phoneNumber: '123-456-7890',
-//         address: '123 Main St',
-//         city: '台中市',
-//         postalCode: '400',
-//         createdAt: '2023-01-15 14:30:00',
-//         updatedAt: '2023-09-10 09:20:00'
-//     },
-//     {
-//         userId: '2',
-//         username: 'jane_smith',
-//         firstName: 'Jane',
-//         lastName: 'Smith',
-//         email: 'jane.smith@example.com',
-//         password: 'password456',
-//         phoneNumber: '987-654-3210',
-//         address: '456 Maple Ave',
-//         city: '台北市',
-//         postalCode: '100',
-//         createdAt: '2023-02-20 16:45:00',
-//         updatedAt: '2023-09-05 10:10:00'
-//     },
-//     {
-//         userId: '3',
-//         username: 'alice_wang',
-//         firstName: 'Alice',
-//         lastName: 'Wang',
-//         email: 'alice.wang@example.com',
-//         password: 'alice789',
-//         phoneNumber: '456-123-7890',
-//         address: '789 Oak St',
-//         city: '高雄市',
-//         postalCode: '800',
-//         createdAt: '2023-03-10 11:50:00',
-//         updatedAt: '2023-09-12 14:00:00'
-//     }
-// ];
-
 // 點擊"總覽"時生成內容的函數
 function generateOverviewContent() {
     const mainContent = document.querySelector('.main-content');
-    mainContent.innerHTML = '';  // 清空之前的內容
+    mainContent.innerHTML = '';  // 清空之前的內容 
 
     // 初始化時間範圍
     let timeRange = 'week';
 
-    // 請求訂單和營業額總數的函數
-    function fetchOverviewData(timeRange) {
+    // 發送 API 請求並更新卡片和圖表數據	
+    function fetchData(timeRange) {
         const today = new Date();
         let startDate, endDate;
 
-        // 根據時間範圍設定起始日期
+        // 根據時間範圍設定起始日期 
         switch (timeRange) {
             case 'week':
                 startDate = new Date(today.setDate(today.getDate() - 7)).toISOString();
@@ -289,20 +27,33 @@ function generateOverviewContent() {
         }
         endDate = new Date().toISOString();  // 今天作為結束日期
 
-        // 發送請求到後端，取得營業額和訂單總數
-        fetch(`/api/orders/overview?startDate=${startDate}&endDate=${endDate}`)
-            .then(response => response.json())
-            .then(data => {
-                // 更新營業額卡片中的值
-                document.querySelector('[data-type="revenue"] p').textContent = data.revenue;
-                // 更新訂單總數卡片中的值
-                document.querySelector('[data-type="orders"] p').textContent = data.ordersCount;
+        // 同時發送 overview 和 chart-data 的 API 請求
+        Promise.all([
+            fetch(`/api/orders/overview?startDate=${startDate}&endDate=${endDate}`),  // 營業額和訂單總數
+            fetch(`/api/orders/chart-data?startDate=${startDate}&endDate=${endDate}&range=${timeRange}`),  // 圖表數據
+            fetch(`/users/count-active`)  // 活躍人數
+        ])
+            .then(async ([overviewResponse, chartResponse, activeMembersResponse]) => {
+                // 解析兩個 API 的返回值
+                const overviewData = await overviewResponse.json();
+                const chartData = await chartResponse.json();
+                const activeMembers = await activeMembersResponse.json();
+
+                // 更新卡片數據
+                document.querySelector('[data-type="revenue"] p').textContent = overviewData.revenue;
+                document.querySelector('[data-type="orders"] p').textContent = overviewData.ordersCount;
+                document.querySelector('[data-type="users"] p').textContent = activeMembers;
+
+                // 更新圖表
+                updateChart(chartData.labels, chartData.values, timeRange); // 將 timeRange 傳入以便更新圖表標籤
             })
-            .catch(error => console.error('Error fetching overview data:', error));
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
     }
 
     // 初始化頁面時顯示數據
-    fetchOverviewData(timeRange);
+    fetchData(timeRange);
 
     // 動態生成總覽卡片的 section
     const overviewSection = document.createElement('section');
@@ -311,7 +62,7 @@ function generateOverviewContent() {
     const cardData = [
         { type: 'revenue', title: '營業額', value: '0' },
         { type: 'orders', title: '訂單總量', value: '0' },
-        { type: 'users', title: '總用戶數', value: '29,556' } // 假設這裡數據固定
+        { type: 'users', title: '總用戶數', value: '0' } // 假設這裡數據固定
     ];
 
     // 動態生成卡片
@@ -328,6 +79,18 @@ function generateOverviewContent() {
 
         cardDiv.appendChild(h2);
         cardDiv.appendChild(p);
+
+        // 為每個卡片添加事件監聽
+        cardDiv.addEventListener('click', () => {
+            // 根據卡片類型切換圖表數據
+            if (card.type === 'orders') {
+                // 如果點擊的是「訂單總量」卡片，更新圖表顯示訂單數據
+                fetchOrderChartData();
+            } else if (card.type === 'revenue') {
+                // 如果點擊的是「營業額」卡片，更新圖表顯示營業額數據
+                fetchRevenueChartData();
+            }
+        });
 
         overviewSection.appendChild(cardDiv);
     });
@@ -391,11 +154,199 @@ function generateOverviewContent() {
     // 為時間範圍選擇添加事件監聽
     timeRangeSelect.addEventListener('change', function () {
         timeRange = this.value;  // 更新時間範圍
-        fetchOverviewData(timeRange);  // 請求數據
+        fetchData(timeRange);  // 請求 overview 和 chart-data
     });
 
     // 初始化圖表
     initChart();
+}
+
+// 獲取初始圖表數據
+function fetchInitialChartData() {
+    // 設置默認的時間範圍，例如 'week'
+    document.getElementById('timeRange').value = 'week';
+
+    // 調用獲取數據的函數
+    fetchRevenueChartData(); // 或者 fetchOrderChartData()，取決於您想要顯示的初始數據
+}
+
+// 點擊"總覽上方"訂單總量"時切換圖表內容的函數
+function fetchOrderChartData() {
+    console.log('開始獲取訂單總量數據');
+    const timeRange = document.getElementById('timeRange');
+    if (!timeRange) {
+        console.error('找不到時間範圍選擇器');
+        alert('頁面載入不完整，請重新整理頁面。');
+        return;
+    }
+    const selectedRange = timeRange.value;
+    console.log('選擇的時間範圍:', selectedRange);
+
+    const today = new Date();
+    let startDate, endDate;
+
+    // 設置起始日期（與 fetchRevenueChartData 相同）
+    switch (selectedRange) {
+        case 'week':
+            startDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7);
+            break;
+        case 'month':
+            startDate = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
+            break;
+        case 'year':
+            startDate = new Date(today.getFullYear() - 1, today.getMonth(), today.getDate());
+            break;
+        default:
+            console.error('無效的時間範圍:', selectedRange);
+            alert('請選擇有效的時間範圍。');
+            return;
+    }
+    endDate = today;
+
+    // 確保日期時間格式符合 ISO 8601 標準
+    const formatDate = (date) => date.toISOString().split('.')[0] + "Z";
+
+    const url = `/api/orders/chart-data?startDate=${formatDate(startDate)}&endDate=${formatDate(endDate)}&range=${selectedRange}&dataType=orders`;
+    console.log('請求 URL:', url);
+
+    fetch(url)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP 錯誤! 狀態: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(chartData => {
+            console.log('接收到的圖表數據:', chartData);
+            if (!chartData || !Array.isArray(chartData.labels) || !Array.isArray(chartData.values)) {
+                throw new Error('接收到的數據格式不正確');
+            }
+            updateChart(chartData.labels, chartData.values, selectedRange, 'orders');
+        })
+        .catch(error => {
+            console.error('獲取訂單總量數據時出錯:', error);
+            alert('無法載入訂單總量數據，請稍後再試。');
+        });
+}
+
+// 點擊總覽上方"營業額"時切換圖表內容的函數
+function fetchRevenueChartData() {
+    console.log('開始獲取營業額數據');
+    const timeRange = document.getElementById('timeRange');
+    if (!timeRange) {
+        console.error('找不到時間範圍選擇器');
+        alert('頁面載入不完整，請重新整理頁面。');
+        return;
+    }
+    const selectedRange = timeRange.value;
+    console.log('選擇的時間範圍:', selectedRange);
+
+    const today = new Date();
+    let startDate, endDate;
+
+    // 設置起始日期
+    switch (selectedRange) {
+        case 'week':
+            startDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7);
+            break;
+        case 'month':
+            startDate = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
+            break;
+        case 'year':
+            startDate = new Date(today.getFullYear() - 1, today.getMonth(), today.getDate());
+            break;
+        default:
+            console.error('無效的時間範圍:', selectedRange);
+            alert('請選擇有效的時間範圍。');
+            return;
+    }
+    endDate = today;
+
+    // 確保日期時間格式符合 ISO 8601 標準
+    const formatDate = (date) => date.toISOString().split('.')[0] + "Z";
+
+    const url = `/api/orders/chart-data?startDate=${formatDate(startDate)}&endDate=${formatDate(endDate)}&range=${selectedRange}`;
+    console.log('請求 URL:', url);
+
+    fetch(url)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP 錯誤! 狀態: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(chartData => {
+            console.log('接收到的圖表數據:', chartData);
+            if (!chartData || !Array.isArray(chartData.labels) || !Array.isArray(chartData.values)) {
+                throw new Error('接收到的數據格式不正確');
+            }
+            updateChart(chartData.labels, chartData.values, selectedRange, '營業額');
+        })
+        .catch(error => {
+            console.error('獲取營業額數據時出錯:', error);
+            alert('無法載入營業額數據，請稍後再試。');
+        });
+}
+
+// 初始化圖表的函數
+function initChart() {
+    const ctx = document.getElementById('orderChart').getContext('2d');
+
+    // 初始化圖表，但先不設置具體數據
+    let chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: [],  // 初始化時為空
+            datasets: [{
+                label: '營業額', // 初始標籤
+                data: [], // 初始化時無數據
+                backgroundColor: 'rgba(136, 191, 75, 0.2)', // 綠色背景
+                borderColor: 'rgba(136, 191, 75, 1)', // 綠色邊框
+                borderWidth: 2,
+                pointBackgroundColor: 'white',
+                pointBorderColor: 'rgba(136, 191, 75, 1)',
+                pointBorderWidth: 3
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                x: {
+                    beginAtZero: true
+                },
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    fetchRevenueChartData();
+}
+
+// 更新圖表數據的函數
+function updateChart(labels, values, timeRange, dataType) {
+    console.log('更新圖表:', { labels, values, timeRange, dataType });
+    const chart = Chart.getChart("orderChart");
+    if (!chart) {
+        console.error('找不到圖表');
+        return;
+    }
+
+    chart.data.labels = labels;
+    chart.data.datasets[0].data = values;
+    chart.data.datasets[0].label = dataType === 'revenue' ? '營業額' : '營業額';
+
+    // 確保 y 軸標題設置生效
+    if (chart.options.scales.yAxes && chart.options.scales.yAxes[0]) {
+        chart.options.scales.yAxes[0].scaleLabel.labelString = dataType === 'revenue' ? '營業額' : '訂單總量';
+    } else if (chart.options.scales.y) {
+        chart.options.scales.y.title.text = dataType === 'revenue' ? '營業額' : '訂單總量';
+    }
+
+    chart.update();
+    console.log('圖表已更新');
 }
 
 // 點擊"訂單管理"時生成內容的函數
@@ -623,15 +574,17 @@ function generateOrderDetailsContent(order) {
     const mainContent = document.querySelector('.main-content');
     mainContent.innerHTML = '';  // 清空之前的內容
 
-    const userInfo = order ? `
-        <p><strong>用戶名稱:</strong> ${order.username || '未提供'}</p>
-        <p><strong>電子郵件:</strong> ${order.email || '未提供'}</p>
-        <p><strong>電話號碼:</strong> ${order.phoneNumber || '未提供'}</p>
-    ` : `<p>無法找到該用戶資訊</p>`;
+    // 動態生成用戶信息
+    const userInfo = order
+        ? `<p><strong>用戶名稱:</strong> ${order.username || '未提供'}</p>
+           <p><strong>電子郵件:</strong> ${order.email || '未提供'}</p>
+           <p><strong>電話號碼:</strong> ${order.phoneNumber || '未提供'}</p>`
+        : `<p>無法找到該用戶資訊</p>`;
 
+    // 動態生成訂單詳情部分
     const orderDetailsSection = `
         <section class="order-details">
-            <h1>訂單詳情 - 訂單編號: ${order.orderNumber}</h1>
+            <h1>訂單詳情 - 訂單編號: ${order.orderId}</h1>
             <div class="order-and-user-info">
                 <div class="order-info">
                     <h2>訂單資訊</h2>
@@ -644,9 +597,6 @@ function generateOrderDetailsContent(order) {
                         <p><strong>折扣金額:</strong> $${order.amountDiscount}</p>
                         <p><strong>最終金額:</strong> $${order.finalAmount}</p>
                         <p><strong>訂單狀態:</strong> ${order.status}</p>
-                        <p><strong>修改者:</strong> ${order.changedBy}</p>
-                        <p><strong>修改時間:</strong> ${order.changedAt}</p>
-                        <p><strong>備註:</strong> ${order.comment || '無'}</p>
                     </div>
                 </div>
                 <div class="user-info2">
@@ -658,7 +608,6 @@ function generateOrderDetailsContent(order) {
             <table class="order-items-table">
                 <thead>
                     <tr>
-                        <th>商品圖片</th>
                         <th>名稱</th>
                         <th>SKU</th>
                         <th>數量</th>
@@ -677,19 +626,13 @@ function generateOrderDetailsContent(order) {
     // 選取表格的 tbody
     const tbody = document.querySelector('.order-items-table tbody');
 
-    // 確認 orderDetails 存在且是陣列
+    // 確認 orderDetails 存在且是陣列，並動態生成商品列表
     if (order.orderDetails && order.orderDetails.length > 0) {
         order.orderDetails.forEach(orderDetails => {
-            // 確保圖片存在，若無圖片則顯示預設圖片
-            const productImage = (orderDetails.product.images && orderDetails.product.images.length > 0)
-                ? orderDetails.product.images[0].url // 假設 image 是一個物件，且您需要取得 URL
-                : '/path/to/default-image.png'; // 預設圖片路徑
-
             const tr = document.createElement('tr');
             tr.innerHTML = `
-                <td><img src="${productImage}" alt="${orderDetails.product.name}" style="width: 50px; height: 50px;"></td>
-                <td>${orderDetails.product.name}</td>
-                <td>${orderDetails.product.sku}</td>
+                <td>${orderDetails.productName}</td>
+                <td>${orderDetails.sku}</td>
                 <td>${orderDetails.quantity}</td>
                 <td>$${orderDetails.price}</td>
             `;
@@ -1253,176 +1196,6 @@ function generateRecipeManagementContent() {
     });
 }
 
-// 點擊"食譜管理"時生成內容的函數
-function generateRecipeManagementContent() {
-    const mainContent = document.querySelector('.main-content');
-    mainContent.innerHTML = '';  // 清空之前的內容    
-
-    // 動態生成食譜管理的標題和表格
-    const recipeManagementSection = `
-        <section class="recipe-management">
-            <h1>食譜管理</h1>
-            <div class="recipeControls">
-                <label>搜尋食譜：</label>
-                <input type="text" id="recipeSearchInput" placeholder="輸入名稱" class="SearchInput">
-                
-                <label>每頁顯示結果數：</label>
-                <select id="resultsPerPage">
-                    <option value="25">25</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
-                </select>
-
-                <label>分類：</label>
-                <select id="category">
-                    <option value="all">全部</option>
-                    <option value="category1">家常料理</option>
-                    <option value="category2">兒童友善</option>
-                    <option value="category3">銀髮友善</option>
-                    <option value="category4">異國料理</option>
-                    <option value="category5">多人料理</option>
-                </select>
-            </div>
-            <table class="recipe-table">
-                <thead>
-                    <tr>
-                        <th>圖片</th>
-                        <th>名稱</th>
-                        <th>描述</th>
-                        <th>操作</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- 這裡插入動態生成的食譜 -->
-                </tbody>
-            </table>
-
-            <!-- 分頁控制 -->
-            <div class="pagination-controls" style="text-align: right; margin-top: 20px;">
-                <label for="pageSelect">選擇頁數：</label>
-                <select id="pageSelect" style="border-radius: 5px; border: 1px solid #ccc;">
-                    <!-- 動態生成頁數選項 -->
-                </select>
-            </div>
-        </section>
-    `;
-    mainContent.innerHTML = recipeManagementSection;
-
-    const tbody = document.querySelector('.recipe-table tbody');
-    const resultsPerPageSelect = document.getElementById('resultsPerPage');
-    const pageSelect = document.getElementById('pageSelect');
-    const searchInput = document.getElementById('recipeSearchInput');
-    const categorySelect = document.getElementById('category');
-
-    // 設置每頁顯示的食譜數量
-    let resultsPerPage = parseInt(resultsPerPageSelect.value);
-    let currentPage = 1;  // 預設為第 1 頁
-    let totalPages = Math.ceil(recipes.length / resultsPerPage);
-
-    // 根據分類篩選食譜
-    function filterRecipesByCategory(category) {
-        if (category === "all") return recipes;  // 如果選擇"全部"，返回所有食譜
-        return recipes.filter(recipe => recipe.category === category);
-    }
-
-    // 動態生成每個食譜的表格行
-    function renderRecipes(filteredRecipes) {
-        tbody.innerHTML = '';  // 清空表格內容
-        const start = (currentPage - 1) * resultsPerPage;
-        const end = start + resultsPerPage;
-        const visibleRecipes = filteredRecipes.slice(start, end);
-
-        visibleRecipes.forEach((recipe, index) => {
-            const tr = document.createElement('tr');
-
-            tr.innerHTML = `
-                <td><img src="${recipe.image}" alt="${recipe.name}" class="recipe-image"></td>
-                <td>${recipe.name}</td>
-                <td style="max-width: 40vw;">${recipe.description}</td>
-                <td class="actions">
-                    <button class="edit-button" data-index="${start + index}">修改</button>
-                    <button class="delete-button" data-index="${start + index}">刪除</button>
-                </td>
-            `;
-
-            tbody.appendChild(tr);
-        });
-
-        // 綁定「修改」按鈕事件
-        document.querySelectorAll('.edit-button').forEach(button => {
-            button.addEventListener('click', function () {
-                const recipeIndex = this.getAttribute('data-index');
-                generateRecipeEditForm(recipes[recipeIndex]); // 調用食譜修改頁面並傳入對應食譜數據
-            });
-        });
-
-        // 綁定「刪除」按鈕事件
-        document.querySelectorAll('.delete-button').forEach(button => {
-            button.addEventListener('click', function () {
-                const recipeIndex = this.getAttribute('data-index');
-                if (confirm('確定要刪除這個食譜嗎？')) {
-                    recipes.splice(recipeIndex, 1); // 刪除食譜
-                    generateRecipeManagementContent(); // 刷新食譜管理頁面
-                }
-            });
-        });
-    }
-
-    // 動態生成頁數選項
-    function updatePagination(filteredRecipes) {
-        pageSelect.innerHTML = '';  // 清空頁數選項
-        totalPages = Math.ceil(filteredRecipes.length / resultsPerPage); // 更新總頁數
-        for (let i = 1; i <= totalPages; i++) {
-            const option = document.createElement('option');
-            option.value = i;
-            option.textContent = `第 ${i} 頁`;
-            pageSelect.appendChild(option);
-        }
-        pageSelect.value = currentPage;  // 設定當前頁數
-    }
-
-    // 搜尋食譜
-    searchInput.addEventListener('input', () => {
-        const searchTerm = searchInput.value.toLowerCase();
-        const filteredRecipes = recipes.filter(recipe =>
-            recipe.name.toLowerCase().includes(searchTerm)
-        );
-        currentPage = 1;  // 搜尋時將頁面重置到第 1 頁
-        updatePagination(filteredRecipes);
-        renderRecipes(filteredRecipes);
-    });
-
-    // 分類篩選食譜
-    categorySelect.addEventListener('change', () => {
-        const selectedCategory = categorySelect.value;
-        const filteredRecipes = filterRecipesByCategory(selectedCategory);
-        currentPage = 1;  // 篩選時頁數重置
-        updatePagination(filteredRecipes);
-        renderRecipes(filteredRecipes);
-    });
-
-    // 更新顯示結果數時，重新計算頁數並渲染
-    resultsPerPageSelect.addEventListener('change', () => {
-        resultsPerPage = parseInt(resultsPerPageSelect.value);
-        currentPage = 1;  // 切換每頁顯示數時，返回到第 1 頁
-        const filteredRecipes = filterRecipesByCategory(categorySelect.value);
-        updatePagination(filteredRecipes);
-        renderRecipes(filteredRecipes);
-    });
-
-    // 監聽頁數切換事件
-    pageSelect.addEventListener('change', () => {
-        currentPage = parseInt(pageSelect.value);
-        const filteredRecipes = filterRecipesByCategory(categorySelect.value);
-        renderRecipes(filteredRecipes);
-    });
-
-    // 初始化頁面
-    const filteredRecipes = filterRecipesByCategory(categorySelect.value);
-    updatePagination(filteredRecipes);
-    renderRecipes(filteredRecipes);
-}
-
 // 點擊"庫存管理"時生成內容的函數
 function generateStockManagementContent() {
     const mainContent = document.querySelector('.main-content');
@@ -1647,181 +1420,7 @@ function generateUserManagementContent() {
                         <th>電話號碼</th>
                         <th>創建時間</th>
                         <th>更新時間</th>
-                        <th>操作</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- 這裡插入動態生成的用戶 -->
-                </tbody>
-            </table>
-
-            <!-- 分頁控制 -->
-            <div class="pagination-controls" style="text-align: right; margin-top: 20px;">
-                <label for="pageSelect">選擇頁數：</label>
-                <select id="pageSelect">
-                    <!-- 動態生成頁數選項 -->
-                </select>
-            </div>
-        </section>
-    `;
-    mainContent.innerHTML = userManagementSection;
-
-    const tbody = document.querySelector('.user-table tbody');
-    const resultsPerPageSelect = document.getElementById('resultsPerPage');
-    const pageSelect = document.getElementById('pageSelect');
-    const searchInput = document.getElementById('userSearchInput');
-    const sortOptions = document.getElementById('sortOptions');
-
-    // 設置每頁顯示的用戶數量
-    let resultsPerPage = parseInt(resultsPerPageSelect.value);
-    let currentPage = 1;  // 預設為第 1 頁
-    let totalPages = Math.ceil(users.length / resultsPerPage);
-
-    // 根據排序選項對用戶進行排序
-    function sortUsers(usersList, sortBy) {
-        if (sortBy === "usernameASC") {
-            return usersList.sort((a, b) => a.username.localeCompare(b.username));
-        } else if (sortBy === "usernameDESC") {
-            return usersList.sort((a, b) => b.username.localeCompare(a.username));
-        } else if (sortBy === "createdAtASC") {
-            return usersList.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
-        } else if (sortBy === "createdAtDESC") {
-            return usersList.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-        }
-        return usersList;
-    }
-
-    // 動態生成每個用戶的表格行
-    function renderUsers(filteredUsers) {
-        tbody.innerHTML = '';  // 清空表格內容
-        const start = (currentPage - 1) * resultsPerPage;
-        const end = start + resultsPerPage;
-        const visibleUsers = filteredUsers.slice(start, end);
-
-        visibleUsers.forEach((user, index) => {
-            const tr = document.createElement('tr');
-
-            tr.innerHTML = `
-                <td>${user.userId}</td>
-                <td>${user.username}</td>
-                <td>${user.email}</td>
-                <td>${user.phoneNumber}</td>
-                <td>${user.createdAt}</td>
-                <td>${user.updatedAt}</td>
-                <td class="actions">
-                    <button class="edit-button" data-index="${start + index}">詳情</button>
-                </td>
-            `;
-
-            tbody.appendChild(tr);
-        });
-
-        // 綁定「詳情」按鈕的事件
-        document.querySelectorAll('.edit-button').forEach(button => {
-            button.addEventListener('click', function () {
-                const userIndex = this.getAttribute('data-index');
-                generateUserEditForm(users[userIndex]);  // 調用用戶修改表單
-            });
-        });
-    }
-
-    // 動態生成頁數選項
-    function updatePagination(filteredUsers) {
-        pageSelect.innerHTML = '';  // 清空頁數選項
-        totalPages = Math.ceil(filteredUsers.length / resultsPerPage); // 更新總頁數
-        for (let i = 1; i <= totalPages; i++) {
-            const option = document.createElement('option');
-            option.value = i;
-            option.textContent = `第 ${i} 頁`;
-            pageSelect.appendChild(option);
-        }
-        pageSelect.value = currentPage;  // 設定當前頁數
-    }
-
-    // 搜尋用戶
-    searchInput.addEventListener('input', () => {
-        const searchTerm = searchInput.value.toLowerCase();
-        const filteredUsers = users.filter(user =>
-            user.username.toLowerCase().includes(searchTerm) || user.email.toLowerCase().includes(searchTerm)
-        );
-        currentPage = 1;  // 搜尋時將頁面重置到第 1 頁
-        updatePagination(filteredUsers);
-        renderUsers(filteredUsers);
-    });
-
-    // 排序功能
-    sortOptions.addEventListener('change', () => {
-        let filteredUsers = users;
-        filteredUsers = sortUsers(filteredUsers, sortOptions.value);
-        currentPage = 1;  // 改變排序時返回到第 1 頁
-        updatePagination(filteredUsers);
-        renderUsers(filteredUsers);
-    });
-
-    // 更新顯示結果數時，重新計算頁數並渲染
-    resultsPerPageSelect.addEventListener('change', () => {
-        resultsPerPage = parseInt(resultsPerPageSelect.value);
-        currentPage = 1;  // 切換每頁顯示數時，返回到第 1 頁
-        let filteredUsers = users;
-        filteredUsers = sortUsers(filteredUsers, sortOptions.value);
-        updatePagination(filteredUsers);
-        renderUsers(filteredUsers);
-    });
-
-    // 監聽頁數切換事件
-    pageSelect.addEventListener('change', () => {
-        currentPage = parseInt(pageSelect.value);
-        let filteredUsers = users;
-        filteredUsers = sortUsers(filteredUsers, sortOptions.value);
-        renderUsers(filteredUsers);
-    });
-
-    // 初始化頁面
-    let filteredUsers = users;
-    filteredUsers = sortUsers(filteredUsers, sortOptions.value);
-    updatePagination(filteredUsers);
-    renderUsers(filteredUsers);
-}
-
-
-// 點擊"用戶管理"時生成內容的函數
-function generateUserManagementContent() {
-    const mainContent = document.querySelector('.main-content');
-    mainContent.innerHTML = '';  // 清空之前的內容    
-
-    // 動態生成用戶管理的標題和表格
-    const userManagementSection = `
-        <section class="user-management">
-            <h1>用戶管理</h1>
-            <div class="userControls">
-                <label>搜尋用戶：</label>
-                <input type="text" id="userSearchInput" class="SearchInput" placeholder="輸入用戶名或電子郵件">
-
-                <label>每頁顯示結果數：</label>
-                <select id="resultsPerPage">
-                    <option value="25">25</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
-                </select>
-
-                <label>排序：</label>
-                <select id="sortOptions">
-                    <option value="usernameASC">用戶名(遞增)</option>
-                    <option value="usernameDESC">用戶名(遞減)</option>
-                    <option value="createdAtASC">創建時間(遞增)</option>
-                    <option value="createdAtDESC">創建時間(遞減)</option>
-                </select>
-            </div>
-            <table class="user-table">
-                <thead>
-                    <tr>
-                        <th>用戶ID</th>
-                        <th>用戶名</th>
-                        <th>電子郵件</th>
-                        <th>電話號碼</th>
-                        <th>創建時間</th>
-                        <th>更新時間</th>
-                        <th>操作</th>
+                        <th>操作</th>                        
                     </tr>
                 </thead>
                 <tbody>
@@ -2105,70 +1704,6 @@ function generateCouponManagementForm() {
     }
 }
 
-// 初始化圖表的函數
-function initChart() {
-    const ctx = document.getElementById('orderChart').getContext('2d');
-
-    let chart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-            datasets: [{
-                label: '每周營業額',
-                data: [3000, 4000, 3500, 5000, 4500, 6000, 5500], // 初始數據
-                backgroundColor: 'rgba(136, 191, 75, 0.2)', // 綠色背景
-                borderColor: 'rgba(136, 191, 75, 1)', // 綠色邊框
-                borderWidth: 2,
-                pointBackgroundColor: 'white',
-                pointBorderColor: 'rgba(136, 191, 75, 1)',
-                pointBorderWidth: 3
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-                x: {
-                    beginAtZero: true
-                },
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
-
-    let currentCard = 'revenue'; // 初始化當前顯示的卡片類型
-
-    // 為卡片添加點擊事件
-    document.querySelectorAll('.card').forEach(card => {
-        card.addEventListener('click', function () {
-            currentCard = this.getAttribute('data-type'); // 更新當前卡片類型
-            const timeRange = document.getElementById('timeRange').value; // 獲取當前選擇的時間範圍
-            const selectedData = chartData[currentCard][timeRange];
-
-            // 更新圖表數據
-            chart.data.labels = selectedData.labels;
-            chart.data.datasets[0].data = selectedData.data;
-            chart.data.datasets[0].label = selectedData.label;
-            chart.update(); // 更新圖表
-        });
-    });
-
-    // 為下拉選單添加事件監聽器
-    const timeRangeSelect = document.getElementById('timeRange');
-    timeRangeSelect.addEventListener('change', function () {
-        const timeRange = this.value;
-        const selectedData = chartData[currentCard][timeRange]; // 根據當前卡片和時間範圍獲取數據
-
-        // 更新圖表數據和標籤
-        chart.data.labels = selectedData.labels;
-        chart.data.datasets[0].data = selectedData.data;
-        chart.data.datasets[0].label = selectedData.label;
-        chart.update(); // 更新圖表
-    });
-}
-
 document.addEventListener('DOMContentLoaded', function () {
     initChart();
 });
@@ -2286,4 +1821,567 @@ document.getElementById('editProductButton').addEventListener('click', function 
     event.preventDefault();
     generateProductManagementWithActionsContent();  // 生成商品管理頁面
 });
+
+// document.addEventListener('DOMContentLoaded', function () {
+//     // 初始化圖表
+//     initChart();
+
+//     // 設置默認時間範圍並加載營業額數據
+//     const timeRange = document.getElementById('timeRange');
+//     if (timeRange) {
+//         timeRange.value = 'week';
+//         fetchRevenueChartData();
+//         timeRange.addEventListener('change', function() {
+//             const activeCard = document.querySelector('.active-card');
+//             if (activeCard && activeCard.id === 'revenueCard') {
+//                 fetchRevenueChartData();
+//             } else if (activeCard && activeCard.id === 'orderCard') {
+//                 fetchOrderChartData();
+//             }
+//         });
+//     }
+
+//     // 點擊 logo 時生成內容
+//     const logo = document.getElementById('logo');
+//     if (logo) {
+//         logo.addEventListener('click', function (event) {
+//             event.preventDefault();
+//             generateOverviewContent();
+//         });
+//     }
+
+//     // 點擊 "總覽" 按鈕時生成內容
+//     const overviewButton = document.getElementById('overviewButton');
+//     if (overviewButton) {
+//         overviewButton.addEventListener('click', function (event) {
+//             event.preventDefault();
+//             generateOverviewContent();
+//         });
+//     }
+
+//     // 點擊 "營業額" 卡片時切換數據
+//     const revenueCard = document.getElementById('revenueCard');
+//     const orderCard = document.getElementById('orderCard');
+//     if (revenueCard && orderCard) {
+//         revenueCard.addEventListener('click', function() {
+//             this.classList.add('active-card');
+//             orderCard.classList.remove('active-card');
+//             fetchRevenueChartData();
+//         });
+
+//         orderCard.addEventListener('click', function() {
+//             this.classList.add('active-card');
+//             revenueCard.classList.remove('active-card');
+//             fetchOrderChartData();
+//         });
+//     }
+
+//     // 點擊 "訂單管理" 按鈕時生成內容
+//     const orderManagementButton = document.getElementById('orderManagementButton');
+//     if (orderManagementButton) {
+//         orderManagementButton.addEventListener('click', function (event) {
+//             event.preventDefault();
+//             generateOrderManagementContent();
+//         });
+//     }
+
+//     // 點擊 "商品上傳" 按鈕時生成內容
+//     const uploadProductButton = document.getElementById('uploadProductButton');
+//     if (uploadProductButton) {
+//         uploadProductButton.addEventListener('click', function (event) {
+//             event.preventDefault();
+//             generateProductUploadForm();
+//         });
+//     }
+
+//     // 點擊 "食譜上傳" 按鈕時生成內容
+//     const uploadRecipeButton = document.getElementById('uploadRecipeButton');
+//     if (uploadRecipeButton) {
+//         uploadRecipeButton.addEventListener('click', function (event) {
+//             event.preventDefault();
+//             generateRecipeUploadForm();
+//         });
+//     }
+
+//     // 點擊 "商品修改" 按鈕時生成內容
+//     const editProductButton = document.getElementById('editProductButton');
+//     if (editProductButton) {
+//         editProductButton.addEventListener('click', function (event) {
+//             event.preventDefault();
+//             generateProductManagementWithActionsContent();
+//         });
+//     }
+
+//     // 點擊 "食譜管理" 按鈕時生成內容
+//     const recipeEditButton = document.getElementById('recipeEditButton');
+//     if (recipeEditButton) {
+//         recipeEditButton.addEventListener('click', function (event) {
+//             event.preventDefault();
+//             generateRecipeManagementContent();
+//         });
+//     }
+
+//     // 點擊 "庫存管理" 按鈕時生成內容
+//     const manageStockButton = document.getElementById('manageStockButton');
+//     if (manageStockButton) {
+//         manageStockButton.addEventListener('click', function (event) {
+//             event.preventDefault();
+//             generateStockManagementContent();
+//         });
+//     }
+
+//     // 點擊 "用戶管理" 按鈕時生成內容
+//     const userManagementButton = document.getElementById('userManagementButton');
+//     if (userManagementButton) {
+//         userManagementButton.addEventListener('click', function (event) {
+//             event.preventDefault();
+//             generateUserManagementContent();
+//         });
+//     }
+
+//     // 點擊 "優惠券管理" 按鈕時生成內容
+//     const couponManagementButton = document.getElementById('couponManagementButton');
+//     if (couponManagementButton) {
+//         couponManagementButton.addEventListener('click', function (event) {
+//             event.preventDefault();
+//             generateCouponManagementForm();
+//         });
+//     }
+
+//     // 為 "詳情" 按鈕添加點擊事件
+//     document.querySelectorAll('.details-link').forEach(link => {
+//         link.addEventListener('click', function (event) {
+//             event.preventDefault();
+//             const productIndex = this.getAttribute('data-index');
+//             generateProductEditForm(products[productIndex]);
+//         });
+//     });
+
+//     // 綁定 "取消" 按鈕的點擊事件
+//     const cancelButton = document.getElementById('cancelButton');
+//     if (cancelButton) {
+//         cancelButton.addEventListener('click', function () {
+//             generateProductManagementContent();
+//         });
+//     }
+
+//     // 綁定 "商品修改" 按鈕的點擊事件
+//     const editProductActionButton = document.getElementById('editProductButton');
+//     if (editProductActionButton) {
+//         editProductActionButton.addEventListener('click', function (event) {
+//             event.preventDefault();
+//             generateProductManagementWithActionsContent();
+//         });
+//     }
+// });
+
+
+// document.addEventListener('DOMContentLoaded', function () {
+//     initChart();
+// });
+
+// document.addEventListener('DOMContentLoaded', function () {
+//     // 點擊logo時生成內容
+//     const logo = document.getElementById('logo');
+//     logo.addEventListener('click', function (event) {
+//         event.preventDefault();  // 防止跳轉
+//         generateOverviewContent();   // 調用生成函數
+//     });
+// });
+
+// document.addEventListener('DOMContentLoaded', function () {
+//     // 點擊"總覽"按鈕時生成內容
+//     const overviewButton = document.getElementById('overviewButton');
+//     overviewButton.addEventListener('click', function (event) {
+//         event.preventDefault();  // 防止跳轉
+//         generateOverviewContent();   // 調用生成函數
+//     });
+// });
+
+// document.getElementById('revenueCard').addEventListener('click', function() {
+//     this.classList.add('active-card');
+//     document.getElementById('orderCard').classList.remove('active-card');
+//     fetchRevenueChartData();
+// });
+
+// document.getElementById('orderCard').addEventListener('click', function() {
+//     this.classList.add('active-card');
+//     document.getElementById('revenueCard').classList.remove('active-card');
+//     fetchOrderChartData();
+// });
+
+// document.addEventListener('DOMContentLoaded', function () {
+//     initChart();
+//     // 設置默認時間範圍
+//     document.getElementById('timeRange').value = 'week';
+//     fetchRevenueChartData();
+// });
+
+// document.getElementById('timeRange').addEventListener('change', function() {
+//     const activeCard = document.querySelector('.active-card');
+//     if (activeCard.id === 'revenueCard') {
+//         fetchRevenueChartData();
+//     } else if (activeCard.id === 'orderCard') {
+//         fetchOrderChartData();
+//     }
+// });
+
+// document.addEventListener('DOMContentLoaded', function () {
+//     // 點擊"訂單管理"按鈕時生成內容
+//     const orderManagementButton = document.getElementById('orderManagementButton');
+//     orderManagementButton.addEventListener('click', function (event) {
+//         event.preventDefault();  // 防止跳轉
+//         generateOrderManagementContent();  // 調用生成訂單管理內容的函數
+//     });
+// });
+
+// document.addEventListener('DOMContentLoaded', function () {
+//     // 點擊"商品上傳"按鈕時生成內容
+//     const uploadProductButton = document.getElementById('uploadProductButton');
+//     uploadProductButton.addEventListener('click', function (event) {
+//         event.preventDefault();  // 防止跳轉
+//         generateProductUploadForm();  // 調用生成商品上傳表單的函數
+//     });
+// });
+
+// document.addEventListener('DOMContentLoaded', function () {
+//     // 點擊"食譜上傳"按鈕時生成內容
+//     const uploadRecipeButton = document.getElementById('uploadRecipeButton');
+//     uploadRecipeButton.addEventListener('click', function (event) {
+//         event.preventDefault();  // 防止跳轉
+//         generateRecipeUploadForm();  // 調用生成商品上傳表單的函數
+//     });
+// });
+
+// document.addEventListener('DOMContentLoaded', function () {
+//     const editProductButton = document.getElementById('editProductButton');
+//     editProductButton.addEventListener('click', function (event) {
+//         event.preventDefault();  // 防止跳轉
+//         generateProductManagementWithActionsContent();  // 調用生成商品管理頁面的函數
+//     });
+// });
+
+// document.addEventListener('DOMContentLoaded', function () {
+//     const editProductButton = document.getElementById('recipeEditButton');
+//     editProductButton.addEventListener('click', function (event) {
+//         event.preventDefault();  // 防止跳轉
+//         generateRecipeManagementContent();  // 調用生成食譜管理頁面的函數
+//     });
+// });
+
+// document.addEventListener('DOMContentLoaded', function () {
+//     const manageStockButton = document.getElementById('manageStockButton');
+//     manageStockButton.addEventListener('click', function (event) {
+//         event.preventDefault();  // 防止跳轉
+//         generateStockManagementContent();  // 調用生成庫存管理頁面的函數
+//     });
+// });
+
+// document.addEventListener('DOMContentLoaded', function () {
+//     const manageStockButton = document.getElementById('userManagementButton');
+//     manageStockButton.addEventListener('click', function (event) {
+//         event.preventDefault();  // 防止跳轉
+//         generateUserManagementContent();  // 調用生成用戶管理頁面的函數
+//     });
+// });
+
+// document.addEventListener('DOMContentLoaded', function () {
+//     const manageStockButton = document.getElementById('couponManagementButton');
+//     manageStockButton.addEventListener('click', function (event) {
+//         event.preventDefault();  // 防止跳轉
+//         generateCouponManagementForm();  // 調用生成優惠券管理頁面的函數
+//     });
+// });
+
+// // 為 "詳情" 按鈕添加點擊事件
+// document.querySelectorAll('.details-link').forEach(link => {
+//     link.addEventListener('click', function (event) {
+//         event.preventDefault();
+//         const productIndex = this.getAttribute('data-index');
+//         generateProductEditForm(products[productIndex]); // 調用商品修改頁面並傳入對應商品數據
+//     });
+// });
+
+// // // 保存按鈕事件
+// // document.getElementById('saveButton').addEventListener('click', function () {
+// //     products.name = document.getElementById('productName').value;
+// //     products.price = document.getElementById('productPrice').value;
+// //     products.stock = document.getElementById('productStock').value;
+// //     generateProductManagementContent();  // 返回商品管理頁面
+// // });
+
+// // 取消按鈕事件
+// document.getElementById('cancelButton').addEventListener('click', function () {
+//     generateProductManagementContent();  // 返回商品管理頁面
+// });
+
+// // 綁定"商品修改"按鈕的點擊事件
+// document.getElementById('editProductButton').addEventListener('click', function (event) {
+//     event.preventDefault();
+//     generateProductManagementWithActionsContent();  // 生成商品管理頁面
+// });
+
+
+
+// // 假資料，模擬不同報表的數據
+// const chartData = {
+//     revenue: {
+//         week: {
+//             labels: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+//             data: [3000, 40, 3500, 5000, 4500, 6000, 5500],
+//             label: '每周營業額'
+//         },
+//         month: {
+//             labels: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+//             data: [12000, 15000, 18000, 20000, 22000, 25000, 28000, 30000, 33000, 35000, 37000, 40000],
+//             label: '每月營業額'
+//         },
+//         year: {
+//             labels: ['2019', '2020', '2021', '2022', '2023'],
+//             data: [150000, 180000, 200000, 220000, 250000],
+//             label: '每年營業額'
+//         }
+//     },
+//     orders: {
+//         week: {
+//             labels: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+//             data: [100, 120, 150, 180, 200, 250, 300],
+//             label: '每周訂單總量'
+//         },
+//         month: {
+//             labels: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+//             data: [1000, 1500, 1800, 2000, 2200, 2500, 2800, 3000, 3500, 3700, 3900, 4000],
+//             label: '每月訂單總量'
+//         },
+//         year: {
+//             labels: ['2019', '2020', '2021', '2022', '2023'],
+//             data: [15000, 18000, 20000, 22000, 25000],
+//             label: '每年訂單總量'
+//         }
+//     },
+//     users: {
+//         week: {
+//             labels: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+//             data: [50, 60, 75, 80, 100, 120, 150],
+//             label: '每周總用戶數'
+//         },
+//         month: {
+//             labels: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+//             data: [500, 700, 900, 1100, 1300, 1500, 1700, 2000, 2300, 2500, 2800, 3000],
+//             label: '每月總用戶數'
+//         },
+//         year: {
+//             labels: ['2019', '2020', '2021', '2022', '2023'],
+//             data: [10000, 15000, 20000, 25000, 30000],
+//             label: '每年總用戶數'
+//         }
+//     }
+// };
+
+// // 假資料，模擬不同訂單
+// const orders = [
+//     {
+//         orderNumber: "XXXX1",
+//         name: "產品名稱1",
+//         deliveryMethod: "快遞",
+//         orderAmount: 1000,
+//         status: "已付款",
+//         statusClass: "paid",
+//         date: "2024-09-21 16:55:56",
+//         couponId: "COUPON123",
+//         orderDate: "2024-09-20",
+//         percentageDiscount: 10,  // 百分比折扣
+//         amountDiscount: 100,  // 折扣金額
+//         totalAmount: 1000,  // 訂單總金額
+//         finalAmount: 900,  // 最終金額
+//         comment: "快速配送，無問題",
+//         changedBy: "Admin",
+//         changedAt: "2024-09-22 08:00",
+//         address: "100台北市中正區鄭州路8號",
+//         userId: "1",
+//         items: [
+//             {
+//                 name: "商品1",
+//                 sku: "SKU123",
+//                 quantity: 2,
+//                 price: 50,
+//                 image: "紅大頭.png"
+//             },
+//             {
+//                 name: "商品2",
+//                 sku: "SKU456",
+//                 quantity: 1,
+//                 price: 100,
+//                 image: "紅大頭.png"
+//             }
+//         ]
+//     },
+//     {
+//         orderNumber: "XXXX2",
+//         name: "產品名稱2",
+//         deliveryMethod: "郵寄",
+//         orderAmount: 2000,
+//         status: "尚未付款",
+//         statusClass: "unpaid",
+//         date: "2024-09-22 10:00:00",
+//         couponId: "COUPON456",
+//         orderDate: "2024-09-21",
+//         percentageDiscount: 5,
+//         amountDiscount: 100,
+//         totalAmount: 2000,
+//         finalAmount: 1900,
+//         comment: "",
+//         changedBy: "Admin",
+//         changedAt: "2024-09-22 09:00",
+//         address: "100台北市中正區忠孝西路一段49號",
+//         userId: "1",
+//         items: [
+//             {
+//                 name: "商品3",
+//                 sku: "SKU789",
+//                 quantity: 1,
+//                 price: 150,
+//                 image: "紅大頭.png"
+//             }
+//         ]
+//     }
+// ];
+
+// // 假資料，模擬不同商品
+// const products = [
+//     {
+//         index: '1',
+//         name: '商品名稱1',
+//         sku: 'ABC-66',
+//         image: '紅大頭.png',
+//         category: '異國料理',
+//         servings: 3,
+//         difficulty: '中等',
+//         vegan: '否',
+//         time: '40',
+//         price: 500,
+//         description: '一道經典的肉醬義大利麵，肉醬味道濃郁，搭配煮得恰到好處的義大利麵，簡單且美味，適合全家人享用',
+//         Ingredients: '義大利麵200g,牛絞肉 150g,番茄醬 1 杯,洋蔥 1 顆（切丁）,大蒜 2 瓣（切碎）,橄欖油 2 湯匙',
+//         steps: '用手做，再說一次用手做',
+//         stock: '50',
+//     },
+//     {
+//         index: '2',
+//         name: '商品名稱2',
+//         sku: 'ABC-66',
+//         image: '紅大頭.png',
+//         category: '異國料理',
+//         servings: 3,
+//         difficulty: '中等',
+//         vegan: '否',
+//         time: '40',
+//         price: 500,
+//         description: '一道經典的肉醬義大利麵，肉醬味道濃郁，搭配煮得恰到好處的義大利麵，簡單且美味，適合全家人享用',
+//         Ingredients: '義大利麵200g,牛絞肉 150g,番茄醬 1 杯,洋蔥 1 顆（切丁）,大蒜 2 瓣（切碎）,橄欖油 2 湯匙',
+//         steps: '用手做，再說一次用手做',
+//         stock: '50',
+//     },
+//     {
+//         index: '3',
+//         name: '商品名稱3',
+//         sku: 'ABC-66',
+//         image: '紅大頭.png',
+//         category: '異國料理',
+//         servings: 3,
+//         difficulty: '中等',
+//         vegan: '否',
+//         time: '80',
+//         price: 500,
+//         description: '一道經典的肉醬義大利麵，肉醬味道濃郁，搭配煮得恰到好處的義大利麵，簡單且美味，適合全家人享用',
+//         Ingredients: '義大利麵200g,牛絞肉 150g,番茄醬 1 杯,洋蔥 1 顆（切丁）,大蒜 2 瓣（切碎）,橄欖油 2 湯匙',
+//         steps: '用手做，再說一次用手做',
+//         stock: '50',
+//     }
+// ];
+
+// // 假資料，模擬不同食譜
+// const recipes = [
+//     {
+//         image: '紅大頭.png',
+//         name: '肉醬義大利麵',
+//         description: '一道經典的肉醬義大利麵，搭配濃郁的番茄醬和牛肉，簡單美味，適合全家人享用。',
+//         category: '異國料理',
+//         people: 4,
+//         difficulty: '中等',
+//         vegan: '否',
+//         time: '45',
+//         ingredients: '義大利麵 200g, 牛絞肉 150g, 番茄醬 1 杯, 洋蔥 1 顆 (切丁), 大蒜 2 瓣 (切碎), 橄欖油 2 湯匙, 鹽與胡椒適量',
+//         steps: '1. 先煮義大利麵，根據包裝說明進行。2. 加熱橄欖油，炒洋蔥和大蒜直到金黃。3. 加入牛絞肉，炒熟。4. 倒入番茄醬，煮滾後轉小火煨煮10分鐘。5. 將煮好的義大利麵拌入醬汁，調味後即可享用。'
+//     },
+//     {
+//         image: '紅大頭.png',
+//         name: '奶油雞肉蘑菇濃湯',
+//         description: '豐富的口感與濃郁的香味，是一份溫暖又美味的湯品。',
+//         category: '家常料理',
+//         people: 2,
+//         difficulty: '簡單',
+//         vegan: '否',
+//         time: '30',
+//         ingredients: '雞胸肉 200g, 蘑菇 100g, 洋蔥 1 顆 (切丁), 奶油 30g, 牛奶 300ml, 麵粉 2 湯匙, 鹽與胡椒適量',
+//         steps: '1. 雞胸肉切塊，蘑菇切片。2. 加熱奶油，炒洋蔥至軟。3. 加入雞肉，炒至變色。4. 加入麵粉，煮至呈糊狀。5. 慢慢倒入牛奶，拌勻。6. 加入蘑菇，煮至濃稠，調味後即可。'
+//     },
+//     {
+//         image: '紅大頭.png',
+//         name: '蔬菜炒飯',
+//         description: '清爽的蔬菜炒飯，加入多樣時令蔬菜，簡單又營養，適合素食者。',
+//         category: '多人料理',
+//         people: 3,
+//         difficulty: '簡單',
+//         vegan: '全素',
+//         time: '20',
+//         ingredients: '白飯 300g, 青椒 1 顆, 紅蘿蔔 1 根, 洋蔥 1 顆, 玉米粒 100g, 醬油 2 湯匙, 橄欖油 1 湯匙',
+//         steps: '1. 將青椒、紅蘿蔔、洋蔥切丁。2. 加熱橄欖油，炒洋蔥至透明。3. 加入其他蔬菜，翻炒至軟。4. 倒入白飯，拌炒均勻。5. 加入醬油調味，翻炒片刻後即可享用。'
+//     }
+// ];
+
+// // 假資料，模擬不同用戶
+// const users = [
+//     {
+//         userId: '1',
+//         username: 'john_doe',
+//         firstName: 'John',
+//         lastName: 'Doe',
+//         email: 'john.doe@example.com',
+//         password: 'password123',
+//         phoneNumber: '123-456-7890',
+//         address: '123 Main St',
+//         city: '台中市',
+//         postalCode: '400',
+//         createdAt: '2023-01-15 14:30:00',
+//         updatedAt: '2023-09-10 09:20:00'
+//     },
+//     {
+//         userId: '2',
+//         username: 'jane_smith',
+//         firstName: 'Jane',
+//         lastName: 'Smith',
+//         email: 'jane.smith@example.com',
+//         password: 'password456',
+//         phoneNumber: '987-654-3210',
+//         address: '456 Maple Ave',
+//         city: '台北市',
+//         postalCode: '100',
+//         createdAt: '2023-02-20 16:45:00',
+//         updatedAt: '2023-09-05 10:10:00'
+//     },
+//     {
+//         userId: '3',
+//         username: 'alice_wang',
+//         firstName: 'Alice',
+//         lastName: 'Wang',
+//         email: 'alice.wang@example.com',
+//         password: 'alice789',
+//         phoneNumber: '456-123-7890',
+//         address: '789 Oak St',
+//         city: '高雄市',
+//         postalCode: '800',
+//         createdAt: '2023-03-10 11:50:00',
+//         updatedAt: '2023-09-12 14:00:00'
+//     }
+// ];
 

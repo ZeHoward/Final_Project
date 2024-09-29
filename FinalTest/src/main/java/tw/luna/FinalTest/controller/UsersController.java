@@ -1,14 +1,13 @@
 package tw.luna.FinalTest.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import tw.luna.FinalTest.model.UserAllInfo;
 import tw.luna.FinalTest.model.Users;
@@ -79,6 +78,12 @@ public class UsersController {
 	public void checkSession(HttpSession session) {
 		System.out.println("進入checkSession");
 		System.out.println((String) session.getAttribute("aaa"));
+	}
+	
+	// 返回 isDel = 0 的用戶總數
+	@GetMapping("/count-active")
+	public long getActiveUserCount() {
+	    return usersServiceImpl.getActiveUserCount();
 	}
 	
 	

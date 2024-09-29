@@ -1,6 +1,7 @@
 package tw.luna.FinalTest.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -29,13 +30,14 @@ public class OrderDetails {
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "orderId", nullable = false)
-	@JsonBackReference
+//	@JsonBackReference("orders_orderDetails")
 	private Orders orders;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "productId", nullable = false)
-	private Product product;
-
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "productId", nullable = false)
+    @JsonBackReference("product_orderDetails")
+    private Product product;
+	
 	public OrderDetails() {
 	}
 

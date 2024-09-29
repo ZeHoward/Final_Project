@@ -1,10 +1,11 @@
 package tw.luna.FinalTest.controller;
 
-
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,11 +21,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.servlet.http.HttpSession;
 import tw.luna.FinalTest.dto.OrderWithUserDTO;
+import tw.luna.FinalTest.dto.OrdersDTO;
 import tw.luna.FinalTest.dto.orders.OrdersInsertDto;
 import tw.luna.FinalTest.model.Orders;
 import tw.luna.FinalTest.model.Users;
 import tw.luna.FinalTest.service.OrdersService;
-
 
 @RequestMapping("/api/orders")
 @RestController
@@ -58,8 +59,14 @@ public class OrdersController {
 
  	// 根據 ID 獲取單個訂單
  	@GetMapping("/{id}")
- 	public ResponseEntity<Orders> getOrderById(@PathVariable Integer id) {
- 	    return ordersService.getOrderById(id); // 直接調用服務層
+ 	public ResponseEntity<OrdersDTO> getOrderById(@PathVariable Integer id) {
+ 	    Optional<OrdersDTO> optionalOrdersDTO = ordersService.getOrderById(id);
+
+ 	    if (optionalOrdersDTO.isPresent()) {
+ 	        return ResponseEntity.ok(optionalOrdersDTO.get());
+ 	    } else {
+ 	        return ResponseEntity.notFound().build();
+ 	    }
  	}
  	
  	@GetMapping("/page")
@@ -92,23 +99,92 @@ public class OrdersController {
 // 	}
     
  	@GetMapping("/overview")
- 	public ResponseEntity<Map<String, Integer>> getOverviewData(
+    public ResponseEntity<Map<String, Integer>> getOverview(
+            @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
+            @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate) {
+
+        Integer totalRevenue = ordersService.getTotalRevenue(startDate, endDate);
+        Integer totalOrders = ordersService.getTotalOrdersCount(startDate, endDate);
+
+        Map<String, Integer> overviewData = new HashMap<>();
+        overviewData.put("revenue", totalRevenue);
+        overviewData.put("ordersCount", totalOrders);
+
+        return ResponseEntity.ok(overviewData);
+    }
+ 	
+ 	@GetMapping("/chart-data")
+ 	public ResponseEntity<Map<String, Object>> getChartData(
  	    @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
- 	    @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate
+ 	    @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate,
+ 	    @RequestParam("range") String range // 接收前端傳入的範圍參數
  	) {
- 	    // 從 service 層獲取營業額總和
- 	    Integer totalRevenue = ordersService.getTotalRevenue(startDate, endDate);
+ 	    List<String> labels = new ArrayList<>();
+ 	    List<Integer> values = new ArrayList<>();
 
- 	    // 從 service 層獲取訂單總數
- 	    Integer totalOrders = ordersService.getTotalOrders(startDate, endDate);
+ 	    switch (range) {
+ 	        case "week":
+ 	            labels = ordersService.getDailyLabels(startDate, endDate);
+ 	            values = ordersService.getDailyRevenue(startDate, endDate);
+ 	            break;
+ 	        case "month":
+ 	        	labels = ordersService.getMonthlyLabels(startDate, endDate);
+ 	            values = ordersService.getMonthlyRevenue(startDate, endDate);
+ 	            break;
+ 	        case "year":
+ 	            labels = ordersService.getYearlyLabels(startDate, endDate);
+ 	            values = ordersService.getYearlyRevenue(startDate, endDate);
+ 	            break;
+ 	        default:
+ 	            return ResponseEntity.badRequest().body(Map.of("error", "Invalid range specified"));
+ 	    }
 
- 	    // 創建一個 Map 來存儲返回的數據
- 	    Map<String, Integer> overviewData = new HashMap<>();
- 	    overviewData.put("totalRevenue", totalRevenue);
- 	    overviewData.put("totalOrders", totalOrders);
+ 	    // 返回的資料格式
+ 	    Map<String, Object> chartData = new HashMap<>();
+ 	    chartData.put("labels", labels);
+ 	    chartData.put("values", values);
 
- 	    // 返回 Map 結構的數據
- 	    return ResponseEntity.ok(overviewData);
+ 	    return ResponseEntity.ok(chartData);
  	}
+ 	
+// 	@GetMapping("/chart-data")
+// 	public ResponseEntity<Map<String, Object>> getChartData(
+// 	    @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
+// 	    @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate,
+// 	    @RequestParam("range") String range,
+// 	    @RequestParam(value = "dataType", defaultValue = "revenue") String dataType // 新增參數
+// 	) {
+// 	    List<String> labels = new ArrayList<>();
+// 	    List<Integer> values = new ArrayList<>();
+//
+// 	    switch (range) {
+// 	        case "week":
+// 	            labels = ordersService.getDailyLabels(startDate, endDate);
+// 	            values = dataType.equals("revenue") ? 
+// 	                     ordersService.getDailyRevenue(startDate, endDate) :
+// 	                     ordersService.getDailyOrderCount(startDate, endDate);
+// 	            break;
+// 	        case "month":
+// 	            labels = ordersService.getMonthlyLabels(startDate, endDate);
+// 	            values = dataType.equals("revenue") ? 
+// 	                     ordersService.getMonthlyRevenue(startDate, endDate) :
+// 	                     ordersService.getMonthlyOrderCount(startDate, endDate);
+// 	            break;
+// 	        case "year":
+// 	            labels = ordersService.getYearlyLabels(startDate, endDate);
+// 	            values = dataType.equals("revenue") ? 
+// 	                     ordersService.getYearlyRevenue(startDate, endDate) :
+// 	                     ordersService.getYearlyOrderCount(startDate, endDate);
+// 	            break;
+// 	        default:
+// 	            return ResponseEntity.badRequest().body(Map.of("error", "Invalid range specified"));
+// 	    }
+//
+// 	    Map<String, Object> chartData = new HashMap<>();
+// 	    chartData.put("labels", labels);
+// 	    chartData.put("values", values);
+//
+// 	    return ResponseEntity.ok(chartData);
+// 	}
 
 }
