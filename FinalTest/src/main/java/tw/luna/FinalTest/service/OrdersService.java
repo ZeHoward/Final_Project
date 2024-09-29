@@ -70,7 +70,7 @@ public class OrdersService {
 
         Cart cart = cartRepository.findByUsersUserId(userId);
         orders.setCart(cart);
-        Set<CartItems> cartItems = cart.getCartItems();
+        List<CartItems> cartItems = cart.getCartItems();
         for (CartItems cartItem : cartItems) {
             OrderDetails orderDetail = new OrderDetails();
             orderDetail.setOrder(orders);
