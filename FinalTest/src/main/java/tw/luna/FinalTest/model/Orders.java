@@ -61,8 +61,8 @@ public class Orders {
 	@Column(name = "Address")
 	private String address;
 
-	@OneToMany(mappedBy = "orders", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JsonManagedReference
+	@OneToMany(mappedBy = "orders", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JsonManagedReference("orders_orderDetails")
 	private List<OrderDetails> orderDetails;
 
 	@OneToMany(mappedBy = "orders", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -196,7 +196,7 @@ public class Orders {
 
 	@Override
 	public String toString() {
-		return "Order{" +
+		return "Orders{" +
 				"orderId=" + orderId +
 				", user=" + user +
 				", totalAmount=" + totalAmount +

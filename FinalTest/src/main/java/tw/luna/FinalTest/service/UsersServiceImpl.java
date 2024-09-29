@@ -122,4 +122,9 @@ public class UsersServiceImpl {
 		
 		
 	}
+	
+	// 活躍用戶數
+	public long getActiveUserCount() {
+        return usersRepository.countActiveUsers();
+    }
 }
