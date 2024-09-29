@@ -27,9 +27,9 @@ public class CartController {
     }
 
     //加入購物車(新增或更新)，購物車內未存在該商品->新增；已存在->修改數量
-    @PutMapping("/add/{userId}")
-    public ResponseEntity<String> addToCart(@PathVariable Long userId, @RequestBody CartInsertDto cartInsertDto){
-        cartService.addToCart(cartInsertDto, userId);
+    @PutMapping("/put/{userId}")
+    public ResponseEntity<String> updateCart(@PathVariable Long userId, @RequestBody CartInsertDto cartInsertDto){
+        cartService.updateCart(cartInsertDto, userId);
         return ResponseEntity.ok("成功將商品加入購物車");
     }
 

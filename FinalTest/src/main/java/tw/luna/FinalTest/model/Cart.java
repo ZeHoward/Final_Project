@@ -6,6 +6,8 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.DynamicUpdate;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 //cart表結構:cartId、userId、total、totalQuantity、status
@@ -28,14 +30,22 @@ public class Cart {
 
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference("Cart_CartItems")
-    private Set<CartItems> cartItems = new HashSet<>();
+    private List<CartItems> cartItems;
 
 	public Cart() {
     }
 
-    public Cart(Integer cartId, Users users, Set<CartItems> cartItems) {
+    public Cart(Integer cartId, Users users, List<CartItems> cartItems) {
         this.cartId = cartId;
         this.users = users;
+        this.cartItems = cartItems;
+    }
+
+    public List<CartItems> getCartItems() {
+        return cartItems;
+    }
+
+    public void setCartItems(List<CartItems> cartItems) {
         this.cartItems = cartItems;
     }
 
@@ -53,14 +63,6 @@ public class Cart {
 
     public void setUsers(Users users) {
         this.users = users;
-    }
-
-    public Set<CartItems> getCartItems() {
-        return cartItems;
-    }
-
-    public void setCartItems(Set<CartItems> cartItems) {
-        this.cartItems = cartItems;
     }
 
     @Override

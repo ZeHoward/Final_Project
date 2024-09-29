@@ -38,6 +38,8 @@ import org.w3c.dom.Document;
 
 import integration.errorMsg.ErrorMessage;
 import integration.exception.EcpayException;
+import org.w3c.dom.Document;
+import tw.luna.FinalTest.config.EcpayConfig;
 import tw.luna.FinalTest.config.EcpayConfig;
 
 
@@ -129,7 +131,7 @@ public class EcpayFunction {
 	 * 產生檢查碼
 	 * @param key
 	 * @param iv
-	 * @param Hashtable<String, String> params
+//	 * @param Hashtable<String, String> params
 	 * @return
 	 */
 	public final static String genCheckMacValue(String key, String iv, Hashtable<String, String> params){
@@ -347,7 +349,7 @@ public class EcpayFunction {
 	/**
 	 * 將 byte array 資料做 hash md5或 sha256 運算，並回傳 hex值的字串資料
 	 * @param data
-	 * @param isMD5
+//	 * @param isMD5
 	 * @return string
 	 */
 	private final static String hash(byte data[], String mode){
