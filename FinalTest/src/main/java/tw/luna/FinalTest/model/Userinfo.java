@@ -20,6 +20,8 @@ public class Userinfo {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long id;
+	
+
 
 	@OneToOne
 	@MapsId
@@ -71,14 +73,14 @@ public class Userinfo {
 		this.birthday = birthday;
 	}
 
-//	public Long getId() {
-//		return id;
-//	}
-//
-//
-//	public void setId(Long id) {
-//		this.id = id;
-//	}
+	public Long getId() {
+		return id;
+	}
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 
 	public Userinfo(Long id, Users users, String firstName, String lastName, String address, String postalCode, String birthday, String county, String district) {
@@ -151,7 +153,7 @@ public class Userinfo {
 	public void setUsers(Users users) {
 		this.users = users;
 	}
-	
+
 	
 	
 }
