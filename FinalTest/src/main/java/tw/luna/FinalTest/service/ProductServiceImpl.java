@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tw.luna.FinalTest.model.Product;
+
 import tw.luna.FinalTest.repository.ProductRepository;
 
 @Service
@@ -52,5 +53,15 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public List<Product> saveProductsInBatch(List<Product> products) {
 		return productRepository.saveAll(products);
+	}
+
+	@Override
+	public List<Product> finProductsByType(String type) {
+		return productRepository.findByType(type);
+	}
+
+	@Override
+	public List<Product> findProductsByTypeAndCategory(String type, Integer categoryId) {
+		return productRepository.findByTypeAndCategory_CategoryId(type, categoryId);
 	}
 }

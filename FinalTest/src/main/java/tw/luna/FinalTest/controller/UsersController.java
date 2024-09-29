@@ -29,8 +29,8 @@ public class UsersController {
 	
 	
 	@RequestMapping("/regist")
-	public UsersResponse regist(@RequestBody Users users) {
-		return usersServiceImpl.registUsers(users);
+	public UsersResponse regist(@RequestBody UserAllInfo registUser) {
+		return usersServiceImpl.registUsers(registUser);
 	}
 	
 	@GetMapping("/checkEmail")
@@ -66,7 +66,11 @@ public class UsersController {
 	@GetMapping("/userAllInfo")
 	public UserAllInfo userAllInfo() {
 		Users loggedInUser = (Users)session.getAttribute("loggedInUser");
-		return usersServiceImpl.userAllInfo(loggedInUser.getEmail());
+		System.out.println(loggedInUser.getUserId());
+		UserAllInfo userAllInfo = usersServiceImpl.userAllInfo(loggedInUser.getUserId());
+		System.out.println(userAllInfo.toString());
+		
+		return userAllInfo;
 	}
 	
 	@RequestMapping("/update")

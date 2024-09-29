@@ -18,7 +18,7 @@ body {
   max-width: 100vw;
   position: relative;
   margin: 0 auto;
-  z-index:1;
+  z-index: 1;
 }
 
 /* 添加淡化效果 */
@@ -79,7 +79,7 @@ body {
 
 .slidesPrev :hover,
 .slidesNext :hover {
-  background-color:rgb(240, 194, 74);
+  background-color: rgb(240, 194, 74);
 }
 
 .dot {
@@ -130,6 +130,10 @@ h1 {
   justify-content: space-between;
 }
 
+.product-name {
+  font-size: 18px;
+}
+
 .product-image {
   width: 90%;
   height: 200px;
@@ -138,7 +142,7 @@ h1 {
 }
 
 .product-price {
-  font-size: 20px;
+  font-size: 15px;
   color: #d35b50;
   font-weight: 700;
 }
