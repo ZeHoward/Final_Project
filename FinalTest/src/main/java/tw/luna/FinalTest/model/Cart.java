@@ -30,25 +30,13 @@ public class Cart {
     @JsonManagedReference("Cart_CartItems")
     private Set<CartItems> cartItems = new HashSet<>();
 
-//    @Column(name = "total",nullable = false)
-//    private Integer total;
-//
-//    @Column(name = "totalQuantity",nullable = false)
-//    private Integer totalQuantity;
-
-    @Column(name = "status")
-    private String status;
-
 	public Cart() {
     }
 
-    public Cart(Integer cartId, Users users, Set<CartItems> cartItems, String status) {
+    public Cart(Integer cartId, Users users, Set<CartItems> cartItems) {
         this.cartId = cartId;
         this.users = users;
         this.cartItems = cartItems;
-//        this.total = total;
-//        this.totalQuantity = totalQuantity;
-        this.status = status;
     }
 
     public Integer getCartId() {
@@ -75,60 +63,10 @@ public class Cart {
         this.cartItems = cartItems;
     }
 
-//    public Integer getTotal() {
-//        return total;
-//    }
-//
-//    public void setTotal(Integer total) {
-//        this.total = total;
-//    }
-//
-//    public void setTotalQuantity(Integer totalQuantity) {
-//        this.totalQuantity = totalQuantity;
-//    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     @Override
     public String toString() {
         return "Cart{" +
                 "cartId=" + cartId +
-                ", status='" + status + '\'' +
                 '}';
     }
 }
-//	public Long getCardId() {
-//		return cardId;
-//	}
-//
-//	public void setCardId(Long cardId) {
-//		this.cardId = cardId;
-//	}
-//
-//
-//
-//	public String getStatus() {
-//		return status;
-//	}
-//
-//	public void setStatus(String status) {
-//		this.status = status;
-//	}
-//
-////	public Users getUsers() {
-////		return users;
-////	}
-////
-////	public void setUsers(Users users) {
-////		this.users = users;
-////	}
-////
-//
-//}
-
