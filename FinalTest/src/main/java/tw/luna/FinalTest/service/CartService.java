@@ -15,7 +15,9 @@ import tw.luna.FinalTest.repository.CartItemsRepository;
 import tw.luna.FinalTest.repository.CartRepository;
 import tw.luna.FinalTest.repository.ProductRepository;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -33,28 +35,28 @@ public class CartService {
     //根據用戶 ID 獲取該用戶的購物車項目
     public List<CartSelectDto> getCartItemsByUserId(Long userId) {
         Cart cart = cartRepository.findByUsersUserId(userId);
-        return cart.getCartItems().stream().map(cartItem ->
-                {
-                    Product product = cartItem.getProduct();
-//                    List<ProductImage> productImageList = product.getProductImages().stream().collect(Collectors.toList());
-//                    byte[] image = product.getProductImages().stream()
-//                            .findFirst() // 取第一張圖片
-//                            .map(ProductImage::getImage) // 假設getImage()返回byte[]
-//                            .orElse(null); // 如果沒有圖片，則為null
-                    return
-                new CartSelectDto(cartItem.getCartitemsId(), cartItem.getPrice(), cartItem.getQuantity(),
-                        product.getName());
-    }
+        List<CartItems> cartItems = cart.getCartItems();
+        List<CartSelectDto> result = new ArrayList<>(cartItems.size());
 
-        ).collect(Collectors.toList());
-
+        for (CartItems cartItem : cartItems) {
+            Product product = cartItem.getProduct();
+            CartSelectDto dto = new CartSelectDto(
+                    cartItem.getCartitemsId(),
+                    cartItem.getPrice(),
+                    cartItem.getQuantity(),
+                    product.getName()
+            );
+            result.add(dto);
+        }
+        return result;
     }
 
     //將商品加入購物車 (新增或修改數量)
     @Transactional
-    public void addToCart(CartInsertDto cartInsertDto, Long userId) {
+    public void updateCart(CartInsertDto cartInsertDto, Long userId) {
         Cart cart = cartRepository.findByUsersUserId(userId);
-        Product product = productRepository.findByProductId(cartInsertDto.getProductId());
+        Product product = productRepository.findProductByName(cartInsertDto.getProductName());
+        System.out.println(product);
         CartItems isPresent = cartItemsRepository.isCartItemInCart(cart, product);
         if(isPresent == null) {          //購物車內目前不存在該商品 ->新增
             CartItems cartItems = new CartItems();
@@ -64,10 +66,9 @@ public class CartService {
             //單價
             cartItems.setPrice(product.getPrice());
             cartItemsRepository.save(cartItems);
-
         }else {  //購物車內已存在該商品 ->更新數量
 
-            isPresent.setQuantity(Math.max(cartInsertDto.getQuantity(), 1) +  isPresent.getQuantity());
+            isPresent.setQuantity(Math.max(cartInsertDto.getQuantity(), 1));
             cartItemsRepository.save(isPresent);
         }
     }

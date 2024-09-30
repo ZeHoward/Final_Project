@@ -1,6 +1,7 @@
 package tw.luna.FinalTest.dto.orders;
 
 import jakarta.persistence.Column;
+import tw.luna.FinalTest.model.DiscountType;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -10,13 +11,13 @@ import java.time.LocalDateTime;
 public class OrdersInsertDto {
 
     //payment
-    private LocalDateTime paymentDate; //now
+//    private LocalDateTime paymentDate; //now
     private Integer paymentAmount; //cart
-    private String merchantNo; //點擊進入綠界時取得---訂單編號
+ //   private String merchantNo; //點擊進入綠界時取得---訂單編號
 
 
     //orders
-    private LocalDateTime orderDate; //now
+//    private LocalDateTime orderDate; //now
     private Integer totalAmount;//cart
     private Integer percentageDiscount;//cart
     private Integer amountDiscount;//cart
@@ -29,27 +30,20 @@ public class OrdersInsertDto {
 //    private Integer quantity; //cartitems
 //    private Integer price; //cartitems
 
+    //coupon
+    private String code;
+
     public OrdersInsertDto() {
     }
 
-    public OrdersInsertDto(LocalDateTime paymentDate, Integer paymentAmount, String merchantNo, LocalDateTime orderDate, Integer totalAmount, Integer percentageDiscount, Integer amountDiscount, Integer finalAmount, String address) {
-        this.paymentDate = paymentDate;
+    public OrdersInsertDto(Integer paymentAmount, Integer totalAmount, Integer percentageDiscount, Integer amountDiscount, Integer finalAmount, String address, String code) {
         this.paymentAmount = paymentAmount;
-        this.merchantNo = merchantNo;
-        this.orderDate = orderDate;
         this.totalAmount = totalAmount;
         this.percentageDiscount = percentageDiscount;
         this.amountDiscount = amountDiscount;
         this.finalAmount = finalAmount;
         this.address = address;
-    }
-
-    public LocalDateTime getPaymentDate() {
-        return paymentDate;
-    }
-
-    public void setPaymentDate(LocalDateTime paymentDate) {
-        this.paymentDate = paymentDate;
+        this.code = code;
     }
 
     public Integer getPaymentAmount() {
@@ -58,22 +52,6 @@ public class OrdersInsertDto {
 
     public void setPaymentAmount(Integer paymentAmount) {
         this.paymentAmount = paymentAmount;
-    }
-
-    public String getMerchantNo() {
-        return merchantNo;
-    }
-
-    public void setMerchantNo(String merchantNo) {
-        this.merchantNo = merchantNo;
-    }
-
-    public LocalDateTime getOrderDate() {
-        return orderDate;
-    }
-
-    public void setOrderDate(LocalDateTime orderDate) {
-        this.orderDate = orderDate;
     }
 
     public Integer getTotalAmount() {
@@ -114,5 +92,13 @@ public class OrdersInsertDto {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 }

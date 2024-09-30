@@ -1,5 +1,3 @@
-
-	console.log("進入template.js");
 	document.addEventListener("DOMContentLoaded", function () {
     // 菜單展開、關閉功能
     window.openSidenav = function () {
@@ -53,9 +51,7 @@
     let isMemberDivVisible = false; // 初始為隱藏
 
     document.getElementById('memberIcon').addEventListener('click', (e) => {
-		console.log("before,e.stop");
         e.stopPropagation(); // 防止點擊會員圖標時觸發頁面其他地方的點擊事件
-		console.log("after,e.stop")
         if (isMemberDivVisible) {
             memberInfoDiv.style.display = "none";
 			slideshowContainer.style.zIndex=5;
@@ -69,6 +65,7 @@
 
     // 點擊頁面其他地方時隱藏會員功能菜單
     document.addEventListener('click', function (e) {
+        e.stopPropagation();
         if (isMemberDivVisible && !memberInfoDiv.contains(e.target)) {
             memberInfoDiv.style.display = "none";
 			slideshowContainer.style.zIndex=5;
@@ -117,6 +114,37 @@
         }
 
     });
+
+    //header的logo點了會跳到首頁
+    document.getElementById('logoDiv').addEventListener('click', () => {
+        window.location.href = '/enjoyum';
+    });
+
+    //判斷使用者是否為登入狀態
+    let loginDiv = document.getElementById('loginDiv');
+    let logoutDiv = document.getElementById('logoutDiv');
+
+    loginDiv.style.display = 'none';
+    logoutDiv.style.display = 'none';
+
+    fetch('http://localhost:8080/users/checkSession',  {
+        method : 'GET'
+    }).then(response => {
+        if(!response.ok){
+            throw new Error('Error : ');
+        }
+        return response.json();
+    }).then(data => {
+        if(data){
+            loginDiv.style.display = 'none';
+            logoutDiv.style.display = 'block';
+        }else{
+            loginDiv.style.display = 'block';
+            logoutDiv.style.display = 'none';
+        }
+    }).catch(error => {
+        console.log('Error :' + error);
+    })
 	
 	//登出
 	document.getElementById('logout').addEventListener('click', () => {
