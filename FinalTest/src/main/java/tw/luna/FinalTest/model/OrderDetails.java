@@ -32,7 +32,7 @@ public class OrderDetails {
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "orderId", nullable = false)
-//	@JsonBackReference("orders_orderDetails")
+	@JsonBackReference("orders_orderDetails")
 	private Orders orders;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
