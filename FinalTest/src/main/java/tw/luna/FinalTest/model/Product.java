@@ -72,16 +72,15 @@ public class Product {
 	private Boolean isDel;
 
 	// 新增一對多關係，商品可以有多張圖片
-	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-	private List<ProductImage> images;
+//	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+//	private List<ProductImage> images;
+//	public List<ProductImage> getImages() {
+//		return images;
+//	}
 
-	public List<ProductImage> getImages() {
-		return images;
-	}
-
-	public void setImages(List<ProductImage> images) {
-		this.images = images;
-	}
+//	public void setImages(List<ProductImage> images) {
+//		this.images = images;
+//	}
 
 	public Product() {
 	}
