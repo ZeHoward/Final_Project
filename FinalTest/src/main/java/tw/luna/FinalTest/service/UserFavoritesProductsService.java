@@ -62,8 +62,8 @@ public class UserFavoritesProductsService {
 
                 // 獲取商品的第一張圖片，將其轉換為 Base64
                 String imageBase64 = "";
-                if (product.getImages() != null && !product.getImages().isEmpty()) {
-                    ProductImage image = product.getImages().get(0);
+                if (product.getProductImages() != null && !product.getProductImages().isEmpty()) {
+                    ProductImage image = product.getProductImages().get(0);
                     imageBase64 = Base64.getEncoder().encodeToString(image.getImage());
                 }
 
