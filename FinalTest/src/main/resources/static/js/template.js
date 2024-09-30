@@ -45,31 +45,6 @@
         }
     };
 
-/*
-    document.getElementById('togglePic1').addEventListener('click', () => {
-        var margin1 = document.getElementById("add");
-        var img1 = document.getElementById("updown1");
-        if (img1.src.includes("down.png")) {
-            img1.src = "./material/icon/up.png";
-            margin1.style.margin = "40px 0";
-        } else {
-            img1.src = "./material/icon/down.png";
-            margin1.style.margin = "";
-        }
-    });
-
-    document.getElementById('togglePic2').addEventListener('click', () => {
-        var margin2 = document.getElementById("add");
-        var img2 = document.sgetElementById("updown2");
-        if (img2.src.includes("down.png")) {
-            img2.src = "./material/icon/up.png";
-            margin2.style.margin = "40px 0";
-        } else {
-            img2.src = "./material/icon/down.png";
-            margin2.style.margin = "";
-        }
-    });
-*/
     // 會員功能菜單顯示/隱藏
     let memberInfoDiv = document.getElementById("memberInfoDiv");
 	let slideshowContainer =document.getElementById("slideshow-container");
