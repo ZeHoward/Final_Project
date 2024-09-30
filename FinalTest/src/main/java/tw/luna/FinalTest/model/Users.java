@@ -39,6 +39,9 @@ public class Users {
 	
 	@Column(name = "token")
 	private String token;
+	
+	@Column(name = "isDel")
+	private boolean isDel;
 
 	@OneToOne(mappedBy = "users", cascade = CascadeType.ALL)
 	@JsonManagedReference("Users_UserInfo")
@@ -49,9 +52,9 @@ public class Users {
 	private List<Orders> orders;
 
 
-	@OneToOne(mappedBy = "users", cascade = CascadeType.ALL)
-	@JsonManagedReference("Users_Cart")
-	private Cart cart;
+//	@OneToOne(mappedBy = "users", cascade = CascadeType.ALL)
+//	@JsonManagedReference("Users_Cart")
+//	private Cart cart;
 
 	public Users() {
 	}
@@ -63,7 +66,7 @@ public class Users {
 		this.password = password;
 		this.phoneNumber = phoneNumber;
 		this.userinfo = userinfo;
-		this.cart = cart;
+//		this.cart = cart;
 	}
 
 	public List<Orders> getOrders() {
@@ -75,13 +78,13 @@ public class Users {
 	}
 
 
-	public Cart getCart() {
-		return cart;
-	}
+//	public Cart getCart() {
+//		return cart;
+//	}
 
-	public void setCart(Cart cart) {
-		this.cart = cart;
-	}
+//	public void setCart(Cart cart) {
+//		this.cart = cart;
+//	}
 
 	public Userinfo getUserinfo() {
 		return userinfo;
@@ -137,6 +140,14 @@ public class Users {
 
 	public void setToken(String token) {
 		this.token = token;
+	}
+
+	public boolean getIsDel() {
+		return isDel;
+	}
+
+	public void setIsDel(boolean isDel) {
+		this.isDel = isDel;
 	}
 
 //	public List<UserFavoritesProducts> getUserFavoritesProducts() {

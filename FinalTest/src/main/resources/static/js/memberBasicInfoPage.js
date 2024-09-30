@@ -181,14 +181,12 @@ window.onload = function () {
 	   fetch('http://localhost:8080/users/userAllInfo',{
 	     method : 'GET'
 	   }).then(response => {
-	     console.log("你好")
 	     if(!response.ok){
 	       console.log('查詢會員失敗')
 	     }
 	     return response.json();
 	   }).then(data => {
 	     userId = data.userId;
-	     console.log(userId);
 	     document.getElementById("userName").value = data.username;
 	     document.getElementById("email").value = data.email;
 	     document.getElementById("telephone").value = data.phoneNumber;
@@ -236,9 +234,37 @@ window.onload = function () {
 	         birthday : birthday
 	       })
 	     }).then(response => {
-	       console.log(response)
-	     })
+	       if(!response.ok){
+			throw new Error('Error:');
+		   }
+		   return response.json();
+	     }).then(data => {
+			if(data){
+				alert('會員資料更新成功');
+			}else{
+				alert('會員資料更新失敗,請稍後在試!!');
+			}
+		 })
 	     
 	   });
 
-	 };
+	 document.getElementById('deleteButton').addEventListener("click", () => {
+		fetch('http://localhost:8080/users/deleteUser',{
+			method : 'GET',
+		}).then(response => {
+			if(!response.ok){
+				throw new Error('Error:');
+			}
+			return response.json();
+		}).then(data => {
+			console.log('返回的int:' + data);
+			if(data > 0){
+				alert('成功刪除');
+				window.location.href = '/enjoyum';
+			}
+		}).catch(error => {
+			console.log('error:', error);
+		})
+	 });
+   
+   };

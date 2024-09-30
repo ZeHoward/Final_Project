@@ -401,3 +401,7 @@ body {
 #myContainer{
   width: 100%;
 }
+
+#logoDiv:hover{
+  cursor: pointer;
+}

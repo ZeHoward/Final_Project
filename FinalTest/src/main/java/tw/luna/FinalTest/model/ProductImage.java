@@ -27,10 +27,8 @@ public class ProductImage implements Serializable{
 	private Long id;
 	
 	@ManyToOne
-
 	@JoinColumn(name = "productId", nullable = false)
 	@JsonBackReference("product_productImage") 
-
     private Product product;
 	
 	@Lob
