@@ -782,28 +782,14 @@ function generateProductUploadForm() {
                 <div class="form-group">
                     <label for="category">菜品分類</label>
                     <select id="category">
-                        <option value="category1">家常料理</option>
-                        <option value="category2">兒童友善</option>
-                        <option value="category3">銀髮友善</option>
-                        <option value="category4">異國料理</option>
-                        <option value="category5">多人料理</option>
+                        <option value="1">家常料理</option>
+                        <option value="2">兒童友善</option>
+                        <option value="3">銀髮友善</option>
+                        <option value="4">異國料理</option>
+                        <option value="5">多人料理</option>
                     </select>
                 </div>
 
-                <!-- 人數、難度等選項 -->
-                <div class="form-group row-group">
-                    <div class="field">
-                        <label for="people">人數</label>
-                        <select id="people">
-                            <option value="1">1人</option>
-                            <option value="2">2人</option>
-                            <option value="3">3人</option>
-                            <option value="4">4人</option>
-                            <option value="5">5人</option>
-                        </select>
-                    </div>
-
-                </div>
 
                 <!-- 商品描述 -->
                 <div class="form-group">
@@ -865,6 +851,8 @@ function generateProductUploadForm() {
           timer: 1500,
         });
       });
+    console.log("Category ID: ", document.getElementById("category").value);
+    console.log(JSON.stringify(productData));
     generateProductUploadForm();
   }
 
@@ -987,13 +975,14 @@ function generateProductManagementWithActionsContent() {
       } else {
         products = data;
         updatePagination(products);
-        filterProductsByStatus();
-        sortProducts();
+        filterProductsByStatus(products);
+        sortProducts(products);
         renderProducts(products);
       }
     })
     .catch((error) => {
       console.error("獲取商品清單發生錯誤", error);
+      console.log(products.length);
     });
 
   // 根據狀態篩選商品
