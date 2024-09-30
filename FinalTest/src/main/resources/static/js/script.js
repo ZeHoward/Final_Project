@@ -1,267 +1,5 @@
 generateOverviewContent(); // 預設總覽頁面為首頁
 
-// // 假資料，模擬不同報表的數據
-// const chartData = {
-//     revenue: {
-//         week: {
-//             labels: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
-//             data: [3000, 40, 3500, 5000, 4500, 6000, 5500],
-//             label: '每周營業額'
-//         },
-//         month: {
-//             labels: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
-//             data: [12000, 15000, 18000, 20000, 22000, 25000, 28000, 30000, 33000, 35000, 37000, 40000],
-//             label: '每月營業額'
-//         },
-//         year: {
-//             labels: ['2019', '2020', '2021', '2022', '2023'],
-//             data: [150000, 180000, 200000, 220000, 250000],
-//             label: '每年營業額'
-//         }
-//     },
-//     orders: {
-//         week: {
-//             labels: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
-//             data: [100, 120, 150, 180, 200, 250, 300],
-//             label: '每周訂單總量'
-//         },
-//         month: {
-//             labels: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
-//             data: [1000, 1500, 1800, 2000, 2200, 2500, 2800, 3000, 3500, 3700, 3900, 4000],
-//             label: '每月訂單總量'
-//         },
-//         year: {
-//             labels: ['2019', '2020', '2021', '2022', '2023'],
-//             data: [15000, 18000, 20000, 22000, 25000],
-//             label: '每年訂單總量'
-//         }
-//     },
-//     users: {
-//         week: {
-//             labels: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
-//             data: [50, 60, 75, 80, 100, 120, 150],
-//             label: '每周總用戶數'
-//         },
-//         month: {
-//             labels: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
-//             data: [500, 700, 900, 1100, 1300, 1500, 1700, 2000, 2300, 2500, 2800, 3000],
-//             label: '每月總用戶數'
-//         },
-//         year: {
-//             labels: ['2019', '2020', '2021', '2022', '2023'],
-//             data: [10000, 15000, 20000, 25000, 30000],
-//             label: '每年總用戶數'
-//         }
-//     }
-// };
-
-// // 假資料，模擬不同訂單
-// const orders = [
-//     {
-//         orderNumber: "XXXX1",
-//         name: "產品名稱1",
-//         deliveryMethod: "快遞",
-//         orderAmount: 1000,
-//         status: "已付款",
-//         statusClass: "paid",
-//         date: "2024-09-21 16:55:56",
-//         couponId: "COUPON123",
-//         orderDate: "2024-09-20",
-//         percentageDiscount: 10,  // 百分比折扣
-//         amountDiscount: 100,  // 折扣金額
-//         totalAmount: 1000,  // 訂單總金額
-//         finalAmount: 900,  // 最終金額
-//         comment: "快速配送，無問題",
-//         changedBy: "Admin",
-//         changedAt: "2024-09-22 08:00",
-//         address: "100台北市中正區鄭州路8號",
-//         userId: "1",
-//         items: [
-//             {
-//                 name: "商品1",
-//                 sku: "SKU123",
-//                 quantity: 2,
-//                 price: 50,
-//                 image: "紅大頭.png"
-//             },
-//             {
-//                 name: "商品2",
-//                 sku: "SKU456",
-//                 quantity: 1,
-//                 price: 100,
-//                 image: "紅大頭.png"
-//             }
-//         ]
-//     },
-//     {
-//         orderNumber: "XXXX2",
-//         name: "產品名稱2",
-//         deliveryMethod: "郵寄",
-//         orderAmount: 2000,
-//         status: "尚未付款",
-//         statusClass: "unpaid",
-//         date: "2024-09-22 10:00:00",
-//         couponId: "COUPON456",
-//         orderDate: "2024-09-21",
-//         percentageDiscount: 5,
-//         amountDiscount: 100,
-//         totalAmount: 2000,
-//         finalAmount: 1900,
-//         comment: "",
-//         changedBy: "Admin",
-//         changedAt: "2024-09-22 09:00",
-//         address: "100台北市中正區忠孝西路一段49號",
-//         userId: "1",
-//         items: [
-//             {
-//                 name: "商品3",
-//                 sku: "SKU789",
-//                 quantity: 1,
-//                 price: 150,
-//                 image: "紅大頭.png"
-//             }
-//         ]
-//     }
-// ];
-
-// // 假資料，模擬不同商品
-// const products = [
-//     {
-//         index: '1',
-//         name: '商品名稱1',
-//         sku: 'ABC-66',
-//         image: '紅大頭.png',
-//         category: '異國料理',
-//         servings: 3,
-//         difficulty: '中等',
-//         vegan: '否',
-//         time: '40',
-//         price: 500,
-//         description: '一道經典的肉醬義大利麵，肉醬味道濃郁，搭配煮得恰到好處的義大利麵，簡單且美味，適合全家人享用',
-//         Ingredients: '義大利麵200g,牛絞肉 150g,番茄醬 1 杯,洋蔥 1 顆（切丁）,大蒜 2 瓣（切碎）,橄欖油 2 湯匙',
-//         steps: '用手做，再說一次用手做',
-//         stock: '50',
-//     },
-//     {
-//         index: '2',
-//         name: '商品名稱2',
-//         sku: 'ABC-66',
-//         image: '紅大頭.png',
-//         category: '異國料理',
-//         servings: 3,
-//         difficulty: '中等',
-//         vegan: '否',
-//         time: '40',
-//         price: 500,
-//         description: '一道經典的肉醬義大利麵，肉醬味道濃郁，搭配煮得恰到好處的義大利麵，簡單且美味，適合全家人享用',
-//         Ingredients: '義大利麵200g,牛絞肉 150g,番茄醬 1 杯,洋蔥 1 顆（切丁）,大蒜 2 瓣（切碎）,橄欖油 2 湯匙',
-//         steps: '用手做，再說一次用手做',
-//         stock: '50',
-//     },
-//     {
-//         index: '3',
-//         name: '商品名稱3',
-//         sku: 'ABC-66',
-//         image: '紅大頭.png',
-//         category: '異國料理',
-//         servings: 3,
-//         difficulty: '中等',
-//         vegan: '否',
-//         time: '80',
-//         price: 500,
-//         description: '一道經典的肉醬義大利麵，肉醬味道濃郁，搭配煮得恰到好處的義大利麵，簡單且美味，適合全家人享用',
-//         Ingredients: '義大利麵200g,牛絞肉 150g,番茄醬 1 杯,洋蔥 1 顆（切丁）,大蒜 2 瓣（切碎）,橄欖油 2 湯匙',
-//         steps: '用手做，再說一次用手做',
-//         stock: '50',
-//     }
-// ];
-
-// // 假資料，模擬不同食譜
-// const recipes = [
-//     {
-//         image: '紅大頭.png',
-//         name: '肉醬義大利麵',
-//         description: '一道經典的肉醬義大利麵，搭配濃郁的番茄醬和牛肉，簡單美味，適合全家人享用。',
-//         category: '異國料理',
-//         people: 4,
-//         difficulty: '中等',
-//         vegan: '否',
-//         time: '45',
-//         ingredients: '義大利麵 200g, 牛絞肉 150g, 番茄醬 1 杯, 洋蔥 1 顆 (切丁), 大蒜 2 瓣 (切碎), 橄欖油 2 湯匙, 鹽與胡椒適量',
-//         steps: '1. 先煮義大利麵，根據包裝說明進行。2. 加熱橄欖油，炒洋蔥和大蒜直到金黃。3. 加入牛絞肉，炒熟。4. 倒入番茄醬，煮滾後轉小火煨煮10分鐘。5. 將煮好的義大利麵拌入醬汁，調味後即可享用。'
-//     },
-//     {
-//         image: '紅大頭.png',
-//         name: '奶油雞肉蘑菇濃湯',
-//         description: '豐富的口感與濃郁的香味，是一份溫暖又美味的湯品。',
-//         category: '家常料理',
-//         people: 2,
-//         difficulty: '簡單',
-//         vegan: '否',
-//         time: '30',
-//         ingredients: '雞胸肉 200g, 蘑菇 100g, 洋蔥 1 顆 (切丁), 奶油 30g, 牛奶 300ml, 麵粉 2 湯匙, 鹽與胡椒適量',
-//         steps: '1. 雞胸肉切塊，蘑菇切片。2. 加熱奶油，炒洋蔥至軟。3. 加入雞肉，炒至變色。4. 加入麵粉，煮至呈糊狀。5. 慢慢倒入牛奶，拌勻。6. 加入蘑菇，煮至濃稠，調味後即可。'
-//     },
-//     {
-//         image: '紅大頭.png',
-//         name: '蔬菜炒飯',
-//         description: '清爽的蔬菜炒飯，加入多樣時令蔬菜，簡單又營養，適合素食者。',
-//         category: '多人料理',
-//         people: 3,
-//         difficulty: '簡單',
-//         vegan: '全素',
-//         time: '20',
-//         ingredients: '白飯 300g, 青椒 1 顆, 紅蘿蔔 1 根, 洋蔥 1 顆, 玉米粒 100g, 醬油 2 湯匙, 橄欖油 1 湯匙',
-//         steps: '1. 將青椒、紅蘿蔔、洋蔥切丁。2. 加熱橄欖油，炒洋蔥至透明。3. 加入其他蔬菜，翻炒至軟。4. 倒入白飯，拌炒均勻。5. 加入醬油調味，翻炒片刻後即可享用。'
-//     }
-// ];
-
-// // 假資料，模擬不同用戶
-// const users = [
-//     {
-//         userId: '1',
-//         username: 'john_doe',
-//         firstName: 'John',
-//         lastName: 'Doe',
-//         email: 'john.doe@example.com',
-//         password: 'password123',
-//         phoneNumber: '123-456-7890',
-//         address: '123 Main St',
-//         city: '台中市',
-//         postalCode: '400',
-//         createdAt: '2023-01-15 14:30:00',
-//         updatedAt: '2023-09-10 09:20:00'
-//     },
-//     {
-//         userId: '2',
-//         username: 'jane_smith',
-//         firstName: 'Jane',
-//         lastName: 'Smith',
-//         email: 'jane.smith@example.com',
-//         password: 'password456',
-//         phoneNumber: '987-654-3210',
-//         address: '456 Maple Ave',
-//         city: '台北市',
-//         postalCode: '100',
-//         createdAt: '2023-02-20 16:45:00',
-//         updatedAt: '2023-09-05 10:10:00'
-//     },
-//     {
-//         userId: '3',
-//         username: 'alice_wang',
-//         firstName: 'Alice',
-//         lastName: 'Wang',
-//         email: 'alice.wang@example.com',
-//         password: 'alice789',
-//         phoneNumber: '456-123-7890',
-//         address: '789 Oak St',
-//         city: '高雄市',
-//         postalCode: '800',
-//         createdAt: '2023-03-10 11:50:00',
-//         updatedAt: '2023-09-12 14:00:00'
-//     }
-// ];
-
 // 點擊"總覽"時生成內容的函數
 function generateOverviewContent() {
   const mainContent = document.querySelector(".main-content");
@@ -730,27 +468,23 @@ function generateProductUploadForm() {
   const productUploadForm = `
         <section class="product-upload">
             <h1>商品上傳</h1>
-            <div class="image-upload">
-                <div class="image-preview">
-                <button id="uploadImageButton">圖片上傳</button>
-                </div>
-            </div>
-
             <form>
-                <div class="form-group">
-                    <label for="sku" id="skulabel">SKU</label>
-                    <textarea id="sku" rows="1"></textarea>
-                </div>
+                 <div class="image-upload">
+                    <div class="image-preview">
+                    <input type="file" />
+                    </div>
+                 </div>
+
                 <div class="form-group">
                     <label for="name">商品名稱</label>
                     <textarea id="name" rows="1" placeholder="商品名稱"></textarea>
                 </div>
-            
+
                 <div class="form-group">
-                    <label for="price">價格</label>
-                    <textarea id="price" rows="1" placeholder="價格"></textarea>
+                    <label for="sku" id="skulabel">SKU</label>
+                    <textarea id="sku" rows="1"></textarea>
                 </div>
-            
+
                 <!-- 類別選擇 -->
                 <div class="form-group">
                     <label for="type">商品類型</label>
@@ -776,6 +510,11 @@ function generateProductUploadForm() {
                 <div class="form-group">
                     <label for="description">商品描述</label>
                     <textarea id="description" rows="8"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="price">價格</label>
+                    <textarea id="price" rows="1" placeholder="價格"></textarea>
                 </div>
 
                 <!-- 庫存 -->
@@ -811,11 +550,23 @@ function generateProductUploadForm() {
       })
       .then((result) => {
         console.log("商品上傳成功", result);
+        Swal.fire({
+          title: "Upload Success",
+          text: `「成功上傳${productData.name}」商品`,
+          icon: "success",
+          timer: 1500,
+        });
       })
       .catch((error) => {
         console.error("上傳商品時發生錯誤", error);
-        console.log(JSON.stringify(productData));
+        Swal.fire({
+          title: "Upload Failed",
+          text: `「上傳${productData.name}」商品失敗`,
+          icon: "error",
+          timer: 1500,
+        });
       });
+    generateProductUploadForm();
   }
 
   // 綁定事件監聽器
@@ -825,16 +576,16 @@ function generateProductUploadForm() {
       event.preventDefault(); // 防止表單提交刷新頁面
 
       const productData = {
-        type: document.getElementById("type").value, // "preparedFood"
-        sku: document.getElementById("sku").value, // 例如 "SKU506"
-        name: document.getElementById("name").value, // 例如 "冷凍日式春雨調理包"
-        description: document.getElementById("description").value, // 例如 商品描述文本
-        price: parseInt(document.getElementById("price").value), // 例如 110
+        type: document.getElementById("type").value,
+        sku: document.getElementById("sku").value,
+        name: document.getElementById("name").value,
+        description: document.getElementById("description").value,
+        price: parseInt(document.getElementById("price").value),
         category: {
-          categoryId: parseInt(document.getElementById("category").value), // 例如 5
+          categoryId: parseInt(document.getElementById("category").value),
         },
-        stockQuantity: parseInt(document.getElementById("stockQuantity").value), // 例如 50
-        isDel: false, // 如果這是固定的值，可以直接設定
+        stockQuantity: parseInt(document.getElementById("stockQuantity").value),
+        isDel: false, //這是固定的值
       };
       uploadProduct(productData); // 在按鈕點擊後調用上傳功能
     });
@@ -850,75 +601,154 @@ function generateProductManagementWithActionsContent() {
 
   // 動態生成商品管理的標題和表格
   const productManagementSection = `
-        <section class="product-management">
-            <h1>商品管理</h1>
-            <div class="orderControls">
-                <label>搜尋商品：</label>
-                <input type="text" id="productSearchInput" placeholder="輸入名稱或SKU" class="SearchInput">
-                
-                <label>每頁顯示結果數：</label>
-                <select id="resultsPerPage">
-                    <option value="25">25</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
-                </select>
+    <section class="product-management">
+        <h1>商品管理</h1>
+        <div class="orderControls">
+            <label>搜尋商品：</label>
+            <input type="text" id="productSearchInput" placeholder="輸入名稱或SKU" class="SearchInput">
 
-                <label>排序：</label>
-                <select id="sortOrder">
-                    <option value="skuASC">SKU (A-Z)</option>
-                    <option value="skuDESC">SKU (Z-A)</option>
-                    <option value="stockValuesASC">庫存量(遞增)</option>
-                    <option value="stockValuesDESC">庫存量(遞減)</option>
-                    <option value="priceASC">價格(遞增)</option>
-                    <option value="priceDESC">價格(遞減)</option>
-                </select>
+            <label>每頁顯示結果數：</label>
+            <select id="resultsPerPage">
+                <option value="25">25</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+            </select>
 
-                <label>狀態：</label>
-                <select id="productStatus">
-                    <option value="all">全部</option>
-                    <option value="stockNull">零庫存</option>
-                </select>
-            </div>
+            <label>排序：</label>
+            <select id="sortOrder">
+                <option value="default">預設排序</option>
+                <option value="skuASC">SKU (A-Z)</option>
+                <option value="skuDESC">SKU (Z-A)</option>
+                <option value="stockValuesASC">庫存量(遞增)</option>
+                <option value="stockValuesDESC">庫存量(遞減)</option>
+                <option value="priceASC">價格(遞增)</option>
+                <option value="priceDESC">價格(遞減)</option>
+            </select>
 
-            <!-- 商品表格 -->
-            <table class="product-table">
-                <thead>
-                    <tr>
-                        <th>商品圖片</th>
-                        <th>SKU</th>
-                        <th>商品名稱</th>
-                        <th>價格</th>
-                        <th>庫存</th>
-                        <th>操作</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- 這裡插入動態生成的商品 -->
-                </tbody>
-            </table>
+            <label>狀態：</label>
+            <select id="productStatus">
+                <option value="all">全部</option>
+                <option value="stockNull">零庫存</option>
+            </select>
+        </div>
 
-            <!-- 頁數切換的下拉選單 -->
-            <div class="pagination-controls" style="text-align: right; margin-top: 20px;">
-                <label for="pageSelect">選擇頁數：</label>
-                <select id="pageSelect" style="border-radius: 5px; border: 1px solid #ccc;">
-                    <!-- 動態生成頁數選項 -->
-                </select>
-            </div>
-        </section>
-    `;
+        <!-- 商品表格 -->
+        <table class="product-table">
+            <thead>
+                <tr>
+                    <th>商品圖片</th>
+                    <th>productId</th>
+                    <th>SKU</th>
+                    <th>商品名稱</th>
+                    <th>價格</th>
+                    <th>庫存</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 這裡插入動態生成的商品 -->
+            </tbody>
+        </table>
+
+        <!-- 頁數切換的下拉選單 -->
+        <div class="pagination-controls" style="text-align: right; margin-top: 20px;">
+            <label for="pageSelect">選擇頁數：</label>
+            <select id="pageSelect" style="border-radius: 5px; border: 1px solid #ccc;">
+                <!-- 動態生成頁數選項 -->
+            </select>
+        </div>
+    </section>
+`;
   mainContent.innerHTML = productManagementSection;
 
   const tbody = document.querySelector(".product-table tbody");
   const resultsPerPageSelect = document.getElementById("resultsPerPage");
+  const sortOrderSelect = document.getElementById("sortOrder"); // 取得排序選項
+  const productStatusSelect = document.getElementById("productStatus"); // 取得狀態選項
   const pageSelect = document.getElementById("pageSelect");
   const searchInput = document.getElementById("productSearchInput");
 
   // 設置每頁顯示的商品數量
+  let products = [];
   let resultsPerPage = parseInt(resultsPerPageSelect.value);
   let currentPage = 1; // 預設為第 1 頁
   let totalPages = Math.ceil(products.length / resultsPerPage);
 
-  // 動態生成每個商品的表格行
+  fetch(`http://localhost:8080/products`)
+    .then((response) => {
+      if (!response.ok) {
+        throw new error("無法獲取現有商品清單");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      if (data.length === 0) {
+        console.log("目前沒有可顯示的商品");
+        tbody.innerHTML = `<tr><td colspan="6">目前沒有商品資料</td></tr>`;
+      } else {
+        products = data;
+        updatePagination(products);
+        filterProductsByStatus();
+        sortProducts();
+        renderProducts(products);
+      }
+    })
+    .catch((error) => {
+      console.error("獲取商品清單發生錯誤", error);
+    });
+
+  // 根據狀態篩選商品
+  function filterProductsByStatus(status) {
+    if (status === "all") return products; // 如果選擇"全部"，返回所有商品
+    return products.filter((product) => product.stock === 0);
+  }
+
+  // 根據排序選項對商品進行排序
+  function sortProducts(productsList, sortBy) {
+    if (sortBy === "priceASC") {
+      return productsList.sort((a, b) => a.price - b.price);
+    } else if (sortBy === "priceDESC") {
+      return productsList.sort((a, b) => b.price - a.price);
+    } else if (sortBy === "stockValuesASC") {
+      return productsList.sort((a, b) => a.stockQuantity - b.stockQuantity);
+    } else if (sortBy === "stockValuesDESC") {
+      return productsList.sort((a, b) => b.stockQuantity - a.stockQuantity);
+    } else if (sortBy === "skuASC") {
+      // 按 SKU 升序排序
+      return productsList.sort((a, b) => a.sku.localeCompare(b.sku));
+    } else if (sortBy === "skuDESC") {
+      // 按 SKU 降序排序
+      return productsList.sort((a, b) => b.sku.localeCompare(a.sku));
+    } else if (sortBy === "default") {
+      // 預設排序，根據 productId 升序
+      return productsList.sort((a, b) => a.productId - b.productId);
+    }
+
+    return productsList;
+  }
+
+  // 渲染篩選和排序後的商品
+  function renderFilteredAndSortedProducts() {
+    let filteredProducts = filterProductsByStatus(productStatusSelect.value); // 先篩選
+    let sortedProducts = sortProducts(filteredProducts, sortOrderSelect.value); // 再排序
+    updatePagination(sortedProducts);
+    renderProducts(sortedProducts);
+  }
+
+  // 動態生成頁數選項
+  function updatePagination(filteredProducts) {
+    pageSelect.innerHTML = ""; // 清空頁數選項
+    totalPages = Math.ceil(filteredProducts.length / resultsPerPage); // 更新總頁數
+    for (let i = 1; i <= totalPages; i++) {
+      const option = document.createElement("option");
+      option.value = i;
+      option.textContent = `第 ${i} 頁`;
+      pageSelect.appendChild(option);
+    }
+    pageSelect.value = currentPage; // 設定當前頁數
+  }
+
+  // 動態生成每個商品的表格行  渲染商品函數
   function renderProducts(filteredProducts) {
     tbody.innerHTML = ""; // 清空表格內容
     const start = (currentPage - 1) * resultsPerPage;
@@ -927,22 +757,28 @@ function generateProductManagementWithActionsContent() {
 
     visibleProducts.forEach((product, index) => {
       const tr = document.createElement("tr");
+      const imageSrc = product.productImages?.[0]?.image
+        ? `data:image/jpeg;base64,${product.productImages?.[0]?.image}`
+        : "./donut.png";
 
       tr.innerHTML = `
-                <td><img src="${product.image}" alt="${product.name}"></td>
-                <td>${product.sku}</td>
-                <td>${product.name}</td>
-                <td>${product.price}</td>
-                <td>${product.stock}</td>
-                <td class="actions">
-                    <button class="edit-button" data-index="${
-                      start + index
-                    }">修改</button>
-                    <button class="delete-button" data-index="${
-                      start + index
-                    }">刪除</button>
-                </td>
-            `;
+            <td><img src="${imageSrc}" alt="${
+        product.name
+      }"  style="height: 80px; width: 80px"></td>
+            <td>${product.productId}</td>
+            <td>${product.sku}</td>
+            <td>${product.name}</td>
+            <td>${product.price}</td>
+            <td>${product.stockQuantity}</td>
+            <td class="actions">
+                <button class="edit-button" data-index="${
+                  start + index
+                }">修改</button>
+                <button class="delete-button" data-index="${
+                  start + index
+                }">刪除</button>
+            </td>
+        `;
 
       tbody.appendChild(tr);
     });
@@ -959,215 +795,283 @@ function generateProductManagementWithActionsContent() {
     document.querySelectorAll(".delete-button").forEach((button) => {
       button.addEventListener("click", function () {
         const productIndex = this.getAttribute("data-index");
-        if (confirm("確定要刪除這個商品嗎？")) {
-          products.splice(productIndex, 1); // 刪除商品
-          generateProductManagementWithActionsContent(); // 刷新商品管理頁面
-        }
+        const productId = products[productIndex].productId;
+        const productName = products[productIndex].name;
+
+        Swal.fire({
+          title: "注意",
+          text: `你確定要刪除「${productName}」商品`,
+          icon: "warning",
+          showCancelButton: true, // 顯示"取消"按鈕的意思
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "確定",
+          cancelButtonText: "取消",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            fetch(`http://localhost:8080/products/${productId}`, {
+              method: "DELETE",
+              headers: {
+                "Content-Type": "application/json",
+              },
+            })
+              .then((response) => {
+                if (!response.ok) {
+                  throw new Error("刪除商品失敗");
+                }
+                return response.text();
+              })
+              .then(() => {
+                Swal.fire({
+                  title: "Deleted!",
+                  text: `刪除「${productName}」商品成功`,
+                  icon: "success",
+                  timer: 1500,
+                });
+                products.splice(productIndex, 1);
+                generateProductManagementWithActionsContent(); // 刷新商品管理頁面
+              })
+              .catch((error) => {
+                console.error("刪除商品時發生錯誤");
+                Swal.fire({
+                  title: "Failed!",
+                  text: `刪除「${productName}」商品失敗`,
+                  icon: "error",
+                  timer: 1500,
+                });
+                generateProductManagementWithActionsContent(); // 刷新商品管理頁面
+              });
+          }
+        });
       });
     });
-  }
 
-  // 動態生成頁數選項
-  function updatePagination(filteredProducts) {
-    pageSelect.innerHTML = ""; // 清空頁數選項
-    totalPages = Math.ceil(filteredProducts.length / resultsPerPage); // 更新總頁數
-    for (let i = 1; i <= totalPages; i++) {
-      const option = document.createElement("option");
-      option.value = i;
-      option.textContent = `第 ${i} 頁`;
-      pageSelect.appendChild(option);
-    }
-    pageSelect.value = currentPage; // 設定當前頁數
-  }
-
-  // 搜尋商品
-  searchInput.addEventListener("input", () => {
-    const searchTerm = searchInput.value.toLowerCase();
-    const filteredProducts = products.filter(
-      (product) =>
-        product.name.toLowerCase().includes(searchTerm) ||
-        product.sku.toLowerCase().includes(searchTerm)
-    );
-    currentPage = 1; // 搜尋時將頁面重置到第 1 頁
-    updatePagination(filteredProducts);
-    renderProducts(filteredProducts);
-  });
-
-  // 更新顯示結果數時，重新計算頁數並渲染
-  resultsPerPageSelect.addEventListener("change", () => {
-    resultsPerPage = parseInt(resultsPerPageSelect.value);
-    currentPage = 1; // 切換每頁顯示數時，返回到第 1 頁
-    const filteredProducts = products;
-    updatePagination(filteredProducts);
-    renderProducts(filteredProducts);
-  });
-
-  // 監聽頁數切換事件
-  pageSelect.addEventListener("change", () => {
-    currentPage = parseInt(pageSelect.value);
-    const filteredProducts = products;
-    renderProducts(filteredProducts);
-  });
-
-  // 初始化頁面
-  updatePagination(products);
-  renderProducts(products);
-}
-
-// 點擊"商品管理-修改"時生成內容的函數
-function generateProductManagementEdit(product) {
-  const mainContent = document.querySelector(".main-content");
-  mainContent.innerHTML = ""; // 清空之前的內容
-
-  // 動態生成商品修改的表單
-  const productEditForm = `
-        <section class="product-edit">
-            <h1>修改商品 - ${product.name}</h1>
-            <div class="image-upload">
-                <div class="image-preview">
-                    <img src="${
-                      product.image
-                    }" alt="商品圖片" style="width: 100%; height: auto;">
-                    <button id="uploadImageButton">上傳新圖片</button>
-                </div>
-            </div>
-
-            <form>
-                <div class="form-group">
-                     <label for="sku">SKU</label>
-                     <textarea id="sku" rows="1" readonly>${
-                       product.sku
-                     }</textarea>
-                </div>
-
-                <div class="form-group">
-                     <label for="name">商品名稱</label>
-                     <textarea id="name" rows="1">${product.name}</textarea>
-                </div>
-				
-                <div class="form-group">
-                     <label for="price">價格</label>
-                     <textarea id="price" rows="1">${product.price}</textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="category">商品類型</label>
-                    <select id="category">
-                        <option value="調理包" ${
-                          product.type === "調理包" ? "selected" : ""
-                        }>調理包</option>
-                        <option value="食材包" ${
-                          product.type === "食材包" ? "selected" : ""
-                        }>食材包</option>
-                    </select>
-                </div>
-				
-                <div class="form-group">
-                    <label for="category">菜品分類</label>
-                    <select id="category">
-                        <option value="家常料理" ${
-                          product.category === "家常料理" ? "selected" : ""
-                        }>家常料理</option>
-                        <option value="兒童友善" ${
-                          product.category === "兒童友善" ? "selected" : ""
-                        }>兒童友善</option>
-                        <option value="銀髮友善" ${
-                          product.category === "銀髮友善" ? "selected" : ""
-                        }>銀髮友善</option>
-                        <option value="異國料理" ${
-                          product.category === "異國料理" ? "selected" : ""
-                        }>異國料理</option>
-                        <option value="多人料理" ${
-                          product.category === "多人料理" ? "selected" : ""
-                        }>多人料理</option>
-                    </select>
-                </div>
-                <div class="form-group row-group">
-                    <div class="field">
-                        <label for="servings">人數份量</label>
-                        <select id="servings">
-                            <option value="1" ${
-                              product.servings === 1 ? "selected" : ""
-                            }>1人</option>
-                            <option value="2" ${
-                              product.servings === 2 ? "selected" : ""
-                            }>2人</option>
-                            <option value="3" ${
-                              product.servings === 3 ? "selected" : ""
-                            }>3人</option>
-                            <option value="4" ${
-                              product.servings === 4 ? "selected" : ""
-                            }>4人</option>
-                            <option value="5" ${
-                              product.servings === 5 ? "selected" : ""
-                            }>5人</option>
-                        </select>
-                    </div>
-
-                </div>
-
-                <div class="form-group">
-                    <label for="price">價格</label>
-                    <textarea id="price" rows="1">${product.price}</textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="description">商品描述</label>
-                    <textarea id="description" rows="4">${
-                      product.description
-                    }</textarea>
-                </div>
-
-                <div class="form-group">
-                    <button type="submit" id="submitButton">保存修改</button>
-                    <button type="button" id="cancelButton">取消</button>
-                </div>
-            </form>
-        </section>
-    `;
-  mainContent.innerHTML = productEditForm;
-
-  // **在生成表單後立即綁定事件**
-  document
-    .getElementById("submitButton")
-    .addEventListener("click", function (event) {
-      event.preventDefault();
-
-      // 更新商品屬性
-      product.sku = document.getElementById("sku").value;
-      product.name = document.getElementById("name").value;
-      product.category = document.getElementById("category").value;
-      product.servings = parseInt(
-        document.getElementById("servings").value,
-        10
+    // 搜尋商品
+    searchInput.addEventListener("input", () => {
+      const searchTerm = searchInput.value.toLowerCase();
+      const filteredProducts = products.filter(
+        (product) =>
+          product.name.toLowerCase().includes(searchTerm) ||
+          product.sku.toLowerCase().includes(searchTerm)
       );
-      product.difficulty = document.getElementById("difficulty").value;
-      product.vegan = document.getElementById("vegan").value;
-      product.time = parseInt(document.getElementById("time").value, 10);
-      product.price = parseFloat(document.getElementById("price").value);
-      product.description = document.getElementById("description").value;
-      product.Ingredients = document.getElementById("ingredients").value;
-      product.steps = document.getElementById("steps").value;
-
-      alert("商品已修改！");
-      generateProductManagementWithActionsContent(); // 返回商品管理頁面
+      currentPage = 1; // 搜尋時將頁面重置到第 1 頁
+      updatePagination(filteredProducts);
+      renderProducts(filteredProducts);
     });
 
-  // 添加取消按鈕的功能
-  document
-    .getElementById("cancelButton")
-    .addEventListener("click", function () {
-      generateProductManagementWithActionsContent(); // 返回商品管理頁面
+    // 更新顯示結果數時，重新計算頁數並渲染
+    resultsPerPageSelect.addEventListener("change", () => {
+      resultsPerPage = parseInt(resultsPerPageSelect.value);
+      currentPage = 1; // 切換每頁顯示數時，返回到第 1 頁
+      const filteredProducts = products;
+      updatePagination(filteredProducts);
+      renderProducts(filteredProducts);
     });
 
-  // 如果需要處理圖片上傳，可以在這裡添加事件監聽器
-  document
-    .getElementById("uploadImageButton")
-    .addEventListener("click", function () {
-      // 這裡可以添加圖片上傳的功能
-      alert("上傳新圖片的功能尚未實現。");
+    // 監聽頁數切換事件
+    pageSelect.addEventListener("change", () => {
+      currentPage = parseInt(pageSelect.value);
+      const filteredProducts = products;
+      renderProducts(filteredProducts);
     });
+
+    // 監聽排序選項變更事件
+    sortOrderSelect.addEventListener("change", () => {
+      currentPage = 1;
+      renderFilteredAndSortedProducts();
+    });
+
+    // 監聽狀態選項變更事件
+    productStatusSelect.addEventListener("change", () => {
+      currentPage = 1;
+      renderFilteredAndSortedProducts();
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const editProductButton = document.getElementById("editProductButton");
+
+    if (editProductButton) {
+      editProductButton.addEventListener("click", function (event) {
+        event.preventDefault(); // 防止跳轉
+        generateProductManagementWithActionsContent(); // 調用生成商品管理頁面的函數
+      });
+    } else {
+      console.error("editProductButton 元素未找到");
+    }
+  });
+
+  // 商品管理部分(點擊"商品管理-修改"時生成內容的函數)
+  function generateProductManagementEdit(product) {
+    const mainContent = document.querySelector(".main-content");
+    mainContent.innerHTML = ""; // 清空之前的內容
+
+    // 動態生成商品修改的表單
+    const productEditForm = `
+      <section class="product-edit">
+          <h1>修改商品 - ${product.name}</h1>
+          <div class="image-upload">
+              <div class="image-preview">
+                  <img src="${
+                    product.image
+                  }" alt="商品圖片" style="width: 100%; height: auto;">
+                  <button id="uploadImageButton">上傳新圖片</button>
+              </div>
+          </div>
+
+          <form>
+              <div class="form-group">
+                  <label for="productId">productId</label>
+                  <textarea id="productId" rows="1" readonly>${
+                    product.productId
+                  }</textarea>
+              </div>
+              <div class="form-group">
+                  <label for="sku">SKU</label>
+                  <textarea id="sku" rows="1" readonly>${product.sku}</textarea>
+              </div>
+
+              <div class="form-group">
+                  <label for="name">商品名稱</label>
+                  <textarea id="name" rows="1">${product.name}</textarea>
+              </div>
+
+              <div class="form-group">
+                  <label for="type">商品類型</label>
+                  <select id="type">
+                      <option value="mealkit" ${
+                        product.type === "調理包" ? "selected" : ""
+                      }>調理包</option>
+                      <option value="preparedFood" ${
+                        product.type === "食材包" ? "selected" : ""
+                      }>食材包</option>
+                  </select>
+              </div>
+              
+              <div class="form-group">
+                  <label for="category">菜品分類</label>
+                  <select id="category">
+                      <option value="5" ${
+                        product.category === "家常料理" ? "selected" : ""
+                      }>家常料理</option>
+                      <option value="3" ${
+                        product.category === "兒童友善" ? "selected" : ""
+                      }>兒童友善</option>
+                      <option value="4" ${
+                        product.category === "銀髮友善" ? "selected" : ""
+                      }>銀髮友善</option>
+                      <option value="1" ${
+                        product.category === "異國料理" ? "selected" : ""
+                      }>異國料理</option>
+                      <option value="2" ${
+                        product.category === "多人料理" ? "selected" : ""
+                      }>多人料理</option>
+                  </select>
+              </div>
+
+              <div class="form-group">
+                  <label for="description">商品描述</label>
+                  <textarea id="description" rows="4">${
+                    product.description
+                  }</textarea>
+              </div>
+
+              <div class="form-group">
+                  <label for="price">價格</label>
+                  <textarea id="price" rows="1">${product.price}</textarea>
+              </div>
+
+              <div class="form-group">
+                  <label for="stockQuantity">庫存數量</label>
+                  <textarea id="stockQuantity" rows="1">${
+                    product.stockQuantity
+                  }</textarea>
+              </div>
+
+
+              <div class="form-group">
+                  <button type="button" id="submitButton">保存修改</button>
+                  <button type="button" id="cancelButton">取消</button>
+              </div>
+          </form>
+      </section>
+  `;
+    mainContent.innerHTML = productEditForm;
+
+    document
+      .getElementById("submitButton")
+      .addEventListener("click", function (event) {
+        event.preventDefault();
+        updateProductDetails(product);
+      });
+
+    // 綁定取消按鈕事件
+    document
+      .getElementById("cancelButton")
+      .addEventListener("click", function () {
+        generateProductManagementWithActionsContent(); // 返回商品管理頁面
+      });
+  }
+
+  function updateProductDetails(product) {
+    const updatedProduct = {
+      productId: parseInt(document.getElementById("productId").value),
+      sku: document.getElementById("sku").value,
+      name: document.getElementById("name").value,
+      type: document.getElementById("type").value,
+      category: {
+        categoryId: parseInt(document.getElementById("category").value),
+      },
+      price: parseInt(document.getElementById("price").value),
+      description: document.getElementById("description").value,
+      stockQuantity: parseInt(document.getElementById("stockQuantity").value),
+    };
+    updateProduct(updatedProduct);
+  }
+
+  function updateProduct(productData) {
+    fetch(`http://localhost:8080/products`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(productData),
+      mode: "cors",
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("修改商品失敗");
+        }
+        return response.json();
+      })
+      .then((result) => {
+        console.log("商品修改成功", result);
+        Swal.fire({
+          title: "成功",
+          text: `「成功修改${productData.name}」商品資訊`,
+          icon: "success",
+          timer: 1500,
+        });
+        generateProductManagementWithActionsContent(); // 返回商品管理頁面
+      })
+      .catch((error) => {
+        console.error("修改商品時發生錯誤", error);
+        Swal.fire({
+          title: "錯誤",
+          text: `修改${productData.name}商品資訊時發生錯誤`,
+          icon: "error",
+          timer: 1500,
+        });
+      });
+  }
 }
+// 如果需要處理圖片上傳，可以在這裡添加事件監聽器
+// document
+//   .getElementById("uploadImageButton")
+//   .addEventListener("click", function () {
+//     // 這裡可以添加圖片上傳的功能
+//     alert("上傳新圖片的功能尚未實現。");
+//   });
 
 // 點擊"食譜上傳"時生成內容的函數
 function generateRecipeUploadForm() {
@@ -1529,199 +1433,6 @@ function generateRecipeManagementContent() {
   const filteredRecipes = filterRecipesByCategory(categorySelect.value);
   updatePagination(filteredRecipes);
   renderRecipes(filteredRecipes);
-}
-
-// 點擊"庫存管理"時生成內容的函數
-function generateStockManagementContent() {
-  const mainContent = document.querySelector(".main-content");
-  mainContent.innerHTML = ""; // 清空之前的內容
-
-  // 動態生成庫存管理的標題和表格
-  const stockManagementSection = `
-        <section class="stock-management">
-            <h1>庫存管理</h1>
-            <div class="stockControls">
-                <label>搜尋商品：</label>
-                <input type="text" id="productSearchInput" placeholder="輸入名稱或SKU" class="SearchInput">
-                
-                <label>每頁顯示結果數：</label>
-                <select id="resultsPerPage">
-                    <option value="25">25</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
-                </select>
-
-                <label>排序：</label>
-                <select id="sortOptions">
-                    <option value="priceASC">價格(遞增)</option>
-                    <option value="priceDESC">價格(遞減)</option>
-                    <option value="stockASC">庫存(遞增)</option>
-                    <option value="stockDESC">庫存(遞減)</option>
-                </select>
-
-                <label>狀態：</label>
-                <select id="statusFilter">
-                    <option value="all">全部</option>
-                    <option value="nomore">無庫存</option>
-                </select>
-            </div>
-            <!-- 庫存表格 -->
-            <table class="stock-table">
-                <thead>
-                    <tr>
-                        <th>商品圖片</th>
-                        <th>SKU</th>
-                        <th>商品名稱</th>
-                        <th>價格</th>
-                        <th>庫存數量</th>
-                        <th>操作</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- 這裡插入動態生成的商品庫存 -->
-                </tbody>
-            </table>
-
-            <!-- 分頁控制 -->
-            <div class="pagination-controls" style="text-align: right; margin-top: 20px;">
-                <label for="pageSelect">選擇頁數：</label>
-                <select id="pageSelect" style="border-radius: 5px; border: 1px solid #ccc;">
-                    <!-- 動態生成頁數選項 -->
-                </select>
-            </div>
-        </section>
-    `;
-  mainContent.innerHTML = stockManagementSection;
-
-  const tbody = document.querySelector(".stock-table tbody");
-  const resultsPerPageSelect = document.getElementById("resultsPerPage");
-  const pageSelect = document.getElementById("pageSelect");
-  const searchInput = document.getElementById("productSearchInput");
-  const sortOptions = document.getElementById("sortOptions");
-  const statusFilter = document.getElementById("statusFilter");
-
-  // 設置每頁顯示的商品數量
-  let resultsPerPage = parseInt(resultsPerPageSelect.value);
-  let currentPage = 1; // 預設為第 1 頁
-  let totalPages = Math.ceil(products.length / resultsPerPage);
-
-  // 根據狀態篩選商品
-  function filterProductsByStatus(status) {
-    if (status === "all") return products; // 如果選擇"全部"，返回所有商品
-    return products.filter((product) => product.stock === 0);
-  }
-
-  // 根據排序選項對商品進行排序
-  function sortProducts(productsList, sortBy) {
-    if (sortBy === "priceASC") {
-      return productsList.sort((a, b) => a.price - b.price);
-    } else if (sortBy === "priceDESC") {
-      return productsList.sort((a, b) => b.price - a.price);
-    } else if (sortBy === "stockASC") {
-      return productsList.sort((a, b) => a.stock - b.stock);
-    } else if (sortBy === "stockDESC") {
-      return productsList.sort((a, b) => b.stock - a.stock);
-    }
-    return productsList;
-  }
-
-  // 動態生成每個商品的表格行
-  function renderProducts(filteredProducts) {
-    tbody.innerHTML = ""; // 清空表格內容
-    const start = (currentPage - 1) * resultsPerPage;
-    const end = start + resultsPerPage;
-    const visibleProducts = filteredProducts.slice(start, end);
-
-    visibleProducts.forEach((product, index) => {
-      const tr = document.createElement("tr");
-
-      tr.innerHTML = `
-                <td><img src="${product.image}" alt="${
-        product.name
-      }" style="width: 50px; height: 50px;"></td>
-                <td>${product.sku}</td>
-                <td>${product.name}</td>
-                <td>${product.price}</td>
-                <td class="stock-quantity">${product.stock}</td>
-                <td>
-                    <button class="details-link" data-index="${
-                      start + index
-                    }">詳情</button>
-                </td>
-            `;
-
-      tbody.appendChild(tr);
-    });
-  }
-
-  // 動態生成頁數選項
-  function updatePagination(filteredProducts) {
-    pageSelect.innerHTML = ""; // 清空頁數選項
-    totalPages = Math.ceil(filteredProducts.length / resultsPerPage); // 更新總頁數
-    for (let i = 1; i <= totalPages; i++) {
-      const option = document.createElement("option");
-      option.value = i;
-      option.textContent = `第 ${i} 頁`;
-      pageSelect.appendChild(option);
-    }
-    pageSelect.value = currentPage; // 設定當前頁數
-  }
-
-  // 搜尋商品
-  searchInput.addEventListener("input", () => {
-    const searchTerm = searchInput.value.toLowerCase();
-    const filteredProducts = products.filter(
-      (product) =>
-        product.name.toLowerCase().includes(searchTerm) ||
-        product.sku.toLowerCase().includes(searchTerm)
-    );
-    currentPage = 1; // 搜尋時將頁面重置到第 1 頁
-    updatePagination(filteredProducts);
-    renderProducts(filteredProducts);
-  });
-
-  // 狀態篩選商品
-  statusFilter.addEventListener("change", () => {
-    const selectedStatus = statusFilter.value;
-    let filteredProducts = filterProductsByStatus(selectedStatus);
-    filteredProducts = sortProducts(filteredProducts, sortOptions.value);
-    currentPage = 1; // 篩選時頁數重置
-    updatePagination(filteredProducts);
-    renderProducts(filteredProducts);
-  });
-
-  // 排序功能
-  sortOptions.addEventListener("change", () => {
-    let filteredProducts = filterProductsByStatus(statusFilter.value);
-    filteredProducts = sortProducts(filteredProducts, sortOptions.value);
-    currentPage = 1; // 改變排序時返回到第 1 頁
-    updatePagination(filteredProducts);
-    renderProducts(filteredProducts);
-  });
-
-  // 更新顯示結果數時，重新計算頁數並渲染
-  resultsPerPageSelect.addEventListener("change", () => {
-    resultsPerPage = parseInt(resultsPerPageSelect.value);
-    currentPage = 1; // 切換每頁顯示數時，返回到第 1 頁
-    let filteredProducts = filterProductsByStatus(statusFilter.value);
-    filteredProducts = sortProducts(filteredProducts, sortOptions.value);
-    updatePagination(filteredProducts);
-    renderProducts(filteredProducts);
-  });
-
-  // 監聽頁數切換事件
-  pageSelect.addEventListener("change", () => {
-    currentPage = parseInt(pageSelect.value);
-    let filteredProducts = filterProductsByStatus(statusFilter.value);
-    filteredProducts = sortProducts(filteredProducts, sortOptions.value);
-    renderProducts(filteredProducts);
-  });
-
-  // 初始化頁面
-  let filteredProducts = filterProductsByStatus(statusFilter.value);
-  filteredProducts = sortProducts(filteredProducts, sortOptions.value);
-  updatePagination(filteredProducts);
-  renderProducts(filteredProducts);
 }
 
 // 點擊"用戶管理"時生成內容的函數
@@ -2091,7 +1802,6 @@ function generateCouponManagementForm() {
   const mainContent = document.querySelector(".main-content");
   mainContent.innerHTML = ""; // 清空之前的內容
 
-  
   const couponManagementForm = `
         <section class="coupon-management">
             <h1>優惠券管理</h1>
@@ -2363,10 +2073,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
 document.addEventListener("DOMContentLoaded", function () {
   const editProductButton = document.getElementById("editProductButton");
-  editProductButton.addEventListener("click", function (event) {
-    event.preventDefault(); // 防止跳轉
-    generateProductManagementWithActionsContent(); // 調用生成商品管理頁面的函數
-  });
+
+  if (editProductButton) {
+    editProductButton.addEventListener("click", function (event) {
+      event.preventDefault(); // 防止跳轉
+      generateProductManagementWithActionsContent(); // 調用生成商品管理頁面的函數
+    });
+  } else {
+    console.error("editProductButton 元素未找到");
+  }
 });
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -2374,14 +2089,6 @@ document.addEventListener("DOMContentLoaded", function () {
   editProductButton.addEventListener("click", function (event) {
     event.preventDefault(); // 防止跳轉
     generateRecipeManagementContent(); // 調用生成食譜管理頁面的函數
-  });
-});
-
-document.addEventListener("DOMContentLoaded", function () {
-  const manageStockButton = document.getElementById("manageStockButton");
-  manageStockButton.addEventListener("click", function (event) {
-    event.preventDefault(); // 防止跳轉
-    generateStockManagementContent(); // 調用生成庫存管理頁面的函數
   });
 });
 
@@ -2409,14 +2116,6 @@ document.querySelectorAll(".details-link").forEach((link) => {
     generateProductEditForm(products[productIndex]); // 調用商品修改頁面並傳入對應商品數據
   });
 });
-
-// // 保存按鈕事件
-// document.getElementById('saveButton').addEventListener('click', function () {
-//     products.name = document.getElementById('productName').value;
-//     products.price = document.getElementById('productPrice').value;
-//     products.stock = document.getElementById('productStock').value;
-//     generateProductManagementContent();  // 返回商品管理頁面
-// });
 
 // 取消按鈕事件
 document.getElementById("cancelButton").addEventListener("click", function () {
