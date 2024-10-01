@@ -1,7 +1,7 @@
 var slideIndex = 1;
 var autoPlayInterval;
-let currentIndex1 = 0; // 第一區域的索引
-let currentIndex2 = 0; // 第二區域的索引
+let currentIndex1 = 0;
+let currentIndex2 = 0;
 
 // 自動播放幻燈片
 function startAutoPlay() {

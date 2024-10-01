@@ -157,17 +157,7 @@ window.onload = function () {
 
 	   document.getElementById("county").addEventListener('change', (event) => {
 	     let county = event.target.value;
-	     let districtSelect = document.getElementById("district");
-	     districtSelect.innerHTML = '<option value="">選擇市/區</option>';
-
-	     if (districtData[county]) {
-	         districtData[county].forEach((district) => {
-	         let option = document.createElement('option');
-	         option.value = district;
-	         option.textContent = district;
-	         districtSelect.appendChild(option);
-	       });
-	     }
+		 populateDistrictOptions(county);
 	   });
 
 	   document.getElementById("district").addEventListener('change', (event) => {
@@ -177,6 +167,19 @@ window.onload = function () {
 	     zipInput.value = zipCode;
 	   });
 
+
+	    let populateDistrictOptions = (county) =>  {
+			let districtSelect = document.getElementById("district");
+			districtSelect.innerHTML = '<option value="">選擇市/區</option>';
+			if (districtData[county]) {
+				districtData[county].forEach((district) => {
+					let option = document.createElement('option');
+					option.value = district;
+					option.textContent = district;
+					districtSelect.appendChild(option);
+				});
+			}
+		}
 
 	   fetch('http://localhost:8080/users/userAllInfo',{
 	     method : 'GET'
@@ -194,6 +197,7 @@ window.onload = function () {
 	     document.getElementById("lastName").value = data.lastName;
 	     document.getElementById("address").value = data.address;
 	     document.getElementById("county").value = data.county;
+		 populateDistrictOptions(data.county);
 	     document.getElementById("district").value = data.district;
 	     document.getElementById("zipCode").value = data.postalCode;
 	     document.getElementById("birthday").value = data.birthday;
@@ -241,6 +245,30 @@ window.onload = function () {
 	     }).then(data => {
 			if(data){
 				alert('會員資料更新成功');
+				fetch('http://localhost:8080/users/userAllInfo',{
+					method : 'GET'
+				  }).then(response => {
+					if(!response.ok){
+					  console.log('查詢會員失敗')
+					}
+					return response.json();
+				  }).then(data => {
+					userId = data.userId;
+					document.getElementById("userName").value = data.username;
+					document.getElementById("email").value = data.email;
+					document.getElementById("telephone").value = data.phoneNumber;
+					document.getElementById("firstName").value = data.firstName;
+					document.getElementById("lastName").value = data.lastName;
+					document.getElementById("address").value = data.address;
+					document.getElementById("county").value = data.county;
+					document.getElementById("district").value = data.district;
+					document.getElementById("zipCode").value = data.postalCode;
+					document.getElementById("birthday").value = data.birthday;
+					window.location.href = '/memberBasicInfoPage';
+				  }).catch(error => {
+					console.log('error', error)
+				  });
+
 			}else{
 				alert('會員資料更新失敗,請稍後在試!!');
 			}

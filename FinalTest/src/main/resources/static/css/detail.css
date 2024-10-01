@@ -23,7 +23,6 @@ body {
   flex-direction: column;
   flex: 1 1 50%;
   padding: 0 20px;
-  /* text-align: left; */
 }
 
 .product-gallery {
@@ -50,12 +49,12 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin: 10px 0;
+  margin: 15px 0;
 }
 
 .thumbnail {
-  width: 6rem;
-  height: 6rem;
+  width: 6.5rem;
+  height: 6.5rem;
   margin: 0 5px;
   cursor: pointer;
   object-fit: cover;
@@ -67,15 +66,23 @@ body {
   border: 2px solid #3c4f6d;
 }
 
-.detail,
+.ship > h3 {
+  margin: 10px 0;
+  padding: 3px;
+  background-color: #cbb68c;
+  border-radius: 5px;
+  display: inline-block;
+}
+
+.description,
+.caption,
 .related-product,
-.tab,
-#Reviews {
+.tab {
   margin: 2vw 5vw;
 }
 
-.detail,
-#Reviews {
+.description,
+.caption {
   border-bottom: #d1de74 1px solid;
 }
 
@@ -178,6 +185,10 @@ h1 {
   margin: 5px 0;
 }
 
+.related-product-name {
+  font-size: 15px;
+}
+
 .related-product-image {
   width: 90%;
   height: 200px;
@@ -248,28 +259,42 @@ h1 {
 
 /* 商品評論 */
 .tab {
-  border-bottom: #d1de74 1px solid;
+  border-bottom: #d1de74 2px solid;
   overflow: hidden;
+  text-align: center;
 }
 
 .tab button {
   background-color: #d1de74;
-  float: left;
+  text-align: center;
   border: none;
   outline: none;
   cursor: pointer;
-  padding: 14px 16px;
+  padding: 14px 30px;
   transition: 0.3s;
-  font-size: 17px;
+  font-size: 25px;
   font-weight: 700;
+  width: 40%;
 }
 
+.tab button.hover {
+  background-color: #abd045;
+}
 .tab button.active {
   background-color: #a1c14b;
 }
 
 .tabcontent {
-  display: none;
   padding: 30px 12px;
-  border-top: none;
+}
+
+.tablinks {
+  border-radius: 15px 15px 0 0;
+  margin: 0 10px;
+}
+
+.caption > h3 {
+  display: inline-flex;
+  padding: 5px;
+  background-color: #cbb68c;
 }
