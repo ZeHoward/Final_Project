@@ -24,11 +24,12 @@ public class UserFavoritesRecipesService {
 
     @Autowired
     private UserFavoritesRecipesRepository repository;
+
     @Autowired
     private ProductRepository productRepository;
 
     @Autowired
-    private RecipesRepository recipeRepository;
+    private RecipesRepository recipesRepository;
 
     public List<UserFavoritesRecipes> getFavoritesByUserId(Long userId) {
         return repository.findByIdUserId(userId);
@@ -38,10 +39,22 @@ public class UserFavoritesRecipesService {
         UserFavoritesRecipes favorite = new UserFavoritesRecipes(userId, recipeId);
         return repository.save(favorite);
     }
+//
+//    @Transactional
+//    public void removeFavorite(Long userId, int recipeId) {
+//        repository.deleteByIdUserIdAndIdRecipeId(userId, recipeId);
+//    }
 
     @Transactional
-    public void removeFavorite(Long userId, int recipeId) {
-        repository.deleteByIdUserIdAndIdRecipeId(userId, recipeId);
+    public void removeFavorite(Long userId, int productId) {
+        // 根據 productId 查找對應的 recipeId
+        Recipes recipe = recipesRepository.findByProductProductId(productId)
+                .orElseThrow(() -> new RuntimeException("Recipe not found for the given productId"));
+
+        int recipeId = recipe.getRecipeId();  // 獲取 recipeId
+
+        // 刪除 UserFavoritesRecipes 中對應的記錄
+        repository.deleteByUserIdAndRecipeId(userId, recipeId);
     }
 
     public Optional<UserFavoritesRecipes> getFavorite(Long userId, int recipeId) {
@@ -57,7 +70,7 @@ public class UserFavoritesRecipesService {
 
         return favorites.stream()
                 .map(favorite -> {
-                    Optional<Recipes> recipe = recipeRepository.findById(favorite.getRecipeId());
+                    Optional<Recipes> recipe = recipesRepository.findById(favorite.getRecipeId());
                     if (recipe.isPresent()) {
                         Product product = recipe.get().getProduct();  // 確保 Recipes 對應的 Product 存在
                         if (product != null) {
@@ -80,4 +93,7 @@ public class UserFavoritesRecipesService {
         }
         return null;
     }
-}
+
+
+    }
+
