@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.servlet.http.HttpSession;
 
 import tw.luna.FinalTest.model.Product;
+import tw.luna.FinalTest.model.Users;
 import tw.luna.FinalTest.service.ProductService;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -32,6 +33,12 @@ public class ProductController {
 	//查詢所有商品
 	@GetMapping
 	public List<Product> getAllProducts() {
+		if(session != null) {
+			Users loggedInUser = (Users)session.getAttribute("loggedInUser");
+			if(loggedInUser != null) {
+				System.out.println("在products中獲取UserID:" + loggedInUser.getUserId());
+			}
+		}
 		return productService.findAllProducts();
 	}
 	
@@ -40,17 +47,17 @@ public class ProductController {
 	public Product getProductById(@PathVariable Integer id) {
 		return productService.findProductById(id).orElse(null);
 	}
-	
+
 	//根據id查詢產品
 //	@GetMapping("/{id}")
 //	public Product getProductById(@PathVariable Integer id) {
 //		Users loggedInUser = (Users)session.getAttribute("loggedInUser");
 //		System.out.println(loggedInUser);
 //		Integer userId = loggedInUser.getUserId().intValue();
-//		
+//
 //		return productService.findProductById(userId).orElse(null);
 //	}
-//	
+//
 	//模糊查詢
 	@GetMapping("/search")
 	public List<Product> searchProductsByName(@RequestParam String keyword){
@@ -62,8 +69,8 @@ public class ProductController {
 	public List<Product> searchProductsByType(@PathVariable("type") String type){
 		return productService.finProductsByType(type);
 	}
-	
-	//根據類別查詢產品	
+
+	//根據類別查詢產品
 	@GetMapping("/category/{categoryId}")
 	public List<Product> searchProductsByCategoryId(@PathVariable("categoryId") Integer CategoryId){
 		return productService.findProductsByCategory(CategoryId);
@@ -81,8 +88,8 @@ public class ProductController {
         this.productService = productService;
     }
 
-	
-	//新增或更新產品	
+
+	//新增或更新產品
 	@PostMapping
 	public Product createOrUpdateProduct(@RequestBody Product product) {
 		return productService.saveProduct(product);

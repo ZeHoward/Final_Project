@@ -982,7 +982,6 @@ function generateProductManagementWithActionsContent() {
     })
     .catch((error) => {
       console.error("獲取商品清單發生錯誤", error);
-      console.log(products.length);
     });
 
   // 根據狀態篩選商品

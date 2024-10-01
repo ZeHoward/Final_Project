@@ -1,40 +1,19 @@
 window.onload = function () {
   fetchRandomProducts();
 
-  var dropdown2 = document.getElementsByClassName("down-btn");
-  var x;
-  for (x = 0; x < dropdown2.length; x++) {
-    dropdown2[x].addEventListener("click", function () {
-      this.classList.toggle("active2");
-      var dropdownContent2 = this.nextElementSibling;
-      if (dropdownContent2.style.display === "block") {
-        dropdownContent2.style.display = "none";
-      } else {
-        dropdownContent2.style.display = "block";
-      }
-    });
-  }
-
-  //menu toggle up/down 圖案
-  window.togglePic3 = function () {
-    // var margin1 = document.getElementById("add");
-    var img3 = document.getElementById("updown3");
-    if (img3.src.includes("down.png")) {
-      img3.src = "./material/icon/up.png";
-      // margin1.style.margin = "40px 0";
-    } else {
-      img3.src = "./material/icon/down.png";
-      // margin1.style.margin = "";
-    }
-  };
-  window.togglePic4 = function () {
-    var img4 = document.getElementById("updown4");
-    if (img4.src.includes("down.png")) {
-      img4.src = "./material/icon/up.png";
-    } else {
-      img4.src = "./material/icon/down.png";
-    }
-  };
+  // var dropdown2 = document.getElementsByClassName("down-btn");
+  // var x;
+  // for (x = 0; x < dropdown2.length; x++) {
+  //   dropdown2[x].addEventListener("click", function () {
+  //     this.classList.toggle("active2");
+  //     var dropdownContent2 = this.nextElementSibling;
+  //     if (dropdownContent2.style.display === "block") {
+  //       dropdownContent2.style.display = "none";
+  //     } else {
+  //       dropdownContent2.style.display = "block";
+  //     }
+  //   });
+  // }
 
   document.querySelectorAll(".links").forEach((link) => {
     link.addEventListener("click", function (event) {
@@ -44,6 +23,10 @@ window.onload = function () {
       fetchProductsByTypeAndCategory(type, categoryId); // 調用函數
     });
   });
+
+  // let resultsPerPage = parseInt(resultsPerPageSelect.value);
+  let currentPage = 1;
+  let totalPages = Math.ceil(products.length / resultsPerPage);
 
   function fetchRandomProducts() {
     fetch("/products")
