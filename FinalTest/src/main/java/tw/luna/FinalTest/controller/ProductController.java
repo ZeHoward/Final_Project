@@ -99,6 +99,4 @@ public class ProductController {
 	public List<Product> createProductsInBatch(@RequestBody List<Product> products){
 		return productService.saveProductsInBatch(products);
 	};
-	
-	
 }
