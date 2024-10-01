@@ -71,7 +71,7 @@ public class Product {
 	@Column(name = "isDel", columnDefinition = "TINYINT(1) DEFAULT 0")
 	private Boolean isDel;
 
-// 新增一對多關係，商品可以有多張圖片(這裡重複了，上面已經有圖片了...)
+	// 新增一對多關係，商品可以有多張圖片
 //	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
 //	private List<ProductImage> images;
 //	public List<ProductImage> getImages() {
