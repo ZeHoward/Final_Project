@@ -123,15 +123,9 @@ function generateOverviewContent() {
   controlsDiv.className = "controls";
 
   // 生成下載按鈕
-const downloadButton = document.createElement("button");
-downloadButton.id = "downloadButton";
-downloadButton.textContent = "下載報表";
-
-// 添加點擊事件監聽器
-downloadButton.addEventListener('click', downloadReport);
-
-// 將按鈕添加到 controlsDiv
-controlsDiv.appendChild(downloadButton);
+  const downloadButton = document.createElement("button");
+  downloadButton.id = "downloadButton";
+  downloadButton.textContent = "下載報表";
 
   // 生成下拉選單
   const timeRangeSelect = document.createElement("select");
@@ -176,38 +170,6 @@ controlsDiv.appendChild(downloadButton);
 
   // 初始化圖表
   initChart();
-}
-
-// 下載對應時間區間xlsx
-function downloadReport() {
-    // 取得用戶選擇的時間區間
-    var timeRange = document.getElementById("timeRange").value;
-
-    // 使用 fetch API 發送請求
-    fetch('/api/orders/report?timeRange=' + timeRange, {
-        method: 'GET',
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.blob();
-    })
-    .then(blob => {
-        // 創建一個臨時URL來下載文件
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.style.display = 'none';
-        a.href = url;
-        a.download = 'order_report.xlsx';
-        document.body.appendChild(a);
-        a.click();
-        window.URL.revokeObjectURL(url);
-    })
-    .catch(error => {
-        console.error('下載報表時發生錯誤:', error);
-        alert('下載報表失敗，請稍後再試。');
-    });
 }
 
 // 獲取初始圖表數據

@@ -1,6 +1,5 @@
 package tw.luna.FinalTest.controller;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,7 +8,6 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +26,6 @@ import tw.luna.FinalTest.dto.orders.OrdersInsertDto;
 import tw.luna.FinalTest.model.Orders;
 import tw.luna.FinalTest.model.Users;
 import tw.luna.FinalTest.service.OrdersService;
-import tw.luna.FinalTest.service.ReportService;
 
 @RequestMapping("/api/orders")
 @RestController
@@ -37,9 +34,6 @@ public class OrdersController {
 
     @Autowired
     OrdersService ordersService;
-    
-    @Autowired
-	ReportService reportService;
 
     // 提交購物車商品->訂單
     @PostMapping ("/{userId}")
@@ -152,18 +146,6 @@ public class OrdersController {
 
  	    return ResponseEntity.ok(chartData);
  	}
- 	
- 	@GetMapping("/report")
- 	public ResponseEntity<Resource> downloadOrderReport(@RequestParam String timeRange) throws IOException {
-        return reportService.generateAndDownloadExcelReport(timeRange);
-    }
-// 	@RequestMapping("/api/reports")
-// 	public class ReportController {
-// 	    
-//
-// 	}
- 	
-
  	
 // 	@GetMapping("/chart-data")
 // 	public ResponseEntity<Map<String, Object>> getChartData(

@@ -41,9 +41,9 @@ public class CartController {
     }
 
     //刪除購物車某項商品
-    @DeleteMapping("/delete/{userId}/{name}")
-    public ResponseEntity<String> deleteCartItemsByProductId(@PathVariable Long userId,@PathVariable String name){
-        cartService.deleteCartItemsByProductId(userId,name);
+    @DeleteMapping("/{userId}/{productId}")
+    public ResponseEntity<String> deleteCartItemsByProductId(@PathVariable Long userId,@PathVariable Long productId){
+        cartService.deleteCartItemsByProductId(userId,productId);
         return ResponseEntity.ok("成功刪除該商品");
     }
 

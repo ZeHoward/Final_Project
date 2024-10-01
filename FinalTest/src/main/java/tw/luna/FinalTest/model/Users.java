@@ -42,9 +42,6 @@ public class Users {
 	
 	@Column(name = "isDel")
 	private boolean isDel;
-	
-	@Column(name = "isVerified")
-	private boolean isVerified;
 
 	@OneToOne(mappedBy = "users", cascade = CascadeType.ALL)
 	@JsonManagedReference("Users_UserInfo")
@@ -62,21 +59,15 @@ public class Users {
 	public Users() {
 	}
 
-	
-
-	public Users(Long userId, String username, String email, String password, String phoneNumber, String token,
-			boolean isDel, boolean isVerified) {
+	public Users(Long userId, String username, String email, String password, String phoneNumber, Userinfo userinfo, Cart cart) {
 		this.userId = userId;
 		this.username = username;
 		this.email = email;
 		this.password = password;
 		this.phoneNumber = phoneNumber;
-		this.token = token;
-		this.isDel = isDel;
-		this.isVerified = isVerified;
+		this.userinfo = userinfo;
+//		this.cart = cart;
 	}
-
-
 
 	public List<Orders> getOrders() {
 		return orders;
@@ -159,27 +150,32 @@ public class Users {
 		this.isDel = isDel;
 	}
 
-	public void setDel(boolean isDel) {
-		this.isDel = isDel;
-	}
+//	public List<UserFavoritesProducts> getUserFavoritesProducts() {
+//		return userFavoritesProducts;
+//	}
+//
+//	public void setUserFavoritesProducts(List<UserFavoritesProducts> userFavoritesProducts) {
+//		this.userFavoritesProducts = userFavoritesProducts;
+//	}
+//
+//	public List<UserFavoritesRecipes> getUserFavoritesRecipes() {
+//		return userFavoritesRecipes;
+//	}
+//
+//	public void setUserFavoritesRecipes(List<UserFavoritesRecipes> userFavoritesRecipes) {
+//		this.userFavoritesRecipes = userFavoritesRecipes;
+//	}
+//
+//	public List<Cart> getCart() {
+//		return cart;
+//	}
+//
+//	public void setCart(List<Cart> cart) {
+//		this.cart = cart;
+//	}
+
+
 	
-	public boolean getIsVerified() {
-		return isVerified;
-	}
-
-	public void setIsVerified(boolean isVerified) {
-		this.isVerified = isVerified;
-	}
-
-
-
-	@Override
-	public String toString() {
-		return "Users [userId=" + userId + ", username=" + username + ", email=" + email + ", password=" + password
-				+ ", phoneNumber=" + phoneNumber + ", token=" + token + ", isDel=" + isDel + ", isVerified="
-				+ isVerified + "]";
-	}
-
-
+	
 
 }

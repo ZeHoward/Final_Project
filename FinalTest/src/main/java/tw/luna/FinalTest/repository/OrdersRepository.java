@@ -1,7 +1,6 @@
 package tw.luna.FinalTest.repository;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -12,7 +11,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import jakarta.persistence.criteria.Order;
 import tw.luna.FinalTest.model.Orders;
 
 @Repository
@@ -53,19 +51,5 @@ public interface OrdersRepository extends JpaRepository<Orders, Integer> {
     	       "WHERE o.orderDate BETWEEN :startDate AND :endDate " +
     	       "GROUP BY YEAR(o.orderDate)")
     	List<Map<String, Object>> aggregateRevenueByYear(@Param("startDate") LocalDateTime startDate, @Param("endDate") LocalDateTime endDate);
-    
-    // 抓到order, orderDetails 的column
-    @Query(value = "SELECT o.orderId, o.userId, o.cartId, o.couponId, o.orderDate, " +
-            "o.totalAmount, o.percentageDiscount, o.amountDiscount, o.finalAmount, " +
-            "o.status, o.Address, od.productId, od.quantity, od.price " +
-            "FROM orders o " +
-            "JOIN orderdetails od ON o.orderId = od.orderId", nativeQuery = true)
-    List<Object[]> findOrderDetailsWithJoin();
-    
-    @Query("SELECT o FROM Orders o WHERE o.orderDate >= :startDate")
-    List<Orders> findOrdersAfterDate(@Param("startDate") LocalDateTime startDate);
-
-	List<Orders> findByOrderDateGreaterThanEqual(LocalDateTime startDate);
-    
 
 }

@@ -57,10 +57,8 @@ window.onload = function () {
 				if(data.mesg === 'Login Failure : 密碼錯誤'){
 					alert('密碼錯誤!!');
 				}
-				if(data.mesg === 'Login Failure: 您的帳號尚未驗證'){
-					alert('您的帳號尚未驗證成功!!')
-				}
 				if(data.mesg === 'Login Success'){
+					
 					window.location.href = '/enjoyum';
 				}
 			  }).catch(error => {

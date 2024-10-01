@@ -46,8 +46,7 @@ public class UsersController {
 	@PostMapping("/login")
 	public UsersResponse login(@RequestBody Users users) {
 		UsersResponse loginUsers = usersServiceImpl.loginUsers(users);
-		
-		if(loginUsers.getUsersStatus() == UsersStatus.LOGIN_SUCCESS && loginUsers.getMesg().equals("Login Success") ) {
+		if(loginUsers.getUsersStatus() == UsersStatus.LOGIN_SUCCESS) {
 			Long userId = loginUsers.getUsers().getUserId();
 			UserAllInfo sessionUser = usersServiceImpl.userAllInfo(userId);
 			session.setAttribute("loggedInUser", sessionUser);
@@ -69,19 +68,15 @@ public class UsersController {
 	@GetMapping("/userAllInfo")
 	public UserAllInfo userAllInfo() {
 		UserAllInfo loggedInUser = (UserAllInfo)session.getAttribute("loggedInUser");
-		UserAllInfo newUserAllInfo = usersServiceImpl.userAllInfo(loggedInUser.getUserId());
-		session.setAttribute("loggedInUser", newUserAllInfo);
-		return newUserAllInfo;
+		
+		return loggedInUser;
 	}
 	
 	@PostMapping("/update")
-	public boolean update(@RequestBody UserAllInfo updateUser) {
-		
+	public void update(@RequestBody UserAllInfo updateUser) {
 		UserAllInfo loggedInUser = (UserAllInfo)session.getAttribute("loggedInUser");
 		updateUser.setPassword(loggedInUser.getPassword());
-		updateUser.setIsDel(loggedInUser.getIsDel());
-		updateUser.setIsVerified(loggedInUser.getIsVerified());
-		return usersServiceImpl.updateUser(updateUser);
+		usersServiceImpl.updateUser(updateUser);
 	}
 	
 	@GetMapping("/deleteUser")

@@ -2,7 +2,6 @@ package tw.luna.FinalTest.service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,9 +27,6 @@ public class UsersServiceImpl {
 	@Autowired
 	private UsersInfoReposity usersInfoReposity;
 	
-	@Autowired
-	private EmailCheckService emailCheckService;
-	
 
 	
 	public UsersResponse isExistUser(String email) {
@@ -54,26 +50,21 @@ public class UsersServiceImpl {
 		if(usersResponse.getUsersStatus() == UsersStatus.NOT_EXIST) {
 			registUser.setPassword(BCrypt.hashpw(registUser.getPassword(), BCrypt.gensalt()));
 			Users newUsers = new Users();
+			Userinfo userinfo = new Userinfo();
 			newUsers.setEmail(registUser.getEmail());
 			newUsers.setPassword(registUser.getPassword());
 			newUsers.setPhoneNumber(null);
 			newUsers.setUsername(registUser.getUsername());
 			newUsers.setPhoneNumber(registUser.getPhoneNumber());
+			Users save = usersRepository.save(newUsers);
 			
-			String token = UUID.randomUUID().toString();
-			newUsers.setToken(token);
-			newUsers.setIsVerified(false);
-			
-			Users savedUser = usersRepository.save(newUsers);
-			emailCheckService.sendVerificationEmail(newUsers.getEmail(), token);
-			
-			Userinfo userinfo = new Userinfo();
+			userinfo.setBirthday(registUser.getBirthday());
 			userinfo.setUsers(newUsers);
 			Userinfo save2 = usersInfoReposity.save(userinfo);
 			
-			if(savedUser != null && save2 != null) {
+			if(save != null && save2 != null) {
 				usersResponse.setUsersStatus(UsersStatus.ADD_SUCCESS);
-				usersResponse.setMesg("註冊成功，請檢查電子郵件並完成驗證");
+				usersResponse.setMesg("註冊成功");
 			}else {
 				usersResponse.setUsersStatus(UsersStatus.ADD_FAILURE);
 				usersResponse.setMesg("註冊失敗");
@@ -95,14 +86,6 @@ public class UsersServiceImpl {
 			usersResponse.setUsers(users);
 		}else {
 			Users userDB = usersResponse.getUsers();
-			
-			if (!userDB.getIsVerified()) {
-	            usersResponse.setUsersStatus(UsersStatus.LOGIN_FAILURE);
-	            usersResponse.setMesg("Login Failure: 您的帳號尚未驗證");
-	            usersResponse.setUsers(null);
-	            return usersResponse;
-	        }
-			
 			if (BCrypt.checkpw(users.getPassword(), userDB.getPassword())) {
 				usersResponse.setUsersStatus(UsersStatus.LOGIN_SUCCESS);
 				usersResponse.setMesg("Login Success");
@@ -135,8 +118,7 @@ public class UsersServiceImpl {
 	            (String) result[9],   // county
 	            (String) result[10],  // district
 	            (String) result[11],  // birthday
-	            (boolean) result[12], //isDel
-	            (boolean) result[13]);  //isVerified
+	            (boolean) result[12]);  //isDel
 		return userAllInfo;
 		
 	}
@@ -144,14 +126,12 @@ public class UsersServiceImpl {
 	public boolean updateUser(UserAllInfo userAllInfo) {
 		Users users = new Users();
 		Userinfo userinfo = new Userinfo();
-//		System.out.println(userAllInfo.toString());
+		
 		users.setUserId(userAllInfo.getUserId());
 		users.setPassword(userAllInfo.getPassword());
 		users.setEmail(userAllInfo.getEmail());
 		users.setPhoneNumber(userAllInfo.getPhoneNumber());
 		users.setUsername(userAllInfo.getUsername());
-		users.setDel(userAllInfo.getIsDel());
-		users.setIsVerified(userAllInfo.getIsVerified());
 		
 		
 		userinfo.setId(userAllInfo.getUserId());
@@ -173,8 +153,7 @@ public class UsersServiceImpl {
 	
 	public int deleteUser(Long userId) {
 		int del = usersRepository.updateUserByUserId(userId);
-//		System.out.println("刪除帳號後的返回int" + del);
-		
+		System.out.println("刪除帳號後的返回int" + del);
 		return del;
 	}
 	
@@ -186,32 +165,4 @@ public class UsersServiceImpl {
 	public long getActiveUserCount() {
         return usersRepository.countActiveUsers();
     }
-	
-	public boolean verifyToken(String token) {
-	    List<Object[]> tokenUserList = usersRepository.findByToken(token);
-	    
-	    if (tokenUserList.isEmpty() || tokenUserList.size() == 0) {
-	    	System.out.println("驗證失敗!!");
-	        return false; // 驗證失敗，無效的 token
-	    }
-	    
-	    Object[] result = tokenUserList.get(0);
-	    Users tokenUser = new Users(
-	    		(Long)result[0],	  // userId
-				(String) result[1],   // username
-	            (String) result[2],   // email
-	            (String) result[3],   // password
-	            (String) result[4],   // phoneNumber
-	            (String) result[5],	  // token
-	            (boolean) result[6],  //isDel
-	            (boolean) result[7]  //isVerified
-	    		);
-	    
-	    // 驗證成功，更新用戶狀態為已驗證
-	    tokenUser.setToken(null);  // 清除 token，防止重複使用
-	    tokenUser.setIsVerified(true);  // 將用戶狀態設為已驗證
-	    usersRepository.save(tokenUser);
-	    
-	    return true; // 驗證成功
-	}
 }

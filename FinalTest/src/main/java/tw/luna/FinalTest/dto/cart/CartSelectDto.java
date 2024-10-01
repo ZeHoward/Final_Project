@@ -10,17 +10,17 @@ public class CartSelectDto {
     private Integer cartitemsId;
     private Integer price;
     private Integer quantity;
-    private String name;
+    private String productName;
     private byte[] image;
 
     public CartSelectDto() {
     }
 
-    public CartSelectDto(Integer cartitemsId, Integer price, Integer quantity, String name) {
+    public CartSelectDto(Integer cartitemsId, Integer price, Integer quantity, String productName) {
         this.cartitemsId = cartitemsId;
         this.price = price;
         this.quantity = quantity;
-        this.name = name;
+        this.productName = productName;
         this.image = image;
     }
 
@@ -49,11 +49,11 @@ public class CartSelectDto {
     }
 
     public String getProductName() {
-        return name;
+        return productName;
     }
 
     public void setProductName(String productName) {
-        this.name = productName;
+        this.productName = productName;
     }
 
     public byte[] getImage() {
@@ -70,7 +70,7 @@ public class CartSelectDto {
                 "cartitemsId=" + cartitemsId +
                 ", price=" + price +
                 ", quantity=" + quantity +
-                ", productName='" + name + '\'' +
+                ", productName='" + productName + '\'' +
                 ", image=" + Arrays.toString(image) +
                 '}';
     }

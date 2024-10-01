@@ -54,7 +54,7 @@ window.onload = function () {
     document.getElementById('regist').addEventListener('click', () => {
       let telephone = document.getElementById('registTelephoneInput').value;
       let userName = document.getElementById('registUserName').value;
-     // let birthday = document.getElementById('registBirthday').value;
+      let birthday = document.getElementById('registBirthday').value;
 
       if(finallyEmail != '' && finallyPassword != '' && userName != ''){
         fetch('http://localhost:8080/users/regist',{
@@ -64,8 +64,8 @@ window.onload = function () {
             username : userName,
             email : finallyEmail,
             password : finallyPassword,
-			phoneNumber : telephone
-			//birthday : birthday
+			phoneNumber : telephone,
+			birthday : birthday
           })}).then(response => {
             if(!response.ok){
               throw new Error('Error : ')
@@ -79,7 +79,7 @@ window.onload = function () {
 				alert('伺服器忙碌中,請稍後在試!!');
 			}
 			if(data.usersStatus == 'ADD_SUCCESS'){
-				alert('已送出驗證碼,請到電子信箱查看並開通!!')
+				alert('註冊成功,歡迎登入會員!!')
 				window.location.href = '/loginPage';
 			}
           }).catch(error => {

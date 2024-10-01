@@ -85,7 +85,6 @@ public class Orders {
 		this.orderDetails = orderDetails;
 	}
 
-	
 	public Integer getOrderId() {
 		return orderId;
 	}
@@ -120,7 +119,7 @@ public class Orders {
 
 	public LocalDateTime getOrderDate() {
 		return orderDate;
-	}	
+	}
 
 	public void setOrderDate(LocalDateTime orderDate) {
 		this.orderDate = orderDate;
