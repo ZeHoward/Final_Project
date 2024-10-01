@@ -59,7 +59,7 @@ body {
 }
 
 .tem-overlay-content > a,
-.tem-dropdown-btn {
+.tem-dropdown-button {
   padding: 8px;
   text-decoration: none;
   font-size: 36px;
@@ -70,7 +70,7 @@ body {
 }
 
 .tem-sidenav a,
-.tem-dropdown-btn {
+.tem-dropdown-button {
   padding: 6px 8px 6px 16px;
   text-decoration: none;
   font-size: 20px;
@@ -82,11 +82,13 @@ body {
   outline: none;
 }
 
-.tem-dropdown-content {
+.tem-dropdown-content1,
+.tem-dropdown-content2 {
   display: none; /*讓下拉選單一開始保持閉合*/
 }
 
-.tem-dropdown-content a {
+.tem-dropdown-content1 a,
+.tem-dropdown-content2 a {
   font-size: 24px;
   padding: 8px;
   text-decoration: none;
@@ -97,8 +99,9 @@ body {
 }
 
 .tem-overlay-content > a:hover,
-.tem-dropdown-btn:hover,
-.tem-dropdown-content > a:hover {
+.tem-dropdown-button:hover,
+.tem-dropdown-content1 > a:hover,
+.tem-dropdown-content2 > a:hover {
   background-color: #e0912f;
 }
 
@@ -106,11 +109,11 @@ body {
   background-color: #e0902fbe;
 }
 
-.tem-dropdown-btn {
+.tem-dropdown-button {
   font-size: 36px;
 }
 
-.tem-dropdown-btn img {
+.tem-dropdown-button img {
   height: 25px;
 }
 
@@ -207,8 +210,6 @@ body {
   background-repeat: repeat;
   background-size: auto;
   background-position: 1940px 774px;
-  
-  
 }
 
 .tem-footer-content {
@@ -279,71 +280,62 @@ body {
   }
 
   .tem-overlay-content > a,
-  .tem-dropdown-btn {
+  .tem-dropdown-button {
     font-size: 20px;
   }
 
-  .tem-dropdown-btn img {
+  .tem-dropdown-button img {
     height: 16px;
-  }
-
-  .tem-dropdown-content {
-    font-size: 16px;
   }
 }
 
-
 /******************************/
 
-#memberIcon{
+#memberIcon {
   margin-right: 10px;
   background-color: transparent;
   border: none;
   transition: transform 0.3s ease;
 }
 
-#memberIcon:hover{
+#memberIcon:hover {
   cursor: pointer;
   transform: scale(1.5);
 }
 
-#memberInfoDiv{
-  position: absolute; 
-  top: 60px; 
-  right: 20px; 
-  width: 270px; 
+#memberInfoDiv {
+  position: absolute;
+  top: 60px;
+  right: 20px;
+  width: 270px;
   background-color: #fff6d0;
   border: 1px solid #ddd;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   flex-direction: column;
   text-align: start;
   border-radius: 10px;
   /*transition: opacity 0.5s ease, height 0.5s ease;*/
-  display:none;
+  display: none;
 }
 
-
-
-.memerinfo-icon{
+.memerinfo-icon {
   font-size: 20px;
   color: black;
 }
-
 
 #memberInfoDiv > div > i {
   margin-right: 20px;
   margin-left: 40px;
 }
 
-#memberInfoDiv > div{
+#memberInfoDiv > div {
   padding: 15px 0;
   transition: transform 0.2s ease;
 }
 
-#memberInfoDiv > div:hover{
+#memberInfoDiv > div:hover {
   transform: scale(1.05);
 }
-
 
 #memberInfoDiv > div:hover,
 #memberInfoDiv > div:hover i,
@@ -352,12 +344,12 @@ body {
   color: #f3ce6e;
 }
 
-#searchIcon{
+#searchIcon {
   background-color: transparent;
   border: none;
   transition: transform 0.3s ease;
 }
-#searchIcon:hover{
+#searchIcon:hover {
   transform: scale(1.5);
 }
 
@@ -388,20 +380,20 @@ body {
   display: inline-block;
 }
 
-#cartIcon{
+#cartIcon {
   background-color: transparent;
   border: none;
   transition: transform 0.3s ease;
 }
 
-#cartIcon:hover{
+#cartIcon:hover {
   transform: scale(1.5);
 }
 
-#myContainer{
+#myContainer {
   width: 100%;
 }
 
-#logoDiv:hover{
+#logoDiv:hover {
   cursor: pointer;
 }
