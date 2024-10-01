@@ -82,11 +82,11 @@ public class CartService {
 
     //刪除購物車內某項商品
     @Transactional
-    public void deleteCartItemsByProductId(Long userId, Long productId) {
+    public void deleteCartItemsByProductId(Long userId, String name) {
         // 找到該用戶的購物車
         Cart cart = cartRepository.findByUsersUserId(userId);
         //找到購物車中的該商品
-        CartItems isPresent = cartItemsRepository.findByCartCartIdAndProductProductId(cart.getCartId(), productId);
+        CartItems isPresent = cartItemsRepository.findByCartCartIdAndProductName(name);
 
         if(isPresent != null)  { //商品存在
         //刪除商品
