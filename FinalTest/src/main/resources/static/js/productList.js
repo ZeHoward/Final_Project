@@ -24,7 +24,7 @@ window.onload = function () {
     });
   });
 
-  let resultsPerPage = parseInt(resultsPerPageSelect.value);
+  // let resultsPerPage = parseInt(resultsPerPageSelect.value);
   let currentPage = 1;
   let totalPages = Math.ceil(products.length / resultsPerPage);
 
