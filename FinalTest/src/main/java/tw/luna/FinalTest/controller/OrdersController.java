@@ -26,6 +26,7 @@ import tw.luna.FinalTest.dto.OrderWithUserDTO;
 import tw.luna.FinalTest.dto.OrdersDTO;
 import tw.luna.FinalTest.dto.orders.OrdersInsertDto;
 import tw.luna.FinalTest.model.Orders;
+import tw.luna.FinalTest.model.UserAllInfo;
 import tw.luna.FinalTest.model.Users;
 import tw.luna.FinalTest.service.OrdersService;
 import tw.luna.FinalTest.service.ReportService;
@@ -33,13 +34,18 @@ import tw.luna.FinalTest.service.ReportService;
 @RequestMapping("/api/orders")
 @RestController
 public class OrdersController {
-    Long userId = 1L; // 假設用戶 ID 固定為 1，實際情況應根據需求調整
+    private static final String UserAllInfo = null;
+
+	Long userId = 1L; // 假設用戶 ID 固定為 1，實際情況應根據需求調整
 
     @Autowired
     OrdersService ordersService;
     
     @Autowired
 	ReportService reportService;
+    
+    @Autowired
+    HttpSession httpSession;
 
     // 提交購物車商品->訂單
     @PostMapping ("/{userId}")
@@ -48,7 +54,7 @@ public class OrdersController {
         return ResponseEntity.ok("成功新增訂單");
     }
     
- // 獲取所有訂單
+    // 獲取所有訂單
  	@GetMapping
  	public List<Orders> getAllOrders(HttpSession session) {
  		
@@ -157,6 +163,37 @@ public class OrdersController {
  	public ResponseEntity<Resource> downloadOrderReport(@RequestParam String timeRange) throws IOException {
         return reportService.generateAndDownloadExcelReport(timeRange);
     }
+ 	
+// 	 @GetMapping("/getUserId")
+//     public long getUserId() {
+//         Users loggedInUser = null;
+//         if(session != null) {
+//             loggedInUser = (Users)session.getAttribute("loggedInUser");
+//             if(loggedInUser != null) {
+//                 System.out.println("在products中獲取UserID:" + loggedInUser.getUserId());
+//             }
+//         }
+//         return loggedInUser.getUserId();
+//     }
+ 	
+ 	@GetMapping("/user")
+ 	public ResponseEntity<List<OrdersDTO>> getUserOrders() {
+ 	    // 從 session 中獲取 UserAllInfo 對象
+ 		
+ 	    UserAllInfo loggedInUser = (UserAllInfo) httpSession.getAttribute("loggedInUser");
+ 	    Long userId = loggedInUser.getUserId();
+ 	    System.out.println(userId);
+
+ 	    // 如果 session 中的 userId 與 path 中的 userId 不一致，則拒絕訪問
+ 	    if (!loggedInUser.getUserId().equals(userId)) {
+ 	        return ResponseEntity.status(403).build();
+ 	    }
+
+ 	    // 查詢訂單
+ 	    List<OrdersDTO> orders = ordersService.getUserOrders(userId);
+ 	    return ResponseEntity.ok(orders);
+ 	}
+ 	
 // 	@RequestMapping("/api/reports")
 // 	public class ReportController {
 // 	    

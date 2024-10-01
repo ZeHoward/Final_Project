@@ -1,10 +1,11 @@
 package tw.luna.FinalTest.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import jakarta.servlet.http.HttpSession;
 import tw.luna.FinalTest.BCrypt;
@@ -27,7 +28,7 @@ public class UsersServiceImpl {
 	@Autowired
 	private UsersInfoReposity usersInfoReposity;
 	
-
+	
 	
 	public UsersResponse isExistUser(String email) {
 		UsersResponse usersResponse = new UsersResponse();
@@ -164,5 +165,16 @@ public class UsersServiceImpl {
 	// 活躍用戶數
 	public long getActiveUserCount() {
         return usersRepository.countActiveUsers();
+    }
+	
+	private static final String USER_ID_SESSION_ATTRIBUTE = "currentUserId";
+	public Long getCurrentUserId() {
+        ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+        HttpSession session = attr.getRequest().getSession(false);
+        if (session != null) {
+            Long userId = (Long) session.getAttribute(USER_ID_SESSION_ATTRIBUTE);
+            return userId;
+        }
+        return null;
     }
 }
