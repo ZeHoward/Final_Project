@@ -21,9 +21,13 @@
       <div class="mid">
         <!-- 側邊選單 -->
         <div class="list">
-          <div class="list-title">商品區</div>
-          <div style="padding: 5px"></div>
-          <button class="down-btn" onclick="togglePic3()">調理包專區</button>
+          <button class="down-btn" onclick="togglePic3()">
+            調理包專區<img
+              th:src="@{/material/icon/down.png}"
+              alt="down"
+              id="updown3"
+            />
+          </button>
           <div class="down-container">
             <a class="links" href="#" data-type="preparedFood" data-category="5"
               >家常料理</a
@@ -42,7 +46,11 @@
             >
           </div>
           <button class="down-btn" onclick="togglePic4()">
-            生鮮食材包專區
+            生鮮食材包專區<img
+              th:src="@{/material/icon/down.png}"
+              alt="down"
+              id="updown4"
+            />
           </button>
           <div class="down-container">
             <a class="links" href="#" data-type="mealkit" data-category="5"

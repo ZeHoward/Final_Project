@@ -1,3 +1,4 @@
+
 * {
   font-family: "Noto Sans TC", system-ui;
   margin: 0;
@@ -18,8 +19,7 @@ body {
   flex: 1;
 }
 /* 菜單 */
-.list,
-.list-title {
+.list {
   flex: 1;
   border-right: 1px solid #ccc;
   padding: 20px;
@@ -27,7 +27,6 @@ body {
 }
 
 .list a,
-.list-title,
 .down-btn {
   padding: 6px 8px 6px 16px;
   text-decoration: none;
@@ -37,28 +36,28 @@ body {
   border: none;
   background: none;
   width: 100%;
-  text-align: center;
+  text-align: left;
   cursor: pointer;
   outline: none;
   font-weight: 600;
 }
 
-.down-btn {
-  background-color: #cbb68c;
-}
-
-.list-title {
-  background-color: #514741;
-}
-
 .down-btn:hover {
   color: rgb(0, 0, 0);
-  background-color: #f3ce6e;
+}
+
+.down-btn > img {
+  width: 20px;
 }
 
 .active2 {
   background-color: #f3cd6ea2;
   color: rgb(0, 0, 0);
+}
+
+.down-container {
+  display: none;
+  /* padding-left: 8px; */
 }
 
 .down-container > a:hover {
@@ -82,11 +81,11 @@ body {
 
 .product {
   margin: 20px;
-  width: 270px;
+  width: 250px;
   text-align: center;
   border: #f4f4f4 2px solid;
-  border-radius: 5px;
-  padding: 10px;
+  border-radius:5px;
+  padding:10px;
 }
 
 .product:hover {
@@ -100,10 +99,6 @@ body {
   height: 200px;
   object-fit: cover;
   border-radius: 2%;
-}
-
-.product-name {
-  font-size: 16px;
 }
 
 .product-name,
@@ -147,7 +142,7 @@ body {
 }
 .add-to-favorite {
   margin-top: 5px;
-  padding-left: 15px;
+  padding-left:15px;
   display: flex;
   align-items: center; /* 垂直置中 */
   justify-content: center; /* 水平置中 */
@@ -165,3 +160,4 @@ body {
 .add-to-cart:active {
   background-color: #de8415;
 }
+
