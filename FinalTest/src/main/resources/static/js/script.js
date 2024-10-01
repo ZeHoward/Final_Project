@@ -123,9 +123,15 @@ function generateOverviewContent() {
   controlsDiv.className = "controls";
 
   // 生成下載按鈕
-  const downloadButton = document.createElement("button");
-  downloadButton.id = "downloadButton";
-  downloadButton.textContent = "下載報表";
+const downloadButton = document.createElement("button");
+downloadButton.id = "downloadButton";
+downloadButton.textContent = "下載報表";
+
+// 添加點擊事件監聽器
+downloadButton.addEventListener('click', downloadReport);
+
+// 將按鈕添加到 controlsDiv
+controlsDiv.appendChild(downloadButton);
 
   // 生成下拉選單
   const timeRangeSelect = document.createElement("select");
@@ -170,6 +176,38 @@ function generateOverviewContent() {
 
   // 初始化圖表
   initChart();
+}
+
+// 下載對應時間區間xlsx
+function downloadReport() {
+    // 取得用戶選擇的時間區間
+    var timeRange = document.getElementById("timeRange").value;
+
+    // 使用 fetch API 發送請求
+    fetch('/api/orders/report?timeRange=' + timeRange, {
+        method: 'GET',
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.blob();
+    })
+    .then(blob => {
+        // 創建一個臨時URL來下載文件
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.style.display = 'none';
+        a.href = url;
+        a.download = 'order_report.xlsx';
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+    })
+    .catch(error => {
+        console.error('下載報表時發生錯誤:', error);
+        alert('下載報表失敗，請稍後再試。');
+    });
 }
 
 // 獲取初始圖表數據
@@ -744,28 +782,14 @@ function generateProductUploadForm() {
                 <div class="form-group">
                     <label for="category">菜品分類</label>
                     <select id="category">
-                        <option value="category1">家常料理</option>
-                        <option value="category2">兒童友善</option>
-                        <option value="category3">銀髮友善</option>
-                        <option value="category4">異國料理</option>
-                        <option value="category5">多人料理</option>
+                        <option value="1">家常料理</option>
+                        <option value="2">兒童友善</option>
+                        <option value="3">銀髮友善</option>
+                        <option value="4">異國料理</option>
+                        <option value="5">多人料理</option>
                     </select>
                 </div>
 
-                <!-- 人數、難度等選項 -->
-                <div class="form-group row-group">
-                    <div class="field">
-                        <label for="people">人數</label>
-                        <select id="people">
-                            <option value="1">1人</option>
-                            <option value="2">2人</option>
-                            <option value="3">3人</option>
-                            <option value="4">4人</option>
-                            <option value="5">5人</option>
-                        </select>
-                    </div>
-
-                </div>
 
                 <!-- 商品描述 -->
                 <div class="form-group">
@@ -827,6 +851,8 @@ function generateProductUploadForm() {
           timer: 1500,
         });
       });
+    console.log("Category ID: ", document.getElementById("category").value);
+    console.log(JSON.stringify(productData));
     generateProductUploadForm();
   }
 
@@ -949,8 +975,8 @@ function generateProductManagementWithActionsContent() {
       } else {
         products = data;
         updatePagination(products);
-        filterProductsByStatus();
-        sortProducts();
+        filterProductsByStatus(products);
+        sortProducts(products);
         renderProducts(products);
       }
     })

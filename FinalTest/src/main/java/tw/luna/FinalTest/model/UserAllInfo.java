@@ -15,6 +15,7 @@ public class UserAllInfo {
 	private String district;
 	private String birthday;
 	private boolean isDel;
+	private boolean isVerified;
 	
 	public UserAllInfo() {
 		
@@ -22,7 +23,7 @@ public class UserAllInfo {
 
 	public UserAllInfo(Long userId, String username, String email, String password, String phoneNumber,
 			String firstName, String lastName, String address, String postalCode, String county, String district,
-			String birthday, boolean isDel) {
+			String birthday, boolean isDel, boolean isVerified) {
 		this.userId = userId;
 		this.username = username;
 		this.email = email;
@@ -36,6 +37,7 @@ public class UserAllInfo {
 		this.district = district;
 		this.birthday = birthday;
 		this.isDel = isDel;
+		this.isVerified = isVerified;
 	}
 
 
@@ -135,12 +137,22 @@ public class UserAllInfo {
 		this.isDel = isDel;
 	}
 
+
+	public boolean getIsVerified() {
+		return isVerified;
+	}
+
+	public void setIsVerified(boolean isVerified) {
+		this.isVerified = isVerified;
+	}
+
+
 	@Override
 	public String toString() {
 		return "UserAllInfo [userId=" + userId + ", username=" + username + ", email=" + email + ", password="
 				+ password + ", phoneNumber=" + phoneNumber + ", firstName=" + firstName + ", lastName=" + lastName
 				+ ", address=" + address + ", postalCode=" + postalCode + ", county=" + county + ", district="
-				+ district + ", birthday=" + birthday + ", isDel=" + isDel + "]";
+				+ district + ", birthday=" + birthday + ", isDel=" + isDel + ", isVerified=" + isVerified + "]";
 	}
 
 
