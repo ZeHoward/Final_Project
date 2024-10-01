@@ -87,9 +87,11 @@ public class OrderDetailsService {
 				orderDetails.getProduct().getName(), // 商品名稱
 				orderDetails.getProduct().getSku(), // 商品 SKU
 				orderDetails.getQuantity(), // 商品數量
-				orderDetails.getPrice()  // 商品價格
+				orderDetails.getPrice(),  // 商品價格
+				orderDetails.getProduct().getProductId()
 		);
 	}
+		
 
 	// 刪除訂單詳細
 	public ResponseEntity<Void> deleteOrderDetails(Integer id) {

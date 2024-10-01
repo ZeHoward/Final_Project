@@ -1,16 +1,14 @@
 package tw.luna.FinalTest.service;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.Base64;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -22,12 +20,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
-import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 import tw.luna.FinalTest.dto.OrderDetailsDTO;
 import tw.luna.FinalTest.dto.OrderWithUserDTO;
 import tw.luna.FinalTest.dto.OrdersDTO;
+import tw.luna.FinalTest.dto.UserDTO;
 import tw.luna.FinalTest.dto.orders.OrdersInsertDto;
 import tw.luna.FinalTest.model.Cart;
 import tw.luna.FinalTest.model.CartItems;
@@ -60,6 +60,9 @@ public class OrdersService {
 
 	@Autowired
 	OrderDetailsRepository orderDetailsRepository;
+	
+	@Autowired
+    private UsersServiceImpl usersServiceImpl;
 
 	@Transactional
 	public void insertOrder(OrdersInsertDto ordersInsertDto, Long userId) {
@@ -125,6 +128,11 @@ public class OrdersService {
 	public List<Orders> getAllOrders() {
 		return ordersRepository.findAll();
 	}
+	
+	// 獲取所有訂單
+	public List<Orders> getAllByUser_UserId(long userId) {
+		return ordersRepository.findByUser_UserId(userId);
+	}
 
 	public ResponseEntity<Page<OrderWithUserDTO>> getOrdersWithPagination(int page, int size, String sortField,
 			String sortDirection) {
@@ -159,43 +167,90 @@ public class OrdersService {
 		return ResponseEntity.ok(orderDTOs);
 	}
 
-	// 根據 orderId 獲取訂單並轉換為 DTO
 	public Optional<OrdersDTO> getOrderById(Integer id) {
-		Optional<Orders> optionalOrder = ordersRepository.findById(id);
+	    return ordersRepository.findById(id).map(order -> {
+	        // 創建 UserDTO
+	        UserDTO userDTO = new UserDTO(
+	            order.getUser().getUserId(),
+	            order.getUser().getUsername(),
+	            order.getUser().getEmail(),
+	            order.getUser().getPhoneNumber(),
+	            order.getAddress() // 使用訂單的地址
+	        );
 
-		if (optionalOrder.isPresent()) {
-			Orders order = optionalOrder.get();
+	        // 轉換 orderDetails 為 DTO 列表
+	        List<OrderDetailsDTO> orderDetailsDTOList = order.getOrderDetails().stream()
+	            .map(this::convertToOrderDetailsDTO)
+	            .collect(Collectors.toList());
 
-			// 將 orderDetails 轉換為 DTO 列表
-			List<OrderDetailsDTO> orderDetailsDTOList = order
-					.getOrderDetails().stream().map(details -> new OrderDetailsDTO(details.getProduct().getName(),
-							details.getProduct().getSku(), details.getQuantity(), details.getPrice()))
-					.collect(Collectors.toList());
+	        // 創建並返回 OrdersDTO
+	        return new OrdersDTO(
+	            order.getOrderId(),
+	            order.getOrderDate(),
+	            order.getAddress(),
+	            order.getTotalAmount(),
+	            order.getCoupon() != null ? order.getCoupon().getCode() : null,
+	            order.getPercentageDiscount(),
+	            order.getAmountDiscount(),
+	            order.getFinalAmount(),
+	            order.getStatus(),
+	            orderDetailsDTOList,
+	            userDTO
+	        );
+	    });
+	}
 
-			OrdersDTO ordersDTO = new OrdersDTO(order.getOrderId(), order.getOrderDate(), order.getAddress(),
-					order.getTotalAmount(), order.getCoupon() != null ? order.getCoupon().getCode() : null,
-					order.getPercentageDiscount(), order.getAmountDiscount(), order.getFinalAmount(), order.getStatus(),
-					orderDetailsDTOList // 傳遞商品詳情
-			);
+	// 輔助方法：轉換 OrderDetails 到 OrderDetailsDTO
+	private OrderDetailsDTO convertToOrderDetailsDTO(OrderDetails details) {
+	    if (details == null || details.getProduct() == null) {
+	        return null;
+	    }
 
-			return Optional.of(ordersDTO);
-		} else {
-			return Optional.empty();
-		}
+	    OrderDetailsDTO dto = new OrderDetailsDTO(
+	        details.getProduct().getName(),
+	        details.getProduct().getSku(),
+	        details.getQuantity(),
+	        details.getPrice(),
+	        details.getProduct().getProductId()
+	    );
+
+	    // 設置總價（如果建構式沒有自動計算的話）
+	    dto.setTotal(details.getQuantity() * details.getPrice());
+
+	    // 注意：這裡沒有設置 productImageBase64，因為現在不處理圖片轉換
+	    // 如果將來需要處理圖片，可以在這裡添加相關邏輯
+
+	    return dto;
 	}
 
 	private OrderDetailsDTO convertToDTO(OrderDetails orderDetails) {
-		String productImageBase64 = null;
-		if (!orderDetails.getProduct().getProductImages().isEmpty()) {
-			byte[] imageBytes = orderDetails.getProduct().getProductImages().get(0).getImage();
-			productImageBase64 = Base64.getEncoder().encodeToString(imageBytes);
-		}
+	    if (orderDetails == null || orderDetails.getProduct() == null) {
+	        return null;
+	    }
 
-		return new OrderDetailsDTO(orderDetails.getProduct().getName(), // 商品名稱
-				orderDetails.getProduct().getSku(), // 商品 SKU
-				orderDetails.getPrice(), // 商品價格
-				orderDetails.getQuantity() // 商品數量
-		);
+	    String productImageBase64 = null;
+	    if (orderDetails.getProduct().getProductImages() != null && !orderDetails.getProduct().getProductImages().isEmpty()) {
+	        byte[] imageBytes = orderDetails.getProduct().getProductImages().get(0).getImage();
+	        if (imageBytes != null) {
+	            productImageBase64 = Base64.getEncoder().encodeToString(imageBytes);
+	        }
+	    }
+
+	    OrderDetailsDTO dto = new OrderDetailsDTO(
+	        orderDetails.getProduct().getName(),
+	        orderDetails.getProduct().getSku(),
+	        orderDetails.getQuantity(),
+	        orderDetails.getPrice(),
+	        orderDetails.getProduct().getProductId()
+	    );
+
+	    // 設置圖片 Base64 字符串
+	    dto.setProductImageBase64(productImageBase64);
+
+	    // 計算並設置總價
+	    dto.setTotal(orderDetails.getQuantity() * orderDetails.getPrice());
+
+	    return dto;
 	}
 
 	public Integer getTotalRevenue(LocalDateTime startDate, LocalDateTime endDate) {
@@ -315,6 +370,107 @@ public class OrdersService {
 		}).sum();
 	}
 	
+	public String getOrdersList(Model model) {
+        Long userId = usersServiceImpl.getCurrentUserId();
+        if (userId == null) {
+            model.addAttribute("errorMessage", "請先登錄以查看您的訂單");
+            return "redirect:/login";
+        }
+        
+        try {
+            // 使用更新後的方法名
+            List<OrdersDTO> orders = ordersRepository.findOrdersDTOByUserId(userId);
+            model.addAttribute("orders", orders);
+            return "orderManage";
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", "無法載入訂單列表，請稍後再試");
+            return "error";
+        }
+    }
+
+    public String getOrderDetails(Integer orderId, Model model) {
+        Long userId = usersServiceImpl.getCurrentUserId();
+        if (userId == null) {
+            model.addAttribute("errorMessage", "請先登錄以查看訂單詳情");
+            return "redirect:/login";
+        }
+        
+        try {
+            // 使用更新後的方法名
+            Optional<Orders> orderOpt = ordersRepository.findByOrderIdAndUser_UserId(orderId, userId);
+            if (orderOpt.isPresent()) {
+                // 可能需要將 Orders 轉換為 OrdersDTO
+                model.addAttribute("order", convertToDTO(orderOpt.get()));
+                return "checkOrder";
+            } else {
+                model.addAttribute("errorMessage", "找不到指定的訂單");
+                return "error";
+            }
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", "無法載入訂單詳情，請稍後再試");
+            return "error";
+        }
+    }
+    
+    private OrdersDTO convertToDTO(Orders order) {
+        if (order == null) {
+            return null;
+        }
+
+        List<OrderDetailsDTO> orderDetailsDTOs = order.getOrderDetails().stream()
+                .map(this::convertToOrderDetailsDTO)
+                .collect(Collectors.toList());
+
+        return new OrdersDTO(
+            order.getOrderId(),
+            order.getOrderDate(),
+            order.getAddress(),
+            order.getTotalAmount(),
+            order.getCoupon() != null ? order.getCoupon().getCode() : null,
+            order.getPercentageDiscount(),
+            order.getAmountDiscount(),
+            order.getFinalAmount(),
+            order.getStatus(),
+            orderDetailsDTOs,
+            convertToUserDTO(order.getUser())
+        );
+    }
+
+    private UserDTO convertToUserDTO(Users user) {
+        return new UserDTO(
+            user.getUserId(),
+            user.getUsername(),
+            user.getEmail(),
+            user.getPhoneNumber(),
+            user.getUserinfo() != null ? user.getUserinfo().getAddress() : null
+        );
+    }
+    
+    public List<OrderDetailsDTO> getOrderDetailsDTOs(Integer orderId) {
+        List<OrderDetails> orderDetails = orderDetailsRepository.findByOrdersOrderId(orderId);
+        return orderDetails.stream()
+                .map(this::convertToDTO)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
+    }
+    
+    public List<OrdersDTO> getUserOrders(Long userId) {
+        List<Orders> orders = ordersRepository.findByUserUserId(userId);
+        return orders.stream()
+                     .map(this::convertToDTO)
+                     .collect(Collectors.toList());
+    }
+    
+    public long getUserId(HttpSession session) {
+      Users loggedInUser = null;
+      if(session != null) {
+          loggedInUser = (Users)session.getAttribute("loggedInUser");
+          if(loggedInUser != null) {
+              System.out.println("在products中獲取UserID:" + loggedInUser.getUserId());
+          }
+      }
+      return loggedInUser.getUserId();
+  }
 	
 
 

@@ -1,9 +1,9 @@
 package tw.luna.FinalTest.repository;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,7 +12,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import jakarta.persistence.criteria.Order;
+import tw.luna.FinalTest.dto.OrdersDTO;
+import tw.luna.FinalTest.model.OrderDetails;
 import tw.luna.FinalTest.model.Orders;
 
 @Repository
@@ -66,6 +67,18 @@ public interface OrdersRepository extends JpaRepository<Orders, Integer> {
     List<Orders> findOrdersAfterDate(@Param("startDate") LocalDateTime startDate);
 
 	List<Orders> findByOrderDateGreaterThanEqual(LocalDateTime startDate);
+	
+	List<Orders> findByUser_UserId(Long userId);
+	Optional<Orders> findByOrderIdAndUser_UserId(Integer orderId, Long userId);
+    
+	@Query("SELECT new tw.luna.FinalTest.dto.OrdersDTO(o.orderId, o.orderDate, o.address, o.totalAmount, " +
+	           "CASE WHEN o.coupon IS NULL THEN null ELSE o.coupon.code END, " +
+	           "o.percentageDiscount, o.amountDiscount, o.finalAmount, o.status) " +
+	           "FROM Orders o WHERE o.user.userId = :userId")
+	    List<OrdersDTO> findOrdersDTOByUserId(@Param("userId") Long userId);
+	
+//	@Query(value ="SELECT * FROM orders o WHERE o.userId = :userId", nativeQuery = true)
+	List<Orders> findByUserUserId(Long userId);
     
 
 }
