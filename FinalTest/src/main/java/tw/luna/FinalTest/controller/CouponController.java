@@ -1,6 +1,8 @@
 package tw.luna.FinalTest.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,8 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import tw.luna.FinalTest.Dto.UserCouponDTO;
+import tw.luna.FinalTest.model.Cart;
 import tw.luna.FinalTest.model.Coupon;
 import tw.luna.FinalTest.model.UserCoupon;
+import tw.luna.FinalTest.service.CartService;
 import tw.luna.FinalTest.service.CouponService;
 @RestController
 @CrossOrigin(origins = "http://127.0.0.1:5500", allowCredentials = "true")
@@ -21,21 +26,38 @@ import tw.luna.FinalTest.service.CouponService;
 public class CouponController {
 
 	private final CouponService couponService;
+	private final CartService cartService;
 
-	public CouponController(CouponService couponService) {
+	public CouponController(CouponService couponService, CartService cartService) {
 		this.couponService = couponService;
-	}
+        this.cartService = cartService;
+    }
 
 	// 根據優惠券碼檢查優惠券是否有效
-	@GetMapping("/validate")
-	public ResponseEntity<String> validateCoupon(@RequestParam String code, @RequestParam long userId) {
-	    try {
-	        couponService.validateCoupon(code, userId);
-	        return ResponseEntity.ok("優惠券有效，可以使用");
-	    } catch (IllegalArgumentException e) {
-	        return ResponseEntity.badRequest().body(e.getMessage());
-	    }
+	@PostMapping("/validate")
+	public ResponseEntity<Map<String, Object>> validateCoupon(@RequestParam String couponCode, @RequestParam long userId) {
+
+		try {
+			Coupon coupon = couponService.validateCoupon(couponCode, userId);
+
+			// 返回成功結果
+			Map<String, Object> response = new HashMap<>();
+			response.put("success", true);
+			response.put("message", "優惠券有效");
+			response.put("discountType", coupon.getDiscountType());
+			response.put("discountValue", coupon.getDiscountValue());
+
+			return ResponseEntity.ok(response);
+		} catch (IllegalArgumentException e) {
+			// 返回錯誤結果
+			Map<String, Object> response = new HashMap<>();
+			response.put("success", false);
+			response.put("message", e.getMessage());
+
+			return ResponseEntity.badRequest().body(response);
+		}
 	}
+
 
 
 	// 發放優惠券給用戶
@@ -58,8 +80,8 @@ public class CouponController {
 
 	// 查詢用戶的所有優惠券：用戶查詢
 	@GetMapping("/user/{userId}")
-	public ResponseEntity<List<UserCoupon>> getUserCoupons(@PathVariable int userId) {
-		List<UserCoupon> userCoupons = couponService.getUserCoupons(userId);
+	public ResponseEntity<List<UserCouponDTO>> getUserCoupons(@PathVariable int userId) {
+		List<UserCouponDTO> userCoupons = couponService.getUserCoupons(userId);
 		return ResponseEntity.ok(userCoupons);
 	}
 
@@ -100,5 +122,28 @@ public class CouponController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("發放失敗: " + e.getMessage());
         }
     }
+	// 應用優惠券到購物車
+	@PostMapping("/apply-coupon")
+	public ResponseEntity<Map<String, Object>> applyCouponToCart(
+			@RequestParam Long cartId,
+			@RequestParam String couponCode) {
+		try {
+			// 調用 CartService 應用優惠券
+			Map<String, Object> response = cartService.applyCouponToCart(cartId, couponCode);
+
+			// 返回成功結果
+			return ResponseEntity.ok(response);
+
+		} catch (RuntimeException e) {
+			// 返回錯誤結果
+			Map<String, Object> errorResponse = new HashMap<>();
+			errorResponse.put("success", false);
+			errorResponse.put("message", e.getMessage());
+			return ResponseEntity.badRequest().body(errorResponse);
+		}
+	}
+
+
+
 
 }
