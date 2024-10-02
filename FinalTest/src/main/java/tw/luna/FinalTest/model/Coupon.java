@@ -38,6 +38,19 @@ public class Coupon {
 	@Column(name = "expiryDate")
 	private LocalDate expiryDate;
 
+
+	@Column(name = "isActive")
+	private boolean isActive;
+
+
+	// Getters and Setters
+	public boolean isActive() {
+		return isActive;
+	}
+
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
+	}
 	public Coupon(long couponId, String code, String name, DiscountType discountType, int discountValue, LocalDate expiryDate) {
 		this.couponId = couponId;
 		this.code = code;
@@ -123,4 +136,6 @@ public class Coupon {
 				", expiryDate=" + expiryDate +
 				'}';
 	}
+
+
 }
