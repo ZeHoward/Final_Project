@@ -2,9 +2,9 @@
   padding: 2% 0;
   text-align: center;
   margin: 0 auto;
-  width: 600px;
+  width: 700px;
   font-weight: bold;
-  
+  /*border: 1px black solid;*/
 }
 
 .couponPage > p:first-child{
