@@ -669,10 +669,10 @@ function generateOrderDetailsContent(order) {
   mainContent.innerHTML = ""; // 清空之前的內容
 
   // 動態生成用戶信息
-  const userInfo = order
-    ? `<p><strong>用戶名稱:</strong> ${order.username || "未提供"}</p>
-           <p><strong>電子郵件:</strong> ${order.email || "未提供"}</p>
-           <p><strong>電話號碼:</strong> ${order.phoneNumber || "未提供"}</p>`
+  const userInfo = order && order.user
+    ? `<p><strong>用戶名稱:</strong> ${order.user.username || "未提供"}</p>
+         <p><strong>電子郵件:</strong> ${order.user.email || "未提供"}</p>
+         <p><strong>電話號碼:</strong> ${order.user.phoneNumber || "未提供"}</p>`
     : `<p>無法找到該用戶資訊</p>`;
 
   // 動態生成訂單詳情部分

@@ -33,23 +33,25 @@ public interface OrdersRepository extends JpaRepository<Orders, Integer> {
     Integer countOrdersWithinPeriod(@Param("startDate") LocalDateTime startDate, @Param("endDate") LocalDateTime endDate);
     
     // 查詢每日的營業額
-    @Query("SELECT new map(FUNCTION('DATE', o.orderDate) AS orderDay, SUM(o.finalAmount) AS totalRevenue) " +
-           "FROM Orders o " +
-           "WHERE o.orderDate BETWEEN :startDate AND :endDate " +
-           "GROUP BY FUNCTION('DATE', o.orderDate) " +
-           "ORDER BY orderDay")
-    List<Map<String, Object>> aggregateRevenueByDay(LocalDateTime startDate, LocalDateTime endDate);
+    @Query("SELECT new map(FUNCTION('DATE', o.orderDate) AS orderDay, SUM(COALESCE(o.finalAmount, 0)) AS totalRevenue) " +
+    	       "FROM Orders o " +
+    	       "WHERE o.orderDate BETWEEN :startDate AND :endDate " +
+    	       "GROUP BY FUNCTION('DATE', o.orderDate) " +
+    	       "ORDER BY orderDay")
+    	List<Map<String, Object>> aggregateRevenueByDay(LocalDateTime startDate, LocalDateTime endDate);
+
 
     // 查詢每月的營業額
-    @Query("SELECT new map(FUNCTION('YEAR', o.orderDate) AS orderYear, FUNCTION('MONTH', o.orderDate) AS orderMonth, SUM(o.finalAmount) AS totalRevenue) " +
-           "FROM Orders o " +
-           "WHERE o.orderDate BETWEEN :startDate AND :endDate " +
-           "GROUP BY FUNCTION('YEAR', o.orderDate), FUNCTION('MONTH', o.orderDate) " +
-           "ORDER BY orderYear, orderMonth")
-    List<Map<String, Object>> aggregateRevenueByMonth(LocalDateTime startDate, LocalDateTime endDate);
+    @Query("SELECT new map(FUNCTION('YEAR', o.orderDate) AS orderYear, FUNCTION('MONTH', o.orderDate) AS orderMonth, SUM(COALESCE(o.finalAmount, 0)) AS totalRevenue) " +
+    	       "FROM Orders o " +
+    	       "WHERE o.orderDate BETWEEN :startDate AND :endDate " +
+    	       "GROUP BY FUNCTION('YEAR', o.orderDate), FUNCTION('MONTH', o.orderDate) " +
+    	       "ORDER BY orderYear, orderMonth")
+    	List<Map<String, Object>> aggregateRevenueByMonth(LocalDateTime startDate, LocalDateTime endDate);
+
     
     // 查詢每年的營業額
-    @Query("SELECT YEAR(o.orderDate) AS orderYear, SUM(o.totalAmount) AS totalRevenue " +
+    @Query("SELECT YEAR(o.orderDate) AS orderYear, SUM(COALESCE(o.finalAmount, 0)) AS totalRevenue " +
     	       "FROM Orders o " +
     	       "WHERE o.orderDate BETWEEN :startDate AND :endDate " +
     	       "GROUP BY YEAR(o.orderDate)")
