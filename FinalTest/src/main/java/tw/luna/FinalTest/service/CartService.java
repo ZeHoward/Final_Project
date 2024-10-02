@@ -33,6 +33,27 @@ public class CartService {
     @Autowired
     CouponRepository couponRepository;
 
+    @Transactional
+    public void addToCart(CartInsertDto cartInsertDto, Long userId) {
+        Cart cart = cartRepository.findByUsersUserId(userId);
+        Product product = productRepository.findProductByName(cartInsertDto.getProductName());
+
+        CartItems cartItem = cartItemsRepository.findByCartCartIdAndProductName(cart.getCartId(), cartInsertDto.getProductName());
+
+        if (cartItem == null) {
+            // Product doesn't exist in the cart, add new item
+            cartItem = new CartItems();
+            cartItem.setCart(cart);
+            cartItem.setProduct(product);
+            cartItem.setQuantity(Math.max(cartInsertDto.getQuantity(), 1));
+            cartItem.setPrice(product.getPrice());
+        } else {
+            // Product exists in the cart, update quantity
+            cartItem.setQuantity(cartItem.getQuantity() + Math.max(cartInsertDto.getQuantity(), 1));
+        }
+
+        cartItemsRepository.save(cartItem);
+    }
 
 
     //根據用戶 ID 獲取該用戶的購物車項目
