@@ -3,7 +3,6 @@ package tw.luna.FinalTest.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import org.hibernate.annotations.DynamicUpdate;
 
 //cart表結構:cartId、userId、total、totalQuantity、status
 //建構式、getter setter

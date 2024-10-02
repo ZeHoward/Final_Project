@@ -32,8 +32,8 @@ public interface CartItemsRepository extends JpaRepository<CartItems,Long> {
     // 查詢購物車內的特定商品 (使用場景 -> 使用者刪除購物車內商品)
 //    @Query("SELECT ci FROM CartItems ci WHERE ci.cart.cartId = :cartId AND ci.product.productId = :productId")
 //    CartItems findByCartCartIdAndProductProductId(@Param("cartId") Integer cartId, @Param("productId") Long productId);
-    @Query("SELECT ci FROM CartItems ci WHERE ci.product.name = :name")
-    CartItems findByCartCartIdAndProductName(@Param("name") String name);
+    @Query("SELECT ci FROM CartItems ci JOIN ci.cart c WHERE c.cartId = :cartId AND ci.product.name = :name")
+    CartItems findByCartCartIdAndProductName(@Param("cartId") Integer cartId, @Param("name") String name);
 
 //    List<CartItems> findCartItemsByCartId(Long cartId);  //透過cartId找到catrItem
 //    Optional<CartItems> findByProductId(Integer productId);     //透過ProductId找到catrItem

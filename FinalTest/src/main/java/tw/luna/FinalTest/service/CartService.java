@@ -57,7 +57,7 @@ public class CartService {
         Cart cart = cartRepository.findByUsersUserId(userId);
         Product product = productRepository.findProductByName(cartInsertDto.getProductName());
         System.out.println(product);
-        CartItems isPresent = cartItemsRepository.isCartItemInCart(cart, product);
+        CartItems isPresent = cartItemsRepository.findByCartCartIdAndProductName(cart.getCartId(),cartInsertDto.getProductName());
         if(isPresent == null) {          //購物車內目前不存在該商品 ->新增
             CartItems cartItems = new CartItems();
             cartItems.setCart(cart);
@@ -87,7 +87,7 @@ public class CartService {
         // 找到該用戶的購物車
         Cart cart = cartRepository.findByUsersUserId(userId);
         //找到購物車中的該商品
-        CartItems isPresent = cartItemsRepository.findByCartCartIdAndProductName(name);
+        CartItems isPresent = cartItemsRepository.findByCartCartIdAndProductName(cart.getCartId(),name);
 
         if(isPresent != null)  { //商品存在
         //刪除商品
