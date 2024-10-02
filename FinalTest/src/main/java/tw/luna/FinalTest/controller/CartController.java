@@ -19,6 +19,12 @@ public class CartController {
     @Autowired
     CartService cartService;
 
+    @PostMapping("/{userId}")
+    public ResponseEntity<String> addToCart(@PathVariable Long userId, @RequestBody CartInsertDto cartInsertDto) {
+        cartService.addToCart(cartInsertDto, userId);
+        return ResponseEntity.ok("Successfully added/updated product in the cart");
+    }
+
     //查詢購物車
     //顯示用戶購物車items
     @GetMapping("/{userId}")
