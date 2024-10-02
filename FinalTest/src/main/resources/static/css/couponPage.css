@@ -27,3 +27,61 @@
 .couponPageImg:active{
   transform: scale(1.03);
 }
+
+
+
+.couponPageDiv{
+  background-image: url('../material/Coupon.jpg');
+  margin-bottom: 20px;
+  width: 630px;
+  height: 300px;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat; 
+  position: relative;
+  display: inline-block;
+}
+
+.couponPageDiv:hover{
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+.couponPageDiv:active{
+  transform: scale(1.03);
+} 
+
+
+#title1{
+  position: absolute; 
+  top: 130px; 
+  left: 240px; 
+  font-size: 24px; 
+  color: black;
+}
+
+#title2{
+  position: absolute; 
+  top: 196px; 
+  left: 251px; 
+  font-size: 20px; 
+  color: black;
+}
+
+#discountCode{
+  position: absolute; 
+  top: 247px; 
+  left: 305px; 
+  font-size: 11px; 
+  color: black;
+}
+
+#validDate{
+  position: absolute; 
+  top: 278px; 
+  left: 326px; 
+  font-size: 11px; 
+  color: black;
+}
