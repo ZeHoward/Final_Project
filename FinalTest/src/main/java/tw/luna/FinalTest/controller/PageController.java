@@ -44,6 +44,27 @@ public class PageController {
         return "orderManage"; // ordersService.getOrdersList(model);
     }
 
+	@GetMapping("shoppingCart")
+	public String shoppingCart() {
+		return "shoppingCart";
+	}
+	@GetMapping("recipe")
+	public String recipe() {
+		return "recipe";
+	}
+	@GetMapping("recipeDetails")
+	public String recipeDetails() {
+		return "recipeDetails";
+	}
+	@GetMapping("checkout")
+	public String checkout() {
+		return "checkout";
+	}
+	@GetMapping("checkInfo")
+	public String checkInfo() {
+		return "checkInfo";
+	}
+
     @GetMapping("/myOrder/details/{id}")
     public String myOrderDetails(@PathVariable Integer id, Model model) {
     	return "checkOrder";
