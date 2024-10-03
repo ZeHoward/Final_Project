@@ -774,7 +774,7 @@ function generateProductUploadForm() {
                     <label for="type">商品類型</label>
                     <select id="type">
                         <option value="preparedFood">調理包</option>
-                        <option value="mealkit">食材包</option>
+                        <option value="mealkit">生鮮食材包</option>
                     </select>
                 </div>
 
@@ -1226,12 +1226,12 @@ function generateProductManagementWithActionsContent() {
               <div class="form-group">
                   <label for="type">商品類型</label>
                   <select id="type">
-                      <option value="mealkit" ${
+                      <option value="preparedFood" ${
                         product.type === "調理包" ? "selected" : ""
                       }>調理包</option>
-                      <option value="preparedFood" ${
-                        product.type === "食材包" ? "selected" : ""
-                      }>食材包</option>
+                      <option value="mealkit " ${
+                        product.type === "生鮮食食材包" ? "selected" : ""
+                      }>生鮮食材包</option>
                   </select>
               </div>
               

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.servlet.http.HttpSession;
 
 import tw.luna.FinalTest.model.Product;
+import tw.luna.FinalTest.model.UserAllInfo;
 import tw.luna.FinalTest.model.Users;
 import tw.luna.FinalTest.service.ProductService;
 
@@ -34,8 +35,10 @@ public class ProductController {
 	@GetMapping
 	public List<Product> getAllProducts() {
 		if(session != null) {
-			Users loggedInUser = (Users)session.getAttribute("loggedInUser");
-			if(loggedInUser != null) {
+//			Users loggedInUser = (Users)session.getAttribute("loggedInUser");
+            UserAllInfo loggedInUser = (UserAllInfo) session.getAttribute("loggedInUser");
+
+            if(loggedInUser != null) {
 				System.out.println("在products中獲取UserID:" + loggedInUser.getUserId());
 			}
 		}
@@ -87,7 +90,6 @@ public class ProductController {
     public ProductController(ProductService productService) {
         this.productService = productService;
     }
-
 
 	//新增或更新產品
 	@PostMapping

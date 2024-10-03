@@ -14,6 +14,7 @@ import tw.luna.FinalTest.model.Product;
 import tw.luna.FinalTest.repository.CartItemsRepository;
 import tw.luna.FinalTest.repository.CartRepository;
 import tw.luna.FinalTest.repository.ProductRepository;
+import tw.luna.FinalTest.repository.UsersRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +32,8 @@ public class CartService {
 
     @Autowired
     ProductRepository productRepository;
+    @Autowired
+    private UsersRepository usersRepository;
 
     //根據用戶 ID 獲取該用戶的購物車項目
     public List<CartSelectDto> getCartItemsByUserId(Long userId) {
@@ -55,9 +58,22 @@ public class CartService {
     @Transactional
     public void updateCart(CartInsertDto cartInsertDto, Long userId) {
         Cart cart = cartRepository.findByUsersUserId(userId);
+        //毓珈加的
+        if (cart == null) {
+            // 如果購物車不存在，創建新的購物車
+            cart = new Cart();
+            cart.setUsers(usersRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("用戶不存在")));
+            cartRepository.save(cart); // 保存新購物車
+        }
+
         Product product = productRepository.findProductByName(cartInsertDto.getProductName());
+        if (product == null) {
+            throw new IllegalArgumentException("商品不存在: " + cartInsertDto.getProductName());
+        }
         System.out.println(product);
+
         CartItems isPresent = cartItemsRepository.isCartItemInCart(cart, product);
+
         if(isPresent == null) {          //購物車內目前不存在該商品 ->新增
             CartItems cartItems = new CartItems();
             cartItems.setCart(cart);
