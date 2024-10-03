@@ -58,7 +58,7 @@ window.onload = function () {
 
   function displayFavorites(favorites, type) {
     const container = document.getElementById("productContainer");
-    container.innerHTML = "";
+    container.innerHTML = "";  // 清空現有內容
 
     if (favorites.length === 0) {
       container.innerHTML = `<p>您沒有收藏的${type === 'products' ? '商品' : '食譜'}。</p>`;
@@ -68,21 +68,35 @@ window.onload = function () {
     favorites.forEach(favorite => {
       const imageSrc = `data:image/jpeg;base64,${favorite.imageBase64}`;
 
-      container.innerHTML += `
-        <div class="product" data-product-id="${favorite.productId}" data-product-name="${favorite.name}">
-          <img class="product-image" src="${imageSrc}" alt="${favorite.name}">
-          <h3 class="product-name">${favorite.name}</h3>
-          <p class="product-price">$NT${favorite.price}</p>
-          <div class="home-product-btn">
-            <button class="add-to-cart" data-product-id="${favorite.productId}" data-product-name="${favorite.name}">
-              <i class="fa-solid fa-cart-shopping"></i>&nbsp;&nbsp;&nbsp;加入購物車
-            </button>
-          </div>
-        </div>`;
+      // 動態生成商品卡，並在外部包裹一個 <a> 元素，讓商品卡成為一個可點擊的鏈接
+      const productDiv = document.createElement('div');
+      productDiv.className = "product";
+      productDiv.dataset.productId = favorite.productId;
+      productDiv.dataset.productName = favorite.name;
+
+      // 設置商品卡的 HTML 結構
+      productDiv.innerHTML = `
+      <img class="product-image" src="${imageSrc}" alt="${favorite.name}">
+      <h3 class="product-name">${favorite.name}</h3>
+      <p class="product-price">$NT${favorite.price}</p>
+      <div class="home-product-btn">
+        <button class="add-to-cart" data-product-id="${favorite.productId}" data-product-name="${favorite.name}">
+          <i class="fa-solid fa-cart-shopping"></i>&nbsp;&nbsp;&nbsp;加入購物車
+        </button>
+      </div>`;
+
+      // 綁定點擊事件到商品卡，點擊跳轉到商品詳情頁
+      productDiv.addEventListener('click', function () {
+        window.location.href = `/detail?productId=${favorite.productId}`;
+      });
+
+      // 將商品卡添加到容器
+      container.appendChild(productDiv);
     });
 
     attachButtonHandlers();
   }
+
 
   function attachButtonHandlers() {
     document.querySelectorAll(".add-to-cart").forEach(button => {
