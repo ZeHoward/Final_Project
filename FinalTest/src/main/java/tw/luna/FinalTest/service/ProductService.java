@@ -24,7 +24,7 @@ public interface ProductService {
 	//根據產品類型查詢商品(生鮮食材包、調理包)
 	List<Product>finProductsByType(String type);
 	
-	//
+	//根據類型和類別查詢產品
 	List<Product>findProductsByTypeAndCategory(String type, Integer categoryId);
 	
 	// 根據價格範圍查詢產品

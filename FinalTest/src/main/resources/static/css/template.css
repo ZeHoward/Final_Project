@@ -23,11 +23,7 @@ body {
   background-color: transparent;
   right: 15px;
   top: 15px;
-}
-
-.tem-closebtn > img {
-  height: 35px;
-  width: 35px;
+  font-size: 25px;
 }
 
 .tem-end-photo {
@@ -268,39 +264,19 @@ body {
   width: 30px;
 }
 
-/*響應式*/
-@media ((min-width: 400px) and (max-width: 1100px)) {
-  .tem-footer-content {
-    justify-content: center;
-    flex-direction: column;
-  }
-
-  .tem-sidenav {
-    padding-top: 15px;
-  }
-
-  .tem-overlay-content > a,
-  .tem-dropdown-button {
-    font-size: 20px;
-  }
-
-  .tem-dropdown-button img {
-    height: 16px;
-  }
-}
-
 /******************************/
+
+#searchIcon,
+#cartIcon,
+#memberIcon{
+  display: inline-block;
+  font-size: 24px;
+}
 
 #memberIcon {
   margin-right: 10px;
   background-color: transparent;
   border: none;
-  transition: transform 0.3s ease;
-}
-
-#memberIcon:hover {
-  cursor: pointer;
-  transform: scale(1.5);
 }
 
 #memberInfoDiv {
@@ -314,7 +290,6 @@ body {
   flex-direction: column;
   text-align: start;
   border-radius: 10px;
-  /*transition: opacity 0.5s ease, height 0.5s ease;*/
   display: none;
 }
 
@@ -330,11 +305,6 @@ body {
 
 #memberInfoDiv > div {
   padding: 15px 0;
-  transition: transform 0.2s ease;
-}
-
-#memberInfoDiv > div:hover {
-  transform: scale(1.05);
 }
 
 #memberInfoDiv > div:hover,
@@ -347,20 +317,15 @@ body {
 #searchIcon {
   background-color: transparent;
   border: none;
-  transition: transform 0.3s ease;
-}
-#searchIcon:hover {
-  transform: scale(1.5);
 }
 
 #searchDiv {
   position: absolute;
   right: 100%;
   top: 10px;
-  width: 0;
+  width: 300px;
   height: 40px;
   background-color: white;
-  transition: width 0.3s ease-in-out;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -383,11 +348,6 @@ body {
 #cartIcon {
   background-color: transparent;
   border: none;
-  transition: transform 0.3s ease;
-}
-
-#cartIcon:hover {
-  transform: scale(1.5);
 }
 
 #myContainer {

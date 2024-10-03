@@ -1,59 +1,13 @@
-var slideIndex = 1;
-var autoPlayInterval;
 let currentIndex1 = 0;
 let currentIndex2 = 0;
-
-// 自動播放幻燈片
-function startAutoPlay() {
-  autoPlayInterval = setInterval(function () {
-    slideIndex++;
-    showSlides(slideIndex);
-  }, 5000); // 每5秒自動切換
-}
-
-// 手動切換幻燈片
-function plusSlides(n) {
-  clearInterval(autoPlayInterval); // 停止自動播放
-  slideIndex += n;
-  showSlides(slideIndex);
-  startAutoPlay(); // 重新啟動自動播放
-}
-
-// 顯示幻燈片
-function showSlides(n) {
-  let slides = document.getElementsByClassName("mySlides");
-  let dots = document.getElementsByClassName("dot");
-
-  if (n > slides.length) {
-    slideIndex = 1;
-  }
-  if (n < 1) {
-    slideIndex = slides.length;
-  }
-
-  // 隱藏所有幻燈片
-  for (let i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";
-  }
-
-  // 移除所有圓點的活動狀態
-  for (let i = 0; i < dots.length; i++) {
-    dots[i].className = dots[i].className.replace(" dotActive", "");
-  }
-
-  // 顯示當前幻燈片，並激活當前的圓點
-  slides[slideIndex - 1].style.display = "block";
-  dots[slideIndex - 1].className += " dotActive";
-}
-
-// 初始化幻燈片
-showSlides(slideIndex);
-startAutoPlay();
-
 const type1 = "mealkit";
 const type2 = "preparedFood";
+let slideIndex = 1;
 
 document.addEventListener("DOMContentLoaded", function () {
+  //輪播廣告
+  showSlides(slideIndex);
+
   // 調理包推薦商品
   fetch(`products/type/${type1}`)
     .then((response) => {
@@ -109,8 +63,18 @@ document.addEventListener("DOMContentLoaded", function () {
     .catch((error) => {
       console.error("無法獲得第二區域商品清單:", error);
     });
+
+    document.querySelectorAll(".view-all").forEach((viewAllBtn)=>{
+      viewAllBtn.addEventListener("click",function (event){
+        event.preventDefault();
+        const type = this.getAttribute("data-type");
+        window.location.href=`http://localhost:8080/productList`;
+      })
+    })
+
 });
 
+//展示商品
 function renderProducts(products, containerId, currentIndex) {
   const container = document.getElementById(containerId);
   container.innerHTML = ""; // 清空容器
@@ -172,27 +136,148 @@ function renderProducts(products, containerId, currentIndex) {
     });
 
     productDiv
-      .querySelector(".add-to-cart")
-      .addEventListener("click", (event) => {
-        event.stopPropagation();
-        Swal.fire({
-          title: "成功",
-          text: "已將商品加入購物車",
-          icon: "success",
-          timer: 1500,
+        .querySelector(".add-to-cart")
+        .addEventListener("click", function (event) {
+          event.stopPropagation();
+          checkLoginStatus()
+              .then(isLoggedIn => {
+                if (isLoggedIn) {
+                  Swal.fire({
+                    title: "成功",
+                    text: "已將商品加入購物車",
+                    icon: "success",
+                    timer: 1500,
+                  });
+                  console.log("success");
+                  // addToCart(product.productId,1); //加入購物車請求
+                } else {
+                  Swal.fire({
+                    title: "未登入",
+                    text: `請先登入才能加入購物車`,
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: '登入',
+                    cancelButtonText: '取消',
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                      window.location.href = 'http://localhost:8080/loginPage';
+                    }
+                  });
+                }
+              });
         });
-      });
 
     productDiv
-      .querySelector(".add-to-favorite")
-      .addEventListener("click", (event1) => {
-        event1.stopPropagation();
-        Swal.fire({
-          title: "成功",
-          text: `已將${product.name}加入收藏`,
-          icon: "success",
-          timer: 1500,
+        .querySelector(".add-to-favorite")
+        .addEventListener("click", function (event) {
+          event.stopPropagation();
+          checkLoginStatus()
+              .then((isLoggedIn) => {
+                if (isLoggedIn) {
+                  getUserId().then(userId => {
+                    if (userId) {
+                      const productId = parseInt(`${product.productId}`) ;
+                      // 發送收藏請求
+                      fetch(`/api/favorites/add?userId=${userId}&productId=${productId}`, {
+                        method: "POST",
+                      })
+                          .then(response => response.json())
+                          .then(() => {
+                            Swal.fire({
+                              title: "成功",
+                              text: "已將商品加入收藏",
+                              icon: "success",
+                              timer: 1500,
+                            });
+                            console.log(productId);
+                          })
+                          .catch((error) => {
+                            console.error("加入收藏時發生錯誤:", error);
+                          });
+                    }
+                  });
+                } else {
+                  Swal.fire({
+                    title: "未登入",
+                    text: `請先登入才能加入收藏`,
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: '登入',
+                    cancelButtonText: '取消',
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                      window.location.href = "/loginPage";
+                    }
+                  });
+                }
+              })
         });
-      });
   }
+}
+
+// 自動播放
+let autoPlayInterval = setInterval(function() {
+  plusSlides(1);
+}, 3000);
+
+function plusSlides(n) {
+  clearInterval(autoPlayInterval); // 切換幻燈片時停止自動播放
+  showSlides(slideIndex += n);
+  autoPlayInterval = setInterval(function() { // 重啟自動播放
+    plusSlides(1);
+  }, 3000);
+}
+
+function currentSlide(n) {
+  clearInterval(autoPlayInterval); // 選擇特定幻燈片時停止自動播放
+  showSlides(slideIndex = n);
+  autoPlayInterval = setInterval(function() { // 重啟自動播放
+    plusSlides(1);
+  }, 3000);
+}
+
+function showSlides(n) {
+  let i;
+  let slides = document.getElementsByClassName("mySlides");
+  let dots = document.getElementsByClassName("dot");
+  if (n > slides.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " active";
+}
+
+//登入驗證
+function getUserId() {
+  return fetch('/users/userAllInfo')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error("無法獲取用戶 ID");
+        }
+        return response.json(); // 返回 UserAllInfo 包含 userId
+      })
+      .then(data => data.userId) // 假設返回的數據中包含 userId
+      .catch(error => {
+        console.error("獲取用戶 ID 時發生錯誤", error);
+        return null;
+      });
+}
+// 取得Id
+function checkLoginStatus() {
+  return fetch('users/checkSession').then(response => {
+    if (!response.ok) {
+      throw new Error("無法檢查登入狀態");
+    }
+    return response.json();
+    console.log(data);
+  })
+      .catch(error => {
+        console.error("登入時發生錯誤", error);
+        return false;
+      })
 }

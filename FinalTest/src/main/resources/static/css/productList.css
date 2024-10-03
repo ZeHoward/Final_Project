@@ -1,16 +1,16 @@
-* {
-  font-family: "Noto Sans TC", system-ui;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+/** {*/
+/*  font-family: "Noto Sans TC", system-ui;*/
+/*  margin: 0;*/
+/*  padding: 0;*/
+/*  box-sizing: border-box;*/
+/*}*/
 
-body {
-  font-family: Arial, sans-serif;
-  width: 100vw;
-  max-width: 100%;
-  overflow-x: hidden;
-}
+/*body {*/
+/*  font-family: Arial, sans-serif;*/
+/*  width: 100vw;*/
+/*  max-width: 100%;*/
+/*  overflow-x: hidden;*/
+/*}*/
 
 /* 中間區塊 */
 .mid {
@@ -48,24 +48,14 @@ body {
 }
 
 .list-title {
-  background-color: #514741;
-}
-
-.down-btn:hover {
-  color: rgb(0, 0, 0);
-  background-color: #f3ce6e;
-}
-
-.active2 {
-  background-color: #f3cd6ea2;
-  color: rgb(0, 0, 0);
+  background-color: #faf4e8;
 }
 
 .down-container > a:hover {
-  background-color: #f3ce6e;
+  background-color: #ece2b3;
 }
 .down-container > a:active {
-  background-color: #edc150;
+  background-color: #ece2b3;
 }
 
 /* 商品區 */

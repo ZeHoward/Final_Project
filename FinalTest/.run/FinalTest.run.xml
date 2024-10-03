@@ -1,0 +1,9 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="FinalTest" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <module name="FinalTest" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="tw.luna.FinalTest.FinalTestApplication" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
