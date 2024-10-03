@@ -987,3 +987,48 @@ input[type="date"]:hover {
     background-color: #f1f1f1;
     border-color: #bbb;
 }
+
+
+/* 啟用按鈕（綠色） */
+.activate-button {
+    background-color: #4CAF50; /* 綠色 */
+    color: white;
+    padding: 8px 12px;
+    margin-right: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.activate-button:hover {
+    background-color: #45a049; /* 深綠色 hover 效果 */
+}
+
+/* 禁用按鈕（紅色） */
+.deactivate-button {
+    background-color: #f44336; /* 紅色 */
+    color: white;
+    padding: 8px 12px;
+    margin-right: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.deactivate-button:hover {
+    background-color: #d32f2f; /* 深紅色 hover 效果 */
+}
+
+/* 發送按鈕（藍色） */
+.send-button {
+    background-color: #1e88e5; /* 藍色 */
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.send-button:hover {
+    background-color: #1565c0; /* 深藍色 hover 效果 */
+}
