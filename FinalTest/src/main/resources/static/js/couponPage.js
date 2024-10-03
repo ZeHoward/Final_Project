@@ -1,15 +1,22 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const userId = 5;  // 根據需求設置 userId
     const container = document.querySelector(".couponPage");
 
-    // 發送 API 請求，獲取該用戶的優惠券
-    fetch(`/api/coupons/user/${userId}`)
+    // 首先通過API獲取userId
+    fetch('http://localhost:8080/api/favorites/recipes/getUserId')
         .then(response => response.json())
-        .then(data => {
-            displayCoupons(data);  // 顯示優惠券數據
+        .then(userId => {
+            // 當成功獲取userId後，使用該userId來獲取優惠券
+            fetch(`/api/coupons/user/${userId}`)
+                .then(response => response.json())
+                .then(data => {
+                    displayCoupons(data);  // 顯示優惠券數據
+                })
+                .catch(error => {
+                    console.error('Error fetching coupons:', error);
+                });
         })
         .catch(error => {
-            console.error('Error fetching coupons:', error);
+            console.error('Error fetching userId:', error);
         });
 
     // 動態生成優惠券的內容
