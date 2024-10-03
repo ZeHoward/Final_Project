@@ -259,7 +259,7 @@ window.onload = function () {
     let apiUrl;
 
     if (type === 'products') {
-      apiUrl = `/api/favorites/products/remove?userId=${userId}&productId=${productId}`;  // 呼叫刪除商品的API
+      apiUrl = `/api/favorites/remove?userId=${userId}&productId=${productId}`;  // 呼叫刪除商品的API
     } else if (type === 'recipes') {
       apiUrl = `/api/favorites/recipes/remove?userId=${userId}&productId=${productId}`;  // 呼叫刪除食譜的API
     }
