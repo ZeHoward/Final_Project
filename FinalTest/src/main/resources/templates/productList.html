@@ -23,7 +23,7 @@
         <div class="list">
           <div class="list-title">商品區</div>
           <div style="padding: 5px"></div>
-          <button class="down-btn" onclick="togglePic3()">調理包專區</button>
+          <button class="down-btn productType" onclick="togglePic3()"  data-type="preparedFood">調理包專區</button>
           <div class="down-container">
             <a class="links" href="#" data-type="preparedFood" data-category="5"
               >家常料理</a
@@ -41,7 +41,7 @@
               >多人料理</a
             >
           </div>
-          <button class="down-btn" onclick="togglePic4()">
+          <button class="down-btn productType" onclick="togglePic4()" data-type="mealkit">
             生鮮食材包專區
           </button>
           <div class="down-container">
@@ -78,6 +78,12 @@
             </label>
           </div>
           <div id="productContainer"></div>
+          <!--分頁-->
+          <div class="pagination">
+            <button id="prevPage">上一頁</button>
+            <span id="pageInfo"></span>
+            <button id="nextPage">下一頁</button>
+          </div>
         </div>
       </div>
     </div>

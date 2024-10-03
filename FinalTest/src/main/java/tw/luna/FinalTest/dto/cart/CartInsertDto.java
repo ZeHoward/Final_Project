@@ -5,7 +5,7 @@ package tw.luna.FinalTest.dto.cart;
 public class CartInsertDto {
 
     private String productName;
-    private Integer quantity; //預設值為1
+    private Integer quantity = 1; //預設值為1
 
     public CartInsertDto() {
     }

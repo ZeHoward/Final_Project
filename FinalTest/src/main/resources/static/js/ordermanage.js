@@ -22,7 +22,19 @@ window.onload = function () {
       // 訂單圖片區域
       const orderImage = document.createElement('div');
       orderImage.classList.add('order-image');
-      orderImage.innerHTML = '<img src="box_placeholder.png" alt="訂單圖片">';  // 假設訂單圖片
+      
+      // 使用第一個商品的圖片或預設圖片
+      let firstProductImage = "../material/icon/default.png";
+      if (order.orderDetails && order.orderDetails.length > 0) {
+        const firstProduct = order.orderDetails[0];
+        if (firstProduct.productImageUrl) {
+          firstProductImage = firstProduct.productImageUrl;
+        } else if (firstProduct.productImageBase64) {
+          firstProductImage = `data:image/jpeg;base64,${firstProduct.productImageBase64}`;
+        }
+      }
+      
+      orderImage.innerHTML = `<img src="${firstProductImage}" alt="訂單商品圖片" class="order-thumbnail">`;
       orderItem.appendChild(orderImage);
 
       // 訂單詳細資訊區域

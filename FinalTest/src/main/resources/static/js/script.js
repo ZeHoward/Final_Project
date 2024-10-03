@@ -475,7 +475,7 @@ function generateOrderManagementContent() {
             <table class="order-table">
                 <thead>
                     <tr>
-                        <th>商品名稱</th>
+                        <th>買家名稱</th>
                         <th>訂單資訊</th>
                         <th>訂單狀態</th>
                         <th>訂單時間</th>
@@ -564,8 +564,8 @@ function generateOrderManagementContent() {
     orders.forEach((order) => {
       const tr = document.createElement("tr");
 
-      // 訂單名稱，如果 order.name 不存在，顯示 '無名稱'
-      const orderName = order.name ? order.name : "無名稱";
+      // 買家名稱，如果 order.username 不存在，顯示 '無名稱'
+      const orderName = order.username ? order.username : "無名稱";
 
       // 訂單配送方式，如果 order.deliveryMethod 不存在，顯示 '無配送方式'
       const deliveryMethod = order.deliveryMethod
@@ -751,17 +751,19 @@ function generateProductUploadForm() {
   mainContent.innerHTML = ""; // 清空之前的內容
 
   const productUploadForm = `
-        <section class="product-upload">
-            <h1>商品上傳</h1>
-            <form>
-                 <div class="image-upload">
-                    <div class="image-preview">
-                    <input type="file" />
-                    </div>
-                 </div>
+    <section class="product-upload">
+      <h1>商品上傳</h1>
+        <form>
+                <div class="image-upload">
+                  <div class="image-preview" id="imagePreviewContainer">
+                    <img src="../material/icon/default.png" alt="預設商品圖片" style="max-width: 200px; margin: 10px;">
+                  </div>
+                  <input type="file" id="fileInput" accept="image/*" style="display: none;">
+                  <button type="button" id="uploadImageButton">選擇圖片</button>
+                </div>
                 <div class="form-group">
-                    <label for="name">商品名稱</label>
-                    <textarea id="name" rows="1" placeholder="商品名稱"></textarea>
+                  <label for="name">商品名稱</label>
+                  <textarea id="name" rows="1" placeholder="商品名稱"></textarea>
                 </div>
 
                 <div class="form-group">
@@ -774,7 +776,7 @@ function generateProductUploadForm() {
                     <label for="type">商品類型</label>
                     <select id="type">
                         <option value="preparedFood">調理包</option>
-                        <option value="mealkit">食材包</option>
+                        <option value="mealkit">生鮮食材包</option>
                     </select>
                 </div>
 
@@ -818,6 +820,8 @@ function generateProductUploadForm() {
     `;
   mainContent.innerHTML = productUploadForm;
 
+  let selectedFile = null;
+
   function uploadProduct(productData) {
     fetch(`http://localhost:8080/products`, {
       method: "POST",
@@ -835,33 +839,84 @@ function generateProductUploadForm() {
       })
       .then((result) => {
         console.log("商品上傳成功", result);
-        Swal.fire({
-          title: "Upload Success",
-          text: `「成功上傳${productData.name}」商品`,
-          icon: "success",
-          timer: 1500,
-        });
+        if (selectedFile) {
+          uploadProductImage(result.productId, selectedFile);
+        } else {
+          showSuccessMessage(productData.name);
+        }
       })
       .catch((error) => {
         console.error("上傳商品時發生錯誤", error);
-        Swal.fire({
-          title: "Upload Failed",
-          text: `「上傳${productData.name}」商品失敗`,
-          icon: "error",
-          timer: 1500,
-        });
+        showErrorMessage(productData.name);
       });
-    console.log("Category ID: ", document.getElementById("category").value);
-    console.log(JSON.stringify(productData));
-    generateProductUploadForm();
   }
 
-  // 綁定事件監聽器
+  function uploadProductImage(productId, file) {
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('productId', productId);
+
+    fetch('http://localhost:8080/productImages/upload', {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('圖片上傳失敗');
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log('圖片上傳成功:', data);
+      showSuccessMessage(document.getElementById("name").value);
+    })
+    .catch(error => {
+      console.error('圖片上傳錯誤:', error);
+      showErrorMessage(document.getElementById("name").value, '商品已創建，但圖片上傳失敗');
+    });
+  }
+
+  function showSuccessMessage(productName) {
+    Swal.fire({
+      title: "Upload Success",
+      text: `「成功上傳${productName}」商品`,
+      icon: "success",
+      timer: 1500,
+    }).then(() => {
+      generateProductUploadForm(); // 重新生成表單
+    });
+  }
+
+  function showErrorMessage(productName, message = '商品上傳失敗') {
+    Swal.fire({
+      title: "Upload Failed",
+      text: `「上傳${productName}」${message}`,
+      icon: "error",
+      timer: 1500,
+    });
+  }
+
+  const uploadImageButton = document.getElementById("uploadImageButton");
+  const fileInput = document.getElementById("fileInput");
+
+  uploadImageButton.addEventListener("click", () => fileInput.click());
+
+  fileInput.addEventListener("change", (event) => {
+    selectedFile = event.target.files[0];
+    if (selectedFile) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        document.querySelector("#imagePreviewContainer img").src = e.target.result;
+      }
+      reader.readAsDataURL(selectedFile);
+    }
+  });
+
+  // 提交按鈕邏輯
   const submitButton = document.getElementById("submitButton");
   if (submitButton) {
     submitButton.addEventListener("click", (event) => {
-      event.preventDefault(); // 防止表單提交刷新頁面
-
+      event.preventDefault();
       const productData = {
         type: document.getElementById("type").value,
         sku: document.getElementById("sku").value,
@@ -872,9 +927,9 @@ function generateProductUploadForm() {
           categoryId: parseInt(document.getElementById("category").value),
         },
         stockQuantity: parseInt(document.getElementById("stockQuantity").value),
-        isDel: false, //這是固定的值
+        isDel: false,
       };
-      uploadProduct(productData); // 在按鈕點擊後調用上傳功能
+      uploadProduct(productData);
     });
   } else {
     console.error("submitButton 元素未找到");
@@ -1037,38 +1092,32 @@ function generateProductManagementWithActionsContent() {
 
   // 動態生成每個商品的表格行  渲染商品函數
   function renderProducts(filteredProducts) {
-    tbody.innerHTML = ""; // 清空表格內容
-    const start = (currentPage - 1) * resultsPerPage;
-    const end = start + resultsPerPage;
-    const visibleProducts = filteredProducts.slice(start, end);
+    tbody.innerHTML = ""; // 清空表格内容
+  const start = (currentPage - 1) * resultsPerPage;
+  const end = start + resultsPerPage;
+  const visibleProducts = filteredProducts.slice(start, end);
 
-    visibleProducts.forEach((product, index) => {
-      const tr = document.createElement("tr");
-      const imageSrc = product.productImages?.[0]?.image
-        ? `data:image/jpeg;base64,${product.productImages?.[0]?.image}`
-        : "./donut.png";
+  visibleProducts.forEach((product, index) => {
+    const tr = document.createElement("tr");
+    const imageSrc = product.productImages && product.productImages.length > 0
+      ? product.productImages[0].image // 使用第一張圖的url
+      : "/path/to/default/image.png"; // 使用默認圖片路徑
 
-      tr.innerHTML = `
-            <td><img src="${imageSrc}" alt="${
-        product.name
-      }"  style="height: 80px; width: 80px"></td>
-            <td>${product.productId}</td>
-            <td>${product.sku}</td>
-            <td>${product.name}</td>
-            <td>${product.price}</td>
-            <td>${product.stockQuantity}</td>
-            <td class="actions">
-                <button class="edit-button" data-index="${
-                  start + index
-                }">修改</button>
-                <button class="delete-button" data-index="${
-                  start + index
-                }">刪除</button>
-            </td>
-        `;
+    tr.innerHTML = `
+      <td><img src="${imageSrc}" alt="${product.name}" style="max-height: 80px;"></td>
+      <td>${product.productId}</td>
+      <td>${product.sku}</td>
+      <td>${product.name}</td>
+      <td>${product.price}</td>
+      <td>${product.stockQuantity || '沒庫存訊息'}</td>
+      <td class="actions">
+        <button class="edit-button" data-index="${start + index}">修改</button>
+        <button class="delete-button" data-index="${start + index}">刪除</button>
+      </td>
+    `;
 
-      tbody.appendChild(tr);
-    });
+    tbody.appendChild(tr);
+  });
 
     // 重新綁定「修改」按鈕事件
     document.querySelectorAll(".edit-button").forEach((button) => {
@@ -1089,7 +1138,7 @@ function generateProductManagementWithActionsContent() {
           title: "注意",
           text: `你確定要刪除「${productName}」商品`,
           icon: "warning",
-          showCancelButton: true, // 顯示"取消"按鈕的意思
+          showCancelButton: true,
           confirmButtonColor: "#3085d6",
           cancelButtonColor: "#d33",
           confirmButtonText: "確定",
@@ -1196,15 +1245,26 @@ function generateProductManagementWithActionsContent() {
     // 動態生成商品修改的表單
     const productEditForm = `
       <section class="product-edit">
-          <h1>修改商品 - ${product.name}</h1>
-          <div class="image-upload">
-              <div class="image-preview">
-                  <img src="${
-                    product.image
-                  }" alt="商品圖片" style="width: 100%; height: auto;">
-                  <button id="uploadImageButton">上傳新圖片</button>
+        <h1>修改商品 - ${product.name}</h1>
+            <div class="image-upload">
+              <div class="image-preview-container">
+                <div id="imagePreviewContainer" class="image-preview">
+                  ${product.productImages && product.productImages.length > 0 
+                    ? product.productImages.map(img => 
+                        `<div class="image-wrapper">
+                          <img src="${img.image || '../material/icon/default.png'}" 
+                                alt="${product.name || '商品圖片'}" 
+                                class="preview-image">
+                        </div>`
+                      ).join('') 
+                    : '<div class="image-wrapper"><img src="../material/icon/default.png" alt="預設商品圖片" class="preview-image"></div>'}
+                </div>
               </div>
-          </div>
+              <div class="upload-button-container">
+                <input type="file" id="fileInput" accept="image/*" style="display: none;">
+                <button type="button" id="uploadImageButton">上傳新圖片</button>
+              </div>
+            </div>
 
           <form>
               <div class="form-group">
@@ -1226,12 +1286,12 @@ function generateProductManagementWithActionsContent() {
               <div class="form-group">
                   <label for="type">商品類型</label>
                   <select id="type">
-                      <option value="mealkit" ${
+                      <option value="preparedFood" ${
                         product.type === "調理包" ? "selected" : ""
                       }>調理包</option>
-                      <option value="preparedFood" ${
-                        product.type === "食材包" ? "selected" : ""
-                      }>食材包</option>
+                      <option value="mealkit " ${
+                        product.type === "生鮮食食材包" ? "selected" : ""
+                      }>生鮮食材包</option>
                   </select>
               </div>
               
@@ -1298,7 +1358,40 @@ function generateProductManagementWithActionsContent() {
       .addEventListener("click", function () {
         generateProductManagementWithActionsContent(); // 返回商品管理頁面
       });
-  }
+
+    document.getElementById("uploadImageButton").addEventListener("click", function() {
+        document.getElementById("fileInput").click();
+      });
+      
+    document.getElementById("fileInput").addEventListener("change", function(event) {
+        const file = event.target.files[0];
+        if (file) {
+          uploadImage(file);
+        }
+      });
+
+      function setupImageUpload() {
+        const uploadButton = document.getElementById("uploadImageButton");
+        const fileInput = document.getElementById("fileInput");
+      
+        if (!uploadButton || !fileInput) {
+          console.error("無法找到上傳按鈕或文件輸入元素");
+          return;
+        }
+      
+        uploadButton.addEventListener("click", function() {
+          fileInput.click();
+        });
+      
+        fileInput.addEventListener("change", function(event) {
+          const file = event.target.files[0];
+          if (file) {
+            uploadImage(file);
+          }
+        });
+      }
+      document.addEventListener('DOMContentLoaded', setupImageUpload);
+    }
 
   function updateProductDetails(product) {
     const updatedProduct = {
@@ -1350,15 +1443,107 @@ function generateProductManagementWithActionsContent() {
           timer: 1500,
         });
       });
-  }
+    }
+
+    // 圖片上傳
+    function uploadImage(file) {
+      const productId = document.getElementById('productId').value;
+      
+      if (!productId) {
+        console.error('無法獲取 productId');
+        Swal.fire({
+          title: '錯誤',
+          text: '無法獲取商品 ID，請確保您在正確的頁面上',
+          icon: 'error',
+          timer: 2000
+        });
+        return;
+      }
+    
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('productId', productId);
+    
+      const imagePreviewContainer = document.getElementById('imagePreviewContainer');
+      
+      // 檢查是否存在預設圖片
+      const defaultImage = imagePreviewContainer.querySelector('.image-wrapper img[src="../material/icon/default.png"]');
+      
+      // 創建新的圖片容器
+      const imageWrapper = document.createElement('div');
+      imageWrapper.className = 'image-wrapper';
+      const loadingSpinner = document.createElement('div');
+      loadingSpinner.className = 'loading-spinner';
+      imageWrapper.appendChild(loadingSpinner);
+      
+      // 如果存在預設圖片，替換它；否則，添加到最後
+      if (defaultImage && defaultImage.parentNode) {
+        imagePreviewContainer.replaceChild(imageWrapper, defaultImage.parentNode);
+      } else {
+        imagePreviewContainer.appendChild(imageWrapper);
+      }
+    
+      fetch('http://localhost:8080/productImages/upload', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('網路回應不正常');
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log('上傳成功:', data);
+        if (data.imageUrl) {
+          // 移除加載動畫
+          imageWrapper.removeChild(loadingSpinner);
+    
+          // 創建新圖片元素
+          const newImage = document.createElement('img');
+          newImage.src = data.imageUrl;
+          newImage.alt = "新上傳的圖片";
+          newImage.className = 'preview-image';
+    
+          // 當圖片加載完成時，添加 loaded 類
+          newImage.onload = function() {
+            imageWrapper.classList.add('loaded');
+          };
+    
+          imageWrapper.appendChild(newImage);
+    
+          Swal.fire({
+            title: '上傳成功',
+            text: '商品圖片已成功上傳',
+            icon: 'success',
+            timer: 2000
+          });
+        } else {
+          throw new Error('返回的數據中沒有圖片 URL');
+        }
+      })
+      .catch(error => {
+        console.error('錯誤:', error);
+        // 移除佔位容器
+        imagePreviewContainer.removeChild(imageWrapper);
+        // 如果是第一張圖片上傳失敗，恢復預設圖片
+        if (imagePreviewContainer.children.length === 0) {
+          const defaultWrapper = document.createElement('div');
+          defaultWrapper.className = 'image-wrapper';
+          defaultWrapper.innerHTML = '<img src="../material/icon/default.png" alt="預設商品圖片" class="preview-image">';
+          imagePreviewContainer.appendChild(defaultWrapper);
+        }
+        Swal.fire({
+          title: '上傳失敗',
+          text: '商品圖片上傳失敗，請稍後再試',
+          icon: 'error',
+          timer: 2000
+        });
+      });
+    }
+    
+    // setupImageUpload();
 }
-// 如果需要處理圖片上傳，可以在這裡添加事件監聽器
-// document
-//   .getElementById("uploadImageButton")
-//   .addEventListener("click", function () {
-//     // 這裡可以添加圖片上傳的功能
-//     alert("上傳新圖片的功能尚未實現。");
-//   });
 
 // 點擊"食譜上傳"時生成內容的函數
 function generateRecipeUploadForm() {
@@ -1370,10 +1555,7 @@ function generateRecipeUploadForm() {
             <h1>食譜上傳</h1>
             <div class="image-upload">
                 <div class="image-preview">
-                <img src="橘大頭.png" alt="商品圖片" style="width: 100%; height: auto;">
-                <img src="紅大頭.png" alt="商品圖片" style="width: 100%; height: auto;">
-                <img src="深綠大頭.png" alt="商品圖片" style="width: 100%; height: auto;">
-                <img src="黃大頭.png" alt="商品圖片" style="width: 100%; height: auto;">
+                <img src="/path/to/default/image.png" alt="商品圖片" style="width: 100%; height: auto;">
                 <button id="uploadImageButton">圖片上傳</button>
                 </div>
             </div>
@@ -1620,31 +1802,25 @@ function generateRecipeManagementContent() {
 
   // 動態生成每個食譜的表格行
   function renderRecipes(filteredRecipes) {
-    tbody.innerHTML = ""; // 清空表格內容
+    tbody.innerHTML = "";
     const start = (currentPage - 1) * resultsPerPage;
     const end = start + resultsPerPage;
     const visibleRecipes = filteredRecipes.slice(start, end);
 
     visibleRecipes.forEach((recipe, index) => {
-      const tr = document.createElement("tr");
+        const tr = document.createElement("tr");
 
-      tr.innerHTML = `
-                <td><img src="${recipe.image}" alt="${
-        recipe.name
-      }" class="recipe-image"></td>
-                <td>${recipe.name}</td>
-                <td style="max-width: 40vw;">${recipe.description}</td>
-                <td class="actions">
-                    <button class="edit-button" data-index="${
-                      start + index
-                    }">修改</button>
-                    <button class="delete-button" data-index="${
-                      start + index
-                    }">刪除</button>
-                </td>
-            `;
+        tr.innerHTML = `
+            <td><img src="${recipe.image}" alt="${recipe.name}" class="recipe-image"></td>
+            <td>${recipe.name}</td>
+            <td style="max-width: 40vw;">${recipe.description}</td>
+            <td class="actions">
+                <button class="edit-button" data-index="${start + index}">修改</button>
+                <button class="delete-button" data-index="${start + index}">刪除</button>
+            </td>
+        `;
 
-      tbody.appendChild(tr);
+        tbody.appendChild(tr);
     });
 
     // 綁定「修改」按鈕事件
@@ -1902,8 +2078,164 @@ function generateUserManagementContent() {
   updatePagination(filteredUsers);
   renderUsers(filteredUsers);
 }
+//
+// function generateCouponManagementForm() {
+//   const mainContent = document.querySelector(".main-content");
+//   mainContent.innerHTML = ""; // 清空之前的內容
+//
+//   const couponManagementForm = `
+//         <section class="coupon-management">
+//             <h1>優惠券管理</h1>
+//
+//             <!-- 新增優惠券表單 -->
+//             <form id="couponForm">
+//                 <div class="form-group">
+//                     <label for="code">優惠券代碼</label>
+//                     <textarea id="code" rows="1" placeholder="輸入優惠券代碼"></textarea>
+//                 </div>
+//
+//                 <div class="form-group">
+//                     <label for="name">優惠券名稱</label>
+//                     <textarea id="name" rows="1" placeholder="輸入優惠券名稱"></textarea>
+//                 </div>
+//
+//                 <div class="form-group">
+//                     <label for="discountType">折扣類型</label>
+//                     <select id="discountType">
+//                         <option value="percentage">百分比折扣</option>
+//                         <option value="amount">固定金額折扣</option>
+//                     </select>
+//                 </div>
+//
+//                 <div class="form-group">
+//                     <label for="discountValue">折扣值</label>
+//                     <textarea id="discountValue" rows="1" placeholder="輸入折扣值"></textarea>
+//                 </div>
+//
+//                 <div class="form-group">
+//                     <label for="expiryDate">到期日期</label>
+//                     <input type="date" id="expiryDate">
+//                     <!-- 提交與取消按鈕 -->
+//                     <button type="submit" id="submitCouponButton">新增優惠券</button>
+//                     <button type="reset" id="cancelCouponButton">取消</button>
+//                 </div>
+//             </form>
+//
+//             <!-- 已經新增的優惠券列表 -->
+//             <section class="existing-coupons">
+//                 <h1>已新增的優惠券</h1>
+//                 <table class="coupon-table">
+//                     <thead>
+//                         <tr>
+//                             <th>優惠券代碼</th>
+//                             <th>名稱</th>
+//                             <th>折扣類型</th>
+//                             <th>折扣值</th>
+//                             <th>到期日期</th>
+//                             <th>操作</th>
+//                         </tr>
+//                     </thead>
+//                     <tbody id="couponTableBody">
+//                         <!-- 這裡插入動態生成的優惠券 -->
+//                     </tbody>
+//                 </table>
+//             </section>
+//         </section>
+//     `;
+//   mainContent.innerHTML = couponManagementForm;
+//
+//   // 儲存優惠券的陣列
+//   let coupons = [];
+//
+//   // 一進入頁面，獲取現有的優惠券並顯示
+//   fetch("http://localhost:8080/api/coupons/all")  // 假設後端的 GET API 是這個路徑
+//       .then((response) => response.json())
+//       .then((data) => {
+//         coupons = data; // 假設後端返回的是現有的優惠券列表
+//         displayCoupons(); // 顯示優惠券
+//       })
+//       .catch((error) => console.error("Error fetching coupons:", error));
+//
+//   // 優惠券表單提交處理
+//   const couponForm = document.getElementById("couponForm");
+//   couponForm.addEventListener("submit", function (event) {
+//     event.preventDefault(); // 阻止表單提交刷新
+//
+//     // 獲取輸入的優惠券信息
+//     const code = document.getElementById("code").value;
+//     const name = document.getElementById("name").value;
+//     const discountType = document.getElementById("discountType").value;
+//     const discountValue = document.getElementById("discountValue").value;
+//     const expiryDate = document.getElementById("expiryDate").value;
+//
+//     // 構造優惠券對象
+//     const couponData = {
+//       code,
+//       name,
+//       discountType,
+//       discountValue,
+//       expiryDate,
+//     };
+//
+//     // 發送 POST 請求到後端
+//     fetch("http://localhost:8080/api/coupons/create", {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/x-www-form-urlencoded",
+//       },
+//       body: new URLSearchParams(couponData),
+//     })
+//         .then((response) => response.json()) // 解析 JSON 回應
+//         .then((data) => {
+//           // 使用返回的優惠券陣列更新表格
+//           coupons = data; // 假設後端返回的是最新的優惠券列表
+//           displayCoupons(); // 顯示優惠券
+//         })
+//         .catch((error) => console.error("Error:", error));
+//
+//     // 重置表單
+//     couponForm.reset();
+//   });
+//
+//   // 顯示已新增的優惠券
+//   function displayCoupons() {
+//     const couponTableBody = document.getElementById("couponTableBody");
+//     couponTableBody.innerHTML = ""; // 清空之前的內容
+//
+//     coupons.forEach((coupon, index) => {
+//       const tr = document.createElement("tr");
+//       tr.innerHTML = `
+//                 <td>${coupon.code}</td>
+//                 <td>${coupon.name}</td>
+//                 <td>${
+//           coupon.discountType === "percentage" ? "百分比" : "固定金額"
+//       }</td>
+//                 <td>${coupon.discountValue}</td>
+//                 <td>${coupon.expiryDate}</td>
+//                 <td>
+//                     <button class="delete-coupon-button" data-index="${index}">刪除</button>
+//                 </td>
+//             `;
+//       couponTableBody.appendChild(tr);
+//     });
+//
+//     // 綁定刪除按鈕的事件
+//     document.querySelectorAll(".delete-coupon-button").forEach((button) => {
+//       button.addEventListener("click", function () {
+//         const index = this.getAttribute("data-index");
+//
+//         // 顯示確認刪除的彈窗
+//         const isConfirmed = confirm("確定要刪除此優惠券嗎？");
+//
+//         if (isConfirmed) {
+//           coupons.splice(index, 1); // 刪除該優惠券
+//           displayCoupons(); // 刷新優惠券表格
+//         }
+//       });
+//     });
+//   }
+// }
 
-// 點擊"優惠券管理"時生成內容的函數
 function generateCouponManagementForm() {
   const mainContent = document.querySelector(".main-content");
   mainContent.innerHTML = ""; // 清空之前的內容
@@ -1947,30 +2279,41 @@ function generateCouponManagementForm() {
             </form>
 
             <!-- 已經新增的優惠券列表 -->
-            <section class="existing-coupons">
-                <h1>已新增的優惠券</h1>
-                <table class="coupon-table">
-                    <thead>
-                        <tr>
-                            <th>優惠券代碼</th>
-                            <th>名稱</th>
-                            <th>折扣類型</th>
-                            <th>折扣值</th>
-                            <th>到期日期</th>
-                            <th>操作</th>
-                        </tr>
-                    </thead>
-                    <tbody id="couponTableBody">
-                        <!-- 這裡插入動態生成的優惠券 -->
-                    </tbody>
-                </table>
-            </section>
+           <!-- 已經新增的優惠券列表 -->
+        <section class="existing-coupons">
+            <h1>已新增的優惠券</h1>
+            <table class="coupon-table">
+                <thead>
+                    <tr>
+                        <th>優惠券代碼</th>
+                        <th>名稱</th>
+                        <th>折扣類型</th>
+                        <th>折扣值</th>
+                        <th>到期日期</th>
+                        <th>狀態</th> <!-- 新增狀態欄 -->
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody id="couponTableBody">
+                    <!-- 動態生成的優惠券將插入這裡 -->
+                </tbody>
+            </table>
+        </section>
         </section>
     `;
   mainContent.innerHTML = couponManagementForm;
 
   // 儲存優惠券的陣列
   let coupons = [];
+
+  // 一進入頁面，獲取現有的優惠券並顯示
+  fetch("http://localhost:8080/api/coupons/all")  // 假設後端的 GET API 是這個路徑
+      .then((response) => response.json())
+      .then((data) => {
+        coupons = data; // 假設後端返回的是現有的優惠券列表
+        displayCoupons(); // 顯示優惠券
+      })
+      .catch((error) => console.error("Error fetching coupons:", error));
 
   // 優惠券表單提交處理
   const couponForm = document.getElementById("couponForm");
@@ -1994,20 +2337,20 @@ function generateCouponManagementForm() {
     };
 
     // 發送 POST 請求到後端
-    fetch("localhost:8080/api/coupons/create", {
+    fetch("http://localhost:8080/api/coupons/create", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },
       body: new URLSearchParams(couponData),
     })
-      .then((response) => response.json()) // 解析 JSON 回應
-      .then((data) => {
-        // 使用返回的優惠券陣列更新表格
-        coupons = data; // 假設後端返回的是最新的優惠券列表
-        displayCoupons(); // 顯示優惠券
-      })
-      .catch((error) => console.error("Error:", error));
+        .then((response) => response.json()) // 解析 JSON 回應
+        .then((data) => {
+          // 使用返回的優惠券陣列更新表格
+          coupons = data; // 假設後端返回的是最新的優惠券列表
+          displayCoupons(); // 顯示優惠券
+        })
+        .catch((error) => console.error("Error:", error));
 
     // 重置表單
     couponForm.reset();
@@ -2018,41 +2361,107 @@ function generateCouponManagementForm() {
     const couponTableBody = document.getElementById("couponTableBody");
     couponTableBody.innerHTML = ""; // 清空之前的內容
 
+    const currentDate = new Date();  // 獲取當前日期
+
     coupons.forEach((coupon, index) => {
       const tr = document.createElement("tr");
+      const expiryDate = new Date(coupon.expiryDate);  // 將優惠券的到期日期轉換為日期格式
+
+      // 確定優惠券的狀態
+      let status = "有效"; // 預設為有效
+
+      if (!coupon.active) {
+        status = "已禁用";  // 如果優惠券被禁用
+      } else if (expiryDate < currentDate) {
+        status = "已過期";  // 如果優惠券已經過期
+      }
+
+      // 建立優惠券行
       tr.innerHTML = `
-                <td>${coupon.code}</td>
-                <td>${coupon.name}</td>
-                <td>${
-                  coupon.discountType === "percentage" ? "百分比" : "固定金額"
-                }</td>
-                <td>${coupon.discountValue}</td>
-                <td>${coupon.expiryDate}</td>
-                <td>
-                    <button class="delete-coupon-button" data-index="${index}">刪除</button>
-                </td>
-            `;
+            <td>${coupon.code}</td>
+            <td>${coupon.name}</td>
+            <td>${coupon.discountType === "percentage" ? "百分比" : "固定金額"}</td>
+            <td>${coupon.discountValue}</td>
+            <td>${coupon.expiryDate}</td>
+            <td>${status}</td>  <!-- 顯示優惠券狀態 -->
+            <td>
+                <button class="${coupon.active ? 'deactivate-button' : 'activate-button'}" data-index="${index}">
+                    ${coupon.active ? "禁用" : "啟用"}
+                </button>
+                <button class="send-button" data-index="${index}">發送</button>
+            </td>
+        `;
       couponTableBody.appendChild(tr);
     });
 
-    // 綁定刪除按鈕的事件
-    document.querySelectorAll(".delete-coupon-button").forEach((button) => {
+    // 綁定禁用/啟用按鈕的事件
+    document.querySelectorAll(".deactivate-button, .activate-button").forEach((button) => {
       button.addEventListener("click", function () {
         const index = this.getAttribute("data-index");
+        const coupon = coupons[index];
 
-        // 顯示確認刪除的彈窗
-        const isConfirmed = confirm("確定要刪除此優惠券嗎？");
+        const action = coupon.active ? "禁用" : "啟用";
+        const isConfirmed = confirm(`確定要${action}此優惠券嗎？`);
 
         if (isConfirmed) {
-          coupons.splice(index, 1); // 刪除該優惠券
-          displayCoupons(); // 刷新優惠券表格
+          // 發送請求到後端切換優惠券狀態
+          fetch(`http://localhost:8080/api/coupons/toggle/${coupon.couponId}`, {
+            method: "POST",
+          })
+              .then((response) => response.json())
+              .then((data) => {
+                // 更新該優惠券的狀態
+                coupons[index] = data.coupon;  // 使用後端返回的 coupon 對象更新狀態
+                displayCoupons(); // 重新渲染表格，確保狀態與後端同步
+              })
+              .catch((error) => console.error("Error toggling coupon:", error));
         }
       });
     });
   }
+
+
+
+
+
+  // 綁定禁用/啟用按鈕的事件
+    document.querySelectorAll(".delete-coupon-button").forEach((button) => {
+      button.addEventListener("click", function () {
+        const index = this.getAttribute("data-index");
+        const coupon = coupons[index];
+
+        // 顯示確認彈窗
+        const action = coupon.isDisabled ? "啟用" : "禁用";
+        const isConfirmed = confirm(`確定要${action}此優惠券嗎？`);
+
+        if (isConfirmed) {
+          // 發送請求切換優惠券狀態
+          fetch(`http://localhost:8080/api/coupons/toggle/${coupon.couponId}`, {
+            method: "POST",
+          })
+              .then((response) => {
+                if (!response.ok) {
+                  throw new Error("Failed to toggle coupon status");
+                }
+                return response.json();  // 解析 JSON 回應
+              })
+              .then((data) => {
+                alert(data.message);  // 顯示狀態消息
+                // 根據返回的狀態更新表格
+                coupons[index].isActive = data.isActive;
+                displayCoupons();  // 刷新優惠券列表
+              })
+              .catch((error) => {
+                console.error("Error toggling coupon:", error);
+              });
+
+        }
+      });
+    });
 }
 
-document.addEventListener("DOMContentLoaded", function () {
+
+  document.addEventListener("DOMContentLoaded", function () {
   initChart();
 });
 

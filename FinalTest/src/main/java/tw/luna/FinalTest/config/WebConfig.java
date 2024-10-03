@@ -18,7 +18,7 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addInterceptor(enjoyumInterceptor)
         		
         		//需登入才能訪問的網址
-                .addPathPatterns("/memberCenterPage", "/memberBasicInfoPage", "/updatePasswordPage", "/couponPage")
+                .addPathPatterns("/memberCenterPage", "/memberBasicInfoPage", "/updatePasswordPage", "/couponPage", "/orderPage", "/orderDetailPage", "/myCollection", "/myOrderList", "/myOrder/detail")
                 
                 //無需登入也能訪問的網址,不設置也可以
                 .excludePathPatterns("/loginPage", "/registPage");  
