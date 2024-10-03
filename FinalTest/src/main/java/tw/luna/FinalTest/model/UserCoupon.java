@@ -1,10 +1,6 @@
 package tw.luna.FinalTest.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.IdClass;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 
 @Entity
@@ -22,9 +18,24 @@ public class UserCoupon {
 	
 	@Column(name="isUsed")
     private boolean isUsed;
-    
-    
-    // Getters and Setters
+
+	// 多對一關係，關聯到 Coupon 表
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "couponId", insertable = false, updatable = false) // couponId 为外键
+	private Coupon coupon;
+
+
+
+	// Getters and Setters
+
+	public Coupon getCoupon() {
+		return coupon;
+	}
+
+	public void setCoupon(Coupon coupon) {
+		this.coupon = coupon;
+	}
+
 	public long getUserId() {
 		return userId;
 	}

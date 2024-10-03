@@ -1,5 +1,7 @@
 package tw.luna.FinalTest.dto;
 
+import tw.luna.FinalTest.model.OrderDetails;
+
 public class OrderDetailsDTO {
     private String productImageBase64;
     private String productName;
@@ -9,11 +11,38 @@ public class OrderDetailsDTO {
     private Integer total;
     private Integer productId;
     
-    public OrderDetailsDTO(String productName, String sku, Integer quantity, Integer price) {
+    public OrderDetailsDTO() {
+    }
+
+    public OrderDetailsDTO(String productName, String sku, Integer quantity, Integer price, Integer productId) {
         this.productName = productName;
         this.sku = sku;
         this.quantity = quantity;
         this.price = price;
+        this.productId = productId;
+        this.total = quantity * price;  
+    }
+
+    public static OrderDetailsDTO convertToOrderDetailsDTO(OrderDetails detail) {
+        return new OrderDetailsDTO(
+            detail.getProduct().getName(),
+            detail.getProduct().getSku(),
+            detail.getQuantity(),
+            detail.getPrice(),
+            detail.getProduct().getProductId()
+        );
+    }
+
+    @Override
+    public String toString() {
+        return "OrderDetailsDTO{" +
+                "productName='" + productName + '\'' +
+                ", sku='" + sku + '\'' +
+                ", quantity=" + quantity +
+                ", price=" + price +
+                ", total=" + total +
+                ", productId=" + productId +
+                '}';
     }
 
 

@@ -2,11 +2,15 @@ package tw.luna.FinalTest.service;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import tw.luna.FinalTest.Dto.CouponDTO;
+import tw.luna.FinalTest.Dto.UserCouponDTO;
 import tw.luna.FinalTest.model.Coupon;
 import tw.luna.FinalTest.model.DiscountType;
 import tw.luna.FinalTest.model.Users;
@@ -30,46 +34,57 @@ public class CouponService {
 		this.userRepository = userRepository;
 	}
 
-	// 檢查優惠券是否有效
+
 	public Coupon validateCoupon(String code, long userId) {
-	    // 先根據代碼從優惠券表中查找優惠券
-	    Coupon coupon = couponRepository.findCouponByCode(code);
-	    
-	    if (coupon == null) {
-	        throw new IllegalArgumentException("優惠券不存在");
-	    }
+		// 根据代号查找优惠券
+		Coupon coupon = couponRepository.findCouponByCode(code);
 
-	    // 檢查優惠券是否已過期
-	    if (coupon.getExpiryDate().isBefore(LocalDate.now())) {
-	        throw new IllegalArgumentException("優惠券已過期");
-	    }
+		if (coupon == null) {
+			throw new IllegalArgumentException("優惠券不存在");
+		}
 
-	    // 檢查用戶是否已擁有該優惠券
-	    UserCoupon userCoupon = userCouponRepository.findUserCouponByUserIdAndCouponId(userId, coupon.getCouponId());
-	    if (userCoupon == null) {
-	        throw new IllegalArgumentException("用戶沒有該優惠券");
-	    }
+		// 检查优惠券是否启用
+		if (!coupon.isActive()) {
+			throw new IllegalArgumentException("優惠券已被禁用");
+		}
 
-	    // 檢查優惠券是否已被使用
-	    if (userCoupon.isUsed()) {
-	        throw new IllegalArgumentException("優惠券已被使用");
-	    }
+		// 检查优惠券是否已过期
+		if (coupon.getExpiryDate().isBefore(LocalDate.now())) {
+			throw new IllegalArgumentException("優惠券已過期");
+		}
 
-	    return coupon; // 優惠券有效
+		// 检查用户是否拥有该优惠券
+		UserCoupon userCoupon = userCouponRepository.findUserCouponByUserIdAndCouponId(userId, coupon.getCouponId());
+		if (userCoupon == null) {
+			throw new IllegalArgumentException("用戶沒有該優惠券");
+		}
+
+		// 检查优惠券是否已被使用
+		if (userCoupon.isUsed()) {
+			throw new IllegalArgumentException("優惠券已被使用");
+		}
+
+		return coupon; // 优惠券有效
 	}
+
 
 
 
 	// 發放優惠券給用戶
 	public void issueCouponToUser(long userId, String couponCode) {
-		
 		Coupon coupon = couponRepository.findCouponByCode(couponCode);
+
 		if (coupon == null || coupon.getExpiryDate().isBefore(LocalDate.now())) {
 			throw new IllegalArgumentException("優惠券無效或已過期");
 		}
 
-		UserCoupon existingUserCoupon = userCouponRepository.findUserCouponByUserIdAndCouponId(userId,
-				coupon.getCouponId());
+		// 检查優惠券是否啟用
+		if (!coupon.isActive()) {
+			throw new IllegalArgumentException("優惠券已被禁用");
+		}
+
+		// 檢查用戶是否已擁有優惠券
+		UserCoupon existingUserCoupon = userCouponRepository.findUserCouponByUserIdAndCouponId(userId, coupon.getCouponId());
 		if (existingUserCoupon != null) {
 			throw new IllegalArgumentException("用戶已經擁有此優惠券");
 		}
@@ -82,23 +97,53 @@ public class CouponService {
 		userCouponRepository.save(userCoupon);
 	}
 
+
 	// 查詢用戶擁有的優惠券
-	public List<UserCoupon> getUserCoupons(long userId) {
-		return userCouponRepository.findCouponsByUserId(userId);
+	public List<UserCouponDTO> getUserCoupons(long userId) {
+		List<UserCoupon> userCoupons = userCouponRepository.findCouponsByUserId(userId);
+
+		// 转换为 UserCouponDTO 并返回
+		return userCoupons.stream()
+				.map(userCoupon -> new UserCouponDTO(
+						userCoupon.getUserId(),
+						new CouponDTO(
+								userCoupon.getCoupon().getCouponId(),
+								userCoupon.getCoupon().getCode(),
+								userCoupon.getCoupon().getName(),
+								userCoupon.getCoupon().getDiscountType().name(),
+								userCoupon.getCoupon().getDiscountValue(),
+								userCoupon.getCoupon().getExpiryDate(),
+								userCoupon.getCoupon().isActive()
+						),
+						userCoupon.isUsed()
+				))
+				.collect(Collectors.toList());
 	}
+
+
+
 
 	// 使用優惠券
 	public void useCoupon(long userId, long couponId) {
-		// 檢查用戶有無優惠券
 		UserCoupon userCoupon = userCouponRepository.findUserCoupon(userId, couponId);
-		if (userCoupon != null && !userCoupon.isUsed()) {
-			userCoupon.setUsed(true);
-            userCouponRepository.save(userCoupon);
-		} else {
+
+		if (userCoupon == null || userCoupon.isUsed()) {
 			throw new IllegalArgumentException("優惠券無效或已使用");
 		}
+
+		// 检查优惠券是否启用
+		Coupon coupon = couponRepository.findById(couponId)
+				.orElseThrow(() -> new IllegalArgumentException("優惠券不存在"));
+
+		if (!coupon.isActive()) {
+			throw new IllegalArgumentException("優惠券已被禁用");
+		}
+
+		userCoupon.setUsed(true);
+		userCouponRepository.save(userCoupon);
 	}
-	
+
+
 	@Transactional
 	public void createCoupon(String code, String name, String discountType, int discountValue, String expiryDate) {
 	    // 檢查優惠券是否已經存在
@@ -112,6 +157,7 @@ public class CouponService {
 	    coupon.setCode(code);
 	    coupon.setName(name);
 	    coupon.setDiscountValue(discountValue);
+		coupon.setActive(true);
 
 	    // 轉換日期字串為 LocalDate
 	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -134,32 +180,60 @@ public class CouponService {
 
 		
 		// 發送優惠券給所有用戶
-		 public void issueCouponToAllUsers(long couponId) {
-		        // 查詢所有用戶
-		        List<Users> users = userRepository.findAll();
+		@Transactional
+		public void issueCouponToAllUsers(long couponId) {
+			// 查找指定的优惠券
+			Coupon coupon = couponRepository.findById(couponId)
+					.orElseThrow(() -> new IllegalArgumentException("優惠券不存在"));
 
-		        // 查找指定的優惠券
-		        Coupon coupon = couponRepository.findById(couponId).orElseThrow(() -> new IllegalArgumentException("優惠券不存在"));
+			// 查詢所有用户
+			List<Users> users = userRepository.findAll();
 
-		        // 發放優惠券
-		        for (Users user : users) {
-		            // 檢查用戶是否已經擁有這張優惠券
-		            if (!userCouponRepository.existsByUserIdAndCouponId(user.getUserId(), couponId)) {
-		                UserCoupon userCoupon = new UserCoupon();
-		                userCoupon.setUserId(user.getUserId());
-		                userCoupon.setCouponId(coupon.getCouponId());
-		                userCoupon.setUsed(false);  // 表示尚未使用
-		                userCouponRepository.save(userCoupon);
-		            }
-		        }
-		    }
-		 
-		
+			// 先批量查找所有已经拥有该优惠券的用户
+			List<Long> existingUserIds = userCouponRepository.findUserIdsByCouponId(couponId);
 
-		    // 獲取所有優惠券
-		    public List<Coupon> getAllCoupons() {
-		        return couponRepository.findAll();
-		    }
-		
-		 
+			// 过滤出尚未拥有该优惠券的用户
+			List<Users> usersToIssueCoupon = users.stream()
+					.filter(user -> !existingUserIds.contains(user.getUserId()))
+					.collect(Collectors.toList());
+
+			// 构建要插入的 UserCoupon 对象列表
+			List<UserCoupon> userCoupons = new ArrayList<>();
+			for (Users user : usersToIssueCoupon) {
+				UserCoupon userCoupon = new UserCoupon();
+				userCoupon.setUserId(user.getUserId());
+				userCoupon.setCouponId(coupon.getCouponId());
+				userCoupon.setUsed(false);
+				userCoupons.add(userCoupon);
+			}
+
+			// 批量保存到数据库
+			userCouponRepository.saveAll(userCoupons);
+		}
+
+
+
+
+	// 管理员查看所有优惠券
+	public List<Coupon> getAllCoupons() {
+		return couponRepository.findAll(); // 包括禁用的优惠券
+	}
+
+
+
+
+	// 切换优惠券的启用/禁用状态
+		@Transactional
+		public boolean toggleCouponStatus(long couponId) {
+			Coupon coupon = couponRepository.findById(couponId)
+					.orElseThrow(() -> new IllegalArgumentException("優惠券不存在"));
+
+			// 切换状态
+			coupon.setActive(!coupon.isActive());
+			couponRepository.save(coupon);
+
+			return coupon.isActive();  // 返回新的状态
+		}
+
+
 }
