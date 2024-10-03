@@ -35,13 +35,16 @@ public class Recipes {
 	@Column(name = "cookTime")
 	private Integer cookTime;
 
+	@Column(name = "level")
+	private String level;
+
 	@Column(name = "isDel", columnDefinition = "TINYINT(1)")
 	private Boolean isDel;
 
 	public Recipes() {
 	}
 
-	public Recipes(Integer recipeId, Product product, String title, String steps, String ingredients, String notes, Integer servings, Integer cookTime, Boolean isDel) {
+	public Recipes(Integer recipeId, Product product, String title, String steps, String ingredients, String notes, Integer servings, Integer cookTime, String level, Boolean isDel) {
 		this.recipeId = recipeId;
 		this.product = product;
 		this.title = title;
@@ -50,7 +53,12 @@ public class Recipes {
 		this.notes = notes;
 		this.servings = servings;
 		this.cookTime = cookTime;
+		this.level = level;  //新增
 		this.isDel = isDel;
+	}
+
+	public Recipes(String level) {
+		this.level = level;
 	}
 
 	public Product getProduct() {
@@ -78,6 +86,14 @@ public class Recipes {
 	}
 
 
+
+	public String getLevel() {
+		return level;
+	}
+
+	public void setLevel(String level) {
+		this.level = level;
+	}
 
 	public String getSteps() {
 		return steps;
@@ -114,6 +130,7 @@ public class Recipes {
 	public Integer getCookTime() {
 		return cookTime;
 	}
+
 
 	public void setCookTime(Integer cookTime) {
 		this.cookTime = cookTime;
