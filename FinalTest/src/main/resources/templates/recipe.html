@@ -12,6 +12,10 @@
     @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap");
   </style>
   <link rel="stylesheet" th:href="@{css/recipe.css}" />
+
+  <!-- vue -->
+  <script src="https://unpkg.com/vue@3.2.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
@@ -53,6 +57,7 @@
 
   <!--食譜區-->
   <div class="recipeZone">
+  <!--  排序方式-->
     <div class="sort">
       <label for="sort"
       >排序方式:
@@ -67,12 +72,26 @@
         </select>
       </label>
     </div>
+
     <!-- 食譜卡顯示區 -->
-    <div id="rcontainer"></div>
+    <div id="rcontainer">
+
+      <div class="recipe-card">
+        <img class="recipe-image" src="${product.image}" alt="${product.name}">
+        <h3>${product.name}</h3>
+        <p class="recipeLevel">難易度: ${product.level}</p>
+        <div class="home-product-btn">
+          <button class="add-to-favorite"><i class="fa-solid fa-heart"></i></button>
+          <button class="readRecipeBtn"><i class="fa-solid fa-book-open"></i>&nbsp;&nbsp;&nbsp;閱讀食譜</button>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 <div th:replace="footer"></div>
 
 <script th:src="@{js/recipe.js}"></script>
+
 </body>
 </html>
