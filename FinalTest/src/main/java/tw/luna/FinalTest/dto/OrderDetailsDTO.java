@@ -1,35 +1,48 @@
 package tw.luna.FinalTest.dto;
 
+import java.util.List;
+
 import tw.luna.FinalTest.model.OrderDetails;
 
 public class OrderDetailsDTO {
-    private String productImageBase64;
-    private String productName;
+	private String productName;
     private String sku;
     private Integer quantity;
     private Integer price;
     private Integer total;
     private Integer productId;
+    private List<ProductImageDTO> productImages;
     
     public OrderDetailsDTO() {
     }
 
+    public OrderDetailsDTO(String productName, String sku, Integer quantity, Integer price, Integer productId, List<ProductImageDTO> productImages) {
+        this.productName = productName;
+        this.sku = sku;
+        this.quantity = quantity;
+        this.price = price;
+        this.productId = productId;
+        this.total = quantity * price;
+        this.productImages = productImages;
+    }
+    
     public OrderDetailsDTO(String productName, String sku, Integer quantity, Integer price, Integer productId) {
         this.productName = productName;
         this.sku = sku;
         this.quantity = quantity;
         this.price = price;
         this.productId = productId;
-        this.total = quantity * price;  
+        this.total = quantity * price;
     }
 
-    public static OrderDetailsDTO convertToOrderDetailsDTO(OrderDetails detail) {
+    public static OrderDetailsDTO convertToOrderDetailsDTO(OrderDetails detail, List<ProductImageDTO> productImages) {
         return new OrderDetailsDTO(
             detail.getProduct().getName(),
             detail.getProduct().getSku(),
             detail.getQuantity(),
             detail.getPrice(),
-            detail.getProduct().getProductId()
+            detail.getProduct().getProductId(),
+            productImages
         );
     }
 
@@ -42,19 +55,27 @@ public class OrderDetailsDTO {
                 ", price=" + price +
                 ", total=" + total +
                 ", productId=" + productId +
+                ", productImages=" + productImages +
                 '}';
     }
 
 
-	public String getProductImageBase64() {
-        return productImageBase64;
+    public List<ProductImageDTO> getProductImages() {
+        return productImages;
     }
 
-    public void setProductImageBase64(String productImageBase64) {
-        this.productImageBase64 = productImageBase64;
+    public void setProductImages(List<ProductImageDTO> productImages) {
+        this.productImages = productImages;
+    }
+	
+	public String getProductImageUrl() {
+        if (this.productImages != null && !this.productImages.isEmpty()) {
+            return this.productImages.get(0).getImage();
+        }
+        return null;
     }
 
-    public String getProductName() {
+	public String getProductName() {
         return productName;
     }
 

@@ -23,7 +23,7 @@
     <div id="sidenav" class="tem-overlay">
       <div class="tem-nav">
         <button class="tem-closebtn" onclick="closeSidenav()">
-          <img src="./material/icon/close.png" alt="" />
+          <i class="fa-regular fa-circle-xmark"></i>
         </button>
       </div>
       <div class="tem-overlay-content">
@@ -74,12 +74,11 @@
         <div class="tem-header-icons">
           <div
             class="tem-icon tem-menu-icon"
-            id="sidenav"
+            id="openSidenav"
             onclick="openSidenav()"
           >
             <a href="#"
-              ><img th:src="@{/material/icon/menu.png}" alt="menu"
-            /></a>
+              ><i class="fa-solid fa-bars"></i></a>
           </div>
         </div>
         <div id="logoDiv" class="tem-logo">
@@ -88,23 +87,20 @@
         <div class="tem-header-icons">
           <div class="searchContainer">
             <div id="searchDiv">
-              <input type="search" id="searchInput" placeholder="搜尋..." />
+              <input type="search" id="searchInput" placeholder="搜尋商品..." />
             </div>
-            <button id="searchIcon" class="tem-icon tem-search-icon">
-              <img
-                th:src="@{/material/icon/search.png}"
-                alt="search"
-                width="30"
-                height="24"
-              />
-            </button>
+            <div id="searchIcon" class="tem-icon tem-search-icon">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
           </div>
-          <button id="cartIcon" href="#" class="tem-icon tem-cart-icon">
-            <img th:src="@{/material/icon/cart.png}" alt="cart" />
-          </button>
-          <button id="memberIcon" href="#" class="tem-icon tem-user-icon">
-            <img th:src="@{/material/icon/account.png}" alt="sign in" />
-          </button>
+          <div id="cartIcon"  class="tem-icon tem-cart-icon">
+            <a href="http://localhost:8080/shoppingCart">
+              <i class="fa-solid fa-cart-shopping"></i>
+            </a>
+          </div>
+          <div id="memberIcon" href="#" class="tem-icon tem-user-icon">
+            <i class="fa-solid fa-user"></i>
+          </div>
           <div id="memberInfoDiv">
             <div>
               <i class="memerinfo-icon fa-solid fa-user"></i
@@ -118,7 +114,7 @@
             </div>
             <div>
               <i class="memerinfo-icon fa-solid fa-heart"></i
-              ><a href="">我的收藏</a>
+              ><a href="http://localhost:8080/myCollection">我的收藏</a>
             </div>
             <div>
               <i class="memerinfo-icon fa-solid fa-bars"></i

@@ -1,6 +1,6 @@
 package tw.luna.FinalTest.service;
 
-import java.util.Base64;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -12,8 +12,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import tw.luna.FinalTest.dto.OrderDetailsDTO;
+import tw.luna.FinalTest.dto.ProductImageDTO;
 import tw.luna.FinalTest.model.OrderDetails;
 import tw.luna.FinalTest.model.Product;
+import tw.luna.FinalTest.model.ProductImage;
 import tw.luna.FinalTest.repository.OrderDetailsRepository;
 
 @Service
@@ -75,22 +77,38 @@ public class OrderDetailsService {
 		return orderDetailsList.stream().map(this::convertToDTO).collect(Collectors.toList());
 	}
 
-	// 將 OrderDetails 實體轉換為 DTO
 	private OrderDetailsDTO convertToDTO(OrderDetails orderDetails) {
-		String productImageBase64 = null;
-		if (!orderDetails.getProduct().getProductImages().isEmpty()) {
-			byte[] imageBytes = orderDetails.getProduct().getProductImages().get(0).getImage();
-			productImageBase64 = Base64.getEncoder().encodeToString(imageBytes);
-		}
+	    if (orderDetails == null || orderDetails.getProduct() == null) {
+	        return null;
+	    }
 
-		return new OrderDetailsDTO(
-				orderDetails.getProduct().getName(), // 商品名稱
-				orderDetails.getProduct().getSku(), // 商品 SKU
-				orderDetails.getQuantity(), // 商品數量
-				orderDetails.getPrice(),  // 商品價格
-				orderDetails.getProduct().getProductId()
-		);
+	    // 初始化產品圖片列表
+	    List<ProductImageDTO> productImages = new ArrayList<>();
+	    if (orderDetails.getProduct().getProductImages() != null && !orderDetails.getProduct().getProductImages().isEmpty()) {
+	        ProductImage firstImage = orderDetails.getProduct().getProductImages().get(0);
+	        productImages.add(new ProductImageDTO(
+	            firstImage.getId(),
+	            orderDetails.getProduct().getProductId(),
+	            firstImage.getImage()
+	        ));
+	    }
+
+	    // 創建 DTO 對象
+	    OrderDetailsDTO dto = new OrderDetailsDTO(
+	        orderDetails.getProduct().getName(),
+	        orderDetails.getProduct().getSku(),
+	        orderDetails.getQuantity(),
+	        orderDetails.getPrice(),
+	        orderDetails.getProduct().getProductId(),
+	        productImages  // 傳遞產品圖片列表
+	    );
+
+	    // 計算並設置總價
+	    dto.setTotal(orderDetails.getQuantity() * orderDetails.getPrice());
+
+	    return dto;
 	}
+
 		
 
 	// 刪除訂單詳細
