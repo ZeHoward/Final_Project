@@ -10,8 +10,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import com.google.firebase.auth.FirebaseToken;
+
 import jakarta.servlet.http.HttpSession;
 import tw.luna.FinalTest.BCrypt;
+import tw.luna.FinalTest.dto.UserDTO;
 import tw.luna.FinalTest.model.UserAllInfo;
 import tw.luna.FinalTest.model.Userinfo;
 import tw.luna.FinalTest.model.Users;
@@ -137,8 +140,9 @@ public class UsersServiceImpl {
 	            (String) result[9],   // county
 	            (String) result[10],  // district
 	            (String) result[11],  // birthday
-	            (boolean) result[12], //isDel
-	            (boolean) result[13]);  //isVerified
+	            (boolean) result[12], // isDel
+	            (boolean) result[13], // isVerified
+	            (String) result[14]); // authType
 		return userAllInfo;
 		
 	}
@@ -217,7 +221,8 @@ public class UsersServiceImpl {
 	            (String) result[4],   // phoneNumber
 	            (String) result[5],	  // token
 	            (boolean) result[6],  //isDel
-	            (boolean) result[7]  //isVerified
+	            (boolean) result[7],  //isVerified
+	            (String) result[8]	  //authType
 	    		);
 	    
 	    // 驗證成功，更新用戶狀態為已驗證
@@ -226,5 +231,86 @@ public class UsersServiceImpl {
 	    usersRepository.save(tokenUser);
 	    
 	    return true; // 驗證成功
+	}
+	
+	
+	public UsersResponse googleLogin(FirebaseToken decodedToken) {
+		String email = decodedToken.getEmail();
+		UsersResponse usersResponse = isExistGoogleUser(email);
+		
+		if(usersResponse.getUsersStatus() == UsersStatus.EXIST) {			
+			return usersResponse;
+		}else {
+			 Users newUser = new Users();
+			 newUser.setUsername(decodedToken.getName());
+             newUser.setEmail(email);
+             newUser.setPassword("");
+             newUser.setAuthType("google");
+             
+             Users save = usersRepository.save(newUser);
+             
+             Userinfo userinfo = new Userinfo();
+ 			 userinfo.setUsers(newUser);
+ 			 Userinfo save2 = usersInfoReposity.save(userinfo);
+ 			 
+ 			 if(save != null && save2 != null) {
+ 				usersResponse.setUsersStatus(UsersStatus.ADD_SUCCESS);
+ 				usersResponse.setMesg("google登入註冊成功");
+ 				usersResponse.setUsers(save);
+ 			 }else {
+ 				 usersResponse.setUsersStatus(UsersStatus.ADD_FAILURE);
+ 				 usersResponse.setMesg("google登入註冊失敗");
+ 			 }	
+ 			return usersResponse;
+		}
+	}
+	
+		public UserAllInfo userAllInfoByGoogle(Long userId) {
+		
+		List<Object[]> results = usersRepository.findByGoogleUserId(userId);
+		Object[] result = results.get(0);
+		UserAllInfo userAllInfo = new UserAllInfo(
+				(Long)result[0],	  // userId
+				(String) result[1],   // username
+	            (String) result[2],   // email
+	            (String) result[3],   // password
+	            (String) result[4],   // phoneNumber
+	            (String) result[5],   // firstName
+	            (String) result[6],   // lastName
+	            (String) result[7],   // address
+	            (String) result[8],   // postalCode
+	            (String) result[9],   // county
+	            (String) result[10],  // district
+	            (String) result[11],  // birthday
+	            (boolean) result[12], // isDel
+	            (boolean) result[13], // isVerified
+	            (String) result[14]); // authType
+		return userAllInfo;
+		
+	}
+	
+	
+	public UsersResponse isExistGoogleUser(String email) {
+		UsersResponse usersResponse = new UsersResponse();
+		List<Object[]> results  = usersRepository.findByGoogleEmail(email);
+		
+		if (results != null && results.size() > 0 ) {
+			usersResponse.setUsersStatus(UsersStatus.EXIST);
+			usersResponse.setMesg("帳號已存在");
+			Object[] result = results.get(0);
+			UserDTO userDTO = new UserDTO((Long)result[0], (String)result[1], (String)result[2], (boolean)result[3]);
+			Users users = new Users();
+			users.setUserId(userDTO.getUserId());
+			users.setUsername(userDTO.getUsername());
+			users.setEmail(userDTO.getUsername());
+			users.setIsDel(userDTO.getIsDel());
+			usersResponse.setUsers(users);
+		}else {
+			usersResponse.setUsersStatus(UsersStatus.NOT_EXIST);
+			usersResponse.setMesg("帳號不存在");
+			usersResponse.setUsers(null);
+		}	
+		return usersResponse;	
+		
 	}
 }
