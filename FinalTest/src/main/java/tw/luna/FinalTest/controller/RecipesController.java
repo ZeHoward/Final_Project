@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import tw.luna.FinalTest.dto.ShowRecipeCardDTO;
 import tw.luna.FinalTest.model.Recipes;
 import tw.luna.FinalTest.service.RecipesService;
+import tw.luna.FinalTest.service.ShowRecipeCardService;
 
 @RestController
 @RequestMapping("/api/recipes")
@@ -22,6 +24,16 @@ public class RecipesController {
 
 	@Autowired
 	private RecipesService recipeService;
+
+	@Autowired
+	ShowRecipeCardService showRecipeCardService;
+
+	@GetMapping("/recipe")
+	public List<ShowRecipeCardDTO> showRecipeCardDTOList () {
+		List<ShowRecipeCardDTO> recipeCardDTOList = showRecipeCardService.getAllRecipes();
+		return recipeCardDTOList;
+	}
+
 
 	// 獲取所有未刪除的食譜
 	@GetMapping
