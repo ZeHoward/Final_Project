@@ -223,17 +223,22 @@ public class CouponService {
 
 
 	// 切换优惠券的启用/禁用状态
-		@Transactional
-		public boolean toggleCouponStatus(long couponId) {
-			Coupon coupon = couponRepository.findById(couponId)
-					.orElseThrow(() -> new IllegalArgumentException("優惠券不存在"));
+	@Transactional
+	public Coupon toggleCouponStatus(long couponId) {
+		Coupon coupon = couponRepository.findById(couponId)
+				.orElseThrow(() -> new IllegalArgumentException("優惠券不存在"));
 
-			// 切换状态
-			coupon.setActive(!coupon.isActive());
-			couponRepository.save(coupon);
+		// 切換優惠券狀態
+		coupon.setActive(!coupon.isActive());
 
-			return coupon.isActive();  // 返回新的状态
-		}
+		// 確保將修改後的優惠券狀態保存到資料庫
+		couponRepository.save(coupon);
+
+		// 返回更新後的優惠券對象
+		return coupon;
+	}
+
+
 
 
 }
