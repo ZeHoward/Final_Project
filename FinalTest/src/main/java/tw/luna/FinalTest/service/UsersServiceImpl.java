@@ -40,7 +40,7 @@ public class UsersServiceImpl {
 	
 	public UsersResponse isExistUser(String email) {
 		UsersResponse usersResponse = new UsersResponse();
-		List<Users> users = usersRepository.findByEmail(email);
+		List<Users> users = usersRepository.findByEmailAndAuthType(email, "email");
 		if (users != null && users.size() > 0 && !users.get(0).getIsDel()) {
 			usersResponse.setUsersStatus(UsersStatus.EXIST);
 			usersResponse.setMesg("帳號已存在");
@@ -68,6 +68,7 @@ public class UsersServiceImpl {
 			String token = UUID.randomUUID().toString();
 			newUsers.setToken(token);
 			newUsers.setIsVerified(false);
+			newUsers.setAuthType("email");
 			
 			Users savedUser = usersRepository.save(newUsers);
 			emailCheckService.sendVerificationEmail(newUsers.getEmail(), token);
@@ -124,8 +125,9 @@ public class UsersServiceImpl {
 	}
 	
 	public UserAllInfo userAllInfo(Long userId) {
-		
+//		System.out.println("userAllInfo,userId:" + userId);
 		List<Object[]> results = usersRepository.findByUserId(userId);
+//		System.out.println("results:" + results.get(0));
 		Object[] result = results.get(0);
 		UserAllInfo userAllInfo = new UserAllInfo(
 				(Long)result[0],	  // userId
@@ -158,6 +160,7 @@ public class UsersServiceImpl {
 		users.setUsername(userAllInfo.getUsername());
 		users.setDel(userAllInfo.getIsDel());
 		users.setIsVerified(userAllInfo.getIsVerified());
+		users.setAuthType(userAllInfo.getAuthType());
 		
 		
 		userinfo.setId(userAllInfo.getUserId());

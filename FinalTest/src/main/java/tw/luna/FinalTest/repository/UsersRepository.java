@@ -15,7 +15,10 @@ import tw.luna.FinalTest.model.Users;
 
 
 public interface UsersRepository extends JpaRepository<Users, Long>{
-	public List<Users> findByEmail(String email);
+	
+	
+	
+	public List<Users> findByEmailAndAuthType(String email, String authType);
 	
 
     // 查詢 isDel 等於 0 的用戶總量
@@ -26,7 +29,7 @@ public interface UsersRepository extends JpaRepository<Users, Long>{
             "ui.firstName, ui.lastName, ui.address, ui.postalCode, ui.county, ui.district, ui.birthday, u.isDel, u.isVerified, u.authType " +
             "FROM users u " +
             "JOIN userinfo ui ON u.userId = ui.userId " +
-            "WHERE u.userId = :userId AND u.authType = 'email'", nativeQuery = true)
+            "WHERE u.userId = :userId AND u.authType = 'email' ", nativeQuery = true)
 	List<Object[]> findByUserId(@Param("userId") Long userId);
 	
 	@Modifying
@@ -40,7 +43,7 @@ public interface UsersRepository extends JpaRepository<Users, Long>{
 	int updatePasswordByUserId(@Param("newPassword") String newPassword, @Param("userId") Long userId);
 	
 	
-	@Query(value = "SELECT userId, username, email, password, phoneNumber, token, isDel, isVerified FROM users WHERE token = :token", nativeQuery = true)
+	@Query(value = "SELECT userId, username, email, password, phoneNumber, token, isDel, isVerified, authType FROM users WHERE token = :token", nativeQuery = true)
 	List<Object[]> findByToken(@Param("token") String token);
 	
 	
