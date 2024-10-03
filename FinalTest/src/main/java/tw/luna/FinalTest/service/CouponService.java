@@ -9,8 +9,8 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import tw.luna.FinalTest.Dto.CouponDTO;
-import tw.luna.FinalTest.Dto.UserCouponDTO;
+import tw.luna.FinalTest.dto.CouponDTO;
+import tw.luna.FinalTest.dto.UserCouponDTO;
 import tw.luna.FinalTest.model.Coupon;
 import tw.luna.FinalTest.model.DiscountType;
 import tw.luna.FinalTest.model.Users;
