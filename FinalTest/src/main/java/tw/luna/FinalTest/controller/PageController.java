@@ -2,12 +2,16 @@ package tw.luna.FinalTest.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
-import jakarta.servlet.http.HttpSession;
+import tw.luna.FinalTest.service.OrdersService;
 @Controller
 public class PageController {
 	
+	@Autowired
+    private OrdersService ordersService;
 	
 	@GetMapping("/")
     public String index() {
@@ -35,14 +39,36 @@ public class PageController {
 	public String myCollection() {
 		return "myCollection";
 	}
-	@GetMapping("/myOrder/detail")
-	public String myOrder() {
-		return "checkOrder";
-	}
 	@GetMapping("/myOrderList")
-	public String myOrderList() {
-		return "orderManage";
+    public String myOrderList(Model model) {
+        return "orderManage"; // ordersService.getOrdersList(model);
+    }
+
+	@GetMapping("shoppingCart")
+	public String shoppingCart() {
+		return "shoppingCart";
 	}
+	@GetMapping("recipe")
+	public String recipe() {
+		return "recipe";
+	}
+	@GetMapping("recipeDetails")
+	public String recipeDetails() {
+		return "recipeDetails";
+	}
+	@GetMapping("checkout")
+	public String checkout() {
+		return "checkout";
+	}
+	@GetMapping("checkInfo")
+	public String checkInfo() {
+		return "checkInfo";
+	}
+
+    @GetMapping("/myOrder/details/{id}")
+    public String myOrderDetails(@PathVariable Integer id, Model model) {
+    	return "checkOrder";
+    }
 	
 	//////////////////////////////////////////
 	@GetMapping("/registPage")

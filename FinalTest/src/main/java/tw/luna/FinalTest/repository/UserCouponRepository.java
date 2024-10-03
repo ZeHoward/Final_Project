@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import org.springframework.data.repository.query.Param;
 import tw.luna.FinalTest.model.Coupon;
 import tw.luna.FinalTest.model.UserCoupon;
 import tw.luna.FinalTest.model.UserCouponId;
@@ -21,5 +22,7 @@ public interface UserCouponRepository extends JpaRepository<UserCoupon,UserCoupo
 	boolean existsByUserIdAndCouponId(Long userId, long couponId);
 
 
+    @Query("SELECT uc.userId FROM UserCoupon uc WHERE uc.couponId = :couponId")
+    List<Long> findUserIdsByCouponId(@Param("couponId") long couponId);
 
 }

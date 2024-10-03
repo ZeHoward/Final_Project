@@ -669,10 +669,10 @@ function generateOrderDetailsContent(order) {
   mainContent.innerHTML = ""; // 清空之前的內容
 
   // 動態生成用戶信息
-  const userInfo = order
-    ? `<p><strong>用戶名稱:</strong> ${order.username || "未提供"}</p>
-           <p><strong>電子郵件:</strong> ${order.email || "未提供"}</p>
-           <p><strong>電話號碼:</strong> ${order.phoneNumber || "未提供"}</p>`
+  const userInfo = order && order.user
+    ? `<p><strong>用戶名稱:</strong> ${order.user.username || "未提供"}</p>
+         <p><strong>電子郵件:</strong> ${order.user.email || "未提供"}</p>
+         <p><strong>電話號碼:</strong> ${order.user.phoneNumber || "未提供"}</p>`
     : `<p>無法找到該用戶資訊</p>`;
 
   // 動態生成訂單詳情部分
@@ -1902,8 +1902,164 @@ function generateUserManagementContent() {
   updatePagination(filteredUsers);
   renderUsers(filteredUsers);
 }
+//
+// function generateCouponManagementForm() {
+//   const mainContent = document.querySelector(".main-content");
+//   mainContent.innerHTML = ""; // 清空之前的內容
+//
+//   const couponManagementForm = `
+//         <section class="coupon-management">
+//             <h1>優惠券管理</h1>
+//
+//             <!-- 新增優惠券表單 -->
+//             <form id="couponForm">
+//                 <div class="form-group">
+//                     <label for="code">優惠券代碼</label>
+//                     <textarea id="code" rows="1" placeholder="輸入優惠券代碼"></textarea>
+//                 </div>
+//
+//                 <div class="form-group">
+//                     <label for="name">優惠券名稱</label>
+//                     <textarea id="name" rows="1" placeholder="輸入優惠券名稱"></textarea>
+//                 </div>
+//
+//                 <div class="form-group">
+//                     <label for="discountType">折扣類型</label>
+//                     <select id="discountType">
+//                         <option value="percentage">百分比折扣</option>
+//                         <option value="amount">固定金額折扣</option>
+//                     </select>
+//                 </div>
+//
+//                 <div class="form-group">
+//                     <label for="discountValue">折扣值</label>
+//                     <textarea id="discountValue" rows="1" placeholder="輸入折扣值"></textarea>
+//                 </div>
+//
+//                 <div class="form-group">
+//                     <label for="expiryDate">到期日期</label>
+//                     <input type="date" id="expiryDate">
+//                     <!-- 提交與取消按鈕 -->
+//                     <button type="submit" id="submitCouponButton">新增優惠券</button>
+//                     <button type="reset" id="cancelCouponButton">取消</button>
+//                 </div>
+//             </form>
+//
+//             <!-- 已經新增的優惠券列表 -->
+//             <section class="existing-coupons">
+//                 <h1>已新增的優惠券</h1>
+//                 <table class="coupon-table">
+//                     <thead>
+//                         <tr>
+//                             <th>優惠券代碼</th>
+//                             <th>名稱</th>
+//                             <th>折扣類型</th>
+//                             <th>折扣值</th>
+//                             <th>到期日期</th>
+//                             <th>操作</th>
+//                         </tr>
+//                     </thead>
+//                     <tbody id="couponTableBody">
+//                         <!-- 這裡插入動態生成的優惠券 -->
+//                     </tbody>
+//                 </table>
+//             </section>
+//         </section>
+//     `;
+//   mainContent.innerHTML = couponManagementForm;
+//
+//   // 儲存優惠券的陣列
+//   let coupons = [];
+//
+//   // 一進入頁面，獲取現有的優惠券並顯示
+//   fetch("http://localhost:8080/api/coupons/all")  // 假設後端的 GET API 是這個路徑
+//       .then((response) => response.json())
+//       .then((data) => {
+//         coupons = data; // 假設後端返回的是現有的優惠券列表
+//         displayCoupons(); // 顯示優惠券
+//       })
+//       .catch((error) => console.error("Error fetching coupons:", error));
+//
+//   // 優惠券表單提交處理
+//   const couponForm = document.getElementById("couponForm");
+//   couponForm.addEventListener("submit", function (event) {
+//     event.preventDefault(); // 阻止表單提交刷新
+//
+//     // 獲取輸入的優惠券信息
+//     const code = document.getElementById("code").value;
+//     const name = document.getElementById("name").value;
+//     const discountType = document.getElementById("discountType").value;
+//     const discountValue = document.getElementById("discountValue").value;
+//     const expiryDate = document.getElementById("expiryDate").value;
+//
+//     // 構造優惠券對象
+//     const couponData = {
+//       code,
+//       name,
+//       discountType,
+//       discountValue,
+//       expiryDate,
+//     };
+//
+//     // 發送 POST 請求到後端
+//     fetch("http://localhost:8080/api/coupons/create", {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/x-www-form-urlencoded",
+//       },
+//       body: new URLSearchParams(couponData),
+//     })
+//         .then((response) => response.json()) // 解析 JSON 回應
+//         .then((data) => {
+//           // 使用返回的優惠券陣列更新表格
+//           coupons = data; // 假設後端返回的是最新的優惠券列表
+//           displayCoupons(); // 顯示優惠券
+//         })
+//         .catch((error) => console.error("Error:", error));
+//
+//     // 重置表單
+//     couponForm.reset();
+//   });
+//
+//   // 顯示已新增的優惠券
+//   function displayCoupons() {
+//     const couponTableBody = document.getElementById("couponTableBody");
+//     couponTableBody.innerHTML = ""; // 清空之前的內容
+//
+//     coupons.forEach((coupon, index) => {
+//       const tr = document.createElement("tr");
+//       tr.innerHTML = `
+//                 <td>${coupon.code}</td>
+//                 <td>${coupon.name}</td>
+//                 <td>${
+//           coupon.discountType === "percentage" ? "百分比" : "固定金額"
+//       }</td>
+//                 <td>${coupon.discountValue}</td>
+//                 <td>${coupon.expiryDate}</td>
+//                 <td>
+//                     <button class="delete-coupon-button" data-index="${index}">刪除</button>
+//                 </td>
+//             `;
+//       couponTableBody.appendChild(tr);
+//     });
+//
+//     // 綁定刪除按鈕的事件
+//     document.querySelectorAll(".delete-coupon-button").forEach((button) => {
+//       button.addEventListener("click", function () {
+//         const index = this.getAttribute("data-index");
+//
+//         // 顯示確認刪除的彈窗
+//         const isConfirmed = confirm("確定要刪除此優惠券嗎？");
+//
+//         if (isConfirmed) {
+//           coupons.splice(index, 1); // 刪除該優惠券
+//           displayCoupons(); // 刷新優惠券表格
+//         }
+//       });
+//     });
+//   }
+// }
 
-// 點擊"優惠券管理"時生成內容的函數
 function generateCouponManagementForm() {
   const mainContent = document.querySelector(".main-content");
   mainContent.innerHTML = ""; // 清空之前的內容
@@ -1972,6 +2128,15 @@ function generateCouponManagementForm() {
   // 儲存優惠券的陣列
   let coupons = [];
 
+  // 一進入頁面，獲取現有的優惠券並顯示
+  fetch("http://localhost:8080/api/coupons/all")  // 假設後端的 GET API 是這個路徑
+      .then((response) => response.json())
+      .then((data) => {
+        coupons = data; // 假設後端返回的是現有的優惠券列表
+        displayCoupons(); // 顯示優惠券
+      })
+      .catch((error) => console.error("Error fetching coupons:", error));
+
   // 優惠券表單提交處理
   const couponForm = document.getElementById("couponForm");
   couponForm.addEventListener("submit", function (event) {
@@ -1994,20 +2159,20 @@ function generateCouponManagementForm() {
     };
 
     // 發送 POST 請求到後端
-    fetch("localhost:8080/api/coupons/create", {
+    fetch("http://localhost:8080/api/coupons/create", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },
       body: new URLSearchParams(couponData),
     })
-      .then((response) => response.json()) // 解析 JSON 回應
-      .then((data) => {
-        // 使用返回的優惠券陣列更新表格
-        coupons = data; // 假設後端返回的是最新的優惠券列表
-        displayCoupons(); // 顯示優惠券
-      })
-      .catch((error) => console.error("Error:", error));
+        .then((response) => response.json()) // 解析 JSON 回應
+        .then((data) => {
+          // 使用返回的優惠券陣列更新表格
+          coupons = data; // 假設後端返回的是最新的優惠券列表
+          displayCoupons(); // 顯示優惠券
+        })
+        .catch((error) => console.error("Error:", error));
 
     // 重置表單
     couponForm.reset();
@@ -2024,12 +2189,13 @@ function generateCouponManagementForm() {
                 <td>${coupon.code}</td>
                 <td>${coupon.name}</td>
                 <td>${
-                  coupon.discountType === "percentage" ? "百分比" : "固定金額"
-                }</td>
+          coupon.discountType === "percentage" ? "百分比" : "固定金額"
+      }</td>
                 <td>${coupon.discountValue}</td>
                 <td>${coupon.expiryDate}</td>
                 <td>
-                    <button class="delete-coupon-button" data-index="${index}">刪除</button>
+                    <button class="delete-coupon-button" data-index="${index}">禁用</button>
+                    <button class="send-coupon-button" data-index="${index}">發送</button>
                 </td>
             `;
       couponTableBody.appendChild(tr);
@@ -2039,18 +2205,83 @@ function generateCouponManagementForm() {
     document.querySelectorAll(".delete-coupon-button").forEach((button) => {
       button.addEventListener("click", function () {
         const index = this.getAttribute("data-index");
+        const coupon = coupons[index];
 
         // 顯示確認刪除的彈窗
-        const isConfirmed = confirm("確定要刪除此優惠券嗎？");
+        const isConfirmed = confirm("確定要禁用此優惠券嗎？");
 
         if (isConfirmed) {
-          coupons.splice(index, 1); // 刪除該優惠券
-          displayCoupons(); // 刷新優惠券表格
+          // 發送 DELETE 請求到後端
+          fetch(`http://localhost:8080/api/coupons/toggle/${coupon.couponId}`, {
+            method: "POST",
+          })
+              .then((response) => response.json())
+              .then(() => {
+                coupons.splice(index, 1); // 刪除該優惠券
+                displayCoupons(); // 刷新優惠券表格
+              })
+              .catch((error) => console.error("Error deleting coupon:", error));
         }
       });
     });
+
+    // // 綁定發送按鈕的事件
+    // document.querySelectorAll(".send-coupon-button").forEach((button) => {
+    //   button.addEventListener("click", function () {
+    //     const index = this.getAttribute("data-index");
+    //     const coupon = coupons[index];
+    //
+    //     // 發送 POST 請求到後端，用來發送優惠券（假設後端有對應的發送API）
+    //     fetch(`http://localhost:8080/api/coupons/issue/all?couponId=${coupon.id}`, {
+    //       method: "POST",
+    //     })
+    //         .then((response) => response.json())
+    //         .then((data) => {
+    //           alert(`優惠券 ${coupon.code} 已成功發送!`);
+    //         })
+    //         .catch((error) => console.error("Error sending coupon:", error));
+    //   });
+    // });
+    //
+    // 綁定發送按鈕的事件
+    document.querySelectorAll(".send-coupon-button").forEach((button) => {
+      button.addEventListener("click", function () {
+        const couponId = this.getAttribute("data-id");
+        const index = this.getAttribute("data-index");
+        const coupon = coupons[index];
+
+        // 檢查 coupon 對象是否有 id
+        console.log("Selected coupon:", coupon);
+
+        if (!coupon || !coupon.couponId) {
+          alert("優惠券 ID 不存在，無法發送");
+          return;
+        }
+
+        // 發送 POST 請求到後端，用來發送優惠券（假設後端有對應的發送API）
+        fetch(`http://localhost:8080/api/coupons/issue/all?couponId=${coupon.couponId}`, {
+          method: "POST",
+        })
+            .then((response) => {
+              // 檢查返回狀態是否成功
+              if (!response.ok) {
+                throw new Error("Failed to send coupon");
+              }
+              return response.text(); // 確保後端返回的是 JSON 格式
+            })
+            .then((data) => {
+              alert(`優惠券 ${coupon.code} 已成功發送!`);
+            })
+            .catch((error) => {
+              console.error("Error sending coupon:", error);
+              alert("發送優惠券時出現錯誤");
+            });
+      });
+    });
+
   }
 }
+
 
 document.addEventListener("DOMContentLoaded", function () {
   initChart();

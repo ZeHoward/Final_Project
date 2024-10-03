@@ -1,71 +1,72 @@
 window.onload = function () {
-// JSON 資料 - 訂單項目
-    // const orderItems = [
-    //     {
-    //         image: "./material/mealkit/BeefPho.png",
-    //         name: "[冷凍] 台式芋頭獅子頭米粉湯",
-    //         quantity: 2,
-    //         subtotal: "NT$300"
-    //     },
-    //     {
-    //         image: "./image/西班牙海鮮燉飯.jpg",
-    //         name: "[冷凍] 經典梅干苦瓜",
-    //         quantity: 1,
-    //         subtotal: "NT$140" 
-    //     },
-    //     {
-    //         image: "product3.jpg",
-    //         name: "[冷凍] 經典魯燒櫻花蝦米糕",
-    //         quantity: 1,
-    //         subtotal: "NT$130"
-    //     },
-    //     {
-    //         image: "product4.jpg",
-    //         name: "五色糙米拌飯",
-    //         quantity: 2,
-    //         subtotal: "NT$400"
-    //     }
-    // ];
+    // 從 URL 路徑中獲取訂單 ID
+    const currentPath = window.location.pathname;
+    const pathSegments = currentPath.split('/');
+    const orderId = pathSegments[pathSegments.length - 1];  // 取得最後一段，這就是 orderId
 
-// JSON 資料 - 收件人資訊
-    // const recipientInfo = {
-    //     name: "不來的",
-    //     email: "bradchao@brad.tw",
-    //     address: "100台北市中正區中山南路7號",
-    //     phone: "02-23123456",
-    //     shippingMethod: "冷凍-黑貓快遞到店"
-    // };
+    console.log("訂單 ID:", orderId);  // 調試用，打印訂單 ID
 
-// 動態生成訂單項目
-    const orderItemsContainer = document.getElementById('che-order-items');
+    if (orderId) {
+        // 有訂單 ID，抓取訂單詳情
+        fetchOrderDetails(orderId);
+    } else {
+        console.error('未提供訂單 ID');
+    }
 
-    orderItems.forEach(item => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-      <td class="che-td"><img src="${item.image}" alt="商品圖片"></td>
-      <td class="che-td">${item.name}</td>
-      <td class="che-td">${item.quantity}</td>
-      <td class="che-td">${item.subtotal}</td>
-  `;
-        orderItemsContainer.appendChild(row);
-    });
+    // 使用 Fetch API 獲取訂單詳情
+    function fetchOrderDetails(orderId) {
+        fetch(`/api/orders/${orderId}`)  // 確保這個路徑是正確的
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("獲取訂單詳情失敗");
+                }
+                return response.json();
+            })
+            .then(order => {
+                displayOrderDetails(order);
+            })
+            .catch(error => console.error('獲取訂單詳情時出錯:', error));
+    }
 
-// 動態生成收件人資訊
-    const recipientDetailsContainer = document.getElementById('che-recipient-details');
-    recipientDetailsContainer.innerHTML = `
-  <p><strong>收件人：</strong> ${recipientInfo.name}</p>
-  <p><strong>收件人信箱：</strong> ${recipientInfo.email}</p>
-  <p><strong>收件人地址：</strong> ${recipientInfo.address}</p>
-  <p><strong>收件人電話：</strong> ${recipientInfo.phone}</p>
-  <p><strong>運送方式：</strong> ${recipientInfo.shippingMethod}</p>
-`;
+    // 顯示訂單詳情
+    function displayOrderDetails(order) {
+        // 1. 更新訂單編號和日期
+        document.getElementById('orderId').textContent = `訂單編號：#${order.orderId}`;
+        document.getElementById('orderDate').textContent = `訂單日期：${new Date(order.orderDate).toLocaleDateString()}`;
 
+        // 2. 更新訂單項目
+        const orderItemsContainer = document.getElementById('che-order-items');
+        orderItemsContainer.innerHTML = ''; // 清空現有內容
 
+        order.orderDetails.forEach(item => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td class="che-td"><img src="${item.productImageBase64 ? `data:image/png;base64,${item.productImageBase64}` : 'placeholder.jpg'}" alt="商品圖片"></td>
+                <td class="che-td">${item.productName}</td>
+                <td class="che-td">${item.quantity}</td>
+                <td class="che-td">NT$${item.price}</td>
+                <td class="che-td">NT$${item.total}</td>
+            `;
+            orderItemsContainer.appendChild(row);
+        });
 
+        // 3. 更新訂單摘要
+        const summaryContainer = document.querySelector('.che-summary');
+        summaryContainer.innerHTML = `
+            商品總計：NT$${order.totalAmount}<br>
+            折扣碼：${order.couponCode ? order.couponCode : '無'}<br>
+            折扣百分比：${order.percentageDiscount ? order.percentageDiscount + '%' : '無'}<br>
+            折扣金額：${order.amountDiscount ? '-NT$' + order.amountDiscount : '無'}<br>
+            付款總金額：NT$${order.finalAmount}
+        `;
 
-
-
+        // 4. 更新收件人資訊
+        const recipientDetailsContainer = document.getElementById('che-recipient-details');
+        recipientDetailsContainer.innerHTML = `
+            <p><strong>收件人：</strong> ${order.user.username}</p>
+            <p><strong>收件人信箱：</strong> ${order.user.email}</p>
+            <p><strong>收件人地址：</strong> ${order.user.address}</p>
+            <p><strong>收件人電話：</strong> ${order.user.phoneNumber}</p>
+        `;
+    }
 };
-
-
-
