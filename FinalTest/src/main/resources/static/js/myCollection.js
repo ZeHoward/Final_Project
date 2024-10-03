@@ -1,4 +1,5 @@
 window.onload = function () {
+  // 定義全局 userId 變數
   let userId = null;
 
   // 獲取 userId，並在成功後調用 fetchFavorites('products')
@@ -18,12 +19,14 @@ window.onload = function () {
 
   // 按鈕更換商品及食譜
   const buttons = document.querySelectorAll('.collection-tab-button');
+  const content = document.querySelector('.collection-content');
 
   buttons.forEach(button => {
     button.addEventListener('click', () => {
       buttons.forEach(btn => btn.classList.remove('active'));
       button.classList.add('active');
 
+      // 判斷點擊的是“我的商品”還是“我的食譜”
       if (button.textContent === '我的商品') {
         fetchFavorites('products');
       } else {
@@ -32,6 +35,7 @@ window.onload = function () {
     });
   });
 
+  // 定義 fetchFavorites 函數，用於根據類型來發送 API 請求
   function fetchFavorites(type) {
     if (!userId) {
       console.error('userId 未獲取到');
@@ -40,22 +44,25 @@ window.onload = function () {
 
     let apiUrl = '';
 
+    // 根據類型設置 API URL
     if (type === 'products') {
-      apiUrl = `/api/favorites/products?userId=${userId}`;
+      apiUrl = `/api/favorites/products?userId=${userId}`;  // 獲取收藏商品的API
     } else if (type === 'recipes') {
-      apiUrl = `/api/favorites/recipes/user?userId=${userId}`;
+      apiUrl = `/api/favorites/recipes/user?userId=${userId}`;  // 獲取收藏食譜的API
     }
 
+    // 使用 fetch 向後端發送請求，然後處理返回的數據
     fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
-          displayFavorites(data, type);
+          displayFavorites(data, type);  // 傳入類型以區分商品或食譜
         })
         .catch(error => {
           console.error('Error fetching data:', error);
         });
   }
 
+  // 更新頁面顯示的商品或食譜
   function displayFavorites(favorites, type) {
     const container = document.getElementById("productContainer");
     container.innerHTML = "";  // 清空現有內容
@@ -66,43 +73,45 @@ window.onload = function () {
     }
 
     favorites.forEach(favorite => {
+      // 將 Base64 字符串作為圖片的 src
       const imageSrc = `data:image/jpeg;base64,${favorite.imageBase64}`;
 
-      // 動態生成商品卡，並在外部包裹一個 <a> 元素，讓商品卡成為一個可點擊的鏈接
-      const productDiv = document.createElement('div');
-      productDiv.className = "product";
-      productDiv.dataset.productId = favorite.productId;
-      productDiv.dataset.productName = favorite.name;
-
-      // 設置商品卡的 HTML 結構
-      productDiv.innerHTML = `
-      <img class="product-image" src="${imageSrc}" alt="${favorite.name}">
-      <h3 class="product-name">${favorite.name}</h3>
-      <p class="product-price">$NT${favorite.price}</p>
-      <div class="home-product-btn">
-        <button class="add-to-cart" data-product-id="${favorite.productId}" data-product-name="${favorite.name}">
-          <i class="fa-solid fa-cart-shopping"></i>&nbsp;&nbsp;&nbsp;加入購物車
-        </button>
-      </div>`;
-
-      // 綁定點擊事件到商品卡，點擊跳轉到商品詳情頁
-      productDiv.addEventListener('click', function () {
-        window.location.href = `/detail?productId=${favorite.productId}`;
-      });
-
-      // 將商品卡添加到容器
-      container.appendChild(productDiv);
+      container.innerHTML += `
+        <div class="product" data-product-id="${favorite.productId}" data-type="${type}">
+          <img class="product-image" src="${imageSrc}" alt="${favorite.name}">
+          <h3 class="product-name">${favorite.name}</h3>
+          <p class="product-price">$NT${favorite.price}</p>
+          <div class="home-product-btn">
+            <button class="add-to-favorite favorited" data-product-id="${favorite.productId}" data-type="${type}">
+              <i class="fa-solid fa-heart"></i>
+            </button>
+            <button class="add-to-cart" data-product-id="${favorite.productId}">
+              <i class="fa-solid fa-cart-shopping"></i>&nbsp;&nbsp;&nbsp;加入購物車
+            </button>
+          </div>
+        </div>`;
     });
 
+    // 為收藏和購物車按鈕添加事件處理
     attachButtonHandlers();
   }
 
-
+  // 收藏和加入購物車按鈕處理邏輯
   function attachButtonHandlers() {
+    // 收藏商品按鈕事件處理
+    document.querySelectorAll(".add-to-favorite").forEach(button => {
+      button.addEventListener("click", function () {
+        const productId = this.getAttribute('data-product-id');
+        const type = this.getAttribute('data-type');  // 獲取類型來決定是商品還是食譜
+        removeFavorite(productId, type, this);
+      });
+    });
+
+    // 加入購物車按鈕事件處理，添加商品數量選擇功能
     document.querySelectorAll(".add-to-cart").forEach(button => {
       button.addEventListener("click", function () {
         const productId = this.getAttribute('data-product-id');
-        const productName = this.getAttribute('data-product-name');
+        const productName = this.closest('.product').querySelector('.product-name').innerText;
         promptQuantityAndAddToCart(productId, productName);
       });
     });
@@ -146,5 +155,31 @@ window.onload = function () {
             });
       }
     });
+  }
+
+  // 取消收藏邏輯，根據不同類型來呼叫不同的API
+  function removeFavorite(productId, type, button) {
+    let apiUrl;
+
+    if (type === 'products') {
+      apiUrl = `/api/favorites/products/remove?userId=${userId}&productId=${productId}`;  // 呼叫刪除商品的API
+      apiUrl = `/api/favorites/remove?userId=${userId}&productId=${productId}`;  // 呼叫刪除商品的API
+    } else if (type === 'recipes') {
+      apiUrl = `/api/favorites/recipes/remove?userId=${userId}&productId=${productId}`;  // 呼叫刪除食譜的API
+    }
+
+    fetch(apiUrl, {
+      method: 'DELETE',
+    })
+        .then(() => {
+          const productElement = document.querySelector(`.product[data-product-id="${productId}"]`);
+          if (productElement) {
+            productElement.remove();  // 從頁面中移除商品
+          }
+          alert(`已將收藏移除！`);
+        })
+        .catch(error => {
+          console.error('Error removing favorite:', error);
+        });
   }
 };
