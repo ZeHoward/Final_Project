@@ -4,9 +4,9 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>即食享熱</title>
-    
+
     <link rel="stylesheet" th:href="@{css/couponPage.css}" />
-    
+
 </head>
 <body>
 
@@ -14,37 +14,14 @@
 <div th:replace="header"></div>
 
 <div id="myContainer">
-	<div class="couponPage">
-	  <p>優惠券</p>
-	  <div class="couponPageDiv">
-        <span id="title1">請編輯優惠標題1</span>
-        <span id="title2">請編輯優惠標題2</span>
-        <span id="discountCode">請編輯優惠代碼</span>
-        <span id="validDate">請編輯有效期限</span>
-      </div>
-      <div class="couponPageDiv">
-        <span id="title1">請編輯優惠標題1</span>
-        <span id="title2">請編輯優惠標題2</span>
-        <span id="discountCode">請編輯優惠代碼</span>
-        <span id="validDate">請編輯有效期限</span>
-      </div>
-      <div class="couponPageDiv">
-        <span id="title1">請編輯優惠標題1</span>
-        <span id="title2">請編輯優惠標題2</span>
-        <span id="discountCode">請編輯優惠代碼</span>
-        <span id="validDate">請編輯有效期限</span>
-      </div>
-	  <img class="couponPageImg" th:src="@{/material/CouponCanUseDISC10.jpg}" alt="">
-  	  <img class="couponPageImg" th:src="@{/material/CouponCanUseHALFPRICE.jpg}" alt="">
-  	  <img class="couponPageImg" th:src="@{/material/CouponCanUseSave50.jpg}" alt="">
-  	  <img class="couponPageImg" th:src="@{/material/CouponUsedDISC10.jpg}" alt="">
-  	  <img class="couponPageImg" th:src="@{/material/CouponUsedHALFPRICE.jpg}" alt="">
-  	  <img class="couponPageImg" th:src="@{/material/CouponUsedSave50.jpg}" alt=""> 
-	</div>
+    <div class="couponPage">
+        <p>優惠券</p>
+        <!-- 優惠券內容將動態插入 -->
+    </div>
 </div>
 
 <!-- 包含footer部分 -->
 <div th:replace="footer"></div>
-	<script th:src="@{js/couponPage.js}" defer="defer"></script>
+<script th:src="@{js/couponPage.js}" defer="defer"></script>
 </body>
 </html>
