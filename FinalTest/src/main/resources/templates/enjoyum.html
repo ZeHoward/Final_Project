@@ -15,37 +15,41 @@
   </head>
   
   <body>
-  
    	<div th:replace="header"></div>
    	
    	<div id="myContainer">
-    	
 	    <!-- slideshow start -->
-	    <div class="slideshow-container" id="slideshow-container">
-	      <div class="mySlides fade">
-	        <img th:src="@{/material/slide1.png}" style="width: 100%" />
-	      </div>
-	      <div class="mySlides fade">
-	        <img th:src="@{/material/slide2.png}" style="width: 100%" />
-	      </div>
-	      <div class="mySlides fade">
-	        <img th:src="@{/material/slide3.png}" style="width: 100%" />
-	      </div>
-	      <div class="mySlides fade">
-	        <img th:src="@{/material/slide4.png}" style="width: 100%" />
-	      </div>
-	
-	      <a class="slidesPrev"  id="slidesPrev" >❮</a>
-	      <a class="slidesNext"  id="slidesNext" >❯</a>
-	    </div>
-	    <br />
-	
-	    <div style="text-align: center">
-	      <span class="dot" onclick="currentSlide(1)"></span>
-	      <span class="dot" onclick="currentSlide(2)"></span>
-	      <span class="dot" onclick="currentSlide(3)"></span>
-	      <span class="dot" onclick="currentSlide(4)"></span>
-	    </div>
+		<div class="mySlides fade">
+			<div class="numbertext">1 / 4</div>
+			<img th:src="@{/material/slide1.png}" style="width:100%">
+		</div>
+
+		<div class="mySlides fade">
+			<div class="numbertext">2 / 4</div>
+			<img th:src="@{/material/slide2.png}" style="width:100%">
+		</div>
+
+		<div class="mySlides fade">
+			<div class="numbertext">3 / 4</div>
+			<img th:src="@{/material/slide3.png}" style="width:100%">
+		</div>
+
+		<div class="mySlides fade">
+			<div class="numbertext">4 / 4</div>
+			<img th:src="@{/material/slide4.png}" style="width:100%">
+		</div>
+
+		<a class="prev" onclick="plusSlides(-1)">❮</a>
+		<a class="next" onclick="plusSlides(1)">❯</a>
+	</div>
+
+	<div style="text-align:center">
+		<span class="dot" onclick="currentSlide(1)"></span>
+		<span class="dot" onclick="currentSlide(2)"></span>
+		<span class="dot" onclick="currentSlide(3)"></span>
+		<span class="dot" onclick="currentSlide(4)"></span>
+
+	</div>
 	    <!-- slideshow end -->
 	
 	    <!-- 商品精選 -->
@@ -58,7 +62,7 @@
 	        <div class="product-container" id="productContainer1"></div>
 	        <button class="nav-button" id="nextBtn">❯</button>
 	      </div>
-	      <button class="view-all">前往調理包專區選購</button>
+	      <button class="view-all" data-type="preparedFood">點擊查看更多</button>
 	    </div>
 	    <!-- 商品精選 -->
 	
@@ -171,7 +175,7 @@
 	        <div class="product-container" id="productContainer2"></div>
 	        <button class="nav-button" id="nextBtn2">❯</button>
 	      </div>
-	      <button class="view-all">前往生鮮食材包專區選購</button>
+	      <button class="view-all" data-type="mealkit">點擊查看更多</button>
 	    </div>
 	    <!-- 商品精選 -->
 	</div>

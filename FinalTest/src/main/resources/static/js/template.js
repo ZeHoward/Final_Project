@@ -53,12 +53,12 @@ document.addEventListener("DOMContentLoaded", function () {
     e.stopPropagation(); // 防止點擊會員圖標時觸發頁面其他地方的點擊事件
     if (isMemberDivVisible) {
       memberInfoDiv.style.display = "none";
-      slideshowContainer.style.zIndex = 5;
+      // slideshowContainer.style.zIndex = 5;
       isMemberDivVisible = false;
     } else {
       memberInfoDiv.style.display = "block";
       isMemberDivVisible = true;
-      slideshowContainer.style.zIndex = -1;
+      // slideshowContainer.style.zIndex = -1;
     }
   });
 
@@ -67,47 +67,33 @@ document.addEventListener("DOMContentLoaded", function () {
     e.stopPropagation();
     if (isMemberDivVisible && !memberInfoDiv.contains(e.target)) {
       memberInfoDiv.style.display = "none";
-      slideshowContainer.style.zIndex = 5;
+      // slideshowContainer.style.zIndex = 5;
       isMemberDivVisible = false;
     }
   });
 
   // 搜索框顯示/隱藏
-  let isOpen = false;
-  let searchDiv = document.getElementById("searchDiv");
-  let searchIcon = document.getElementById("searchIcon");
-
-  searchIcon.addEventListener("click", () => {
-    if (!isOpen) {
-      searchDiv.style.width = "200px";
-      searchDiv.style.border = "1px solid #a1c14b";
-      isOpen = true;
-    } else {
-      searchDiv.style.width = "0";
-      searchDiv.style.border = "0";
-      isOpen = false;
-    }
-  });
-
-  // 搜索框的 Enter 事件
-  let searchInput = document.getElementById("searchInput");
-  searchInput.addEventListener("keydown", (event) => {
-    if (event.key === "Enter") {
-      let keyword = searchInput.value;
-      alert("您輸入的關鍵字是 : " + keyword);
-    }
-  });
+  // let isOpen = false;
+  // let searchDiv = document.getElementById("searchDiv");
+  // let searchIcon = document.getElementById("searchIcon");
+  //
+  // searchIcon.addEventListener("click", () => {
+  //   if (!isOpen) {
+  //     searchDiv.style.width = "200px";
+  //     searchDiv.style.border = "1px solid #a1c14b";
+  //     isOpen = true;
+  //   } else {
+  //     searchDiv.style.width = "0";
+  //     searchDiv.style.border = "0";
+  //     isOpen = false;
+  //   }
+  // });
 
   // 點擊頁面其他地方時隱藏搜索框和會員功能菜單
   document.getElementById("myContainer").addEventListener("click", () => {
-    if (isOpen) {
-      searchDiv.style.width = "0";
-      searchDiv.style.border = "0";
-      isOpen = false;
-    }
     if (isMemberDivVisible) {
       memberInfoDiv.style.display = "none";
-      slideshowContainer.style.zIndex = 5;
+      // slideshowContainer.style.zIndex = 5;
       isMemberDivVisible = false;
     }
   });

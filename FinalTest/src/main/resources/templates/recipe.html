@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-Hant"  xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>即食享熱</title>
+  <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+  />
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap");
+  </style>
+  <link rel="stylesheet" th:href="@{css/recipe.css}" />
+</head>
+
+<body>
+
+<div th:replace="header"></div>
+<!-- 開始編輯 -->
+
+
+<!-- 中間區塊:側邊選單+食譜區 -->
+<div class="mid">
+  <!-- 側邊選單 -->
+  <div class="list">
+    <button class="down-btn" data-type="all">
+      線上食譜<img src="./material/icon/down.png" alt="down" id="updown4" />
+    </button>
+
+    <div class="down-container">
+      <a href="#" data-type="home" onclick="filterRecipes('home')"
+      >家常料理</a
+      >
+      <a href="#" data-type="kids" onclick="filterRecipes('kids')"
+      >兒童友善</a
+      >
+      <a href="#" data-type="elderly" onclick="filterRecipes('elderly')"
+      >銀髮友善</a
+      >
+      <a
+              href="#"
+              data-type="international"
+              onclick="filterRecipes('international')"
+      >異國料理</a
+      >
+      <a href="#" data-type="group" onclick="filterRecipes('group')"
+      >多人料理</a
+      >
+    </div>
+    <div style="height:250px"></div> <!--先撐開空間不然footer會跑版-->
+  </div>
+
+  <!--食譜區-->
+  <div class="recipeZone">
+    <div class="sort">
+      <label for="sort"
+      >排序方式:
+        <select name="sort" id="sort" onchange="sortRecipes()">
+          <option value="" disabled selected>請選擇</option>
+          <option value="easyToHard">烹飪難易度:由易至難</option>
+          <option value="hardToEasy">烹飪難易度:由難至易</option>
+          <option value="dateNewOld">上架時間：由新至舊</option>
+          <option value="dateOldNew">上架時間：由舊至新</option>
+          <option value="dateNewOld">價格：由低至高</option>
+          <option value="dateOldNew">價格：由高至低</option>
+        </select>
+      </label>
+    </div>
+    <!-- 食譜卡顯示區 -->
+    <div id="rcontainer"></div>
+  </div>
+</div>
+<div th:replace="footer"></div>
+
+<script th:src="@{js/recipe.js}"></script>
+</body>
+</html>
