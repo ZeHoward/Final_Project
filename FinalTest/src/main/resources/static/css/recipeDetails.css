@@ -1,5 +1,6 @@
+/*header footer*/
 * {
-  font-family: "Noto Sans TC", system-ui;
+  /* font-family: "Noto Sans TC", system-ui; */
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -10,6 +11,7 @@ body {
   width: 100vw;
   max-width: 100%;
   overflow-x: hidden;
+  text-align: center; /*新增*/
 }
 
 .tem-nav {
@@ -23,10 +25,15 @@ body {
   background-color: transparent;
   right: 15px;
   top: 15px;
-  font-size: 25px;
+}
+
+.tem-closebtn > img {
+  height: 35px;
+  width: 35px;
 }
 
 .tem-end-photo {
+  display: flex;
   justify-content: center;
 }
 
@@ -38,7 +45,7 @@ body {
   position: fixed;
   height: 100%;
   width: 0;
-  z-index: 100;
+  z-index: 1;
   top: 0;
   left: 0;
   background-color: #fff6d0;
@@ -55,7 +62,7 @@ body {
 }
 
 .tem-overlay-content > a,
-.tem-dropdown-button {
+.tem-dropdown-btn {
   padding: 8px;
   text-decoration: none;
   font-size: 36px;
@@ -66,7 +73,7 @@ body {
 }
 
 .tem-sidenav a,
-.tem-dropdown-button {
+.tem-dropdown-btn {
   padding: 6px 8px 6px 16px;
   text-decoration: none;
   font-size: 20px;
@@ -78,13 +85,11 @@ body {
   outline: none;
 }
 
-.tem-dropdown-content1,
-.tem-dropdown-content2 {
+.tem-dropdown-content {
   display: none; /*讓下拉選單一開始保持閉合*/
 }
 
-.tem-dropdown-content1 a,
-.tem-dropdown-content2 a {
+.tem-dropdown-content a {
   font-size: 24px;
   padding: 8px;
   text-decoration: none;
@@ -95,9 +100,8 @@ body {
 }
 
 .tem-overlay-content > a:hover,
-.tem-dropdown-button:hover,
-.tem-dropdown-content1 > a:hover,
-.tem-dropdown-content2 > a:hover {
+.tem-dropdown-btn:hover,
+.tem-dropdown-content > a:hover {
   background-color: #e0912f;
 }
 
@@ -105,11 +109,11 @@ body {
   background-color: #e0902fbe;
 }
 
-.tem-dropdown-button {
+.tem-dropdown-btn {
   font-size: 36px;
 }
 
-.tem-dropdown-button img {
+.tem-dropdown-btn img {
   height: 25px;
 }
 
@@ -129,7 +133,7 @@ body {
       rgba(255, 255, 255, 0.4),
       rgba(255, 255, 255, 0.4)
     ),
-    url("../material/Vorderrhein3.png");
+    url("./material/Vorderrhein3.png");
   background-repeat: repeat;
   background-size: auto;
   background-position: 1500px 3197px;
@@ -157,14 +161,7 @@ body {
 }
 
 .tem-icon :hover {
-  cursor: pointer;
-}
-
-.tem-icon {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 10px;
+  height: 35px;
 }
 
 .tem-header-icons a {
@@ -202,7 +199,7 @@ body {
       rgba(255, 255, 255, 0.3),
       rgba(255, 255, 255, 0.3)
     ),
-    url("../material/Vorderrhein3.png");
+    url("./material/Vorderrhein3.png");
   background-repeat: repeat;
   background-size: auto;
   background-position: 1940px 774px;
@@ -211,6 +208,7 @@ body {
 .tem-footer-content {
   display: flex;
   justify-content: space-around;
+  font-weight: bold;
 }
 
 .tem-footer-content div {
@@ -263,97 +261,142 @@ body {
   height: 30px;
   width: 30px;
 }
+/*響應式*/
+@media ((min-width: 400px) and (max-width: 1100px)) {
+  .tem-footer-content {
+    justify-content: center;
+    flex-direction: column;
+  }
 
-/******************************/
+  .tem-sidenav {
+    padding-top: 15px;
+  }
 
-#searchIcon,
-#cartIcon,
-#memberIcon{
+  .tem-overlay-content > a,
+  .tem-dropdown-btn {
+    font-size: 20px;
+  }
+
+  .tem-dropdown-btn img {
+    height: 16px;
+  }
+
+  .tem-dropdown-content {
+    font-size: 16px;
+  }
+}
+/*↑header footer*/
+
+/*主畫面*/
+
+.container {
+  width: 50vw;
+  max-width: 800px;
+  margin: 0 auto; /*水平置中*/
+}
+.topTag {
+  /*線上食譜*/
   display: inline-block;
-  font-size: 24px;
+  width: 120px;
+  line-height: 35px;
+  background-color: #e0912f;
+  color: #fff;
+  border-radius: 15px;
+  margin: 10px;
+}
+/*料理名稱*/
+.foodName {
+  font-size: xxx-large;
+  color: #000000;
+}
+/*料理圖片*/
+.foodImage {
+  width: 80%;
+  margin-bottom: 15px;
+  border-radius: 25px;
+  /* 圓角效果 */
+  margin: 0 auto; /* 自動水平居中 */
+  display: block; /* 使圖片顯示為塊級元素 */
 }
 
-#memberIcon {
-  margin-right: 10px;
-  background-color: transparent;
-  border: none;
-}
-
-#memberInfoDiv {
-  position: absolute;
-  top: 60px;
-  right: 20px;
-  width: 270px;
-  background-color: #fff6d0;
-  border: 1px solid #ddd;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  flex-direction: column;
-  text-align: start;
-  border-radius: 10px;
-  display: none;
-}
-
-.memerinfo-icon {
-  font-size: 20px;
-  color: black;
-}
-
-#memberInfoDiv > div > i {
-  margin-right: 20px;
-  margin-left: 40px;
-}
-
-#memberInfoDiv > div {
-  padding: 15px 0;
-}
-
-#memberInfoDiv > div:hover,
-#memberInfoDiv > div:hover i,
-#memberInfoDiv > div:hover a {
-  cursor: pointer;
-  color: #f3ce6e;
-}
-
-#searchIcon {
-  background-color: transparent;
-  border: none;
-}
-
-#searchDiv {
-  position: absolute;
-  right: 100%;
-  top: 10px;
-  width: 300px;
-  height: 40px;
-  background-color: white;
-  overflow: hidden;
+.recipe-container {
   display: flex;
-  align-items: center;
-  border-radius: 10px;
+  flex-direction: column; /* 垂直排列內容 */
+  align-items: center; /* 確保內容水平居中 */
 }
-
-#searchInput {
-  width: 100%;
-  height: 100%;
-  border: none;
-  padding: 0 10px;
+/*照片至按鈕區域*/
+.main {
+  display: flex;
+  justify-content: center;
+  flex-direction: column; /*垂直排列*/
+  align-items: center; /*確保子元素在主軸上居中*/
+}
+/*說明的小標*/
+.recipeTitle {
+  font-size: 20px;
+  margin: 15px 0 5px 0;
+  text-align: left;
+  margin-left: 8%;
+}
+/*說明的內文*/
+.recipeDetails {
   font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 15px;
+  text-align: left; /*水平居左*/
+  margin-left: 12%;
+}
+/* 按鈕容器 */
+.btns {
+  display: flex;
+  justify-content: space-between; /* 在容器內部均勻分配按鈕之間的空間 */
+  width: 79%; /* 容器的寬度設為 100%，即填滿父容器的寬度 */
+  margin-top: 5px; /* 添加上邊距 */
 }
 
-.searchContainer {
-  position: relative;
+.btnRed,
+.btnYellow {
   display: inline-block;
+  width: 48%; /*佔用 48% 寬度，留有間距*/
+  height: 40px;
+  line-height: 40px;
+  color: #fff;
+  text-align: center;
+  border-radius: 25px;
+  text-decoration: none;
+  font-size: large;
+  font-weight: bold;
+  margin: 0;
+  transition: background-color 0.3s, transform 0.3s;
+}
+.btnRed {
+  background-color: #d35b50;
 }
 
-#cartIcon {
-  background-color: transparent;
-  border: none;
+.btnYellow {
+  background-color: #f3ce6e;
+}
+.btnRed:hover {
+  /*鼠標經過的過渡效果-浮動、變色*/
+  background-color: #ca2a1c;
+  transform: scale(1.05);
+}
+.btnYellow:hover {
+  background-color: #f39c12;
+  transform: scale(1.05);
 }
 
-#myContainer {
-  width: 100%;
-}
+/* 響應式設置 */
+@media (max-width: 800px) {
+  .container {
+    width: 95vw; /* 在小螢幕上稍微增加寬度 */
+  }
 
-#logoDiv:hover {
-  cursor: pointer;
+  .recipeTitle {
+    font-size: 18px; /* 調整標題字型大小 */
+  }
+
+  .recipeDetails {
+    font-size: 14px; /* 調整內容字型大小 */
+  }
 }

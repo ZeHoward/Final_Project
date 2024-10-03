@@ -58,6 +58,9 @@ public class UsersController {
 			UserAllInfo sessionUser = usersServiceImpl.userAllInfo(userId);
 			session.setAttribute("loggedInUser", sessionUser);
 //			System.out.println("創建JSESSIONID:" + session.getId());
+
+			// 將用戶信息保存到 session 中
+			session.setAttribute("loggedInUser", sessionUser);
 		}
 		return loginUsers;
 	}

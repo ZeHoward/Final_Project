@@ -6,13 +6,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import tw.luna.FinalTest.dto.FavoritesRecipeDTO;
+import tw.luna.FinalTest.model.UserAllInfo;
 import tw.luna.FinalTest.model.UserFavoritesRecipes;
-import tw.luna.FinalTest.model.Users;
 import tw.luna.FinalTest.service.UserFavoritesRecipesService;
 
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/favorites/recipes")
@@ -24,17 +22,32 @@ public class UserFavoritesRecipesController {
     @Autowired
     private HttpSession session;
 
+//    @GetMapping("/getUserId")
+//    public long getUserId() {
+//        Users loggedInUser = null;
+//        if(session != null) {
+//            loggedInUser = (Users)session.getAttribute("loggedInUser");
+//            if(loggedInUser != null) {
+//                System.out.println("在products中獲取UserID:" + loggedInUser.getUserId());
+//            }
+//        }
+//        return loggedInUser.getUserId();
+//    }
+
     @GetMapping("/getUserId")
-    public long getUserId() {
-        Users loggedInUser = null;
-        if(session != null) {
-            loggedInUser = (Users)session.getAttribute("loggedInUser");
-            if(loggedInUser != null) {
-                System.out.println("在products中獲取UserID:" + loggedInUser.getUserId());
-            }
+    public ResponseEntity<Long> getUserId() {
+        UserAllInfo loggedInUser = (UserAllInfo) session.getAttribute("loggedInUser");
+
+        // 檢查 loggedInUser 是否為 null
+        if (loggedInUser == null) {
+            return ResponseEntity.status(401).body(null);  // 401 未授權
         }
-        return loggedInUser.getUserId();
+
+        Long userId = loggedInUser.getUserId();
+        return ResponseEntity.ok(userId);  // 返回正確的 userId
     }
+
+
 
     @PostMapping("/add")
     public ResponseEntity<UserFavoritesRecipes> addFavorite(@RequestParam Long userId, @RequestParam int recipeId) {

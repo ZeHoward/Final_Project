@@ -39,11 +39,6 @@ public class UserFavoritesRecipesService {
         UserFavoritesRecipes favorite = new UserFavoritesRecipes(userId, recipeId);
         return repository.save(favorite);
     }
-//
-//    @Transactional
-//    public void removeFavorite(Long userId, int recipeId) {
-//        repository.deleteByIdUserIdAndIdRecipeId(userId, recipeId);
-//    }
 
     @Transactional
     public void removeFavorite(Long userId, int productId) {
@@ -74,8 +69,9 @@ public class UserFavoritesRecipesService {
                     if (recipe.isPresent()) {
                         Product product = recipe.get().getProduct();  // 確保 Recipes 對應的 Product 存在
                         if (product != null) {
-                            String imageBase64 = encodeImageToBase64(product.getProductImages());
-                            return new FavoritesRecipeDTO(product.getProductId(), product.getName(), product.getPrice(), imageBase64);
+                            // 使用 S3 URL 而不是 Base64 編碼
+                            String imageUrl = getProductImageUrl(product.getProductImages());
+                            return new FavoritesRecipeDTO(product.getProductId(), product.getName(), product.getPrice(), imageUrl);
                         }
                     }
                     return null;
@@ -84,16 +80,13 @@ public class UserFavoritesRecipesService {
                 .collect(Collectors.toList());
     }
 
-
-    // 編碼圖片為 Base64
-    private String encodeImageToBase64(List<ProductImage> productImages) {
+    // 獲取產品的第一張圖片的 S3 URL
+    private String getProductImageUrl(List<ProductImage> productImages) {
         if (productImages != null && !productImages.isEmpty()) {
-            byte[] imageBytes = productImages.get(0).getImage();  // 假設取第一張圖片
-            return Base64.getEncoder().encodeToString(imageBytes);
+            return productImages.get(0).getImage();  // 假設取第一張圖片，該字段存儲的是 S3 URL
         }
         return null;
     }
+}
 
-
-    }
 

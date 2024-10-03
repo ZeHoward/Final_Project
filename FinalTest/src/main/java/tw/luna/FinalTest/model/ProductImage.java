@@ -31,9 +31,8 @@ public class ProductImage implements Serializable{
 	@JsonBackReference("product_productImage") 
     private Product product;
 	
-	@Lob
-	@Column(name = "image", columnDefinition="LONGBLOB")
-	private byte[] image;// 用來存放圖片的二進制數據
+	@Column(name = "image")
+    private String image; // 存放圖片在 S3 的 URL
 
 	
 	@Transient
@@ -44,7 +43,7 @@ public class ProductImage implements Serializable{
 		
 	}
 	
-	public ProductImage(byte[] image, Product product) {
+	public ProductImage(String image, Product product) {
         this.image = image;
         this.product = product;
     }
@@ -65,11 +64,11 @@ public class ProductImage implements Serializable{
 		this.product = product;
 	}
 
-	public byte[] getImage() {
+	public String getImage() {
 		return image;
 	}
 
-	public void setImage(byte[] image) {
+	public void setImage(String image) {
 		this.image = image;
 	}
 	
@@ -82,12 +81,12 @@ public class ProductImage implements Serializable{
 	}
 
 	@Override
-    public String toString() {
-        return "ProductImage{" +
-                "id=" + id +
-                ", product=" + product +
-                ", image=" + Arrays.toString(image) +
-                '}';
+	public String toString() {
+	    return "ProductImage{" +
+	            "id=" + id +
+	            ", product=" + product +
+	            ", image='" + image + '\'' + // 顯示 S3 的 URL
+	            '}';
 	}
 	
 }

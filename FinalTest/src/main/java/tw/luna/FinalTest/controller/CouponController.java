@@ -15,9 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import tw.luna.FinalTest.dto.UserCouponDTO;
+
 import tw.luna.FinalTest.model.Cart;
+
 import tw.luna.FinalTest.model.Coupon;
-import tw.luna.FinalTest.model.UserCoupon;
 import tw.luna.FinalTest.service.CartService;
 import tw.luna.FinalTest.service.CouponService;
 @RestController
@@ -142,6 +143,28 @@ public class CouponController {
 			return ResponseEntity.badRequest().body(errorResponse);
 		}
 	}
+
+	// 切換優惠券的啟用/禁用狀態
+	@PostMapping("/toggle/{couponId}")
+	public ResponseEntity<Map<String, Object>> toggleCouponStatus(@PathVariable long couponId) {
+		try {
+			// 調用服務層來切換優惠券狀態
+			Coupon updatedCoupon = couponService.toggleCouponStatus(couponId);
+
+			// 返回 JSON 格式的完整優惠券數據
+			Map<String, Object> response = new HashMap<>();
+			response.put("message", updatedCoupon.isActive() ? "優惠券已啟用" : "優惠券已禁用");
+			response.put("coupon", updatedCoupon);  // 返回完整的優惠券對象
+
+			return ResponseEntity.ok(response);
+		} catch (IllegalArgumentException e) {
+			// 返回錯誤信息的 JSON
+			Map<String, Object> errorResponse = new HashMap<>();
+			errorResponse.put("error", e.getMessage());
+			return ResponseEntity.badRequest().body(errorResponse);
+		}
+	}
+
 
 
 
