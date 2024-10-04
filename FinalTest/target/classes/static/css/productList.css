@@ -1,0 +1,157 @@
+/** {*/
+/*  font-family: "Noto Sans TC", system-ui;*/
+/*  margin: 0;*/
+/*  padding: 0;*/
+/*  box-sizing: border-box;*/
+/*}*/
+
+/*body {*/
+/*  font-family: Arial, sans-serif;*/
+/*  width: 100vw;*/
+/*  max-width: 100%;*/
+/*  overflow-x: hidden;*/
+/*}*/
+
+/* 中間區塊 */
+.mid {
+  display: flex;
+  flex: 1;
+}
+/* 菜單 */
+.list,
+.list-title {
+  flex: 1;
+  border-right: 1px solid #ccc;
+  padding: 20px;
+  font-weight: 600;
+}
+
+.list a,
+.list-title,
+.down-btn {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #000000;
+  display: block;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  font-weight: 600;
+}
+
+.down-btn {
+  background-color: #cbb68c;
+}
+
+.list-title {
+  background-color: #faf4e8;
+}
+
+.down-container > a:hover {
+  background-color: #ece2b3;
+}
+.down-container > a:active {
+  background-color: #ece2b3;
+}
+
+/* 商品區 */
+.product-zone {
+  flex: 4;
+  padding: 20px;
+}
+
+#productContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.product {
+  margin: 20px;
+  width: 270px;
+  text-align: center;
+  border: #f4f4f4 2px solid;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.product:hover {
+  /*box-shadow: 0 2px 10px #edc05095;*/
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+.product-image {
+  display: block; /* 讓圖片被當作塊級元素，這樣才能由父容器的 text-align 來置中 */
+  margin: 10px auto; /* 確保圖片水平置中 */
+  width: 90%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 2%;
+}
+
+.product-name {
+  font-size: 16px;
+}
+
+.product-name,
+.product-price,
+.home-product-btn {
+  margin: 10px 0; /* 調整文字與按鈕的間距 */
+}
+
+.product-price {
+  font-size: 20px;
+  color: #d35b50;
+  font-weight: 700;
+}
+
+.sort {
+  text-align: right;
+  margin-bottom: 20px;
+}
+
+.fa-heart {
+  font-size: 25px;
+  align-items: center;
+}
+
+.add-to-cart {
+  background-color: #e0912f;
+  color: white;
+  border: none;
+  padding: 10px 0;
+  border-radius: 5px;
+  margin-top: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 60%;
+}
+
+.home-product-btn {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.add-to-favorite {
+  margin-top: 5px;
+  padding-left: 15px;
+  display: flex;
+  align-items: center; /* 垂直置中 */
+  justify-content: center; /* 水平置中 */
+  border: none;
+  background-color: transparent;
+  color: #787575; /* 默認未收藏的顏色 */
+  cursor: pointer;
+}
+
+.add-to-favorite.favorited {
+  color: #cc4235; /* 收藏後的顏色 */
+}
+
+.add-to-cart:hover,
+.add-to-cart:active {
+  background-color: #de8415;
+}
