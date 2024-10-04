@@ -1,7 +1,6 @@
 package tw.luna.FinalTest.repository;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -9,7 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
-import tw.luna.FinalTest.model.UserAllInfo;
 import tw.luna.FinalTest.model.Users;
 
 

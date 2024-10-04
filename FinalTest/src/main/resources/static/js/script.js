@@ -1922,8 +1922,6 @@ function generateUserManagementContent() {
                 <select id="sortOptions">
                     <option value="usernameASC">用戶名(遞增)</option>
                     <option value="usernameDESC">用戶名(遞減)</option>
-                    <option value="createdAtASC">創建時間(遞增)</option>
-                    <option value="createdAtDESC">創建時間(遞減)</option>
                 </select>
             </div>
             <table class="user-table">
@@ -1933,8 +1931,7 @@ function generateUserManagementContent() {
                         <th>用戶名</th>
                         <th>電子郵件</th>
                         <th>電話號碼</th>
-                        <th>創建時間</th>
-                        <th>更新時間</th>
+                        <th>狀態</th>
                         <th>操作</th>                        
                     </tr>
                 </thead>
@@ -1960,10 +1957,26 @@ function generateUserManagementContent() {
   const searchInput = document.getElementById("userSearchInput");
   const sortOptions = document.getElementById("sortOptions");
 
-  // 設置每頁顯示的用戶數量
+  let users = [];
   let resultsPerPage = parseInt(resultsPerPageSelect.value);
-  let currentPage = 1; // 預設為第 1 頁
-  let totalPages = Math.ceil(users.length / resultsPerPage);
+  let currentPage = 1;
+  let totalPages = 0;
+
+  // 從API獲取用戶數據
+  async function fetchUsers() {
+    try {
+      const response = await fetch('/users');
+      if (!response.ok) {
+        throw new Error('Failed to fetch users');
+      }
+      users = await response.json();
+      totalPages = Math.ceil(users.length / resultsPerPage);
+      return users;
+    } catch (error) {
+      console.error('Error fetching users:', error);
+      return [];
+    }
+  }
 
   // 根據排序選項對用戶進行排序
   function sortUsers(usersList, sortBy) {
@@ -1971,14 +1984,6 @@ function generateUserManagementContent() {
       return usersList.sort((a, b) => a.username.localeCompare(b.username));
     } else if (sortBy === "usernameDESC") {
       return usersList.sort((a, b) => b.username.localeCompare(a.username));
-    } else if (sortBy === "createdAtASC") {
-      return usersList.sort(
-        (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
-      );
-    } else if (sortBy === "createdAtDESC") {
-      return usersList.sort(
-        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-      );
     }
     return usersList;
   }
@@ -1990,20 +1995,17 @@ function generateUserManagementContent() {
     const end = start + resultsPerPage;
     const visibleUsers = filteredUsers.slice(start, end);
 
-    visibleUsers.forEach((user, index) => {
+    visibleUsers.forEach((user) => {
       const tr = document.createElement("tr");
 
       tr.innerHTML = `
                 <td>${user.userId}</td>
                 <td>${user.username}</td>
                 <td>${user.email}</td>
-                <td>${user.phoneNumber}</td>
-                <td>${user.createdAt}</td>
-                <td>${user.updatedAt}</td>
+                <td>${user.phoneNumber || 'N/A'}</td>
+                <td>${user.isVerified ? '已驗證' : '未驗證'}</td>
                 <td class="actions">
-                    <button class="edit-button" data-index="${
-                      start + index
-                    }">詳情</button>
+                    <button class="edit-button" data-userid="${user.userId}">詳情</button>
                 </td>
             `;
 
@@ -2013,8 +2015,8 @@ function generateUserManagementContent() {
     // 綁定「詳情」按鈕的事件
     document.querySelectorAll(".edit-button").forEach((button) => {
       button.addEventListener("click", function () {
-        const userIndex = this.getAttribute("data-index");
-        generateUserEditForm(users[userIndex]); // 調用用戶修改表單
+        const userId = this.getAttribute("data-userid");
+        generateUserEditForm(users.find(u => u.userId == userId));
       });
     });
   }
@@ -2047,8 +2049,7 @@ function generateUserManagementContent() {
 
   // 排序功能
   sortOptions.addEventListener("change", () => {
-    let filteredUsers = users;
-    filteredUsers = sortUsers(filteredUsers, sortOptions.value);
+    let filteredUsers = sortUsers(users, sortOptions.value);
     currentPage = 1; // 改變排序時返回到第 1 頁
     updatePagination(filteredUsers);
     renderUsers(filteredUsers);
@@ -2058,8 +2059,7 @@ function generateUserManagementContent() {
   resultsPerPageSelect.addEventListener("change", () => {
     resultsPerPage = parseInt(resultsPerPageSelect.value);
     currentPage = 1; // 切換每頁顯示數時，返回到第 1 頁
-    let filteredUsers = users;
-    filteredUsers = sortUsers(filteredUsers, sortOptions.value);
+    let filteredUsers = sortUsers(users, sortOptions.value);
     updatePagination(filteredUsers);
     renderUsers(filteredUsers);
   });
@@ -2067,16 +2067,54 @@ function generateUserManagementContent() {
   // 監聽頁數切換事件
   pageSelect.addEventListener("change", () => {
     currentPage = parseInt(pageSelect.value);
-    let filteredUsers = users;
-    filteredUsers = sortUsers(filteredUsers, sortOptions.value);
+    let filteredUsers = sortUsers(users, sortOptions.value);
     renderUsers(filteredUsers);
   });
 
   // 初始化頁面
-  let filteredUsers = users;
-  filteredUsers = sortUsers(filteredUsers, sortOptions.value);
-  updatePagination(filteredUsers);
-  renderUsers(filteredUsers);
+  fetchUsers().then(fetchedUsers => {
+    users = fetchedUsers;
+    let filteredUsers = sortUsers(users, sortOptions.value);
+    updatePagination(filteredUsers);
+    renderUsers(filteredUsers);
+  });
+}
+
+// 生成用戶詳情表單
+function generateUserEditForm(user) {
+  const mainContent = document.querySelector(".main-content");
+  mainContent.innerHTML = ""; // 清空之前的內容
+
+  const userInfoHTML = `
+    <h1>用戶詳情 - 用戶ID: ${user.userId}</h1>
+    <div class="user-info-container">
+      <div class="basic-info">
+        <h2>基本資訊</h2>
+        <div class="info-summary">
+          <p><strong>用戶名:</strong> ${user.username}</p>
+          <p><strong>電子郵件:</strong> ${user.email}</p>
+          <p><strong>電話號碼:</strong> ${user.phoneNumber || 'N/A'}</p>
+          <p><strong>驗證狀態:</strong> ${user.isVerified ? '已驗證' : '未驗證'}</p>
+          <p><strong>是否刪除:</strong> ${user.isDel ? '是' : '否'}</p>
+        </div>
+      </div>
+      <div class="detailed-info">
+        <h2>詳細資訊</h2>
+        <div class="info-summary">
+          <p><strong>名字:</strong> ${user.userinfo?.firstName || 'N/A'}</p>
+          <p><strong>姓氏:</strong> ${user.userinfo?.lastName || 'N/A'}</p>
+          <p><strong>地址:</strong> ${user.userinfo?.address || 'N/A'}</p>
+          <p><strong>郵遞區號:</strong> ${user.userinfo?.postalCode || 'N/A'}</p>
+          <p><strong>生日:</strong> ${user.userinfo?.birthday || 'N/A'}</p>
+          <p><strong>縣市:</strong> ${user.userinfo?.county || 'N/A'}</p>
+          <p><strong>區域:</strong> ${user.userinfo?.district || 'N/A'}</p>
+        </div>
+      </div>
+    </div>
+    <button onclick="generateUserManagementContent()">返回用戶列表</button>
+  `;
+
+  mainContent.innerHTML = userInfoHTML;
 }
 //
 // function generateCouponManagementForm() {

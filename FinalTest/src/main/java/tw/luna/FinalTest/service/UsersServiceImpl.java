@@ -1,9 +1,8 @@
 package tw.luna.FinalTest.service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
-
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +11,8 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import jakarta.servlet.http.HttpSession;
 import tw.luna.FinalTest.BCrypt;
+import tw.luna.FinalTest.dto.UserDTO;
+import tw.luna.FinalTest.dto.UserInfoDTO;
 import tw.luna.FinalTest.model.UserAllInfo;
 import tw.luna.FinalTest.model.Userinfo;
 import tw.luna.FinalTest.model.Users;
@@ -227,4 +228,16 @@ public class UsersServiceImpl {
 	    
 	    return true; // 驗證成功
 	}
+	
+	public List<Users> getAllUsers() {
+        List<Users> users = usersRepository.findAll();
+        return users.stream()
+            .map(this::filterUserData)
+            .collect(Collectors.toList());
+    }
+
+    private Users filterUserData(Users user) {    
+        Userinfo userinfo = user.getUserinfo();       
+        return user;
+    }
 }
