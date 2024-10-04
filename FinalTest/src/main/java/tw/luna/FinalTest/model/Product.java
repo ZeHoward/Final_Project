@@ -1,5 +1,6 @@
 package tw.luna.FinalTest.model;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -7,21 +8,14 @@ import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
 @Table(name="products")
+@EntityListeners(AuditingEntityListener.class)
 public class Product {
 	
 	@Id
@@ -71,6 +65,13 @@ public class Product {
 	@Column(name = "isDel", columnDefinition = "TINYINT(1) DEFAULT 0")
 	private Boolean isDel;
 
+	@CreatedDate
+	@Column(name = "createdAt", nullable = false, updatable = false)
+	private Timestamp createdAt;
+
+	@LastModifiedDate
+	@Column(name = "updatedAt", nullable = false)
+	private Timestamp updatedAt;
 // 新增一對多關係，商品可以有多張圖片(這裡重複了，上面已經有圖片了...)
 //	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
 //	private List<ProductImage> images;
@@ -85,7 +86,7 @@ public class Product {
 	public Product() {
 	}
 
-	public Product(Integer productId, Recipes recipes, List<ProductImage> productImages, Set<CartItems> cartItems, String type, String sku, String name, String description, Integer price, Category category, Integer stockQuantity, Boolean isDel) {
+	public Product(Integer productId, Recipes recipes, List<ProductImage> productImages, Set<CartItems> cartItems, String type, String sku, String name, String description, Integer price, Category category, Integer stockQuantity, Boolean isDel,Timestamp createdAt) {
 		this.productId = productId;
 		this.recipes = recipes;
 		this.productImages = productImages;
@@ -98,6 +99,7 @@ public class Product {
 		this.category = category;
 		this.stockQuantity = stockQuantity;
 		this.isDel = isDel;
+		this.createdAt = createdAt;
 	}
 
 	public Recipes getRecipes() {
@@ -128,56 +130,45 @@ public class Product {
 		return productId;
 	}
 
-
 	public void setProductId(Integer productId) {
 		this.productId = productId;
 	}
-
 
 	public String getType() {
 		return type;
 	}
 
-
 	public void setType(String type) {
 		this.type = type;
 	}
-
 
 	public String getSku() {
 		return sku;
 	}
 
-
 	public void setSku(String sku) {
 		this.sku = sku;
 	}
-
 
 	public String getName() {
 		return name;
 	}
 
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
 
 	public String getDescription() {
 		return description;
 	}
 
-
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
-
 	public Integer getPrice() {
 		return price;
 	}
-
 
 	public void setPrice(Integer price) {
 		this.price = price;
@@ -187,16 +178,13 @@ public class Product {
 		return category;
 	}
 
-
 	public void setCategory(Category category) {
 		this.category = category;
 	}
 
-
 	public Integer getStockQuantity() {
 		return stockQuantity;
 	}
-
 
 	public void setStockQuantity(Integer stockQuantity) {
 		this.stockQuantity = stockQuantity;
@@ -206,10 +194,23 @@ public class Product {
 		return isDel;
 	}
 
-
 	public void setIsDel(Boolean isDel) {
 		this.isDel = isDel;
 	}
-	
-	
+
+	public Timestamp getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Timestamp createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public Timestamp getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(Timestamp updatedAt) {
+		this.updatedAt = updatedAt;
+	}
 }

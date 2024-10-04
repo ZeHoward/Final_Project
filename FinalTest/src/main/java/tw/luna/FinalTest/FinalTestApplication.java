@@ -13,8 +13,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableJpaRepositories(basePackages = "tw.luna.FinalTest.repository")
 @EnableTransactionManagement
 @EnableSpringDataWebSupport // 支持切換分頁功能
-//@EnableJpaAuditing //啟用審計功能自動建立與更新時間
-
+@EnableJpaAuditing //啟用審計功能自動建立與更新時間
 public class FinalTestApplication {
 
 	public static void main(String[] args) {

@@ -42,7 +42,7 @@ window.onload = function () {
         }
     })
 
-    document.querySelectorAll(".productType").forEach((typeBtn)=> {
+    document.querySelectorAll(".productType").forEach((typeBtn) => {
         typeBtn.addEventListener("click", function (event) {
             event.preventDefault();
             const productType = this.getAttribute("data-type")
@@ -150,29 +150,73 @@ function handleProductActions(event) {
     if (target.closest(".add-to-cart")) {
         event.preventDefault(); // 阻止預設行為
         event.stopPropagation(); // 阻止事件冒泡
-        checkLoginStatus().then((isLoggedIn) => {
-            if (isLoggedIn) {
-                Swal.fire({
-                    title: "成功",
-                    text: "已將商品加入購物車",
-                    icon: "success",
-                    timer: 1500,
-                });
-            } else {
-                Swal.fire({
-                    title: "未登入",
-                    text: `請先登入才能加入購物車`,
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonText: '登入',
-                    cancelButtonText: '取消',
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = "/loginPage";
-                    }
-                });
-            }
-        });
+        checkLoginStatus()
+            .then((isLoggedIn) => {
+                if (isLoggedIn) {
+                    getUserId().then(userId => {
+                        if (userId) {
+                            const productElement = target.closest(".product");
+                            const productId = productElement.dataset.productId;
+                            const productName = productElement.dataset.productName;
+                            const quantity = 1;
+                            // const productId = parseInt(new URLSearchParams(window.location.search).get("productId"));
+                            const cartItem =
+                                {
+                                    productName: productName,
+                                    productId: productId,
+                                    quantity: quantity
+                                };
+                            console.log(cartItem);
+
+                            // 發送加入購物車請求
+                            fetch(`/api/cart/put/${userId}`, {
+                                method: "PUT",
+                                headers: {
+                                    "Content-Type": "application/json",
+                                },
+                                body: JSON.stringify(cartItem), // 傳送商品數據
+                            })
+                                .then(response => {
+                                    if (response.ok) {
+                                        Swal.fire({
+                                            title: "成功",
+                                            text: "已將商品加入購物車",
+                                            icon: "success",
+                                            timer: 1500,
+                                        });
+                                    } else {
+                                        Swal.fire({
+                                            title: "錯誤",
+                                            text: "無法將商品加入購物車",
+                                            icon: "error",
+                                        });
+                                    }
+                                })
+                                .catch((error) => {
+                                    console.error("加入購物車時發生錯誤:", error);
+                                    Swal.fire({
+                                        title: "錯誤",
+                                        text: "加入購物車時發生錯誤",
+                                        icon: "error",
+                                    });
+                                });
+                        }
+                    });
+                } else {
+                    Swal.fire({
+                        title: "未登入",
+                        text: "請先登入才能加入購物車",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonText: '登入',
+                        cancelButtonText: '取消',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "/loginPage";
+                        }
+                    });
+                }
+            });
         return; // 阻止後續的跳轉行為
     }
 
@@ -194,13 +238,14 @@ function displayProducts(productsToShow) {
         productDiv.className = "product";
         productDiv.style.cursor = "pointer"; //更改滑鼠樣式，可以點擊
         productDiv.dataset.productId = product.productId;
+        productDiv.dataset.productName = product.name; // 設置自定義屬性 data-name 購物車撈商品名稱用
 
         const imgElement = document.createElement("img");
         imgElement.className = "product-image";
         imgElement.alt = product.name;
 
         const productHtml = `
-            <h3 class="product-name">${product.name}</h3>
+            <h3 class="product-name" id="productName">${product.name}</h3>
             <p class="product-price">$NT${product.price}</p>
             <div class="home-product-btn">
                 <button class="add-to-favorite"><i class="fa-solid fa-heart"></i></button>
@@ -256,15 +301,15 @@ function fetchProductsByTypeAndCategory(type, categoryId) {
         });
 }
 
-function fetchProductsByType(type){
+function fetchProductsByType(type) {
     fetch(`products/type/${type}`)
-        .then((response)=>{
-            if(!response.ok){
+        .then((response) => {
+            if (!response.ok) {
                 throw new Error("無法獲取商品清單");
             }
             return response.json();
         })
-        .then(data=>{
+        .then(data => {
             products = data; // 更新 products 數據
             totalPages = Math.ceil(products.length / productsPerPage);
             currentPage = 1; // 重置頁碼
@@ -274,7 +319,7 @@ function fetchProductsByType(type){
                 sortProducts(products, sortBy);
             });
         })
-        .catch(error=>{
+        .catch(error => {
             console.error("Error fetching products:", error);
         })
 }
@@ -286,10 +331,11 @@ function sortProducts(products, sortBy) {
     } else if (sortBy === "priceHighLow") {
         products.sort((a, b) => b.price - a.price);
     } else if (sortBy === "dateNewOld") {
-        products.sort((a, b) => new Date(b.releaseDate) - new Date(a.releaseDate));
+        products.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
     } else if (sortBy === "dateOldNew") {
-        products.sort((a, b) => new Date(a.releaseDate) - new Date(b.releaseDate));
+        products.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
     }
+    console.log(products);
     displayProducts(products); // 重新顯示排序後的產品
 }
 
@@ -308,6 +354,7 @@ function getUserId() {
             return null;
         });
 }
+
 // 取得Id
 function checkLoginStatus() {
     return fetch('users/checkSession').then(response => {
@@ -346,3 +393,4 @@ function searchProducts(keyword) {
             console.error("搜尋過程發生錯誤", error);
         });
 }
+
