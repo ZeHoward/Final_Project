@@ -67,4 +67,12 @@ public interface UsersRepository extends JpaRepository<Users, Long>{
             "WHERE u.userId = :userId AND u.authType = 'google'", nativeQuery = true)
 	List<Object[]> findByGoogleUserId(@Param("userId") Long userId);
 	
+	
+	@Query(value = "SELECT u.userId, u.username, u.email, u.password, u.phoneNumber, " +
+            "ui.firstName, ui.lastName, ui.address, ui.postalCode, ui.county, ui.district, ui.birthday, u.isDel, u.isVerified, u.authType " +
+            "FROM users u " +
+            "JOIN userinfo ui ON u.userId = ui.userId " +
+            "WHERE u.email = :email AND ui.birthday = :birthday AND u.authType = 'email' ", nativeQuery = true)
+	List<Object[]> findByEmailAndBirthday(@Param("email") String email, @Param("birthday") String birthday);
+	
 }

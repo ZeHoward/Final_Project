@@ -1,21 +1,30 @@
  package tw.luna.FinalTest.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
+import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
+import tw.luna.FinalTest.repository.UsersRepository;
 
 @Service
 public class EmailCheckService {
 	@Autowired
     private JavaMailSender mailSender;
+	
+	@Autowired
+	private UsersRepository usersRepository;
+	
+	
 
     public void sendVerificationEmail(String to, String token) {
         try {
-            MimeMessage message = mailSender.createMimeMessage();
-            MimeMessageHelper helper = new MimeMessageHelper(message, true);
+        	MimeMessage message = mailSender.createMimeMessage();
+        	MimeMessageHelper helper = new MimeMessageHelper(message, true);
             
             String htmlContent = "<html lang=\"zh-Hant\"><head><meta charset=\"UTF-8\">" +
                     "<style>body {font-family: Arial, sans-serif;background-color: #f4f4f4;margin: 0;padding: 0;}" +
@@ -35,4 +44,7 @@ public class EmailCheckService {
             e.printStackTrace();
         }
     }
+    
+    
+
 }
