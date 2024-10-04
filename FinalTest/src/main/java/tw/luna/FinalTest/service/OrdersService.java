@@ -78,7 +78,10 @@ public class OrdersService {
 		Users user = userRepository.getReferenceById(userId);
 
 		orders.setUser(user);
-		List<OrderDetails> orderDetails = orders.getOrderDetails();
+//		List<OrderDetails> orderDetails = orders.getOrderDetails();
+
+		List<OrderDetails> orderDetails = new ArrayList<>();
+		System.out.println(orderDetails);
 
 		Cart cart = cartRepository.findByUsersUserId(userId);
 		orders.setCart(cart);
