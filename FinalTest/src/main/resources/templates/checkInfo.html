@@ -40,10 +40,8 @@
                 </tr>
                 <tr>
                     <td>地址：</td>
-                    <td id="address">{{ zipCode+ city+
-                        area
-
-                        }}</td>
+                    <td id="address">{{ zipCode+ city +
+                        area + address}}</td>
                 </tr>
                 <tr>
                     <td>配送方式：</td>
@@ -65,13 +63,8 @@
             </button>
 
             <!-- 確認付款按鈕 -->
-            <button class="checkBtn" id="checkBtn">
-                <a
-                        id="paymentLink"
-                        href=" "
-                        style="color: white; text-decoration: none"
-                >確認付款</a
-                >
+            <button type="button" class="checkBtn"  @click="addToOrders()" id="checkBtn">
+                確認付款
             </button>
         </div>
     </div>

@@ -5,14 +5,27 @@ public class UserDTO {
     private String username;
     private String email;
     private String phoneNumber;
-    private String address; 
+    private String address;
+    private boolean isDel;
+    private String authType;
     
-    public UserDTO(Long userId, String username, String email, String phoneNumber, String address) {
+  
+    public UserDTO() {
+	}
+
+	public UserDTO(Long userId, String username, String email, String phoneNumber, String address) {
         this.userId = userId;
         this.username = username;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.address = address;
+    }
+    
+    public UserDTO(Long userId, String username, String email, boolean isDel) {
+    	this.userId = userId;
+    	this.username = username;
+    	this.email = email;
+    	this.isDel = isDel;
     }
 
 
@@ -55,4 +68,14 @@ public class UserDTO {
     public void setAddress(String address) {
         this.address = address;
     }
+
+
+	public boolean getIsDel() {
+		return isDel;
+	}
+
+
+	public void setIsDel(boolean isDel) {
+		this.isDel = isDel;
+	}
 }

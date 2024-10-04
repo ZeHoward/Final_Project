@@ -1103,18 +1103,24 @@ function generateProductManagementWithActionsContent() {
       ? product.productImages[0].image // 使用第一張圖的url
       : "/path/to/default/image.png"; // 使用默認圖片路徑
 
-    tr.innerHTML = `
-      <td><img src="${imageSrc}" alt="${product.name}" style="max-height: 80px;"></td>
-      <td>${product.productId}</td>
-      <td>${product.sku}</td>
-      <td>${product.name}</td>
-      <td>${product.price}</td>
-      <td>${product.stockQuantity || '沒庫存訊息'}</td>
-      <td class="actions">
-        <button class="edit-button" data-index="${start + index}">修改</button>
-        <button class="delete-button" data-index="${start + index}">刪除</button>
-      </td>
-    `;
+      tr.innerHTML = `
+            <td><img src="${imageSrc}" alt="${
+        product.name
+      }"  style="height: 80px; width: 80px"></td>
+            <td>${product.productId}</td>
+            <td>${product.sku}</td>
+            <td>${product.name}</td>
+            <td>${product.price}</td>
+            <td>${product.stockQuantity}</td>
+            <td class="actions">
+                <button class="edit-button" data-index="${
+                  start + index
+                }" data-product-id="${product.productId}">修改</button>
+                <button class="delete-button" data-index="${
+                  start + index
+                }">刪除</button>
+            </td>
+        `;
 
     tbody.appendChild(tr);
   });
@@ -1122,8 +1128,8 @@ function generateProductManagementWithActionsContent() {
     // 重新綁定「修改」按鈕事件
     document.querySelectorAll(".edit-button").forEach((button) => {
       button.addEventListener("click", function () {
-        const productIndex = this.getAttribute("data-index");
-        generateProductManagementEdit(products[productIndex]); // 調用商品修改頁面並傳入對應商品數據
+        const productId = this.getAttribute("data-product-id"); // 從按鈕中獲取商品ID
+        fetchProductDetails(productId); // 調用函數來獲取商品詳情並生成表單
       });
     });
 
@@ -1225,6 +1231,7 @@ function generateProductManagementWithActionsContent() {
   }
 
   document.addEventListener("DOMContentLoaded", function () {
+
     const editProductButton = document.getElementById("editProductButton");
 
     if (editProductButton) {
@@ -1236,6 +1243,23 @@ function generateProductManagementWithActionsContent() {
       console.error("editProductButton 元素未找到");
     }
   });
+
+  function fetchProductDetails(productId) {
+    fetch(`http://localhost:8080/products/${productId}`)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("無法獲取商品詳情");
+          }
+          return response.json();
+        })
+        .then((product) => {
+          // 獲取到商品詳情後，生成編輯表單
+          generateProductManagementEdit(product);
+        })
+        .catch((error) => {
+          console.error("獲取商品詳情時發生錯誤", error);
+        });
+  }
 
   // 商品管理部分(點擊"商品管理-修改"時生成內容的函數)
   function generateProductManagementEdit(product) {
@@ -1362,7 +1386,7 @@ function generateProductManagementWithActionsContent() {
     document.getElementById("uploadImageButton").addEventListener("click", function() {
         document.getElementById("fileInput").click();
       });
-      
+
     document.getElementById("fileInput").addEventListener("change", function(event) {
         const file = event.target.files[0];
         if (file) {
@@ -1373,16 +1397,16 @@ function generateProductManagementWithActionsContent() {
       function setupImageUpload() {
         const uploadButton = document.getElementById("uploadImageButton");
         const fileInput = document.getElementById("fileInput");
-      
+
         if (!uploadButton || !fileInput) {
           console.error("無法找到上傳按鈕或文件輸入元素");
           return;
         }
-      
+
         uploadButton.addEventListener("click", function() {
           fileInput.click();
         });
-      
+
         fileInput.addEventListener("change", function(event) {
           const file = event.target.files[0];
           if (file) {
@@ -1428,7 +1452,7 @@ function generateProductManagementWithActionsContent() {
         console.log("商品修改成功", result);
         Swal.fire({
           title: "成功",
-          text: `「成功修改${productData.name}」商品資訊`,
+          text: `成功修改「${productData.name}」商品資訊`,
           icon: "success",
           timer: 1500,
         });
@@ -1448,7 +1472,7 @@ function generateProductManagementWithActionsContent() {
     // 圖片上傳
     function uploadImage(file) {
       const productId = document.getElementById('productId').value;
-      
+
       if (!productId) {
         console.error('無法獲取 productId');
         Swal.fire({
@@ -1459,30 +1483,30 @@ function generateProductManagementWithActionsContent() {
         });
         return;
       }
-    
+
       const formData = new FormData();
       formData.append('file', file);
       formData.append('productId', productId);
-    
+
       const imagePreviewContainer = document.getElementById('imagePreviewContainer');
-      
+
       // 檢查是否存在預設圖片
       const defaultImage = imagePreviewContainer.querySelector('.image-wrapper img[src="../material/icon/default.png"]');
-      
+
       // 創建新的圖片容器
       const imageWrapper = document.createElement('div');
       imageWrapper.className = 'image-wrapper';
       const loadingSpinner = document.createElement('div');
       loadingSpinner.className = 'loading-spinner';
       imageWrapper.appendChild(loadingSpinner);
-      
+
       // 如果存在預設圖片，替換它；否則，添加到最後
       if (defaultImage && defaultImage.parentNode) {
         imagePreviewContainer.replaceChild(imageWrapper, defaultImage.parentNode);
       } else {
         imagePreviewContainer.appendChild(imageWrapper);
       }
-    
+
       fetch('http://localhost:8080/productImages/upload', {
         method: 'POST',
         body: formData
@@ -1498,20 +1522,20 @@ function generateProductManagementWithActionsContent() {
         if (data.imageUrl) {
           // 移除加載動畫
           imageWrapper.removeChild(loadingSpinner);
-    
+
           // 創建新圖片元素
           const newImage = document.createElement('img');
           newImage.src = data.imageUrl;
           newImage.alt = "新上傳的圖片";
           newImage.className = 'preview-image';
-    
+
           // 當圖片加載完成時，添加 loaded 類
           newImage.onload = function() {
             imageWrapper.classList.add('loaded');
           };
-    
+
           imageWrapper.appendChild(newImage);
-    
+
           Swal.fire({
             title: '上傳成功',
             text: '商品圖片已成功上傳',
@@ -1541,9 +1565,13 @@ function generateProductManagementWithActionsContent() {
         });
       });
     }
-    
+
     // setupImageUpload();
 }
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~``
 
 // 點擊"食譜上傳"時生成內容的函數
 function generateRecipeUploadForm() {

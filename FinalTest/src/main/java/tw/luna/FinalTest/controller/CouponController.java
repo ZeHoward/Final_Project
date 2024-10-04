@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import tw.luna.FinalTest.dto.UserCouponDTO;
+
+import tw.luna.FinalTest.model.Cart;
+
 import tw.luna.FinalTest.model.Coupon;
 import tw.luna.FinalTest.service.CartService;
 import tw.luna.FinalTest.service.CouponService;
