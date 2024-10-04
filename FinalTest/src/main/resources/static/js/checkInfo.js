@@ -22,6 +22,19 @@
           
           const address = params.get("address")
 
+          // 生成 UUID
+          function generateUUID() {
+            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                const random = Math.random() * 16 | 0;
+                const value = c === 'x' ? random : (random & 0x3 | 0x8);
+                return value.toString(16);
+            }).replace(/-/g, '').substring(0, 8);
+          }
+
+          // 使用示例
+          const merchantNo = generateUUID();
+          console.log(merchantNo);
+
 
            // 定義獲取資料的函式
            const getCart = async () => {
@@ -30,18 +43,24 @@
           };
 
           const orderData = {
-            // console.log(zipCode, city, area);
-
-             // 後端DTO參數 : 這頁對應的變數
+            // 後端DTO參數 : 這頁對應的變數
             paymentAmount:finalAmount2,
             totalAmount:totalAmount,
             finalAmount:finalAmount2,
             address:`${zipCode} ${city} ${area} ${address} ` ,
-            // address:`${zipCode.value} ${city.value} ${area.value}`,
-            // code:, //coupon
-            // percentageDiscount:,
-            // amountDiscount:,
+            merchantNo:merchantNo
           }
+
+          const paymentData = {
+            total:finalAmount2,
+            merchantNo:merchantNo
+          }
+
+          const getPayment = async () => {
+            const res = await axios.post(`${api.value}/ECPAY/ecpayCheckout`,paymentData);
+        console.log(res);
+        
+          };
 
           //缺優惠券
           //將收件者資料及購物車商品資料存進資料庫
@@ -50,8 +69,14 @@
             
             try{
             const res = await axios.post(`${api.value}/orders/${userId.value}`,orderData)
+         
             if(res.status === 200){
-              alert('訂單已建立成功');
+              getPayment()
+
+            //跳轉頁面並且帶著付款金額及marchantNo
+          
+
+
             }
           } catch (error){
             console.log('訂單建立失敗:',error);
@@ -62,6 +87,7 @@
           
           onMounted(() => {
             getCart()
+            getPayment()
           })
 
           return {
