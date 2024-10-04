@@ -1,10 +1,12 @@
 package tw.luna.FinalTest.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +20,7 @@ import com.google.firebase.auth.FirebaseToken;
 import jakarta.servlet.http.HttpSession;
 import tw.luna.FinalTest.BCrypt;
 import tw.luna.FinalTest.dto.UpdatePasswordDTO;
+import tw.luna.FinalTest.dto.UserDTO;
 import tw.luna.FinalTest.model.UserAllInfo;
 import tw.luna.FinalTest.model.Users;
 import tw.luna.FinalTest.model.UsersResponse;
@@ -161,7 +164,11 @@ public class UsersController {
 	    return usersServiceImpl.getActiveUserCount();
 	}
 	
-	
+	@GetMapping
+    public ResponseEntity<List<Users>> getAllUsers() {
+        List<Users> users = usersServiceImpl.getAllUsers();
+        return ResponseEntity.ok(users);
+    }
 	
 	
 	
