@@ -44,7 +44,6 @@ public class ReportService {
             for (int i = 0; i < columns.length; i++) {
                 Cell cell = headerRow.createCell(i);
                 cell.setCellValue(columns[i]);
-                // 可以在這裡添加標題樣式
             }
 
             int rowNum = 1;
@@ -55,8 +54,8 @@ public class ReportService {
                 row.createCell(2).setCellValue(order.getCoupon() != null ? order.getCoupon().getCode() : "No Coupon");
                 row.createCell(3).setCellValue(order.getOrderDate().format(DATE_FORMATTER));
                 row.createCell(4).setCellValue(order.getTotalAmount());
-                row.createCell(5).setCellValue(order.getPercentageDiscount());
-                row.createCell(6).setCellValue(order.getAmountDiscount());
+                row.createCell(5).setCellValue(order.getPercentageDiscount() != null ? order.getPercentageDiscount() : 0);
+                row.createCell(6).setCellValue(order.getAmountDiscount() != null ? order.getAmountDiscount() : 0);
                 row.createCell(7).setCellValue(order.getFinalAmount());
                 row.createCell(8).setCellValue(order.getStatus());
                 row.createCell(9).setCellValue(order.getAddress());

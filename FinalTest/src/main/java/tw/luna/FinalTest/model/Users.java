@@ -45,6 +45,9 @@ public class Users {
 	
 	@Column(name = "isVerified")
 	private boolean isVerified;
+	
+	@Column(name = "authType")
+	private String authType;
 
 	@OneToOne(mappedBy = "users", cascade = CascadeType.ALL)
 	@JsonManagedReference("Users_UserInfo")
@@ -59,13 +62,11 @@ public class Users {
 //	@JsonManagedReference("Users_Cart")
 //	private Cart cart;
 
-	public Users() {
-	}
-
+	
 	
 
 	public Users(Long userId, String username, String email, String password, String phoneNumber, String token,
-			boolean isDel, boolean isVerified) {
+			boolean isDel, boolean isVerified, String authType) {
 		this.userId = userId;
 		this.username = username;
 		this.email = email;
@@ -74,9 +75,12 @@ public class Users {
 		this.token = token;
 		this.isDel = isDel;
 		this.isVerified = isVerified;
+		this.authType = authType;
 	}
 
-
+	public Users() {
+		super();
+	}
 
 	public List<Orders> getOrders() {
 		return orders;
@@ -173,11 +177,29 @@ public class Users {
 
 
 
+	public String getAuthType() {
+		return authType;
+	}
+
+
+
+	public void setAuthType(String authType) {
+		this.authType = authType;
+	}
+
+
+
+	public void setVerified(boolean isVerified) {
+		this.isVerified = isVerified;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "Users [userId=" + userId + ", username=" + username + ", email=" + email + ", password=" + password
 				+ ", phoneNumber=" + phoneNumber + ", token=" + token + ", isDel=" + isDel + ", isVerified="
-				+ isVerified + "]";
+				+ isVerified + ", authType=" + authType + ", userinfo=" + userinfo + ", orders=" + orders + "]";
 	}
 
 

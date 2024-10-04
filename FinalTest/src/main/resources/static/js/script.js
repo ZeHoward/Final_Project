@@ -475,7 +475,7 @@ function generateOrderManagementContent() {
             <table class="order-table">
                 <thead>
                     <tr>
-                        <th>商品名稱</th>
+                        <th>買家名稱</th>
                         <th>訂單資訊</th>
                         <th>訂單狀態</th>
                         <th>訂單時間</th>
@@ -564,8 +564,8 @@ function generateOrderManagementContent() {
     orders.forEach((order) => {
       const tr = document.createElement("tr");
 
-      // 訂單名稱，如果 order.name 不存在，顯示 '無名稱'
-      const orderName = order.name ? order.name : "無名稱";
+      // 買家名稱，如果 order.username 不存在，顯示 '無名稱'
+      const orderName = order.username ? order.username : "無名稱";
 
       // 訂單配送方式，如果 order.deliveryMethod 不存在，顯示 '無配送方式'
       const deliveryMethod = order.deliveryMethod
@@ -751,17 +751,19 @@ function generateProductUploadForm() {
   mainContent.innerHTML = ""; // 清空之前的內容
 
   const productUploadForm = `
-        <section class="product-upload">
-            <h1>商品上傳</h1>
-            <form>
-                 <div class="image-upload">
-                    <div class="image-preview">
-                    <input type="file" />
-                    </div>
-                 </div>
+    <section class="product-upload">
+      <h1>商品上傳</h1>
+        <form>
+                <div class="image-upload">
+                  <div class="image-preview" id="imagePreviewContainer">
+                    <img src="../material/icon/default.png" alt="預設商品圖片" style="max-width: 200px; margin: 10px;">
+                  </div>
+                  <input type="file" id="fileInput" accept="image/*" style="display: none;">
+                  <button type="button" id="uploadImageButton">選擇圖片</button>
+                </div>
                 <div class="form-group">
-                    <label for="name">商品名稱</label>
-                    <textarea id="name" rows="1" placeholder="商品名稱"></textarea>
+                  <label for="name">商品名稱</label>
+                  <textarea id="name" rows="1" placeholder="商品名稱"></textarea>
                 </div>
 
                 <div class="form-group">
@@ -818,6 +820,8 @@ function generateProductUploadForm() {
     `;
   mainContent.innerHTML = productUploadForm;
 
+  let selectedFile = null;
+
   function uploadProduct(productData) {
     fetch(`http://localhost:8080/products`, {
       method: "POST",
@@ -835,33 +839,84 @@ function generateProductUploadForm() {
       })
       .then((result) => {
         console.log("商品上傳成功", result);
-        Swal.fire({
-          title: "Upload Success",
-          text: `成功上傳「${productData.name}」商品`,
-          icon: "success",
-          timer: 1500,
-        });
+        if (selectedFile) {
+          uploadProductImage(result.productId, selectedFile);
+        } else {
+          showSuccessMessage(productData.name);
+        }
       })
       .catch((error) => {
         console.error("上傳商品時發生錯誤", error);
-        Swal.fire({
-          title: "Upload Failed",
-          text: `上傳「${productData.name}」商品失敗`,
-          icon: "error",
-          timer: 1500,
-        });
+        showErrorMessage(productData.name);
       });
-    console.log("Category ID: ", document.getElementById("category").value);
-    console.log(JSON.stringify(productData));
-    generateProductUploadForm();
   }
 
-  // 綁定事件監聽器
+  function uploadProductImage(productId, file) {
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('productId', productId);
+
+    fetch('http://localhost:8080/productImages/upload', {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('圖片上傳失敗');
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log('圖片上傳成功:', data);
+      showSuccessMessage(document.getElementById("name").value);
+    })
+    .catch(error => {
+      console.error('圖片上傳錯誤:', error);
+      showErrorMessage(document.getElementById("name").value, '商品已創建，但圖片上傳失敗');
+    });
+  }
+
+  function showSuccessMessage(productName) {
+    Swal.fire({
+      title: "Upload Success",
+      text: `「成功上傳${productName}」商品`,
+      icon: "success",
+      timer: 1500,
+    }).then(() => {
+      generateProductUploadForm(); // 重新生成表單
+    });
+  }
+
+  function showErrorMessage(productName, message = '商品上傳失敗') {
+    Swal.fire({
+      title: "Upload Failed",
+      text: `「上傳${productName}」${message}`,
+      icon: "error",
+      timer: 1500,
+    });
+  }
+
+  const uploadImageButton = document.getElementById("uploadImageButton");
+  const fileInput = document.getElementById("fileInput");
+
+  uploadImageButton.addEventListener("click", () => fileInput.click());
+
+  fileInput.addEventListener("change", (event) => {
+    selectedFile = event.target.files[0];
+    if (selectedFile) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        document.querySelector("#imagePreviewContainer img").src = e.target.result;
+      }
+      reader.readAsDataURL(selectedFile);
+    }
+  });
+
+  // 提交按鈕邏輯
   const submitButton = document.getElementById("submitButton");
   if (submitButton) {
     submitButton.addEventListener("click", (event) => {
-      event.preventDefault(); // 防止表單提交刷新頁面
-
+      event.preventDefault();
       const productData = {
         type: document.getElementById("type").value,
         sku: document.getElementById("sku").value,
@@ -872,9 +927,9 @@ function generateProductUploadForm() {
           categoryId: parseInt(document.getElementById("category").value),
         },
         stockQuantity: parseInt(document.getElementById("stockQuantity").value),
-        isDel: false, //這是固定的值
+        isDel: false,
       };
-      uploadProduct(productData); // 在按鈕點擊後調用上傳功能
+      uploadProduct(productData);
     });
   } else {
     console.error("submitButton 元素未找到");
@@ -1037,16 +1092,16 @@ function generateProductManagementWithActionsContent() {
 
   // 動態生成每個商品的表格行  渲染商品函數
   function renderProducts(filteredProducts) {
-    tbody.innerHTML = ""; // 清空表格內容
-    const start = (currentPage - 1) * resultsPerPage;
-    const end = start + resultsPerPage;
-    const visibleProducts = filteredProducts.slice(start, end);
+    tbody.innerHTML = ""; // 清空表格内容
+  const start = (currentPage - 1) * resultsPerPage;
+  const end = start + resultsPerPage;
+  const visibleProducts = filteredProducts.slice(start, end);
 
-    visibleProducts.forEach((product, index) => {
-      const tr = document.createElement("tr");
-      const imageSrc = product.productImages?.[0]?.image
-        ? `data:image/jpeg;base64,${product.productImages?.[0]?.image}`
-        : "./donut.png";
+  visibleProducts.forEach((product, index) => {
+    const tr = document.createElement("tr");
+    const imageSrc = product.productImages && product.productImages.length > 0
+      ? product.productImages[0].image // 使用第一張圖的url
+      : "/path/to/default/image.png"; // 使用默認圖片路徑
 
       tr.innerHTML = `
             <td><img src="${imageSrc}" alt="${
@@ -1067,8 +1122,8 @@ function generateProductManagementWithActionsContent() {
             </td>
         `;
 
-      tbody.appendChild(tr);
-    });
+    tbody.appendChild(tr);
+  });
 
     // 重新綁定「修改」按鈕事件
     document.querySelectorAll(".edit-button").forEach((button) => {
@@ -1077,7 +1132,6 @@ function generateProductManagementWithActionsContent() {
         fetchProductDetails(productId); // 調用函數來獲取商品詳情並生成表單
       });
     });
-
 
     // 重新綁定「刪除」按鈕事件
     document.querySelectorAll(".delete-button").forEach((button) => {
@@ -1090,7 +1144,7 @@ function generateProductManagementWithActionsContent() {
           title: "注意",
           text: `你確定要刪除「${productName}」商品`,
           icon: "warning",
-          showCancelButton: true, // 顯示"取消"按鈕的意思
+          showCancelButton: true,
           confirmButtonColor: "#3085d6",
           cancelButtonColor: "#d33",
           confirmButtonText: "確定",
@@ -1215,15 +1269,26 @@ function generateProductManagementWithActionsContent() {
     // 動態生成商品修改的表單
     const productEditForm = `
       <section class="product-edit">
-          <h1>修改商品 - ${product.name}</h1>
-          <div class="image-upload">
-              <div class="image-preview">
-                  <img src="${
-                    product.image
-                  }" alt="商品圖片" style="width: 100%; height: auto;">
-                  <button id="uploadImageButton">上傳新圖片</button>
+        <h1>修改商品 - ${product.name}</h1>
+            <div class="image-upload">
+              <div class="image-preview-container">
+                <div id="imagePreviewContainer" class="image-preview">
+                  ${product.productImages && product.productImages.length > 0 
+                    ? product.productImages.map(img => 
+                        `<div class="image-wrapper">
+                          <img src="${img.image || '../material/icon/default.png'}" 
+                                alt="${product.name || '商品圖片'}" 
+                                class="preview-image">
+                        </div>`
+                      ).join('') 
+                    : '<div class="image-wrapper"><img src="../material/icon/default.png" alt="預設商品圖片" class="preview-image"></div>'}
+                </div>
               </div>
-          </div>
+              <div class="upload-button-container">
+                <input type="file" id="fileInput" accept="image/*" style="display: none;">
+                <button type="button" id="uploadImageButton">上傳新圖片</button>
+              </div>
+            </div>
 
           <form>
               <div class="form-group">
@@ -1317,7 +1382,40 @@ function generateProductManagementWithActionsContent() {
       .addEventListener("click", function () {
         generateProductManagementWithActionsContent(); // 返回商品管理頁面
       });
-  }
+
+    document.getElementById("uploadImageButton").addEventListener("click", function() {
+        document.getElementById("fileInput").click();
+      });
+
+    document.getElementById("fileInput").addEventListener("change", function(event) {
+        const file = event.target.files[0];
+        if (file) {
+          uploadImage(file);
+        }
+      });
+
+      function setupImageUpload() {
+        const uploadButton = document.getElementById("uploadImageButton");
+        const fileInput = document.getElementById("fileInput");
+
+        if (!uploadButton || !fileInput) {
+          console.error("無法找到上傳按鈕或文件輸入元素");
+          return;
+        }
+
+        uploadButton.addEventListener("click", function() {
+          fileInput.click();
+        });
+
+        fileInput.addEventListener("change", function(event) {
+          const file = event.target.files[0];
+          if (file) {
+            uploadImage(file);
+          }
+        });
+      }
+      document.addEventListener('DOMContentLoaded', setupImageUpload);
+    }
 
   function updateProductDetails(product) {
     const updatedProduct = {
@@ -1369,7 +1467,106 @@ function generateProductManagementWithActionsContent() {
           timer: 1500,
         });
       });
-  }
+    }
+
+    // 圖片上傳
+    function uploadImage(file) {
+      const productId = document.getElementById('productId').value;
+
+      if (!productId) {
+        console.error('無法獲取 productId');
+        Swal.fire({
+          title: '錯誤',
+          text: '無法獲取商品 ID，請確保您在正確的頁面上',
+          icon: 'error',
+          timer: 2000
+        });
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('productId', productId);
+
+      const imagePreviewContainer = document.getElementById('imagePreviewContainer');
+
+      // 檢查是否存在預設圖片
+      const defaultImage = imagePreviewContainer.querySelector('.image-wrapper img[src="../material/icon/default.png"]');
+
+      // 創建新的圖片容器
+      const imageWrapper = document.createElement('div');
+      imageWrapper.className = 'image-wrapper';
+      const loadingSpinner = document.createElement('div');
+      loadingSpinner.className = 'loading-spinner';
+      imageWrapper.appendChild(loadingSpinner);
+
+      // 如果存在預設圖片，替換它；否則，添加到最後
+      if (defaultImage && defaultImage.parentNode) {
+        imagePreviewContainer.replaceChild(imageWrapper, defaultImage.parentNode);
+      } else {
+        imagePreviewContainer.appendChild(imageWrapper);
+      }
+
+      fetch('http://localhost:8080/productImages/upload', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('網路回應不正常');
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log('上傳成功:', data);
+        if (data.imageUrl) {
+          // 移除加載動畫
+          imageWrapper.removeChild(loadingSpinner);
+
+          // 創建新圖片元素
+          const newImage = document.createElement('img');
+          newImage.src = data.imageUrl;
+          newImage.alt = "新上傳的圖片";
+          newImage.className = 'preview-image';
+
+          // 當圖片加載完成時，添加 loaded 類
+          newImage.onload = function() {
+            imageWrapper.classList.add('loaded');
+          };
+
+          imageWrapper.appendChild(newImage);
+
+          Swal.fire({
+            title: '上傳成功',
+            text: '商品圖片已成功上傳',
+            icon: 'success',
+            timer: 2000
+          });
+        } else {
+          throw new Error('返回的數據中沒有圖片 URL');
+        }
+      })
+      .catch(error => {
+        console.error('錯誤:', error);
+        // 移除佔位容器
+        imagePreviewContainer.removeChild(imageWrapper);
+        // 如果是第一張圖片上傳失敗，恢復預設圖片
+        if (imagePreviewContainer.children.length === 0) {
+          const defaultWrapper = document.createElement('div');
+          defaultWrapper.className = 'image-wrapper';
+          defaultWrapper.innerHTML = '<img src="../material/icon/default.png" alt="預設商品圖片" class="preview-image">';
+          imagePreviewContainer.appendChild(defaultWrapper);
+        }
+        Swal.fire({
+          title: '上傳失敗',
+          text: '商品圖片上傳失敗，請稍後再試',
+          icon: 'error',
+          timer: 2000
+        });
+      });
+    }
+
+    // setupImageUpload();
 }
 
 
@@ -1386,10 +1583,7 @@ function generateRecipeUploadForm() {
             <h1>食譜上傳</h1>
             <div class="image-upload">
                 <div class="image-preview">
-                <img src="橘大頭.png" alt="商品圖片" style="width: 100%; height: auto;">
-                <img src="紅大頭.png" alt="商品圖片" style="width: 100%; height: auto;">
-                <img src="深綠大頭.png" alt="商品圖片" style="width: 100%; height: auto;">
-                <img src="黃大頭.png" alt="商品圖片" style="width: 100%; height: auto;">
+                <img src="/path/to/default/image.png" alt="商品圖片" style="width: 100%; height: auto;">
                 <button id="uploadImageButton">圖片上傳</button>
                 </div>
             </div>
@@ -1636,31 +1830,25 @@ function generateRecipeManagementContent() {
 
   // 動態生成每個食譜的表格行
   function renderRecipes(filteredRecipes) {
-    tbody.innerHTML = ""; // 清空表格內容
+    tbody.innerHTML = "";
     const start = (currentPage - 1) * resultsPerPage;
     const end = start + resultsPerPage;
     const visibleRecipes = filteredRecipes.slice(start, end);
 
     visibleRecipes.forEach((recipe, index) => {
-      const tr = document.createElement("tr");
+        const tr = document.createElement("tr");
 
-      tr.innerHTML = `
-                <td><img src="${recipe.image}" alt="${
-        recipe.name
-      }" class="recipe-image"></td>
-                <td>${recipe.name}</td>
-                <td style="max-width: 40vw;">${recipe.description}</td>
-                <td class="actions">
-                    <button class="edit-button" data-index="${
-                      start + index
-                    }">修改</button>
-                    <button class="delete-button" data-index="${
-                      start + index
-                    }">刪除</button>
-                </td>
-            `;
+        tr.innerHTML = `
+            <td><img src="${recipe.image}" alt="${recipe.name}" class="recipe-image"></td>
+            <td>${recipe.name}</td>
+            <td style="max-width: 40vw;">${recipe.description}</td>
+            <td class="actions">
+                <button class="edit-button" data-index="${start + index}">修改</button>
+                <button class="delete-button" data-index="${start + index}">刪除</button>
+            </td>
+        `;
 
-      tbody.appendChild(tr);
+        tbody.appendChild(tr);
     });
 
     // 綁定「修改」按鈕事件

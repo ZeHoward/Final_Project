@@ -35,10 +35,8 @@ public class ProductController {
 	@GetMapping
 	public List<Product> getAllProducts() {
 		if(session != null) {
-//			Users loggedInUser = (Users)session.getAttribute("loggedInUser");
-            UserAllInfo loggedInUser = (UserAllInfo) session.getAttribute("loggedInUser");
-
-            if(loggedInUser != null) {
+			UserAllInfo loggedInUser = (UserAllInfo)session.getAttribute("loggedInUser");
+			if(loggedInUser != null) {
 				System.out.println("在products中獲取UserID:" + loggedInUser.getUserId());
 			}
 		}
