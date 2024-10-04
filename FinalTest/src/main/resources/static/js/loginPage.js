@@ -32,7 +32,7 @@ window.onload = function () {
 	           // 成功登入，取得使用者資訊
 	           const user = result.user;
 	           console.log("使用者資訊: ", user);
-	           alert("登入成功: " + user.displayName);
+	           console.log("登入成功: " + user.displayName);
 			   return user.getIdToken();
 	       }).then((idToken) => {
                // 將 ID Token 發送到後端進行驗證
