@@ -948,7 +948,8 @@ function generateProductManagementWithActionsContent() {
         <div class="orderControls">
             <label>搜尋商品：</label>
             <input type="text" id="productSearchInput" placeholder="輸入名稱或SKU" class="SearchInput">
-
+            <button id="searchBtn">搜尋</button>
+            
             <label>每頁顯示結果數：</label>
             <select id="resultsPerPage">
                 <option value="25">25</option>
@@ -1189,7 +1190,7 @@ function generateProductManagementWithActionsContent() {
     });
 
     // 搜尋商品
-    searchInput.addEventListener("input", () => {
+    document.getElementById("searchBtn").addEventListener("click", () => {
       const searchTerm = searchInput.value.toLowerCase();
       const filteredProducts = products.filter(
         (product) =>
@@ -1830,7 +1831,7 @@ function generateRecipeManagementContent() {
 
   // 動態生成每個食譜的表格行
   function renderRecipes(filteredRecipes) {
-    tbody.innerHTML = "";
+    tbody.innerHTML = ""; // 清空表格內容
     const start = (currentPage - 1) * resultsPerPage;
     const end = start + resultsPerPage;
     const visibleRecipes = filteredRecipes.slice(start, end);
@@ -1848,7 +1849,7 @@ function generateRecipeManagementContent() {
             </td>
         `;
 
-        tbody.appendChild(tr);
+      tbody.appendChild(tr);
     });
 
     // 綁定「修改」按鈕事件
