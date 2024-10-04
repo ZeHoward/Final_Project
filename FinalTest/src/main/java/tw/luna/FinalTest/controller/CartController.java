@@ -19,13 +19,6 @@ public class CartController {
     @Autowired
     CartService cartService;
 
-    //新增商品進購物車 購物車內未存在該商品->新增；已存在->累加數量
-    @PostMapping("/{userId}")
-    public ResponseEntity<String> addToCart(@PathVariable Long userId, @RequestBody CartInsertDto cartInsertDto) {
-        cartService.addToCart(cartInsertDto, userId);
-        return ResponseEntity.ok("成功加入商品至購物車");
-    }
-
     //查詢購物車
     //顯示用戶購物車items
     @GetMapping("/{userId}")
@@ -33,11 +26,11 @@ public class CartController {
         return cartService.getCartItemsByUserId(userId);
     }
 
-    //購物車 修改數量
+    //加入購物車(新增或更新)，購物車內未存在該商品->新增；已存在->修改數量
     @PutMapping("/put/{userId}")
     public ResponseEntity<String> updateCart(@PathVariable Long userId, @RequestBody CartInsertDto cartInsertDto){
         cartService.updateCart(cartInsertDto, userId);
-        return ResponseEntity.ok("成功更新購物車商品數量");
+        return ResponseEntity.ok("成功將商品加入購物車");
     }
 
     //清空購物車
@@ -55,4 +48,20 @@ public class CartController {
         return ResponseEntity.ok("成功刪除該商品");
     }
 
+
 }
+
+//    // 新增購物車
+//    @PostMapping
+//    public ResponseEntity<String> addToCart(@RequestBody CartInsertDto cartInsertDto) {
+//        cartService.insertCart(cartInsertDto);
+//        return ResponseEntity.ok("成功新增購物車");
+//    }
+//
+//    @DeleteMapping("/{userId}/{itemId}")
+//    public ResponseEntity<String> deleteCartItem(@PathVariable Long userId,
+//                                                 @PathVariable Long itemId) {
+//        cartService.deleteCartItem(userId, itemId);
+//        return ResponseEntity.ok("成功刪除單一購物車品項");
+//    }
+//

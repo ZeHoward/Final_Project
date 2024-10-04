@@ -837,7 +837,7 @@ function generateProductUploadForm() {
         console.log("商品上傳成功", result);
         Swal.fire({
           title: "Upload Success",
-          text: `「成功上傳${productData.name}」商品`,
+          text: `成功上傳「${productData.name}」商品`,
           icon: "success",
           timer: 1500,
         });
@@ -846,7 +846,7 @@ function generateProductUploadForm() {
         console.error("上傳商品時發生錯誤", error);
         Swal.fire({
           title: "Upload Failed",
-          text: `「上傳${productData.name}」商品失敗`,
+          text: `上傳「${productData.name}」商品失敗`,
           icon: "error",
           timer: 1500,
         });
@@ -1060,7 +1060,7 @@ function generateProductManagementWithActionsContent() {
             <td class="actions">
                 <button class="edit-button" data-index="${
                   start + index
-                }">修改</button>
+                }" data-product-id="${product.productId}">修改</button>
                 <button class="delete-button" data-index="${
                   start + index
                 }">刪除</button>
@@ -1073,10 +1073,11 @@ function generateProductManagementWithActionsContent() {
     // 重新綁定「修改」按鈕事件
     document.querySelectorAll(".edit-button").forEach((button) => {
       button.addEventListener("click", function () {
-        const productIndex = this.getAttribute("data-index");
-        generateProductManagementEdit(products[productIndex]); // 調用商品修改頁面並傳入對應商品數據
+        const productId = this.getAttribute("data-product-id"); // 從按鈕中獲取商品ID
+        fetchProductDetails(productId); // 調用函數來獲取商品詳情並生成表單
       });
     });
+
 
     // 重新綁定「刪除」按鈕事件
     document.querySelectorAll(".delete-button").forEach((button) => {
@@ -1176,6 +1177,7 @@ function generateProductManagementWithActionsContent() {
   }
 
   document.addEventListener("DOMContentLoaded", function () {
+
     const editProductButton = document.getElementById("editProductButton");
 
     if (editProductButton) {
@@ -1187,6 +1189,23 @@ function generateProductManagementWithActionsContent() {
       console.error("editProductButton 元素未找到");
     }
   });
+
+  function fetchProductDetails(productId) {
+    fetch(`http://localhost:8080/products/${productId}`)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("無法獲取商品詳情");
+          }
+          return response.json();
+        })
+        .then((product) => {
+          // 獲取到商品詳情後，生成編輯表單
+          generateProductManagementEdit(product);
+        })
+        .catch((error) => {
+          console.error("獲取商品詳情時發生錯誤", error);
+        });
+  }
 
   // 商品管理部分(點擊"商品管理-修改"時生成內容的函數)
   function generateProductManagementEdit(product) {
@@ -1335,7 +1354,7 @@ function generateProductManagementWithActionsContent() {
         console.log("商品修改成功", result);
         Swal.fire({
           title: "成功",
-          text: `「成功修改${productData.name}」商品資訊`,
+          text: `成功修改「${productData.name}」商品資訊`,
           icon: "success",
           timer: 1500,
         });
@@ -1352,13 +1371,10 @@ function generateProductManagementWithActionsContent() {
       });
   }
 }
-// 如果需要處理圖片上傳，可以在這裡添加事件監聽器
-// document
-//   .getElementById("uploadImageButton")
-//   .addEventListener("click", function () {
-//     // 這裡可以添加圖片上傳的功能
-//     alert("上傳新圖片的功能尚未實現。");
-//   });
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~``
 
 // 點擊"食譜上傳"時生成內容的函數
 function generateRecipeUploadForm() {

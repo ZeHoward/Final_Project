@@ -105,8 +105,8 @@ public class CartService {
             cartItems.setPrice(product.getPrice());
             cartItemsRepository.save(cartItems);
         }else {  //購物車內已存在該商品 ->更新數量
-
-            isPresent.setQuantity(Math.max(cartInsertDto.getQuantity(), 1));
+            int newQuantity = isPresent.getQuantity() + Math.max(cartInsertDto.getQuantity(), 1);  // 若商品以在購物車內，將原有數量加上新選擇數量=新商品數量
+            isPresent.setQuantity(newQuantity);
             cartItemsRepository.save(isPresent);
         }
     }
