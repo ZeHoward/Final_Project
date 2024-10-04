@@ -1,4 +1,4 @@
-package tw.luna.FinalTest.Dto;
+package tw.luna.FinalTest.dto;
 
 public class UserCouponDTO {
 

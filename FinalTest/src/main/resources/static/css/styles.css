@@ -493,14 +493,45 @@ canvas {
     margin-bottom: 20px;
 }
 
+.image-preview {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 10px;
+}
+
 .image-preview img {
-    width: 100%;
     max-width: 300px;
-    height: auto;
     margin-bottom: 10px;
 }
 
-.image-preview button {
+.image-preview button:hover {
+    background-color: #77a73f;
+}
+
+.image-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.preview-image {
+    max-width: 300px; 
+    height: auto; 
+    object-fit: contain;
+}
+
+.upload-button-container {
+    position: sticky;
+    right: 0;
+    background-color: #e4efe1;
+    padding-left: 10px;
+    display: flex;
+    align-items: center;
+}
+
+#uploadImageButton {
+    white-space: nowrap;
     margin-top: 10px;
     padding: 8px 15px;
     background-color: #88BF4B;
@@ -508,10 +539,6 @@ canvas {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-}
-
-.image-preview button:hover {
-    background-color: #77a73f;
 }
 
 .form-group {

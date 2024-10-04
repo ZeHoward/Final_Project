@@ -5,7 +5,6 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.YearMonth;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -27,6 +26,7 @@ import jakarta.transaction.Transactional;
 import tw.luna.FinalTest.dto.OrderDetailsDTO;
 import tw.luna.FinalTest.dto.OrderWithUserDTO;
 import tw.luna.FinalTest.dto.OrdersDTO;
+import tw.luna.FinalTest.dto.ProductImageDTO;
 import tw.luna.FinalTest.dto.UserDTO;
 import tw.luna.FinalTest.dto.orders.OrdersInsertDto;
 import tw.luna.FinalTest.model.Cart;
@@ -36,11 +36,14 @@ import tw.luna.FinalTest.model.DiscountType;
 import tw.luna.FinalTest.model.OrderDetails;
 import tw.luna.FinalTest.model.Orders;
 import tw.luna.FinalTest.model.Payment;
+import tw.luna.FinalTest.model.ProductImage;
+import tw.luna.FinalTest.model.UserAllInfo;
 import tw.luna.FinalTest.model.Users;
 import tw.luna.FinalTest.repository.CartRepository;
 import tw.luna.FinalTest.repository.CouponRepository;
 import tw.luna.FinalTest.repository.OrderDetailsRepository;
 import tw.luna.FinalTest.repository.OrdersRepository;
+import tw.luna.FinalTest.repository.ProductImageRepository;
 import tw.luna.FinalTest.repository.UsersRepository;
 
 @Service
@@ -60,6 +63,9 @@ public class OrdersService {
 
 	@Autowired
 	OrderDetailsRepository orderDetailsRepository;
+	
+	@Autowired
+    private ProductImageRepository productImageRepository;
 	
 	@Autowired
     private UsersServiceImpl usersServiceImpl;
@@ -219,36 +225,6 @@ public class OrdersService {
 
 	    // 注意：這裡沒有設置 productImageBase64，因為現在不處理圖片轉換
 	    // 如果將來需要處理圖片，可以在這裡添加相關邏輯
-
-	    return dto;
-	}
-
-	private OrderDetailsDTO convertToDTO(OrderDetails orderDetails) {
-	    if (orderDetails == null || orderDetails.getProduct() == null) {
-	        return null;
-	    }
-
-	    String productImageBase64 = null;
-	    if (orderDetails.getProduct().getProductImages() != null && !orderDetails.getProduct().getProductImages().isEmpty()) {
-	        byte[] imageBytes = orderDetails.getProduct().getProductImages().get(0).getImage();
-	        if (imageBytes != null) {
-	            productImageBase64 = Base64.getEncoder().encodeToString(imageBytes);
-	        }
-	    }
-
-	    OrderDetailsDTO dto = new OrderDetailsDTO(
-	        orderDetails.getProduct().getName(),
-	        orderDetails.getProduct().getSku(),
-	        orderDetails.getQuantity(),
-	        orderDetails.getPrice(),
-	        orderDetails.getProduct().getProductId()
-	    );
-
-	    // 設置圖片 Base64 字符串
-	    dto.setProductImageBase64(productImageBase64);
-
-	    // 計算並設置總價
-	    dto.setTotal(orderDetails.getQuantity() * orderDetails.getPrice());
 
 	    return dto;
 	}
@@ -417,6 +393,39 @@ public class OrdersService {
         }
     }
     
+    private OrderDetailsDTO convertToDTO(OrderDetails orderDetails) {
+        if (orderDetails == null || orderDetails.getProduct() == null) {
+            return null;
+        }
+
+        // 初始化產品圖片列表
+        List<ProductImageDTO> productImages = new ArrayList<>();
+        if (orderDetails.getProduct().getProductImages() != null && !orderDetails.getProduct().getProductImages().isEmpty()) {
+            ProductImage firstImage = orderDetails.getProduct().getProductImages().get(0);
+            productImages.add(new ProductImageDTO(
+                firstImage.getId(),
+                orderDetails.getProduct().getProductId(),
+                firstImage.getImage()
+            ));
+        }
+
+        // 創建 DTO 對象
+        OrderDetailsDTO dto = new OrderDetailsDTO(
+            orderDetails.getProduct().getName(),
+            orderDetails.getProduct().getSku(),
+            orderDetails.getQuantity(),
+            orderDetails.getPrice(),
+            orderDetails.getProduct().getProductId(),
+            productImages  // 傳遞產品圖片列表
+        );
+
+        // 計算並設置總價
+        dto.setTotal(orderDetails.getQuantity() * orderDetails.getPrice());
+
+        return dto;
+    }
+
+    
     private OrdersDTO convertToDTO(Orders order) {
         if (order == null) {
             return null;
@@ -461,15 +470,40 @@ public class OrdersService {
     
     public List<OrdersDTO> getUserOrders(Long userId) {
         List<Orders> orders = ordersRepository.findByUserUserId(userId);
-        return orders.stream()
-                     .map(this::convertToDTO)
-                     .collect(Collectors.toList());
+        return orders.stream().map(order -> {
+            OrdersDTO dto = convertToDTO(order);
+            dto.setOrderDetails(order.getOrderDetails().stream()
+                .map(detail -> {
+                    List<ProductImageDTO> productImages = productImageRepository
+                        .findByProductProductId(detail.getProduct().getProductId())
+                        .stream()
+                        .map(image -> new ProductImageDTO(
+                            image.getId(),
+                            image.getProduct().getProductId(),
+                            image.getImage()))
+                        .collect(Collectors.toList());
+                    return convertToOrderDetailsDTO(detail, productImages);
+                })
+                .collect(Collectors.toList()));
+            return dto;
+        }).collect(Collectors.toList());
+    }
+    
+    private OrderDetailsDTO convertToOrderDetailsDTO(OrderDetails detail, List<ProductImageDTO> productImages) {
+        return new OrderDetailsDTO(
+            detail.getProduct().getName(),
+            detail.getProduct().getSku(),
+            detail.getQuantity(),
+            detail.getPrice(),
+            detail.getProduct().getProductId(),
+            productImages
+        );
     }
     
     public long getUserId(HttpSession session) {
-      Users loggedInUser = null;
+      UserAllInfo loggedInUser = null;
       if(session != null) {
-          loggedInUser = (Users)session.getAttribute("loggedInUser");
+          loggedInUser = (UserAllInfo)session.getAttribute("loggedInUser");
           if(loggedInUser != null) {
               System.out.println("在products中獲取UserID:" + loggedInUser.getUserId());
           }

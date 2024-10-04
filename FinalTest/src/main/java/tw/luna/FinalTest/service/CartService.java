@@ -95,7 +95,9 @@ public class CartService {
             throw new IllegalArgumentException("商品不存在: " + cartInsertDto.getProductName());
         }
         System.out.println(product);
-        CartItems isPresent = cartItemsRepository.findByCartCartIdAndProductName(cart.getCartId(),cartInsertDto.getProductName());
+
+        CartItems isPresent = cartItemsRepository.isCartItemInCart(cart, product);
+
         if(isPresent == null) {          //購物車內目前不存在該商品 ->新增
             CartItems cartItems = new CartItems();
             cartItems.setCart(cart);
