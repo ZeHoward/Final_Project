@@ -14,10 +14,7 @@ import com.google.firebase.auth.FirebaseToken;
 import jakarta.servlet.http.HttpSession;
 import tw.luna.FinalTest.BCrypt;
 import tw.luna.FinalTest.dto.UserDTO;
-<<<<<<< HEAD
 import tw.luna.FinalTest.dto.UserInfoDTO;
-=======
->>>>>>> branch 'testAPI2' of https://github.com/ZeHoward/Final_Project.git
 import tw.luna.FinalTest.model.UserAllInfo;
 import tw.luna.FinalTest.model.Userinfo;
 import tw.luna.FinalTest.model.Users;
