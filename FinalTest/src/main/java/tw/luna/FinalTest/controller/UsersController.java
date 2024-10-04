@@ -1,6 +1,7 @@
 package tw.luna.FinalTest.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthException;
+import com.google.firebase.auth.FirebaseToken;
 
 import jakarta.servlet.http.HttpSession;
 import tw.luna.FinalTest.BCrypt;
@@ -63,6 +68,31 @@ public class UsersController {
 		return loginUsers;
 	}
 	
+	@PostMapping("/googleLogin")
+	public UsersResponse authenticate(@RequestBody Map<String, String> body) {
+        String idToken = body.get("idToken");
+
+        try {
+            // 驗證 ID Token 並取得使用者資訊
+            FirebaseToken decodedToken = FirebaseAuth.getInstance().verifyIdToken(idToken);
+            UsersResponse googleUsersResponse = usersServiceImpl.googleLogin(decodedToken);
+            if(googleUsersResponse.getUsersStatus() == UsersStatus.EXIST || googleUsersResponse.getUsersStatus() == UsersStatus.ADD_SUCCESS) {
+            	Long userId = googleUsersResponse.getUsers().getUserId();
+            	UserAllInfo sessionUser = usersServiceImpl.userAllInfoByGoogle(userId);
+    			session.setAttribute("loggedInUser", sessionUser);
+            }
+            return googleUsersResponse;
+        } catch (FirebaseAuthException e) {
+        	UsersResponse usersResponse = new UsersResponse();
+        	usersResponse.setUsersStatus(UsersStatus.LOGIN_FAILURE);
+        	usersResponse.setMesg("Firebase獲取使用者訊失敗");
+        	usersResponse.setUsers(null);
+        	e.printStackTrace();
+        	return usersResponse;
+        }
+		
+    }
+	
 	@GetMapping("/logout")
 	public boolean logout() {
 		UserAllInfo loggedInUser = (UserAllInfo) session.getAttribute("loggedInUser");
@@ -76,9 +106,15 @@ public class UsersController {
 	@GetMapping("/userAllInfo")
 	public UserAllInfo userAllInfo() {
 		UserAllInfo loggedInUser = (UserAllInfo)session.getAttribute("loggedInUser");
-		UserAllInfo newUserAllInfo = usersServiceImpl.userAllInfo(loggedInUser.getUserId());
-		session.setAttribute("loggedInUser", newUserAllInfo);
-		return newUserAllInfo;
+		Long userId = loggedInUser.getUserId();
+		if(loggedInUser.getAuthType().equals("email")) {
+			UserAllInfo newUserAllInfo = usersServiceImpl.userAllInfo(userId);
+			session.setAttribute("loggedInUser", newUserAllInfo);
+			return newUserAllInfo;
+		}else {
+			UserAllInfo userAllInfoByGoogle = usersServiceImpl.userAllInfoByGoogle(userId);
+			return userAllInfoByGoogle;
+		}
 	}
 	
 	@PostMapping("/update")
@@ -88,6 +124,7 @@ public class UsersController {
 		updateUser.setPassword(loggedInUser.getPassword());
 		updateUser.setIsDel(loggedInUser.getIsDel());
 		updateUser.setIsVerified(loggedInUser.getIsVerified());
+		updateUser.setAuthType(loggedInUser.getAuthType());
 		return usersServiceImpl.updateUser(updateUser);
 	}
 	
