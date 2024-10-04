@@ -74,15 +74,15 @@ body {
   background-color: #717171;
 }
 
-.fade {
-  animation-name: fade;
-  animation-duration: 1.5s;
-}
+/*.fade {*/
+/*  animation-name: fade;*/
+/*  animation-duration: 1.5s;*/
+/*}*/
 
-@keyframes fade {
-  from {opacity: .4}
-  to {opacity: 1}
-}
+/*@keyframes fade {*/
+/*  from {opacity: .4}*/
+/*  to {opacity: 1}*/
+/*}*/
 
 /* 生鮮食材包專區 */
 .container {
