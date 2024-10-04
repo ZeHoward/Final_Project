@@ -16,9 +16,9 @@ public class OpenAPIConfig {
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("API Documentation")
-                        .version("1.0")
-                        .description("API documentation for your entire application"));
+                        .title("即食享熱API文件")
+                        .version("V.2024100301")
+                        .description("就是API"));
     }
 
     @Bean
