@@ -44,7 +44,31 @@ public class EmailCheckService {
             e.printStackTrace();
         }
     }
-    
-    
+
+    public void sendForgetPasswordEmail(String to) {
+	
+	try {
+		MimeMessage message = mailSender.createMimeMessage();
+    	MimeMessageHelper helper = new MimeMessageHelper(message, true);
+    	String forgetPasswordUrl = "http://localhost:8080/resetPassword";
+    	String htmlContent = "<p>您好，</p>" +
+                "<p>我們收到了您重設密碼的請求。</p>" +
+                "<p>點擊以下連結重設您的密碼：</p>" +
+                "<p><a href=\"" + forgetPasswordUrl + "?email=" + to + "\">重設密碼</a></p>" +
+                "<br>" +
+                "<p>如果您並未請求重設密碼，請忽略此郵件。</p>";
+    			
+    	helper.setTo(to);
+        helper.setFrom("haurd8080@gmail.com");
+        helper.setSubject("請重設您的密碼");
+        helper.setText(htmlContent, true);
+        mailSender.send(message);
+    	
+	} catch (MessagingException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+
+  }
 
 }

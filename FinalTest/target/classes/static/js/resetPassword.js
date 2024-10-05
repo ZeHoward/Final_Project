@@ -1,12 +1,13 @@
 window.onload = () => {
-	
+    let email = new URLSearchParams(window.location.search).get('email');
+	console.log(email);
 	let finalNewPassword = '';
 	let newPasswordDifferent = document.getElementById('newPasswordDifferent');
 	let passwordRegexCheck = document.getElementById('passwordRegexCheck');
 	let checkPassword = false;
 
 	document.getElementById('newPassword').addEventListener('blur', () => {
-		finalNewPassword = '';
+        finalNewPassword = '';
 		let regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;      
 		let newPassword = document.getElementById('newPassword').value;
 		if(!regex.test(newPassword)){
@@ -31,18 +32,15 @@ window.onload = () => {
 		}
 	})
 	
-	
-	
-	
+
 	
 	document.getElementById('updatePasswordButton').addEventListener('click', () => {
-		let oldPassword = document.getElementById('oldPassword').value;
-		if(finalNewPassword != '' && finalNewPassword != null && oldPassword != '' && oldPassword != null && checkPassword){
-			fetch('http://localhost:8080/users/updatePassword',{
+		if(finalNewPassword != '' && finalNewPassword != null  && checkPassword){
+			fetch('http://localhost:8080/users/resetPassword',{
 				method : 'POST',
 				headers : {'Content-Type' : 'application/json'},
 				body : JSON.stringify({
-					oldPassword : oldPassword,
+                    email : email,
 					newPassword : finalNewPassword
 					})
 			}).then(response => {
@@ -56,12 +54,10 @@ window.onload = () => {
 					window.location.href = '/loginPage';
 				}else if( data == 0){
 					alert('伺服器忙碌中,請稍後在試!!');
-				}else{
-					alert('您輸入的目前密碼與舊密碼不同!!');
 				}
 			})
 		}else{
-			alert('請正確輸入完整的目前密碼與新密碼!!')
+			alert('請正確輸入完整的新密碼!!')
 		}
 		
 	})

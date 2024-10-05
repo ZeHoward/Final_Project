@@ -411,13 +411,13 @@ canvas {
     color: #333;
 }
 
-.order-and-user-info {
+.order-and-user-info, .user-info-container {
     display: flex;
     justify-content: space-between;
     gap: 20px;
 }
 
-.order-info, .user-info2 {
+.order-info, .user-info2, .basic-info, .detailed-info {
     flex: 1;
     background-color: #f9f9f9;
     padding: 20px;
@@ -425,7 +425,7 @@ canvas {
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
 }
 
-.order-info {
+.order-info, .basic-info, .detailed-info {
     margin-right: 20px;
 }
 

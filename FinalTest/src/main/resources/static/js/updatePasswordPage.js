@@ -6,6 +6,7 @@ window.onload = () => {
 	let checkPassword = false;
 
 	document.getElementById('newPassword').addEventListener('blur', () => {
+		finalNewPassword = '';
 		let regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;      
 		let newPassword = document.getElementById('newPassword').value;
 		if(!regex.test(newPassword)){

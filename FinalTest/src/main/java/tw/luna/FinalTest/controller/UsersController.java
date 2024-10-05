@@ -171,6 +171,20 @@ public class UsersController {
         return ResponseEntity.ok(users);
     }
 
+	@PostMapping("/forgetPassword")
+	public boolean forgetPassword(@RequestBody Map<String, String> request) {
+		String email = request.get("email");
+		String birthday = request.get("birthday");
+		return usersServiceImpl.getUserByEmailAndBirthday(email, birthday);
+	}
+	
+	@PostMapping("/resetPassword")
+	public int resetPassword(@RequestBody Map<String, String> request) {
+		String email = request.get("email");
+		String password = request.get("newPassword");
+		return usersServiceImpl.resetPasswordByEmail(email, password);
+		
+	}
 	
 	
 	

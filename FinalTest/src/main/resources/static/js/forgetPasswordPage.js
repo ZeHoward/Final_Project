@@ -27,22 +27,33 @@ document.getElementById("emailInput").addEventListener("blur", () => {
 
 });
 
-document.getElementById("birthday").addEventListener("change", () => {
-	let birthday = document.getElementById("birthday").value;
 	
-	let checkBirthdayUrl = 'http://localhost:8080/users/checkEmail?email=' + finalEmail + '&birthday=' + birthday
-	fetch(checkBirthdayUrl, {
-		method : 'GET'
-	}).then(response => {
-		if(!response.ok){
-			throw new Error ('Error : ')
-		}
-		return response.json();
-	}).then(data  => {
-		
-	})
-})
-	
-document.getElementById("loginButton").addEventListener("click", () => {
-	fetch()
+document.getElementById("resetButton").addEventListener("click", () => {
+	if(finalEmail != '' || finalEmail != null){
+		let birthday = document.getElementById("birthday").value;
+		fetch('http://localhost:8080/users/forgetPassword',{
+			method : 'POST',
+			headers: {'Content-Type': 'application/json'},
+		    body: JSON.stringify({ 
+				email : finalEmail,
+				birthday : birthday
+			})
+		}).then(response => {
+			if(!response.ok){
+				console.error('Error:', error);
+			}
+			return response.json();
+		}).then(data => {
+			if(data){
+				alert("已將重設密碼連結發送至電子信箱!!");
+				window.location.href = '/enjoyum';
+			}else{
+				alert('您輸入正確的生日!!')
+			}
+		}).catch((error) => {
+			console.error('查詢失敗:', error);
+		})
+	}else{
+		alert('請輸入已註冊過的電子信箱!!');
+	}
 })
