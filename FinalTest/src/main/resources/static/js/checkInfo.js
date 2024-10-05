@@ -27,6 +27,13 @@
           const sendCheckoutForm = ref({})
           const isSubmit = ref(false)
 
+          const getUserId = async () => {
+            const res = await axios.get(`/users/userAllInfo`);
+            userId.value = res.data.userId;
+            console.log(userId.value);
+            getCart();
+          };
+
           // 生成 UUID
           function generateUUID() {
             return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
@@ -117,7 +124,7 @@
 
           
           onMounted(() => {
-            getCart()
+            getUserId()
           })
 
           return {
