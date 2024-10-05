@@ -4,6 +4,12 @@ const type1 = "mealkit";
 const type2 = "preparedFood";
 let slideIndex = 1;
 
+const checkUserPayment = () => {
+  const userId = 2
+  //用id找payment
+  //寫controller
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   //輪播廣告
   showSlides(slideIndex);
