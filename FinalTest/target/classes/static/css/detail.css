@@ -1,17 +1,3 @@
-/** {*/
-/*  font-family: "Noto Sans TC", system-ui;*/
-/*  margin: 0;*/
-/*  padding: 0;*/
-/*  box-sizing: border-box;*/
-/*}*/
-
-/*body {*/
-/*  font-family: Arial, sans-serif;*/
-/*  width: 100vw;*/
-/*  max-width: 100%;*/
-/*  overflow-x: hidden;*/
-/*}*/
-
 /* 商品詳情 */
 .info {
   display: flex;
@@ -124,7 +110,7 @@ input,
   margin: 20px 0;
   padding: 10px 20px;
   font-size: 24px;
-  background-color: #d35b50;
+  background-color: #e0912f;
   color: white;
   border: none;
   border-radius: 5px;
@@ -133,11 +119,7 @@ input,
 }
 
 .like {
-  background-color: #de8415;
-}
-
-.keep {
-  background-color: #f3ce6e;
+  background-color: #F3CE6E;
 }
 
 .container {
@@ -178,15 +160,16 @@ h1 {
   font-weight: 700;
   margin: 10px 0;
 }
+
 .product-price {
-  font-size: 30px;
+  font-size: 40px;
   color: #d35b50;
   font-weight: 700;
   margin: 5px 0;
 }
 
 .related-product-name {
-  font-size: 15px;
+  font-size: medium;
 }
 
 .related-product-image {
@@ -197,7 +180,7 @@ h1 {
 }
 
 .related-product-price {
-  font-size: 20px;
+  font-size: medium;
   color: #d35b50;
   font-weight: 700;
 }
@@ -257,7 +240,7 @@ h1 {
   cursor: pointer;
 }
 
-/* 商品評論 */
+/* 購物須知 */
 .tab {
   border-bottom: #d1de74 2px solid;
   overflow: hidden;
@@ -297,4 +280,8 @@ h1 {
   display: inline-flex;
   padding: 5px;
   background-color: #cbb68c;
+}
+
+i.active {
+  color: red;
 }

@@ -70,8 +70,12 @@ body {
   transition: background-color 0.6s ease;
 }
 
-.active, .dot:hover {
+.dot:hover {
   background-color: #717171;
+}
+
+i.active {
+  color: red;
 }
 
 /* 生鮮食材包專區 */

@@ -1,22 +1,22 @@
-let currentPage = 1;
-const productsPerPage = 9; // 每頁顯示的商品數量
-let totalPages = 1;
+let currentPage = 1; //目前的頁碼
+const productsPerPage = 12; // 每頁顯示的商品數量，超過九個換頁
+let totalPages = 1; //總頁數
+
 window.onload = function () {
 
-    fetchRandomProducts();
+    fetchRandomProducts(); //隨機抓取商品
 
     document.querySelectorAll(".links").forEach((link) => {
         link.addEventListener("click", function (event) {
             event.preventDefault();
-            const type = this.getAttribute("data-type");
+            const type = this.getAttribute("data-type"); //自訂義屬姓
             const categoryId = this.getAttribute("data-category");
             fetchProductsByTypeAndCategory(type, categoryId);
         });
     });
 
-    // 綁定事件委託到 productContainer來處理按鈕事件
+    // 處理按鈕事件
     document.getElementById("productContainer").addEventListener("click", handleProductActions);
-
     // 分頁按鈕(上一頁)
     document.getElementById("prevPage").addEventListener("click", () => {
         if (currentPage > 1) {
@@ -31,8 +31,7 @@ window.onload = function () {
             renderCurrentPage();
         }
     });
-
-    //關鍵字搜尋商品
+    // 關鍵字搜尋商品
     document.getElementById("searchIcon").addEventListener("click", () => {
         const keyword = document.getElementById("searchInput").value.trim();
         if (keyword) {
@@ -41,7 +40,7 @@ window.onload = function () {
             alert("請輸入關鍵字");
         }
     })
-
+    // 根據商品類別抓取商品
     document.querySelectorAll(".productType").forEach((typeBtn) => {
         typeBtn.addEventListener("click", function (event) {
             event.preventDefault();
@@ -52,7 +51,7 @@ window.onload = function () {
 
 }
 
-//商品頁隨機顯示商品
+//隨機顯示商品
 function fetchRandomProducts() {
     fetch("/products")
         .then((response) => {
@@ -80,7 +79,7 @@ function fetchRandomProducts() {
         .addEventListener("click", handleProductActions);
 }
 
-// 渲染當前頁面的產品
+// 渲染當前頁面
 function renderCurrentPage() {
     const startIndex = (currentPage - 1) * productsPerPage;
     const endIndex = startIndex + productsPerPage;
@@ -90,12 +89,12 @@ function renderCurrentPage() {
     updatePageInfo(); // 更新頁面信息
 }
 
-// 更新頁面信息（頁碼顯示）
+// 更新頁碼
 function updatePageInfo() {
-    document.getElementById("pageInfo").textContent = `第 ${currentPage} 頁 / 總共 ${totalPages} 頁`;
+    document.getElementById("pageInfo").textContent = `第 ${currentPage} 頁 / 共 ${totalPages} 頁`;
 }
 
-// 使用事件委託來處理加入購物車和收藏商品邏輯
+// 處理加入購物車和收藏商品按鈕邏輯
 function handleProductActions(event) {
     const target = event.target;
 
@@ -110,22 +109,43 @@ function handleProductActions(event) {
                         if (userId) {
                             const productElement = target.closest(".product");
                             const productId = productElement.dataset.productId;
-                            // 發送收藏請求
-                            fetch(`/api/favorites/add?userId=${userId}&productId=${productId}`, {
-                                method: "POST",
-                            })
-                                .then(response => response.json())
-                                .then(() => {
+                            const productName = productElement.dataset.productName;
+                            const favoriteBtn = target.closest(".fa-heart");
+
+                            if (favoriteBtn.classList.contains("active")) {
+                                fetch(`/api/favorites/remove?userId=${userId}&productId=${productId}`, {
+                                    method: "DELETE",
+                                }).then(() => {
+                                    favoriteBtn.classList.remove("active");
                                     Swal.fire({
-                                        title: "成功",
-                                        text: "已將商品加入收藏",
+                                        title: "已取消收藏",
+                                        text: `已將${productName}移除收藏`,
                                         icon: "success",
                                         timer: 1500,
                                     });
+                                }).catch((error)=>{
+                                    console.error("移除商品收藏遇到錯誤",error);
                                 })
-                                .catch((error) => {
-                                    console.error("加入收藏時發生錯誤:", error);
-                                });
+                            } else {
+                                fetch(`/api/favorites/add?userId=${userId}&productId=${productId}`, {
+                                    method: "POST",
+                                })
+                                    .then(response => response.json())
+                                    .then(() => {
+                                        favoriteBtn.classList.add("active");
+                                        Swal.fire({
+                                            title: "成功",
+                                            text: `已將${productName}加入收藏`,
+                                            icon: "success",
+                                            timer: 1500,
+                                        });
+                                        console.log(productId);
+                                        console.log(productName);
+                                    })
+                                    .catch((error) => {
+                                        console.error("加入收藏時發生錯誤:", error);
+                                    });
+                            }
                         }
                     });
                 } else {
@@ -229,14 +249,15 @@ function handleProductActions(event) {
     }
 }
 
-// 顯示產品
+// 渲染商品卡
 function displayProducts(productsToShow) {
     const container = document.getElementById("productContainer");
-    container.innerHTML = ""; // 清空現有的產品
+    container.innerHTML = ""; // 清空現有的產品重新渲染
     productsToShow.forEach((product) => {
+        //生成商品卡
         const productDiv = document.createElement("div");
         productDiv.className = "product";
-        productDiv.style.cursor = "pointer"; //更改滑鼠樣式，可以點擊
+        productDiv.style.cursor = "pointer";
         productDiv.dataset.productId = product.productId;
         productDiv.dataset.productName = product.name; // 設置自定義屬性 data-name 購物車撈商品名稱用
 
@@ -245,7 +266,7 @@ function displayProducts(productsToShow) {
         imgElement.alt = product.name;
 
         const productHtml = `
-            <h3 class="product-name" id="productName">${product.name}</h3>
+            <p class="product-name" id="productName">${product.name}</p>
             <p class="product-price">$NT${product.price}</p>
             <div class="home-product-btn">
                 <button class="add-to-favorite"><i class="fa-solid fa-heart"></i></button>
@@ -265,9 +286,9 @@ function displayProducts(productsToShow) {
             })
             .then((images) => {
                 if (images.length > 0) {
-                    imgElement.src = images[0]; // 使用 Base64Images
+                    imgElement.src = images[0];
                 } else {
-                    imgElement.src = "../material/icon/default.png"; // 沒有圖片時使用默認圖片
+                    imgElement.src = "../material/icon/default.png"; // 如果沒有圖片時使用預設圖片
                 }
             })
             .catch((error) => {
@@ -275,9 +296,21 @@ function displayProducts(productsToShow) {
                 imgElement.src = "../material/icon/error.png"; // 如果發生錯誤使用錯誤圖片
             });
     });
+
+    //沒有排滿三張商品卡填補空白商品卡(方便對齊)
+    const itemsPerRow = 6;
+    let itemsToAdd = itemsPerRow - (productsToShow.length % itemsPerRow);
+    if (itemsToAdd && itemsToAdd !== itemsPerRow) {
+        for (let i = 0; i < itemsToAdd; i++) {
+            const emptyDiv = document.createElement("div");
+            emptyDiv.className = "product empty";
+            emptyDiv.style.visibility = "hidden";
+            container.appendChild(emptyDiv);
+        }
+    }
 }
 
-//依照產品類型和產品分類
+//依照產品類型和產品分類抓取商品
 function fetchProductsByTypeAndCategory(type, categoryId) {
     fetch(`products/filter?type=${type}&categoryId=${categoryId}`)
         .then((response) => {
@@ -295,12 +328,63 @@ function fetchProductsByTypeAndCategory(type, categoryId) {
                 const sortBy = document.getElementById("sort").value;
                 sortProducts(products, sortBy);
             });
+            if (type === "mealkit") {
+                switch (categoryId) {
+                    case("1"):
+                        document.getElementById("title").innerHTML = `生鮮食材包 異國料理`;
+                        console.log(1);
+                        break;
+                    case("2"):
+                        document.getElementById("title").innerHTML = `生鮮食材包 多人料理`;
+                        console.log(1);
+                        break;
+                    case("3"):
+                        document.getElementById("title").innerHTML = `生鮮食材包 兒童料理`;
+                        console.log(1);
+                        break;
+                    case("4"):
+                        document.getElementById("title").innerHTML = `生鮮食材包 銀髮友善`;
+                        console.log(1);
+                        break;
+                    case("5"):
+                        document.getElementById("title").innerHTML = `生鮮食材包 家常料理`;
+                        console.log(1);
+                        break;
+
+                }
+            } else {
+                switch (categoryId) {
+                    case("1"):
+                        document.getElementById("title").innerHTML = `調理包 異國料理`;
+                        console.log(1);
+                        break;
+                    case("2"):
+                        document.getElementById("title").innerHTML = `調理包 多人料理`;
+                        console.log(1);
+                        break;
+                    case("3"):
+                        document.getElementById("title").innerHTML = `調理包 兒童料理`;
+                        console.log(1);
+                        break;
+                    case("4"):
+                        document.getElementById("title").innerHTML = `調理包 銀髮友善`;
+                        console.log(1);
+                        break;
+                    case("5"):
+                        document.getElementById("title").innerHTML = `調理包 家常料理`;
+                        console.log(1);
+                        break;
+
+                }
+            }
+
         })
         .catch((error) => {
             console.error("Error fetching products:", error);
         });
 }
 
+//依照產品類型抓取商品
 function fetchProductsByType(type) {
     fetch(`products/type/${type}`)
         .then((response) => {
@@ -318,13 +402,18 @@ function fetchProductsByType(type) {
                 const sortBy = document.getElementById("sort").value;
                 sortProducts(products, sortBy);
             });
+            if(type==="mealkit"){
+                document.getElementById("title").innerHTML="生鮮食材包";
+            }else{
+                document.getElementById("title").innerHTML="調理包";
+            }
         })
         .catch(error => {
             console.error("Error fetching products:", error);
         })
 }
 
-//商品排序
+//商品排序按鈕
 function sortProducts(products, sortBy) {
     if (sortBy === "priceLowHigh") {
         products.sort((a, b) => a.price - b.price);
@@ -339,7 +428,7 @@ function sortProducts(products, sortBy) {
     displayProducts(products); // 重新顯示排序後的產品
 }
 
-//確認登入狀態
+//取得userId
 function getUserId() {
     return fetch('/users/userAllInfo')
         .then(response => {
@@ -355,7 +444,7 @@ function getUserId() {
         });
 }
 
-// 取得Id
+//點選加入購物車和收藏按鈕先確認登入狀態在加入收藏和購物車
 function checkLoginStatus() {
     return fetch('users/checkSession').then(response => {
         if (!response.ok) {
@@ -370,7 +459,7 @@ function checkLoginStatus() {
         })
 }
 
-//搜尋功能
+//關鍵字搜尋功能(模糊查詢)
 function searchProducts(keyword) {
     fetch(`/products/search?keyword=${encodeURIComponent(keyword)}`, {method: "GET"})
         .then((response) => {

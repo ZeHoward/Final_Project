@@ -281,3 +281,7 @@ h1 {
   padding: 5px;
   background-color: #cbb68c;
 }
+
+i.active {
+  color: red;
+}
