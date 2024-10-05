@@ -1,4 +1,4 @@
-      const { createApp, ref, onMounted, computed } = Vue;
+      const { createApp, ref, onMounted, computed, watch } = Vue;
       createApp({
         setup() {
           const params = new URLSearchParams(window.location.search);
@@ -21,6 +21,11 @@
           const city = params.get("city")
           
           const address = params.get("address")
+          const pay = ref(false)
+          const form = ref("")
+          const merchantTradeNo = ref("")
+          const sendCheckoutForm = ref({})
+          const isSubmit = ref(false)
 
           // 生成 UUID
           function generateUUID() {
@@ -58,9 +63,35 @@
 
           const getPayment = async () => {
             const res = await axios.post(`${api.value}/ECPAY/ecpayCheckout`,paymentData);
-        console.log(res);
+            form.value = res.data
+            const parser = new DOMParser()
+            const doc = parser.parseFromString(form.value, 'text/html')
+            const merchantTradeNoElement = doc.querySelector('input[name="MerchantTradeNo"]');
+            if(merchantTradeNoElement) {
+              merchantTradeNo.value = merchantTradeNoElement.value
+              sendCheckoutForm.value = form.value
+              isSubmit.value   = true
+            }
+            if(res.data) {
+              pay.value = true
+            }
+        console.log(res.data);
         
           };
+
+          watch(sendCheckoutForm, (newForm) => {
+            if(newForm) {
+              setTimeout(() => {
+                const parser = new DOMParser()
+                const doc = parser.parseFromString(newForm, 'text/html')
+                const form = doc.getElementById('allPayAPIForm')
+                if (form) {
+                  document.body.appendChild(form)
+                  form.submit()
+                }
+              }, 0)
+            }
+          })
 
           //缺優惠券
           //將收件者資料及購物車商品資料存進資料庫
@@ -69,7 +100,7 @@
             
             try{
             const res = await axios.post(`${api.value}/orders/${userId.value}`,orderData)
-         
+              
             if(res.status === 200){
               getPayment()
 
@@ -87,7 +118,6 @@
           
           onMounted(() => {
             getCart()
-            getPayment()
           })
 
           return {
@@ -103,7 +133,11 @@
             area,
             city,
             addToOrders,
-            address
+            address,
+            form,
+            pay,
+            merchantTradeNo,
+            isSubmit
           }
           }
           }).mount("#myContainer")
