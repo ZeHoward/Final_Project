@@ -274,7 +274,7 @@ window.onload = function () {
             const productDiv = document.createElement("div");
             productDiv.className = "product";
             productDiv.style.cursor = "pointer";
-            productDiv.dataset.productId = product.productId
+            productDiv.dataset.productId = product.productId;
             productDiv.dataset.productName = product.name;
 
             // 創建 img 元素
@@ -333,12 +333,12 @@ window.onload = function () {
                         .then((isLoggedIn) => {
                             if (isLoggedIn) {
                                 getUserId().then(userId => {
+                                    console.log(userId);
                                     if (userId) {
                                         const productElement = event.target.closest(".product");
                                         const productId = productElement.dataset.productId;
                                         const productName = productElement.dataset.productName;
                                         const quantity = 1;
-                                        // const productId = parseInt(new URLSearchParams(window.location.search).get("productId"));
                                         const cartItem =
                                             {
                                                 productName: productName,
@@ -407,23 +407,45 @@ window.onload = function () {
                             if (isLoggedIn) {
                                 getUserId().then(userId => {
                                     if (userId) {
-                                        const productId = new URLSearchParams(window.location.search).get("productId");
-                                        // 發送收藏請求
-                                        fetch(`/api/favorites/add?userId=${userId}&productId=${productId}`, {
-                                            method: "POST",
-                                        })
-                                            .then(response => response.json())
-                                            .then(() => {
+                                        const productId = parseInt(`${product.productId}`);
+                                        const productName = `${product.name}`;
+                                        const favoriteBtn = this.querySelector(".fa-heart");
+
+                                        if (favoriteBtn.classList.contains("active")) {
+                                            fetch(`/api/favorites/remove?userId=${userId}&productId=${productId}`, {
+                                                method: "DELETE",
+                                            }).then(() => {
+                                                favoriteBtn.classList.remove("active");
                                                 Swal.fire({
-                                                    title: "成功",
-                                                    text: "已將商品加入收藏",
+                                                    title: "已取消收藏",
+                                                    text: `已將${productName}移除收藏`,
                                                     icon: "success",
                                                     timer: 1500,
                                                 });
+                                            }).catch((error)=>{
+                                                console.error("移除商品收藏遇到錯誤",error);
                                             })
-                                            .catch((error) => {
-                                                console.error("加入收藏時發生錯誤:", error);
-                                            });
+                                        } else {
+                                            fetch(`/api/favorites/add?userId=${userId}&productId=${productId}`, {
+                                                method: "POST",
+                                            })
+                                                .then(response => response.json())
+                                                .then(() => {
+                                                    favoriteBtn.classList.add("active");
+                                                    const productName = `${product.name}`;
+                                                    Swal.fire({
+                                                        title: "成功",
+                                                        text: `已將${productName}加入收藏`,
+                                                        icon: "success",
+                                                        timer: 1500,
+                                                    });
+                                                    console.log(productId);
+                                                    console.log(productName);
+                                                })
+                                                .catch((error) => {
+                                                    console.error("加入收藏時發生錯誤:", error);
+                                                });
+                                        }
                                     }
                                 });
                             } else {

@@ -109,22 +109,43 @@ function handleProductActions(event) {
                         if (userId) {
                             const productElement = target.closest(".product");
                             const productId = productElement.dataset.productId;
-                            // 發送收藏請求
-                            fetch(`/api/favorites/add?userId=${userId}&productId=${productId}`, {
-                                method: "POST",
-                            })
-                                .then(response => response.json())
-                                .then(() => {
+                            const productName = productElement.dataset.productName;
+                            const favoriteBtn = target.closest(".fa-heart");
+
+                            if (favoriteBtn.classList.contains("active")) {
+                                fetch(`/api/favorites/remove?userId=${userId}&productId=${productId}`, {
+                                    method: "DELETE",
+                                }).then(() => {
+                                    favoriteBtn.classList.remove("active");
                                     Swal.fire({
-                                        title: "成功",
-                                        text: "已將商品加入收藏",
+                                        title: "已取消收藏",
+                                        text: `已將${productName}移除收藏`,
                                         icon: "success",
                                         timer: 1500,
                                     });
+                                }).catch((error)=>{
+                                    console.error("移除商品收藏遇到錯誤",error);
                                 })
-                                .catch((error) => {
-                                    console.error("加入收藏時發生錯誤:", error);
-                                });
+                            } else {
+                                fetch(`/api/favorites/add?userId=${userId}&productId=${productId}`, {
+                                    method: "POST",
+                                })
+                                    .then(response => response.json())
+                                    .then(() => {
+                                        favoriteBtn.classList.add("active");
+                                        Swal.fire({
+                                            title: "成功",
+                                            text: `已將${productName}加入收藏`,
+                                            icon: "success",
+                                            timer: 1500,
+                                        });
+                                        console.log(productId);
+                                        console.log(productName);
+                                    })
+                                    .catch((error) => {
+                                        console.error("加入收藏時發生錯誤:", error);
+                                    });
+                            }
                         }
                     });
                 } else {

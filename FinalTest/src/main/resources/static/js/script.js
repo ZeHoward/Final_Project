@@ -879,7 +879,7 @@ function generateProductUploadForm() {
     function showSuccessMessage(productName) {
         Swal.fire({
             title: "Upload Success",
-            text: `「成功上傳${productName}」商品`,
+            text: `成功上傳「${productName}」商品`,
             icon: "success",
             timer: 1500,
         }).then(() => {
@@ -890,7 +890,7 @@ function generateProductUploadForm() {
     function showErrorMessage(productName, message = '商品上傳失敗') {
         Swal.fire({
             title: "Upload Failed",
-            text: `「上傳${productName}」${message}`,
+            text: `上傳「${productName}」${message}`,
             icon: "error",
             timer: 1500,
         });
@@ -1121,8 +1121,8 @@ function generateProductManagementWithActionsContent() {
                 start + index
             }" data-product-id="${product.productId}">修改</button>
                 <button class="delete-button" data-index="${
-                start + index 
-            }" data-product-id="${product.productId}">刪除</button>
+                start + index
+            }" data-product-id="${product.productId}" data-product-name="${product.name}">刪除</button>
             </td>
         `;
 
@@ -1140,9 +1140,8 @@ function generateProductManagementWithActionsContent() {
         // 重新綁定「刪除」按鈕事件
         document.querySelectorAll(".delete-button").forEach((button) => {
             button.addEventListener("click", function () {
-                // const productIndex = this.getAttribute("data-index");
                 const productId = this.getAttribute("data-product-id");
-                const productName = products[productId].name;
+                const productName = this.getAttribute("data-product-name");
                 //點擊刪除跳出提醒
                 Swal.fire({
                     title: "注意",
@@ -1174,6 +1173,8 @@ function generateProductManagementWithActionsContent() {
                                     icon: "success",
                                     timer: 1500,
                                 });
+                                console.log(productId);
+                                console.log(productName);
                                 products.splice(productId, 1);
                                 generateProductManagementWithActionsContent(); // 刷新商品管理頁面
                             })
@@ -1573,7 +1574,6 @@ function generateProductManagementWithActionsContent() {
 
     // setupImageUpload();
 }
-
 
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~``
@@ -2151,10 +2151,10 @@ function generateUserEditForm(user) {
 }
 
 function generateCouponManagementForm() {
-  const mainContent = document.querySelector(".main-content");
-  mainContent.innerHTML = ""; // 清空之前的內容
+    const mainContent = document.querySelector(".main-content");
+    mainContent.innerHTML = ""; // 清空之前的內容
 
-  const couponManagementForm = `
+    const couponManagementForm = `
         <section class="coupon-management">
             <h1>優惠券管理</h1>
 
@@ -2215,83 +2215,83 @@ function generateCouponManagementForm() {
         </section>
         </section>
     `;
-  mainContent.innerHTML = couponManagementForm;
+    mainContent.innerHTML = couponManagementForm;
 
-  // 儲存優惠券的陣列
-  let coupons = [];
+    // 儲存優惠券的陣列
+    let coupons = [];
 
-  // 一進入頁面，獲取現有的優惠券並顯示
-  fetch("http://localhost:8080/api/coupons/all")  // 假設後端的 GET API 是這個路徑
-      .then((response) => response.json())
-      .then((data) => {
-        coupons = data; // 假設後端返回的是現有的優惠券列表
-        displayCoupons(); // 顯示優惠券
-      })
-      .catch((error) => console.error("Error fetching coupons:", error));
-
-  // 優惠券表單提交處理
-  const couponForm = document.getElementById("couponForm");
-  couponForm.addEventListener("submit", function (event) {
-    event.preventDefault(); // 阻止表單提交刷新
-
-    // 獲取輸入的優惠券信息
-    const code = document.getElementById("code").value;
-    const name = document.getElementById("name").value;
-    const discountType = document.getElementById("discountType").value;
-    const discountValue = document.getElementById("discountValue").value;
-    const expiryDate = document.getElementById("expiryDate").value;
-
-    // 構造優惠券對象
-    const couponData = {
-      code,
-      name,
-      discountType,
-      discountValue,
-      expiryDate,
-    };
-
-    // 發送 POST 請求到後端
-    fetch("http://localhost:8080/api/coupons/create", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: new URLSearchParams(couponData),
-    })
-        .then((response) => response.json()) // 解析 JSON 回應
+    // 一進入頁面，獲取現有的優惠券並顯示
+    fetch("http://localhost:8080/api/coupons/all")  // 假設後端的 GET API 是這個路徑
+        .then((response) => response.json())
         .then((data) => {
-          // 使用返回的優惠券陣列更新表格
-          coupons = data; // 假設後端返回的是最新的優惠券列表
-          displayCoupons(); // 顯示優惠券
+            coupons = data; // 假設後端返回的是現有的優惠券列表
+            displayCoupons(); // 顯示優惠券
         })
-        .catch((error) => console.error("Error:", error));
+        .catch((error) => console.error("Error fetching coupons:", error));
 
-    // 重置表單
-    couponForm.reset();
-  });
+    // 優惠券表單提交處理
+    const couponForm = document.getElementById("couponForm");
+    couponForm.addEventListener("submit", function (event) {
+        event.preventDefault(); // 阻止表單提交刷新
 
-  // 顯示已新增的優惠券
-  function displayCoupons() {
-    const couponTableBody = document.getElementById("couponTableBody");
-    couponTableBody.innerHTML = ""; // 清空之前的內容
+        // 獲取輸入的優惠券信息
+        const code = document.getElementById("code").value;
+        const name = document.getElementById("name").value;
+        const discountType = document.getElementById("discountType").value;
+        const discountValue = document.getElementById("discountValue").value;
+        const expiryDate = document.getElementById("expiryDate").value;
 
-    const currentDate = new Date();  // 獲取當前日期
+        // 構造優惠券對象
+        const couponData = {
+            code,
+            name,
+            discountType,
+            discountValue,
+            expiryDate,
+        };
 
-    coupons.forEach((coupon, index) => {
-      const tr = document.createElement("tr");
-      const expiryDate = new Date(coupon.expiryDate);  // 將優惠券的到期日期轉換為日期格式
+        // 發送 POST 請求到後端
+        fetch("http://localhost:8080/api/coupons/create", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+            body: new URLSearchParams(couponData),
+        })
+            .then((response) => response.json()) // 解析 JSON 回應
+            .then((data) => {
+                // 使用返回的優惠券陣列更新表格
+                coupons = data; // 假設後端返回的是最新的優惠券列表
+                displayCoupons(); // 顯示優惠券
+            })
+            .catch((error) => console.error("Error:", error));
 
-      // 確定優惠券的狀態
-      let status = "有效"; // 預設為有效
+        // 重置表單
+        couponForm.reset();
+    });
 
-      if (!coupon.active) {
-        status = "已禁用";  // 如果優惠券被禁用
-      } else if (expiryDate < currentDate) {
-        status = "已過期";  // 如果優惠券已經過期
-      }
+    // 顯示已新增的優惠券
+    function displayCoupons() {
+        const couponTableBody = document.getElementById("couponTableBody");
+        couponTableBody.innerHTML = ""; // 清空之前的內容
 
-      // 建立優惠券行
-      tr.innerHTML = `
+        const currentDate = new Date();  // 獲取當前日期
+
+        coupons.forEach((coupon, index) => {
+            const tr = document.createElement("tr");
+            const expiryDate = new Date(coupon.expiryDate);  // 將優惠券的到期日期轉換為日期格式
+
+            // 確定優惠券的狀態
+            let status = "有效"; // 預設為有效
+
+            if (!coupon.active) {
+                status = "已禁用";  // 如果優惠券被禁用
+            } else if (expiryDate < currentDate) {
+                status = "已過期";  // 如果優惠券已經過期
+            }
+
+            // 建立優惠券行
+            tr.innerHTML = `
             <td>${coupon.code}</td>
             <td>${coupon.name}</td>
             <td>${coupon.discountType === "percentage" ? "百分比" : "固定金額"}</td>
@@ -2305,182 +2305,179 @@ function generateCouponManagementForm() {
                 <button class="send-button" data-index="${index}">發送</button>
             </td>
         `;
-      couponTableBody.appendChild(tr);
-    });
+            couponTableBody.appendChild(tr);
+        });
+
+        // 綁定禁用/啟用按鈕的事件
+        document.querySelectorAll(".deactivate-button, .activate-button").forEach((button) => {
+            button.addEventListener("click", function () {
+                const index = this.getAttribute("data-index");
+                const coupon = coupons[index];
+
+                const action = coupon.active ? "禁用" : "啟用";
+                const isConfirmed = confirm(`確定要${action}此優惠券嗎？`);
+
+                if (isConfirmed) {
+                    // 發送請求到後端切換優惠券狀態
+                    fetch(`http://localhost:8080/api/coupons/toggle/${coupon.couponId}`, {
+                        method: "POST",
+                    })
+                        .then((response) => response.json())
+                        .then((data) => {
+                            // 更新該優惠券的狀態
+                            coupons[index] = data.coupon;  // 使用後端返回的 coupon 對象更新狀態
+                            displayCoupons(); // 重新渲染表格，確保狀態與後端同步
+                        })
+                        .catch((error) => console.error("Error toggling coupon:", error));
+                }
+            });
+        });
+    }
+
 
     // 綁定禁用/啟用按鈕的事件
-    document.querySelectorAll(".deactivate-button, .activate-button").forEach((button) => {
-      button.addEventListener("click", function () {
-        const index = this.getAttribute("data-index");
-        const coupon = coupons[index];
-
-        const action = coupon.active ? "禁用" : "啟用";
-        const isConfirmed = confirm(`確定要${action}此優惠券嗎？`);
-
-        if (isConfirmed) {
-          // 發送請求到後端切換優惠券狀態
-          fetch(`http://localhost:8080/api/coupons/toggle/${coupon.couponId}`, {
-            method: "POST",
-          })
-              .then((response) => response.json())
-              .then((data) => {
-                // 更新該優惠券的狀態
-                coupons[index] = data.coupon;  // 使用後端返回的 coupon 對象更新狀態
-                displayCoupons(); // 重新渲染表格，確保狀態與後端同步
-              })
-              .catch((error) => console.error("Error toggling coupon:", error));
-        }
-      });
-    });
-  }
-
-
-
-
-
-  // 綁定禁用/啟用按鈕的事件
     document.querySelectorAll(".delete-coupon-button").forEach((button) => {
-      button.addEventListener("click", function () {
-        const index = this.getAttribute("data-index");
-        const coupon = coupons[index];
+        button.addEventListener("click", function () {
+            const index = this.getAttribute("data-index");
+            const coupon = coupons[index];
 
-        // 顯示確認彈窗
-        const action = coupon.isDisabled ? "啟用" : "禁用";
-        const isConfirmed = confirm(`確定要${action}此優惠券嗎？`);
+            // 顯示確認彈窗
+            const action = coupon.isDisabled ? "啟用" : "禁用";
+            const isConfirmed = confirm(`確定要${action}此優惠券嗎？`);
 
-        if (isConfirmed) {
-          // 發送請求切換優惠券狀態
-          fetch(`http://localhost:8080/api/coupons/toggle/${coupon.couponId}`, {
-            method: "POST",
-          })
-              .then((response) => {
-                if (!response.ok) {
-                  throw new Error("Failed to toggle coupon status");
-                }
-                return response.json();  // 解析 JSON 回應
-              })
-              .then((data) => {
-                alert(data.message);  // 顯示狀態消息
-                // 根據返回的狀態更新表格
-                coupons[index].isActive = data.isActive;
-                displayCoupons();  // 刷新優惠券列表
-              })
-              .catch((error) => {
-                console.error("Error toggling coupon:", error);
-              });
+            if (isConfirmed) {
+                // 發送請求切換優惠券狀態
+                fetch(`http://localhost:8080/api/coupons/toggle/${coupon.couponId}`, {
+                    method: "POST",
+                })
+                    .then((response) => {
+                        if (!response.ok) {
+                            throw new Error("Failed to toggle coupon status");
+                        }
+                        return response.json();  // 解析 JSON 回應
+                    })
+                    .then((data) => {
+                        alert(data.message);  // 顯示狀態消息
+                        // 根據返回的狀態更新表格
+                        coupons[index].isActive = data.isActive;
+                        displayCoupons();  // 刷新優惠券列表
+                    })
+                    .catch((error) => {
+                        console.error("Error toggling coupon:", error);
+                    });
 
-        }
-      });
+            }
+        });
     });
 }
 
 
-  document.addEventListener("DOMContentLoaded", function () {
-  initChart();
+document.addEventListener("DOMContentLoaded", function () {
+    initChart();
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-  // 點擊logo時生成內容
-  const logo = document.getElementById("logo");
-  logo.addEventListener("click", function (event) {
-    event.preventDefault(); // 防止跳轉
-    generateOverviewContent(); // 調用生成函數
-  });
-});
-
-document.addEventListener("DOMContentLoaded", function () {
-  // 點擊"總覽"按鈕時生成內容
-  const overviewButton = document.getElementById("overviewButton");
-  overviewButton.addEventListener("click", function (event) {
-    event.preventDefault(); // 防止跳轉
-    generateOverviewContent(); // 調用生成函數
-  });
-});
-
-document.addEventListener("DOMContentLoaded", function () {
-  // 點擊"訂單管理"按鈕時生成內容
-  const orderManagementButton = document.getElementById(
-    "orderManagementButton"
-  );
-  orderManagementButton.addEventListener("click", function (event) {
-    event.preventDefault(); // 防止跳轉
-    generateOrderManagementContent(); // 調用生成訂單管理內容的函數
-  });
-});
-
-document.addEventListener("DOMContentLoaded", function () {
-  // 點擊"商品上傳"按鈕時生成內容
-  const uploadProductButton = document.getElementById("uploadProductButton");
-  uploadProductButton.addEventListener("click", function (event) {
-    event.preventDefault(); // 防止跳轉
-    generateProductUploadForm(); // 調用生成商品上傳表單的函數
-  });
-});
-
-document.addEventListener("DOMContentLoaded", function () {
-  // 點擊"食譜上傳"按鈕時生成內容
-  const uploadRecipeButton = document.getElementById("uploadRecipeButton");
-  uploadRecipeButton.addEventListener("click", function (event) {
-    event.preventDefault(); // 防止跳轉
-    generateRecipeUploadForm(); // 調用生成商品上傳表單的函數
-  });
-});
-
-document.addEventListener("DOMContentLoaded", function () {
-  const editProductButton = document.getElementById("editProductButton");
-
-  if (editProductButton) {
-    editProductButton.addEventListener("click", function (event) {
-      event.preventDefault(); // 防止跳轉
-      generateProductManagementWithActionsContent(); // 調用生成商品管理頁面的函數
+    // 點擊logo時生成內容
+    const logo = document.getElementById("logo");
+    logo.addEventListener("click", function (event) {
+        event.preventDefault(); // 防止跳轉
+        generateOverviewContent(); // 調用生成函數
     });
-  } else {
-    console.error("editProductButton 元素未找到");
-  }
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-  const editProductButton = document.getElementById("recipeEditButton");
-  editProductButton.addEventListener("click", function (event) {
-    event.preventDefault(); // 防止跳轉
-    generateRecipeManagementContent(); // 調用生成食譜管理頁面的函數
-  });
+    // 點擊"總覽"按鈕時生成內容
+    const overviewButton = document.getElementById("overviewButton");
+    overviewButton.addEventListener("click", function (event) {
+        event.preventDefault(); // 防止跳轉
+        generateOverviewContent(); // 調用生成函數
+    });
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-  const manageStockButton = document.getElementById("userManagementButton");
-  manageStockButton.addEventListener("click", function (event) {
-    event.preventDefault(); // 防止跳轉
-    generateUserManagementContent(); // 調用生成用戶管理頁面的函數
-  });
+    // 點擊"訂單管理"按鈕時生成內容
+    const orderManagementButton = document.getElementById(
+        "orderManagementButton"
+    );
+    orderManagementButton.addEventListener("click", function (event) {
+        event.preventDefault(); // 防止跳轉
+        generateOrderManagementContent(); // 調用生成訂單管理內容的函數
+    });
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-  const manageStockButton = document.getElementById("couponManagementButton");
-  manageStockButton.addEventListener("click", function (event) {
-    event.preventDefault(); // 防止跳轉
-    generateCouponManagementForm(); // 調用生成優惠券管理頁面的函數
-  });
+    // 點擊"商品上傳"按鈕時生成內容
+    const uploadProductButton = document.getElementById("uploadProductButton");
+    uploadProductButton.addEventListener("click", function (event) {
+        event.preventDefault(); // 防止跳轉
+        generateProductUploadForm(); // 調用生成商品上傳表單的函數
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    // 點擊"食譜上傳"按鈕時生成內容
+    const uploadRecipeButton = document.getElementById("uploadRecipeButton");
+    uploadRecipeButton.addEventListener("click", function (event) {
+        event.preventDefault(); // 防止跳轉
+        generateRecipeUploadForm(); // 調用生成商品上傳表單的函數
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    const editProductButton = document.getElementById("editProductButton");
+
+    if (editProductButton) {
+        editProductButton.addEventListener("click", function (event) {
+            event.preventDefault(); // 防止跳轉
+            generateProductManagementWithActionsContent(); // 調用生成商品管理頁面的函數
+        });
+    } else {
+        console.error("editProductButton 元素未找到");
+    }
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    const editProductButton = document.getElementById("recipeEditButton");
+    editProductButton.addEventListener("click", function (event) {
+        event.preventDefault(); // 防止跳轉
+        generateRecipeManagementContent(); // 調用生成食譜管理頁面的函數
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    const manageStockButton = document.getElementById("userManagementButton");
+    manageStockButton.addEventListener("click", function (event) {
+        event.preventDefault(); // 防止跳轉
+        generateUserManagementContent(); // 調用生成用戶管理頁面的函數
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    const manageStockButton = document.getElementById("couponManagementButton");
+    manageStockButton.addEventListener("click", function (event) {
+        event.preventDefault(); // 防止跳轉
+        generateCouponManagementForm(); // 調用生成優惠券管理頁面的函數
+    });
 });
 
 // 為 "詳情" 按鈕添加點擊事件
 document.querySelectorAll(".details-link").forEach((link) => {
-  link.addEventListener("click", function (event) {
-    event.preventDefault();
-    const productIndex = this.getAttribute("data-index");
-    generateProductEditForm(products[productIndex]); // 調用商品修改頁面並傳入對應商品數據
-  });
+    link.addEventListener("click", function (event) {
+        event.preventDefault();
+        const productIndex = this.getAttribute("data-index");
+        generateProductEditForm(products[productIndex]); // 調用商品修改頁面並傳入對應商品數據
+    });
 });
 
 // 取消按鈕事件
 document.getElementById("cancelButton").addEventListener("click", function () {
-  generateProductManagementContent(); // 返回商品管理頁面
+    generateProductManagementContent(); // 返回商品管理頁面
 });
 
 // 綁定"商品修改"按鈕的點擊事件
 document
-  .getElementById("editProductButton")
-  .addEventListener("click", function (event) {
-    event.preventDefault();
-    generateProductManagementWithActionsContent(); // 生成商品管理頁面
-  });
+    .getElementById("editProductButton")
+    .addEventListener("click", function (event) {
+        event.preventDefault();
+        generateProductManagementWithActionsContent(); // 生成商品管理頁面
+    });

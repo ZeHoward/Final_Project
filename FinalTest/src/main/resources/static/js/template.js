@@ -12,37 +12,37 @@ document.addEventListener("DOMContentLoaded", function () {
 
   //展開菜單選項
   // menu toggle up/down 圖案
-  window.togglePic1 = function () {
-    var margin1 = document.getElementById("add");
-    var img1 = document.getElementById("updown1");
-    var childContent1 = document.getElementById("tem-dropdown-content1");
-
-    if (img1.src.includes("down.png")) {
-      img1.src = "./material/icon/up.png";
-      margin1.style.margin = "40px 0";
-      childContent1.style.display = "block";
-    } else if (img1.src.includes("up.png")) {
-      img1.src = "./material/icon/down.png";
-      margin1.style.margin = "";
-      childContent1.style.display = "none";
-    }
-  };
-
-  window.togglePic2 = function () {
-    var margin2 = document.getElementById("add");
-    var img2 = document.getElementById("updown2");
-    var childContent2 = document.getElementById("tem-dropdown-content2");
-
-    if (img2.src.includes("down.png")) {
-      img2.src = "./material/icon/up.png";
-      margin2.style.margin = "40px 0";
-      childContent2.style.display = "block";
-    } else if (img2.src.includes("up.png")) {
-      img2.src = "./material/icon/down.png";
-      margin2.style.margin = "";
-      childContent2.style.display = "none";
-    }
-  };
+  // window.togglePic1 = function () {
+  //   var margin1 = document.getElementById("add");
+  //   var img1 = document.getElementById("updown1");
+  //   var childContent1 = document.getElementById("tem-dropdown-content1");
+  //
+  //   if (img1.src.includes("down.png")) {
+  //     img1.src = "./material/icon/up.png";
+  //     margin1.style.margin = "40px 0";
+  //     childContent1.style.display = "block";
+  //   } else if (img1.src.includes("up.png")) {
+  //     img1.src = "./material/icon/down.png";
+  //     margin1.style.margin = "";
+  //     childContent1.style.display = "none";
+  //   }
+  // };
+  //
+  // window.togglePic2 = function () {
+  //   var margin2 = document.getElementById("add");
+  //   var img2 = document.getElementById("updown2");
+  //   var childContent2 = document.getElementById("tem-dropdown-content2");
+  //
+  //   if (img2.src.includes("down.png")) {
+  //     img2.src = "./material/icon/up.png";
+  //     margin2.style.margin = "40px 0";
+  //     childContent2.style.display = "block";
+  //   } else if (img2.src.includes("up.png")) {
+  //     img2.src = "./material/icon/down.png";
+  //     margin2.style.margin = "";
+  //     childContent2.style.display = "none";
+  //   }
+  // };
 
   // 會員功能菜單顯示/隱藏
   let memberInfoDiv = document.getElementById("memberInfoDiv");
