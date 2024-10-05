@@ -33,26 +33,12 @@ public class ECPAYService {
         String form = null;
         try {
 
-
-
-//            // 生成 UUID
-//            String uuId =
-//                    UUID.randomUUID().toString().replaceAll("-", "").substring(0,
-//                            8);
-
-            Pay pay = new Pay();
-            pay.setMerchantNo(postMerchantDto.getMerchantNo());
-            pay.setTotal(postMerchantDto.getTotal());
-            pay.setPayStatus(false);
-
-            payRepository.save(pay);
-            //時間格式化
             String formattedDate = getFormattedCurrentDate();
             // 設定支付訊息
             AllInOne all = new AllInOne("");
             AioCheckOutALL obj = new AioCheckOutALL();
             obj.setMerchantTradeNo(postMerchantDto.getMerchantNo());
-    obj.setMerchantTradeDate(formattedDate);
+            obj.setMerchantTradeDate(formattedDate);
             obj.setTotalAmount(postMerchantDto.getTotal().toString());
             obj.setTradeDesc("test Description");
             obj.setItemName("本次購買總金額");
