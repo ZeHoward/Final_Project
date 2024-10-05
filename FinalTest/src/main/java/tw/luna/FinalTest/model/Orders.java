@@ -196,14 +196,12 @@ public class Orders {
 	public String toString() {
 		return "Orders{" +
 				"orderId=" + orderId +
-				", user=" + user +
 				", totalAmount=" + totalAmount +
 				", percentageDiscount=" + percentageDiscount +
 				", amountDiscount=" + amountDiscount +
 				", finalAmount=" + finalAmount +
 				", status='" + status + '\'' +
 				", address='" + address + '\'' +
-				", payments=" + payment +
 				", orderDate=" + orderDate +
 				'}';
 	}

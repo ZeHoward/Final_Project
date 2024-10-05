@@ -16,7 +16,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tw.luna.FinalTest.dto.PostMerchantDto;
 import tw.luna.FinalTest.dto.QueryOrderDTO;
+import tw.luna.FinalTest.dto.orders.MerchantByUserDto;
+import tw.luna.FinalTest.model.Orders;
 import tw.luna.FinalTest.model.Pay;
+import tw.luna.FinalTest.model.Payment;
 import tw.luna.FinalTest.repository.OrdersRepository;
 import tw.luna.FinalTest.repository.PayRepository;
 
@@ -123,5 +126,13 @@ public class ECPAYService {
         String dateStr = localDateTime.toString();
         LocalDateTime dateTime = LocalDateTime.parse(dateStr, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
         return dateTime.format(outputFormatter);
+    }
+
+    public void changeOrderStatus(String merchantNo) {
+
+        Orders orders = ordersRepository.findByMerchantNo(merchantNo);
+
+        orders.setStatus("completed");
+        ordersRepository.save(orders);
     }
 }

@@ -24,11 +24,14 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.servlet.http.HttpSession;
 import tw.luna.FinalTest.dto.OrderWithUserDTO;
 import tw.luna.FinalTest.dto.OrdersDTO;
+import tw.luna.FinalTest.dto.orders.MerchantByUserDto;
 import tw.luna.FinalTest.dto.orders.OrdersInsertDto;
 import tw.luna.FinalTest.model.Orders;
+import tw.luna.FinalTest.model.Payment;
 import tw.luna.FinalTest.model.UserAllInfo;
 import tw.luna.FinalTest.model.Users;
 import tw.luna.FinalTest.service.OrdersService;
+import tw.luna.FinalTest.service.PaymentService;
 import tw.luna.FinalTest.service.ReportService;
 
 @RequestMapping("/api/orders")
@@ -46,6 +49,16 @@ public class OrdersController {
     
     @Autowired
     HttpSession httpSession;
+
+	@Autowired
+	PaymentService paymentService;
+
+	//透過userId查找payment 更新ordre付款狀態
+	@GetMapping("/pay/{userId}")
+	public List<MerchantByUserDto> getPaymentByUserId (@PathVariable Long userId){
+		return  paymentService.findAllPayments(userId);
+	}
+
 
     // 提交購物車商品->訂單
     @PostMapping ("/{userId}")

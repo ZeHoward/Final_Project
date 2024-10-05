@@ -78,15 +78,15 @@
         <!--使用優惠券折抵的金額-->
         <!--預設為零，有輸入合法的優惠券才呈現折抵數字，否則為0-->
         <div style="font-size: 18px; font-weight: bold; color: #d35b50">
-          優惠券折抵：NT $ {{"還沒寫"}}
+          優惠券折抵：NT $ {{discount}}
+          <!--優惠券生效後用參數代入否則為0-->
         </div>
-
         <!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
 
         <!--優惠碼-->
         <div class="coupon-container">
-          <input type="text" placeholder="輸入優惠序號" />
-          <button class="useCouponBtn">使用優惠券</button>
+          <input type="text" placeholder="輸入優惠序號" v-model="couponCode" />
+          <button class="useCouponBtn" @click="applyCoupon">使用優惠券</button>
         </div>
 
         <div class="actions">
@@ -105,11 +105,37 @@
           const api = ref("http://localhost:8080/api");
           const userId = ref(0); // 使用者 ID，這裡假設為 2
           const products = ref([]); // 用來儲存產品的數組
+          // const couponCode = ref(""); // 用于存储输入的优惠券代码
+          // const discount = ref(0); // 用于存储折扣金额
           const totalAmount2 = computed(() => {
             return products.value.reduce(
               (total, product) => total + product.quantity * product.price,
               0
             );
+          });
+
+          const applyCoupon = async () => {
+            try {
+              const cartId = 1; // 假设购物车 ID（根据你的业务逻辑进行修改）
+              const response = await axios.post(`${api.value}/apply-coupon`, {
+                cartId,
+                couponCode: couponCode.value,
+              });
+
+              if (response.data.success) {
+                discountAmount.value = response.data.discount; // 假设返回的折扣金额
+                discountMessage.value = "優惠券已成功應用！";
+              } else {
+                discountMessage.value = response.data.message;
+              }
+            } catch (error) {
+              discountMessage.value = "應用優惠券時出錯！請稍後再試。";
+              console.error(error);
+            }
+          };
+
+          const totalAfterDiscount = computed(() => {
+            return finalAmount2 - discountAmount.value;
           });
 
           const getUserId = async () => {
@@ -164,7 +190,7 @@
             );
 
             //缺少優惠券
-            const finalAmount = totalAmount + 120;
+            const finalAmount = totalAmount + 160;
             const queryParams = new URLSearchParams({
               totalAmount: totalAmount,
               finalAmount: finalAmount,

@@ -127,7 +127,7 @@
             <div class="checkbox-container">
               <input type="radio" id="delivery" name="delivery" />
               <label for="delivery">冷凍-黑貓宅急便 </label>
-              <p>運費：NT$120</p>
+              <p>運費：NT$160</p>
             </div>
 
             <div style="margin-top: 15%">
@@ -177,7 +177,7 @@
               <p id="discount" style="color: #d35b50">
                 優惠券折抵：NT $ {{"還沒寫"}}
               </p>
-              <p id="shipping">運費：NT $ {{120}}</p>
+              <p id="shipping">運費：NT $ {{160}}</p>
               <p id="finalAmount">付款總金額：NT $ {{finalAmount}}</p>
               <p id="total" style="font-size: large"></p>
             </div>
@@ -398,7 +398,8 @@
           //要傳遞出去的參數  缺少優惠券
           const toCheckInfo = () => {
             const totalAmount = totalAmount2.value;
-            const finalAmount2 = totalAmount + 120;
+            const finalAmount2 = totalAmount + 160;
+            //const discount = discount.value;
 
             //name.value抓這頁的變數 :前的name2是傳出去的變數名稱
             const queryParams = new URLSearchParams({
@@ -412,6 +413,7 @@
               zipCode: zipCode.value,
               address: address.value,
               phone: phone.value,
+              // discount,
             }).toString();
 
             window.location.href = `/checkInfo?${queryParams}`;

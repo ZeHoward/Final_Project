@@ -2,12 +2,10 @@ package tw.luna.FinalTest.controller;
 
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import tw.luna.FinalTest.dto.PostMerchantDto;
 import tw.luna.FinalTest.dto.QueryOrderDTO;
+import tw.luna.FinalTest.dto.orders.MerchantByUserDto;
 import tw.luna.FinalTest.service.ECPAYService;
 import tw.luna.FinalTest.service.OrderService;
 import tw.luna.FinalTest.service.OrdersService;
@@ -34,4 +32,11 @@ public class ECPAYController {
                              @RequestBody QueryOrderDTO queryOrderDTO) throws IOException {
         return ecpayService.queryOrder(queryOrderDTO);
     }
+
+    @PutMapping("/changeOrderStatus")
+    public void changeOrderStatus(@RequestBody MerchantByUserDto merchantNo) {
+        ecpayService.changeOrderStatus(merchantNo.getMerchantNo());
+    }
+
+
 }
