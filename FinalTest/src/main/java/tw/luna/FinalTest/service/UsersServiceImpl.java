@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -348,4 +349,18 @@ public class UsersServiceImpl {
 		return usersRepository.resetPasswordByEmail(BCrypt.hashpw(password, BCrypt.gensalt()), email);
 	}
 
+	
+	public UsersStatus revalidate(String email) {
+		String token = UUID.randomUUID().toString();
+		List<Users> results = usersRepository.findByEmailAndAuthType(email, "email");
+		if(results.isEmpty() || results.size() == 0) {
+			return UsersStatus.NOT_EXIST;
+		}
+		int result = usersRepository.resetTokenByEmail(token, email);
+		if(result <= 0) {
+			return UsersStatus.ADD_FAILURE;
+		}
+		emailCheckService.sendVerificationEmail(email, token);
+		return UsersStatus.ADD_SUCCESS;
+	}
 }

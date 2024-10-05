@@ -99,6 +99,7 @@
     color: black;
 }
 .registA:hover{
+	cursor: pointer;
     text-decoration: none;
     color: #F3CE6E;
 }
@@ -133,3 +134,5 @@
 .socialButton:hover {
   transform: scale(1.05);
 } 
+
+
