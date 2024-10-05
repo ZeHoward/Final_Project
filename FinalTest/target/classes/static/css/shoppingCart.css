@@ -1,0 +1,152 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden; /* 防止水平滾動條 */
+}
+
+/*以下為主畫面*/
+
+.container {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+.title {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+/*返回購物按鈕*/
+.gobackButton {
+  font-size: 16px;
+  font-weight: bolder;
+  color: #007bff;
+  background-color: #fff;
+  cursor: pointer;
+  text-decoration: none;
+  border: none;
+}
+table {
+  width: 100%;
+  border-collapse: collapse; /*邊框合併*/
+}
+thead th {
+  border-bottom: 2px solid #ddd;
+}
+tbody td {
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+}
+tbody tr:last-child td {
+  border-bottom: none;
+}
+td {
+  padding: 10px;
+  text-align: center; /* 確保所有 td 的內容都是水平置中 */
+}
+th {
+  font-weight: bolder;
+  font-size: large;
+}
+
+.total {
+  /*商品總額*/
+  font-weight: bold;
+  font-size: 20px;
+  text-align: left;
+  margin-top: 20px;
+  border-top: 2px solid #ddd;
+  padding-top: 30px;
+}
+
+.product-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+.coupon-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px; /*序號框跟按鈕的距離*/
+}
+.coupon-container input {
+  width: 110px;
+  padding: 10px;
+}
+.useCouponBtn {
+  background-color: #857d7b;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  width: auto;
+}
+.useCouponBtn:hover {
+  background-color: #564a4d;
+}
+.quantity {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* 水平置中 */
+}
+.quantity button {
+  background-color: transparent;
+  border: 1px solid #ddd;
+  color: #007bff;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 5px 10px;
+  text-align: center;
+}
+.quantity span {
+  margin: 0 10px;
+}
+/* 提交訂單 */
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 30px;
+}
+.submitButton {
+  background-color: #d35b50;
+  font-size: medium;
+  color: white;
+  border-radius: 8px;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  margin-left: 10px;
+  width: 240px;
+  font-weight: bold;
+  margin: 30px 0 100px 0;
+}
+.submitButton:hover {
+  background-color: #ca2a1c;
+}
+
+/*刪除按鈕*/
+td button {
+  background-color: transparent;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 0;
+  text-align: center;
+}
+
+.fa-trash:hover {
+  color: #d35b50;
+}
+/* 響應式設置 */
+@media (max-width: 800px) {
+  .container {
+    width: 80vw; /* 在小螢幕上稍微增加寬度 */
+  }
+}

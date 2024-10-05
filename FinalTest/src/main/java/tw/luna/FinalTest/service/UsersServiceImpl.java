@@ -6,10 +6,12 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.google.firebase.auth.FirebaseToken;
+import com.google.firebase.auth.hash.Bcrypt;
 
 import jakarta.servlet.http.HttpSession;
 import tw.luna.FinalTest.BCrypt;
@@ -326,5 +328,39 @@ public class UsersServiceImpl {
 		}	
 		return usersResponse;	
 		
+	}
+	
+	public boolean getUserByEmailAndBirthday(String email, String birthday) {
+		List<Object[]> results = usersRepository.findByEmailAndBirthday(email, birthday);
+		
+		if(results.isEmpty() || results.size() == 0) {
+			return false;
+		}
+		
+		Object[] result = results.get(0);
+		
+		System.out.println("忘記密碼email:" + (String) result[2]);
+		emailCheckService.sendForgetPasswordEmail((String) result[2]);
+		return true;
+
+	}
+	
+	public int resetPasswordByEmail(String email, String password) {
+		return usersRepository.resetPasswordByEmail(BCrypt.hashpw(password, BCrypt.gensalt()), email);
+	}
+
+	
+	public UsersStatus revalidate(String email) {
+		String token = UUID.randomUUID().toString();
+		List<Users> results = usersRepository.findByEmailAndAuthType(email, "email");
+		if(results.isEmpty() || results.size() == 0) {
+			return UsersStatus.NOT_EXIST;
+		}
+		int result = usersRepository.resetTokenByEmail(token, email);
+		if(result <= 0) {
+			return UsersStatus.ADD_FAILURE;
+		}
+		emailCheckService.sendVerificationEmail(email, token);
+		return UsersStatus.ADD_SUCCESS;
 	}
 }
