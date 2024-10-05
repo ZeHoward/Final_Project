@@ -80,4 +80,10 @@ public interface UsersRepository extends JpaRepository<Users, Long>{
 	@Query(value = "UPDATE users SET password = :password WHERE email = :email AND authType = 'email'", nativeQuery = true)
 	int resetPasswordByEmail(@Param("password") String password, @Param("email") String email);
 
+	
+	@Modifying
+	@Transactional
+	@Query(value = "UPDATE users SET token = :token, isVerified = 0 WHERE email = :email AND authType = 'email'", nativeQuery = true)
+	int resetTokenByEmail(@Param("token") String token, @Param("email") String email);
+
 }

@@ -186,6 +186,11 @@ public class UsersController {
 		
 	}
 	
+	@GetMapping("/revalidate")
+	public UsersStatus revalidate(@RequestParam String email) {
+		return usersServiceImpl.revalidate(email);
+	}
+	
 	
 	
 }
