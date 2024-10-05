@@ -73,14 +73,16 @@ window.onload = function () {
                             if (isLoggedIn) {
                                 getUserId().then(userId => {
                                     if (userId) {
-                                        const productName = document.getElementById("productName").textContent.trim();  // 確保去掉空格
+                                        const productName = document.getElementById("productName").textContent.trim();
                                         const quantity = parseInt(document.getElementById("quantity").value);
-                                        const productId = new URLSearchParams(window.location.search).get("productId");
-                                        const cartItem = {
-                                            productName: productName,  // 傳遞商品名稱
-                                            quantity: quantity
-                                        };
-
+                                        const productId = parseInt(new URLSearchParams(window.location.search).get("productId")) ;
+                                        const cartItem =
+                                            {
+                                                productName:productName,
+                                                productId: productId,
+                                                quantity: quantity
+                                            };
+                                        console.log(cartItem);
 
                                         // 發送加入購物車請求
                                         fetch(`/api/cart/put/${userId}`, {
@@ -276,6 +278,8 @@ window.onload = function () {
             const productDiv = document.createElement("div");
             productDiv.className = "product";
             productDiv.style.cursor = "pointer";
+            productDiv.dataset.productId = product.productId
+            productDiv.dataset.productName = product.name;
 
             // 創建 img 元素
             const imgElement = document.createElement("img");
@@ -330,27 +334,68 @@ window.onload = function () {
                 .addEventListener("click", function (event) {
                     event.stopPropagation();
                     checkLoginStatus()
-                        .then(isLoggedIn => {
+                        .then((isLoggedIn) => {
                             if (isLoggedIn) {
-                                Swal.fire({
-                                    title: "成功",
-                                    text: "已將商品加入購物車",
-                                    icon: "success",
-                                    timer: 1500,
+                                getUserId().then(userId => {
+                                    if (userId) {
+                                        const productElement = event.target.closest(".product");
+                                        const productId = productElement.dataset.productId;
+                                        const productName = productElement.dataset.productName;
+                                        const quantity = 1;
+                                        // const productId = parseInt(new URLSearchParams(window.location.search).get("productId"));
+                                        const cartItem =
+                                            {
+                                                productName: productName,
+                                                productId: productId,
+                                                quantity: quantity
+                                            };
+                                        console.log(cartItem);
+
+                                        // 發送加入購物車請求
+                                        fetch(`/api/cart/put/${userId}`, {
+                                            method: "PUT",
+                                            headers: {
+                                                "Content-Type": "application/json",
+                                            },
+                                            body: JSON.stringify(cartItem), // 傳送商品數據
+                                        })
+                                            .then(response => {
+                                                if (response.ok) {
+                                                    Swal.fire({
+                                                        title: "成功",
+                                                        text: "已將商品加入購物車",
+                                                        icon: "success",
+                                                        timer: 1500,
+                                                    });
+                                                } else {
+                                                    Swal.fire({
+                                                        title: "錯誤",
+                                                        text: "無法將商品加入購物車",
+                                                        icon: "error",
+                                                    });
+                                                }
+                                            })
+                                            .catch((error) => {
+                                                console.error("加入購物車時發生錯誤:", error);
+                                                Swal.fire({
+                                                    title: "錯誤",
+                                                    text: "加入購物車時發生錯誤",
+                                                    icon: "error",
+                                                });
+                                            });
+                                    }
                                 });
-                                console.log("success");
-                                // addToCart(product.productId,1); //加入購物車請求
                             } else {
                                 Swal.fire({
                                     title: "未登入",
-                                    text: `請先登入才能加入購物車`,
+                                    text: "請先登入才能加入購物車",
                                     icon: "warning",
                                     showCancelButton: true,
                                     confirmButtonText: '登入',
                                     cancelButtonText: '取消',
                                 }).then((result) => {
                                     if (result.isConfirmed) {
-                                        window.location.href = 'http://localhost:8080/loginPage';
+                                        window.location.href = "/loginPage";
                                     }
                                 });
                             }
@@ -401,7 +446,7 @@ window.onload = function () {
                             }
                         })
                 });
-            }
+        }
     }
 
     //tab內容
