@@ -28,7 +28,6 @@ window.onload = function () {
             </div>
               <button class="btn cart" id="cart"><i class="fa-solid fa-cart-shopping"></i>&nbsp;加入購物車</button>
               <button class="btn like" id="like"><i class="fa-regular fa-heart"></i>&nbsp;收藏商品</button>
-              <button class="btn keep" id="keep"><i class="fa-solid fa-book-open"></i>&nbsp;查看食譜</button>
             <div class="ship">
               <h3>&nbsp;配送方式: &nbsp;</h3>
               <p>黑貓宅急便(低溫配送)</p>
@@ -175,9 +174,6 @@ window.onload = function () {
                             }
                         })
                 })
-                document.getElementById("keep").addEventListener("click", function () {
-                    window.location.href = "我要食譜頁面URL";
-                })
 
                 // 商品詳細描述
                 const detailSection = document.querySelector(".description");
@@ -288,7 +284,7 @@ window.onload = function () {
 
             // 設置商品卡的 HTML 內容
             const productHtml = `
-        <h3 class="related-product-name">${product.name}</h3>
+        <p class="related-product-name">${product.name}</p>
         <p class="related-product-price">$NT${product.price}</p>
         <div class="home-product-btn">
           <button class="add-to-favorite"><i class="fa-solid fa-heart"></i></button>
