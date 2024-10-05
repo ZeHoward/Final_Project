@@ -56,6 +56,8 @@ public class CartService {
         }
 
         cartItemsRepository.save(cartItem);
+
+
     }
 
 
@@ -89,15 +91,9 @@ public class CartService {
             cart.setUsers(usersRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("用戶不存在")));
             cartRepository.save(cart); // 保存新購物車
         }
-
         Product product = productRepository.findProductByName(cartInsertDto.getProductName());
-        if (product == null) {
-            throw new IllegalArgumentException("商品不存在: " + cartInsertDto.getProductName());
-        }
         System.out.println(product);
-
-        CartItems isPresent = cartItemsRepository.isCartItemInCart(cart, product);
-
+        CartItems isPresent = cartItemsRepository.findByCartCartIdAndProductName(cart.getCartId(),cartInsertDto.getProductName());
         if(isPresent == null) {          //購物車內目前不存在該商品 ->新增
             CartItems cartItems = new CartItems();
             cartItems.setCart(cart);
@@ -107,8 +103,8 @@ public class CartService {
             cartItems.setPrice(product.getPrice());
             cartItemsRepository.save(cartItems);
         }else {  //購物車內已存在該商品 ->更新數量
-            int newQuantity = isPresent.getQuantity() + Math.max(cartInsertDto.getQuantity(), 1);  // 若商品以在購物車內，將原有數量加上新選擇數量=新商品數量
-            isPresent.setQuantity(newQuantity);
+
+            isPresent.setQuantity(Math.max(cartInsertDto.getQuantity(), 1));
             cartItemsRepository.save(isPresent);
         }
     }
@@ -130,9 +126,9 @@ public class CartService {
         CartItems isPresent = cartItemsRepository.findByCartCartIdAndProductName(cart.getCartId(),name);
 
         if(isPresent != null)  { //商品存在
-        //刪除商品
-        cartItemsRepository.delete(isPresent);
-         } else {
+            //刪除商品
+            cartItemsRepository.delete(isPresent);
+        } else {
             throw new RuntimeException("購物車內無此商品");
         }
     }
