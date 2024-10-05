@@ -97,7 +97,7 @@ function renderProducts(products, containerId, currentIndex) {
 
     // 設置商品卡的 HTML 內容
     const productHtml = `
-      <h3 class="product-name">${product.name}</h3>
+      <p class="product-name">${product.name}</p>
       <p class="product-price">$NT${product.price}</p>
       <div class="home-product-btn">
         <button class="add-to-favorite"><i class="fa-solid fa-heart"></i></button>

@@ -74,16 +74,6 @@ body {
   background-color: #717171;
 }
 
-/*.fade {*/
-/*  animation-name: fade;*/
-/*  animation-duration: 1.5s;*/
-/*}*/
-
-/*@keyframes fade {*/
-/*  from {opacity: .4}*/
-/*  to {opacity: 1}*/
-/*}*/
-
 /* 生鮮食材包專區 */
 .container {
   align-items: center;
@@ -117,7 +107,7 @@ h1 {
 }
 
 .product-name {
-  font-size: 18px;
+  font-size: medium;
 }
 
 .product-image {
@@ -128,7 +118,7 @@ h1 {
 }
 
 .product-price {
-  font-size: 15px;
+  font-size: medium;
   color: #d35b50;
   font-weight: 700;
 }
