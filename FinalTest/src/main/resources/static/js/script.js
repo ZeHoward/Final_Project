@@ -576,7 +576,6 @@ function generateOrderManagementContent() {
             const orderDate = order.orderDate
                 ? new Date(order.orderDate).toLocaleDateString()
                 : "無日期";
-
             tr.innerHTML = `
             <td>
                 <p>${orderName}</p>

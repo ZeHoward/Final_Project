@@ -4,14 +4,13 @@ public class FavoritesRecipeDTO {
     private int productId;
     private String name;
     private int price;
-    private String imageBase64;
+    private String imageUrl;
 
-    // Constructors, getters and setters
-    public FavoritesRecipeDTO(int productId, String name, int price, String imageBase64) {
+    public FavoritesRecipeDTO(int productId, String name, int price, String imageUrl) {
         this.productId = productId;
         this.name = name;
         this.price = price;
-        this.imageBase64 = imageBase64;
+        this.imageUrl = imageUrl;
     }
 
     public int getProductId() {
@@ -38,11 +37,12 @@ public class FavoritesRecipeDTO {
         this.price = price;
     }
 
-    public String getImageBase64() {
-        return imageBase64;
-    }
+	public String getImageUrl() {
+		return imageUrl;
+	}
 
-    public void setImageBase64(String imageBase64) {
-        this.imageBase64 = imageBase64;
-    }
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+
 }
