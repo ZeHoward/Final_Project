@@ -570,7 +570,7 @@ function generateOrderManagementContent() {
       // 訂單配送方式，如果 order.deliveryMethod 不存在，顯示 '無配送方式'
       const deliveryMethod = order.deliveryMethod
         ? order.deliveryMethod
-        : "到府";
+        : "自取";
 
       // 訂單日期格式化，如果 order.orderDate 存在
       const orderDate = order.orderDate
