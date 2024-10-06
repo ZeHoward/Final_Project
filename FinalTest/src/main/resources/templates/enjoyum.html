@@ -12,11 +12,12 @@
       @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap");
     </style>
     <link rel="stylesheet" th:href="@{css/enjoyum.css}" />
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   </head>
-  
+
   <body>
    	<div th:replace="header"></div>
-   	
+
    	<div id="myContainer">
 	    <!-- slideshow start -->
 		<div class="mySlides fade">
@@ -51,7 +52,7 @@
 
 	</div>
 	    <!-- slideshow end -->
-	
+
 	    <!-- 商品精選 -->
 	    <div class="container">
 	      <div class="bt">
@@ -65,7 +66,7 @@
 	      <button class="view-all" data-type="preparedFood">點擊查看更多</button>
 	    </div>
 	    <!-- 商品精選 -->
-	
+
 	    <!-- 產品特色 -->
 	    <div class="feature-section2">
 	      <div class="container">
@@ -162,9 +163,9 @@
 	        </div>
 	      </div>
 	    </div>
-	
+
 	    <!-- Feature End -->
-	
+
 	    <!-- 商品精選 -->
 	    <div class="container">
 	      <div class="bt">
@@ -179,9 +180,9 @@
 	    </div>
 	    <!-- 商品精選 -->
 	</div>
-   	
+
 	<div th:replace="footer"></div>
-	
-	<script th:src="@{js/enjoyum.js}" defer="defer"></script>	
+
+	<script th:src="@{js/enjoyum.js}" defer="defer"></script>
   </body>
 </html>

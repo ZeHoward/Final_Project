@@ -4,14 +4,13 @@
           const params = new URLSearchParams(window.location.search);
           const totalAmount = params.get("totalAmount");
           const finalAmount2 = params.get("finalAmount2");
+          // const discount = params.get("discount");
           const api = ref("http://localhost:8080/api");
           const img = ref(
             "https://plus.unsplash.com/premium_photo-1661322640130-f6a1e2c36653?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8YXBwbGV8ZW58MHx8MHx8fDA%3D"
           );
-          const userId = ref(2); // 使用者 ID
-          //params.get("name2")取出前一頁傳來的name2並用name5接
+          const userId = ref(0); // 使用者 ID
           const products = ref([])
-
           const name5 = params.get("name2")
           const lastName2 = params.get("lastName")
           const email = params.get("email")
@@ -26,6 +25,13 @@
           const merchantTradeNo = ref("")
           const sendCheckoutForm = ref({})
           const isSubmit = ref(false)
+
+          const getUserId = async () => {
+            const res = await axios.get(`/users/userAllInfo`);
+            userId.value = res.data.userId;
+            console.log(userId.value);
+            getCart();
+          };
 
           // 生成 UUID
           function generateUUID() {
@@ -117,7 +123,7 @@
 
           
           onMounted(() => {
-            getCart()
+            getUserId()
           })
 
           return {

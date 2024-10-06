@@ -112,6 +112,8 @@
     justify-content: center;
     gap: 20px;
     margin: 20px 0;
+    font-size: 30px;
+    color: white;
   }
 
 .socialButton {
@@ -120,19 +122,10 @@
   align-items: center;
   width: 120px;
   height: 60px;
-  border: 2px solid #c8d365;
+  border: none;
   border-radius: 10px;
   cursor: pointer;
   transition: transform 0.3s ease;
 }
-
-.socialButton img {
-  width: 30px;
-  height: 30px;
-}
-
-.socialButton:hover {
-  transform: scale(1.05);
-} 
 
 

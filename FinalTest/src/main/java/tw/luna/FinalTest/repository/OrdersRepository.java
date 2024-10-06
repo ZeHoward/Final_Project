@@ -13,6 +13,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import tw.luna.FinalTest.dto.OrdersDTO;
+import tw.luna.FinalTest.dto.orders.MerchantByUserDto;
 import tw.luna.FinalTest.model.OrderDetails;
 import tw.luna.FinalTest.model.Orders;
 
@@ -81,6 +82,8 @@ public interface OrdersRepository extends JpaRepository<Orders, Integer> {
 	
 //	@Query(value ="SELECT * FROM orders o WHERE o.userId = :userId", nativeQuery = true)
 	List<Orders> findByUserUserId(Long userId);
-    
 
+	//wen
+	@Query("SELECT o FROM Orders o JOIN o.payment p WHERE p.merchantNo = :merchantNo")
+	Orders findByMerchantNo(String merchantNo);
 }
