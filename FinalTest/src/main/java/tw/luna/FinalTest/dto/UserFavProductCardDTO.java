@@ -5,16 +5,15 @@ public class UserFavProductCardDTO {
     private Integer productId;
     private String name;
     private Integer price;
-    private String imageBase64;  // Base64 編碼的圖片
+    private String imageUrl;
 
-    public UserFavProductCardDTO(Integer productId, String name, Integer price, String imageBase64) {
+    public UserFavProductCardDTO(Integer productId, String name, Integer price, String imageUrl) {
         this.productId = productId;
         this.name = name;
         this.price = price;
-        this.imageBase64 = imageBase64;
+        this.imageUrl = imageUrl;
     }
 
-    // Getters and Setters
     public Integer getProductId() {
         return productId;
     }
@@ -39,11 +38,11 @@ public class UserFavProductCardDTO {
         this.price = price;
     }
 
-    public String getImageBase64() {
-        return imageBase64;
-    }
+	public String getImageUrl() {
+		return imageUrl;
+	}
 
-    public void setImageBase64(String imageBase64) {
-        this.imageBase64 = imageBase64;
-    }
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
 }

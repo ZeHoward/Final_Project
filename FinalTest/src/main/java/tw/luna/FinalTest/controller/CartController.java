@@ -14,7 +14,6 @@ import java.util.List;
 @RequestMapping("/api/cart")
 @RestController
 public class CartController {
-    Long userId = 1L; // 假設用戶 ID 固定為 1，實際情況應根據需求調整
 
     @Autowired
     CartService cartService;
