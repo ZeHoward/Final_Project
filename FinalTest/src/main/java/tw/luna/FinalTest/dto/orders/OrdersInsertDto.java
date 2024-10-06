@@ -13,7 +13,7 @@ public class OrdersInsertDto {
     //payment
 //    private LocalDateTime paymentDate; //now
     private Integer paymentAmount; //cart
- //   private String merchantNo; //點擊進入綠界時取得---訂單編號
+    private String merchantNo; //點擊進入綠界時取得---訂單編號
 
 
     //orders
@@ -30,6 +30,8 @@ public class OrdersInsertDto {
 //    private Integer quantity; //cartitems
 //    private Integer price; //cartitems
 
+
+
     //coupon
     private String code;
 
@@ -44,6 +46,13 @@ public class OrdersInsertDto {
         this.finalAmount = finalAmount;
         this.address = address;
         this.code = code;
+    }
+    public String getMerchantNo() {
+        return merchantNo;
+    }
+
+    public void setMerchantNo(String merchantNo) {
+        this.merchantNo = merchantNo;
     }
 
     public Integer getPaymentAmount() {

@@ -100,4 +100,14 @@ public class PageController {
 	public String couponPage() {
 		return "couponPage";
 	}
+	
+	@GetMapping("/forgetPasswordPage")
+	public String forgetPasswod() {
+		return "forgetPasswordPage";
+	}
+	
+	@GetMapping("/resetPassword")
+	public String resetPassword() {
+		return "resetPassword";
+	}
 }

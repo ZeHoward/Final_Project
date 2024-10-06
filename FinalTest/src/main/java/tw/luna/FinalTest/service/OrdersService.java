@@ -121,13 +121,12 @@ public class OrdersService {
 //
 //        });
 
-		String random = UUID.randomUUID().toString().replaceAll("-", "").substring(0, 8);
-
+//
 		Payment payment = new Payment();
 		payment.setOrder(orders);
 		payment.setPaymentAmount(ordersInsertDto.getPaymentAmount());
 		payment.setPaymentDate(LocalDateTime.now());
-		payment.setMerchantNo(random);
+		payment.setMerchantNo(ordersInsertDto.getMerchantNo());
 		orders.setPayment(payment);
 
 		ordersRepository.save(orders);

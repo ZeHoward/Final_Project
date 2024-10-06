@@ -1,21 +1,30 @@
  package tw.luna.FinalTest.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
+import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
+import tw.luna.FinalTest.repository.UsersRepository;
 
 @Service
 public class EmailCheckService {
 	@Autowired
     private JavaMailSender mailSender;
+	
+	@Autowired
+	private UsersRepository usersRepository;
+	
+	
 
     public void sendVerificationEmail(String to, String token) {
         try {
-            MimeMessage message = mailSender.createMimeMessage();
-            MimeMessageHelper helper = new MimeMessageHelper(message, true);
+        	MimeMessage message = mailSender.createMimeMessage();
+        	MimeMessageHelper helper = new MimeMessageHelper(message, true);
             
             String htmlContent = "<html lang=\"zh-Hant\"><head><meta charset=\"UTF-8\">" +
                     "<style>body {font-family: Arial, sans-serif;background-color: #f4f4f4;margin: 0;padding: 0;}" +
@@ -35,4 +44,31 @@ public class EmailCheckService {
             e.printStackTrace();
         }
     }
+
+    public void sendForgetPasswordEmail(String to) {
+	
+	try {
+		MimeMessage message = mailSender.createMimeMessage();
+    	MimeMessageHelper helper = new MimeMessageHelper(message, true);
+    	String forgetPasswordUrl = "http://localhost:8080/resetPassword";
+    	String htmlContent = "<p>您好，</p>" +
+                "<p>我們收到了您重設密碼的請求。</p>" +
+                "<p>點擊以下連結重設您的密碼：</p>" +
+                "<p><a href=\"" + forgetPasswordUrl + "?email=" + to + "\">重設密碼</a></p>" +
+                "<br>" +
+                "<p>如果您並未請求重設密碼，請忽略此郵件。</p>";
+    			
+    	helper.setTo(to);
+        helper.setFrom("haurd8080@gmail.com");
+        helper.setSubject("請重設您的密碼");
+        helper.setText(htmlContent, true);
+        mailSender.send(message);
+    	
+	} catch (MessagingException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+
+  }
+
 }
