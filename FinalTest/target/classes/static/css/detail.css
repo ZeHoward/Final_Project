@@ -67,13 +67,14 @@
   margin: 2vw 5vw;
 }
 
-.description,
-.caption {
+.description
+.caption{
   border-bottom: #d1de74 1px solid;
 }
 
 label {
   font-size: 24px;
+  font-weight: 700;
 }
 
 input {
@@ -232,7 +233,7 @@ h1 {
   position: relative;
   top: 0;
   margin: 0 20px;
-  background: #fef9f9;
+  background: #f3ce6e;
   border: none;
   border-radius: 15%;
   padding: 10px;
@@ -242,13 +243,12 @@ h1 {
 
 /* 購物須知 */
 .tab {
-  border-bottom: #d1de74 2px solid;
   overflow: hidden;
   text-align: center;
 }
 
 .tab button {
-  background-color: #d1de74;
+  background-color: #F3CE6E;
   text-align: center;
   border: none;
   outline: none;
@@ -258,28 +258,32 @@ h1 {
   font-size: 25px;
   font-weight: 700;
   width: 40%;
+  margin-bottom: 10px;
 }
 
 .tab button.hover {
-  background-color: #abd045;
+  background-color: #fdcf37;
 }
 .tab button.active {
-  background-color: #a1c14b;
+  background-color: #fdcf37;
 }
 
 .tabcontent {
   padding: 30px 12px;
+  border-bottom: 1px solid #f3ce6e;
 }
 
 .tablinks {
-  border-radius: 15px 15px 0 0;
+  border-radius: 15px;
   margin: 0 10px;
 }
 
 .caption > h3 {
   display: inline-flex;
   padding: 5px;
-  background-color: #cbb68c;
+  background-color: #ece2b3;
+  margin-bottom: 5px;
+  border-radius: 5px;
 }
 
 i.active {

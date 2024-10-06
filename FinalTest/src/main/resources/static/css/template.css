@@ -164,11 +164,10 @@ body {
   background: none;
   border: none;
   cursor: pointer;
-  padding: 10px;
 }
 
 .tem-header-icons a {
-  margin: 0 10px;
+  /*margin: 0 10px;*/
   font-size: 24px;
   text-decoration: none;
   color: black;
