@@ -58,7 +58,7 @@ public interface UsersRepository extends JpaRepository<Users, Long>{
 	@Query(value = "SELECT u.userId, u.username, u.email, u.isDel  FROM users u WHERE u.email = :email AND u.authType = 'google'", nativeQuery = true)
 	List<Object[]> findByGoogleEmail(@Param("email") String email);
 
-
+	
 	@Query(value = "SELECT u.userId, u.username, u.email, u.password, u.phoneNumber, " +
             "ui.firstName, ui.lastName, ui.address, ui.postalCode, ui.county, ui.district, ui.birthday, u.isDel, u.isVerified, u.authType " +
             "FROM users u " +
@@ -66,4 +66,24 @@ public interface UsersRepository extends JpaRepository<Users, Long>{
             "WHERE u.userId = :userId AND u.authType = 'google'", nativeQuery = true)
 	List<Object[]> findByGoogleUserId(@Param("userId") Long userId);
 	
+	
+	@Query(value = "SELECT u.userId, u.username, u.email, u.password, u.phoneNumber, u.token," +
+            "ui.firstName, ui.lastName, ui.address, ui.postalCode, ui.county, ui.district, ui.birthday, u.isDel, u.isVerified, u.authType " +
+            "FROM users u " +
+            "JOIN userinfo ui ON u.userId = ui.userId " +
+            "WHERE u.email = :email AND ui.birthday = :birthday AND u.authType = 'email' ", nativeQuery = true)
+	List<Object[]> findByEmailAndBirthday(@Param("email") String email, @Param("birthday") String birthday);
+	
+	
+	@Modifying
+	@Transactional
+	@Query(value = "UPDATE users SET password = :password WHERE email = :email AND authType = 'email'", nativeQuery = true)
+	int resetPasswordByEmail(@Param("password") String password, @Param("email") String email);
+
+	
+	@Modifying
+	@Transactional
+	@Query(value = "UPDATE users SET token = :token, isVerified = 0 WHERE email = :email AND authType = 'email'", nativeQuery = true)
+	int resetTokenByEmail(@Param("token") String token, @Param("email") String email);
+
 }

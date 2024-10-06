@@ -16,7 +16,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tw.luna.FinalTest.dto.PostMerchantDto;
 import tw.luna.FinalTest.dto.QueryOrderDTO;
+import tw.luna.FinalTest.dto.orders.MerchantByUserDto;
+import tw.luna.FinalTest.model.Orders;
 import tw.luna.FinalTest.model.Pay;
+import tw.luna.FinalTest.model.Payment;
 import tw.luna.FinalTest.repository.OrdersRepository;
 import tw.luna.FinalTest.repository.PayRepository;
 
@@ -33,30 +36,18 @@ public class ECPAYService {
         String form = null;
         try {
 
-            // 生成 UUID
-            String uuId =
-                    UUID.randomUUID().toString().replaceAll("-", "").substring(0,
-                            8);
-
-            Pay pay = new Pay();
-            pay.setMerchantNo(postMerchantDto.getMerchantNo());
-            pay.setTotal(postMerchantDto.getTotal());
-            pay.setPayStatus(false);
-
-            payRepository.save(pay);
-            //時間格式化
             String formattedDate = getFormattedCurrentDate();
             // 設定支付訊息
             AllInOne all = new AllInOne("");
             AioCheckOutALL obj = new AioCheckOutALL();
             obj.setMerchantTradeNo(postMerchantDto.getMerchantNo());
-    obj.setMerchantTradeDate(formattedDate);
+            obj.setMerchantTradeDate(formattedDate);
             obj.setTotalAmount(postMerchantDto.getTotal().toString());
             obj.setTradeDesc("test Description");
             obj.setItemName("本次購買總金額");
             obj.setReturnURL("http://localhost:8081/test");
             obj.setNeedExtraPaidInfo("N");
-            obj.setClientBackURL("http://www.google.com");  //!!!!!!!!!!!!!!!!!!!改自己的首頁!!!!!!!!!!!!!!!!!!!!!!
+            obj.setClientBackURL("http://localhost:8080/enjoyum");  //!!!!!!!!!!!!!!!!!!!改自己的首頁!!!!!!!!!!!!!!!!!!!!!!
             obj.setNeedExtraPaidInfo("Y");
             // 生成表单
             form = all.aioCheckOut(obj, null);
@@ -135,5 +126,13 @@ public class ECPAYService {
         String dateStr = localDateTime.toString();
         LocalDateTime dateTime = LocalDateTime.parse(dateStr, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
         return dateTime.format(outputFormatter);
+    }
+
+    public void changeOrderStatus(String merchantNo) {
+
+        Orders orders = ordersRepository.findByMerchantNo(merchantNo);
+
+        orders.setStatus("completed");
+        ordersRepository.save(orders);
     }
 }
