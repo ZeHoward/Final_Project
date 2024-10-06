@@ -3,12 +3,85 @@ let currentIndex2 = 0;
 const type1 = "mealkit";
 const type2 = "preparedFood";
 let slideIndex = 1;
+//*wen
+const apiWEN = "http://localhost:8080/api"
+let userIdWEN = 2
+let merchantNoList = []
+//wen*//
 
 // const checkUserPayment = () => {
 //   const userId = 2
 //   //用id找payment
 //   //寫controller
 // }
+//*wen
+const getUserIdWEN = async () => {
+  const res = await axios.get(`/users/userAllInfo`);
+  userIdWEN = res.data.userId;
+  checkUserPaymentWEN()
+};
+
+const checkUserPaymentWEN = async () => {
+  const res = await axios.get(`${apiWEN}/orders/pay/${userIdWEN}`);
+  merchantNoList = res.data
+  merchantNoList.forEach((merchantNo) => {
+    checkIsPaidWEN(merchantNo.merchantNo)
+  })
+  //用id找payment
+  //寫controller
+}
+
+const checkIsPaidWEN = async (merchantNo) => {
+
+const res = await axios.post(`${apiWEN}/ECPAY/queryOrder`, {
+  merchantID: "2000132",
+  merchantTradeNo: merchantNo,
+  timeStamp: "",
+  checkMacValue: "",
+  platformID: ""
+});
+const PaidMerchantNo = extractMerchantTradeNo(res.data);
+//res拆出
+  PutOrdersStatus(PaidMerchantNo)
+}
+
+const PutOrdersStatus = async (PaidMerchantNo) => {
+  const res = await axios.put(`${apiWEN}/ECPAY/changeOrderStatus`, {
+    merchantNo: PaidMerchantNo
+  });
+  console.log("修改付款狀態成功");
+};
+
+function extractMerchantTradeNo(inputString) {
+  // 將輸入字符串分割成鍵值對
+  const pairs = inputString.split('&');
+  let merchantTradeNo = '';
+  let tradeStatus = '';
+
+  // 遍歷所有鍵值對
+  for (let pair of pairs) {
+      const [key, value] = pair.split('=');
+
+      // 找到 MerchantTradeNo
+      if (key === 'MerchantTradeNo') {
+          merchantTradeNo = value;
+      }
+
+      // 找到 TradeStatus
+      if (key === 'TradeStatus') {
+          tradeStatus = value;
+      }
+
+      // 如果兩個值都找到了，就可以停止遍歷
+      if (merchantTradeNo && tradeStatus) {
+          break;
+      }
+  }
+
+  // 如果 TradeStatus 為 1，返回 MerchantTradeNo，否則返回空字符串
+  return tradeStatus === '1' ? merchantTradeNo : '';
+}
+// wen*//
 
 document.addEventListener("DOMContentLoaded", function () {
     //輪播廣告
@@ -78,6 +151,8 @@ document.addEventListener("DOMContentLoaded", function () {
         })
     })
 
+    //wen
+    getUserIdWEN()
 });
 
 //展示商品
