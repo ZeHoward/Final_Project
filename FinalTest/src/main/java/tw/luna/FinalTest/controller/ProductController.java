@@ -34,6 +34,7 @@ public class ProductController {
 	//查詢所有商品
 	@GetMapping
 	public List<Product> getAllProducts() {
+		System.out.println("789789789798");
 		if(session != null) {
 			UserAllInfo loggedInUser = (UserAllInfo)session.getAttribute("loggedInUser");
 			if(loggedInUser != null) {

@@ -1,9 +1,11 @@
 let currentPage = 1; //目前的頁碼
 const productsPerPage = 9; // 每頁顯示的商品數量，超過九個換頁
 let totalPages = 1; //總頁數
+console.log('productList.js檔案')
 
+//document.addEventListener('DOMContentLoaded', function () {
 window.onload = function () {
-
+	console.log('window.onload裡面')
     fetchRandomProducts(); //隨機抓取商品
 
     document.querySelectorAll(".links").forEach((link) => {
@@ -53,6 +55,7 @@ window.onload = function () {
 
 //隨機顯示商品
 function fetchRandomProducts() {
+	console.log('fetchrandom方法')
     fetch("/products")
         .then((response) => {
             if (!response.ok) {

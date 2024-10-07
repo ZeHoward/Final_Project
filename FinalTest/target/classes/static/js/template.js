@@ -1,6 +1,6 @@
-window.onload = () => {
+//window.onload = () => {
 
-//document.addEventListener("DOMContentLoaded", function () {	
+document.addEventListener("DOMContentLoaded", function () {	
   // 菜單展開、關閉功能
   window.openSidenav = function () {
     document.getElementById("sidenav").style.width = "100%";
@@ -210,4 +210,4 @@ window.onload = () => {
   })
   
   
-}
+});
