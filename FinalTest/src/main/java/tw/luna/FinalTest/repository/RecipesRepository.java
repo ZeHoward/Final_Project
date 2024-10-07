@@ -12,8 +12,12 @@ import tw.luna.FinalTest.model.Recipes;
 
 @Repository
 public interface RecipesRepository extends JpaRepository<Recipes, Integer> {
+<<<<<<< HEAD
 	
 	List<Recipes> findByIsDelFalse();
+=======
+
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 
 	// 根據 productId 查找對應的 Recipe
 	Optional<Recipes> findByProductProductId(int productId);
@@ -26,4 +30,11 @@ public interface RecipesRepository extends JpaRepository<Recipes, Integer> {
 			"JOIN r.product p " +
 			"JOIN p.category c ")
 	List<ShowRecipeCardDTO> getAllRecipes();
+<<<<<<< HEAD
 }
+=======
+
+	// 自定義查詢方法，僅返回未邏輯刪除的食譜
+	List<Recipes> findByIsDelFalse();
+}
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5

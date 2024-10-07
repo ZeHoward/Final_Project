@@ -66,11 +66,46 @@ window.onload = function () {
   function displayFavorites(favorites, type) {
     const container = document.getElementById("productContainer");
     container.innerHTML = "";  // 清空現有內容
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+  
+=======
+
+>>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
     if (favorites.length === 0) {
       container.innerHTML = `<p>您沒有收藏的${type === 'products' ? '商品' : '食譜'}。</p>`;
       return;
     }
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+  
+    favorites.forEach(favorite => {
+      const imageSrc = favorite.imageUrl || '../material/icon/error.png';
+  
+      container.innerHTML += `
+        <div class="product" data-product-id="${favorite.productId}">
+          <img class="product-image" src="${imageSrc}" alt="${favorite.name}" onerror="this.src='../material/icon/error.png';">
+          <h3 class="product-name">${favorite.name}</h3>
+          <p class="product-price">$NT${favorite.price}</p>
+          <div class="home-product-btn">
+            <button class="add-to-favorite favorited" data-product-id="${favorite.productId}">
+              <i class="fa-solid fa-heart"></i>
+            </button>
+            <button class="add-to-cart" data-product-id="${favorite.productId}">
+              <i class="fa-solid fa-cart-shopping"></i>&nbsp;&nbsp;&nbsp;加入購物車
+            </button>
+          </div>
+        </div>`;
+    });
+  
+    // 為收藏和購物車按鈕添加事件處理
+    attachButtonHandlers();
+=======
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 
     const fragment = document.createDocumentFragment();
 
@@ -107,6 +142,10 @@ window.onload = function () {
     `;
 
     return card;
+<<<<<<< HEAD
+=======
+>>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
   }
 
   // 收藏和加入購物車按鈕處理邏輯
@@ -176,6 +215,13 @@ window.onload = function () {
 
     if (type === 'products') {
       apiUrl = `/api/favorites/products/remove?userId=${userId}&productId=${productId}`;  // 呼叫刪除商品的API
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+      apiUrl = `/api/favorites/remove?userId=${userId}&productId=${productId}`;  // 呼叫刪除商品的API
+=======
+>>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
     } else if (type === 'recipes') {
       apiUrl = `/api/favorites/recipes/remove?userId=${userId}&productId=${productId}`;  // 呼叫刪除食譜的API
     }

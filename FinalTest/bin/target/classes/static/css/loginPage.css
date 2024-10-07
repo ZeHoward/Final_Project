@@ -99,6 +99,13 @@
     color: black;
 }
 .registA:hover{
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+	cursor: pointer;
+=======
+>>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
     text-decoration: none;
     color: #F3CE6E;
 }
@@ -111,6 +118,14 @@
     justify-content: center;
     gap: 20px;
     margin: 20px 0;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+    font-size: 30px;
+    color: white;
+=======
+>>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
   }
 
 .socialButton {
@@ -119,12 +134,26 @@
   align-items: center;
   width: 120px;
   height: 60px;
+<<<<<<< HEAD
   border: 2px solid #c8d365;
+=======
+<<<<<<< HEAD
+  border: none;
+=======
+  border: 2px solid #c8d365;
+>>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
   border-radius: 10px;
   cursor: pointer;
   transition: transform 0.3s ease;
 }
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+
+=======
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 .socialButton img {
   width: 30px;
   height: 30px;
@@ -133,3 +162,7 @@
 .socialButton:hover {
   transform: scale(1.05);
 } 
+<<<<<<< HEAD
+=======
+>>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5

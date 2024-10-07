@@ -6,6 +6,13 @@ window.onload = () => {
 	let checkPassword = false;
 
 	document.getElementById('newPassword').addEventListener('blur', () => {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+		finalNewPassword = '';
+=======
+>>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 		let regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;      
 		let newPassword = document.getElementById('newPassword').value;
 		if(!regex.test(newPassword)){

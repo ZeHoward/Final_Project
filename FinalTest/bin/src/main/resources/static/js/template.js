@@ -157,4 +157,55 @@ document.addEventListener("DOMContentLoaded", function () {
         console.error("Error:", error);
       });
   });
+<<<<<<< HEAD
+=======
+  
+  //聯絡我們
+  
+  let contactDiv = document.getElementById("contactDiv");
+  
+  document.getElementById("contactIcon").addEventListener("click", () => {
+	contactDiv.style.display = 'block';
+  })
+
+  document.getElementById("close").addEventListener("click", () => {
+      contactDiv.style.display = 'none';
+  })
+
+  document.getElementById("contactBtn").addEventListener("click", () => {
+      let name = document.getElementById("name").value;
+      let contactInfo = document.getElementById("contactInfo").value;
+      let message = document.getElementById("message").value;
+
+      if(name === '' || name == null){
+          alert('請輸入姓名');
+      }else if(contactInfo === '' || contactInfo == null){
+          alert('請輸入聯絡方式');
+      }else if(message === '' || message == null){
+          alert('請輸入諮詢內容');
+      }else{
+          fetch('http://localhost:8080/users/consult', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                  name: name,
+                  contactInfo: contactInfo,
+                  message : message
+              })
+          }).then(response => {
+              if(!response.ok){
+                  throw new Error ('Error :');
+                  alert('伺服器忙碌中,請稍後在試!!');
+              }
+              alert('感謝您的諮詢，我們我盡快回復您的問題！！');
+          }).catch(error => {
+              console.log('Error:', error);
+          })
+      }
+  })
+  
+  
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 });

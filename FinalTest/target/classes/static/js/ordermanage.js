@@ -1,5 +1,4 @@
 window.onload = function () {
-
   // 從後端獲取當前用戶的訂單
   function fetchOrders() {
     fetch('/api/orders/user')
@@ -23,7 +22,6 @@ window.onload = function () {
       // 訂單圖片區域
       const orderImage = document.createElement('div');
       orderImage.classList.add('order-image');
-
       // 使用第一個商品的圖片或預設圖片
       let firstProductImage = "../material/icon/default.png";
       if (order.orderDetails && order.orderDetails.length > 0) {

@@ -1,4 +1,9 @@
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 //window.onload = function () {
 //  //菜單展開、關閉
 //  window.openSidenav = function () {
@@ -51,6 +56,10 @@
 //};
 
 
+<<<<<<< HEAD
+=======
+>>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 // 縣市區域及郵遞區號
 const districts = {
   台北市: {

@@ -71,7 +71,15 @@ window.onload = function () {
 	
 	let finalEmail = '';
 
+<<<<<<< HEAD
 	emailInput.addEventListener("change", () => {
+=======
+<<<<<<< HEAD
+	emailInput.addEventListener("blur", () => {
+=======
+	emailInput.addEventListener("change", () => {
+>>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 	  finalEmail = '';
 	  let emailInput = document.getElementById("emailInput");
 	  let checkEmailUrl = 'http://localhost:8080/users/checkEmail?email=' + emailInput.value
@@ -139,5 +147,45 @@ window.onload = function () {
 	  }
 	    
 	})
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+	
+	document.getElementById("revalidate").addEventListener("click", () => {
+		if(finalEmail != '' && finalEmail != null){
+			let revalidateUrl = 'http://localhost:8080/users/revalidate?email=' + finalEmail;
+			
+			fetch(revalidateUrl,{
+			    method: 'GET'
+			  }).then(response => {
+				if(!response.ok){
+					throw new Error('Error : ');
+				}
+				return response.json();
+			  }).then(data => {
+				switch(data){
+					case 'NOT_EXIST':
+						alert('此帳號尚未註冊!!');
+						break;
+					case 'ADD_FAILURE':
+						alert('重置驗證信件失敗,請稍後在試!!');
+						break;
+					case 'ADD_SUCCESS':
+						alert('已將驗證信件發送至電子信箱!!');
+						break;
+					default : 
+						alert('伺服器忙碌中,請稍後在試!!');
+				}
+			  }).catch(error => {
+				console.log('error:', error);
+			  })
+			
+		}else{			
+			alert('請輸入正確的電子信箱');
+		}
+	});
+=======
+>>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 		
 };

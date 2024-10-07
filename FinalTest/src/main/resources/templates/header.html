@@ -31,8 +31,7 @@
         <a href="/about">關於我們</a>
         <a href="/productList">全館商品</a>
         <a href="#share">線上食譜</a>
-        <a href="#QA">常見問題</a>
-        <a href="#noticet">購買須知</a>
+        <a href="/notice">常見問題</a>
         <a href="#contact">聯絡我們</a>
         <a href="/registPage">註冊</a>
     </div>
@@ -59,13 +58,15 @@
             <img th:src="@{/material/logo.png}" alt="Logo" class=""/>
         </div>
         <div class="tem-header-icons">
+	        <div id="contactIcon" class="tem-icon">
+				<i class="fa-solid fa-envelope"></i>			</div>
             <div id="cartIcon" class="tem-icon tem-cart-icon">
-                <a href="/shoppingCart">
+                <a href="/shoppingCart" style="padding-right: 20px">
                     <i class="fa-solid fa-cart-shopping"></i>
                 </a>
             </div>
             <div id="memberIcon" href="#" class="tem-icon tem-user-icon">
-                <i class="fa-solid fa-user"></i>
+                <i class="fa-solid fa-user" style="padding-right: 20px"></i>
             </div>
             <div id="memberInfoDiv">
                 <div>
@@ -106,6 +107,23 @@
         <a href="#">首頁</a>
     </div>
 </header>
+
+<!-- 聯絡我們 -->
+ 	<div id="contactDiv">
+        <div id="contactContent">
+        	<span id="close">&times;</span>
+            <h3>聯絡我們</h3>
+            <p>謝謝您的主動聯絡，請留下要諮詢的問題，我們會用以下資訊進行回覆。</p>      
+            <p>姓名:<input id="name" class="contactInput" type="text"></p>
+            <p>聯絡方式:<input id="contactInfo" class="contactInput" type="text" placeholder="電子信箱 或 手機號碼"></p>
+            <p>諮詢內容:</p>
+            <textarea id="message" name="message"></textarea><br>
+
+            <button id="contactBtn">送出</button>
+            
+        </div>
+    </div>
+
 <script th:src="@{js/template.js}" defer="defer"></script>
 </body>
 </html>

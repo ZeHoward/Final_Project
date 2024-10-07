@@ -257,6 +257,25 @@ body {
 
 .tem-social-media a {
   margin: 0 10px;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+  border: none;
+  color: black;
+}
+
+.tem-social-media i {
+  font-size: 24px;
+  padding: 5px;
+}
+
+/*會員中心*/
+
+#cartIcon,
+#memberIcon,
+#contactIcon{
+=======
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 }
 
 .tem-social-media img {
@@ -269,12 +288,23 @@ body {
 #searchIcon,
 #cartIcon,
 #memberIcon{
+<<<<<<< HEAD
+=======
+>>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
   display: inline-block;
   font-size: 24px;
 }
 
 #memberIcon {
+<<<<<<< HEAD
   margin-right: 10px;
+=======
+<<<<<<< HEAD
+=======
+  margin-right: 10px;
+>>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
   background-color: transparent;
   border: none;
 }
@@ -314,6 +344,11 @@ body {
   color: #f3ce6e;
 }
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 #searchIcon {
   background-color: transparent;
   border: none;
@@ -345,6 +380,10 @@ body {
   display: inline-block;
 }
 
+<<<<<<< HEAD
+=======
+>>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 #cartIcon {
   background-color: transparent;
   border: none;
@@ -357,3 +396,80 @@ body {
 #logoDiv:hover {
   cursor: pointer;
 }
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+
+
+/******聯絡我們*********/
+    
+#contactDiv {
+    display: none;
+    position: fixed; 
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    background-color: rgba(0, 0, 0, 0.5); 
+}
+
+#contactContent {
+    background-color: #fff;
+    margin: 5% auto auto; 
+    padding: 20px;
+    border: 1px solid #888;
+    width: 40%;
+    border-radius: 10px;
+    
+}
+
+#contactContent > p {
+	margin-top: 10px;
+}
+
+#message{
+    border: 1px solid #a1c14b;
+    border-radius: 10px;
+    width: 100%;
+    height: 30%;
+    resize: none;
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+.contactInput{
+    border: 1px solid #a1c14b;
+    border-radius: 10px;
+    width: 100%;
+    height: 30px;
+    padding: 10px;
+    
+}
+
+
+
+#contactBtn{
+    margin-top: 10px;
+    background-color: #a1c14b; 
+    color: white; 
+    border: none;
+    border-radius: 10px; 
+    cursor: pointer;
+    padding: 5px 20px;
+}
+
+#contactBtn:hover{
+    color: black;
+}
+
+#close {
+    color: #aaa;
+    float: right;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+=======
+>>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5

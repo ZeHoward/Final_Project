@@ -25,6 +25,10 @@ import tw.luna.FinalTest.model.UserAllInfo;
 import tw.luna.FinalTest.model.Users;
 import tw.luna.FinalTest.model.UsersResponse;
 import tw.luna.FinalTest.model.UsersStatus;
+<<<<<<< HEAD
+=======
+import tw.luna.FinalTest.service.EmailCheckService;
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 import tw.luna.FinalTest.service.UsersServiceImpl;
 
 
@@ -36,6 +40,12 @@ public class UsersController {
 	private UsersServiceImpl usersServiceImpl;
 	
 	@Autowired
+<<<<<<< HEAD
+=======
+	private EmailCheckService emailCheckService;
+	
+	@Autowired
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 	private HttpSession session;
 	
 	@PostMapping("/regist")
@@ -191,6 +201,14 @@ public class UsersController {
 		return usersServiceImpl.revalidate(email);
 	}
 	
+<<<<<<< HEAD
+=======
+	@PostMapping("/consult")
+	public void consult(@RequestBody Map<String, String> request) {
+		emailCheckService.sendToSeller(request);
+	}
+	
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 	
 	
 }

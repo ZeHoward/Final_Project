@@ -12,6 +12,42 @@ document.addEventListener("DOMContentLoaded", function () {
 
   //展開菜單選項
   // menu toggle up/down 圖案
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+  // window.togglePic1 = function () {
+  //   var margin1 = document.getElementById("add");
+  //   var img1 = document.getElementById("updown1");
+  //   var childContent1 = document.getElementById("tem-dropdown-content1");
+  //
+  //   if (img1.src.includes("down.png")) {
+  //     img1.src = "./material/icon/up.png";
+  //     margin1.style.margin = "40px 0";
+  //     childContent1.style.display = "block";
+  //   } else if (img1.src.includes("up.png")) {
+  //     img1.src = "./material/icon/down.png";
+  //     margin1.style.margin = "";
+  //     childContent1.style.display = "none";
+  //   }
+  // };
+  //
+  // window.togglePic2 = function () {
+  //   var margin2 = document.getElementById("add");
+  //   var img2 = document.getElementById("updown2");
+  //   var childContent2 = document.getElementById("tem-dropdown-content2");
+  //
+  //   if (img2.src.includes("down.png")) {
+  //     img2.src = "./material/icon/up.png";
+  //     margin2.style.margin = "40px 0";
+  //     childContent2.style.display = "block";
+  //   } else if (img2.src.includes("up.png")) {
+  //     img2.src = "./material/icon/down.png";
+  //     margin2.style.margin = "";
+  //     childContent2.style.display = "none";
+  //   }
+  // };
+=======
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
   window.togglePic1 = function () {
     var margin1 = document.getElementById("add");
     var img1 = document.getElementById("updown1");
@@ -43,6 +79,10 @@ document.addEventListener("DOMContentLoaded", function () {
       childContent2.style.display = "none";
     }
   };
+<<<<<<< HEAD
+=======
+>>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 
   // 會員功能菜單顯示/隱藏
   let memberInfoDiv = document.getElementById("memberInfoDiv");
@@ -157,4 +197,58 @@ document.addEventListener("DOMContentLoaded", function () {
         console.error("Error:", error);
       });
   });
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+  
+  //聯絡我們
+  
+  let contactDiv = document.getElementById("contactDiv");
+  
+  document.getElementById("contactIcon").addEventListener("click", () => {
+	contactDiv.style.display = 'block';
+  })
+
+  document.getElementById("close").addEventListener("click", () => {
+      contactDiv.style.display = 'none';
+  })
+
+  document.getElementById("contactBtn").addEventListener("click", () => {
+      let name = document.getElementById("name").value;
+      let contactInfo = document.getElementById("contactInfo").value;
+      let message = document.getElementById("message").value;
+
+      if(name === '' || name == null){
+          alert('請輸入姓名');
+      }else if(contactInfo === '' || contactInfo == null){
+          alert('請輸入聯絡方式');
+      }else if(message === '' || message == null){
+          alert('請輸入諮詢內容');
+      }else{
+          fetch('http://localhost:8080/users/consult', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                  name: name,
+                  contactInfo: contactInfo,
+                  message : message
+              })
+          }).then(response => {
+              if(!response.ok){
+                  throw new Error ('Error :');
+                  alert('伺服器忙碌中,請稍後在試!!');
+              }
+              alert('感謝您的諮詢，我們我盡快回復您的問題！！');
+          }).catch(error => {
+              console.log('Error:', error);
+          })
+      }
+  })
+  
+  
+=======
+>>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 });
