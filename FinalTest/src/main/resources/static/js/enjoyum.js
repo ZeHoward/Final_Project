@@ -241,8 +241,8 @@ function renderProducts(products, containerId, currentIndex) {
                                     console.log(cartItem);
 
                                     // 發送加入購物車請求
-                                    fetch(`/api/cart/put/${userId}`, {
-                                        method: "PUT",
+                                    fetch(`/api/cart/${userId}`, {
+                                        method: "POST",
                                         headers: {
                                             "Content-Type": "application/json",
                                         },
