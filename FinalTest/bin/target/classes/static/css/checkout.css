@@ -1,0 +1,219 @@
+* {
+  font-family: "Noto Sans TC", system-ui;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.subtotal {
+  margin-left: auto;
+  align-items: center;
+}
+.outTd {
+  /* align-items: center; */
+}
+.flexColumn {
+  flex-direction: column;
+  padding-left: 5px;
+  justify-content: space-between;
+}
+.dflex {
+  display: flex;
+}
+/* 只對 tbody 內的元素設置邊框 */
+table {
+  width: 100%;
+  border-collapse: collapse; /* 使邊框合併成一條線 */
+}
+tbody td {
+  border-bottom: 1px solid black;
+  border-top: 1px solid black;
+  padding: 10px;
+}
+.product-image {
+  /* width: 25px;
+  height: 25px; */
+}
+
+body {
+  font-family: Arial, sans-serif;
+  width: 100vw;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+
+/* 以下為主畫面 */
+.container {
+  display: flex;
+  width: 100%;
+  margin: 0;
+  box-shadow: none;
+  border-radius: 0;
+  overflow: hidden;
+}
+.left,
+.right {
+  width: 50%;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: white;
+  margin: 10px 5%;
+  position: relative;
+  border: none;
+}
+.steps {
+  padding: 10px 20px;
+  text-align: left;
+}
+.steps a {
+  color: #000000;
+  text-decoration: none;
+  margin: 0 5px;
+  margin-top: 100px;
+}
+.steps a:not(:last-child)::after {
+  content: ">";
+  margin: 0 5px;
+}
+
+h1 {
+  text-align: center;
+  /* top: 1%; */
+  margin-bottom: 40px;
+}
+.item {
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+}
+.item img {
+  width: 80px;
+  height: 80px;
+  margin-right: 15px;
+}
+.item-details {
+  flex: 1;
+  font-weight: bold;
+}
+.item-name .item-quantity {
+  text-align: left;
+}
+.item-price {
+  text-align: right;
+}
+.total {
+  margin-top: 20px;
+  font-weight: bolder;
+}
+.form-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  flex-wrap: wrap; /* 允许子项在容器宽度不足时换行 */
+}
+.form-row label,
+.form-row input,
+.form-row select {
+  flex: 1;
+  margin-right: 10px;
+}
+.form-row input,
+.form-row select {
+  margin-right: 0;
+}
+.form-row .half-width {
+  flex: 1;
+  margin-right: 5px;
+}
+.form-row .half-width:last-child {
+  margin-right: 0;
+}
+.form-row .full-width {
+  flex: 2;
+}
+input,
+select {
+  height: 45px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+select {
+  /*移除表單中 <select> 元素的默認瀏覽器樣式*/
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+input::placeholder {
+  color: #888;
+}
+select::placeholder {
+  color: #888;
+}
+.form-row select::-ms-expand {
+  display: none;
+}
+.header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 55px;
+}
+.checkbox-container {
+  display: flex;
+  align-items: center;
+}
+.checkbox-container input {
+  margin-right: 10px;
+}
+
+.gobackBtn {
+  text-decoration: none; /* 去掉下劃線 */
+  color: #d35b50; /* 設定未點選時的顏色 */
+  border: none;
+  background-color: transparent; /* 設定背景透明 */
+  font-weight: bold;
+}
+
+.gobackBtn:hover {
+  color: #ca2a1c; /* 設定滑鼠懸停時的顏色 (可選) */
+}
+
+.item {
+  border-bottom: 1px solid #7c7b7b;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.item:last-child {
+  border-bottom: none;
+}
+
+.nextstepBtn {
+  margin-left: 70%;
+  height: 40px;
+  width: 150px;
+  background-color: #d35b50;
+  border: none;
+  font-size: large;
+  border-radius: 5px;
+  color: white;
+  text-decoration: none;
+}
+.nextstepBtn:hover {
+  background-color: #ca2a1c;
+}
+header.tem-header {
+  border: none; /* 确保没有边框 */
+  box-shadow: none; /* 确保没有阴影 */
+  padding: 0;
+}
+
+.product-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}

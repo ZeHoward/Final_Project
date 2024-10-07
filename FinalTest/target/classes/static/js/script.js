@@ -971,7 +971,7 @@ function generateProductUploadForm() {
     }
 }
 
-//動態生成商品管理的頁面
+// 點擊"商品管理"時生成內容的函數
 function generateProductManagementWithActionsContent() {
   if (!localStorage.getItem('adminLoggedIn')) {
     window.location.href = 'backlogin.html';
@@ -1149,7 +1149,7 @@ function generateProductManagementWithActionsContent() {
             tr.innerHTML = `
             <td><img src="${imageSrc}" alt="${
                 product.name
-            }"  style="height: 80px; width: 80px"></td>
+            }"  style="height: auto; width: 150px;"></td>
             <td>${product.productId}</td>
             <td>${product.sku}</td>
             <td>${product.name}</td>
@@ -1355,10 +1355,10 @@ function generateProductManagementWithActionsContent() {
                   <label for="type">商品類型</label>
                   <select id="type">
                       <option value="preparedFood" ${
-            product.type === "調理包" ? "selected" : ""
+            product.type === "preparedFood" ? "selected" : ""
         }>調理包</option>
                       <option value="mealkit " ${
-            product.type === "生鮮食食材包" ? "selected" : ""
+            product.type === "mealkit" ? "selected" : ""
         }>生鮮食材包</option>
                   </select>
               </div>
