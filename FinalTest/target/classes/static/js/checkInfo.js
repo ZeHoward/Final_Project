@@ -4,6 +4,8 @@ createApp({
     const params = new URLSearchParams(window.location.search);
     const totalAmount = params.get("totalAmount");
     const finalAmount2 = params.get("finalAmount2");
+    const couponCode = params.get("couponCode");
+    const percentageDiscount = params.get("percentageDiscount");
     const api = ref("http://localhost:8080/api");
     const img = ref(
       "https://plus.unsplash.com/premium_photo-1661322640130-f6a1e2c36653?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8YXBwbGV8ZW58MHx8MHx8fDA%3D"
@@ -11,6 +13,7 @@ createApp({
     const userId = ref(2); // 使用者 ID
     //params.get("name2")取出前一頁傳來的name2並用name5接
     const products = ref([])
+    
 
     const name5 = params.get("name2")
     const lastName2 = params.get("lastName")
@@ -55,18 +58,28 @@ createApp({
       products.value = res.data
     };
 
+
+    //*********code  percentageDiscount   amountDiscount  */
     const orderData = {
       // 後端DTO參數 : 這頁對應的變數
       paymentAmount:finalAmount2,
       totalAmount:totalAmount,
       finalAmount:finalAmount2,
       address:`${zipCode} ${city} ${area} ${address} ` ,
-      merchantNo:merchantNo
+      merchantNo:merchantNo,
+      amountDiscount:　discountAmount,
+      percentageDiscount:percentageDiscount,
+      code:couponCode,
+
     }
 
     const paymentData = {
       total:finalAmount2,
-      merchantNo:merchantNo
+      merchantNo:merchantNo,
+
+      couponCode:couponCode,
+      discountAmount:discountAmount,
+
     }
 
     const getPayment = async () => {
@@ -103,9 +116,7 @@ createApp({
 
     //缺優惠券
     //將收件者資料及購物車商品資料存進資料庫
-    const addToOrders = async () => {
-      console.log(orderData);
-      
+    const addToOrders = async () => {      
       try{
       const res = await axios.post(`${api.value}/orders/${userId.value}`,orderData)
         
@@ -146,7 +157,8 @@ createApp({
       pay,
       merchantTradeNo,
       isSubmit,
-      discountAmount
+      discountAmount,
+      percentageDiscount
     }
     }
     }).mount("#myContainer")
