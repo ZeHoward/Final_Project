@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard總覽頁面</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- 用於圖表的庫 -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"
+    />
+    <!-- sweetAlart2 -->
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- 側邊導航 -->
+      <nav class="sidebar">
+        <div class="logo">
+          <img src="./material/logo.png" alt="Logo" id="logo" />
+        </div>
+        <ul>
+          <li><a href="#" id="overviewButton">總覽</a></li>
+          <li><a href="#" id="orderManagementButton">訂單管理</a></li>
+          <li><a href="#" id="uploadProductButton">商品上傳</a></li>
+          <li><a href="#" id="editProductButton">商品管理</a></li>
+          <li><a href="#" id="uploadRecipeButton">食譜上傳</a></li>
+          <li><a href="#" id="recipeEditButton">食譜管理</a></li>
+          <li><a href="#" id="userManagementButton">用戶管理</a></li>
+          <li><a href="#" id="couponManagementButton">優惠券管理</a></li>
+        </ul>
+      </nav>
+
+      <div class="main-section">
+        <!-- 頁面頂部標題及導航 -->
+        <header class="header">
+          <div class="header-title"></div>
+          <div class="user-info">
+            <img
+              src="./material/darkgreenhead.png"
+              alt="User Icon"
+              id="userIcon"
+            />
+            <!-- 下拉選單 -->
+            <div class="dropdown-menu">
+              <ul>
+                <li><a href="login.html">登出</a></li>
+              </ul>
+            </div>
+          </div>
+        </header>
+
+        <!-- 主內容區域 -->
+        <main class="main-content"></main>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="./js/script.js"></script>
+  </body>
+</html>
