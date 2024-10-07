@@ -27,29 +27,18 @@ public class PageController {
 	public String productList() {
 		return "productList";
 	}
-<<<<<<< HEAD
-=======
-
->>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 	@GetMapping("/enjoyum")
 	public String enjoyum() {
 		return "enjoyum";
 	}
-<<<<<<< HEAD
-=======
-
->>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 	@GetMapping("/detail")
 	public String detail() {
 		return "detail";
 	}
-<<<<<<< HEAD
-=======
 
 	@GetMapping("/notice")
 	public String notice() {return "notice";}
 
->>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 	@GetMapping("/myCollection")
 	public String myCollection() {
 		return "myCollection";
