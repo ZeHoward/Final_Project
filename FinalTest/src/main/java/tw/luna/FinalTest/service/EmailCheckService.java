@@ -1,6 +1,7 @@
  package tw.luna.FinalTest.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -125,5 +126,30 @@ public class EmailCheckService {
 	}
 
   }
+    
+    public void sendToSeller(Map<String, String> request) {
+    	MimeMessage message = mailSender.createMimeMessage();
+    	try {
+			MimeMessageHelper helper = new MimeMessageHelper(message, true);
+			
+			String htmlContent = "<html>" +
+			        "<body>" +
+			        "<h3>使用者諮詢通知</h3>" +
+			        "<p><strong>姓名:</strong> " + request.get("name") + "</p>" +
+			        "<p><strong>聯絡方式:</strong> " + request.get("contactInfo") + "</p>" +
+			        "<p><strong>訊息內容:</strong> " + request.get("message") + "</p>" +
+			        "<br><p>此信件為自動生成，請勿回覆。</p>" +
+			        "</body>" +
+			        "</html>";
+			
+			helper.setTo("haurd8080@gmail.com");
+	        helper.setFrom("haurd8080@gmail.com");
+	        helper.setSubject("請重設您的密碼");
+	        helper.setText(htmlContent, true);
+	        mailSender.send(message);
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		}
+    }
 
 }

@@ -25,6 +25,7 @@ import tw.luna.FinalTest.model.UserAllInfo;
 import tw.luna.FinalTest.model.Users;
 import tw.luna.FinalTest.model.UsersResponse;
 import tw.luna.FinalTest.model.UsersStatus;
+import tw.luna.FinalTest.service.EmailCheckService;
 import tw.luna.FinalTest.service.UsersServiceImpl;
 
 
@@ -34,6 +35,9 @@ public class UsersController {
 	
 	@Autowired
 	private UsersServiceImpl usersServiceImpl;
+	
+	@Autowired
+	private EmailCheckService emailCheckService;
 	
 	@Autowired
 	private HttpSession session;
@@ -189,6 +193,11 @@ public class UsersController {
 	@GetMapping("/revalidate")
 	public UsersStatus revalidate(@RequestParam String email) {
 		return usersServiceImpl.revalidate(email);
+	}
+	
+	@PostMapping("/consult")
+	public void consult(@RequestBody Map<String, String> request) {
+		emailCheckService.sendToSeller(request);
 	}
 	
 	
