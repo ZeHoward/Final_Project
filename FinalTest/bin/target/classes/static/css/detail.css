@@ -1,5 +1,8 @@
 <<<<<<< HEAD
 =======
+<<<<<<< HEAD
+=======
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 /** {*/
 /*  font-family: "Noto Sans TC", system-ui;*/
 /*  margin: 0;*/
@@ -14,7 +17,10 @@
 /*  overflow-x: hidden;*/
 /*}*/
 
+<<<<<<< HEAD
+=======
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 /* 商品詳情 */
 .info {
   display: flex;
@@ -128,10 +134,14 @@ input,
   padding: 10px 20px;
   font-size: 24px;
 <<<<<<< HEAD
+  background-color: #d35b50;
+=======
+<<<<<<< HEAD
   background-color: #e0912f;
 =======
   background-color: #d35b50;
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
   color: white;
   border: none;
   border-radius: 5px;
@@ -141,14 +151,20 @@ input,
 
 .like {
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
   background-color: #F3CE6E;
 =======
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
   background-color: #de8415;
 }
 
 .keep {
   background-color: #f3ce6e;
+<<<<<<< HEAD
+=======
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 }
 
 .container {
@@ -190,6 +206,10 @@ h1 {
   margin: 10px 0;
 }
 <<<<<<< HEAD
+.product-price {
+  font-size: 30px;
+=======
+<<<<<<< HEAD
 
 .product-price {
   font-size: 40px;
@@ -197,6 +217,7 @@ h1 {
 .product-price {
   font-size: 30px;
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
   color: #d35b50;
   font-weight: 700;
   margin: 5px 0;
@@ -204,10 +225,14 @@ h1 {
 
 .related-product-name {
 <<<<<<< HEAD
+  font-size: 15px;
+=======
+<<<<<<< HEAD
   font-size: medium;
 =======
   font-size: 15px;
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 }
 
 .related-product-image {
@@ -219,10 +244,14 @@ h1 {
 
 .related-product-price {
 <<<<<<< HEAD
+  font-size: 20px;
+=======
+<<<<<<< HEAD
   font-size: medium;
 =======
   font-size: 20px;
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
   color: #d35b50;
   font-weight: 700;
 }
@@ -283,10 +312,14 @@ h1 {
 }
 
 <<<<<<< HEAD
+/* 商品評論 */
+=======
+<<<<<<< HEAD
 /* 購物須知 */
 =======
 /* 商品評論 */
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 .tab {
   border-bottom: #d1de74 2px solid;
   overflow: hidden;
@@ -328,9 +361,12 @@ h1 {
   background-color: #cbb68c;
 }
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
 
 i.active {
   color: red;
 }
 =======
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5

@@ -29,9 +29,13 @@ window.onload = function () {
               <button class="btn cart" id="cart"><i class="fa-solid fa-cart-shopping"></i>&nbsp;加入購物車</button>
               <button class="btn like" id="like"><i class="fa-regular fa-heart"></i>&nbsp;收藏商品</button>
 <<<<<<< HEAD
+              <button class="btn keep" id="keep"><i class="fa-solid fa-book-open"></i>&nbsp;查看食譜</button>
+=======
+<<<<<<< HEAD
 =======
               <button class="btn keep" id="keep"><i class="fa-solid fa-book-open"></i>&nbsp;查看食譜</button>
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
             <div class="ship">
               <h3>&nbsp;配送方式: &nbsp;</h3>
               <p>黑貓宅急便(低溫配送)</p>
@@ -179,11 +183,17 @@ window.onload = function () {
                         })
                 })
 <<<<<<< HEAD
+                document.getElementById("keep").addEventListener("click", function () {
+                    window.location.href = "我要食譜頁面URL";
+                })
+=======
+<<<<<<< HEAD
 =======
                 document.getElementById("keep").addEventListener("click", function () {
                     window.location.href = "我要食譜頁面URL";
                 })
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 
                 // 商品詳細描述
                 const detailSection = document.querySelector(".description");
@@ -285,10 +295,14 @@ window.onload = function () {
             productDiv.className = "product";
             productDiv.style.cursor = "pointer";
 <<<<<<< HEAD
+            productDiv.dataset.productId = product.productId
+=======
+<<<<<<< HEAD
             productDiv.dataset.productId = product.productId;
 =======
             productDiv.dataset.productId = product.productId
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
             productDiv.dataset.productName = product.name;
 
             // 創建 img 元素
@@ -299,10 +313,14 @@ window.onload = function () {
             // 設置商品卡的 HTML 內容
             const productHtml = `
 <<<<<<< HEAD
+        <h3 class="related-product-name">${product.name}</h3>
+=======
+<<<<<<< HEAD
         <p class="related-product-name">${product.name}</p>
 =======
         <h3 class="related-product-name">${product.name}</h3>
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
         <p class="related-product-price">$NT${product.price}</p>
         <div class="home-product-btn">
           <button class="add-to-favorite"><i class="fa-solid fa-heart"></i></button>
@@ -352,18 +370,25 @@ window.onload = function () {
                             if (isLoggedIn) {
                                 getUserId().then(userId => {
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
                                     console.log(userId);
 =======
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
                                     if (userId) {
                                         const productElement = event.target.closest(".product");
                                         const productId = productElement.dataset.productId;
                                         const productName = productElement.dataset.productName;
                                         const quantity = 1;
 <<<<<<< HEAD
+                                        // const productId = parseInt(new URLSearchParams(window.location.search).get("productId"));
+=======
+<<<<<<< HEAD
 =======
                                         // const productId = parseInt(new URLSearchParams(window.location.search).get("productId"));
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
                                         const cartItem =
                                             {
                                                 productName: productName,
@@ -433,6 +458,8 @@ window.onload = function () {
                                 getUserId().then(userId => {
                                     if (userId) {
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
                                         const productId = parseInt(`${product.productId}`);
                                         const productName = `${product.name}`;
                                         const favoriteBtn = this.querySelector(".fa-heart");
@@ -473,6 +500,7 @@ window.onload = function () {
                                                 });
                                         }
 =======
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
                                         const productId = new URLSearchParams(window.location.search).get("productId");
                                         // 發送收藏請求
                                         fetch(`/api/favorites/add?userId=${userId}&productId=${productId}`, {
@@ -490,7 +518,10 @@ window.onload = function () {
                                             .catch((error) => {
                                                 console.error("加入收藏時發生錯誤:", error);
                                             });
+<<<<<<< HEAD
+=======
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
                                     }
                                 });
                             } else {

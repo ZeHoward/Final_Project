@@ -258,6 +258,8 @@ body {
 .tem-social-media a {
   margin: 0 10px;
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
   border: none;
   color: black;
 }
@@ -273,6 +275,7 @@ body {
 #memberIcon,
 #contactIcon{
 =======
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 }
 
 .tem-social-media img {
@@ -285,16 +288,23 @@ body {
 #searchIcon,
 #cartIcon,
 #memberIcon{
+<<<<<<< HEAD
+=======
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
   display: inline-block;
   font-size: 24px;
 }
 
 #memberIcon {
 <<<<<<< HEAD
+  margin-right: 10px;
+=======
+<<<<<<< HEAD
 =======
   margin-right: 10px;
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
   background-color: transparent;
   border: none;
 }
@@ -336,6 +346,9 @@ body {
 
 <<<<<<< HEAD
 =======
+<<<<<<< HEAD
+=======
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 #searchIcon {
   background-color: transparent;
   border: none;
@@ -367,7 +380,10 @@ body {
   display: inline-block;
 }
 
+<<<<<<< HEAD
+=======
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 #cartIcon {
   background-color: transparent;
   border: none;
@@ -380,6 +396,8 @@ body {
 #logoDiv:hover {
   cursor: pointer;
 }
+<<<<<<< HEAD
+=======
 <<<<<<< HEAD
 
 
@@ -454,3 +472,4 @@ body {
 }
 =======
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5

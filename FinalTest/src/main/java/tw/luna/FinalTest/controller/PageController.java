@@ -27,12 +27,10 @@ public class PageController {
 	public String productList() {
 		return "productList";
 	}
-
 	@GetMapping("/enjoyum")
 	public String enjoyum() {
 		return "enjoyum";
 	}
-
 	@GetMapping("/detail")
 	public String detail() {
 		return "detail";

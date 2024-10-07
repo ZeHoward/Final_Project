@@ -1,0 +1,58 @@
+@charset "UTF-8";
+h1{
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.container {
+    padding: 2rem 5rem;
+
+}
+
+.accordion {
+    background-color: #f3ce6e;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    transition: 0.4s;
+    margin: 10px 0;
+}
+
+.accordion:hover {
+    background-color: rgb(250, 208, 79);
+}
+
+.accordion:after {
+    content: "+";
+    color: #686554;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+}
+
+.active {
+    background-color: rgb(250, 208, 79);
+}
+
+.active:after {
+    content: "−";
+}
+
+.panel {
+    padding: 0 30px;
+    background-color: #ffffff;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    font-size: 16px;
+}
+
+.panel p{
+    padding: 20px;
+}
+

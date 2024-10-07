@@ -1,4 +1,6 @@
-document.addEventListener("DOMContentLoaded", function () {
+window.onload = () => {
+
+//document.addEventListener("DOMContentLoaded", function () {	
   // 菜單展開、關閉功能
   window.openSidenav = function () {
     document.getElementById("sidenav").style.width = "100%";
@@ -159,7 +161,6 @@ document.addEventListener("DOMContentLoaded", function () {
   });
   
   //聯絡我們
-  
   let contactDiv = document.getElementById("contactDiv");
   
   document.getElementById("contactIcon").addEventListener("click", () => {
@@ -169,10 +170,11 @@ document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("close").addEventListener("click", () => {
       contactDiv.style.display = 'none';
   })
-
+  
   document.getElementById("contactBtn").addEventListener("click", () => {
       let name = document.getElementById("name").value;
       let contactInfo = document.getElementById("contactInfo").value;
+	  let questionType = document.getElementById("questionType").value;
       let message = document.getElementById("message").value;
 
       if(name === '' || name == null){
@@ -190,14 +192,17 @@ document.addEventListener("DOMContentLoaded", function () {
               body: JSON.stringify({
                   name: name,
                   contactInfo: contactInfo,
+				  questionType : questionType,
                   message : message
               })
           }).then(response => {
               if(!response.ok){
                   throw new Error ('Error :');
                   alert('伺服器忙碌中,請稍後在試!!');
-              }
-              alert('感謝您的諮詢，我們我盡快回復您的問題！！');
+              }else{
+				contactDiv.style.display = 'none';
+                alert('感謝您的諮詢，我們我盡快回復您的問題！！');
+			  }
           }).catch(error => {
               console.log('Error:', error);
           })
@@ -205,4 +210,4 @@ document.addEventListener("DOMContentLoaded", function () {
   })
   
   
-});
+}

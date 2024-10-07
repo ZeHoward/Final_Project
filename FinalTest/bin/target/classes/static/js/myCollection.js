@@ -67,14 +67,20 @@ window.onload = function () {
     const container = document.getElementById("productContainer");
     container.innerHTML = "";  // 清空現有內容
 <<<<<<< HEAD
+
+=======
+<<<<<<< HEAD
   
 =======
 
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
     if (favorites.length === 0) {
       container.innerHTML = `<p>您沒有收藏的${type === 'products' ? '商品' : '食譜'}。</p>`;
       return;
     }
+<<<<<<< HEAD
+=======
 <<<<<<< HEAD
   
     favorites.forEach(favorite => {
@@ -99,6 +105,7 @@ window.onload = function () {
     // 為收藏和購物車按鈕添加事件處理
     attachButtonHandlers();
 =======
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 
     const fragment = document.createDocumentFragment();
 
@@ -135,7 +142,10 @@ window.onload = function () {
     `;
 
     return card;
+<<<<<<< HEAD
+=======
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
   }
 
   // 收藏和加入購物車按鈕處理邏輯
@@ -206,9 +216,12 @@ window.onload = function () {
     if (type === 'products') {
       apiUrl = `/api/favorites/products/remove?userId=${userId}&productId=${productId}`;  // 呼叫刪除商品的API
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
       apiUrl = `/api/favorites/remove?userId=${userId}&productId=${productId}`;  // 呼叫刪除商品的API
 =======
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
     } else if (type === 'recipes') {
       apiUrl = `/api/favorites/recipes/remove?userId=${userId}&productId=${productId}`;  // 呼叫刪除食譜的API
     }

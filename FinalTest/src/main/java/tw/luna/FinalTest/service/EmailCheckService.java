@@ -137,6 +137,7 @@ public class EmailCheckService {
 			        "<h3>使用者諮詢通知</h3>" +
 			        "<p><strong>姓名:</strong> " + request.get("name") + "</p>" +
 			        "<p><strong>聯絡方式:</strong> " + request.get("contactInfo") + "</p>" +
+			        "<p><strong>問題類型:</strong> " + request.get("questionType") + "</p>" +
 			        "<p><strong>訊息內容:</strong> " + request.get("message") + "</p>" +
 			        "<br><p>此信件為自動生成，請勿回覆。</p>" +
 			        "</body>" +

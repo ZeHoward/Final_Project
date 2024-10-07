@@ -72,10 +72,14 @@ window.onload = function () {
 	let finalEmail = '';
 
 <<<<<<< HEAD
+	emailInput.addEventListener("change", () => {
+=======
+<<<<<<< HEAD
 	emailInput.addEventListener("blur", () => {
 =======
 	emailInput.addEventListener("change", () => {
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 	  finalEmail = '';
 	  let emailInput = document.getElementById("emailInput");
 	  let checkEmailUrl = 'http://localhost:8080/users/checkEmail?email=' + emailInput.value
@@ -144,6 +148,8 @@ window.onload = function () {
 	    
 	})
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
 	
 	document.getElementById("revalidate").addEventListener("click", () => {
 		if(finalEmail != '' && finalEmail != null){
@@ -180,5 +186,6 @@ window.onload = function () {
 	});
 =======
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 		
 };

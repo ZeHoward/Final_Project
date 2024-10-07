@@ -13,6 +13,8 @@ document.addEventListener("DOMContentLoaded", function () {
   //展開菜單選項
   // menu toggle up/down 圖案
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
   // window.togglePic1 = function () {
   //   var margin1 = document.getElementById("add");
   //   var img1 = document.getElementById("updown1");
@@ -45,6 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
   //   }
   // };
 =======
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
   window.togglePic1 = function () {
     var margin1 = document.getElementById("add");
     var img1 = document.getElementById("updown1");
@@ -76,7 +79,10 @@ document.addEventListener("DOMContentLoaded", function () {
       childContent2.style.display = "none";
     }
   };
+<<<<<<< HEAD
+=======
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 
   // 會員功能菜單顯示/隱藏
   let memberInfoDiv = document.getElementById("memberInfoDiv");
@@ -192,6 +198,8 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   });
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
   
   //聯絡我們
   
@@ -242,4 +250,5 @@ document.addEventListener("DOMContentLoaded", function () {
   
 =======
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 });

@@ -4,6 +4,8 @@ const type1 = "mealkit";
 const type2 = "preparedFood";
 let slideIndex = 1;
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
 //*wen
 const apiWEN = "http://localhost:8080/api"
 let userIdWEN = 2
@@ -155,6 +157,7 @@ document.addEventListener("DOMContentLoaded", function () {
     //wen
     getUserIdWEN()
 =======
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 
 document.addEventListener("DOMContentLoaded", function () {
   //輪播廣告
@@ -224,11 +227,16 @@ document.addEventListener("DOMContentLoaded", function () {
       })
     })
 
+<<<<<<< HEAD
+=======
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 });
 
 //展示商品
 function renderProducts(products, containerId, currentIndex) {
+<<<<<<< HEAD
+=======
 <<<<<<< HEAD
     const container = document.getElementById(containerId);
     container.innerHTML = ""; // 清空容器
@@ -253,6 +261,7 @@ function renderProducts(products, containerId, currentIndex) {
         const productHtml = `
       <p class="product-name">${product.name}</p>
 =======
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
   const container = document.getElementById(containerId);
   container.innerHTML = ""; // 清空容器
 
@@ -275,7 +284,10 @@ function renderProducts(products, containerId, currentIndex) {
     // 設置商品卡的 HTML 內容
     const productHtml = `
       <h3 class="product-name">${product.name}</h3>
+<<<<<<< HEAD
+=======
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
       <p class="product-price">$NT${product.price}</p>
       <div class="home-product-btn">
         <button class="add-to-favorite"><i class="fa-solid fa-heart"></i></button>
@@ -283,6 +295,8 @@ function renderProducts(products, containerId, currentIndex) {
       </div>
     `;
 
+<<<<<<< HEAD
+=======
 <<<<<<< HEAD
         productDiv.innerHTML = productHtml;
         productDiv.insertBefore(imgElement, productDiv.firstChild); // 插入圖片在第一位
@@ -498,6 +512,7 @@ function showSlides(n) {
     slides[slideIndex - 1].style.display = "block";
     dots[slideIndex - 1].className += " active";
 =======
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
     productDiv.innerHTML = productHtml;
     productDiv.insertBefore(imgElement, productDiv.firstChild); // 插入圖片在第一位
     container.appendChild(productDiv);
@@ -686,11 +701,16 @@ function showSlides(n) {
   }
   slides[slideIndex-1].style.display = "block";
   dots[slideIndex-1].className += " active";
+<<<<<<< HEAD
+=======
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 }
 
 //登入驗證
 function getUserId() {
+<<<<<<< HEAD
+=======
 <<<<<<< HEAD
     return fetch('/users/userAllInfo')
         .then(response => {
@@ -720,6 +740,7 @@ function checkLoginStatus() {
             return false;
         })
 =======
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
   return fetch('/users/userAllInfo')
       .then(response => {
         if (!response.ok) {
@@ -746,5 +767,8 @@ function checkLoginStatus() {
         console.error("登入時發生錯誤", error);
         return false;
       })
+<<<<<<< HEAD
+=======
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 }

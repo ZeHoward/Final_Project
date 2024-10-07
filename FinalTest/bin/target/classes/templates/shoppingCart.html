@@ -1,14 +1,20 @@
 <!DOCTYPE html>
 <html lang="zh-Hant" xmlns:th="http://www.w3.org/1999/xhtml">
 <<<<<<< HEAD
+<head>
+=======
+<<<<<<< HEAD
   <head>
 =======
 <head>
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>即食享熱</title>
     <style>
+<<<<<<< HEAD
+=======
 <<<<<<< HEAD
       @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap");
     </style>
@@ -17,17 +23,23 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
 =======
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
         @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap");
     </style>
     <link rel="stylesheet" href="css/shoppingCart.css" />
     <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+<<<<<<< HEAD
+=======
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
     />
     <!-- vue -->
     <script src="https://unpkg.com/vue@3.2.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<<<<<<< HEAD
+=======
 <<<<<<< HEAD
   </head>
 
@@ -44,6 +56,7 @@
         >
           &lt;返回購物
 =======
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 
 </head>
 
@@ -59,11 +72,16 @@
                 onclick="window.location.href='productList';"
         >
             &lt;返回購物
+<<<<<<< HEAD
+=======
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
         </button>
 
         <h1 class="title">你的購物車</h1>
         <table>
+<<<<<<< HEAD
+=======
 <<<<<<< HEAD
           <thead>
             <tr>
@@ -79,6 +97,7 @@
             <td>
               <img src="" alt="圖片" class="product-image" />
 =======
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
             <thead>
             <tr>
                 <th>商品</th>
@@ -92,7 +111,10 @@
             <tbody id="cartItems" v-for="(product, i) in products" :index="i">
             <td>
                 <img src="" alt="圖片" class="product-image" />
+<<<<<<< HEAD
+=======
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
             </td>
 
             <td>{{product.name}}</td>
@@ -101,6 +123,8 @@
 
             <td>
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
               <!--調整商品數量 -數量+ -->
               <div class="quantity">
                 <button class="decrease" @click="decrease(product)">–</button>
@@ -108,18 +132,24 @@
                 <button class="increase" @click="add(product)">+</button>
               </div>
 =======
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
                 <!--調整商品數量 -數量+ -->
                 <div class="quantity">
                     <button class="decrease" @click="decrease(product)">–</button>
                     <span class="amount">{{product.quantity}}</span>
                     <button class="increase" @click="add(product)">+</button>
                 </div>
+<<<<<<< HEAD
+=======
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
             </td>
             <!--各項商品小計-->
             <td class="subtotal">NT ${{product.quantity * product.price}}</td>
 
             <td>
+<<<<<<< HEAD
+=======
 <<<<<<< HEAD
               <!--刪除單項商品-->
               <button @click="deleteProduct(product)">
@@ -128,13 +158,17 @@
             </td>
           </tbody>
 =======
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
                 <!--刪除單項商品-->
                 <button @click="deleteProduct(product)">
                     <i class="fa-solid fa-trash"></i>
                 </button>
             </td>
             </tbody>
+<<<<<<< HEAD
+=======
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
         </table>
 
         <!--商品總額-->
@@ -144,6 +178,11 @@
         <!--預設為零，有輸入合法的優惠券才呈現折抵數字，否則為0-->
         <div style="font-size: 18px; font-weight: bold; color: #d35b50">
 <<<<<<< HEAD
+            優惠券折抵：NT $ {{"還沒寫"}}
+        </div>
+
+=======
+<<<<<<< HEAD
           優惠券折抵：NT $ {{discount}}
           <!--優惠券生效後用參數代入否則為0-->
         </div>
@@ -152,10 +191,13 @@
         </div>
 
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
         <!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
 
         <!--優惠碼-->
         <div class="coupon-container">
+<<<<<<< HEAD
+=======
 <<<<<<< HEAD
           <input type="text" placeholder="輸入優惠序號" v-model="couponCode" />
           <button class="useCouponBtn" @click="applyCoupon">使用優惠券</button>
@@ -289,6 +331,7 @@
     </script>
   </body>
 =======
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
             <input type="text" placeholder="輸入優惠序號" />
             <button class="useCouponBtn">使用優惠券</button>
         </div>
@@ -389,5 +432,8 @@
     }).mount("#myContainer"); // 將應用程式掛載到指定的 DOM 元素上
 </script>
 </body>
+<<<<<<< HEAD
+=======
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 </html>

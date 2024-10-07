@@ -1,4 +1,6 @@
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
 let currentPage = 1; //目前的頁碼
 const productsPerPage = 12; // 每頁顯示的商品數量，超過九個換頁
 let totalPages = 1; //總頁數
@@ -7,27 +9,40 @@ window.onload = function () {
 
     fetchRandomProducts(); //隨機抓取商品
 =======
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 let currentPage = 1;
 const productsPerPage = 9; // 每頁顯示的商品數量
 let totalPages = 1;
 window.onload = function () {
 
     fetchRandomProducts();
+<<<<<<< HEAD
+=======
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 
     document.querySelectorAll(".links").forEach((link) => {
         link.addEventListener("click", function (event) {
             event.preventDefault();
 <<<<<<< HEAD
+            const type = this.getAttribute("data-type");
+=======
+<<<<<<< HEAD
             const type = this.getAttribute("data-type"); //自訂義屬姓
 =======
             const type = this.getAttribute("data-type");
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
             const categoryId = this.getAttribute("data-category");
             fetchProductsByTypeAndCategory(type, categoryId);
         });
     });
 
+<<<<<<< HEAD
+    // 綁定事件委託到 productContainer來處理按鈕事件
+    document.getElementById("productContainer").addEventListener("click", handleProductActions);
+
+=======
 <<<<<<< HEAD
     // 處理按鈕事件
     document.getElementById("productContainer").addEventListener("click", handleProductActions);
@@ -36,6 +51,7 @@ window.onload = function () {
     document.getElementById("productContainer").addEventListener("click", handleProductActions);
 
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
     // 分頁按鈕(上一頁)
     document.getElementById("prevPage").addEventListener("click", () => {
         if (currentPage > 1) {
@@ -51,11 +67,16 @@ window.onload = function () {
         }
     });
 <<<<<<< HEAD
+
+    //關鍵字搜尋商品
+=======
+<<<<<<< HEAD
     // 關鍵字搜尋商品
 =======
 
     //關鍵字搜尋商品
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
     document.getElementById("searchIcon").addEventListener("click", () => {
         const keyword = document.getElementById("searchInput").value.trim();
         if (keyword) {
@@ -65,10 +86,14 @@ window.onload = function () {
         }
     })
 <<<<<<< HEAD
+
+=======
+<<<<<<< HEAD
     // 根據商品類別抓取商品
 =======
 
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
     document.querySelectorAll(".productType").forEach((typeBtn) => {
         typeBtn.addEventListener("click", function (event) {
             event.preventDefault();
@@ -80,10 +105,14 @@ window.onload = function () {
 }
 
 <<<<<<< HEAD
+//商品頁隨機顯示商品
+=======
+<<<<<<< HEAD
 //隨機顯示商品
 =======
 //商品頁隨機顯示商品
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 function fetchRandomProducts() {
     fetch("/products")
         .then((response) => {
@@ -112,10 +141,14 @@ function fetchRandomProducts() {
 }
 
 <<<<<<< HEAD
+// 渲染當前頁面的產品
+=======
+<<<<<<< HEAD
 // 渲染當前頁面
 =======
 // 渲染當前頁面的產品
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 function renderCurrentPage() {
     const startIndex = (currentPage - 1) * productsPerPage;
     const endIndex = startIndex + productsPerPage;
@@ -126,6 +159,8 @@ function renderCurrentPage() {
 }
 
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
 // 更新頁碼
 function updatePageInfo() {
     document.getElementById("pageInfo").textContent = `第 ${currentPage} 頁 / 共 ${totalPages} 頁`;
@@ -133,13 +168,17 @@ function updatePageInfo() {
 
 // 處理加入購物車和收藏商品按鈕邏輯
 =======
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 // 更新頁面信息（頁碼顯示）
 function updatePageInfo() {
     document.getElementById("pageInfo").textContent = `第 ${currentPage} 頁 / 總共 ${totalPages} 頁`;
 }
 
 // 使用事件委託來處理加入購物車和收藏商品邏輯
+<<<<<<< HEAD
+=======
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 function handleProductActions(event) {
     const target = event.target;
 
@@ -154,6 +193,8 @@ function handleProductActions(event) {
                         if (userId) {
                             const productElement = target.closest(".product");
                             const productId = productElement.dataset.productId;
+<<<<<<< HEAD
+=======
 <<<<<<< HEAD
                             const productName = productElement.dataset.productName;
                             const favoriteBtn = target.closest(".fa-heart");
@@ -193,6 +234,7 @@ function handleProductActions(event) {
                                     });
                             }
 =======
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
                             // 發送收藏請求
                             fetch(`/api/favorites/add?userId=${userId}&productId=${productId}`, {
                                 method: "POST",
@@ -209,7 +251,10 @@ function handleProductActions(event) {
                                 .catch((error) => {
                                     console.error("加入收藏時發生錯誤:", error);
                                 });
+<<<<<<< HEAD
+=======
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
                         }
                     });
                 } else {
@@ -314,6 +359,8 @@ function handleProductActions(event) {
 }
 
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
 // 渲染商品卡
 function displayProducts(productsToShow) {
     const container = document.getElementById("productContainer");
@@ -324,6 +371,7 @@ function displayProducts(productsToShow) {
         productDiv.className = "product";
         productDiv.style.cursor = "pointer";
 =======
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 // 顯示產品
 function displayProducts(productsToShow) {
     const container = document.getElementById("productContainer");
@@ -332,7 +380,10 @@ function displayProducts(productsToShow) {
         const productDiv = document.createElement("div");
         productDiv.className = "product";
         productDiv.style.cursor = "pointer"; //更改滑鼠樣式，可以點擊
+<<<<<<< HEAD
+=======
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
         productDiv.dataset.productId = product.productId;
         productDiv.dataset.productName = product.name; // 設置自定義屬性 data-name 購物車撈商品名稱用
 
@@ -342,10 +393,14 @@ function displayProducts(productsToShow) {
 
         const productHtml = `
 <<<<<<< HEAD
+            <h3 class="product-name" id="productName">${product.name}</h3>
+=======
+<<<<<<< HEAD
             <p class="product-name" id="productName">${product.name}</p>
 =======
             <h3 class="product-name" id="productName">${product.name}</h3>
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
             <p class="product-price">$NT${product.price}</p>
             <div class="home-product-btn">
                 <button class="add-to-favorite"><i class="fa-solid fa-heart"></i></button>
@@ -366,6 +421,11 @@ function displayProducts(productsToShow) {
             .then((images) => {
                 if (images.length > 0) {
 <<<<<<< HEAD
+                    imgElement.src = images[0]; // 使用 Base64Images
+                } else {
+                    imgElement.src = "../material/icon/default.png"; // 沒有圖片時使用默認圖片
+=======
+<<<<<<< HEAD
                     imgElement.src = images[0];
                 } else {
                     imgElement.src = "../material/icon/default.png"; // 如果沒有圖片時使用預設圖片
@@ -374,6 +434,7 @@ function displayProducts(productsToShow) {
                 } else {
                     imgElement.src = "../material/icon/default.png"; // 沒有圖片時使用默認圖片
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
                 }
             })
             .catch((error) => {
@@ -381,6 +442,11 @@ function displayProducts(productsToShow) {
                 imgElement.src = "../material/icon/error.png"; // 如果發生錯誤使用錯誤圖片
             });
     });
+<<<<<<< HEAD
+}
+
+//依照產品類型和產品分類
+=======
 <<<<<<< HEAD
 
     //沒有排滿三張商品卡填補空白商品卡(方便對齊)
@@ -402,6 +468,7 @@ function displayProducts(productsToShow) {
 
 //依照產品類型和產品分類
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 function fetchProductsByTypeAndCategory(type, categoryId) {
     fetch(`products/filter?type=${type}&categoryId=${categoryId}`)
         .then((response) => {
@@ -419,6 +486,8 @@ function fetchProductsByTypeAndCategory(type, categoryId) {
                 const sortBy = document.getElementById("sort").value;
                 sortProducts(products, sortBy);
             });
+<<<<<<< HEAD
+=======
 <<<<<<< HEAD
             if (type === "mealkit") {
                 switch (categoryId) {
@@ -472,6 +541,7 @@ function fetchProductsByTypeAndCategory(type, categoryId) {
 
 =======
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
         })
         .catch((error) => {
             console.error("Error fetching products:", error);
@@ -479,9 +549,12 @@ function fetchProductsByTypeAndCategory(type, categoryId) {
 }
 
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
 //依照產品類型抓取商品
 =======
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 function fetchProductsByType(type) {
     fetch(`products/type/${type}`)
         .then((response) => {
@@ -500,6 +573,8 @@ function fetchProductsByType(type) {
                 sortProducts(products, sortBy);
             });
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
             if(type==="mealkit"){
                 document.getElementById("title").innerHTML="生鮮食材包";
             }else{
@@ -507,6 +582,7 @@ function fetchProductsByType(type) {
             }
 =======
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
         })
         .catch(error => {
             console.error("Error fetching products:", error);
@@ -514,10 +590,14 @@ function fetchProductsByType(type) {
 }
 
 <<<<<<< HEAD
+//商品排序
+=======
+<<<<<<< HEAD
 //商品排序按鈕
 =======
 //商品排序
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 function sortProducts(products, sortBy) {
     if (sortBy === "priceLowHigh") {
         products.sort((a, b) => a.price - b.price);
@@ -533,10 +613,14 @@ function sortProducts(products, sortBy) {
 }
 
 <<<<<<< HEAD
+//確認登入狀態
+=======
+<<<<<<< HEAD
 //取得userId
 =======
 //確認登入狀態
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 function getUserId() {
     return fetch('/users/userAllInfo')
         .then(response => {
@@ -553,10 +637,14 @@ function getUserId() {
 }
 
 <<<<<<< HEAD
+// 取得Id
+=======
+<<<<<<< HEAD
 //點選加入購物車和收藏按鈕先確認登入狀態在加入收藏和購物車
 =======
 // 取得Id
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 function checkLoginStatus() {
     return fetch('users/checkSession').then(response => {
         if (!response.ok) {
@@ -572,10 +660,14 @@ function checkLoginStatus() {
 }
 
 <<<<<<< HEAD
+//搜尋功能
+=======
+<<<<<<< HEAD
 //關鍵字搜尋功能(模糊查詢)
 =======
 //搜尋功能
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 function searchProducts(keyword) {
     fetch(`/products/search?keyword=${encodeURIComponent(keyword)}`, {method: "GET"})
         .then((response) => {
