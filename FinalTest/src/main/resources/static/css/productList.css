@@ -113,8 +113,9 @@
   width: 100%;
 }
 
-.product { /*商品卡*/
-  width: 270px;
+.product {
+  flex: 0 1 30%;
+  /*width: 320px;*/
   text-align: center;
   border: #f4f4f4 2px solid;
   border-radius: 5px;
@@ -130,7 +131,7 @@
   display: block;
   margin: 10px auto;
   width: 90%;
-  height: 200px;
+  height: 35vh;
   object-fit: cover;
   border-radius: 5px;
 }
@@ -139,7 +140,7 @@
 .product-price,
 .home-product-btn { /*home-product-btn是收藏按鈕和加入購物車按鈕*/
   margin: 10px 0;
-  font-size: medium;
+  font-size: large;
 }
 
 .product-price {
@@ -208,4 +209,18 @@
 
 i.active {
   color: red;
+}
+
+
+
+@media (min-width: 1600px) and (max-width: 3840px) {
+
+  .product-image{
+    height: 40vh;
+  }
+
+  #productName{
+    font-size: 25px;
+  }
+
 }
