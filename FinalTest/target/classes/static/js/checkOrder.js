@@ -1,17 +1,25 @@
 window.onload = function () {
-    fetchOrderDetails();
+    // 從 URL 路徑中獲取訂單 ID
+    const pathParts = window.location.pathname.split('/');
+    const orderId = pathParts[pathParts.length - 1];
 
-    function fetchOrderDetails() {
-        fetch('/api/orders/user')
+    if (orderId) {
+        fetchOrderDetails(orderId);
+    } else {
+        console.error('沒有提供訂單 ID');
+    }
+
+    function fetchOrderDetails(orderId) {
+        fetch(`/api/orders/${orderId}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error("獲取訂單詳情失敗");
                 }
                 return response.json();
             })
-            .then(orders => {
-                if (orders.length > 0) {
-                    displayOrderDetails(orders[0]); // 顯示第一個訂單的詳情
+            .then(order => {
+                if (order) {
+                    displayOrderDetails(order);
                 } else {
                     console.error('沒有找到訂單');
                 }
@@ -20,11 +28,11 @@ window.onload = function () {
     }
 
     function displayOrderDetails(order) {
-        // 1. 更新訂單編號和日期
+        // 更新訂單編號和日期
         document.getElementById('orderId').textContent = `訂單編號：#${order.orderId}`;
         document.getElementById('orderDate').textContent = `訂單日期：${new Date(order.orderDate).toLocaleDateString()}`;
 
-        // 2. 更新訂單項目
+        // 更新訂單項目
         const orderItemsContainer = document.getElementById('che-order-items');
         orderItemsContainer.innerHTML = '';
 
@@ -41,7 +49,7 @@ window.onload = function () {
             orderItemsContainer.appendChild(row);
         });
 
-        // 3. 更新訂單摘要
+        // 更新訂單摘要
         const summaryContainer = document.querySelector('.che-summary');
         summaryContainer.innerHTML = `
             商品總計：NT$${order.totalAmount}<br>
@@ -52,7 +60,7 @@ window.onload = function () {
             訂單狀態：${order.status}
         `;
 
-        // 4. 更新收件人資訊
+        // 更新收件人資訊
         const recipientDetailsContainer = document.getElementById('che-recipient-details');
         recipientDetailsContainer.innerHTML = `
             <p><strong>收件人：</strong> ${order.user.username}</p>

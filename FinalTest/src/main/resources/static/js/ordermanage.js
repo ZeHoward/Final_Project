@@ -1,5 +1,5 @@
 window.onload = function () {
-  
+
   // 從後端獲取當前用戶的訂單
   function fetchOrders() {
     fetch('/api/orders/user')
@@ -18,22 +18,21 @@ window.onload = function () {
     orders.forEach(order => {
       const orderItem = document.createElement('div');
       orderItem.classList.add('order-item');
+      orderItem.setAttribute('data-order-id', order.orderId); // 將orderId添加為data屬性
 
       // 訂單圖片區域
       const orderImage = document.createElement('div');
       orderImage.classList.add('order-image');
-      
+
       // 使用第一個商品的圖片或預設圖片
       let firstProductImage = "../material/icon/default.png";
       if (order.orderDetails && order.orderDetails.length > 0) {
         const firstProduct = order.orderDetails[0];
         if (firstProduct.productImageUrl) {
           firstProductImage = firstProduct.productImageUrl;
-        } else if (firstProduct.productImageBase64) {
-          firstProductImage = `data:image/jpeg;base64,${firstProduct.productImageBase64}`;
         }
       }
-      
+
       orderImage.innerHTML = `<img src="${firstProductImage}" alt="訂單商品圖片" class="order-thumbnail">`;
       orderItem.appendChild(orderImage);
 
@@ -52,8 +51,16 @@ window.onload = function () {
       orderInfo.classList.add('order-info');
       orderInfo.innerHTML = `
         <span>${order.orderDetails.length}項商品</span>
-        <button onclick="viewOrderDetails(${order.orderId})">查看訂單</button>
       `;
+
+      // 創建查看訂單按鈕
+      const viewOrderButton = document.createElement('button');
+      viewOrderButton.textContent = '查看訂單';
+      viewOrderButton.addEventListener('click', function () {
+        viewOrderDetails(order.orderId);
+      });
+      orderInfo.appendChild(viewOrderButton);
+
       orderItem.appendChild(orderInfo);
 
       // 將訂單項目添加到訂單列表中
@@ -62,9 +69,13 @@ window.onload = function () {
   }
 
   // 查看訂單詳情
-  window.viewOrderDetails = function(orderId) {
+  function viewOrderDetails(orderId) {
+    console.log('Viewing order details for orderId:', orderId); // 添加日誌
     window.location.href = `/myOrder/details/${orderId}`;
   }
+
+  // 將 viewOrderDetails 函數添加到全局作用域
+  window.viewOrderDetails = viewOrderDetails;
 
   // 頁面加載時獲取訂單
   fetchOrders();
