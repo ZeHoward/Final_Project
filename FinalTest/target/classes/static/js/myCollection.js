@@ -66,11 +66,16 @@ window.onload = function () {
   function displayFavorites(favorites, type) {
     const container = document.getElementById("productContainer");
     container.innerHTML = "";  // 清空現有內容
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> b79d6adcfee841d179b480fdc757c207faeed811
     if (favorites.length === 0) {
       container.innerHTML = `<p>您沒有收藏的${type === 'products' ? '商品' : '食譜'}。</p>`;
       return;
     }
+<<<<<<< HEAD
   
     favorites.forEach(favorite => {
       const imageSrc = favorite.imageUrl || '../material/icon/error.png';
@@ -82,6 +87,20 @@ window.onload = function () {
           <p class="product-price">$NT${favorite.price}</p>
           <div class="home-product-btn">
             <button class="add-to-favorite favorited" data-product-id="${favorite.productId}">
+=======
+
+    favorites.forEach(favorite => {
+      // 將 Base64 字符串作為圖片的 src
+      const imageSrc = `data:image/jpeg;base64,${favorite.imageBase64}`;
+
+      container.innerHTML += `
+        <div class="product" data-product-id="${favorite.productId}" data-type="${type}">
+          <img class="product-image" src="${imageSrc}" alt="${favorite.name}">
+          <h3 class="product-name">${favorite.name}</h3>
+          <p class="product-price">$NT${favorite.price}</p>
+          <div class="home-product-btn">
+            <button class="add-to-favorite favorited" data-product-id="${favorite.productId}" data-type="${type}">
+>>>>>>> b79d6adcfee841d179b480fdc757c207faeed811
               <i class="fa-solid fa-heart"></i>
             </button>
             <button class="add-to-cart" data-product-id="${favorite.productId}">
@@ -90,7 +109,11 @@ window.onload = function () {
           </div>
         </div>`;
     });
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> b79d6adcfee841d179b480fdc757c207faeed811
     // 為收藏和購物車按鈕添加事件處理
     attachButtonHandlers();
   }
