@@ -185,7 +185,7 @@
             </table>
             <div id="items-container"></div>
             <div id="total-container" class="total">
-              <p id="subtotal">商品總額：NT $ {{totalAmount}}</p>
+              <p id="subtotal">商品總額：NT $ {{totalAmount2}}</p>
               <p id="discount" style="color: #d35b50">
                 優惠券折抵：NT $ {{discountAmount != 0 ?　discountAmount :
                 percentageDiscount != 0 ? percentageDiscount : 0}}
@@ -460,7 +460,10 @@
             const totalAmount = totalAmount2.value;
             const finalAmount2 =
               totalAmount + 160 - discountAmount - percentageDiscount;
-
+            console.log(456);
+            console.log(percentageDiscount);
+            console.log(333);
+            console.log(discountAmount);
             //name.value抓這頁的變數 :前的name2是傳出去的變數名稱
             const queryParams = new URLSearchParams({
               totalAmount,
@@ -543,6 +546,7 @@
             district,
             discountAmount,
             percentageDiscount,
+            totalAmount2,
           };
         },
       }).mount("#myContainer"); // 將應用程式掛載到指定的 DOM 元素上
