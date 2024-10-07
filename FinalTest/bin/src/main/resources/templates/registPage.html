@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>即食享熱</title>
+    <link rel="stylesheet" th:href="@{css/registPage.css}" />
+    
+</head>
+<body>
+
+<!-- 包含header部分 -->
+<div th:replace="header"></div>
+
+<div id="myContainer">
+	
+    <div class="regist">
+        <p class="registTopP">會員註冊</p>
+        <div>
+            <p  style="text-align: left;">電子信箱</p><input id="registEmailInput" type="email" class="registInput" placeholder="example@gmail.com">
+            <p id="emailRegexCheck">電子信箱格式有誤</p>
+
+        </div>
+
+        <div>
+            <p  style="text-align: left;">建立密碼</p><input id="registPasswordInput" type="password" class="registInput" placeholder="必須有包含數字、英文字母大小寫，最低長度為8">
+            <p id="passwordRegexCheck">必須有包含數字、英文字母大小寫，最低長度為8</p>
+        </div>
+
+        <div>
+            <p  style="text-align: left;">確認密碼</p><input id="registPasswordCheckInput" type="password" class="registInput">
+            <p id="passwordDifferent">兩組密碼不相同</p>
+        </div>
+		
+		<div class="registName">
+          <p  style="text-align: left;">使用者名稱</p><input id="registUserName" class="registInput">
+        </div>
+        
+        <div>
+          <p  style="text-align: left;">電話號碼</p><input id="registTelephoneInput" type="tel" class="registInput">
+        </div>
+       <!--
+        <div>
+        <p  style="text-align: left;">生日</p><input id="registBirthday" type="date" class="registInput">
+        </div>
+-->
+        
+
+
+      <button id="regist" class="registButton">註冊</button>
+
+      <p class="isMemberP">已經是會員嗎?<a class="isMemberA" href="http://localhost:8080/loginPage">登入</a></p>
+    </div>
+</div>
+
+<!-- 包含footer部分 -->
+<div th:replace="footer"></div>
+
+	<script th:src="@{js/registPage.js}" defer="defer"></script>	
+
+	
+</body>
+</html>

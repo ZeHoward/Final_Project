@@ -1,0 +1,139 @@
+
+
+  .memberBasicInfo{
+    padding: 3% 0;
+    text-align: center;
+    margin: 0 auto;
+    width: 400px;
+    font-weight: bold;
+}
+
+.memberBasicInfo>div{
+  margin-bottom: 30px;
+}
+
+.memberBasicInfoInput{
+    border: 1px solid #a1c14b;
+    border-radius: 10px;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.memberBasicInfoName{
+    display: flex;
+    justify-content: space-between;
+}
+
+.memberBasicInfoFirstName{
+ 
+    display: flex;
+    flex-direction: column;
+}
+.memberBasicInfoLastName{
+    margin-right: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+#updateButton{
+    margin-top: 50px;
+    margin-bottom: 20px;
+    background-color: #a1c14b; 
+    color: white; 
+    border: none; 
+    padding: 15px 60px;
+    border-radius: 10px; 
+    font-size: 16px; 
+    cursor: pointer;
+    width: 100%;
+}
+
+#updateButton:hover{
+    color: black;
+}
+
+.memberBasicInfoA{
+    margin-left: 50px;
+    display: flex;
+    justify-content: left;
+    text-decoration: none;
+    color: #e0912f;
+}
+
+.memberBasicInfoA:hover{
+    text-decoration: none;
+    color: #F3CE6E;
+}
+
+select{
+    text-align: start;
+    border: 1px solid #a1c14b;
+    border-radius: 10px;
+    padding: 10px;
+    width: 188px;
+    box-sizing: border-box;
+}
+
+.divOfSelect{
+  display: flex;
+  justify-content:start;
+}
+.divOfSelect>div{
+  text-align: start;
+}
+
+.divOfSelect>div:first{
+  margin-right: 10px;
+}
+
+#district, #county{
+  margin-top: 10px;
+}
+
+.memberBasicInfoInput {
+  border: 1px solid #a1c14b;
+  border-radius: 10px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.addressContainer {
+  display: flex;
+  gap: 10px; 
+}
+
+.zipInput {
+  width: 20%;
+}
+
+.addressInput {
+  width: 80%;
+}
+
+.addressLabel {
+  display: flex;
+  
+}
+
+.alignRight {
+  margin-left: 25px;
+}
+
+#deleteButton{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background-color: red;
+  color: white; 
+  border: none; 
+  padding: 15px 60px;
+  border-radius: 10px; 
+  font-size: 16px; 
+  cursor: pointer;
+  width: 100%;
+}
+
+#deleteButton:hover{
+  color: black;
+}
+

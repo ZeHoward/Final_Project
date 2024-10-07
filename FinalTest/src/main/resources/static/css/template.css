@@ -268,7 +268,8 @@ body {
 /*會員中心*/
 
 #cartIcon,
-#memberIcon{
+#memberIcon,
+#contactIcon{
   display: inline-block;
   font-size: 24px;
 }
@@ -324,4 +325,75 @@ body {
 
 #logoDiv:hover {
   cursor: pointer;
+}
+
+
+/******聯絡我們*********/
+    
+#contactDiv {
+    display: none;
+    position: fixed; 
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    background-color: rgba(0, 0, 0, 0.5); 
+}
+
+#contactContent {
+    background-color: #fff;
+    margin: 5% auto auto; 
+    padding: 20px;
+    border: 1px solid #888;
+    width: 40%;
+    border-radius: 10px;
+    
+}
+
+#contactContent > p {
+	margin-top: 10px;
+}
+
+#message{
+    border: 1px solid #a1c14b;
+    border-radius: 10px;
+    width: 100%;
+    height: 30%;
+    resize: none;
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+.contactInput{
+    border: 1px solid #a1c14b;
+    border-radius: 10px;
+    width: 100%;
+    height: 30px;
+    padding: 10px;
+    
+}
+
+
+
+#contactBtn{
+    margin-top: 10px;
+    background-color: #a1c14b; 
+    color: white; 
+    border: none;
+    border-radius: 10px; 
+    cursor: pointer;
+    padding: 5px 20px;
+}
+
+#contactBtn:hover{
+    color: black;
+}
+
+#close {
+    color: #aaa;
+    float: right;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
 }

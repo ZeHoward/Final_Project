@@ -1,0 +1,48 @@
+
+  .memberName{
+    text-align: center;
+  }
+  .memberCenter>div{
+    margin-bottom: 50px;
+  }
+  .memberCenterA{
+    text-decoration: none;
+    color: black;
+  }
+  
+  .memberCenterA:hover{
+    cursor: pointer;
+    color: #f3ce6e;
+  }
+  
+  .divOfMemberCenter>i{
+    margin-left: 70px;
+  }
+  
+  .divOfMemberCenter>a{
+    margin-left: 40px;
+  }
+  
+  .divOfMemberCenter{
+    padding-bottom: 20px;
+    border-bottom: 1px solid #D1DE74;
+  }
+  
+  .memberCenter{
+      padding: 3% 0;
+      margin: 0 auto;
+      width: 300px;
+      
+  }
+  
+  .memberCenterTopP{
+      margin-bottom: 10%;
+      text-align: center;
+      font-size: 30px;
+  }
+  
+  .fa-solid{
+    font-size: 15px;
+    color: black;
+  }
+  
