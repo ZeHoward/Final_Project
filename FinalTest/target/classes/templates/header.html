@@ -31,8 +31,7 @@
         <a href="/about">關於我們</a>
         <a href="/productList">全館商品</a>
         <a href="#share">線上食譜</a>
-        <a href="#QA">常見問題</a>
-        <a href="#noticet">購買須知</a>
+        <a href="/notice">常見問題</a>
         <a href="/registPage">註冊</a>
     </div>
     <div class="tem-end-photo">
@@ -58,15 +57,14 @@
             <img th:src="@{/material/logo.png}" alt="Logo" class=""/>
         </div>
         <div class="tem-header-icons">
-	        <div id="contactIcon" class="tem-icon">
-				<i class="fa-solid fa-envelope"></i>			</div>
+	        
             <div id="cartIcon" class="tem-icon tem-cart-icon">
-                <a href="/shoppingCart">
+                <a href="/shoppingCart" style="padding-right: 20px">
                     <i class="fa-solid fa-cart-shopping"></i>
                 </a>
             </div>
             <div id="memberIcon" href="#" class="tem-icon tem-user-icon">
-                <i class="fa-solid fa-user"></i>
+                <i class="fa-solid fa-user" style="padding-right: 20px"></i>
             </div>
             <div id="memberInfoDiv">
                 <div>
@@ -91,13 +89,17 @@
                     <i class="memerinfo-icon fa-solid fa-tag"></i
                     ><a href="http://localhost:8080/couponPage">優惠券</a>
                 </div>
+                <div id="contactIcon">
+					<i class="memerinfo-icon fa-solid fa-comment"></i>					
+					<a style="margin-left:-8px;">聯絡我們</a>
+				</div>
                 <div id="loginDiv" style="display: none">
-                    <i class="memerinfo-icon fa-solid fa-right-to-bracket"></i
-                    ><a href="http://localhost:8080/loginPage">登入</a>
+                    <i class="memerinfo-icon fa-solid fa-right-to-bracket"></i>
+                    <a style="margin-left:-4px" href="http://localhost:8080/loginPage">登入</a>
                 </div>
                 <div id="logoutDiv" style="display: none">
                     <i class="memerinfo-icon fa-solid fa-right-from-bracket"></i
-                    ><a id="logout">登出</a>
+                    ><a id="logout" style="margin-left:-4px">登出</a>
                 </div>
             </div>
         </div>
@@ -116,8 +118,18 @@
             <p>謝謝您的主動聯絡，請留下要諮詢的問題，我們會用以下資訊進行回覆。</p>      
             <p>姓名:<input id="name" class="contactInput" type="text"></p>
             <p>聯絡方式:<input id="contactInfo" class="contactInput" type="text" placeholder="電子信箱 或 手機號碼"></p>
+            <p>問題類型:</p>
+            <select id="questionType">
+            	<option value="請選擇問題類型">請選擇問題類型</option>
+            	<option value="無法完成購買">無法完成購買</option>
+            	<option value="看不到商品圖">看不到商品圖</option>
+            	<option value="無法顯示網頁">無法顯示網頁</option>
+            	<option value="商品文案有誤">商品文案有誤</option>
+            	<option value="商品文案有誤">商品瑕疵,退/換貨</option>            	
+            	<option value="其他問題">其他問題</option>
+            </select><br>
             <p>諮詢內容:</p>
-            <textarea id="message" name="message"></textarea><br>
+            <textarea id="message" name="message" placeholder="若為已購買商品相關問題,麻煩請填寫訂單編號"></textarea><br>
 
             <button id="contactBtn">送出</button>
             

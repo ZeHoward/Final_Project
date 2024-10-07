@@ -110,15 +110,19 @@ public class UsersController {
 	@GetMapping("/userAllInfo")
 	public UserAllInfo userAllInfo() {
 		UserAllInfo loggedInUser = (UserAllInfo)session.getAttribute("loggedInUser");
-		Long userId = loggedInUser.getUserId();
-		if(loggedInUser.getAuthType().equals("email")) {
-			UserAllInfo newUserAllInfo = usersServiceImpl.userAllInfo(userId);
-			session.setAttribute("loggedInUser", newUserAllInfo);
-			return newUserAllInfo;
-		}else {
-			UserAllInfo userAllInfoByGoogle = usersServiceImpl.userAllInfoByGoogle(userId);
-			return userAllInfoByGoogle;
+		if(loggedInUser != null) {
+			Long userId = loggedInUser.getUserId();
+			if(loggedInUser.getAuthType().equals("email")) {
+				UserAllInfo newUserAllInfo = usersServiceImpl.userAllInfo(userId);
+				session.setAttribute("loggedInUser", newUserAllInfo);
+				return newUserAllInfo;
+			}else {
+				UserAllInfo userAllInfoByGoogle = usersServiceImpl.userAllInfoByGoogle(userId);
+				return userAllInfoByGoogle;
+			}
 		}
+		return null;
+		
 	}
 	
 	@PostMapping("/update")
