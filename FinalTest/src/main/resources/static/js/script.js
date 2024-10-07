@@ -1476,6 +1476,8 @@ function generateProductManagementWithActionsContent() {
             stockQuantity: parseInt(document.getElementById("stockQuantity").value),
         };
         updateProduct(updatedProduct);
+
+        console.log(updatedProduct);
     }
 
     function updateProduct(productData) {

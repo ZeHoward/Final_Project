@@ -353,6 +353,7 @@ body {
 
 #contactContent > p {
 	margin-top: 10px;
+	margin-bottom: 5px;
 }
 
 #message{
@@ -371,9 +372,15 @@ body {
     width: 100%;
     height: 30px;
     padding: 10px;
-    
 }
 
+#questionType{
+	border: 1px solid #a1c14b;
+    border-radius: 10px;
+    width: 30%;
+    height: 30px;
+}
+    
 
 
 #contactBtn{

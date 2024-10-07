@@ -90,7 +90,6 @@ window.onload = function () {
           </div>
         </div>`;
     });
-  
     // 為收藏和購物車按鈕添加事件處理
     attachButtonHandlers();
   }
