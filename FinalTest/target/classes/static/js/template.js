@@ -176,6 +176,7 @@ document.addEventListener("DOMContentLoaded", function () {
       let name = document.getElementById("name").value;
       let contactInfo = document.getElementById("contactInfo").value;
 	  let questionType = document.getElementById("questionType").value;
+
       let message = document.getElementById("message").value;
 
       if(name === '' || name == null){
@@ -204,7 +205,6 @@ document.addEventListener("DOMContentLoaded", function () {
 				contactDiv.style.display = 'none';
                 alert('感謝您的諮詢，我們我盡快回復您的問題！！');
 			  }
-			  
           }).catch(error => {
               console.log('Error:', error);
           })

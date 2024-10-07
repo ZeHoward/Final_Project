@@ -122,7 +122,6 @@ public class UsersController {
 			}
 		}
 		return null;
-		
 	}
 	
 	@PostMapping("/update")

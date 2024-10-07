@@ -353,10 +353,7 @@ body {
 
 #contactContent > p {
 	margin-top: 10px;
-}
-
-#contactContent > label{
-	margin-top: 10px;
+	margin-bottom: 5px;
 }
 
 #message{
@@ -383,6 +380,7 @@ body {
     width: 30%;
     height: 30px;
 }
+    
 
 
 #contactBtn{

@@ -1315,10 +1315,11 @@ function generateProductManagementWithActionsContent() {
                   <label for="type">商品類型</label>
                   <select id="type">
                       <option value="preparedFood" ${
-            product.type === "調理包" ? "selected" : ""
+
+            product.type === "preparedFood" ? "selected" : ""
         }>調理包</option>
                       <option value="mealkit " ${
-            product.type === "生鮮食食材包" ? "selected" : ""
+            product.type === "mealkit" ? "selected" : ""
         }>生鮮食材包</option>
                   </select>
               </div>
@@ -1436,6 +1437,8 @@ function generateProductManagementWithActionsContent() {
             stockQuantity: parseInt(document.getElementById("stockQuantity").value),
         };
         updateProduct(updatedProduct);
+
+        console.log(updatedProduct);
     }
 
     function updateProduct(productData) {
