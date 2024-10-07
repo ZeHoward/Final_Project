@@ -30,15 +30,16 @@ window.onload = function () {
               <button class="btn like" id="like"><i class="fa-regular fa-heart"></i>&nbsp;收藏商品</button>
             <div class="ship">
               <h3>&nbsp;配送方式: &nbsp;</h3>
-              <p>黑貓宅急便(低溫配送)</p>
+              <p>黑貓宅急便--低溫配送 (目前僅限台灣本島配送，暫無開放外島配送)</p>
               <h3>&nbsp;運費:&nbsp;</h3>
               <p>
-                全站運費皆160元。<br>
-                ※如遇颱風地震等天災或其他不可抗力因素(如：疫情、罷工)影響時，出貨時間將順延。<br>
-                ※離島門市取貨的預購商品配送需搭配船期，故實際配送至離島門市的日期會與您訂購時選擇之希望到貨日有所差異。<br>
+                每筆訂單皆須另支付160元運費。<br> 
               </p>
               <h3>&nbsp; 配送說明: &nbsp;</h3>
-              <p>※宅配：貨運將依收件者資料寄送到府</p>
+              <p>※宅配到府：貨運將依收件者資料寄送到府。<br>
+                 ※如遇颱風地震等天災或其他不可抗力因素(如：疫情、罷工)影響時，出貨時間將順延。<br>
+              </p>
+              
             </div>
       
           `;
@@ -84,8 +85,8 @@ window.onload = function () {
                                         console.log(cartItem);
 
                                         // 發送加入購物車請求
-                                        fetch(`/api/cart/put/${userId}`, {
-                                            method: "PUT",
+                                        fetch(`/api/cart/${userId}`, {
+                                            method: "POST",
                                             headers: {
                                                 "Content-Type": "application/json",
                                             },
@@ -348,8 +349,8 @@ window.onload = function () {
                                         console.log(cartItem);
 
                                         // 發送加入購物車請求
-                                        fetch(`/api/cart/put/${userId}`, {
-                                            method: "PUT",
+                                        fetch(`/api/cart/${userId}`, {
+                                            method: "POST",
                                             headers: {
                                                 "Content-Type": "application/json",
                                             },

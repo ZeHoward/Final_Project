@@ -66,28 +66,11 @@ window.onload = function () {
   function displayFavorites(favorites, type) {
     const container = document.getElementById("productContainer");
     container.innerHTML = "";  // 清空現有內容
-<<<<<<< HEAD
-  
-=======
 
->>>>>>> b79d6adcfee841d179b480fdc757c207faeed811
     if (favorites.length === 0) {
       container.innerHTML = `<p>您沒有收藏的${type === 'products' ? '商品' : '食譜'}。</p>`;
       return;
     }
-<<<<<<< HEAD
-  
-    favorites.forEach(favorite => {
-      const imageSrc = favorite.imageUrl || '../material/icon/error.png';
-  
-      container.innerHTML += `
-        <div class="product" data-product-id="${favorite.productId}">
-          <img class="product-image" src="${imageSrc}" alt="${favorite.name}" onerror="this.src='../material/icon/error.png';">
-          <h3 class="product-name">${favorite.name}</h3>
-          <p class="product-price">$NT${favorite.price}</p>
-          <div class="home-product-btn">
-            <button class="add-to-favorite favorited" data-product-id="${favorite.productId}">
-=======
 
     favorites.forEach(favorite => {
       const imageSrc = favorite.imageUrl || '../material/icon/error.png';
@@ -98,12 +81,7 @@ window.onload = function () {
           <h3 class="product-name">${favorite.name}</h3>
           <p class="product-price">$NT${favorite.price}</p>
           <div class="home-product-btn">
-<<<<<<< HEAD
-            <button class="add-to-favorite favorited" data-product-id="${favorite.productId}" data-type="${type}">
->>>>>>> b79d6adcfee841d179b480fdc757c207faeed811
-=======
             <button class="add-to-favorite favorited" data-product-id="${favorite.productId}">
->>>>>>> f284366c00a970999dc6ca919513b95ad6f83dc9
               <i class="fa-solid fa-heart"></i>
             </button>
             <button class="add-to-cart" data-product-id="${favorite.productId}">
@@ -112,11 +90,7 @@ window.onload = function () {
           </div>
         </div>`;
     });
-<<<<<<< HEAD
-  
-=======
 
->>>>>>> b79d6adcfee841d179b480fdc757c207faeed811
     // 為收藏和購物車按鈕添加事件處理
     attachButtonHandlers();
   }

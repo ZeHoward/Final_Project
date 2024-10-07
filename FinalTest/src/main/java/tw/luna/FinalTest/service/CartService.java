@@ -103,7 +103,6 @@ public class CartService {
             cartItems.setPrice(product.getPrice());
             cartItemsRepository.save(cartItems);
         }else {  //購物車內已存在該商品 ->更新數量
-
             isPresent.setQuantity(Math.max(cartInsertDto.getQuantity(), 1));
             cartItemsRepository.save(isPresent);
         }

@@ -1,5 +1,5 @@
 let currentPage = 1; //目前的頁碼
-const productsPerPage = 12; // 每頁顯示的商品數量，超過九個換頁
+const productsPerPage = 9; // 每頁顯示的商品數量，超過九個換頁
 let totalPages = 1; //總頁數
 
 window.onload = function () {
@@ -189,8 +189,8 @@ function handleProductActions(event) {
                             console.log(cartItem);
 
                             // 發送加入購物車請求
-                            fetch(`/api/cart/put/${userId}`, {
-                                method: "PUT",
+                            fetch(`/api/cart/${userId}`, {
+                                method: "POST",
                                 headers: {
                                     "Content-Type": "application/json",
                                 },
@@ -298,7 +298,7 @@ function displayProducts(productsToShow) {
     });
 
     //沒有排滿三張商品卡填補空白商品卡(方便對齊)
-    const itemsPerRow = 6;
+    const itemsPerRow = 3;
     let itemsToAdd = itemsPerRow - (productsToShow.length % itemsPerRow);
     if (itemsToAdd && itemsToAdd !== itemsPerRow) {
         for (let i = 0; i < itemsToAdd; i++) {
@@ -444,7 +444,7 @@ function getUserId() {
         });
 }
 
-//點選加入購物車和收藏按鈕先確認登入狀態在加入收藏和購物車
+//點選加入購物車和收藏按鈕先確認登入狀態再加入收藏和購物車
 function checkLoginStatus() {
     return fetch('users/checkSession').then(response => {
         if (!response.ok) {
