@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>訂單管理</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap");
+    </style>
+    <link rel="stylesheet" th:href="@{/css/checkOrder.css}" />
+</head>
+
+<body>
+
+    <div th:replace="header"></div>
+
+    <!-- 開始編輯 -->
+    <div class="che-container">
+        <h1 class="che-h1" id="orderId">訂單編號：</h1>
+        <h2 class="che-h1" id="orderDate">訂單日期：</h2> <!-- 新增訂單日期元素 -->
+
+        <h2 class="che-h2">訂單內容</h2>
+        <table class="che-table">
+            <thead>
+                <tr>
+                    <th class="che-th" style="width: 20%;">商品圖片</th>
+                    <th class="che-th" style="width: 50%;">商品名稱</th>
+                    <th class="che-th" style="width: 15%;">數量</th>
+                    <th class="che-th" style="width: 15%;">小計</th>
+                </tr>
+            </thead>
+            <tbody id="che-order-items">
+                <!-- JavaScript will insert order items here -->
+            </tbody>
+        </table>
+        <hr>
+
+        <div class="che-summary">
+            <p>商品總計：NT$970</p>
+            <p>運費：NT$120</p>
+            <p>折抵：-NT$150</p>
+            <p>付款總金額：NT$1040</p>
+        </div>
+
+        <div class="che-recipient-info">
+            <hr>
+            <h2 class="che-h2">收件人資訊</h2>
+            <div id="che-recipient-details">
+                <!-- JavaScript will insert recipient details here -->
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="footer"></div>
+    <script th:src="@{/js/checkOrder.js}"></script>
+</body>
+
+</html>
