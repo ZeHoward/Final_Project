@@ -77,7 +77,7 @@
                 <tbody id="cartItems">
                 <tr v-for="(product, i) in products" :key="i">
                     <td class="dflex outTd">
-                        <img :src="img" alt="圖片" class="product-image" />
+                        <img :src="product.image" alt="圖片" class="product-image" />
 
                         <div class="dflex flexColumn">
                             <div>{{ product.name }}</div>
@@ -96,7 +96,7 @@
             <div id="total-container" class="total">
                 <p id="subtotal">商品總額：NT $ {{totalAmount}}</p>
                 <p id="discount" style="color: #d35b50">
-                    優惠券折抵：NT $ {{discountAmount}}
+                    優惠券折抵：NT $ {{0 ||　discountAmount}}
                 </p>
                 <p id="shipping">運費：NT $ {{160}}</p>
                 <p id="finalAmount">付款總金額：NT $ {{finalAmount2}}</p>

@@ -77,7 +77,7 @@
                 <tbody id="cartItems">
                 <tr v-for="(product, i) in products" :key="i">
                     <td class="dflex outTd">
-                        <img :src="img" alt="圖片" class="product-image" />
+                        <img :src="product.image" alt="圖片" class="product-image" />
 
                         <div class="dflex flexColumn">
                             <div>{{ product.name }}</div>

@@ -214,9 +214,6 @@ i.active {
 
 
 @media (min-width: 1600px) and (max-width: 3840px) {
-  .product{
-    flex: 0 1 30%;
-  }
 
   .product-image{
     height: 40vh;

@@ -167,7 +167,11 @@
               <tbody id="cartItems">
                 <tr v-for="(product, i) in products" :key="i">
                   <td class="dflex outTd">
-                    <img :src="img" alt="圖片" class="product-image" />
+                    <img
+                      :src="product.image"
+                      alt="圖片"
+                      class="product-image"
+                    />
                     <div class="dflex flexColumn">
                       <div>{{ product.name }}</div>
                       <div>數量:{{ product.quantity }}</div>
@@ -210,7 +214,7 @@
           const totalAmount = params.get("totalAmount");
           const finalAmount = params.get("finalAmount");
           const discountAmount = params.get("discountAmount");
-      
+
           //自定義名稱
           const name = ref("");
           const img = ref(
@@ -393,8 +397,7 @@
           const cityName = ref("");
           const isSameInfo = ref(false); // 確保這個變量被定義
           const district = ref("");
-          const discountAmountToNextPage =ref("");
-         
+          const discountAmountToNextPage = ref("");
 
           const totalAmount2 = computed(() => {
             return products.value.reduce(
@@ -449,7 +452,6 @@
 
           //要傳遞出去的參數  缺少優惠券
           const toCheckInfo = () => {
-                                         
             const totalAmount = totalAmount2.value;
             const finalAmount2 = totalAmount + 160 - discountAmount;
             discountAmountToNextPage.value = discountAmount;
@@ -466,7 +468,7 @@
               zipCode: zipCode.value,
               address: address.value,
               phone: phone.value,
-              discountAmount2:discountAmount,
+              discountAmount2: discountAmount,
             }).toString();
 
             window.location.href = `/checkInfo?${queryParams}`;
@@ -536,7 +538,7 @@
             clearUserInfo,
             populateUserInfo,
             district,
-            discountAmount
+            discountAmount,
           };
         },
       }).mount("#myContainer"); // 將應用程式掛載到指定的 DOM 元素上
