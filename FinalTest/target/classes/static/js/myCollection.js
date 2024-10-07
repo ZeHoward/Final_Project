@@ -73,16 +73,15 @@ window.onload = function () {
     }
 
     favorites.forEach(favorite => {
-      // 將 Base64 字符串作為圖片的 src
-      const imageSrc = `data:image/jpeg;base64,${favorite.imageBase64}`;
+      const imageSrc = favorite.imageUrl || '../material/icon/error.png';
 
       container.innerHTML += `
-        <div class="product" data-product-id="${favorite.productId}" data-type="${type}">
-          <img class="product-image" src="${imageSrc}" alt="${favorite.name}">
+        <div class="product" data-product-id="${favorite.productId}">
+          <img class="product-image" src="${imageSrc}" alt="${favorite.name}" onerror="this.src='../material/icon/error.png';">
           <h3 class="product-name">${favorite.name}</h3>
           <p class="product-price">$NT${favorite.price}</p>
           <div class="home-product-btn">
-            <button class="add-to-favorite favorited" data-product-id="${favorite.productId}" data-type="${type}">
+            <button class="add-to-favorite favorited" data-product-id="${favorite.productId}">
               <i class="fa-solid fa-heart"></i>
             </button>
             <button class="add-to-cart" data-product-id="${favorite.productId}">
