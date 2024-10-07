@@ -1,30 +1,43 @@
 <<<<<<< HEAD
+      const { createApp, ref, onMounted, computed } = Vue;
+=======
+<<<<<<< HEAD
       const { createApp, ref, onMounted, computed, watch } = Vue;
 =======
       const { createApp, ref, onMounted, computed } = Vue;
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
       createApp({
         setup() {
           const params = new URLSearchParams(window.location.search);
           const totalAmount = params.get("totalAmount");
           const finalAmount2 = params.get("finalAmount2");
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
           // const discount = params.get("discount");
 =======
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
           const api = ref("http://localhost:8080/api");
           const img = ref(
             "https://plus.unsplash.com/premium_photo-1661322640130-f6a1e2c36653?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8YXBwbGV8ZW58MHx8MHx8fDA%3D"
           );
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
           const userId = ref(0); // 使用者 ID
           const products = ref([])
 =======
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
           const userId = ref(2); // 使用者 ID
           //params.get("name2")取出前一頁傳來的name2並用name5接
           const products = ref([])
 
+<<<<<<< HEAD
+=======
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
           const name5 = params.get("name2")
           const lastName2 = params.get("lastName")
           const email = params.get("email")
@@ -34,6 +47,8 @@
           const city = params.get("city")
           
           const address = params.get("address")
+<<<<<<< HEAD
+=======
 <<<<<<< HEAD
           const pay = ref(false)
           const form = ref("")
@@ -49,6 +64,7 @@
           };
 =======
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 
           // 生成 UUID
           function generateUUID() {
@@ -87,6 +103,8 @@
           const getPayment = async () => {
             const res = await axios.post(`${api.value}/ECPAY/ecpayCheckout`,paymentData);
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
             form.value = res.data
             const parser = new DOMParser()
             const doc = parser.parseFromString(form.value, 'text/html')
@@ -118,11 +136,15 @@
           })
 
 =======
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
         console.log(res);
         
           };
 
+<<<<<<< HEAD
+=======
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
           //缺優惠券
           //將收件者資料及購物車商品資料存進資料庫
           const addToOrders = async () => {
@@ -131,10 +153,14 @@
             try{
             const res = await axios.post(`${api.value}/orders/${userId.value}`,orderData)
 <<<<<<< HEAD
+         
+=======
+<<<<<<< HEAD
               
 =======
          
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
             if(res.status === 200){
               getPayment()
 
@@ -152,11 +178,16 @@
           
           onMounted(() => {
 <<<<<<< HEAD
+            getCart()
+            getPayment()
+=======
+<<<<<<< HEAD
             getUserId()
 =======
             getCart()
             getPayment()
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
           })
 
           return {
@@ -173,6 +204,9 @@
             city,
             addToOrders,
 <<<<<<< HEAD
+            address
+=======
+<<<<<<< HEAD
             address,
             form,
             pay,
@@ -181,6 +215,7 @@
 =======
             address
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
           }
           }
           }).mount("#myContainer")

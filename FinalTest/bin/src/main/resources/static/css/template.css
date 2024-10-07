@@ -268,8 +268,12 @@ body {
 
 #searchIcon,
 #cartIcon,
+<<<<<<< HEAD
+#memberIcon{
+=======
 #memberIcon,
 #contactIcon{
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
   display: inline-block;
   font-size: 24px;
 }
@@ -358,6 +362,8 @@ body {
 #logoDiv:hover {
   cursor: pointer;
 }
+<<<<<<< HEAD
+=======
 
 
 /******聯絡我們*********/
@@ -429,3 +435,4 @@ body {
     font-weight: bold;
     cursor: pointer;
 }
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5

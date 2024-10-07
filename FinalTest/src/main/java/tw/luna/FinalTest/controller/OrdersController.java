@@ -99,9 +99,10 @@ public class OrdersController {
  	    @RequestParam("page") int page,
  	    @RequestParam("size") int size,
  	    @RequestParam("sortField") String sortField, // 排序字段
- 	    @RequestParam("sortDirection") String sortDirection // 排序方向 ("asc" 或 "desc")
+ 	    @RequestParam("sortDirection") String sortDirection, // 排序方向 ("asc" 或 "desc")
+ 	    @RequestParam(value = "status", required = false) String status
  	) {
- 	    return ordersService.getOrdersWithPagination(page, size, sortField, sortDirection);
+ 		return ordersService.getOrdersWithPagination(page, size, sortField, sortDirection, status);
  	}
 
 // 	// 創建新訂單

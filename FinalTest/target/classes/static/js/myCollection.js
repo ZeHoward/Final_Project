@@ -66,15 +66,15 @@ window.onload = function () {
   function displayFavorites(favorites, type) {
     const container = document.getElementById("productContainer");
     container.innerHTML = "";  // 清空現有內容
-
+  
     if (favorites.length === 0) {
       container.innerHTML = `<p>您沒有收藏的${type === 'products' ? '商品' : '食譜'}。</p>`;
       return;
     }
-
+  
     favorites.forEach(favorite => {
       const imageSrc = favorite.imageUrl || '../material/icon/error.png';
-
+  
       container.innerHTML += `
         <div class="product" data-product-id="${favorite.productId}">
           <img class="product-image" src="${imageSrc}" alt="${favorite.name}" onerror="this.src='../material/icon/error.png';">
@@ -90,7 +90,6 @@ window.onload = function () {
           </div>
         </div>`;
     });
-
     // 為收藏和購物車按鈕添加事件處理
     attachButtonHandlers();
   }

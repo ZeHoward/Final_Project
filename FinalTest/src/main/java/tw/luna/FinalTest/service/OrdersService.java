@@ -143,37 +143,42 @@ public class OrdersService {
 	}
 
 	public ResponseEntity<Page<OrderWithUserDTO>> getOrdersWithPagination(int page, int size, String sortField,
-			String sortDirection) {
-		// 根據傳入的排序方向，轉換為 Sort.Direction
-		Sort.Direction direction = Sort.Direction.fromString(sortDirection);
+            String sortDirection, String status) {
+    // 根據傳入的排序方向，轉換為 Sort.Direction
+    Sort.Direction direction = Sort.Direction.fromString(sortDirection);
 
-		// 使用排序字段和方向來創建分頁請求
-		Pageable pageable = PageRequest.of(page, size, Sort.by(direction, sortField));
+    // 使用排序字段和方向來創建分頁請求
+    Pageable pageable = PageRequest.of(page, size, Sort.by(direction, sortField));
 
-		// 查詢訂單數據
-		Page<Orders> orders = ordersRepository.findAll(pageable);
+    Page<Orders> orders;
 
-		// 將查詢到的訂單數據轉換為 DTO
-		Page<OrderWithUserDTO> orderDTOs = orders.map(order -> {
-			OrderWithUserDTO dto = new OrderWithUserDTO();
-			dto.setOrderId(order.getOrderId());
-			dto.setOrderDate(order.getOrderDate());
-			dto.setTotalAmount(order.getTotalAmount());
-			dto.setPercentageDiscount(order.getPercentageDiscount());
-			dto.setAmountDiscount(order.getAmountDiscount());
-			dto.setFinalAmount(order.getFinalAmount());
-			dto.setStatus(order.getStatus());
+    if (status != null && !status.isEmpty() && !status.equalsIgnoreCase("all")) {
+        orders = ordersRepository.findByStatus(status, pageable);
+    } else {
+        orders = ordersRepository.findAll(pageable);
+    }
 
-			// 設置用戶相關的字段
-			dto.setUsername(order.getUser().getUsername());
-			dto.setEmail(order.getUser().getEmail());
-			dto.setPhoneNumber(order.getUser().getPhoneNumber());
+    // 將查詢到的訂單數據轉換為 DTO
+    Page<OrderWithUserDTO> orderDTOs = orders.map(order -> {
+        OrderWithUserDTO dto = new OrderWithUserDTO();
+        dto.setOrderId(order.getOrderId());
+        dto.setOrderDate(order.getOrderDate());
+        dto.setTotalAmount(order.getTotalAmount());
+        dto.setPercentageDiscount(order.getPercentageDiscount());
+        dto.setAmountDiscount(order.getAmountDiscount());
+        dto.setFinalAmount(order.getFinalAmount());
+        dto.setStatus(order.getStatus());
 
-			return dto;
-		});
+        // 設置用戶相關的字段
+        dto.setUsername(order.getUser().getUsername());
+        dto.setEmail(order.getUser().getEmail());
+        dto.setPhoneNumber(order.getUser().getPhoneNumber());
 
-		return ResponseEntity.ok(orderDTOs);
-	}
+        return dto;
+    });
+
+    return ResponseEntity.ok(orderDTOs);
+}
 
 	public Optional<OrdersDTO> getOrderById(Integer id) {
 	    return ordersRepository.findById(id).map(order -> {
@@ -214,21 +219,23 @@ public class OrdersService {
 	        return null;
 	    }
 
-	    OrderDetailsDTO dto = new OrderDetailsDTO(
+	    // 獲取產品圖片
+	    List<ProductImageDTO> productImages = details.getProduct().getProductImages().stream()
+	        .map(image -> new ProductImageDTO(
+	            image.getId(),
+	            details.getProduct().getProductId(),
+	            image.getImage() // 假設這是存儲在數據庫中的圖片URL
+	        ))
+	        .collect(Collectors.toList());
+
+	    return new OrderDetailsDTO(
 	        details.getProduct().getName(),
 	        details.getProduct().getSku(),
 	        details.getQuantity(),
 	        details.getPrice(),
-	        details.getProduct().getProductId()
+	        details.getProduct().getProductId(),
+	        productImages // 傳遞產品圖片列表
 	    );
-
-	    // 設置總價（如果建構式沒有自動計算的話）
-	    dto.setTotal(details.getQuantity() * details.getPrice());
-
-	    // 注意：這裡沒有設置 productImageBase64，因為現在不處理圖片轉換
-	    // 如果將來需要處理圖片，可以在這裡添加相關邏輯
-
-	    return dto;
 	}
 
 	public Integer getTotalRevenue(LocalDateTime startDate, LocalDateTime endDate) {

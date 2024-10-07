@@ -71,6 +71,8 @@ body {
 }
 
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
 .dot:hover {
   background-color: #717171;
 }
@@ -79,6 +81,7 @@ i.active {
   color: red;
 }
 =======
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 .active, .dot:hover {
   background-color: #717171;
 }
@@ -92,7 +95,10 @@ i.active {
 /*  from {opacity: .4}*/
 /*  to {opacity: 1}*/
 /*}*/
+<<<<<<< HEAD
+=======
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 
 /* 生鮮食材包專區 */
 .container {
@@ -128,10 +134,14 @@ h1 {
 
 .product-name {
 <<<<<<< HEAD
+  font-size: 18px;
+=======
+<<<<<<< HEAD
   font-size: medium;
 =======
   font-size: 18px;
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 }
 
 .product-image {
@@ -143,10 +153,14 @@ h1 {
 
 .product-price {
 <<<<<<< HEAD
+  font-size: 15px;
+=======
+<<<<<<< HEAD
   font-size: medium;
 =======
   font-size: 15px;
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
   color: #d35b50;
   font-weight: 700;
 }

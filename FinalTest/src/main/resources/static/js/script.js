@@ -2,6 +2,10 @@ generateOverviewContent(); // 預設總覽頁面為首頁
 
 // 點擊"總覽"時生成內容的函數
 function generateOverviewContent() {
+    if (!localStorage.getItem('adminLoggedIn')) {
+        window.location.href = 'backlogin.html';
+        return;
+    }
     const mainContent = document.querySelector(".main-content");
     mainContent.innerHTML = ""; // 清空之前的內容
 
@@ -180,6 +184,10 @@ function generateOverviewContent() {
 
 // 下載對應時間區間xlsx
 function downloadReport() {
+  if (!localStorage.getItem('adminLoggedIn')) {
+    window.location.href = 'backlogin.html';
+    return;
+}
     // 取得用戶選擇的時間區間
     var timeRange = document.getElementById("timeRange").value;
 
@@ -212,6 +220,10 @@ function downloadReport() {
 
 // 獲取初始圖表數據
 function fetchInitialChartData() {
+  if (!localStorage.getItem('adminLoggedIn')) {
+    window.location.href = 'backlogin.html';
+    return;
+  }
     // 設置默認的時間範圍，例如 'week'
     document.getElementById("timeRange").value = "week";
 
@@ -221,6 +233,10 @@ function fetchInitialChartData() {
 
 // 點擊"總覽上方"訂單總量"時切換圖表內容的函數
 function fetchOrderChartData() {
+  if (!localStorage.getItem('adminLoggedIn')) {
+    window.location.href = 'backlogin.html';
+    return;
+  }
     console.log("開始獲取訂單總量數據");
     const timeRange = document.getElementById("timeRange");
     if (!timeRange) {
@@ -298,6 +314,10 @@ function fetchOrderChartData() {
 
 // 點擊總覽上方"營業額"時切換圖表內容的函數
 function fetchRevenueChartData() {
+  if (!localStorage.getItem('adminLoggedIn')) {
+    window.location.href = 'backlogin.html';
+    return;
+  }
     console.log("開始獲取營業額數據");
     const timeRange = document.getElementById("timeRange");
     if (!timeRange) {
@@ -375,6 +395,10 @@ function fetchRevenueChartData() {
 
 // 初始化圖表的函數
 function initChart() {
+  if (!localStorage.getItem('adminLoggedIn')) {
+    window.location.href = 'backlogin.html';
+    return;
+  }
     const ctx = document.getElementById("orderChart").getContext("2d");
 
     // 初始化圖表，但先不設置具體數據
@@ -414,6 +438,10 @@ function initChart() {
 
 // 更新圖表數據的函數
 function updateChart(labels, values, timeRange, dataType) {
+  if (!localStorage.getItem('adminLoggedIn')) {
+    window.location.href = 'backlogin.html';
+    return;
+  }
     console.log("更新圖表:", {labels, values, timeRange, dataType});
     const chart = Chart.getChart("orderChart");
     if (!chart) {
@@ -440,6 +468,10 @@ function updateChart(labels, values, timeRange, dataType) {
 
 // 點擊"訂單管理"時生成內容的函數
 function generateOrderManagementContent() {
+  if (!localStorage.getItem('adminLoggedIn')) {
+    window.location.href = 'backlogin.html';
+    return;
+  }
     const mainContent = document.querySelector(".main-content");
     mainContent.innerHTML = ""; // 清空之前的內容
 
@@ -466,8 +498,8 @@ function generateOrderManagementContent() {
                 <label>狀態：</label>
                 <select id="orderStatus">
                     <option value="all">全部</option>
-                    <option value="completed">已付款</option>
-                    <option value="cancelled">取消</option>
+                    <option value="completed">completed</option>
+                    <option value="pending">pending</option>
                 </select>
             </div>
 
@@ -664,6 +696,10 @@ function generateOrderManagementContent() {
 
 // 點擊訂單的"詳細"連結後生成訂單詳情頁面的函數
 function generateOrderDetailsContent(order) {
+  if (!localStorage.getItem('adminLoggedIn')) {
+    window.location.href = 'backlogin.html';
+    return;
+  }
     const mainContent = document.querySelector(".main-content");
     mainContent.innerHTML = ""; // 清空之前的內容
 
@@ -935,8 +971,12 @@ function generateProductUploadForm() {
     }
 }
 
-//動態生成商品管理的頁面
+// 點擊"商品管理"時生成內容的函數
 function generateProductManagementWithActionsContent() {
+  if (!localStorage.getItem('adminLoggedIn')) {
+    window.location.href = 'backlogin.html';
+    return;
+  }
     const mainContent = document.querySelector(".main-content");
     mainContent.innerHTML = ""; // 清空之前的內容
 
@@ -1109,7 +1149,7 @@ function generateProductManagementWithActionsContent() {
             tr.innerHTML = `
             <td><img src="${imageSrc}" alt="${
                 product.name
-            }"  style="height: 80px; width: 80px"></td>
+            }"  style="height: auto; width: 150px;"></td>
             <td>${product.productId}</td>
             <td>${product.sku}</td>
             <td>${product.name}</td>
@@ -1315,7 +1355,6 @@ function generateProductManagementWithActionsContent() {
                   <label for="type">商品類型</label>
                   <select id="type">
                       <option value="preparedFood" ${
-
             product.type === "preparedFood" ? "selected" : ""
         }>調理包</option>
                       <option value="mealkit " ${
@@ -1582,6 +1621,10 @@ function generateProductManagementWithActionsContent() {
 
 // 點擊"食譜上傳"時生成內容的函數
 function generateRecipeUploadForm() {
+  if (!localStorage.getItem('adminLoggedIn')) {
+    window.location.href = 'backlogin.html';
+    return;
+  }
     const mainContent = document.querySelector(".main-content");
     mainContent.innerHTML = ""; // 清空之前的內容
 
@@ -1680,6 +1723,10 @@ function generateRecipeUploadForm() {
 
 // 點擊"食譜管理"時生成內容的函數
 function generateRecipeManagementContent() {
+  if (!localStorage.getItem('adminLoggedIn')) {
+    window.location.href = 'backlogin.html';
+    return;
+  }
     const mainContent = document.querySelector(".main-content");
     mainContent.innerHTML = ""; // 清空之前的內容
 
@@ -1765,6 +1812,10 @@ function generateRecipeManagementContent() {
 
 // 點擊"食譜管理"時生成內容的函數
 function generateRecipeManagementContent() {
+  if (!localStorage.getItem('adminLoggedIn')) {
+    window.location.href = 'backlogin.html';
+    return;
+  }
     const mainContent = document.querySelector(".main-content");
     mainContent.innerHTML = ""; // 清空之前的內容
 
@@ -1935,6 +1986,10 @@ function generateRecipeManagementContent() {
 
 // 點擊"用戶管理"時生成內容的函數
 function generateUserManagementContent() {
+  if (!localStorage.getItem('adminLoggedIn')) {
+    window.location.href = 'backlogin.html';
+    return;
+  }
     const mainContent = document.querySelector(".main-content");
     mainContent.innerHTML = ""; // 清空之前的內容
 
@@ -2117,6 +2172,10 @@ function generateUserManagementContent() {
 
 // 生成用戶詳情表單
 function generateUserEditForm(user) {
+  if (!localStorage.getItem('adminLoggedIn')) {
+    window.location.href = 'backlogin.html';
+    return;
+  }
     const mainContent = document.querySelector(".main-content");
     mainContent.innerHTML = ""; // 清空之前的內容
 
@@ -2153,6 +2212,10 @@ function generateUserEditForm(user) {
 }
 
 function generateCouponManagementForm() {
+  if (!localStorage.getItem('adminLoggedIn')) {
+    window.location.href = 'backlogin.html';
+    return;
+  }
     const mainContent = document.querySelector(".main-content");
     mainContent.innerHTML = ""; // 清空之前的內容
 
@@ -2373,6 +2436,12 @@ function generateCouponManagementForm() {
     });
 }
 
+function logout() {
+  localStorage.removeItem('adminLoggedIn');
+  sessionStorage.removeItem('adminLoggedIn');
+  window.location.href = 'backlogin.html';
+}
+
 
 document.addEventListener("DOMContentLoaded", function () {
     initChart();
@@ -2483,3 +2552,10 @@ document
         event.preventDefault();
         generateProductManagementWithActionsContent(); // 生成商品管理頁面
     });
+
+// 登出功能
+document.getElementById('logoutButton').addEventListener('click', function(e) {
+	 e.preventDefault();
+	 localStorage.removeItem('adminLoggedIn');
+	 window.location.href = 'backlogin.html';
+});

@@ -161,7 +161,6 @@ window.onload = () => {
   });
   
   //聯絡我們
-  console.log('4564654')
   let contactDiv = document.getElementById("contactDiv");
   
   document.getElementById("contactIcon").addEventListener("click", () => {
@@ -173,7 +172,6 @@ window.onload = () => {
   })
   
   document.getElementById("contactBtn").addEventListener("click", () => {
-	console.log('contactBtn7777777');
       let name = document.getElementById("name").value;
       let contactInfo = document.getElementById("contactInfo").value;
 	  let questionType = document.getElementById("questionType").value;

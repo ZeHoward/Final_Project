@@ -14,7 +14,6 @@ import tw.luna.FinalTest.repository.RecipesRepository;
 public class RecipesService {
 
 	@Autowired
-
 	private RecipesRepository recipesRepository;
 
 	// 獲取所有未刪除的食譜

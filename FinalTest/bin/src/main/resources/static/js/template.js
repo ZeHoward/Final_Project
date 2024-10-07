@@ -157,6 +157,8 @@ document.addEventListener("DOMContentLoaded", function () {
         console.error("Error:", error);
       });
   });
+<<<<<<< HEAD
+=======
   
   //聯絡我們
   
@@ -205,4 +207,5 @@ document.addEventListener("DOMContentLoaded", function () {
   })
   
   
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 });

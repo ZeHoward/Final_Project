@@ -1,6 +1,15 @@
+<<<<<<< HEAD
+Manifest-Version: 1.0
+Build-Jdk-Spec: 22
+Implementation-Title: FinalTest
+Implementation-Version: 0.0.1-SNAPSHOT
+Created-By: Maven Integration for Eclipse
+
+=======
 Manifest-Version: 1.0
 Build-Jdk-Spec: 21
 Implementation-Title: FinalTest
 Implementation-Version: 0.0.1-SNAPSHOT
 Created-By: Maven Integration for Eclipse
 
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5

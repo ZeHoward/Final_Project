@@ -1,7 +1,10 @@
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
 
 /* 中間區塊(商品分類側邊欄位和商品卡) */
 =======
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 /** {*/
 /*  font-family: "Noto Sans TC", system-ui;*/
 /*  margin: 0;*/
@@ -17,16 +20,23 @@
 /*}*/
 
 /* 中間區塊 */
+<<<<<<< HEAD
+=======
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 .mid {
   display: flex;
   flex: 1;
 }
 <<<<<<< HEAD
+/* 菜單 */
+=======
+<<<<<<< HEAD
 /* 商品分類菜單(五大項) */
 =======
 /* 菜單 */
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 .list,
 .list-title {
   flex: 1;
@@ -39,10 +49,14 @@
 .list-title,
 .down-btn {
 <<<<<<< HEAD
+  padding: 6px 8px 6px 16px;
+=======
+<<<<<<< HEAD
   padding: 6px 8px;
 =======
   padding: 6px 8px 6px 16px;
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
   text-decoration: none;
   font-size: 20px;
   color: #000000;
@@ -72,6 +86,8 @@
 }
 
 /* 商品區 */
+<<<<<<< HEAD
+=======
 <<<<<<< HEAD
 .title{  /*商品分類類型標題*/
   font-size: 30px;
@@ -142,6 +158,7 @@
 
 .product { /*商品卡*/
 =======
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 .product-zone {
   flex: 4;
   padding: 20px;
@@ -155,12 +172,17 @@
 
 .product {
   margin: 20px;
+<<<<<<< HEAD
+=======
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
   width: 270px;
   text-align: center;
   border: #f4f4f4 2px solid;
   border-radius: 5px;
   padding: 10px;
+<<<<<<< HEAD
+=======
 <<<<<<< HEAD
   margin-bottom: 20px;
 }
@@ -177,6 +199,7 @@
   object-fit: cover;
   border-radius: 5px;
 =======
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 }
 
 .product:hover {
@@ -194,11 +217,18 @@
 
 .product-name {
   font-size: 16px;
+<<<<<<< HEAD
+=======
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 }
 
 .product-name,
 .product-price,
+<<<<<<< HEAD
+.home-product-btn {
+  margin: 10px 0; /* 調整文字與按鈕的間距 */
+=======
 <<<<<<< HEAD
 .home-product-btn { /*home-product-btn是收藏按鈕和加入購物車按鈕*/
   margin: 10px 0;
@@ -207,6 +237,7 @@
 .home-product-btn {
   margin: 10px 0; /* 調整文字與按鈕的間距 */
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 }
 
 .product-price {
@@ -217,12 +248,18 @@
 
 <<<<<<< HEAD
 =======
+<<<<<<< HEAD
+=======
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 .sort {
   text-align: right;
   margin-bottom: 20px;
 }
 
+<<<<<<< HEAD
+=======
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 .fa-heart {
   font-size: 25px;
   align-items: center;
@@ -241,22 +278,31 @@
 }
 
 <<<<<<< HEAD
+.home-product-btn {
+=======
+<<<<<<< HEAD
 .home-product-btn { /*按鈕的家*/
 =======
 .home-product-btn {
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
   display: flex;
   justify-content: space-around;
   align-items: center;
 }
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
 
 =======
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
 .add-to-favorite {
   margin-top: 5px;
   padding-left: 15px;
   display: flex;
+<<<<<<< HEAD
+=======
 <<<<<<< HEAD
   align-items: center;
   justify-content: center;
@@ -264,12 +310,16 @@
   background-color: transparent;
   color: #787575;
 =======
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
   align-items: center; /* 垂直置中 */
   justify-content: center; /* 水平置中 */
   border: none;
   background-color: transparent;
   color: #787575; /* 默認未收藏的顏色 */
+<<<<<<< HEAD
+=======
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5
   cursor: pointer;
 }
 
@@ -281,6 +331,8 @@
 .add-to-cart:active {
   background-color: #de8415;
 }
+<<<<<<< HEAD
+=======
 <<<<<<< HEAD
 
 .pagination{
@@ -302,3 +354,4 @@ i.active {
 }
 =======
 >>>>>>> df1674c5fef1625551261257122acc83d3e42279
+>>>>>>> c654e672b4e173558a1d0734ffe17e8f86b675e5

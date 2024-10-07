@@ -13,7 +13,6 @@ import tw.luna.FinalTest.model.Recipes;
 @Repository
 public interface RecipesRepository extends JpaRepository<Recipes, Integer> {
 
-
 	// 根據 productId 查找對應的 Recipe
 	Optional<Recipes> findByProductProductId(int productId);
 

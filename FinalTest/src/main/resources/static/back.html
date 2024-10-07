@@ -7,14 +7,24 @@
     <link rel="stylesheet" href="./css/styles.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- 用於圖表的庫 -->
+    <script src="auth.js"></script>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"
     />
     <!-- sweetAlart2 -->
+    <script>
+      // 即時檢查登入狀態
+      (function() {
+          const isLoggedIn = localStorage.getItem('adminLoggedIn') === 'true' && sessionStorage.getItem('adminLoggedIn') === 'true';
+          if (!isLoggedIn) {
+              window.location.href = 'backlogin.html';
+          }
+      })();
+    </script>
   </head>
 
-  <body>
+  <body onload="checkAuth()">
     <div class="container">
       <!-- 側邊導航 -->
       <nav class="sidebar">
@@ -46,7 +56,7 @@
             <!-- 下拉選單 -->
             <div class="dropdown-menu">
               <ul>
-                <li><a href="login.html">登出</a></li>
+                <li><a href="backlogin.html" onclick="logout()">登出</a></li>
               </ul>
             </div>
           </div>
