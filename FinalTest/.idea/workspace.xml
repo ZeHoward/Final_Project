@@ -4,23 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="aac085bc-ba1f-4034-a473-ae9efe4b7580" name="Changes" comment="修正myCollection.js">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="aac085bc-ba1f-4034-a473-ae9efe4b7580" name="Changes" comment="給user一台載我靈魂的車車">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.run/FinalTest.run.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.run/FinalTest.run.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tw/luna/FinalTest/model/Users.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tw/luna/FinalTest/model/Users.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tw/luna/FinalTest/service/CartService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tw/luna/FinalTest/service/CartService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/header.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/controller/OrdersController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/controller/OrdersController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/controller/PageController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/controller/PageController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/controller/ProductController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/controller/ProductController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/controller/RecipesController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/controller/RecipesController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/dto/cart/CartSelectDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/dto/cart/CartSelectDto.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/model/Users.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/model/Users.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/service/CartService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/service/CartService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/service/EmailCheckService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/service/EmailCheckService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/service/OrdersService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/service/OrdersService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/service/RecipesService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/service/RecipesService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/myCollection.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/myCollection.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/recipe.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/recipe.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/recipe.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/recipe.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/recipe.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/recipe.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,8 +112,17 @@
       <workItem from="1728353768991" duration="103000" />
       <workItem from="1728353999617" duration="55000" />
       <workItem from="1728354515506" duration="232000" />
-      <workItem from="1728360679546" duration="63000" />
+      <workItem from="1728360679546" duration="7596000" />
     </task>
+    <task id="LOCAL-00001" summary="給user一台載我靈魂的車車">
+      <option name="closed" value="true" />
+      <created>1728360980553</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1728360980553</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -132,6 +130,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="修正myCollection.js" />
-    <option name="LAST_COMMIT_MESSAGE" value="修正myCollection.js" />
+    <MESSAGE value="給user一台載我靈魂的車車" />
+    <option name="LAST_COMMIT_MESSAGE" value="給user一台載我靈魂的車車" />
   </component>
 </project>
