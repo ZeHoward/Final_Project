@@ -109,7 +109,6 @@ window.onload = function () {
 	document.getElementsByClassName("loginButton")[0].addEventListener('click',() =>{
 
 	  let finalPassword = document.getElementById("passwordInput").value;
-	  console.log(finalEmail + "," + finalPassword);
 	  if(finalEmail != '' && finalEmail != null && finalPassword != '' && finalPassword != null){
 		fetch('http://localhost:8080/users/login',{
 			    method: 'POST',
