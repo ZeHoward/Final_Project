@@ -36,7 +36,7 @@ window.onload = () => {
 	
 	document.getElementById('updatePasswordButton').addEventListener('click', () => {
 		if(finalNewPassword != '' && finalNewPassword != null  && checkPassword){
-			fetch('http://localhost:8080/users/resetPassword',{
+			fetch('/users/resetPassword',{
 				method : 'POST',
 				headers : {'Content-Type' : 'application/json'},
 				body : JSON.stringify({

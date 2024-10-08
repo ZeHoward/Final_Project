@@ -181,7 +181,7 @@ window.onload = function () {
 			}
 		}
 
-	   fetch('http://localhost:8080/users/userAllInfo',{
+	   fetch('/users/userAllInfo',{
 	     method : 'GET'
 	   }).then(response => {
 	     if(!response.ok){
@@ -220,7 +220,7 @@ window.onload = function () {
 	     let zipCode = document.getElementById("zipCode").value;
 	     let birthday = document.getElementById("birthday").value;
 	    
-	     fetch('http://localhost:8080/users/update',{
+	     fetch('/users/update',{
 	       method : 'POST',
 	       headers : {'Content-Type' : 'application/json'},
 	       body : JSON.stringify({
@@ -245,7 +245,7 @@ window.onload = function () {
 	     }).then(data => {
 			if(data){
 				alert('會員資料更新成功');
-				fetch('http://localhost:8080/users/userAllInfo',{
+				fetch('/users/userAllInfo',{
 					method : 'GET'
 				  }).then(response => {
 					if(!response.ok){
@@ -277,7 +277,7 @@ window.onload = function () {
 	   });
 
 	 document.getElementById('deleteButton').addEventListener("click", () => {
-		fetch('http://localhost:8080/users/deleteUser',{
+		fetch('/users/deleteUser',{
 			method : 'GET',
 		}).then(response => {
 			if(!response.ok){
