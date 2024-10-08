@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import tw.luna.FinalTest.dto.cart.CartInsertDto;
 import tw.luna.FinalTest.dto.cart.CartSelectDto;
+import tw.luna.FinalTest.model.Cart;
 import tw.luna.FinalTest.service.CartService;
 
 import java.util.List;
@@ -17,6 +18,12 @@ public class CartController {
 
     @Autowired
     CartService cartService;
+
+    //透過userId查詢購物車Id
+    @GetMapping("/getCartId/{userId}")
+    public Cart getCartId(@PathVariable Long userId){
+        return cartService.getCartIdByUserId(userId);
+    }
 
     //新增商品進購物車 購物車內未存在該商品->新增；已存在->累加數量
     @PostMapping("/{userId}")
