@@ -4,200 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="aac085bc-ba1f-4034-a473-ae9efe4b7580" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/main.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/watcherTasks.xml" beforeDir="false" />
+    <list default="true" id="aac085bc-ba1f-4034-a473-ae9efe4b7580" name="Changes" comment="10081038 新增前台食譜外頁">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.run/FinalTest.run.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.run/FinalTest.run.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tw/luna/FinalTest/controller/PageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tw/luna/FinalTest/controller/PageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tw/luna/FinalTest/controller/RecipesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tw/luna/FinalTest/controller/RecipesController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/productList.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/productList.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/recipe.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/recipe.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/recipeDetails.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/recipeDetails.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/recipe.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/recipe.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/recipeDetails.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/recipeDetails.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/script.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/template.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/template.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/header.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/productList.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/productList.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/recipe.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/recipe.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/recipeDetails.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/recipeDetails.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/META-INF/MANIFEST.MF" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/META-INF/maven/tw.luna/FinalTest/pom.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/maven/tw.luna/FinalTest/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/integration/AllInOne.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/integration/AllInOne.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/integration/AllInOneBase.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/integration/AllInOneBase.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/integration/domain/ATMRequestObj.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/integration/domain/ATMRequestObj.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/integration/domain/AioCheckOutALL.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/integration/domain/AioCheckOutALL.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/integration/domain/AioCheckOutATM.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/integration/domain/AioCheckOutATM.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/integration/domain/AioCheckOutApplePay.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/integration/domain/AioCheckOutApplePay.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/integration/domain/AioCheckOutBARCODE.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/integration/domain/AioCheckOutBARCODE.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/integration/domain/AioCheckOutCVS.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/integration/domain/AioCheckOutCVS.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/integration/domain/AioCheckOutDevide.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/integration/domain/AioCheckOutDevide.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/integration/domain/AioCheckOutGooglePay.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/integration/domain/AioCheckOutGooglePay.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/integration/domain/AioCheckOutOneTime.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/integration/domain/AioCheckOutOneTime.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/integration/domain/AioCheckOutPeriod.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/integration/domain/AioCheckOutPeriod.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/integration/domain/AioCheckOutWebATM.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/integration/domain/AioCheckOutWebATM.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/integration/domain/CVSOrBARCODERequestObj.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/integration/domain/CVSOrBARCODERequestObj.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/integration/domain/CaptureObj.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/integration/domain/CaptureObj.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/integration/domain/CreateServerOrderObj.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/integration/domain/CreateServerOrderObj.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/integration/domain/DoActionObj.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/integration/domain/DoActionObj.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/integration/domain/FundingReconDetailObj.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/integration/domain/FundingReconDetailObj.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/integration/domain/InvoiceObj.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/integration/domain/InvoiceObj.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/integration/domain/QueryCreditCardPeriodInfoObj.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/integration/domain/QueryCreditCardPeriodInfoObj.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/integration/domain/QueryTradeInfoObj.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/integration/domain/QueryTradeInfoObj.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/integration/domain/QueryTradeObj.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/integration/domain/QueryTradeObj.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/integration/domain/TradeNoAioObj.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/integration/domain/TradeNoAioObj.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/integration/ecpayOperator/EcpayFunction$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/integration/ecpayOperator/EcpayFunction$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/integration/ecpayOperator/EcpayFunction.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/integration/ecpayOperator/EcpayFunction.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/integration/ecpayOperator/PaymentVerifyBase.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/integration/ecpayOperator/PaymentVerifyBase.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/integration/errorMsg/ErrorMessage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/integration/errorMsg/ErrorMessage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/integration/exception/EcpayException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/integration/exception/EcpayException.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/integration/verification/VerifyAioCheckOut.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/integration/verification/VerifyAioCheckOut.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/integration/verification/VerifyCapture.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/integration/verification/VerifyCapture.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/integration/verification/VerifyCreateServerOrder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/integration/verification/VerifyCreateServerOrder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/integration/verification/VerifyDoAction.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/integration/verification/VerifyDoAction.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/integration/verification/VerifyFundingReconDetail.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/integration/verification/VerifyFundingReconDetail.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/integration/verification/VerifyQueryCreditTrade.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/integration/verification/VerifyQueryCreditTrade.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/integration/verification/VerifyQueryTrade.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/integration/verification/VerifyQueryTrade.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/integration/verification/VerifyQueryTradeInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/integration/verification/VerifyQueryTradeInfo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/integration/verification/VerifyTradeNoAio.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/integration/verification/VerifyTradeNoAio.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/css/notice.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/css/notice.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/css/productList.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/css/productList.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/css/recipe.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/css/recipe.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/css/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/css/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/js/notice.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/js/notice.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/js/recipe.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/js/recipe.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/js/recipeDetails.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/js/recipeDetails.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/js/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/js/script.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/js/template.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/js/template.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/templates/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/header.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/notice.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/notice.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/productList.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/productList.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/recipe.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/recipe.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/recipeDetails.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/recipeDetails.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/BCrypt.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/BCrypt.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/FinalTestApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/FinalTestApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/config/AWSConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/config/AWSConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/config/EcpayConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/config/EcpayConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/config/EnjoyumInterceptor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/config/EnjoyumInterceptor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/config/MyCorsConfiguration.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/config/MyCorsConfiguration.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/config/OpenAPIConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/config/OpenAPIConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/config/SpringDocConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/config/SpringDocConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/config/WebConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/config/WebConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/controller/CartController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/controller/CartController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/controller/CategoryController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/controller/CategoryController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/controller/CouponController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/controller/CouponController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/controller/ECPAYController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/controller/ECPAYController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/controller/OrderController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/controller/OrderController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/controller/OrderDetailsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/controller/OrderDetailsController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/controller/OrdersController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/controller/OrdersController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/controller/PageController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/controller/PageController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/controller/ProductController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/controller/ProductController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/controller/ProductImagesController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/controller/ProductImagesController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/controller/RecipesController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/controller/RecipesController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/controller/ShowRecipeCardController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/controller/ShowRecipeCardController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/controller/UserFavoritesProductsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/controller/UserFavoritesProductsController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/controller/UserFavoritesRecipesController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/controller/UserFavoritesRecipesController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/controller/UsersController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/controller/UsersController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/controller/VerificationController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/controller/VerificationController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/dto/CouponDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/dto/CouponDTO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/dto/FavoritesRecipeDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/dto/FavoritesRecipeDTO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/dto/OrderDetailReportDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/dto/OrderDetailReportDTO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/dto/OrderDetailsDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/dto/OrderDetailsDTO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/dto/OrderReportDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/dto/OrderReportDTO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/dto/OrderWithUserDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/dto/OrderWithUserDTO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/dto/OrdersDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/dto/OrdersDTO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/dto/PostMerchantDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/dto/PostMerchantDto.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/dto/ProductImageDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/dto/ProductImageDTO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/dto/QueryOrderDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/dto/QueryOrderDTO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/dto/ShowRecipeCardDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/dto/ShowRecipeCardDTO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/dto/UpdatePasswordDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/dto/UpdatePasswordDTO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/dto/UserCouponDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/dto/UserCouponDTO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/dto/UserDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/dto/UserDTO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/dto/UserFavProductCardDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/dto/UserFavProductCardDTO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/dto/UserInfoDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/dto/UserInfoDTO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/dto/cart/CartInsertDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/dto/cart/CartInsertDto.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/dto/cart/CartSelectDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/dto/cart/CartSelectDto.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/dto/cart/CartUpdateDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/dto/cart/CartUpdateDto.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/dto/orders/MerchantByUserDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/dto/orders/MerchantByUserDto.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/dto/orders/OrdersInsertDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/dto/orders/OrdersInsertDto.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/model/Cart.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/model/Cart.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/model/CartItems.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/model/CartItems.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/model/Category.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/model/Category.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/model/Coupon.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/model/Coupon.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/model/DiscountType.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/model/DiscountType.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/model/OrderDetails.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/model/OrderDetails.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/model/Orders.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/model/Orders.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/model/Pay.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/model/Pay.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/model/Payment.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/model/Payment.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/model/Product.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/model/Product.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/model/ProductImage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/model/ProductImage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/model/Recipes.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/model/Recipes.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/model/UserAllInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/model/UserAllInfo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/model/UserCoupon.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/model/UserCoupon.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/model/UserCouponId.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/model/UserCouponId.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/model/UserFavoritesProducts.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/model/UserFavoritesProducts.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/model/UserFavoritesProductsId.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/model/UserFavoritesProductsId.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/model/UserFavoritesRecipes.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/model/UserFavoritesRecipes.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/model/UserFavoritesRecipesId.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/model/UserFavoritesRecipesId.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/model/UserFavoritesRecipesKeys.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/model/UserFavoritesRecipesKeys.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/model/Userinfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/model/Userinfo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/model/Users.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/model/Users.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/model/UsersResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/model/UsersResponse.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/model/UsersStatus.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/model/UsersStatus.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/model/VerificationToken.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/model/VerificationToken.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/repository/CartItemsRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/repository/CartItemsRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/repository/CartRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/repository/CartRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/repository/CategoryRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/repository/CategoryRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/repository/CouponRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/repository/CouponRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/repository/OrderDetailsRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/repository/OrderDetailsRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/repository/OrdersRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/repository/OrdersRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/repository/PayRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/repository/PayRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/repository/PaymentRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/repository/PaymentRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/repository/ProductImageRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/repository/ProductImageRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/repository/ProductRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/repository/ProductRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/repository/RecipesRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/repository/RecipesRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/repository/UserCouponRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/repository/UserCouponRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/repository/UserFavoritesProductsRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/repository/UserFavoritesProductsRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/repository/UserFavoritesRecipesRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/repository/UserFavoritesRecipesRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/repository/UsersInfoReposity.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/repository/UsersInfoReposity.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/repository/UsersRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/repository/UsersRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/service/AWSS3Service.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/service/AWSS3Service.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/service/CartService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/service/CartService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/service/CategoryService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/service/CategoryService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/service/CategoryServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/service/CategoryServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/service/CouponService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/service/CouponService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/service/ECPAYService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/service/ECPAYService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/service/EmailCheckService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/service/EmailCheckService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/service/FirebaseService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/service/FirebaseService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/service/OrderDetailsService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/service/OrderDetailsService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/service/OrderService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/service/OrderService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/service/OrdersService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/service/OrdersService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/service/PaymentService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/service/PaymentService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/service/ProductImageService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/service/ProductImageService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/service/ProductImageServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/service/ProductImageServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/service/ProductService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/service/ProductService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/service/ProductServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/service/ProductServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/service/RecipesService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/service/RecipesService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/service/ReportService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/service/ReportService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/service/ResourceNotFoundException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/service/ResourceNotFoundException.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/service/ShowRecipeCardService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/service/ShowRecipeCardService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/service/UserFavoritesProductsService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/service/UserFavoritesProductsService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/service/UserFavoritesRecipesService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/service/UserFavoritesRecipesService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/service/UsersServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/service/UsersServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/tw/luna/FinalTest/FinalTestApplicationTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/tw/luna/FinalTest/FinalTestApplicationTests.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -207,6 +35,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "ZeHoward"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/ZeHoward/Final_Project.git",
+    "accountId": "0a09ad87-9095-4c77-b4d4-bd9ab3099ac9"
+  }
+}]]></component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -222,33 +62,44 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;testAPI2&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/howar/OneDrive/桌面/大專專/final0926/Final_Project&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Spring Boot.FinalTest.executor": "Run",
+    "Spring Boot.Unnamed.executor": "Run",
+    "git-widget-placeholder": "testAPI2",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/howar/OneDrive/桌面/大專專/final0926/Final_Project/FinalTest/pom.xml",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
-  <component name="RunManager" selected="Spring Boot.FinalTest">
+}]]></component>
+  <component name="RunManager" selected="Spring Boot.Unnamed">
     <configuration name="Unnamed" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <option name="ALTERNATIVE_JRE_PATH" value="17" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <option name="SPRING_BOOT_MAIN_CLASS" />
+      <module name="FinalTest" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="tw.luna.FinalTest.FinalTestApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Spring Boot.FinalTest" />
+      <item itemvalue="Spring Boot.Unnamed" />
+    </list>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -281,10 +132,35 @@
       <workItem from="1728353768991" duration="103000" />
       <workItem from="1728353999617" duration="55000" />
       <workItem from="1728354515506" duration="232000" />
+      <workItem from="1728354795225" duration="23307000" />
     </task>
+    <task id="LOCAL-00001" summary="10081038 新增前台食譜外頁">
+      <option name="closed" value="true" />
+      <created>1728355222544</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1728355222544</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="10081038 新增前台食譜外頁" />
+    <option name="LAST_COMMIT_MESSAGE" value="10081038 新增前台食譜外頁" />
   </component>
 </project>

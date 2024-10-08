@@ -14,6 +14,11 @@ body {
   text-align: center; /*新增*/
 }
 
+#recipeImage {
+  margin: 10px 10px;
+  width: 20vw;
+}
+
 .tem-nav {
   height: 80px;
   display: block;
@@ -214,7 +219,6 @@ body {
 .tem-footer-content div {
   padding: 20px 30px;
   text-align: left;
-  min-width: 200px;
   box-sizing: border-box;
   text-align: left;
 }
@@ -290,8 +294,7 @@ body {
 /*主畫面*/
 
 .container {
-  width: 50vw;
-  max-width: 800px;
+  width: 90vw;
   margin: 0 auto; /*水平置中*/
 }
 .topTag {
@@ -320,9 +323,11 @@ body {
 }
 
 .recipe-container {
-  display: flex;
-  flex-direction: column; /* 垂直排列內容 */
-  align-items: center; /* 確保內容水平居中 */
+  /* display: flex; */
+  flex: 1 1 100%;
+  /* flex-direction: column; 垂直排列內容 */
+  /* align-items: center; 確保內容水平居中 */
+  /* text-align: center; */
 }
 /*照片至按鈕區域*/
 .main {
@@ -340,18 +345,23 @@ body {
 }
 /*說明的內文*/
 .recipeDetails {
-  font-size: 16px;
+  font-size: 25px;
   margin-top: 20px;
   margin-bottom: 15px;
   text-align: left; /*水平居左*/
   margin-left: 12%;
+  list-style-type: none;
+  padding-left: 0;
 }
 /* 按鈕容器 */
 .btns {
   display: flex;
   justify-content: space-between; /* 在容器內部均勻分配按鈕之間的空間 */
-  width: 79%; /* 容器的寬度設為 100%，即填滿父容器的寬度 */
-  margin-top: 5px; /* 添加上邊距 */
+  width: 50%; /* 容器的寬度設為 100%，即填滿父容器的寬度 */
+}
+
+.btns:hover {
+  cursor: pointer;
 }
 
 .btnRed,
