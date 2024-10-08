@@ -1,235 +1,213 @@
-/* * {
-  font-family: "Noto Sans TC", system-ui;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: Arial, sans-serif;
-  width: 100vw;
-  max-width: 100%;
-  overflow-x: hidden;
-} */
-
 /* 中間區塊(食譜分類側邊欄位和食譜卡) */
 .mid {
-  display: flex;
-  flex: 1;
+    display: flex;
+    flex: 1;
 }
 
 /* 食譜分類菜單 */
 .list,
 .list-title {
-  flex: 1;
-  border-right: 1px solid #ccc;
-  padding: 20px;
-  font-weight: 600;
+    flex: 1;
+    border-right: 1px solid #ccc;
+    padding: 20px;
+    font-weight: 600;
 }
 
 .list a,
 .list-title,
 .down-btn {
-  padding: 6px 8px;
-  text-decoration: none;
-  font-size: 20px;
-  color: #000000;
-  display: block;
-  border: none;
-  background: none;
-  width: 100%;
-  text-align: center;
-  cursor: pointer;
-  outline: none;
-  font-weight: 600;
+    padding: 6px 8px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #000000;
+    display: block;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    font-weight: 600;
 }
 
 .down-btn {
-  background-color: #cbb68c;
+    background-color: #cbb68c;
 }
 
 .list-title {
-  background-color: #faf4e8;
+    background-color: #faf4e8;
 }
 
 .down-container > a:hover {
-  background-color: #ece2b3;
+    background-color: #ece2b3;
 }
 
 .down-container > a:active {
-  background-color: #ece2b3;
+    background-color: #ece2b3;
 }
 
 /* 食譜區 */
-.title {  /*食譜分類類型標題*/
-  font-size: 30px;
-  padding: 12px 8px;
-  font-weight: 600;
-  margin-bottom: 5px;
-  text-align: center;
+.title { /*食譜分類類型標題*/
+    font-size: 30px;
+    padding: 12px 8px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    text-align: center;
 }
 
 .sortAndSearch {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 6px 0;
-  font-size: 20px;
-  margin-bottom: 20px;
-  height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+    font-size: 20px;
+    margin-bottom: 20px;
+    height: 40px;
 }
 
 .searchContainer {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 #searchDiv {
-  overflow: hidden;
-  display: flex;
-  align-items: center;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
 }
 
 #searchInput {
-  height: 40px;
-  border: 1px solid black;
-  font-size: 16px;
-  text-align: center;
+    height: 40px;
+    border: 1px solid black;
+    font-size: 16px;
+    text-align: center;
 }
 
 .sort {
-  display: flex;
-  align-items: center;
-  height: 40px;
-  border: black 1px solid;
+    display: flex;
+    align-items: center;
+    height: 40px;
+}
+
+label{
+    border: black 1px solid;
 }
 
 .searchIcon {
-  cursor: pointer;
-  margin-left: 10px;
+    cursor: pointer;
+    margin-left: 10px;
 }
 
 .recipeZone {
-  display: flex;
-  flex-direction: column;
-  flex: 5;
-  padding: 20px 40px;
+    display: flex;
+    flex-direction: column;
+    flex: 5;
+    padding: 20px 40px;
 }
 
 #rcontainer {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  flex: 1;
-  width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    flex: 1;
+    width: 100%;
+    gap: 40px;
 }
 
 .recipe-card {
-  width: 270px;
-  text-align: center;
-  border: #f4f4f4 2px solid;
-  border-radius: 5px;
-  padding: 10px;
-  margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    flex: 1 1 30%;
+    text-align: center;
+    border-radius: 15px 15px 0 0 ;
 }
 
 .recipe-card:hover {
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 5px rgba(25, 24, 24, 0.6);
 }
 
 .recipe-image {
-  display: block;
-  margin: 10px auto;
-  width: 90%;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 5px;
+    display: block;
+    margin-bottom: 10px;
+    width: 100%;
+    height: 40vh;
+    object-fit: cover;
+    border-radius: 15px 15px 0 0;
 }
 
 .recipe-name,
 .recipe-level,
-.recipe-time,
-.recipe-actions {
-  margin: 10px 0;
-  font-size: medium;
+.recipe-time {
+    margin: 10px 0;
+    font-size: medium;
 }
 
 .recipe-level {
-  font-size: 20px;
-  color: #d35b50;
-  font-weight: 700;
-}
-
-.fa-heart {
-  font-size: 25px;
-  align-items: center;
+    font-size: 20px;
+    color: #d35b50;
+    font-weight: 700;
 }
 
 .view-recipe {
-  background-color: #e0912f;
-  color: white;
-  border: none;
-  padding: 10px 0;
-  border-radius: 5px;
-  margin-top: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  width: 60%;
+    background-color: #e0912f;
+    color: white;
+    padding: 10px 0;
+    cursor: pointer;
+    flex: 1 1 50%;
+    border: none;
+    height: 50px;
+    font-size: 16px;
 }
 
 .recipe-actions {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 50px;
+    margin: 0 auto;
 }
 
 .add-to-favorite {
-  margin-top: 5px;
-  padding-left: 15px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  background-color: transparent;
-  color: #787575;
-  cursor: pointer;
+    padding: 10px 0;
+    background-color: #f44336;
+    border: none;
+    color: white;
+    cursor: pointer;
+    flex: 1 1 50%;
+    height: 50px;
+    font-size: 16px;
 }
 
 .add-to-favorite.active {
-  color: #cc4235;
+    color: #cc4235;
 }
 
 .view-recipe:hover,
 .view-recipe:active {
-  background-color: #de8415;
+    background-color: #de8415;
 }
 
 .pagination {
-  text-align: center;
-  margin-top: 20px;
+    text-align: center;
+    margin-top: 20px;
 }
 
 #prevPage,
 #nextPage {
-  border: none;
-  background-color: #ece2b3;
-  font-size: 20px;
-  padding: 10px;
-  border-radius: 5px;
-  margin: 0 10px;
-  cursor: pointer;
+    border: none;
+    background-color: #ece2b3;
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 0 10px;
+    cursor: pointer;
 }
 
 @media (min-width: 1600px) and (max-width: 3840px) {
-  .recipe-image {
-    height: 40vh;
-  }
+    .recipe-image {
+        height: 40vh;
+    }
 
-  .recipe-name {
-    font-size: 25px;
-  }
-}
-
-.fa-heart.active {
-  color: red; /* 這裡設置愛心的顏色 */
+    .recipe-name {
+        font-size: 25px;
+    }
 }

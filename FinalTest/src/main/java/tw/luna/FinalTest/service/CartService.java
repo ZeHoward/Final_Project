@@ -194,10 +194,10 @@ public class CartService {
         return response;
     }
 
-
-
-
-
+    public Cart getCartIdByUserId(Long userId) {
+        Cart cart =cartRepository.findByUsersUserId(userId);
+        return cart;
+    }
 }
 
 

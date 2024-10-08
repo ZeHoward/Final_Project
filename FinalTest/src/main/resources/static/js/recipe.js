@@ -134,8 +134,8 @@ function displayRecipes(recipesToShow) {
         <p class="recipe-level">難易度: ${recipe.level}</p>
         <p class="recipe-time">烹飪時間: ${recipe.cookTime} 分鐘</p>
         <div class="recipe-actions">
-          <button class="add-to-favorite"><i class="fa-solid ${heartClass}"></i></button>
-          <button class="view-recipe" data-recipe-id="${recipe.recipeId}">閱讀食譜</button>
+          <button class="add-to-favorite"><i class="fa-solid fa-bookmark"></i>&nbsp;&nbsp;加入收藏</button>
+          <button class="view-recipe" data-recipe-id="${recipe.recipeId}"><i class="fa-solid fa-eye"></i>&nbsp;&nbsp;閱讀食譜</button>
         </div>
       `;
       recipeDiv.innerHTML = recipeHtml;

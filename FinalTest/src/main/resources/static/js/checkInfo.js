@@ -122,12 +122,13 @@ createApp({
         
       if(res.status === 200){
         getPayment()
-
-      //跳轉頁面並且帶著付款金額及marchantNo
-    
-
-
-      }
+        //訂單建立後清空購物車
+        axios.delete(`${api.value}/cart/${userId.value}`).then
+        ((res) => console.log(res)).catch((err) => console.log(err))    
+        
+        
+        //跳轉頁面並且帶著付款金額及marchantNo
+          }
     } catch (error){
       console.log('訂單建立失敗:',error);
       alert('訂單建立失敗請稍後再試');

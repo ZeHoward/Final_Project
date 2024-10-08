@@ -117,7 +117,7 @@
           const percentageDiscountToNext = ref(0);
           const discountType = ref("");
 
-          const cartId = ref(4);
+          const cartId = ref(0);  //cartID
 
           //計算總價 數量*單價
           const totalAmount2 = computed(() => {
@@ -137,6 +137,8 @@
           });
 
           const calculateDiscount = async (total) => {
+     
+            
             // 如果已經有優惠券，重新獲取折扣金額
             try {
               const response = await axios.post(
@@ -147,6 +149,7 @@
                     cartId: cartId.value,
                     couponCode: couponCode.value,
                   },
+                  
                 }
               );
               const { percentageDiscount, amountDiscount } = response.data;
@@ -170,6 +173,9 @@
 
           //套用優惠碼
           const applyCoupon = async () => {
+            console.log(123);
+            
+            console.log(cartId.value);
             try {
               const response = await axios.post(
                 `${api.value}/coupons/apply-coupon`,
@@ -214,8 +220,17 @@
             userId.value = res.data.userId;
             console.log(userId.value);
             getCart();
+            getCartId();
           };
 
+          //取得cartId
+          const getCartId = async () => {
+          const res =await axios.get(`${api.value}/cart/getCartId/${userId.value}`);
+          cartId.value = res.data.cartId;
+          console.log(cartId.value);          
+          };
+          
+          
           // 定義獲取購物車資料的函式
           const getCart = async () => {
             const res = await axios.get(`${api.value}/cart/${userId.value}`);
