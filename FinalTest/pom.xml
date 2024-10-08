@@ -131,7 +131,12 @@
 		    <groupId>software.amazon.awssdk</groupId>
 		    <artifactId>auth</artifactId> <!-- 添加這個來解決認證相關的類缺失問題 -->
 		    <version>2.20.9</version> <!-- 和 S3 保持相同版本 -->
-
+		</dependency>
+		
+		<!-- log記錄用 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
 		</dependency>
 
 	</dependencies>

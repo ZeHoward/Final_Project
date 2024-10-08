@@ -229,3 +229,7 @@ body {
     font-size: 25px;
   }
 }
+
+.fa-heart.active {
+  color: red; /* 這裡設置愛心的顏色 */
+}

@@ -49,14 +49,32 @@ window.onload = function () {
       }
     });
 
-
+	
 
     document.getElementById('regist').addEventListener('click', () => {
-      let telephone = document.getElementById('registTelephoneInput').value;
       let userName = document.getElementById('registUserName').value;
-     // let birthday = document.getElementById('registBirthday').value;
+	  let birthday = document.getElementById('registBirthday').value || '';
 
-      if(finallyEmail != '' && finallyPassword != '' && userName != ''){
+      if(finallyEmail != '' && finallyPassword != '' && userName != '' && birthday != ''){
+		Swal.fire({
+			  title: '正在發送中...',
+			  text: '請稍後',
+			  allowOutsideClick: false,
+			  width: 600, 
+			   padding: '3em',
+			   color: '#716add',
+			   background: '#fff', 
+			   /*
+			   backdrop: `
+			     rgba(0,0,123,0.4)
+			     url("https://sweetalert2.github.io/images/nyan-cat.gif")
+			     left top
+			     no-repeat
+			   `,*/
+			  didOpen: () => {
+			    Swal.showLoading();
+			  },
+			});
         fetch('http://localhost:8080/users/regist',{
           method : 'POST',
           headers : {'Content-Type' : 'application/json'},
@@ -64,29 +82,54 @@ window.onload = function () {
             username : userName,
             email : finallyEmail,
             password : finallyPassword,
-			phoneNumber : telephone
-			//birthday : birthday
+			birthday : birthday
           })}).then(response => {
+			Swal.close();
             if(!response.ok){
               throw new Error('Error : ')
             }
             return response.json();
           }).then(data => {
             if(data.usersStatus == 'EXIST'){
-				alert('此電子信箱帳號已註冊過!!');
+				Swal.close(); 
+			    Swal.fire({
+			        title: "註冊失敗",
+			        text: "此帳號已被註冊!!",
+			        icon: "warning"
+			    });			
 			}
 			if(data.usersStatus == 'ADD_FAILURE'){
-				alert('伺服器忙碌中,請稍後在試!!');
+				Swal.close(); 
+			    Swal.fire({
+			        title: "註冊失敗",
+			        text: "伺服器忙碌中,請稍後再試!!",
+			        icon: "error"
+			    });
 			}
 			if(data.usersStatus == 'ADD_SUCCESS'){
-				alert('已送出驗證碼,請到電子信箱查看並開通!!')
+				Swal.close(); 
+				Swal.fire({
+					title:"註冊成功",
+					text:"感謝您成為我們的會員，請到註冊的電子信箱收去驗證信件！！",
+					icon:"success"
+				})
 				window.location.href = '/loginPage';
 			}
           }).catch(error => {
             console.log('error:', error)
+			Swal.close(); 
+		    Swal.fire({
+		        title: "註冊失敗",
+		        text: "伺服器忙碌中,請稍後再試!!",
+		        icon: "error"
+		    });	
           })
       }else{
-        alert("註冊失敗,請再檢查電子信箱、密碼、使用者名稱是否輸入有誤!!");
+		Swal.fire({
+			title:"註冊失敗",
+			text:"請再檢查電子信箱、密碼、使用者名稱、生日是否輸入有誤!!",
+			icon:"warning"
+		})
       }
       
     });
