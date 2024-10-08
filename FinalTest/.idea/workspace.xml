@@ -6,9 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="aac085bc-ba1f-4034-a473-ae9efe4b7580" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/login.txt" beforeDir="false" afterPath="$PROJECT_DIR$/log/login.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/template.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/template.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/js/template.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/js/template.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/recipe.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/recipe.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/recipeDetails.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/recipeDetails.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/recipe.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/recipe.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/footer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/productList.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/productList.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/footer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/productList.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/productList.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../test.html" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
