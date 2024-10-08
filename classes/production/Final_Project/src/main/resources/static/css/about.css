@@ -1,0 +1,66 @@
+.main-photo img {
+  width: 100%;
+}
+
+.paragraph {
+  display: flex;
+  justify-content: center;
+  margin: 0 100px;
+}
+
+.title {
+  margin: 50px;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+}
+
+.content {
+  flex: 1 1 30%;
+  padding: 60px 0;
+  margin: 20px 80px;
+  text-align: center;
+  background-color: #d1de74;
+  /* border-radius: 50% 50% 50% 50%; */
+  border-radius: 50% 20% / 10% 40%;
+}
+
+.step-image {
+  width: 200px;
+  margin: 0 auto;
+}
+
+.text {
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.view-all {
+  display: block;
+  width: 300px;
+  margin: 50px auto;
+  background: #f3ce6e;
+  border: none;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.view-all:hover,
+.view-all:active {
+  background-color: #ffc940;
+}
+
+.importPage,
+.importPage:active {
+  text-decoration: none;
+  color: black;
+}
