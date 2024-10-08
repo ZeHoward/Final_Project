@@ -73,22 +73,37 @@ public class RecipesController {
 		response.put("recipes", recipes.stream().map(this::convertToRecipeDTO).collect(Collectors.toList()));
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
+	
+	@GetMapping("/view")
+	public ResponseEntity<Map<String, Object>> getRecipeById(@RequestParam("id") Integer recipeId) {
+	    Map<String, Object> response = new HashMap<>();
+	    Recipes recipe = recipeService.getRecipeById(recipeId).getBody();
+
+	    if (recipe == null) {
+	        response.put("message", "未找到該食譜，請檢查 ID 是否正確");
+	        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+	    }
+
+	    response.put("message", "食譜查詢成功");
+	    response.put("recipe", convertToRecipeDTO(recipe));
+	    return new ResponseEntity<>(response, HttpStatus.OK);
+	}
 
 	// 查詢單個食譜
-	@PostMapping("/view")
-	public ResponseEntity<Map<String, Object>> getRecipeById(@RequestParam("id") Integer recipeId) {
-		Map<String, Object> response = new HashMap<>();
-		Recipes recipe = recipeService.getRecipeById(recipeId).getBody();
-
-		if (recipe == null) {
-			response.put("message", "未找到該食譜，請檢查 ID 是否正確");
-			return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
-		}
-
-		response.put("message", "食譜查詢成功");
-		response.put("recipe", convertToRecipeDTO(recipe));
-		return new ResponseEntity<>(response, HttpStatus.OK);
-	}
+//	@PostMapping("/view")
+//	public ResponseEntity<Map<String, Object>> getRecipeById(@RequestParam("id") Integer recipeId) {
+//		Map<String, Object> response = new HashMap<>();
+//		Recipes recipe = recipeService.getRecipeById(recipeId).getBody();
+//
+//		if (recipe == null) {
+//			response.put("message", "未找到該食譜，請檢查 ID 是否正確");
+//			return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+//		}
+//
+//		response.put("message", "食譜查詢成功");
+//		response.put("recipe", convertToRecipeDTO(recipe));
+//		return new ResponseEntity<>(response, HttpStatus.OK);
+//	}
 
 	// 更新食譜
 	@PutMapping("/update")

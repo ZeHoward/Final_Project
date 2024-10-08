@@ -45,7 +45,7 @@
           </thead>
           <tbody id="cartItems" v-for="(product, i) in products" :index="i">
             <td>
-              <img src="" alt="圖片" class="product-image" />
+              <img :src="product.image" alt="圖片" class="product-image" />
             </td>
 
             <td>{{product.name}}</td>
@@ -78,10 +78,10 @@
         <!--使用優惠券折抵的金額-->
         <!--預設為零，有輸入合法的優惠券才呈現折抵數字，否則為0-->
         <div style="font-size: 18px; font-weight: bold; color: #d35b50">
-          優惠券折抵：NT $ {{discountAmount}}
+          優惠券折抵：NT $ {{discountAmountToNext != 0 ? discountAmountToNext :
+          percentageDiscountToNext != 0 ? percentageDiscountToNext : 0}}
           <!--優惠券生效後用參數代入否則為0-->
         </div>
-        <!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
 
         <!--優惠碼-->
         <div class="coupon-container">
@@ -94,11 +94,8 @@
         </div>
 
         <div class="actions">
-        
           <button class="submitButton" @click="toCheckout()">提交訂單</button>
-     
-        </div>        
-        
+        </div>
       </div>
     </div>
 
@@ -113,11 +110,13 @@
           const api = ref("http://localhost:8080/api");
           const userId = ref(0); // 使用者 ID
           const products = ref([]); // 用來儲存產品的數組
-         
+
           const couponCode = ref(""); // 用於儲存輸入的優惠券代碼
-          const discountAmount = ref(0); // 用於儲存折扣金额，預設為0
+          const discountAmountToNext = ref(0); // 用於儲存折扣金额，預設為0
           const message = ref(""); //用於儲存應用優惠券的訊息
-         
+          const percentageDiscountToNext = ref(0);
+          const discountType = ref("");
+
           const cartId = ref(4);
 
           //計算總價 數量*單價
@@ -127,7 +126,6 @@
               0
             );
           });
-
 
           //透過監聽商品總額的變化 滾動式調整折扣金額
           // 監聽 totalAmount2 的變化
@@ -141,48 +139,76 @@
           const calculateDiscount = async (total) => {
             // 如果已經有優惠券，重新獲取折扣金額
             try {
-              const response = await axios.post(`${api.value}/coupons/apply-coupon`, null, {
-                params: {
-                  cartId: cartId.value,
-                  couponCode: couponCode.value
+              const response = await axios.post(
+                `${api.value}/coupons/apply-coupon`,
+                null,
+                {
+                  params: {
+                    cartId: cartId.value,
+                    couponCode: couponCode.value,
+                  },
                 }
-              });
-              discountAmount.value = response.data.amountDiscount || response.data.percentageDiscount; // 假設後端返回的折扣金額
+              );
+              const { percentageDiscount, amountDiscount } = response.data;
+              if (percentageDiscount != 0) {
+                percentageDiscountToNext.value = percentageDiscount;
+              } else if (amountDiscount != 0) {
+                discountAmountToNext.value = amountDiscount;
+              }
               message.value = "已成功套用優惠券";
             } catch (error) {
-              console.error('Error applying coupon:', error.response ? error.response.data : error);
-              message.value = error.response ? error.response.data.message : '發生錯誤';
-              discountAmount.value = 0; // 無效的優惠碼時，折扣金額為 0
+              console.error(
+                "Error applying coupon:",
+                error.response ? error.response.data : error
+              );
+              message.value = error.response
+                ? error.response.data.message
+                : "發生錯誤";
+              discountAmountToNext.value = 0; // 無效的優惠碼時，折扣金額為 0
             }
           };
 
-          //套用優惠碼          
+          //套用優惠碼
           const applyCoupon = async () => {
-            console.log('Applying coupon...'); // 這一行可以幫助檢查函數是否被調用
             try {
-                const response = await axios.post(`${api.value}/coupons/apply-coupon`, null, {
-                    params: {
-                        cartId: cartId.value,
-                        couponCode: couponCode.value
-                    }
-                });
-                discountAmount.value = response.data.amountDiscount|| response.data.percentageDiscount; // 假設後端返回的折扣金額
-                message.value = "已成功套用優惠券"; // 成功訊息
+              const response = await axios.post(
+                `${api.value}/coupons/apply-coupon`,
+                null,
+                {
+                  params: {
+                    cartId: cartId.value,
+                    couponCode: couponCode.value,
+                  },
+                }
+              );
 
-                console.log('Coupon applied successfully:', response.data);
+              const { percentageDiscount, amountDiscount } = response.data;
+
+              if (percentageDiscount != 0) {
+                percentageDiscountToNext.value = percentageDiscount;
+              } else if (amountDiscount != 0) {
+                discountAmountToNext.value = amountDiscount;
+              }
+              message.value = "已成功套用優惠券"; // 成功訊息
+
+              console.log("Coupon applied successfully:", response.data);
             } catch (error) {
-                console.error('Error applying coupon:', error.response ? error.response.data : error);
-                message.value = error.response ? error.response.data.message : '發生錯誤'; // 錯誤訊息
-                discountAmount.value = 0; // 無效的優惠碼時，折扣金額為 0
-                    }
-                };
+              console.error(
+                "Error applying coupon:",
+                error.response ? error.response.data : error
+              );
+              message.value = error.response
+                ? error.response.data.message
+                : "發生錯誤"; // 錯誤訊息
+              discountAmountToNext.value = 0; // 無效的優惠碼時，折扣金額為 0
+            }
+          };
 
           const totalAfterDiscount = computed(() => {
-            return finalAmount2 - discountAmount.value;
+            return finalAmount2 - discountAmountToNext.value;
           });
 
-
-           //取得userId
+          //取得userId
           const getUserId = async () => {
             const res = await axios.get(`/users/userAllInfo`);
             userId.value = res.data.userId;
@@ -226,19 +252,22 @@
             getCart(); // 更新購物車資料
           };
 
-         //前往Checkout頁
+          //前往Checkout頁
           const toCheckout = () => {
             const totalAmount = products.value.reduce(
               (total, product) => total + product.quantity * product.price,
               0
             );
 
-            const finalAmount = totalAmount + 160 - discountAmount.value;
-      
+            const finalAmount = totalAmount + 160;
+
             const queryParams = new URLSearchParams({
               totalAmount: totalAmount,
               finalAmount: finalAmount,
-              discountAmount:discountAmount.value,
+              discountAmountToNext: discountAmountToNext.value,
+              couponCode: couponCode.value,
+              percentageDiscountToNext: percentageDiscountToNext.value,
+              discountType: discountType.value,
             }).toString();
 
             // 跳轉到 checkout 頁面，並帶上參數
@@ -256,10 +285,12 @@
             toCheckout,
             deleteProduct,
             totalAmount2,
-            discountAmount,
+            discountAmountToNext,
             applyCoupon,
             couponCode,
             message,
+            percentageDiscountToNext,
+            discountType,
           };
         },
       }).mount("#myContainer"); // 將應用程式掛載到指定的 DOM 元素上

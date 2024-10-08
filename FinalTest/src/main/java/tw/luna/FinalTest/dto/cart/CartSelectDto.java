@@ -11,16 +11,25 @@ public class CartSelectDto {
     private Integer price;
     private Integer quantity;
     private String name;
-    private byte[] image;
+    private String image;
 
     public CartSelectDto() {
     }
-// image還沒放!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    public CartSelectDto(Integer cartitemsId, Integer price, Integer quantity, String name) {
+
+    public String getImage() {
+        return image;
+    }
+
+    public CartSelectDto(Integer cartitemsId, Integer price, Integer quantity, String name, String image) {
         this.cartitemsId = cartitemsId;
         this.price = price;
         this.quantity = quantity;
         this.name = name;
+        this.image = image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public Integer getCartitemsId() {
@@ -55,14 +64,6 @@ public class CartSelectDto {
         this.name = name;
     }
 
-    public byte[] getImage() {
-        return image;
-    }
-
-    public void setImage(byte[] image) {
-        this.image = image;
-    }
-
     @Override
     public String toString() {
         return "CartSelectDto{" +
@@ -70,7 +71,6 @@ public class CartSelectDto {
                 ", price=" + price +
                 ", quantity=" + quantity +
                 ", name='" + name + '\'' +
-                ", image=" + Arrays.toString(image) +
                 '}';
     }
 }

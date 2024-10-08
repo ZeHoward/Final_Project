@@ -68,7 +68,6 @@ function fetchRandomProducts() {
             document.getElementById("sort").addEventListener("change", () => {
                 const sortBy = document.getElementById("sort").value;
                 sortProducts(products, sortBy);
-                console.log("success");
             });
         })
         .catch((error) => {

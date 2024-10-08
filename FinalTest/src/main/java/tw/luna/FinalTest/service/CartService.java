@@ -39,6 +39,12 @@ public class CartService {
     @Transactional
     public void addToCart(CartInsertDto cartInsertDto, Long userId) {
         Cart cart = cartRepository.findByUsersUserId(userId);
+        if (cart == null) {
+            // 如果購物車不存在，創建新的購物車
+            cart = new Cart();
+            cart.setUsers(usersRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("用戶不存在")));
+            cartRepository.save(cart); // 保存新購物車
+        }
         Product product = productRepository.findProductByName(cartInsertDto.getProductName());
 
         CartItems cartItem = cartItemsRepository.findByCartCartIdAndProductName(cart.getCartId(), cartInsertDto.getProductName());
@@ -69,11 +75,15 @@ public class CartService {
 
         for (CartItems cartItem : cartItems) {
             Product product = cartItem.getProduct();
+            Optional<ProductImage> firstImage = product.getProductImages().stream().findFirst();
+                String imageUrl = firstImage.get().getImage();
+                // 使用 imageUrl
             CartSelectDto dto = new CartSelectDto(
                     cartItem.getCartitemsId(),
                     cartItem.getPrice(),
                     cartItem.getQuantity(),
-                    product.getName()
+                    product.getName(),
+                    imageUrl
             );
             result.add(dto);
         }
