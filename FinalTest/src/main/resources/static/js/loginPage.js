@@ -44,18 +44,25 @@ window.onload = function () {
 	               },
 	               body: JSON.stringify({ idToken: idToken }),
 	           }).then(response => {
-				console.log('google登入返回');
 				if(!response.ok){
 					console.error('Error:', error);
 				}
 				 return response.json()
 				 }).then(data => {
 	                 if(data.mesg === 'Firebase獲取使用者訊失敗'){
-						alert('Google伺服器忙線中,請稍後在試');
+						Swal.fire({
+					        title: "登入失敗",
+					        text: "Google伺服器忙線中,請稍後在試!!",
+					        icon: "error"
+					    });	
 					 }
 					 if(data.mesg === 'google登入註冊失敗'){
-					 	alert('本網站伺服器忙線中,請稍後在試')	
- 					 }
+						Swal.fire({
+					        title: "登入失敗",
+					        text: "Google伺服器忙線中,請稍後在試!!",
+					        icon: "error"
+					    }); 					 
+					}
 					 if(data.mesg === 'google登入註冊成功' || data.mesg ==='帳號已存在'){
 						window.location.href = '/enjoyum';
 					 }
@@ -120,13 +127,25 @@ window.onload = function () {
 			    return response.json();
 			  }).then(data => {
 				if(data.mesg === 'Login Failure'){
-					alert('登入失敗,請稍後在試!!');
+					Swal.fire({
+	 					title:"登入失敗",
+	 					text:"請再嘗試一次!!",
+	 					icon:"error"
+	 				})
 				}
 				if(data.mesg === 'Login Failure : 密碼錯誤'){
-					alert('密碼錯誤!!');
+					Swal.fire({
+	 					title:"登入失敗",
+	 					text:"密碼錯誤!!,請重新輸入密碼!!",
+	 					icon:"warning"
+	 				})
 				}
 				if(data.mesg === 'Login Failure: 您的帳號尚未驗證'){
-					alert('您的帳號尚未驗證成功!!')
+					Swal.fire({
+	 					title:"帳號尚未驗證",
+	 					text:"您的帳號尚未驗證,請麻煩到電子信箱收取驗證信件或者到網頁下方重發驗證信!!",
+	 					icon:"warning"
+	 				})
 				}
 				if(data.mesg === 'Login Success'){
 					window.location.href = '/enjoyum';
@@ -135,7 +154,11 @@ window.onload = function () {
 			    console.log('error:', error);
 			  })
 	  }else{
-		alert('請輸入正確的帳號與密碼!!');
+		Swal.fire({
+			title:"登入失敗",
+			text:"請再嘗試一次!!",
+			icon:"error"
+		})
 	  }
 	    
 	})
@@ -155,22 +178,43 @@ window.onload = function () {
 				switch(data){
 					case 'NOT_EXIST':
 						alert('此帳號尚未註冊!!');
+						Swal.fire({
+					        title: "此帳號尚未註冊!!",
+					        text: "請前往註冊頁面註冊會員",
+					        icon: "warning"
+					    });	
 						break;
 					case 'ADD_FAILURE':
-						alert('重置驗證信件失敗,請稍後在試!!');
+						Swal.fire({
+					        title: "重置驗證信件失敗!!",
+					        text: "請稍後在試!!",
+					        icon: "error"
+					    });	
 						break;
 					case 'ADD_SUCCESS':
-						alert('已將驗證信件發送至電子信箱!!');
+						Swal.fire({
+					        title: "驗證信件已發送!!",
+					        text: "請前往電子信箱收取驗證信!!",
+					        icon: "success"
+					    });
 						break;
 					default : 
-						alert('伺服器忙碌中,請稍後在試!!');
+						Swal.fire({
+					        title: "伺服器忙碌中!!",
+					        text: "請稍後在試!!",
+					        icon: "error"
+					    });	
 				}
 			  }).catch(error => {
 				console.log('error:', error);
 			  })
 			
 		}else{			
-			alert('請輸入正確的電子信箱');
+			Swal.fire({
+		        title: "請輸入已註冊過的電子信箱!!",
+		        text: "若尚未註冊,請前往註冊頁面",
+		        icon: "warning"
+		    });	
 		}
 	});
 		

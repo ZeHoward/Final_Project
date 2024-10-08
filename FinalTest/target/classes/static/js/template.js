@@ -184,6 +184,28 @@
       }else if(message === '' || message == null){
           alert('請輸入諮詢內容');
       }else{
+		
+		Swal.fire({
+		  title: '正在發送中...',
+		  text: '請稍後',
+		  allowOutsideClick: false,
+		  width: 600, // 设置宽度
+		   padding: '3em', // 设置内边距
+		   color: '#716add', // 设置文本颜色
+		   background: '#fff', // 背景设置
+		   /*
+		   backdrop: `
+		     rgba(0,0,123,0.4)
+		     url("https://sweetalert2.github.io/images/nyan-cat.gif")
+		     left top
+		     no-repeat
+		   `,*/
+		  didOpen: () => {
+		    Swal.showLoading(); // 顯示加載提示
+		  },
+		  
+		});
+		
           fetch('http://localhost:8080/users/consult', {
               method: 'POST',
               headers: {
@@ -196,14 +218,26 @@
                   message : message
               })
           }).then(response => {
+			Swal.close();
               if(!response.ok){
                   throw new Error ('Error :');
-                  alert('伺服器忙碌中,請稍後在試!!');
+				  
               }else{
 				contactDiv.style.display = 'none';
-                alert('感謝您的諮詢，我們我盡快回復您的問題！！');
+                Swal.fire({
+					title:"已收到您的諮詢",
+					text:"感謝您的諮詢，我們我盡快回復您的問題！！",
+					icon:"success",
+					timer:"2000"
+				})
 			  }
           }).catch(error => {
+			Swal.close(); 
+		    Swal.fire({
+		        title: "發送失敗",
+		        text: "伺服器忙碌中,請稍後再試!!",
+		        icon: "warning"
+		    });
               console.log('Error:', error);
           })
       }
