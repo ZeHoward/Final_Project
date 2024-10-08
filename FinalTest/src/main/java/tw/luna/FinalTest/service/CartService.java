@@ -69,11 +69,15 @@ public class CartService {
 
         for (CartItems cartItem : cartItems) {
             Product product = cartItem.getProduct();
+            Optional<ProductImage> firstImage = product.getProductImages().stream().findFirst();
+                String imageUrl = firstImage.get().getImage();
+                // 使用 imageUrl
             CartSelectDto dto = new CartSelectDto(
                     cartItem.getCartitemsId(),
                     cartItem.getPrice(),
                     cartItem.getQuantity(),
-                    product.getName()
+                    product.getName(),
+                    imageUrl
             );
             result.add(dto);
         }

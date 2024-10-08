@@ -32,7 +32,6 @@
         <a href="/productList">全館商品</a>
         <a href="/recipe">線上食譜</a>
         <a href="/notice">常見問題</a>
-        <a href="#contact">聯絡我們</a>
         <a href="/registPage">註冊</a>
     </div>
     <div class="tem-end-photo">
@@ -114,8 +113,11 @@
  	<div id="contactDiv">
         <div id="contactContent">
         	<span id="close">&times;</span>
-            <h3>聯絡我們</h3>
-            <p>謝謝您的主動聯絡，請留下要諮詢的問題，我們會用以下資訊進行回覆。</p>      
+            <h1 style="text-align:center;">聯絡我們</h1>
+            <div style="display:flex; flex:1 1 100%; justify-content:center;">
+            	  <img style="width:80px; height:auto;" th:src="@{/material/orangehead.png}" alt=""/>
+            </div>          
+            <p style="text-align:center;">謝謝您的主動聯絡，請留下要諮詢的問題，我們會用以下資訊進行回覆。</p>      
             <p>姓名:</p>
             <input id="name" class="contactInput" type="text"><br>
             <p>聯絡方式:</p>
@@ -133,11 +135,13 @@
             <p>諮詢內容:</p>
             <textarea id="message" name="message" placeholder="若為已購買商品相關問題,麻煩請填寫訂單編號"></textarea><br>
 
-            <button id="contactBtn">送出</button>
+            <div style="display:flex; flex:1 1 100%; justify-content:center;">
+            	<button id="contactBtn">送出</button>			
+			</div>
             
         </div>
     </div>
 
-<script th:src="@{js/template.js}" defer="defer"></script>
 </body>
+<script th:src="@{js/template.js}" defer="defer"></script>
 </html>

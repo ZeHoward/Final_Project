@@ -81,7 +81,6 @@ public class OrdersService {
 //		List<OrderDetails> orderDetails = orders.getOrderDetails();
 
 		List<OrderDetails> orderDetails = new ArrayList<>();
-		System.out.println(orderDetails);
 
 		Cart cart = cartRepository.findByUsersUserId(userId);
 		orders.setCart(cart);
@@ -97,15 +96,24 @@ public class OrdersService {
 			System.out.println(orderDetails);
 		}
 		orders.setOrderDetails(orderDetails);
-
+		System.out.println("d1");
+		System.out.println(ordersInsertDto.getCode());
 		if (ordersInsertDto.getCode() != null) {
 			Coupon coupon = couponRepository.findCouponByCode(ordersInsertDto.getCode());
+			System.out.println(coupon);
 			if (coupon.getDiscountType() == DiscountType.percentage) {
 				orders.setPercentageDiscount(coupon.getDiscountValue());
+
+				System.out.println(orders.getPercentageDiscount());
+
 			} else if (coupon.getDiscountType() == DiscountType.amount) {
 				orders.setAmountDiscount(coupon.getDiscountValue());
+
+				System.out.println(orders.getAmountDiscount());
+
 			}
 			orders.setCoupon(coupon);
+			System.out.println(orders);
 		}
 		orders.setOrderDate(LocalDateTime.now());
 		orders.setTotalAmount(ordersInsertDto.getTotalAmount());

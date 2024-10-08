@@ -145,7 +145,7 @@ public class EmailCheckService {
 			
 			helper.setTo("haurd8080@gmail.com");
 	        helper.setFrom("haurd8080@gmail.com");
-	        helper.setSubject("請重設您的密碼");
+	        helper.setSubject("使用者諮詢通知");
 	        helper.setText(htmlContent, true);
 	        mailSender.send(message);
 		} catch (MessagingException e) {

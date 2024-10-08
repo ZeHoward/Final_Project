@@ -37,7 +37,6 @@ public class PageController {
 	}
 
 	@GetMapping("/notice")
-
 	public String notice() {return "notice";}
 
 	@GetMapping("/myCollection")

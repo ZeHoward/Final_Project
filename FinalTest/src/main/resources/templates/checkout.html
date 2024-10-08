@@ -167,7 +167,11 @@
               <tbody id="cartItems">
                 <tr v-for="(product, i) in products" :key="i">
                   <td class="dflex outTd">
-                    <img :src="img" alt="圖片" class="product-image" />
+                    <img
+                      :src="product.image"
+                      alt="圖片"
+                      class="product-image"
+                    />
                     <div class="dflex flexColumn">
                       <div>{{ product.name }}</div>
                       <div>數量:{{ product.quantity }}</div>
@@ -181,12 +185,16 @@
             </table>
             <div id="items-container"></div>
             <div id="total-container" class="total">
-              <p id="subtotal">商品總額：NT $ {{totalAmount}}</p>
+              <p id="subtotal">商品總額：NT $ {{totalAmount2}}</p>
               <p id="discount" style="color: #d35b50">
-                優惠券折抵：NT $ {{"還沒寫"}}
+                優惠券折抵：NT $ {{discountAmount != 0 ?　discountAmount :
+                percentageDiscount != 0 ? percentageDiscount : 0}}
               </p>
               <p id="shipping">運費：NT $ {{160}}</p>
-              <p id="finalAmount">付款總金額：NT $ {{finalAmount}}</p>
+              <p id="finalAmount">
+                付款總金額：NT $ {{finalAmount - 　discountAmount -
+                percentageDiscount}}
+              </p>
               <p id="total" style="font-size: large"></p>
             </div>
           </div>
@@ -209,6 +217,9 @@
           const params = new URLSearchParams(window.location.search);
           const totalAmount = params.get("totalAmount");
           const finalAmount = params.get("finalAmount");
+          const discountAmount = params.get("discountAmountToNext");
+          const couponCode = params.get("couponCode");
+          const percentageDiscount = params.get("percentageDiscountToNext");
 
           //自定義名稱
           const name = ref("");
@@ -392,6 +403,7 @@
           const cityName = ref("");
           const isSameInfo = ref(false); // 確保這個變量被定義
           const district = ref("");
+
           const totalAmount2 = computed(() => {
             return products.value.reduce(
               (total, product) => total + product.quantity * product.price,
@@ -443,12 +455,15 @@
           };
           //-----------------------------------------
 
-          //要傳遞出去的參數  缺少優惠券
+          //要傳遞出去的參數
           const toCheckInfo = () => {
             const totalAmount = totalAmount2.value;
-            const finalAmount2 = totalAmount + 160;
-            //const discount = discount.value;
-
+            const finalAmount2 =
+              totalAmount + 160 - discountAmount - percentageDiscount;
+            console.log(456);
+            console.log(percentageDiscount);
+            console.log(333);
+            console.log(discountAmount);
             //name.value抓這頁的變數 :前的name2是傳出去的變數名稱
             const queryParams = new URLSearchParams({
               totalAmount,
@@ -461,7 +476,9 @@
               zipCode: zipCode.value,
               address: address.value,
               phone: phone.value,
-              // discount,
+              discountAmount2: discountAmount,
+              couponCode: couponCode,
+              percentageDiscount: percentageDiscount,
             }).toString();
 
             window.location.href = `/checkInfo?${queryParams}`;
@@ -476,10 +493,6 @@
           onMounted(() => {
             getUserId(); // 在組件掛載後獲取資料
           });
-
-          // const updateDistricts = () => {
-          //   districts.value = cityDistricts[city.value] || [];
-          // };
 
           watch(city, () => {
             updateDistricts();
@@ -528,10 +541,12 @@
             toCheckInfo,
 
             isSameInfo,
-            // getUserAllInfo,
             clearUserInfo,
             populateUserInfo,
             district,
+            discountAmount,
+            percentageDiscount,
+            totalAmount2,
           };
         },
       }).mount("#myContainer"); // 將應用程式掛載到指定的 DOM 元素上
