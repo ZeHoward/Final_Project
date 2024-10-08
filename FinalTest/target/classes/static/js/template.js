@@ -1,4 +1,4 @@
-window.onload = () => {
+// window.onload = () => {
 
 //document.addEventListener("DOMContentLoaded", function () {	
   // 菜單展開、關閉功能
@@ -207,7 +207,4 @@ window.onload = () => {
               console.log('Error:', error);
           })
       }
-  })
-  
-  
-}
+})

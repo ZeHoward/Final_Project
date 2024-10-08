@@ -2,7 +2,7 @@ let currentPage = 1; //目前的頁碼
 const productsPerPage = 9; // 每頁顯示的商品數量，超過九個換頁
 let totalPages = 1; //總頁數
 
-window.onload = function () {
+document.addEventListener("DOMContentLoaded", function () {
 
     fetchRandomProducts(); //隨機抓取商品
 
@@ -49,7 +49,7 @@ window.onload = function () {
         })
     })
 
-}
+});
 
 //隨機顯示商品
 function fetchRandomProducts() {
@@ -68,6 +68,7 @@ function fetchRandomProducts() {
             document.getElementById("sort").addEventListener("change", () => {
                 const sortBy = document.getElementById("sort").value;
                 sortProducts(products, sortBy);
+                console.log("success");
             });
         })
         .catch((error) => {
@@ -269,7 +270,7 @@ function displayProducts(productsToShow) {
             <p class="product-name" id="productName">${product.name}</p>
             <p class="product-price">$NT${product.price}</p>
             <div class="home-product-btn">
-                <button class="add-to-favorite"><i class="fa-solid fa-heart"></i></button>
+                <button class="add-to-favorite"><i class="fa-solid fa-heart"></i>&nbsp;&nbsp;收藏商品</button>
                 <button class="add-to-cart"><i class="fa-solid fa-cart-shopping"></i>&nbsp;&nbsp;&nbsp;加入購物車</button>
             </div>
         `;

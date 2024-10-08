@@ -147,11 +147,10 @@ h1 {
 }
 
 .product {
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 7px rgba(0, 0, 0, 0.2);
   margin: 15px;
-  padding: 15px;
-  width: 250px;
-  border-radius: 5%;
+  width: 300px;
+  border-radius: 5px;
   text-align: center;
   justify-content: space-between;
 }
@@ -170,31 +169,37 @@ h1 {
 }
 
 .related-product-name {
-  font-size: medium;
+  font-size: 16px;
+  margin: 10px 0;
 }
 
 .related-product-image {
-  width: 90%;
-  height: 200px;
+  width: 100%;
+  height: 35vh;
   object-fit: cover;
-  border-radius: 2%;
+  border-radius: 5px 5px 0 0;
 }
 
 .related-product-price {
-  font-size: medium;
+  font-size: larger;
   color: #d35b50;
   font-weight: 700;
+  margin: 10px 0;
 }
 
 .fa-heart {
   font-size: 25px;
   align-items: center;
 }
-
-.home-product-btn {
+.home-product-btn { /*按鈕的家*/
   display: flex;
   justify-content: space-around;
   align-items: center;
+}
+
+.add-to-cart,.add-to-favorite{
+  flex: 1 1 50%;
+  height: 60px;
 }
 
 .add-to-cart {
@@ -202,22 +207,21 @@ h1 {
   color: white;
   border: none;
   padding: 10px 0;
-  border-radius: 5px;
   margin-top: 5px;
   cursor: pointer;
   font-size: 16px;
-  width: 60%;
 }
 
 .add-to-favorite {
-  margin-top: 10px;
+  margin-top: 5px;
   display: flex;
-  align-items: center; /* 垂直置中 */
-  justify-content: center; /* 水平置中 */
+  align-items: center;
+  justify-content: center;
   border: none;
-  background-color: transparent;
-  color: #787575; /* 默認未收藏的顏色 */
+  background-color: #f44336;
+  color: #ffffff;
   cursor: pointer;
+  font-size: 16px;
 }
 
 .add-to-favorite.favorited {
@@ -288,4 +292,16 @@ h1 {
 
 i.active {
   color: red;
+}
+
+.btn,
+.tablinks{
+  box-shadow: 0 9px #999;
+  border-radius: 15px;
+}
+
+.btn:active,
+.tablinks:active {
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
 }
