@@ -37,7 +37,7 @@ window.onload = function () {
 	       }).then((idToken) => {
                // 將 ID Token 發送到後端進行驗證
 			   console.log(idToken);
-	           fetch('http://localhost:8080/users/googleLogin', {
+	           fetch('/users/googleLogin', {
 	               method: 'POST',
 	               headers: {
 	                   'Content-Type': 'application/json',
@@ -81,7 +81,7 @@ window.onload = function () {
 	emailInput.addEventListener("blur", () => {
 	  finalEmail = '';
 	  let emailInput = document.getElementById("emailInput");
-	  let checkEmailUrl = 'http://localhost:8080/users/checkEmail?email=' + emailInput.value
+	  let checkEmailUrl = '/users/checkEmail?email=' + emailInput.value
 	  if(emailInput.value != null && emailInput.value != ''){
 	    fetch(checkEmailUrl, {
 	      method : 'GET',
@@ -110,7 +110,7 @@ window.onload = function () {
 
 	  let finalPassword = document.getElementById("passwordInput").value;
 	  if(finalEmail != '' && finalEmail != null && finalPassword != '' && finalPassword != null){
-		fetch('http://localhost:8080/users/login',{
+		fetch('/users/login',{
 			    method: 'POST',
 			    headers:{
 			      'Content-Type': 'application/json'
@@ -164,7 +164,7 @@ window.onload = function () {
 	
 	document.getElementById("revalidate").addEventListener("click", () => {
 		if(finalEmail != '' && finalEmail != null){
-			let revalidateUrl = 'http://localhost:8080/users/revalidate?email=' + finalEmail;
+			let revalidateUrl = '/users/revalidate?email=' + finalEmail;
 			
 			fetch(revalidateUrl,{
 			    method: 'GET'
