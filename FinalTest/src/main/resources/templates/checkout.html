@@ -29,13 +29,13 @@
                 id="same-info"
                 name="same-info"
                 v-model="isSameInfo"
-                @change="isSameInfo ? populateUserInfo() : clearUserInfo()"
+                @change="isSameInfo ? populateUserInfo() : clearUserInfo()"              
               />
               <label for="same-info">收件人資訊與會員資訊相同</label>
             </div>
           </div>
 
-          <form>
+          <form @submit.prevent="handleSubmit">
             <div class="form-row">
               <input
                 type="text"
@@ -44,6 +44,7 @@
                 class="half-width"
                 placeholder="收件人名字"
                 v-model="name"
+                required
               />
               <input
                 type="text"
@@ -52,6 +53,7 @@
                 class="half-width"
                 placeholder="收件人姓氏"
                 v-model="lastName"
+                required
               />
             </div>
             <div class="form-row">
@@ -62,6 +64,7 @@
                 class="full-width"
                 placeholder="電子信箱"
                 v-model="email"
+                required
               />
             </div>
             <div class="form-row">
@@ -72,6 +75,7 @@
                 class="full-width"
                 placeholder="聯絡電話"
                 v-model="phone"
+                required
               />
             </div>
             <div class="form-row">
@@ -81,6 +85,7 @@
                 class="half-width"
                 v-model="city"
                 @change="updateDistricts"
+                required
               >
                 <option value="" disabled selected>選擇縣市</option>
                 <option
@@ -98,6 +103,7 @@
                 class="half-width"
                 v-model="area"
                 @change="updateZipCode"
+                required
               >
                 <option value="" disabled selected>選擇區域</option>
                 <option
@@ -117,6 +123,7 @@
                 class="half-width"
                 placeholder="郵遞區號"
                 v-model="zipCode"
+                required
               />
             </div>
             <div class="form-row">
@@ -127,6 +134,7 @@
                 class="full-width"
                 placeholder="地址"
                 v-model="address"
+                required
               />
             </div>
             <h3>配送方式</h3>
@@ -454,12 +462,64 @@
             zipCode.value = "";
           };
           //-----------------------------------------
+          //定義一個錯誤訊息的物件來追蹤每個欄位是否有效。
+          const errors = ref({
+            name: "",
+            lastName: "",
+            email: "",
+            phone: "",
+            city: "",
+            area: "",
+            zipCode: "",
+            address: "",
+          });
 
+          //針對每個欄位進行驗證並更新錯誤訊息
+          const validateForm = () => {
+          if (!name.value) {
+            alert("請輸入姓名");
+            return false;
+          }
+          if (!lastName.value) {
+            alert("請輸入姓氏");
+            return false;
+          }
+          if (!email.value) {
+            alert("請輸入電子郵件");
+            return false;
+          }
+          if (!phone.value) {
+            alert("請輸入電話號碼");
+            return false;
+          }
+          if (!city.value) {
+            alert("請選擇縣市");
+            return false;
+          }
+          if (!area.value) {
+            alert("請選擇區域");
+            return false;
+          }
+          if (!zipCode.value) {
+            alert("請輸入郵遞區號");
+            return false;
+          }
+          if (!address.value) {
+            alert("請輸入地址");
+            return false;
+          }
+        
+          return true; // 如果所有欄位都已填寫，返回 true
+        };
+          
           //要傳遞出去的參數
           const toCheckInfo = () => {
+            if (!validateForm()) {
+    return; // 停止提交，如果表單驗證不通過
+  }
+           // 通過驗證後才繼續提交表單
             const totalAmount = totalAmount2.value;
-            const finalAmount2 =
-              totalAmount + 160 - discountAmount - percentageDiscount;
+            const finalAmount2 = totalAmount + 160 - discountAmount - percentageDiscount;
             console.log(456);
             console.log(percentageDiscount);
             console.log(333);
@@ -484,7 +544,7 @@
             window.location.href = `/checkInfo?${queryParams}`;
           };
 
-          // 定義獲取資料的函式
+          // 定義獲取購物車資料的函式
           const getCart = async () => {
             const res = await axios.get(`${api.value}/cart/${userId.value}`);
             products.value = res.data; // 將獲取的資料儲存到 products 中
