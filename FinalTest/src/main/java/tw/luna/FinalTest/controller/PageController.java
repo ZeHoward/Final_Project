@@ -56,8 +56,8 @@ public class PageController {
 	public String recipe() {
 		return "recipe";
 	}
-	@GetMapping("recipeDetails")
-	public String recipeDetails() {
+	@GetMapping("recipeDetails/{id}")
+	public String recipeDetails(@PathVariable Integer id) {
 		return "recipeDetails";
 	}
 	@GetMapping("checkout")

@@ -62,8 +62,10 @@ public class Users {
 //	@JsonManagedReference("Users_Cart")
 //	private Cart cart;
 
-	
-	
+
+
+
+
 
 	public Users(Long userId, String username, String email, String password, String phoneNumber, String token,
 			boolean isDel, boolean isVerified, String authType) {
@@ -76,6 +78,7 @@ public class Users {
 		this.isDel = isDel;
 		this.isVerified = isVerified;
 		this.authType = authType;
+//		this.cart = new Cart();  // 初始化購物車
 	}
 
 	public Users() {

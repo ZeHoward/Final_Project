@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="aac085bc-ba1f-4034-a473-ae9efe4b7580" name="Changes" comment="修正myCollection.js">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.run/FinalTest.run.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.run/FinalTest.run.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tw/luna/FinalTest/model/Users.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tw/luna/FinalTest/model/Users.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tw/luna/FinalTest/service/CartService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tw/luna/FinalTest/service/CartService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/controller/OrdersController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/controller/OrdersController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/controller/PageController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/controller/PageController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/controller/ProductController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/controller/ProductController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/controller/RecipesController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/controller/RecipesController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/dto/cart/CartSelectDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/dto/cart/CartSelectDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/model/Users.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/model/Users.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/service/CartService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/service/CartService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/service/EmailCheckService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/service/EmailCheckService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/service/OrdersService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/service/OrdersService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/service/RecipesService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/tw/luna/FinalTest/service/RecipesService.class" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "lunaWewe"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/ZeHoward/Final_Project.git",
+    "accountId": "c9444826-2e1d-437a-a1d6-aec41cf08fb2"
+  }
+}]]></component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="2n5gbWqvEmJE6JnwUpQqVMUCF8y" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Spring Boot.FinalTest.executor": "Run",
+    "Spring Boot.Unnamed.executor": "Run",
+    "git-widget-placeholder": "testAPI2",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/howar/OneDrive/桌面/大專專/final0926/Final_Project",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager" selected="Spring Boot.FinalTest">
+    <configuration name="Unnamed" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <option name="ALTERNATIVE_JRE_PATH" value="17" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <module name="FinalTest" />
+      <option name="SPRING_BOOT_MAIN_CLASS" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23339.11" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23339.11" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="aac085bc-ba1f-4034-a473-ae9efe4b7580" name="Changes" comment="" />
+      <created>1728268426763</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1728268426763</updated>
+      <workItem from="1728268426766" duration="658000" />
+      <workItem from="1728350595180" duration="71000" />
+      <workItem from="1728350894483" duration="504000" />
+      <workItem from="1728351413225" duration="94000" />
+      <workItem from="1728351555660" duration="265000" />
+      <workItem from="1728351833679" duration="182000" />
+      <workItem from="1728352025004" duration="1255000" />
+      <workItem from="1728353305113" duration="102000" />
+      <workItem from="1728353415185" duration="92000" />
+      <workItem from="1728353523511" duration="165000" />
+      <workItem from="1728353696521" duration="13000" />
+      <workItem from="1728353717209" duration="46000" />
+      <workItem from="1728353768991" duration="103000" />
+      <workItem from="1728353999617" duration="55000" />
+      <workItem from="1728354515506" duration="232000" />
+      <workItem from="1728360679546" duration="63000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="修正myCollection.js" />
+    <option name="LAST_COMMIT_MESSAGE" value="修正myCollection.js" />
+  </component>
+</project>

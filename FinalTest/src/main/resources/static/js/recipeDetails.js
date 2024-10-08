@@ -1,85 +1,78 @@
 document.addEventListener('DOMContentLoaded', async () => {
+    console.log("HI~");
+    
     try {
-        const response = await fetch('recipeDetails.json');
+        const urlParams = new URLSearchParams(window.location.search);
+        const recipeId = urlParams.get('id');
+
+        if (!recipeId) {
+            throw new Error('未提供食譜 ID');
+        }
+
+        const response = await fetch(`/api/recipes/view?id=${recipeId}`);
+
         if (!response.ok) {
-            throw new Error(`Network response was not ok: ${response.statusText}`);
+            throw new Error(`HTTP 錯誤！狀態：${response.status}`);
         }
 
-        // 確認響應內容
-        const text = await response.text();
-        console.log('Raw Response Text:', text);
-
-        // 嘗試將響應解析為 JSON
-        const data = JSON.parse(text);
-        console.log('Parsed Data:', data);
-
-        // 確認 data 是否為對象
-        if (typeof data !== 'object' || Array.isArray(data)) {
-            throw new Error('Expected data to be an object.');
+        const data = await response.json();
+        
+        if (!data.recipe) {
+            throw new Error('食譜數據未定義');
         }
 
-        const recipe = data;
-        if (!recipe) {
-            throw new Error('Recipe data is undefined');
-        }
+        const recipe = data.recipe;
 
-        document.getElementById('foodName').textContent = recipe.name || '無名稱';
-        document.getElementById('foodImage').src = recipe.img || 'default-image.jpg';
-        document.getElementById('cookingTime').textContent = recipe.cookingTime || '未提供';
-        document.getElementById('level').textContent = recipe.level || '未提供';
-        document.getElementById('quantity').textContent = recipe.quantity || '未提供';
+        // 使用輔助函數安全地更新 DOM
+        updateElement('recipeName', recipe.title);
+        updateElement('foodName', recipe.title);
+        updateElement('cookingTime', `烹飪時間：${recipe.cookTime} 分鐘`);
+        updateElement('level', `難度：${recipe.level}`);
+        updateElement('servings', `份量：${recipe.servings} 人份`);
 
-        const ingredientsList = document.getElementById('ingredientsList');
-        if (Array.isArray(recipe.ingredients)) {
-            recipe.ingredients.forEach(item => {
-                const li = document.createElement('li');
-                li.textContent = item;
-                ingredientsList.appendChild(li);
-            });
-        } else {
-            console.error('Ingredients is not an array');
-        }
+        updateList('ingredientsList', recipe.ingredients.split('\r\n'));
+        updateList('stepsList', recipe.steps.split('\r\n'), true);
+        updateList('notesList', recipe.notes.split('\r\n'));
 
-        const stepsList = document.getElementById('stepsList');
-        if (Array.isArray(recipe.steps)) {
-            recipe.steps.forEach(item => {
-                const li = document.createElement('li');
-                li.textContent = item;
-                stepsList.appendChild(li);
-            });
-        } else {
-            console.error('Steps is not an array');
-        }
+        // 添加事件監聽器
+        addButtonListener('saveRecipe', () => console.log('收藏食譜', recipe.recipeId));
+        addButtonListener('viewProduct', () => window.location.href = `/product?id=${recipe.productId}`);
 
-        const noteList = document.getElementById('noteList');
-        if (Array.isArray(recipe.note)) {
-            recipe.note.forEach(item => {
-                const li = document.createElement('li');
-                li.textContent = item;
-                noteList.appendChild(li);
-            });
-        } else {
-            console.error('Note is not an array');
-        }
     } catch (error) {
-        console.error('載入配方數據時出錯：', error);
+        console.error('載入食譜數據時出錯：', error);
+        alert('載入食譜數據時出錯，請稍後再試');
     }
-  });
+});
 
-  //現在的位置
-  document.addEventListener("DOMContentLoaded", function() {
-    // 使用 Fetch API 讀取 JSON 檔案
-    fetch('recipeDetails.json')
-      .then(response => response.json())
-      .then(data => {
-        // 假設 JSON 檔案包含的資料欄位是 name
-        const recipeName = data.name;
+// 輔助函數
+function updateElement(id, content) {
+    const element = document.getElementById(id);
+    if (element) {
+        element.textContent = content;
+    } else {
+        console.warn(`未找到 ID 為 '${id}' 的元素`);
+    }
+}
 
-        // 更新面包屑導航中的食譜名稱
-        document.getElementById('recipeName').textContent = recipeName;
-      })
-      .catch(error => {
-        console.error('錯誤:', error);
-        document.getElementById('recipeName').textContent = '無法加載食譜名稱';
-      });
-  });
+function updateList(id, items, numbered = false) {
+    const list = document.getElementById(id);
+    if (list) {
+        list.innerHTML = '';
+        items.forEach((item, index) => {
+            const li = document.createElement('li');
+            li.textContent = numbered ? `${index + 1}. ${item}` : item;
+            list.appendChild(li);
+        });
+    } else {
+        console.warn(`未找到 ID 為 '${id}' 的列表`);
+    }
+}
+
+function addButtonListener(id, callback) {
+    const button = document.getElementById(id);
+    if (button) {
+        button.addEventListener('click', callback);
+    } else {
+        console.warn(`未找到 ID 為 '${id}' 的按鈕`);
+    }
+}

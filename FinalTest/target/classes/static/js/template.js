@@ -193,13 +193,13 @@
 		   padding: '3em', // 设置内边距
 		   color: '#716add', // 设置文本颜色
 		   background: '#fff', // 背景设置
-		   /*
+		   
 		   backdrop: `
 		     rgba(0,0,123,0.4)
 		     url("https://sweetalert2.github.io/images/nyan-cat.gif")
 		     left top
 		     no-repeat
-		   `,*/
+		   `,
 		  didOpen: () => {
 		    Swal.showLoading(); // 顯示加載提示
 		  },

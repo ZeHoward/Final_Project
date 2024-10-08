@@ -29,13 +29,13 @@
                 id="same-info"
                 name="same-info"
                 v-model="isSameInfo"
-                @change="isSameInfo ? populateUserInfo() : clearUserInfo()"
+                @change="isSameInfo ? populateUserInfo() : clearUserInfo()"              
               />
               <label for="same-info">收件人資訊與會員資訊相同</label>
             </div>
           </div>
 
-          <form>
+          <form @submit.prevent="handleSubmit">
             <div class="form-row">
               <input
                 type="text"
@@ -44,6 +44,7 @@
                 class="half-width"
                 placeholder="收件人名字"
                 v-model="name"
+                required
               />
               <input
                 type="text"
@@ -52,6 +53,7 @@
                 class="half-width"
                 placeholder="收件人姓氏"
                 v-model="lastName"
+                required
               />
             </div>
             <div class="form-row">
@@ -62,6 +64,7 @@
                 class="full-width"
                 placeholder="電子信箱"
                 v-model="email"
+                required
               />
             </div>
             <div class="form-row">
@@ -72,6 +75,7 @@
                 class="full-width"
                 placeholder="聯絡電話"
                 v-model="phone"
+                required
               />
             </div>
             <div class="form-row">
@@ -81,6 +85,7 @@
                 class="half-width"
                 v-model="city"
                 @change="updateDistricts"
+                required
               >
                 <option value="" disabled selected>選擇縣市</option>
                 <option
@@ -98,6 +103,7 @@
                 class="half-width"
                 v-model="area"
                 @change="updateZipCode"
+                required
               >
                 <option value="" disabled selected>選擇區域</option>
                 <option
@@ -117,6 +123,7 @@
                 class="half-width"
                 placeholder="郵遞區號"
                 v-model="zipCode"
+                required
               />
             </div>
             <div class="form-row">
@@ -127,6 +134,7 @@
                 class="full-width"
                 placeholder="地址"
                 v-model="address"
+                required
               />
             </div>
             <h3>配送方式</h3>
@@ -167,7 +175,11 @@
               <tbody id="cartItems">
                 <tr v-for="(product, i) in products" :key="i">
                   <td class="dflex outTd">
-                    <img :src="img" alt="圖片" class="product-image" />
+                    <img
+                      :src="product.image"
+                      alt="圖片"
+                      class="product-image"
+                    />
                     <div class="dflex flexColumn">
                       <div>{{ product.name }}</div>
                       <div>數量:{{ product.quantity }}</div>
@@ -181,12 +193,16 @@
             </table>
             <div id="items-container"></div>
             <div id="total-container" class="total">
-              <p id="subtotal">商品總額：NT $ {{totalAmount}}</p>
+              <p id="subtotal">商品總額：NT $ {{totalAmount2}}</p>
               <p id="discount" style="color: #d35b50">
-                優惠券折抵：NT $ {{discountAmount}}
+                優惠券折抵：NT $ {{discountAmount != 0 ?　discountAmount :
+                percentageDiscount != 0 ? percentageDiscount : 0}}
               </p>
               <p id="shipping">運費：NT $ {{160}}</p>
-              <p id="finalAmount">付款總金額：NT $ {{finalAmount}}</p>
+              <p id="finalAmount">
+                付款總金額：NT $ {{finalAmount - 　discountAmount -
+                percentageDiscount}}
+              </p>
               <p id="total" style="font-size: large"></p>
             </div>
           </div>
@@ -209,8 +225,10 @@
           const params = new URLSearchParams(window.location.search);
           const totalAmount = params.get("totalAmount");
           const finalAmount = params.get("finalAmount");
-          const discountAmount = params.get("discountAmount");
-      
+          const discountAmount = params.get("discountAmountToNext");
+          const couponCode = params.get("couponCode");
+          const percentageDiscount = params.get("percentageDiscountToNext");
+
           //自定義名稱
           const name = ref("");
           const img = ref(
@@ -393,8 +411,6 @@
           const cityName = ref("");
           const isSameInfo = ref(false); // 確保這個變量被定義
           const district = ref("");
-          const discountAmountToNextPage =ref("");
-         
 
           const totalAmount2 = computed(() => {
             return products.value.reduce(
@@ -446,14 +462,68 @@
             zipCode.value = "";
           };
           //-----------------------------------------
+          //定義一個錯誤訊息的物件來追蹤每個欄位是否有效。
+          const errors = ref({
+            name: "",
+            lastName: "",
+            email: "",
+            phone: "",
+            city: "",
+            area: "",
+            zipCode: "",
+            address: "",
+          });
 
-          //要傳遞出去的參數  缺少優惠券
+          //針對每個欄位進行驗證並更新錯誤訊息
+          const validateForm = () => {
+          if (!name.value) {
+            alert("請輸入姓名");
+            return false;
+          }
+          if (!lastName.value) {
+            alert("請輸入姓氏");
+            return false;
+          }
+          if (!email.value) {
+            alert("請輸入電子郵件");
+            return false;
+          }
+          if (!phone.value) {
+            alert("請輸入電話號碼");
+            return false;
+          }
+          if (!city.value) {
+            alert("請選擇縣市");
+            return false;
+          }
+          if (!area.value) {
+            alert("請選擇區域");
+            return false;
+          }
+          if (!zipCode.value) {
+            alert("請輸入郵遞區號");
+            return false;
+          }
+          if (!address.value) {
+            alert("請輸入地址");
+            return false;
+          }
+        
+          return true; // 如果所有欄位都已填寫，返回 true
+        };
+          
+          //要傳遞出去的參數
           const toCheckInfo = () => {
-                                         
+            if (!validateForm()) {
+    return; // 停止提交，如果表單驗證不通過
+  }
+           // 通過驗證後才繼續提交表單
             const totalAmount = totalAmount2.value;
-            const finalAmount2 = totalAmount + 160 - discountAmount;
-            discountAmountToNextPage.value = discountAmount;
-
+            const finalAmount2 = totalAmount + 160 - discountAmount - percentageDiscount;
+            console.log(456);
+            console.log(percentageDiscount);
+            console.log(333);
+            console.log(discountAmount);
             //name.value抓這頁的變數 :前的name2是傳出去的變數名稱
             const queryParams = new URLSearchParams({
               totalAmount,
@@ -466,13 +536,15 @@
               zipCode: zipCode.value,
               address: address.value,
               phone: phone.value,
-              discountAmount2:discountAmount,
+              discountAmount2: discountAmount,
+              couponCode: couponCode,
+              percentageDiscount: percentageDiscount,
             }).toString();
 
             window.location.href = `/checkInfo?${queryParams}`;
           };
 
-          // 定義獲取資料的函式
+          // 定義獲取購物車資料的函式
           const getCart = async () => {
             const res = await axios.get(`${api.value}/cart/${userId.value}`);
             products.value = res.data; // 將獲取的資料儲存到 products 中
@@ -481,10 +553,6 @@
           onMounted(() => {
             getUserId(); // 在組件掛載後獲取資料
           });
-
-          // const updateDistricts = () => {
-          //   districts.value = cityDistricts[city.value] || [];
-          // };
 
           watch(city, () => {
             updateDistricts();
@@ -536,7 +604,9 @@
             clearUserInfo,
             populateUserInfo,
             district,
-            discountAmount
+            discountAmount,
+            percentageDiscount,
+            totalAmount2,
           };
         },
       }).mount("#myContainer"); // 將應用程式掛載到指定的 DOM 元素上
