@@ -1,170 +1,274 @@
-window.onload = function () {
-  // 菜單展開、關閉
-  window.openSidenav = function () {
-    document.getElementById("sidenav").style.width = "100%";
-    document.body.style.overflow = "hidden";
-  };
+let currentPage = 1;
+const recipesPerPage = 9;
+let totalPages = 1;
+let recipes = [];
 
-  window.closeSidenav = function () {
-    document.getElementById("sidenav").style.width = "0%";
-    document.body.style.overflow = "";
-  };
+document.addEventListener('DOMContentLoaded', function () {
+  fetchRecipes();
 
-  // 展開菜單選項
-  var dropdowns = document.getElementsByClassName("tem-dropdown-btn");
-  for (var i = 0; i < dropdowns.length; i++) {
-    dropdowns[i].addEventListener("click", function () {
-      this.classList.toggle("tem-active");
-      var dropdownContent = this.nextElementSibling;
-      if (dropdownContent.style.display === "block") {
-        dropdownContent.style.display = "none";
+  document.querySelectorAll(".down-container a").forEach((link) => {
+    link.addEventListener("click", function (event) {
+      event.preventDefault();
+      const category = this.getAttribute("data-category");
+      filterRecipes(category);
+    });
+  });
+
+  document.getElementById("rcontainer").addEventListener("click", handleRecipeActions);
+  document.getElementById("prevPage").addEventListener("click", () => {
+    if (currentPage > 1) {
+      currentPage--;
+      renderCurrentPage();
+    }
+  });
+  document.getElementById("nextPage").addEventListener("click", () => {
+    if (currentPage < totalPages) {
+      currentPage++;
+      renderCurrentPage();
+    }
+  });
+  document.getElementById("searchIcon").addEventListener("click", () => {
+    const keyword = document.getElementById("searchInput").value.trim();
+    if (keyword) {
+      searchRecipes(keyword);
+    } else {
+      alert("請輸入關鍵字");
+    }
+  });
+});
+
+function fetchRecipes(category = '') {
+  fetch(`/api/recipes/list`)
+    .then(response => response.json())
+    .then(data => {
+      recipes = data.recipes;
+      totalPages = Math.ceil(recipes.length / recipesPerPage);
+      currentPage = 1;
+      renderCurrentPage();
+      updateTitle(category);  // 這裡 category 可能是空字符串
+    })
+    .catch(error => console.error('Error fetching recipes:', error));
+}
+
+function renderCurrentPage() {
+  const startIndex = (currentPage - 1) * recipesPerPage;
+  const endIndex = startIndex + recipesPerPage;
+  const recipesToShow = recipes.slice(startIndex, endIndex);
+  displayRecipes(recipesToShow);
+  updatePageInfo();
+}
+
+function updatePageInfo() {
+  document.getElementById("pageInfo").textContent = `第 ${currentPage} 頁 / 共 ${totalPages} 頁`;
+}
+
+function displayRecipes(recipesToShow) {
+  const container = document.getElementById("rcontainer");
+  container.innerHTML = "";
+  
+  const fetchImagePromises = recipesToShow.map(recipe => 
+    fetch(`/productImages/${recipe.productId}`)
+      .then(response => response.json())
+      .then(imageData => ({
+        recipe, 
+        imageUrl: imageData.image || '../material/icon/default.png'
+      }))
+      .catch(() => ({
+        recipe, 
+        imageUrl: '../material/icon/default.png'
+      }))
+  );
+
+  Promise.all(fetchImagePromises).then(recipeDataWithImages => {
+    recipeDataWithImages.forEach(({recipe, imageUrl}) => {
+      const recipeDiv = document.createElement("div");
+      recipeDiv.className = "recipe-card";
+      recipeDiv.dataset.recipeId = recipe.recipeId;
+      recipeDiv.dataset.recipeName = recipe.title;
+
+      const recipeHtml = `
+        <img class="recipe-image" src="${imageUrl}" alt="${recipe.title}">
+        <h3 class="recipe-name">${recipe.title}</h3>
+        <p class="recipe-level">難易度: ${recipe.level}</p>
+        <p class="recipe-time">烹飪時間: ${recipe.cookTime} 分鐘</p>
+        <div class="recipe-actions">
+          <button class="add-to-favorite"><i class="fa-solid fa-heart"></i></button>
+          <button class="view-recipe" data-recipe-id="${recipe.recipeId}">閱讀食譜</button>
+        </div>
+      `;
+      recipeDiv.innerHTML = recipeHtml;
+      container.appendChild(recipeDiv);
+    });
+
+    // 填補空白卡片
+    const itemsPerRow = 3;
+    let itemsToAdd = itemsPerRow - (recipesToShow.length % itemsPerRow);
+    if (itemsToAdd && itemsToAdd !== itemsPerRow) {
+      for (let i = 0; i < itemsToAdd; i++) {
+        const emptyDiv = document.createElement("div");
+        emptyDiv.className = "recipe-card empty";
+        emptyDiv.style.visibility = "hidden";
+        container.appendChild(emptyDiv);
+      }
+    }
+  });
+}
+
+function handleRecipeActions(event) {
+  const target = event.target;
+
+  if (target.closest(".add-to-favorite")) {
+    event.preventDefault();
+    event.stopPropagation();
+    const recipeElement = target.closest(".recipe-card");
+    const recipeId = recipeElement.dataset.recipeId;
+    const recipeName = recipeElement.dataset.recipeName;
+    toggleFavorite(recipeId, recipeName, target.closest(".fa-heart"));
+  } else if (target.closest(".view-recipe")) {
+    event.preventDefault();
+    event.stopPropagation();
+    const recipeId = target.closest(".view-recipe").dataset.recipeId;
+    window.location.href = `/recipeDetails/${recipeId}`;
+  }
+}
+
+function toggleFavorite(recipeId, recipeName, favoriteBtn) {
+  checkLoginStatus()
+    .then((isLoggedIn) => {
+      if (isLoggedIn) {
+        getUserId().then(userId => {
+          if (userId) {
+            if (favoriteBtn.classList.contains("active")) {
+              removeFavorite(userId, recipeId, recipeName, favoriteBtn);
+            } else {
+              addFavorite(userId, recipeId, recipeName, favoriteBtn);
+            }
+          }
+        });
       } else {
-        dropdownContent.style.display = "block";
+        showLoginPrompt();
       }
     });
+}
+
+function addFavorite(userId, recipeId, recipeName, favoriteBtn) {
+  fetch(`/api/favorites/add?userId=${userId}&recipeId=${recipeId}`, { method: "POST" })
+    .then(response => response.json())
+    .then(() => {
+      favoriteBtn.classList.add("active");
+      showSuccessMessage(`已將${recipeName}加入收藏`);
+    })
+    .catch(error => console.error("加入收藏時發生錯誤:", error));
+}
+
+function removeFavorite(userId, recipeId, recipeName, favoriteBtn) {
+  fetch(`/api/favorites/remove?userId=${userId}&recipeId=${recipeId}`, { method: "DELETE" })
+    .then(() => {
+      favoriteBtn.classList.remove("active");
+      showSuccessMessage(`已將${recipeName}移除收藏`);
+    })
+    .catch(error => console.error("移除商品收藏遇到錯誤", error));
+}
+
+function filterRecipes(category) {
+  fetchRecipes(category);
+}
+
+function sortRecipes() {
+  const sortBy = document.getElementById("sortSelect").value;
+  let sortedRecipes = [...recipes];
+
+  switch (sortBy) {
+    case "levelAsc":
+      sortedRecipes.sort((a, b) => a.level.localeCompare(b.level));
+      break;
+    case "levelDesc":
+      sortedRecipes.sort((a, b) => b.level.localeCompare(a.level));
+      break;
   }
 
-  // menu toggle up/down 圖案
-  window.togglePic1 = function () {
-    var margin1 = document.getElementById("add");
-    var img1 = document.getElementById("updown1");
-    if (img1.src.includes("down.png")) {
-      img1.src = "./material/icon/up.png";
-      margin1.style.margin = "40px 0";
-    } else {
-      img1.src = "./material/icon/down.png";
-      margin1.style.margin = "";
-    }
-  };
+  recipes = sortedRecipes;
+  currentPage = 1;
+  renderCurrentPage();
+}
 
-  window.togglePic2 = function () {
-    var margin2 = document.getElementById("add");
-    var img2 = document.getElementById("updown2");
-    if (img2.src.includes("down.png")) {
-      img2.src = "./material/icon/up.png";
-      margin2.style.margin = "40px 0";
-    } else {
-      img2.src = "./material/icon/down.png";
-      margin2.style.margin = "";
-    }
-  };
+function searchRecipes(keyword) {
+  // 目前 API 沒有提供搜索功能，這裡只是簡單地過濾標題
+  const filteredRecipes = recipes.filter(recipe =>
+    recipe.title.toLowerCase().includes(keyword.toLowerCase())
+  );
+  recipes = filteredRecipes;
+  totalPages = Math.ceil(recipes.length / recipesPerPage);
+  currentPage = 1;
+  renderCurrentPage();
+  updateTitle('搜尋結果');
+}
 
-  var dropdown2 = document.getElementsByClassName("down-btn");
-  var x;
+function updateTitle(category) {
+  const titleElement = document.getElementById("title");
+  switch (category) {
+    case 'home':
+      titleElement.textContent = "家常料理";
+      break;
+    case 'kids':
+      titleElement.textContent = "兒童友善";
+      break;
+    case 'elderly':
+      titleElement.textContent = "銀髮友善";
+      break;
+    case 'international':
+      titleElement.textContent = "異國料理";
+      break;
+    case 'group':
+      titleElement.textContent = "多人料理";
+      break;
+    case '搜尋結果':
+      titleElement.textContent = "搜尋結果";
+      break;
+    default:
+      titleElement.textContent = "所有食譜";
+  }
+}
 
-  for (x = 0; x < dropdown2.length; x++) {
-    dropdown2[x].addEventListener("click", function () {
-      this.classList.toggle("active2");
-      var dropdownContent2 = this.nextElementSibling;
-      if (dropdownContent2.style.display === "block") {
-        dropdownContent2.style.display = "none";
-      } else {
-        dropdownContent2.style.display = "block";
-      }
+function getUserId() {
+  return fetch('/users/userAllInfo')
+    .then(response => response.json())
+    .then(data => data.userId)
+    .catch(error => {
+      console.error("獲取用戶 ID 時發生錯誤", error);
+      return null;
     });
-  }
+}
 
-  // 儲存當前選擇的類別
-  // let currentCategory = '';
+function checkLoginStatus() {
+  return fetch('users/checkSession')
+    .then(response => response.json())
+    .catch(error => {
+      console.error("檢查登入狀態時發生錯誤", error);
+      return false;
+    });
+}
 
-  // 使用 fetch 從 recipe.json 載入食譜資料
-  // fetch('./recipe.json')
-  //   .then(response => response.json())
-  //   .then(products => {
-  //     // 顯示食譜資料
-  //     displayProducts(products);
+function showLoginPrompt() {
+  Swal.fire({
+    title: "未登入",
+    text: "請先登入才能加入收藏",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonText: '登入',
+    cancelButtonText: '取消',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      window.location.href = "/loginPage";
+    }
+  });
+}
 
-
-      // 食譜排序功能
-      // window.sortRecipes = function () {
-      //   const sortBy = document.getElementById("sort").value;
-      //   let sortedProducts = [...products];
-
-        // 依據當前類別進行排序
-        // if (currentCategory) {
-        //   sortedProducts = sortedProducts.filter(product => product.category === currentCategory);
-        // }
-
-
-  // 顯示食譜資料的函數
-  // window.displayProducts = function (products) {
-  //   const container = document.getElementById("rcontainer");
-  //   container.innerHTML = ""; // 清空現有食譜
-  //   products.forEach((product) => {
-  //     container.innerHTML += `
-  //       <div class="recipe-card">
-  //         <img class="recipe-image" src="${product.image}" alt="${product.name}">
-  //         <h3>${product.name}</h3>
-  //         <p class="recipeLevel">難易度: ${product.level}</p>
-  //         <div class="home-product-btn">
-  //           <button class="add-to-favorite"><i class="fa-solid fa-heart"></i></button>
-  //           <button class="readRecipeBtn"><i class="fa-solid fa-book-open"></i>&nbsp;&nbsp;&nbsp;閱讀食譜</button>
-  //         </div>
-  //       </div>
-  //     `;
-  //   });
-
-  //   // 收藏食譜按鈕事件處理
-  //   document.querySelectorAll(".add-to-favorite").forEach((button) => {
-  //     // 使用 dataset 屬性追踪按鈕的收藏狀態
-  //     button.dataset.isFavorited = "false"; // 初始狀態
-
-  //     button.addEventListener("click", function () {
-  //       const recipeName = this.closest(".recipe-card").querySelector("h3").textContent;
-
-  //       if (this.dataset.isFavorited === "false") {
-  //         // 當狀態為未收藏時，執行收藏操作
-  //         this.style.color = "#cc4235"; // 愛心變成紅色
-  //         this.dataset.isFavorited = "true"; // 更新狀態為已收藏
-  //         // 使用訊息提示
-  //         showMessage(`已將 【${recipeName}】食譜加入收藏！`);
-  //       } else {
-  //         // 當狀態為已收藏時，執行取消收藏操作
-  //         this.style.color = "#787575"; // 愛心變回灰色
-  //         this.dataset.isFavorited = "false"; // 更新狀態為未收藏
-  //         // 使用訊息提示
-  //         showMessage(`已將 【${recipeName}】食譜取消收藏！`);
-  //       }
-  //     });
-  //   });
-  // };
-
-  // 顯示訊息的函數
-  function showMessage(message) {
-    const messageBox = document.createElement("div");
-    messageBox.className = "message-box";
-    messageBox.textContent = message;
-    document.body.appendChild(messageBox);
-
-    // 設定訊息顯示時間
-    setTimeout(() => {
-      messageBox.remove();
-    }, 2000);
-  }
-
-//  // 篩選食譜
-//  window.filterRecipes = function (type) {
-//    fetch('./recipe.json')
-//      .then(response => response.json())
-//      .then(products => {
-//        // 儲存當前選擇的類別
-//        currentCategory = type;
-//
-//        // 假設 JSON 文件中每個食譜都有一個 `category` 屬性
-//        const filteredProducts = products.filter(product => product.category === type);
-//        displayProducts(filteredProducts);
-//
-//        // 更新麵包屑
-//        const categoryElement = document.getElementById('recipe-category');
-//        categoryElement.textContent =`\\ ${type === 'home' ? '家常料理' :
-//          type === 'kids' ? '兒童友善' :
-//          type === 'elderly' ? '銀髮友善' :
-//          type === 'international' ? '異國料理' :
-//          type === 'group' ? '多人料理' : ''}`;
-//
-//        // 清除排序選擇
-//        document.getElementById("sort").selectedIndex = 0;
-//      })
-//      .catch(error => console.error('載入食譜資料時出錯:', error));
-//  }
-};
+function showSuccessMessage(message) {
+  Swal.fire({
+    title: "成功",
+    text: message,
+    icon: "success",
+    timer: 1500,
+  });
+}

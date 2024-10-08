@@ -1,4 +1,4 @@
-* {
+/* * {
   font-family: "Noto Sans TC", system-ui;
   margin: 0;
   padding: 0;
@@ -10,29 +10,27 @@ body {
   width: 100vw;
   max-width: 100%;
   overflow-x: hidden;
-}
+} */
 
-.home-product-btn {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-
-/* 中間區塊 */
+/* 中間區塊(食譜分類側邊欄位和食譜卡) */
 .mid {
   display: flex;
   flex: 1;
 }
-/* 菜單 */
-.list {
+
+/* 食譜分類菜單 */
+.list,
+.list-title {
   flex: 1;
   border-right: 1px solid #ccc;
   padding: 20px;
+  font-weight: 600;
 }
 
 .list a,
+.list-title,
 .down-btn {
-  padding: 6px 8px 6px 16px;
+  padding: 6px 8px;
   text-decoration: none;
   font-size: 20px;
   color: #000000;
@@ -40,135 +38,194 @@ body {
   border: none;
   background: none;
   width: 100%;
-  text-align: left;
+  text-align: center;
   cursor: pointer;
   outline: none;
+  font-weight: 600;
 }
 
-.down-btn:hover {
-  color: rgb(0, 0, 0);
+.down-btn {
+  background-color: #cbb68c;
 }
 
-/*新增 滑鼠懸停側邊菜單選項*/
-.list a:hover {
-  background-color: #f3ce6e;
-}
-.list a.active {
-  background-color: #f3ce6e;
+.list-title {
+  background-color: #faf4e8;
 }
 
-.down-btn > img {
-  width: 20px;
+.down-container > a:hover {
+  background-color: #ece2b3;
 }
 
-.active2 {
-  background-color: #f3cd6ea2; /*修改顏色*/
-  color: rgb(0, 0, 0);
+.down-container > a:active {
+  background-color: #ece2b3;
 }
-
-.down-container {
-  display: none;
-  padding-left: 8px;
-}
-
-/*收藏按鈕*/
-.add-to-favorite {
-  margin-top: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  color: #787575;
-  background-color: transparent;
-}
-
-.add-to-favorite:hover {
-  color: #686666;
-}
-
-.add-to-favorite:active {
-  color: #cc4235;
-}
-
-
-/*--------------------------------------------------------------------*/
 
 /* 食譜區 */
+.title {  /*食譜分類類型標題*/
+  font-size: 30px;
+  padding: 12px 8px;
+  font-weight: 600;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+.sortAndSearch {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+  font-size: 20px;
+  margin-bottom: 20px;
+  height: 40px;
+}
+
+.searchContainer {
+  display: flex;
+  align-items: center;
+}
+
+#searchDiv {
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+#searchInput {
+  height: 40px;
+  border: 1px solid black;
+  font-size: 16px;
+  text-align: center;
+}
+
+.sort {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  border: black 1px solid;
+}
+
+.searchIcon {
+  cursor: pointer;
+  margin-left: 10px;
+}
+
 .recipeZone {
-  flex: 4;
-  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 5;
+  padding: 20px 40px;
 }
 
 #rcontainer {
   display: flex;
   flex-wrap: wrap;
-  /* justify-content: space-between; */
+  justify-content: space-between;
+  flex: 1;
+  width: 100%;
 }
 
-/*食譜卡*/
 .recipe-card {
-  margin: 10px;
-  width: 230px;
+  width: 270px;
   text-align: center;
-  border: #edc150 2px solid;
-}
-
-.recipe-image {
-  display: block; /* 讓圖片被當作塊級元素，這樣才能由父容器的 text-align 來置中 */
-  margin: 10px auto; /* 確保圖片水平置中 */
-  width: 90%;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 2%;
-}
-
-.recipeLevel {
-  font-size: medium;
-  font-weight: bold;
-  margin-top: 10px 0;
-  color: #cc4235;
-}
-
-p.recipeLevel{
-  margin: 10px;
-}
-
-.sort {
-  text-align: right;
+  border: #f4f4f4 2px solid;
+  border-radius: 5px;
+  padding: 10px;
   margin-bottom: 20px;
 }
 
-/* 收藏-愛心 */
+.recipe-card:hover {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.recipe-image {
+  display: block;
+  margin: 10px auto;
+  width: 90%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.recipe-name,
+.recipe-level,
+.recipe-time,
+.recipe-actions {
+  margin: 10px 0;
+  font-size: medium;
+}
+
+.recipe-level {
+  font-size: 20px;
+  color: #d35b50;
+  font-weight: 700;
+}
+
 .fa-heart {
   font-size: 25px;
   align-items: center;
 }
 
-/* 閱讀食譜按鈕 */
-.readRecipeBtn {
+.view-recipe {
   background-color: #e0912f;
   color: white;
   border: none;
-  padding: 10px 15px;
+  padding: 10px 0;
   border-radius: 5px;
   margin-top: 5px;
-  margin-bottom: 10px;
   cursor: pointer;
+  font-size: 16px;
   width: 60%;
 }
-.readRecipeBtn:hover {
-  background-color: #d35b50;
+
+.recipe-actions {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
-/*收藏訊息提示*/
-.message-box {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: rgba(0, 0, 0, 0.7);
-  color: white;
-  padding: 10px 20px;
+
+.add-to-favorite {
+  margin-top: 5px;
+  padding-left: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background-color: transparent;
+  color: #787575;
+  cursor: pointer;
+}
+
+.add-to-favorite.active {
+  color: #cc4235;
+}
+
+.view-recipe:hover,
+.view-recipe:active {
+  background-color: #de8415;
+}
+
+.pagination {
+  text-align: center;
+  margin-top: 20px;
+}
+
+#prevPage,
+#nextPage {
+  border: none;
+  background-color: #ece2b3;
+  font-size: 20px;
+  padding: 10px;
   border-radius: 5px;
-  font-size: 16px;
-  z-index: 1000;
+  margin: 0 10px;
+  cursor: pointer;
+}
+
+@media (min-width: 1600px) and (max-width: 3840px) {
+  .recipe-image {
+    height: 40vh;
+  }
+
+  .recipe-name {
+    font-size: 25px;
+  }
 }

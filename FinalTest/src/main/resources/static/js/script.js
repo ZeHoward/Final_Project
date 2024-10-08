@@ -49,7 +49,7 @@ function generateOverviewContent() {
                     const overviewData = await overviewResponse.json();
                     const chartData = await chartResponse.json();
                     const activeMembers = await activeMembersResponse.json();
-
+					
                     // 更新卡片數據
                     document.querySelector('[data-type="revenue"] p').textContent =
                         overviewData.revenue;

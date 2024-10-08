@@ -170,7 +170,7 @@ document.addEventListener("DOMContentLoaded", function () {
       contactDiv.style.display = 'none';
   })
 
-  document.getElementById("contactBtn").removeEventListener("click", contactBtnHandler);
+  // document.getElementById("contactBtn").removeEventListener("click", contactBtnHandler);
 
   document.getElementById("contactBtn").addEventListener("click", () => {
       let name = document.getElementById("name").value;
