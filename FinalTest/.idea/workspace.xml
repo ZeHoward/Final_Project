@@ -4,15 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="aac085bc-ba1f-4034-a473-ae9efe4b7580" name="Changes" comment="">
+    <list default="true" id="aac085bc-ba1f-4034-a473-ae9efe4b7580" name="Changes" comment="給user一台載我靈魂的車車">
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/recipe.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/recipe.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/recipeDetails.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/recipeDetails.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/recipe.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/recipe.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/footer.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/productList.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/productList.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/footer.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/productList.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/productList.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/log/login.txt" beforeDir="false" afterPath="$PROJECT_DIR$/log/login.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/detail.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/detail.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/enjoyum.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/enjoyum.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/detail.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/detail.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/enjoyum.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/enjoyum.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/enjoyum.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/enjoyum.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/maven/tw.luna/FinalTest/pom.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/css/detail.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/css/detail.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/css/enjoyum.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/css/enjoyum.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/detail.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/js/detail.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/static/js/enjoyum.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/js/enjoyum.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/tw/luna/FinalTest/FinalTestApplicationTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/tw/luna/FinalTest/FinalTestApplicationTests.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../test.html" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -57,11 +65,12 @@
     "RequestMappingsPanelWidth0": "75",
     "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Spring Boot.FinalTest.executor": "Run",
     "Spring Boot.Unnamed.executor": "Run",
     "git-widget-placeholder": "testAPI2",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/howar/OneDrive/桌面/大專專/final0926/Final_Project",
+    "last_opened_file_path": "D:/ref",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -74,17 +83,6 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="Spring Boot.FinalTest">
-    <configuration name="Unnamed" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-      <option name="ALTERNATIVE_JRE_PATH" value="17" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <module name="FinalTest" />
-      <option name="SPRING_BOOT_MAIN_CLASS" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -117,6 +115,7 @@
       <workItem from="1728353999617" duration="55000" />
       <workItem from="1728354515506" duration="232000" />
       <workItem from="1728360679546" duration="7596000" />
+      <workItem from="1728389941721" duration="19596000" />
     </task>
     <task id="LOCAL-00001" summary="給user一台載我靈魂的車車">
       <option name="closed" value="true" />
@@ -136,5 +135,17 @@
     <MESSAGE value="修正myCollection.js" />
     <MESSAGE value="給user一台載我靈魂的車車" />
     <option name="LAST_COMMIT_MESSAGE" value="" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/main/resources/static/js/enjoyum.js</url>
+          <line>86</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
