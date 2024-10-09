@@ -31,7 +31,7 @@ public class ReportService {
 
     public byte[] generateExcelReport(String timeFrame) throws IOException {
         LocalDateTime startDate = calculateStartDate(timeFrame);
-        List<Orders> orders = ordersRepository.findByOrderDateGreaterThanEqual(startDate);
+        List<Orders> orders = ordersRepository.findByOrderDateGreaterThanEqualAndStatus(startDate, "completed");
 
         try (XSSFWorkbook workbook = new XSSFWorkbook()) {
             XSSFSheet sheet = workbook.createSheet("Order Report");
@@ -56,7 +56,7 @@ public class ReportService {
                 row.createCell(4).setCellValue(order.getTotalAmount());
                 row.createCell(5).setCellValue(order.getPercentageDiscount() != null ? order.getPercentageDiscount() : 0);
                 row.createCell(6).setCellValue(order.getAmountDiscount() != null ? order.getAmountDiscount() : 0);
-                row.createCell(7).setCellValue(order.getFinalAmount());
+                row.createCell(7).setCellValue(order.getTotalAmount());
                 row.createCell(8).setCellValue(order.getStatus());
                 row.createCell(9).setCellValue(order.getAddress());
 
@@ -65,7 +65,7 @@ public class ReportService {
                 for (int i = 0; i < details.size(); i++) {
                     OrderDetails detail = details.get(i);
                     XSSFRow detailRow = (i == 0) ? row : sheet.createRow(rowNum + i);
-                    
+
                     detailRow.createCell(10).setCellValue(detail.getProduct().getName());
                     detailRow.createCell(11).setCellValue(detail.getQuantity());
                     detailRow.createCell(12).setCellValue(detail.getPrice());

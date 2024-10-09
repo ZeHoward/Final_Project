@@ -148,22 +148,22 @@ public class OrdersController {
  	    List<String> labels = new ArrayList<>();
  	    List<Integer> values = new ArrayList<>();
 
- 	    switch (range) {
- 	        case "week":
- 	            labels = ordersService.getDailyLabels(startDate, endDate);
- 	            values = ordersService.getDailyRevenue(startDate, endDate);
- 	            break;
- 	        case "month":
- 	        	labels = ordersService.getMonthlyLabels(startDate, endDate);
- 	            values = ordersService.getMonthlyRevenue(startDate, endDate);
- 	            break;
- 	        case "year":
- 	            labels = ordersService.getYearlyLabels(startDate, endDate);
- 	            values = ordersService.getYearlyRevenue(startDate, endDate);
- 	            break;
- 	        default:
- 	            return ResponseEntity.badRequest().body(Map.of("error", "Invalid range specified"));
- 	    }
+		switch (range) {
+			case "week":
+				labels = ordersService.getDailyLabels(startDate, endDate);
+				values = ordersService.getDailyRevenue(startDate, endDate);
+				break;
+			case "month":
+				labels = ordersService.getMonthlyLabels(startDate, endDate);
+				values = ordersService.getMonthlyRevenue(startDate, endDate);
+				break;
+			case "year":
+				labels = ordersService.getYearlyLabels(startDate, endDate);
+				values = ordersService.getYearlyRevenue(startDate, endDate);
+				break;
+			default:
+				return ResponseEntity.badRequest().body(Map.of("error", "Invalid range specified"));
+		}
 
  	    // 返回的資料格式
  	    Map<String, Object> chartData = new HashMap<>();

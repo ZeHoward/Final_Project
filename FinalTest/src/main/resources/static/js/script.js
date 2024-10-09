@@ -232,92 +232,92 @@ function fetchInitialChartData() {
 }
 
 // 點擊"總覽上方"訂單總量"時切換圖表內容的函數
-function fetchOrderChartData() {
-  if (!localStorage.getItem('adminLoggedIn')) {
-    window.location.href = 'backlogin.html';
-    return;
-  }
-    console.log("開始獲取訂單總量數據");
-    const timeRange = document.getElementById("timeRange");
-    if (!timeRange) {
-        console.error("找不到時間範圍選擇器");
-        alert("頁面載入不完整，請重新整理頁面。");
-        return;
-    }
-    const selectedRange = timeRange.value;
-    console.log("選擇的時間範圍:", selectedRange);
-
-    const today = new Date();
-    let startDate, endDate;
-
-    // 設置起始日期（與 fetchRevenueChartData 相同）
-    switch (selectedRange) {
-        case "week":
-            startDate = new Date(
-                today.getFullYear(),
-                today.getMonth(),
-                today.getDate() - 7
-            );
-            break;
-        case "month":
-            startDate = new Date(
-                today.getFullYear(),
-                today.getMonth() - 1,
-                today.getDate()
-            );
-            break;
-        case "year":
-            startDate = new Date(
-                today.getFullYear() - 1,
-                today.getMonth(),
-                today.getDate()
-            );
-            break;
-        default:
-            console.error("無效的時間範圍:", selectedRange);
-            alert("請選擇有效的時間範圍。");
-            return;
-    }
-    endDate = today;
-
-    // 確保日期時間格式符合 ISO 8601 標準
-    const formatDate = (date) => date.toISOString().split(".")[0] + "Z";
-
-    const url = `/api/orders/chart-data?startDate=${formatDate(
-        startDate
-    )}&endDate=${formatDate(endDate)}&range=${selectedRange}&dataType=orders`;
-    console.log("請求 URL:", url);
-
-    fetch(url)
-        .then((response) => {
-            if (!response.ok) {
-                throw new Error(`HTTP 錯誤! 狀態: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then((chartData) => {
-            console.log("接收到的圖表數據:", chartData);
-            if (
-                !chartData ||
-                !Array.isArray(chartData.labels) ||
-                !Array.isArray(chartData.values)
-            ) {
-                throw new Error("接收到的數據格式不正確");
-            }
-            updateChart(chartData.labels, chartData.values, selectedRange, "orders");
-        })
-        .catch((error) => {
-            console.error("獲取訂單總量數據時出錯:", error);
-            alert("無法載入訂單總量數據，請稍後再試。");
-        });
-}
+// function fetchOrderChartData() {
+//   if (!localStorage.getItem('adminLoggedIn')) {
+//     window.location.href = 'backlogin.html';
+//     return;
+//   }
+//     console.log("開始獲取訂單總量數據");
+//     const timeRange = document.getElementById("timeRange");
+//     if (!timeRange) {
+//         console.error("找不到時間範圍選擇器");
+//         alert("頁面載入不完整，請重新整理頁面。");
+//         return;
+//     }
+//     const selectedRange = timeRange.value;
+//     console.log("選擇的時間範圍:", selectedRange);
+//
+//     const today = new Date();
+//     let startDate, endDate;
+//
+//     // 設置起始日期（與 fetchRevenueChartData 相同）
+//     switch (selectedRange) {
+//         case "week":
+//             startDate = new Date(
+//                 today.getFullYear(),
+//                 today.getMonth(),
+//                 today.getDate() - 7
+//             );
+//             break;
+//         case "month":
+//             startDate = new Date(
+//                 today.getFullYear(),
+//                 today.getMonth() - 1,
+//                 today.getDate()
+//             );
+//             break;
+//         case "year":
+//             startDate = new Date(
+//                 today.getFullYear() - 1,
+//                 today.getMonth(),
+//                 today.getDate()
+//             );
+//             break;
+//         default:
+//             console.error("無效的時間範圍:", selectedRange);
+//             alert("請選擇有效的時間範圍。");
+//             return;
+//     }
+//     endDate = today;
+//
+//     // 確保日期時間格式符合 ISO 8601 標準
+//     const formatDate = (date) => date.toISOString().split(".")[0] + "Z";
+//
+//     const url = `/api/orders/chart-data?startDate=${formatDate(
+//         startDate
+//     )}&endDate=${formatDate(endDate)}&range=${selectedRange}&dataType=orders`;
+//     console.log("請求 URL:", url);
+//
+//     fetch(url)
+//         .then((response) => {
+//             if (!response.ok) {
+//                 throw new Error(`HTTP 錯誤! 狀態: ${response.status}`);
+//             }
+//             return response.json();
+//         })
+//         .then((chartData) => {
+//             console.log("接收到的圖表數據:", chartData);
+//             if (
+//                 !chartData ||
+//                 !Array.isArray(chartData.labels) ||
+//                 !Array.isArray(chartData.values)
+//             ) {
+//                 throw new Error("接收到的數據格式不正確");
+//             }
+//             updateChart(chartData.labels, chartData.values, selectedRange, "orders");
+//         })
+//         .catch((error) => {
+//             console.error("獲取訂單總量數據時出錯:", error);
+//             alert("無法載入訂單總量數據，請稍後再試。");
+//         });
+// }
 
 // 點擊總覽上方"營業額"時切換圖表內容的函數
 function fetchRevenueChartData() {
-  if (!localStorage.getItem('adminLoggedIn')) {
-    window.location.href = 'backlogin.html';
-    return;
-  }
+    if (!localStorage.getItem('adminLoggedIn')) {
+        window.location.href = 'backlogin.html';
+        return;
+    }
     console.log("開始獲取營業額數據");
     const timeRange = document.getElementById("timeRange");
     if (!timeRange) {
@@ -364,32 +364,33 @@ function fetchRevenueChartData() {
     // 確保日期時間格式符合 ISO 8601 標準
     const formatDate = (date) => date.toISOString().split(".")[0] + "Z";
 
-    const url = `/api/orders/chart-data?startDate=${formatDate(
-        startDate
-    )}&endDate=${formatDate(endDate)}&range=${selectedRange}`;
+    const url = `/api/orders/chart-data?startDate=${formatDate(startDate)}&endDate=${formatDate(endDate)}&range=${selectedRange}`;
     console.log("請求 URL:", url);
 
+    console.time('fetchRevenueData');
     fetch(url)
         .then((response) => {
+            console.timeLog('fetchRevenueData', 'Received response');
+            console.log("響應狀態:", response.status, response.statusText);
             if (!response.ok) {
-                throw new Error(`HTTP 錯誤! 狀態: ${response.status}`);
+                return response.text().then(text => {
+                    throw new Error(`HTTP 錯誤! 狀態: ${response.status}, 響應內容: ${text}`);
+                });
             }
             return response.json();
         })
         .then((chartData) => {
-            console.log("接收到的圖表數據:", chartData);
-            if (
-                !chartData ||
-                !Array.isArray(chartData.labels) ||
-                !Array.isArray(chartData.values)
-            ) {
-                throw new Error("接收到的數據格式不正確");
+            console.timeEnd('fetchRevenueData');
+            console.log("接收到的圖表數據:", JSON.stringify(chartData, null, 2));
+            if (!chartData || !Array.isArray(chartData.labels) || !Array.isArray(chartData.values)) {
+                throw new Error("接收到的數據格式不正確: " + JSON.stringify(chartData));
             }
             updateChart(chartData.labels, chartData.values, selectedRange, "營業額");
         })
         .catch((error) => {
-            console.error("獲取營業額數據時出錯:", error);
-            alert("無法載入營業額數據，請稍後再試。");
+            console.timeEnd('fetchRevenueData');
+            console.error("獲取營業額數據時出錯");
+            // alert("無法載入營業額數據，請稍後再試。錯誤詳情: " + error.message);
         });
 }
 
