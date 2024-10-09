@@ -110,9 +110,9 @@ function handleProductActions(event) {
                             const productElement = target.closest(".product");
                             const productId = productElement.dataset.productId;
                             const productName = productElement.dataset.productName;
-                            const favoriteBtn = target.closest(".fa-heart");
+                            const favoriteBtn = productElement.querySelector(".fa-heart");
 
-                            if (favoriteBtn.classList.contains("active")) {
+                            if (favoriteBtn && favoriteBtn.classList.contains("active")) {
                                 fetch(`/api/favorites/remove?userId=${userId}&productId=${productId}`, {
                                     method: "DELETE",
                                 }).then(() => {
