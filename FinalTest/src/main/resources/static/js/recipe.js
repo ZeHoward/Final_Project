@@ -71,6 +71,7 @@ function fetchRecipes(category = '') {
 }
 
 function fetchFavorites() {
+  favoriteProductIds = [];
   getUserId().then(userId => {
     if (!userId) return;
 
@@ -99,73 +100,60 @@ function displayRecipes(recipesToShow) {
   container.innerHTML = "";
 
   const fetchImagePromises = recipesToShow.map(recipe =>
-    fetch(`/productImages/product/${recipe.productId}`)
-      .then(response => response.json())
-      .then(imageUrls => ({
-        recipe,
-        // 確保 imageUrls 是一個陣列並且有內容，否則使用預設圖片
-        imageUrl: (imageUrls && imageUrls.length > 0) ? imageUrls[0] : '../material/icon/default.png'
-      }))
-      .catch(() => ({
-        recipe,
-        imageUrl: '../material/icon/default.png'
-      }))
+      fetch(`/productImages/product/${recipe.productId}`)
+          .then(response => response.json())
+          .then(imageUrls => ({
+            recipe,
+            imageUrl: (imageUrls && imageUrls.length > 0) ? imageUrls[0] : '../material/icon/default.png'
+          }))
+          .catch(() => ({
+            recipe,
+            imageUrl: '../material/icon/default.png'
+          }))
   );
 
   Promise.all(fetchImagePromises)
-    .then(recipeDataWithImages => {
-      recipeDataWithImages.forEach(({ recipe, imageUrl }) => {
-        // 建立食譜卡片的 DOM 元素
-        const recipeDiv = document.createElement("div");
-        recipeDiv.className = "recipe-card";
-        recipeDiv.dataset.recipeId = recipe.recipeId;
-        recipeDiv.dataset.recipeName = recipe.title;
-  Promise.all(fetchImagePromises).then(recipeDataWithImages => {
-    recipeDataWithImages.forEach(({recipe, imageUrl}) => {
-      const recipeDiv = document.createElement("div");
-      recipeDiv.className = "recipe-card";
-      recipeDiv.dataset.recipeId = recipe.recipeId;
-      recipeDiv.dataset.productId = recipe.productId;
-      recipeDiv.dataset.recipeName = recipe.title;
+      .then(recipeDataWithImages => {
+        recipeDataWithImages.forEach(({ recipe, imageUrl }) => {
+          const recipeDiv = document.createElement("div");
+          recipeDiv.className = "recipe-card";
+          recipeDiv.dataset.recipeId = recipe.recipeId;
+          recipeDiv.dataset.productId = recipe.productId;
+          recipeDiv.dataset.recipeName = recipe.title;
 
-        // 建立卡片內的 HTML 結構
-        const recipeHtml = `
-      // 檢查該食譜的 productId 是否在收藏清單中
-      const isFavorite = favoriteProductIds.includes(recipe.productId);
-      const heartClass = isFavorite ? "fa-heart active" : "fa-heart";
+          const isFavorite = favoriteProductIds.includes(recipe.productId);
+          const heartClass = isFavorite ? "fa-heart active" : "fa-heart";
 
-      const recipeHtml = `
-        <img class="recipe-image" src="${imageUrl}" alt="${recipe.title}">
-        <h3 class="recipe-name">${recipe.title}</h3>
-        <p class="recipe-level">難易度: ${recipe.level}</p>
-        <p class="recipe-time">烹飪時間: ${recipe.cookTime} 分鐘</p>
-        <div class="recipe-actions">
-          <button class="add-to-favorite">
-            <i class="fa-solid fa-heart"></i>
-          </button>
-          <button class="view-recipe" data-recipe-id="${recipe.recipeId}">
-            閱讀食譜
-          </button>
-          <button class="add-to-favorite"><i class="fa-solid fa-bookmark"></i>&nbsp;&nbsp;加入收藏</button>
-          <button class="view-recipe" data-recipe-id="${recipe.recipeId}"><i class="fa-solid fa-eye"></i>&nbsp;&nbsp;閱讀食譜</button>
-        </div>
-      `;
-      recipeDiv.innerHTML = recipeHtml;
-      container.appendChild(recipeDiv);
-    });
+          const recipeHtml = `
+          <img class="recipe-image" src="${imageUrl}" alt="${recipe.title}">
+          <h3 class="recipe-name">${recipe.title}</h3>
+          <p class="recipe-level">難易度: ${recipe.level}</p>
+          <p class="recipe-time">烹飪時間: ${recipe.cookTime} 分鐘</p>
+          <div class="recipe-actions">
+            <button class="add-to-favorite">
+              <i class="fa-solid ${heartClass}"></i>&nbsp;&nbsp;加入收藏
+            </button>
+            <button class="view-recipe" data-recipe-id="${recipe.recipeId}">
+              <i class="fa-solid fa-eye"></i>&nbsp;&nbsp;閱讀食譜
+            </button>
+          </div>
+        `;
+          recipeDiv.innerHTML = recipeHtml;
+          container.appendChild(recipeDiv);
+        });
 
-      // 填補空白卡片
-      const itemsPerRow = 3;
-      let itemsToAdd = itemsPerRow - (recipesToShow.length % itemsPerRow);
-      if (itemsToAdd && itemsToAdd !== itemsPerRow) {
-        for (let i = 0; i < itemsToAdd; i++) {
-          const emptyDiv = document.createElement("div");
-          emptyDiv.className = "recipe-card empty";
-          emptyDiv.style.visibility = "hidden";
-          container.appendChild(emptyDiv);
+        // 填補空白卡片
+        const itemsPerRow = 3;
+        let itemsToAdd = itemsPerRow - (recipesToShow.length % itemsPerRow);
+        if (itemsToAdd && itemsToAdd !== itemsPerRow) {
+          for (let i = 0; i < itemsToAdd; i++) {
+            const emptyDiv = document.createElement("div");
+            emptyDiv.className = "recipe-card empty";
+            emptyDiv.style.visibility = "hidden";
+            container.appendChild(emptyDiv);
+          }
         }
-      }
-    });
+      });
 }
 
 function handleRecipeActions(event) {
@@ -256,13 +244,23 @@ function sortRecipes() {
   const sortBy = document.getElementById("sort").value;
   let sortedRecipes = [...recipes]; // 複製 recipes
 
+  const levelOrder = {
+    '簡易': 3,
+    '中等': 2,
+    '困難': 1
+  };
+
   // 根據用戶選擇的排序方式進行排序
   switch (sortBy) {
     case "levelAsc":
-      sortedRecipes.sort((a, b) => a.level.localeCompare(b.level));  // 由易至難
+      sortedRecipes.sort((a, b) => {
+        return (levelOrder[a.level] || 0) - (levelOrder[b.level] || 0);
+      });
       break;
     case "levelDesc":
-      sortedRecipes.sort((a, b) => b.level.localeCompare(a.level));  // 由難至易
+      sortedRecipes.sort((a, b) => {
+        return (levelOrder[b.level] || 0) - (levelOrder[a.level] || 0);
+      });
       break;
   }
 
