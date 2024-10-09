@@ -4,7 +4,7 @@ const type1 = "mealkit";
 const type2 = "preparedFood";
 let slideIndex = 1;
 //*wen
-const apiWEN = "http://localhost:8080/api"
+const apiWEN = "/api"
 let userIdWEN = 2
 let merchantNoList = []
 //wen*//
@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", function () {
         viewAllBtn.addEventListener("click", function (event) {
             event.preventDefault();
             const type = this.getAttribute("data-type");
-            window.location.href = `http://localhost:8080/productList`;
+            window.location.href = `/productList`;
         })
     })
 
