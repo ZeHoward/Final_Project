@@ -329,3 +329,18 @@ h1 {
     transform: scale(1);
   }
 }
+
+@media (min-width: 1600px) and (max-width: 3840px) {
+  .product{
+    width: 420px;
+  }
+
+  .product-image{
+    height: 40vh;
+  }
+
+  #productName{
+    font-size: 25px;
+  }
+
+}
