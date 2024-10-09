@@ -1,3 +1,17 @@
+/* * {
+  font-family: "Noto Sans TC", system-ui;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  width: 100vw;
+  max-width: 100%;
+  overflow-x: hidden;
+} */
+
 /* 中間區塊(食譜分類側邊欄位和食譜卡) */
 .mid {
     display: flex;
@@ -7,10 +21,10 @@
 /* 食譜分類菜單 */
 .list,
 .list-title {
-    flex: 1;
-    border-right: 1px solid #ccc;
-    padding: 20px;
-    font-weight: 600;
+  flex: 1;
+  border-right: 1px solid #ccc;
+  padding: 20px;
+  font-weight: 600;
 }
 
 .list a,

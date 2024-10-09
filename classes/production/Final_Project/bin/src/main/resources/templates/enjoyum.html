@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>即食享熱</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap");
+    </style>
+    <link rel="stylesheet" th:href="@{css/enjoyum.css}" />
+  </head>
+  
+  <body>
+   	<div th:replace="header"></div>
+   	
+   	<div id="myContainer">
+	    <!-- slideshow start -->
+		<div class="mySlides fade">
+			<div class="numbertext">1 / 4</div>
+			<img th:src="@{/material/slide1.png}" style="width:100%">
+		</div>
+
+		<div class="mySlides fade">
+			<div class="numbertext">2 / 4</div>
+			<img th:src="@{/material/slide2.png}" style="width:100%">
+		</div>
+
+		<div class="mySlides fade">
+			<div class="numbertext">3 / 4</div>
+			<img th:src="@{/material/slide3.png}" style="width:100%">
+		</div>
+
+		<div class="mySlides fade">
+			<div class="numbertext">4 / 4</div>
+			<img th:src="@{/material/slide4.png}" style="width:100%">
+		</div>
+
+		<a class="prev" onclick="plusSlides(-1)">❮</a>
+		<a class="next" onclick="plusSlides(1)">❯</a>
+	</div>
+
+	<div style="text-align:center">
+		<span class="dot" onclick="currentSlide(1)"></span>
+		<span class="dot" onclick="currentSlide(2)"></span>
+		<span class="dot" onclick="currentSlide(3)"></span>
+		<span class="dot" onclick="currentSlide(4)"></span>
+
+	</div>
+	    <!-- slideshow end -->
+	
+	    <!-- 商品精選 -->
+	    <div class="container">
+	      <div class="bt">
+	        <p>- 主廚精選，即刻嘗鮮 | 調理包專區 -</p>
+	      </div>
+	      <div class="carousel">
+	        <button class="nav-button" id="prevBtn">❮</button>
+	        <div class="product-container" id="productContainer1"></div>
+	        <button class="nav-button" id="nextBtn">❯</button>
+	      </div>
+	      <button class="view-all" data-type="preparedFood">點擊查看更多</button>
+	    </div>
+	    <!-- 商品精選 -->
+	
+	    <!-- 產品特色 -->
+	    <div class="feature-section2">
+	      <div class="container">
+	        <div class="title-row">
+	          <h1>
+	            即食享熱&nbsp;
+	            <span style="font-size: 3rem; color: #d35b50">六大特色</span>
+	          </h1>
+	        </div>
+	        <div class="product-row">
+	          <div class="product-column fadeIn">
+	            <div class="row">
+	              <div class="content">
+	                <div class="icon-container">
+	                  <i class="fa-regular fa-circle-check"></i>
+	                </div>
+	                <div class="text">
+	                  <h2>新鮮直送，嚴選食材</h2>
+	                  <!-- <hr class="line" /> -->
+	                  <p>
+	                    確保每日挑選最新鮮的食材，直接從產地送到您家門口，讓您隨時享受最優質的美味。
+	                  </p>
+	                </div>
+	              </div>
+	              <div class="content">
+	                <div class="icon-container">
+	                  <i class="fa-regular fa-circle-check"></i>
+	                </div>
+	                <div class="text">
+	                  <h2>豐富選擇，滿足需求</h2>
+	                  <p>
+	                    提供多種口味選擇，無論是單人份、多人套餐還是特殊飲食需求，都有合適的產品。
+	                  </p>
+	                </div>
+	              </div>
+	              <div class="content">
+	                <div class="icon-container">
+	                  <i class="fa-regular fa-circle-check"></i>
+	                </div>
+	                <div class="text">
+	                  <h2>簡單料理，輕鬆上桌</h2>
+	                  <p>
+	                    每個調理包與生鮮食材包都設計成簡單易用的方式，讓您只需幾個步驟就能快速享用美味餐點。
+	                  </p>
+	                </div>
+	              </div>
+	            </div>
+	          </div>
+	          <div class="product-column fadeIn">
+	            <div class="img-container">
+	              <img
+	                class="img-fluid animated pulse infinite"
+	                th:src="@{/material/orangehead.png}"
+	              />
+	            </div>
+	          </div>
+	          <div class="product-column fadeIn">
+	            <div class="row">
+	              <div class="content">
+	                <div class="icon-container">
+	                  <i class="fa-regular fa-circle-check"></i>
+	                </div>
+	                <div class="text">
+	                  <h2>嚴格控管，品質保證</h2>
+	                  <p>
+	                    每項產品都經過嚴格的品質檢測，確保顧客品嚐的每道料理都保持最高品質標準。
+	                  </p>
+	                </div>
+	              </div>
+	              <div class="content">
+	                <div class="icon-container">
+	                  <i class="fa-regular fa-circle-check"></i>
+	                </div>
+	                <div class="text">
+	                  <h2>綠色包裝，資源永續</h2>
+	                  <p>
+	                    採用環保材質包裝，既能保存食物的新鮮，又符合現代社會對永續環保的要求。
+	                  </p>
+	                </div>
+	              </div>
+	              <div class="content">
+	                <div class="icon-container">
+	                  <i class="fa-regular fa-circle-check"></i>
+	                </div>
+	                <div class="text">
+	                  <h2>即時配送，安全保鮮</h2>
+	                  <p>
+	                    與專業物流公司合作，採用低溫配送技術，確保食材在運輸過程中保持新鮮與安全。
+	                  </p>
+	                </div>
+	              </div>
+	            </div>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	
+	    <!-- Feature End -->
+	
+	    <!-- 商品精選 -->
+	    <div class="container">
+	      <div class="bt">
+	        <p>- 甄選生鮮，營養滿分 | 生鮮食材包專區 -</p>
+	      </div>
+	      <div class="carousel">
+	        <button class="nav-button" id="prevBtn2">❮</button>
+	        <div class="product-container" id="productContainer2"></div>
+	        <button class="nav-button" id="nextBtn2">❯</button>
+	      </div>
+	      <button class="view-all" data-type="mealkit">點擊查看更多</button>
+	    </div>
+	    <!-- 商品精選 -->
+	</div>
+   	
+	<div th:replace="footer"></div>
+	
+	<script th:src="@{js/enjoyum.js}" defer="defer"></script>	
+  </body>
+</html>

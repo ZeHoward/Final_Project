@@ -6,7 +6,7 @@ createApp({
     const finalAmount2 = params.get("finalAmount2");
     const couponCode = params.get("couponCode");
     const percentageDiscount = params.get("percentageDiscount");
-    const api = ref("http://localhost:8080/api");
+    const api = ref("/api");
     const img = ref(
       "https://plus.unsplash.com/premium_photo-1661322640130-f6a1e2c36653?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8YXBwbGV8ZW58MHx8MHx8fDA%3D"
     );
@@ -122,12 +122,13 @@ createApp({
         
       if(res.status === 200){
         getPayment()
-
-      //跳轉頁面並且帶著付款金額及marchantNo
-    
-
-
-      }
+        //訂單建立後清空購物車
+        axios.delete(`${api.value}/cart/${userId.value}`).then
+        ((res) => console.log(res)).catch((err) => console.log(err))    
+        
+        
+        //跳轉頁面並且帶著付款金額及marchantNo
+          }
     } catch (error){
       console.log('訂單建立失敗:',error);
       alert('訂單建立失敗請稍後再試');

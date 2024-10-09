@@ -15,7 +15,7 @@ public class PageController {
 	
 	@GetMapping("/")
     public String index() {
-        return "index";  // 返回的是模板文件的名稱，不包括路徑和副檔名
+        return "enjoyum";  // 返回的是模板文件的名稱，不包括路徑和副檔名
     }
 	
 	@GetMapping("/about")

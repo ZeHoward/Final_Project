@@ -858,7 +858,7 @@ function generateProductUploadForm() {
     let selectedFile = null;
 
     function uploadProduct(productData) {
-        fetch(`http://localhost:8080/products`, {
+        fetch(`/products`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -891,7 +891,7 @@ function generateProductUploadForm() {
         formData.append('file', file);
         formData.append('productId', productId);
 
-        fetch('http://localhost:8080/productImages/upload', {
+        fetch('/productImages/upload', {
             method: 'POST',
             body: formData
         })
@@ -1193,7 +1193,7 @@ function generateProductManagementWithActionsContent() {
                     cancelButtonText: "取消",
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        fetch(`http://localhost:8080/products/${productId}`, {
+                        fetch(`/products/${productId}`, {
                             method: "DELETE",
                             headers: {
                                 "Content-Type": "application/json",
@@ -1289,7 +1289,7 @@ function generateProductManagementWithActionsContent() {
     });
 
     function fetchProductDetails(productId) {
-        fetch(`http://localhost:8080/products/${productId}`)
+        fetch(`/products/${productId}`)
             .then((response) => {
                 if (!response.ok) {
                     throw new Error("無法獲取商品詳情");
@@ -1481,7 +1481,7 @@ function generateProductManagementWithActionsContent() {
     }
 
     function updateProduct(productData) {
-        fetch(`http://localhost:8080/products`, {
+        fetch(`/products`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -1554,7 +1554,7 @@ function generateProductManagementWithActionsContent() {
             imagePreviewContainer.appendChild(imageWrapper);
         }
 
-        fetch('http://localhost:8080/productImages/upload', {
+        fetch('/productImages/upload', {
             method: 'POST',
             body: formData
         })
@@ -2286,7 +2286,7 @@ function generateCouponManagementForm() {
     let coupons = [];
 
     // 一進入頁面，獲取現有的優惠券並顯示
-    fetch("http://localhost:8080/api/coupons/all")  // 假設後端的 GET API 是這個路徑
+    fetch("/api/coupons/all")  // 假設後端的 GET API 是這個路徑
         .then((response) => response.json())
         .then((data) => {
             coupons = data; // 假設後端返回的是現有的優惠券列表
@@ -2316,7 +2316,7 @@ function generateCouponManagementForm() {
         };
 
         // 發送 POST 請求到後端
-        fetch("http://localhost:8080/api/coupons/create", {
+        fetch("/api/coupons/create", {
             method: "POST",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded",
@@ -2384,7 +2384,7 @@ function generateCouponManagementForm() {
 
                 if (isConfirmed) {
                     // 發送請求到後端切換優惠券狀態
-                    fetch(`http://localhost:8080/api/coupons/toggle/${coupon.couponId}`, {
+                    fetch(`/api/coupons/toggle/${coupon.couponId}`, {
                         method: "POST",
                     })
                         .then((response) => response.json())
@@ -2412,7 +2412,7 @@ function generateCouponManagementForm() {
 
             if (isConfirmed) {
                 // 發送請求切換優惠券狀態
-                fetch(`http://localhost:8080/api/coupons/toggle/${coupon.couponId}`, {
+                fetch(`/api/coupons/toggle/${coupon.couponId}`, {
                     method: "POST",
                 })
                     .then((response) => {

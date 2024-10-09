@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const container = document.querySelector(".couponPage");
 
     // 首先通過API獲取userId
-    fetch('http://localhost:8080/api/favorites/recipes/getUserId')
+    fetch('/api/favorites/recipes/getUserId')
         .then(response => response.json())
         .then(userId => {
             // 當成功獲取userId後，使用該userId來獲取優惠券
