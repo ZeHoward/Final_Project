@@ -1,11 +1,9 @@
 let currentPage = 1; //目前的頁碼
 const productsPerPage = 9; // 每頁顯示的商品數量，超過九個換頁
 let totalPages = 1; //總頁數
-console.log('productList.js檔案')
 
-document.addEventListener('DOMContentLoaded', function () {
-//window.onload = function () {
-	console.log('window.onload裡面')
+document.addEventListener("DOMContentLoaded", function () {
+
     fetchRandomProducts(); //隨機抓取商品
 
     document.querySelectorAll(".links").forEach((link) => {
@@ -55,7 +53,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 //隨機顯示商品
 function fetchRandomProducts() {
-	console.log('fetchrandom方法')
     fetch("/products")
         .then((response) => {
             if (!response.ok) {
@@ -272,7 +269,7 @@ function displayProducts(productsToShow) {
             <p class="product-name" id="productName">${product.name}</p>
             <p class="product-price">$NT${product.price}</p>
             <div class="home-product-btn">
-                <button class="add-to-favorite"><i class="fa-solid fa-heart"></i></button>
+                <button class="add-to-favorite"><i class="fa-solid fa-heart"></i>&nbsp;&nbsp;收藏商品</button>
                 <button class="add-to-cart"><i class="fa-solid fa-cart-shopping"></i>&nbsp;&nbsp;&nbsp;加入購物車</button>
             </div>
         `;

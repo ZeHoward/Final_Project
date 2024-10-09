@@ -2,6 +2,7 @@ let currentPage = 1;
 const recipesPerPage = 9;
 let totalPages = 1;
 let recipes = [];
+let favoriteProductIds = []; // 存儲用戶收藏的 productId 列表
 
 document.addEventListener('DOMContentLoaded', function () {
   fetchRecipes();
@@ -44,17 +45,45 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 
-function fetchRecipes() {
+function fetchRecipes(category = '') {
   fetch(`/api/recipes/list`)
-    .then(response => response.json())
-    .then(data => {
-      recipes = data.recipes;
-      totalPages = Math.ceil(recipes.length / recipesPerPage);
-      currentPage = 1;
-      renderCurrentPage();
-      updateTitle();
-    })
-    .catch(error => console.error('Error fetching recipes:', error));
+      .then(response => response.json())
+      .then(data => {
+        console.log(data); // 檢查 API 回傳的資料
+        recipes = data.recipes;
+
+        // 檢查每個 recipe 是否具有 productId
+        recipes.forEach(recipe => {
+          if (!recipe.productId) {
+            console.warn("缺少 productId 的食譜:", recipe);
+          }
+        });
+
+        totalPages = Math.ceil(recipes.length / recipesPerPage);
+        currentPage = 1;
+        renderCurrentPage();
+        updateTitle(category);
+
+        // 在獲取食譜後調用 fetchFavorites 來標記已收藏的食譜
+        fetchFavorites();
+      })
+      .catch(error => console.error('Error fetching recipes:', error));
+}
+
+function fetchFavorites() {
+  getUserId().then(userId => {
+    if (!userId) return;
+
+    fetch(`/api/favorites/recipes/user?userId=${userId}`)
+        .then(response => response.json())
+        .then(favorites => {
+          favoriteProductIds = favorites.map(item => item.productId);
+
+          // 重新渲染當前頁面以顯示愛心樣式
+          renderCurrentPage();
+        })
+        .catch(error => console.error('Error fetching favorites:', error));
+  });
 }
 
 function renderCurrentPage() {
@@ -91,9 +120,21 @@ function displayRecipes(recipesToShow) {
         recipeDiv.className = "recipe-card";
         recipeDiv.dataset.recipeId = recipe.recipeId;
         recipeDiv.dataset.recipeName = recipe.title;
+  Promise.all(fetchImagePromises).then(recipeDataWithImages => {
+    recipeDataWithImages.forEach(({recipe, imageUrl}) => {
+      const recipeDiv = document.createElement("div");
+      recipeDiv.className = "recipe-card";
+      recipeDiv.dataset.recipeId = recipe.recipeId;
+      recipeDiv.dataset.productId = recipe.productId;
+      recipeDiv.dataset.recipeName = recipe.title;
 
         // 建立卡片內的 HTML 結構
         const recipeHtml = `
+      // 檢查該食譜的 productId 是否在收藏清單中
+      const isFavorite = favoriteProductIds.includes(recipe.productId);
+      const heartClass = isFavorite ? "fa-heart active" : "fa-heart";
+
+      const recipeHtml = `
         <img class="recipe-image" src="${imageUrl}" alt="${recipe.title}">
         <h3 class="recipe-name">${recipe.title}</h3>
         <p class="recipe-level">難易度: ${recipe.level}</p>
@@ -105,14 +146,13 @@ function displayRecipes(recipesToShow) {
           <button class="view-recipe" data-recipe-id="${recipe.recipeId}">
             閱讀食譜
           </button>
+          <button class="add-to-favorite"><i class="fa-solid fa-bookmark"></i>&nbsp;&nbsp;加入收藏</button>
+          <button class="view-recipe" data-recipe-id="${recipe.recipeId}"><i class="fa-solid fa-eye"></i>&nbsp;&nbsp;閱讀食譜</button>
         </div>
       `;
-        recipeDiv.innerHTML = recipeHtml;
-        container.appendChild(recipeDiv);
-      })
-        .catch(error => {
-          console.error("載入食譜資料時出錯:", error);
-        });
+      recipeDiv.innerHTML = recipeHtml;
+      container.appendChild(recipeDiv);
+    });
 
       // 填補空白卡片
       const itemsPerRow = 3;
@@ -136,8 +176,9 @@ function handleRecipeActions(event) {
     event.stopPropagation();
     const recipeElement = target.closest(".recipe-card");
     const recipeId = recipeElement.dataset.recipeId;
+    const productId = recipeElement.dataset.productId;
     const recipeName = recipeElement.dataset.recipeName;
-    toggleFavorite(recipeId, recipeName, target.closest(".fa-heart"));
+    toggleFavorite(recipeId, productId, recipeName, target.closest(".fa-heart"));
   } else if (target.closest(".view-recipe")) {
     event.preventDefault();
     event.stopPropagation();
@@ -146,47 +187,68 @@ function handleRecipeActions(event) {
   }
 }
 
-function toggleFavorite(recipeId, recipeName, favoriteBtn) {
+
+function toggleFavorite(recipeId, productId, recipeName, favoriteBtn) {
+  console.log(`Toggle favorite for Product ID: ${productId} - ${recipeName}`);
   checkLoginStatus()
-    .then((isLoggedIn) => {
-      if (isLoggedIn) {
-        getUserId().then(userId => {
-          if (userId) {
-            if (favoriteBtn.classList.contains("active")) {
-              removeFavorite(userId, recipeId, recipeName, favoriteBtn);
+      .then((isLoggedIn) => {
+        if (isLoggedIn) {
+          getUserId().then(userId => {
+            if (userId) {
+              console.log(`User ID retrieved: ${userId}`);
+              if (favoriteBtn.classList.contains("active")) {
+                removeFavorite(userId, productId, recipeName, favoriteBtn);
+              } else {
+                addFavorite(userId, recipeId, recipeName, favoriteBtn);
+              }
             } else {
-              addFavorite(userId, recipeId, recipeName, favoriteBtn);
+              console.error("User ID is null or undefined");
             }
-          }
-        });
-      } else {
-        showLoginPrompt();
-      }
-    });
+          }).catch(error => console.error("Error retrieving User ID:", error));
+        } else {
+          showLoginPrompt();
+        }
+      }).catch(error => console.error("Error checking login status:", error));
 }
 
 function addFavorite(userId, recipeId, recipeName, favoriteBtn) {
-  fetch(`/api/favorites/add?userId=${userId}&recipeId=${recipeId}`, { method: "POST" })
-    .then(response => response.json())
-    .then(() => {
-      favoriteBtn.classList.add("active");
-      showSuccessMessage(`已將${recipeName}加入收藏`);
-    })
-    .catch(error => console.error("加入收藏時發生錯誤:", error));
+  console.log(`Adding to favorites - User ID: ${userId}, Recipe ID: ${recipeId}`);
+  fetch(`/api/favorites/recipes/add?userId=${userId}&recipeId=${recipeId}`, {
+    method: "POST"
+  })
+      .then(response => {
+        if (!response.ok) {
+          console.error(`Add Favorite failed with status: ${response.status}`);
+          throw new Error('加入收藏失敗');
+        }
+        return response.json();
+      })
+      .then(() => {
+        favoriteBtn.classList.add("active");
+        showSuccessMessage(`已將${recipeName}加入收藏`);
+      })
+      .catch(error => console.error("加入收藏時發生錯誤:", error));
 }
 
-function removeFavorite(userId, recipeId, recipeName, favoriteBtn) {
-  fetch(`/api/favorites/remove?userId=${userId}&recipeId=${recipeId}`, { method: "DELETE" })
-    .then(() => {
-      favoriteBtn.classList.remove("active");
-      showSuccessMessage(`已將${recipeName}移除收藏`);
-    })
-    .catch(error => console.error("移除商品收藏遇到錯誤", error));
+function removeFavorite(userId, productId, recipeName, favoriteBtn) {
+  console.log(`Removing from favorites - User ID: ${userId}, Product ID: ${productId}`);
+  fetch(`/api/favorites/recipes/remove?userId=${userId}&productId=${productId}`, {
+    method: "DELETE"
+  })
+      .then(response => {
+        if (!response.ok) {
+          console.error(`Remove Favorite failed with status: ${response.status}`);
+          throw new Error('移除收藏失敗');
+        }
+      })
+      .then(() => {
+        favoriteBtn.classList.remove("active");
+        showSuccessMessage(`已將${recipeName}移除收藏`);
+      })
+      .catch(error => console.error("移除商品收藏遇到錯誤", error));
 }
 
 function filterRecipes(category) {
-  // 這裡需要實現根據類別過濾食譜的邏輯
-  // 目前API似乎沒有提供按類別過濾的功能，所以這裡只是重新獲取所有食譜
   fetchRecipes();
 }
 
@@ -212,7 +274,7 @@ function sortRecipes() {
 
 function searchRecipes(keyword) {
   const filteredRecipes = recipes.filter(recipe =>
-    recipe.title.toLowerCase().includes(keyword.toLowerCase())
+      recipe.title.toLowerCase().includes(keyword.toLowerCase())
   );
   recipes = filteredRecipes;
   totalPages = Math.ceil(recipes.length / recipesPerPage);
@@ -249,21 +311,21 @@ function updateTitle(category = '') {
 
 function getUserId() {
   return fetch('/users/userAllInfo')
-    .then(response => response.json())
-    .then(data => data.userId)
-    .catch(error => {
-      console.error("獲取用戶 ID 時發生錯誤", error);
-      return null;
-    });
+      .then(response => response.json())
+      .then(data => data.userId)
+      .catch(error => {
+        console.error("獲取用戶 ID 時發生錯誤", error);
+        return null;
+      });
 }
 
 function checkLoginStatus() {
   return fetch('users/checkSession')
-    .then(response => response.json())
-    .catch(error => {
-      console.error("檢查登入狀態時發生錯誤", error);
-      return false;
-    });
+      .then(response => response.json())
+      .catch(error => {
+        console.error("檢查登入狀態時發生錯誤", error);
+        return false;
+      });
 }
 
 function showLoginPrompt() {

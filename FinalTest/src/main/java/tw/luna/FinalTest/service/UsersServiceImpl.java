@@ -77,6 +77,7 @@ public class UsersServiceImpl {
 			
 			Userinfo userinfo = new Userinfo();
 			userinfo.setUsers(newUsers);
+			userinfo.setBirthday(registUser.getBirthday());
 			Userinfo save2 = usersInfoReposity.save(userinfo);
 			
 			if(savedUser != null && save2 != null) {

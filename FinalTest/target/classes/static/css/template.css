@@ -116,7 +116,7 @@ body {
 /* header */
 .tem-header {
   text-align: center;
-  position: sticky;
+  position:sticky;
 }
 
 .tem-header-content {

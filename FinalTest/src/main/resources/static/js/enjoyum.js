@@ -16,71 +16,72 @@ let merchantNoList = []
 // }
 //*wen
 const getUserIdWEN = async () => {
-  const res = await axios.get(`/users/userAllInfo`);
-  userIdWEN = res.data.userId;
-  checkUserPaymentWEN()
+    const res = await axios.get(`/users/userAllInfo`);
+    userIdWEN = res.data.userId;
+    checkUserPaymentWEN()
 };
 
 const checkUserPaymentWEN = async () => {
-  const res = await axios.get(`${apiWEN}/orders/pay/${userIdWEN}`);
-  merchantNoList = res.data
-  merchantNoList.forEach((merchantNo) => {
-    checkIsPaidWEN(merchantNo.merchantNo)
-  })
-  //用id找payment
-  //寫controller
+    const res = await axios.get(`${apiWEN}/orders/pay/${userIdWEN}`);
+    merchantNoList = res.data
+    merchantNoList.forEach((merchantNo) => {
+        checkIsPaidWEN(merchantNo.merchantNo)
+    })
+    //用id找payment
+    //寫controller
 }
 
 const checkIsPaidWEN = async (merchantNo) => {
 
-const res = await axios.post(`${apiWEN}/ECPAY/queryOrder`, {
-  merchantID: "2000132",
-  merchantTradeNo: merchantNo,
-  timeStamp: "",
-  checkMacValue: "",
-  platformID: ""
-});
-const PaidMerchantNo = extractMerchantTradeNo(res.data);
+    const res = await axios.post(`${apiWEN}/ECPAY/queryOrder`, {
+        merchantID: "2000132",
+        merchantTradeNo: merchantNo,
+        timeStamp: "",
+        checkMacValue: "",
+        platformID: ""
+    });
+    const PaidMerchantNo = extractMerchantTradeNo(res.data);
 //res拆出
-  PutOrdersStatus(PaidMerchantNo)
+    PutOrdersStatus(PaidMerchantNo)
 }
 
 const PutOrdersStatus = async (PaidMerchantNo) => {
-  const res = await axios.put(`${apiWEN}/ECPAY/changeOrderStatus`, {
-    merchantNo: PaidMerchantNo
-  });
-  console.log("修改付款狀態成功");
+    const res = await axios.put(`${apiWEN}/ECPAY/changeOrderStatus`, {
+        merchantNo: PaidMerchantNo
+    });
+    console.log("修改付款狀態成功");
 };
 
 function extractMerchantTradeNo(inputString) {
-  // 將輸入字符串分割成鍵值對
-  const pairs = inputString.split('&');
-  let merchantTradeNo = '';
-  let tradeStatus = '';
+    // 將輸入字符串分割成鍵值對
+    const pairs = inputString.split('&');
+    let merchantTradeNo = '';
+    let tradeStatus = '';
 
-  // 遍歷所有鍵值對
-  for (let pair of pairs) {
-      const [key, value] = pair.split('=');
+    // 遍歷所有鍵值對
+    for (let pair of pairs) {
+        const [key, value] = pair.split('=');
 
-      // 找到 MerchantTradeNo
-      if (key === 'MerchantTradeNo') {
-          merchantTradeNo = value;
-      }
+        // 找到 MerchantTradeNo
+        if (key === 'MerchantTradeNo') {
+            merchantTradeNo = value;
+        }
 
-      // 找到 TradeStatus
-      if (key === 'TradeStatus') {
-          tradeStatus = value;
-      }
+        // 找到 TradeStatus
+        if (key === 'TradeStatus') {
+            tradeStatus = value;
+        }
 
-      // 如果兩個值都找到了，就可以停止遍歷
-      if (merchantTradeNo && tradeStatus) {
-          break;
-      }
-  }
+        // 如果兩個值都找到了，就可以停止遍歷
+        if (merchantTradeNo && tradeStatus) {
+            break;
+        }
+    }
 
-  // 如果 TradeStatus 為 1，返回 MerchantTradeNo，否則返回空字符串
-  return tradeStatus === '1' ? merchantTradeNo : '';
+    // 如果 TradeStatus 為 1，返回 MerchantTradeNo，否則返回空字符串
+    return tradeStatus === '1' ? merchantTradeNo : '';
 }
+
 // wen*//
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -160,7 +161,7 @@ function renderProducts(products, containerId, currentIndex) {
     const container = document.getElementById(containerId);
     container.innerHTML = ""; // 清空容器
 
-    for (let i = -1; i <= 2; i++) {
+    for (let i = -1; i <= 1; i++) {
         const index = (currentIndex + i + products.length) % products.length;
         const product = products[index];
 
@@ -178,13 +179,13 @@ function renderProducts(products, containerId, currentIndex) {
 
         // 設置商品卡的 HTML 內容
         const productHtml = `
-      <p class="product-name">${product.name}</p>
-      <p class="product-price">$NT${product.price}</p>
-      <div class="home-product-btn">
-        <button class="add-to-favorite"><i class="fa-solid fa-heart"></i></button>
-        <button class="add-to-cart"><i class="fa-solid fa-cart-shopping"></i>&nbsp;&nbsp;&nbsp;加入購物車</button>
-      </div>
-    `;
+            <p class="product-name" id="productName">${product.name}</p>
+            <p class="product-price">$NT${product.price}</p>
+            <div class="home-product-btn">
+                <button class="add-to-favorite"><i class="fa-solid fa-heart"></i>&nbsp;&nbsp;收藏商品</button>
+                <button class="add-to-cart"><i class="fa-solid fa-cart-shopping"></i>&nbsp;&nbsp;&nbsp;加入購物車</button>
+            </div>
+        `;
 
         productDiv.innerHTML = productHtml;
         productDiv.insertBefore(imgElement, productDiv.firstChild); // 插入圖片在第一位
@@ -315,8 +316,8 @@ function renderProducts(products, containerId, currentIndex) {
                                                 icon: "success",
                                                 timer: 1500,
                                             });
-                                        }).catch((error)=>{
-                                            console.error("移除商品收藏遇到錯誤",error);
+                                        }).catch((error) => {
+                                            console.error("移除商品收藏遇到錯誤", error);
                                         })
                                     } else {
                                         fetch(`/api/favorites/add?userId=${userId}&productId=${productId}`, {

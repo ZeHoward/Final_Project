@@ -1,6 +1,6 @@
-window.onload = function () {
+document.addEventListener("DOMContentLoaded", function () {
     // 獲取 URL 中的 productId
-    const urlParams = new URLSearchParams(window.location.search);
+    const urlParams = new URLSearchParams(window.location.search); //productId
     const productId = urlParams.get("productId");
     let currentIndex1 = 0; //相關商品索引
 
@@ -267,7 +267,7 @@ window.onload = function () {
         const container = document.getElementById(containerId);
         container.innerHTML = ""; // 清空容器
 
-        for (let i = -1; i <= 2; i++) {
+        for (let i = -1; i <= 1; i++) {
             const index = (currentIndex + i + products.length) % products.length;
             const product = products[index];
 
@@ -285,13 +285,13 @@ window.onload = function () {
 
             // 設置商品卡的 HTML 內容
             const productHtml = `
-        <p class="related-product-name">${product.name}</p>
-        <p class="related-product-price">$NT${product.price}</p>
-        <div class="home-product-btn">
-          <button class="add-to-favorite"><i class="fa-solid fa-heart"></i></button>
-          <button class="add-to-cart"><i class="fa-solid fa-cart-shopping"></i>&nbsp;&nbsp;&nbsp;加入購物車</button>
-        </div>
-      `;
+            <p class="related-product-name" id="productName">${product.name}</p>
+            <p class="related-product-price">$NT${product.price}</p>
+            <div class="home-product-btn">
+                <button class="add-to-favorite"><i class="fa-solid fa-heart"></i>&nbsp;&nbsp;收藏商品</button>
+                <button class="add-to-cart"><i class="fa-solid fa-cart-shopping"></i>&nbsp;&nbsp;&nbsp;加入購物車</button>
+            </div>
+        `;
 
             productDiv.innerHTML = productHtml;
             productDiv.insertBefore(imgElement, productDiv.firstChild); // 插入圖片在第一位
@@ -518,7 +518,7 @@ window.onload = function () {
             })
     }
 
-};
+});
 
 
 // 發送請求取得 userId
