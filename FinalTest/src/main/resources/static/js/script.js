@@ -15,34 +15,40 @@ function generateOverviewContent() {
     // 發送 API 請求並更新卡片和圖表數據
     function fetchData(timeRange) {
         const today = new Date();
+        today.setHours(23, 59, 59, 999); // 設置為今天的最後一秒
         let startDate, endDate;
 
         // 根據時間範圍設定起始日期
         switch (timeRange) {
             case "week":
-                startDate = new Date(today.setDate(today.getDate() - 7)).toISOString();
+                startDate = new Date(today);
+                startDate.setDate(today.getDate() - 6); // 從今天開始往前推 6 天（共 7 天）
                 break;
             case "month":
-                startDate = new Date(
-                    today.setMonth(today.getMonth() - 1)
-                ).toISOString();
+                startDate = new Date(today);
+                startDate.setMonth(today.getMonth() - 1);
                 break;
             case "year":
-                startDate = new Date(
-                    today.setFullYear(today.getFullYear() - 1)
-                ).toISOString();
+                startDate = new Date(today);
+                startDate.setFullYear(today.getFullYear() - 1);
                 break;
-        }
-        endDate = new Date().toISOString(); // 今天作為結束日期
+      }
+        startDate.setHours(0, 0, 0, 0); // 設置為起始日的第一秒
+        endDate = today; // 今天作為結束日期
+
+        const formatDate = (date) => date.toISOString().split('T')[0] + 'T' + date.toTimeString().split(' ')[0];
+
+        const formattedStartDate = formatDate(startDate);
+        const formattedEndDate = formatDate(endDate);
 
         // 同時發送 overview 和 chart-data 的 API 請求
         Promise.all([
-            fetch(`/api/orders/overview?startDate=${startDate}&endDate=${endDate}`), // 營業額和訂單總數
-            fetch(
-                `/api/orders/chart-data?startDate=${startDate}&endDate=${endDate}&range=${timeRange}`
-            ), // 圖表數據
-            fetch(`/users/count-active`), // 活躍人數
-        ])
+          fetch(`/api/orders/overview?startDate=${formattedStartDate}&endDate=${formattedEndDate}`), // 營業額和訂單總數
+          fetch(
+              `/api/orders/chart-data?startDate=${formattedStartDate}&endDate=${formattedEndDate}&range=${timeRange}`
+          ), // 圖表數據
+          fetch(`/users/count-active`), // 活躍人數
+      ])
             .then(
                 async ([overviewResponse, chartResponse, activeMembersResponse]) => {
                     // 解析兩個 API 的返回值
@@ -57,6 +63,9 @@ function generateOverviewContent() {
                         overviewData.ordersCount;
                     document.querySelector('[data-type="users"] p').textContent =
                         activeMembers;
+
+                    // 初始化圖表
+                    initChart();
 
                     // 更新圖表
                     updateChart(chartData.labels, chartData.values, timeRange); // 將 timeRange 傳入以便更新圖表標籤
@@ -177,9 +186,6 @@ function generateOverviewContent() {
         timeRange = this.value; // 更新時間範圍
         fetchData(timeRange); // 請求 overview 和 chart-data
     });
-
-    // 初始化圖表
-    initChart();
 }
 
 // 下載對應時間區間xlsx
@@ -396,75 +402,84 @@ function fetchRevenueChartData() {
 
 // 初始化圖表的函數
 function initChart() {
-  if (!localStorage.getItem('adminLoggedIn')) {
-    window.location.href = 'backlogin.html';
-    return;
+  const ctx = document.getElementById('orderChart').getContext('2d');
+  if (window.myChart instanceof Chart) {
+      window.myChart.destroy(); 
   }
-    const ctx = document.getElementById("orderChart").getContext("2d");
-
-    // 初始化圖表，但先不設置具體數據
-    let chart = new Chart(ctx, {
-        type: "line",
-        data: {
-            labels: [], // 初始化時為空
-            datasets: [
-                {
-                    label: "營業額", // 初始標籤
-                    data: [], // 初始化時無數據
-                    backgroundColor: "rgba(136, 191, 75, 0.2)", // 綠色背景
-                    borderColor: "rgba(136, 191, 75, 1)", // 綠色邊框
-                    borderWidth: 2,
-                    pointBackgroundColor: "white",
-                    pointBorderColor: "rgba(136, 191, 75, 1)",
-                    pointBorderWidth: 3,
-                },
-            ],
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-                x: {
-                    beginAtZero: true,
-                },
-                y: {
-                    beginAtZero: true,
-                },
-            },
-        },
-    });
-
-    fetchRevenueChartData();
+  window.myChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+          labels: [],
+          datasets: [{
+              label: '營業額',
+              data: [],
+              borderColor: 'rgb(75, 192, 192)',
+              tension: 0.1
+          }]
+      },
+      options: {
+          responsive: true,
+          scales: {
+              y: {
+                  beginAtZero: true
+              }
+          }
+      }
+  });
 }
 
 // 更新圖表數據的函數
 function updateChart(labels, values, timeRange, dataType) {
   if (!localStorage.getItem('adminLoggedIn')) {
-    window.location.href = 'backlogin.html';
-    return;
+      window.location.href = 'backlogin.html';
+      return;
   }
-    console.log("更新圖表:", {labels, values, timeRange, dataType});
-    const chart = Chart.getChart("orderChart");
-    if (!chart) {
-        console.error("找不到圖表");
-        return;
-    }
 
-    chart.data.labels = labels;
-    chart.data.datasets[0].data = values;
-    chart.data.datasets[0].label = dataType === "revenue" ? "營業額" : "營業額";
+  console.log("更新圖表:", {labels, values, timeRange, dataType});
 
-    // 確保 y 軸標題設置生效
-    if (chart.options.scales.yAxes && chart.options.scales.yAxes[0]) {
-        chart.options.scales.yAxes[0].scaleLabel.labelString =
-            dataType === "revenue" ? "營業額" : "訂單總量";
-    } else if (chart.options.scales.y) {
-        chart.options.scales.y.title.text =
-            dataType === "revenue" ? "營業額" : "訂單總量";
-    }
+  let chart;
+  if (window.myChart instanceof Chart) {
+      chart = window.myChart;
+  } else {
+      chart = Chart.getChart("orderChart");
+  }
 
-    chart.update();
-    console.log("圖表已更新");
+  if (!chart) {
+      console.error("找不到圖表");
+      return;
+  }
+
+  // 更新圖表數據
+  chart.data.labels = labels;
+  chart.data.datasets[0].data = values;
+  chart.data.datasets[0].label = dataType === "revenue" ? "營業額" : "訂單總量";
+
+  // 更新 y 軸標題
+  if (chart.options.scales.y) {
+      chart.options.scales.y.title.text = dataType === "revenue" ? "營業額" : "訂單總量";
+  } else if (chart.options.scales.yAxes && chart.options.scales.yAxes[0]) {
+      chart.options.scales.yAxes[0].scaleLabel.labelString = dataType === "revenue" ? "營業額" : "訂單總量";
+  }
+
+  // 根據 timeRange 更新 x 軸標題
+  if (chart.options.scales.x) {
+      switch(timeRange) {
+          case 'week':
+              chart.options.scales.x.title.text = '日期';
+              break;
+          case 'month':
+              chart.options.scales.x.title.text = '日期';
+              break;
+          case 'year':
+              chart.options.scales.x.title.text = '月份';
+              break;
+          default:
+              chart.options.scales.x.title.text = '時間';
+      }
+  }
+
+  chart.update();
+  console.log("圖表已更新");
 }
 
 // 點擊"訂單管理"時生成內容的函數
