@@ -1638,96 +1638,242 @@ function generateProductManagementWithActionsContent() {
 // 點擊"食譜管理"時生成內容的函數
 function generateRecipeUploadForm() {
   if (!localStorage.getItem('adminLoggedIn')) {
-    window.location.href = 'backlogin.html';
-    return;
+      window.location.href = 'backlogin.html';
+      return;
   }
-    const mainContent = document.querySelector(".main-content");
-    mainContent.innerHTML = ""; // 清空之前的內容
 
-    const productUploadForm = `
-        <section class="product-upload">
-            <h1>食譜管理</h1>
-            <form>
-                <div class="form-group">
-                    <label for="description">食譜名稱</label>
-                    <textarea id="description" rows="1" placeholder="食譜名稱"></textarea>
-                </div>
-            
-                <!-- 類別選擇 -->
-                <div class="form-group">
-                    <label for="category">菜品分類</label>
-                    <select id="category">
-                        <option value="category1">家常料理</option>
-                        <option value="category2">兒童友善</option>
-                        <option value="category3">銀髮友善</option>
-                        <option value="category4">異國料理</option>
-                        <option value="category5">多人料理</option>
-                    </select>
-                </div>
+  const mainContent = document.querySelector(".main-content");
+  mainContent.innerHTML = `
+      <section class="product-upload">
+          <h1>食譜管理</h1>
+          <div class="form-group">
+              <label for="productSelect">選擇商品</label>
+              <select id="productSelect">
+                  <option value="">請選擇商品</option>
+              </select>
+          </div>
+          <div id="productInfo" style="display: none;">
+              <h2 id="productName"></h2>
+              <button id="addRecipeBtn" style="display: none;">新增食譜</button>
+          </div>
+          <form id="recipeForm" style="display: none;">
+              <div class="form-group">
+                  <label for="recipeName">選擇食譜 (未選擇則為新增食譜)</label>
+                  <select id="recipeName">
+                      <option value="">請選擇食譜</option>
+                  </select>
+              </div>
 
-                <!-- 人數、難度等選項 -->
-                <div class="form-group row-group">
-                    <div class="field">
-                        <label for="people">人數</label>
-                        <select id="people">
-                            <option value="1">1人</option>
-                            <option value="2">2人</option>
-                            <option value="3">3人</option>
-                            <option value="4">4人</option>
-                            <option value="5">5人</option>
-                        </select>
-                    </div>
+              <div class="form-group">
+                  <label for="recipeTitle">食譜標題</label>
+                  <input type="text" id="recipeTitle" class="recipeInput" required>
+              </div>
+          
+              <div class="form-group row-group">
+                  <div class="field">
+                      <label for="servings">人數</label>
+                      <select id="servings">
+                          <option value="1">1人</option>
+                          <option value="2">2人</option>
+                          <option value="3">3人</option>
+                          <option value="4">4人</option>
+                          <option value="5">5人</option>
+                      </select>
+                  </div>
 
-                    <div class="field">
-                        <label for="difficulty">難度</label>
-                        <select id="difficulty">
-                            <option value="easy">簡單</option>
-                            <option value="medium">中等</option>
-                            <option value="hard">困難</option>
-                        </select>
-                    </div>
+                  <div class="field">
+                      <label for="level">難度</label>
+                      <select id="level">
+                          <option value="簡單">簡單</option>
+                          <option value="中等">中等</option>
+                          <option value="困難">困難</option>
+                      </select>
+                  </div>
 
-                    <div class="field">
-                        <label for="vagan">素食</label>
-                        <select id="vagan">
-                            <option value="no">否</option>
-                            <option value="vagen">全素</option>
-                            <option value="halfvagen">奶蛋素</option>
-                        </select>
-                    </div>
+                  <div class="field time">
+                      <label for="cookTime">製作時間（分鐘）</label>
+                      <input type="number" id="cookTime" class="recipeInput" required>
+                  </div>
+              </div>
 
-                    <div class="field time">
-                        <label for="time">製作時間</label>
-                        <textarea id="time" rows="1" class="time"></textarea>
-                    </div>
-                </div>
+              <div class="form-group">
+                  <label for="ingredients">食材</label>
+                  <textarea id="ingredients" rows="5"></textarea>
+              </div>
 
-                <!-- 食譜描述 -->
-                <div class="form-group">
-                    <label for="description">食材</label>
-                    <textarea id="description" rows="8"></textarea>
-                </div>
+              <div class="form-group">
+                  <label for="steps">食譜步驟</label>
+                  <textarea id="steps" rows="8"></textarea>
+              </div>
 
-                <!-- 食材與步驟 -->
-                <div class="form-group">
-                    <label for="ingredients">食譜步驟</label>
-                    <textarea id="ingredients" rows="8"></textarea>
-                </div>
+              <div class="form-group">
+                  <label for="notes">貼心小提醒</label>
+                  <textarea id="notes" rows="3"></textarea>
+              </div>
 
-                <div class="form-group">
-                    <label for="steps">貼心小提醒</label>
-                    <textarea id="steps" rows="8"></textarea>
-                </div>
+              <div class="form-group">
+                  <button type="submit" id="submitButton">確認</button>
+                  <button type="reset" id="cancelButton">取消</button>
+              </div>
+          </form>
+      </section>
+  `;
 
-                <!-- 提交與取消按鈕 -->
-                <div class="form-group">
-                    <button type="submit" id="submitButton">確認</button>
-                    <button type="reset" id="cancelButton">取消</button>
-                </div>
-            </form>
-        </section>
-    `;
-    mainContent.innerHTML = productUploadForm;
+  // 獲取產品列表並填充下拉選單
+  fetch('http://localhost:8080/products')
+      .then(response => response.json())
+      .then(products => {
+          const productSelect = document.getElementById('productSelect');
+          products.forEach(product => {
+              if (product.name.includes('生鮮食材')) {
+                  const option = document.createElement('option');
+                  option.value = product.productId;
+                  option.textContent = product.name;
+                  productSelect.appendChild(option);
+              }
+          });
+      })
+      .catch(error => {
+          console.error('獲取產品列表失敗:', error);
+          alert('獲取產品列表失敗，請稍後再試');
+      });
+
+  // 修改產品選擇事件監聽器
+  document.getElementById('productSelect').addEventListener('change', function(event) {
+    const productId = event.target.value;
+    if (productId) {
+        fetch(`http://localhost:8080/api/recipes/by-product/${productId}`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('productInfo').style.display = 'block';
+                document.getElementById('productName').textContent = data.productName;
+                
+                const recipeSelect = document.getElementById('recipeName');
+                recipeSelect.innerHTML = '<option value="">請選擇食譜</option>';
+                
+                if (data.recipes && data.recipes.length > 0) {
+                    data.recipes.forEach(recipe => {
+                        const option = document.createElement('option');
+                        option.value = recipe.recipeId;
+                        option.textContent = recipe.title;
+                        recipeSelect.appendChild(option);
+                    });
+                }
+                document.getElementById('recipeForm').style.display = 'block';
+                clearRecipeForm(); // 清空表單，為可能的新增做準備
+            })
+            .catch(error => {
+                console.error('獲取食譜列表失敗:', error);
+                alert('獲取食譜列表失敗，請稍後再試');
+            });
+    } else {
+        document.getElementById('productInfo').style.display = 'none';
+        document.getElementById('recipeForm').style.display = 'none';
+    }
+});
+
+  // 修改食譜選擇事件監聽器
+  document.getElementById('recipeName').addEventListener('change', function(event) {
+      const recipeId = event.target.value;
+      if (recipeId) {
+          fetch(`http://localhost:8080/api/recipes/view?id=${recipeId}`)
+              .then(response => response.json())
+              .then(data => {
+                  if (data.recipe) {
+                      fillRecipeForm(data.recipe);
+                  } else {
+                      console.error('No recipe data found in the response');
+                      alert('無法獲取食譜資料，請稍後再試');
+                  }
+              })
+              .catch(error => {
+                  console.error('獲取食譜詳情失敗:', error);
+                  alert('獲取食譜詳情失敗，請稍後再試');
+              });
+      } else {
+          clearRecipeForm(); // 如果選擇了空選項，清空表單
+      }
+  });
+
+  // 修改表單提交事件監聽器
+  document.getElementById('recipeForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const productId = document.getElementById('productSelect').value;
+    const recipeId = document.getElementById('recipeName').value;
+    
+    if (!productId) {
+        alert('請選擇一個產品');
+        return;
+    }
+
+    const formData = {
+        recipeId: recipeId || null, // 如果沒有選擇食譜，則為 null（新增情況）
+        title: document.getElementById('recipeTitle').value,
+        servings: parseInt(document.getElementById('servings').value),
+        level: document.getElementById('level').value,
+        cookTime: parseInt(document.getElementById('cookTime').value),
+        ingredients: document.getElementById('ingredients').value,
+        steps: document.getElementById('steps').value,
+        notes: document.getElementById('notes').value,
+        isDel: false,
+        productId: parseInt(productId)
+    };
+
+    console.log('提交的表單數據:', formData); // 添加日誌
+
+    const url = recipeId ? 
+        `http://localhost:8080/api/recipes/update?id=${recipeId}` : 
+        'http://localhost:8080/api/recipes/create';
+
+    const method = recipeId ? 'PUT' : 'POST';
+
+    fetch(url, {
+        method: method,
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+    })
+    .then(response => {
+        console.log('API 響應狀態:', response.status); // 添加日誌
+        if (!response.ok) {
+            return response.text().then(text => {
+                throw new Error(`HTTP error! status: ${response.status}, message: ${text}`);
+            });
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('API 響應數據:', data); // 添加日誌
+        alert(recipeId ? '食譜更新成功' : '食譜創建成功');
+        // 重新加載食譜列表
+        document.getElementById('productSelect').dispatchEvent(new Event('change'));
+    })
+    .catch(error => {
+        console.error('操作食譜時發生錯誤:', error);
+        alert(recipeId ? '食譜更新失敗' : '食譜創建失敗');
+    });
+});
+
+  function clearRecipeForm() {
+      document.getElementById('recipeTitle').value = '';
+      document.getElementById('servings').value = '1';
+      document.getElementById('level').value = '簡單';
+      document.getElementById('cookTime').value = '';
+      document.getElementById('ingredients').value = '';
+      document.getElementById('steps').value = '';
+      document.getElementById('notes').value = '';
+  }
+
+  function fillRecipeForm(recipe) {
+    document.getElementById('recipeTitle').value = recipe.title || '';
+    document.getElementById('servings').value = recipe.servings || '';
+    document.getElementById('level').value = recipe.level || '簡單';
+    document.getElementById('cookTime').value = recipe.cookTime || '';
+    document.getElementById('ingredients').value = recipe.ingredients || '';
+    document.getElementById('steps').value = recipe.steps || '';
+    document.getElementById('notes').value = recipe.notes || '';
+}
 }
 
 // 點擊"用戶管理"時生成內容的函數

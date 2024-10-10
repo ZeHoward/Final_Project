@@ -1,20 +1,27 @@
 package tw.luna.FinalTest.service;
 
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
+import tw.luna.FinalTest.dto.RecipeDTO;
+import tw.luna.FinalTest.model.Product;
 import tw.luna.FinalTest.model.Recipes;
+import tw.luna.FinalTest.repository.ProductRepository;
 import tw.luna.FinalTest.repository.RecipesRepository;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class RecipesService {
 
 	@Autowired
 	private RecipesRepository recipesRepository;
+
+	@Autowired
+	private ProductRepository productRepository;
 
 	// 獲取所有未刪除的食譜
 	public List<Recipes> getAllRecipes() {
@@ -63,5 +70,44 @@ public class RecipesService {
 			r.setIsDel(true);  // 設置邏輯刪除標記
 			recipesRepository.save(r);
 		});
+	}
+
+	public Map<String, Object> getRecipesByProductId(Integer productId) {
+		Product product = productRepository.findById(productId)
+				.orElseThrow(() -> new ResourceNotFoundException("Product not found with id: " + productId));
+
+		List<Recipes> recipes = recipesRepository.findByProduct_ProductIdAndIsDelFalse(productId);
+
+		if (recipes.isEmpty()) {
+			return Map.of(
+					"message", "沒有找到與此產品相關的有效食譜",
+					"productName", product.getName()
+			);
+		}
+
+		List<RecipeDTO> recipeDTOs = recipes.stream()
+				.map(this::convertToDTO)
+				.collect(Collectors.toList());
+
+		return Map.of(
+				"recipes", recipeDTOs,
+				"message", "成功獲取食譜列表",
+				"productName", product.getName()
+		);
+	}
+
+	private RecipeDTO convertToDTO(Recipes recipe) {
+		RecipeDTO dto = new RecipeDTO();
+		dto.setRecipeId(recipe.getRecipeId());
+		dto.setTitle(recipe.getTitle());
+		dto.setSteps(recipe.getSteps());
+		dto.setIngredients(recipe.getIngredients());
+		dto.setNotes(recipe.getNotes());
+		dto.setServings(recipe.getServings());
+		dto.setCookTime(recipe.getCookTime());
+		dto.setLevel(recipe.getLevel());
+		dto.setIsDel(recipe.getIsDel());
+		dto.setProductId(recipe.getProduct() != null ? recipe.getProduct().getProductId() : null);
+		return dto;
 	}
 }
