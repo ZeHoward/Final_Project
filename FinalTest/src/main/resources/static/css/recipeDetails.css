@@ -164,6 +164,11 @@ body {
   height: 35px;
 }
 
+#recipeImage {
+  max-height: 40vh;
+  margin-top: 10px;
+}
+
 .tem-header-icons a {
   margin: 0 10px;
   font-size: 24px;
@@ -321,8 +326,13 @@ body {
 
 .recipe-container {
   display: flex;
-  flex-direction: column; /* 垂直排列內容 */
-  align-items: center; /* 確保內容水平居中 */
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px; /* 區塊之間的間距 */
+}
+
+#stepsList {
+  list-style-image: none;
 }
 /*照片至按鈕區域*/
 .main {
