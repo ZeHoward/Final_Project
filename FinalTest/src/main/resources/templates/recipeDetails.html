@@ -56,7 +56,6 @@
 
   <!-- <script th:src="@{js/recipeDetails.js}"></script> -->
   <script>
-    console.log('999999');
     document.addEventListener('DOMContentLoaded', () => {
       console.log("HI~");
 
@@ -72,57 +71,54 @@
 
       // 使用正確的 API 路徑來獲取食譜數據
       fetch(`/api/recipes/view?id=${recipeId}`)
-        .then(response => {
-          if (!response.ok) {
-            throw new Error(`HTTP 錯誤！狀態：${response.status}`);
-          }
-          return response.json();
-        })
-        .then(data => {
-          const recipe = data.recipe;
-          // const idd = data.productId;
+              .then(response => {
+                if (!response.ok) {
+                  throw new Error(`HTTP 錯誤！狀態：${response.status}`);
+                }
+                return response.json();
+              })
+              .then(data => {
+                const recipe = data.recipe;
 
+                // 更新 DOM 元素
+                updateElement('recipeName', recipe.title);
+                updateElement('foodName', recipe.title);
+                updateElement('cookingTime', `烹飪時間：${recipe.cookTime} 分鐘`);
+                updateElement('level', `難度：${recipe.level}`);
+                updateElement('servings', `份量：${recipe.servings} 人份`);
 
+                // 使用修改後的 updateList 函數
+                updateList('ingredientsList', recipe.ingredients);
+                updateList('stepsList', recipe.steps);
+                updateList('notesList', recipe.notes);
 
-          // 更新 DOM 元素
-          updateElement('recipeName', recipe.title);
-          updateElement('foodName', recipe.title);
-          updateElement('cookingTime', `烹飪時間：${recipe.cookTime} 分鐘`);
-          updateElement('level', `難度：${recipe.level}`);
-          updateElement('servings', `份量：${recipe.servings} 人份`);
+                // 添加事件監聽器
+                addButtonListener('saveRecipe', () => console.log('收藏食譜', recipe.recipeId));
 
-          updateList('ingredientsList', recipe.ingredients.split(', '));
-          updateList('stepsList', recipe.steps.split('\n\n'), true);
-          updateList('notesList', [recipe.notes]);
+                // 更新"查看商品"按鈕的事件監聽器
+                addButtonListener('viewProduct', () => {
+                  window.location.href = `/detail?productId=${recipe.productId}`;
+                });
 
-          // 添加事件監聽器
-          addButtonListener('saveRecipe', () => console.log('收藏食譜', recipe.recipeId));
-
-          // 修改這裡：更新"查看商品"按鈕的事件監聽器
-          addButtonListener('viewProduct', () => {
-            window.location.href = `/detail?productId=${recipe.productId}`;
-          });
-
-          // 獲取並顯示圖片部分，使用 productId
-          const productId = recipe.productId;  // 確認 productId 來自食譜數據
-          fetch(`/productImages/product/${productId}`)
-            .then(response => response.json())
-            .then(imageUrls => {
-              // 只顯示第一張圖片
-              const firstImageUrl = imageUrls.length > 0 ? imageUrls[0] : '../material/icon/default.png';
-              updateImage('recipeImage', firstImageUrl);
-              console.log(firstImageUrl);
-            })
-            .catch(() => {
-              // 如果請求圖片失敗，顯示預設圖片
-              updateImage('recipeImage', '../material/icon/default.png');
-            });
-
-        })
-        .catch(error => {
-          console.error('載入食譜數據時出錯：', error);
-          alert('載入食譜數據時出錯，請稍後再試');
-        });
+                // 獲取並顯示圖片部分，使用 productId
+                const productId = recipe.productId;
+                fetch(`/productImages/product/${productId}`)
+                        .then(response => response.json())
+                        .then(imageUrls => {
+                          // 只顯示第一張圖片
+                          const firstImageUrl = imageUrls.length > 0 ? imageUrls[0] : '../material/icon/default.png';
+                          updateImage('recipeImage', firstImageUrl);
+                          console.log(firstImageUrl);
+                        })
+                        .catch(() => {
+                          // 如果請求圖片失敗，顯示預設圖片
+                          updateImage('recipeImage', '../material/icon/default.png');
+                        });
+              })
+              .catch(error => {
+                console.error('載入食譜數據時出錯：', error);
+                alert('載入食譜數據時出錯，請稍後再試');
+              });
     });
 
     // 輔助函數
@@ -135,17 +131,17 @@
       }
     }
 
-    function updateList(id, items, numbered = false) {
-      const list = document.getElementById(id);
-      if (list) {
-        list.innerHTML = '';
-        items.forEach((item, index) => {
-          const li = document.createElement('li');
-          li.textContent = numbered ? `${index + 1}. ${item}` : item;
-          list.appendChild(li);
-        });
+    function updateList(id, content) {
+      const preElement = document.getElementById(id);
+      if (preElement) {
+        if (id === 'ingredientsList') {
+          const formattedContent = content.split(',').map(item => item.trim()).join('\n');
+          preElement.textContent = formattedContent;
+        } else {
+          preElement.textContent = content;
+        }
       } else {
-        console.warn(`未找到 ID 為 '${id}' 的列表`);
+        console.warn(`未找到 ID 為 '${id}' 的 pre 元素`);
       }
     }
 
@@ -158,7 +154,6 @@
       }
     }
 
-    // 新增的圖片更新函數
     function updateImage(id, imageUrl) {
       const imageElement = document.getElementById(id);
       if (imageElement) {

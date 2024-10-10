@@ -232,92 +232,92 @@ function fetchInitialChartData() {
 }
 
 // 點擊"總覽上方"訂單總量"時切換圖表內容的函數
-function fetchOrderChartData() {
-  if (!localStorage.getItem('adminLoggedIn')) {
-    window.location.href = 'backlogin.html';
-    return;
-  }
-    console.log("開始獲取訂單總量數據");
-    const timeRange = document.getElementById("timeRange");
-    if (!timeRange) {
-        console.error("找不到時間範圍選擇器");
-        alert("頁面載入不完整，請重新整理頁面。");
-        return;
-    }
-    const selectedRange = timeRange.value;
-    console.log("選擇的時間範圍:", selectedRange);
-
-    const today = new Date();
-    let startDate, endDate;
-
-    // 設置起始日期（與 fetchRevenueChartData 相同）
-    switch (selectedRange) {
-        case "week":
-            startDate = new Date(
-                today.getFullYear(),
-                today.getMonth(),
-                today.getDate() - 7
-            );
-            break;
-        case "month":
-            startDate = new Date(
-                today.getFullYear(),
-                today.getMonth() - 1,
-                today.getDate()
-            );
-            break;
-        case "year":
-            startDate = new Date(
-                today.getFullYear() - 1,
-                today.getMonth(),
-                today.getDate()
-            );
-            break;
-        default:
-            console.error("無效的時間範圍:", selectedRange);
-            alert("請選擇有效的時間範圍。");
-            return;
-    }
-    endDate = today;
-
-    // 確保日期時間格式符合 ISO 8601 標準
-    const formatDate = (date) => date.toISOString().split(".")[0] + "Z";
-
-    const url = `/api/orders/chart-data?startDate=${formatDate(
-        startDate
-    )}&endDate=${formatDate(endDate)}&range=${selectedRange}&dataType=orders`;
-    console.log("請求 URL:", url);
-
-    fetch(url)
-        .then((response) => {
-            if (!response.ok) {
-                throw new Error(`HTTP 錯誤! 狀態: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then((chartData) => {
-            console.log("接收到的圖表數據:", chartData);
-            if (
-                !chartData ||
-                !Array.isArray(chartData.labels) ||
-                !Array.isArray(chartData.values)
-            ) {
-                throw new Error("接收到的數據格式不正確");
-            }
-            updateChart(chartData.labels, chartData.values, selectedRange, "orders");
-        })
-        .catch((error) => {
-            console.error("獲取訂單總量數據時出錯:", error);
-            alert("無法載入訂單總量數據，請稍後再試。");
-        });
-}
+// function fetchOrderChartData() {
+//   if (!localStorage.getItem('adminLoggedIn')) {
+//     window.location.href = 'backlogin.html';
+//     return;
+//   }
+//     console.log("開始獲取訂單總量數據");
+//     const timeRange = document.getElementById("timeRange");
+//     if (!timeRange) {
+//         console.error("找不到時間範圍選擇器");
+//         alert("頁面載入不完整，請重新整理頁面。");
+//         return;
+//     }
+//     const selectedRange = timeRange.value;
+//     console.log("選擇的時間範圍:", selectedRange);
+//
+//     const today = new Date();
+//     let startDate, endDate;
+//
+//     // 設置起始日期（與 fetchRevenueChartData 相同）
+//     switch (selectedRange) {
+//         case "week":
+//             startDate = new Date(
+//                 today.getFullYear(),
+//                 today.getMonth(),
+//                 today.getDate() - 7
+//             );
+//             break;
+//         case "month":
+//             startDate = new Date(
+//                 today.getFullYear(),
+//                 today.getMonth() - 1,
+//                 today.getDate()
+//             );
+//             break;
+//         case "year":
+//             startDate = new Date(
+//                 today.getFullYear() - 1,
+//                 today.getMonth(),
+//                 today.getDate()
+//             );
+//             break;
+//         default:
+//             console.error("無效的時間範圍:", selectedRange);
+//             alert("請選擇有效的時間範圍。");
+//             return;
+//     }
+//     endDate = today;
+//
+//     // 確保日期時間格式符合 ISO 8601 標準
+//     const formatDate = (date) => date.toISOString().split(".")[0] + "Z";
+//
+//     const url = `/api/orders/chart-data?startDate=${formatDate(
+//         startDate
+//     )}&endDate=${formatDate(endDate)}&range=${selectedRange}&dataType=orders`;
+//     console.log("請求 URL:", url);
+//
+//     fetch(url)
+//         .then((response) => {
+//             if (!response.ok) {
+//                 throw new Error(`HTTP 錯誤! 狀態: ${response.status}`);
+//             }
+//             return response.json();
+//         })
+//         .then((chartData) => {
+//             console.log("接收到的圖表數據:", chartData);
+//             if (
+//                 !chartData ||
+//                 !Array.isArray(chartData.labels) ||
+//                 !Array.isArray(chartData.values)
+//             ) {
+//                 throw new Error("接收到的數據格式不正確");
+//             }
+//             updateChart(chartData.labels, chartData.values, selectedRange, "orders");
+//         })
+//         .catch((error) => {
+//             console.error("獲取訂單總量數據時出錯:", error);
+//             alert("無法載入訂單總量數據，請稍後再試。");
+//         });
+// }
 
 // 點擊總覽上方"營業額"時切換圖表內容的函數
 function fetchRevenueChartData() {
-  if (!localStorage.getItem('adminLoggedIn')) {
-    window.location.href = 'backlogin.html';
-    return;
-  }
+    if (!localStorage.getItem('adminLoggedIn')) {
+        window.location.href = 'backlogin.html';
+        return;
+    }
     console.log("開始獲取營業額數據");
     const timeRange = document.getElementById("timeRange");
     if (!timeRange) {
@@ -364,32 +364,33 @@ function fetchRevenueChartData() {
     // 確保日期時間格式符合 ISO 8601 標準
     const formatDate = (date) => date.toISOString().split(".")[0] + "Z";
 
-    const url = `/api/orders/chart-data?startDate=${formatDate(
-        startDate
-    )}&endDate=${formatDate(endDate)}&range=${selectedRange}`;
+    const url = `/api/orders/chart-data?startDate=${formatDate(startDate)}&endDate=${formatDate(endDate)}&range=${selectedRange}`;
     console.log("請求 URL:", url);
 
+    console.time('fetchRevenueData');
     fetch(url)
         .then((response) => {
+            console.timeLog('fetchRevenueData', 'Received response');
+            console.log("響應狀態:", response.status, response.statusText);
             if (!response.ok) {
-                throw new Error(`HTTP 錯誤! 狀態: ${response.status}`);
+                return response.text().then(text => {
+                    throw new Error(`HTTP 錯誤! 狀態: ${response.status}, 響應內容: ${text}`);
+                });
             }
             return response.json();
         })
         .then((chartData) => {
-            console.log("接收到的圖表數據:", chartData);
-            if (
-                !chartData ||
-                !Array.isArray(chartData.labels) ||
-                !Array.isArray(chartData.values)
-            ) {
-                throw new Error("接收到的數據格式不正確");
+            console.timeEnd('fetchRevenueData');
+            console.log("接收到的圖表數據:", JSON.stringify(chartData, null, 2));
+            if (!chartData || !Array.isArray(chartData.labels) || !Array.isArray(chartData.values)) {
+                throw new Error("接收到的數據格式不正確: " + JSON.stringify(chartData));
             }
             updateChart(chartData.labels, chartData.values, selectedRange, "營業額");
         })
         .catch((error) => {
-            console.error("獲取營業額數據時出錯:", error);
-            alert("無法載入營業額數據，請稍後再試。");
+            console.timeEnd('fetchRevenueData');
+            console.error("獲取營業額數據時出錯");
+            // alert("無法載入營業額數據，請稍後再試。錯誤詳情: " + error.message);
         });
 }
 
@@ -987,7 +988,7 @@ function generateProductManagementWithActionsContent() {
         <div class="orderControls">
             <label>搜尋商品：</label>
             <input type="text" id="productSearchInput" placeholder="輸入名稱或SKU" class="SearchInput">
-            <button id="searchBtn">搜尋</button>
+            <button id="searchBtn" class="btn">搜尋</button>
             
             <label>每頁顯示結果數：</label>
             <select id="resultsPerPage">
@@ -1619,7 +1620,7 @@ function generateProductManagementWithActionsContent() {
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~``
 
-// 點擊"食譜上傳"時生成內容的函數
+// 點擊"食譜管理"時生成內容的函數
 function generateRecipeUploadForm() {
   if (!localStorage.getItem('adminLoggedIn')) {
     window.location.href = 'backlogin.html';
@@ -1630,14 +1631,7 @@ function generateRecipeUploadForm() {
 
     const productUploadForm = `
         <section class="product-upload">
-            <h1>食譜上傳</h1>
-            <div class="image-upload">
-                <div class="image-preview">
-                <img src="/path/to/default/image.png" alt="商品圖片" style="width: 100%; height: auto;">
-                <button id="uploadImageButton">圖片上傳</button>
-                </div>
-            </div>
-
+            <h1>食譜管理</h1>
             <form>
                 <div class="form-group">
                     <label for="description">食譜名稱</label>
@@ -1719,269 +1713,6 @@ function generateRecipeUploadForm() {
         </section>
     `;
     mainContent.innerHTML = productUploadForm;
-}
-
-// 點擊"食譜管理"時生成內容的函數
-function generateRecipeManagementContent() {
-  if (!localStorage.getItem('adminLoggedIn')) {
-    window.location.href = 'backlogin.html';
-    return;
-  }
-    const mainContent = document.querySelector(".main-content");
-    mainContent.innerHTML = ""; // 清空之前的內容
-
-    // 動態生成食譜管理的標題和表格
-    const recipeManagementSection = `
-        <section class="recipe-management">
-            <h1>食譜管理</h1>
-            <div class="recipeControls">
-                <label>搜尋商品：</label>
-                <input type="text" id="productSearchInput" placeholder="輸入名稱" class="SearchInput">
-                
-                <label>每頁顯示結果數：</label>
-                <select>
-                    <option value="25">25</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
-                </select>
-
-                <label>分類：</label>
-                <select id="category">
-                     <option value="category1">家常料理</option>
-                     <option value="category2">兒童友善</option>
-                     <option value="category3">銀髮友善</option>
-                      <option value="category4">異國料理</option>
-                      <option value="category5">多人料理</option>
-                </select>
-            </div>
-            <table class="recipe-table">
-                <thead>
-                    <tr>
-                        <th>圖片</th>
-                        <th>名稱</th>
-                        <th>描述</th>
-                        <th>操作</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- 這裡插入動態生成的食譜 -->
-                </tbody>
-            </table>
-        </section>
-    `;
-    mainContent.innerHTML = recipeManagementSection;
-
-    const tbody = document.querySelector(".recipe-table tbody");
-
-    // 動態生成每個食譜的表格行
-    recipes.forEach((recipe, index) => {
-        const tr = document.createElement("tr");
-
-        tr.innerHTML = `
-            <td><img src="${recipe.image}" alt="${recipe.name}" class="recipe-image"></td>
-            <td>${recipe.name}</td>
-            <td style="max-width: 40vw;">${recipe.description}</td>
-            <td class="actions">
-                <button class="edit-button" data-index="${index}">修改</button>
-                <button class="delete-button" data-index="${index}">刪除</button>
-            </td>
-        `;
-
-        tbody.appendChild(tr);
-    });
-
-    // 重新為動態生成的「修改」按鈕綁定事件
-    document.querySelectorAll(".edit-button").forEach((button) => {
-        button.addEventListener("click", function () {
-            const recipeIndex = this.getAttribute("data-index");
-            generateRecipeEditForm(recipes[recipeIndex]); // 調用食譜修改頁面並傳入對應食譜數據
-        });
-    });
-
-    // 重新為動態生成的「刪除」按鈕綁定事件
-    document.querySelectorAll(".delete-button").forEach((button) => {
-        button.addEventListener("click", function () {
-            const recipeIndex = this.getAttribute("data-index");
-            if (confirm("確定要刪除這個食譜嗎？")) {
-                recipes.splice(recipeIndex, 1); // 刪除食譜
-                generateRecipeManagementContent(); // 刷新食譜管理頁面
-            }
-        });
-    });
-}
-
-// 點擊"食譜管理"時生成內容的函數
-function generateRecipeManagementContent() {
-  if (!localStorage.getItem('adminLoggedIn')) {
-    window.location.href = 'backlogin.html';
-    return;
-  }
-    const mainContent = document.querySelector(".main-content");
-    mainContent.innerHTML = ""; // 清空之前的內容
-
-    // 動態生成食譜管理的標題和表格
-    const recipeManagementSection = `
-        <section class="recipe-management">
-            <h1>食譜管理</h1>
-            <div class="recipeControls">
-                <label>搜尋食譜：</label>
-                <input type="text" id="recipeSearchInput" placeholder="輸入名稱" class="SearchInput">
-                
-                <label>每頁顯示結果數：</label>
-                <select id="resultsPerPage">
-                    <option value="25">25</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
-                </select>
-
-                <label>分類：</label>
-                <select id="category">
-                    <option value="all">全部</option>
-                    <option value="category1">家常料理</option>
-                    <option value="category2">兒童友善</option>
-                    <option value="category3">銀髮友善</option>
-                    <option value="category4">異國料理</option>
-                    <option value="category5">多人料理</option>
-                </select>
-            </div>
-            <table class="recipe-table">
-                <thead>
-                    <tr>
-                        <th>圖片</th>
-                        <th>名稱</th>
-                        <th>描述</th>
-                        <th>操作</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- 這裡插入動態生成的食譜 -->
-                </tbody>
-            </table>
-
-            <!-- 分頁控制 -->
-            <div class="pagination-controls" style="text-align: right; margin-top: 20px;">
-                <label for="pageSelect">選擇頁數：</label>
-                <select id="pageSelect" style="border-radius: 5px; border: 1px solid #ccc;">
-                    <!-- 動態生成頁數選項 -->
-                </select>
-            </div>
-        </section>
-    `;
-    mainContent.innerHTML = recipeManagementSection;
-
-    const tbody = document.querySelector(".recipe-table tbody");
-    const resultsPerPageSelect = document.getElementById("resultsPerPage");
-    const pageSelect = document.getElementById("pageSelect");
-    const searchInput = document.getElementById("recipeSearchInput");
-    const categorySelect = document.getElementById("category");
-
-    // 設置每頁顯示的食譜數量
-    let resultsPerPage = parseInt(resultsPerPageSelect.value);
-    let currentPage = 1; // 預設為第 1 頁
-    let totalPages = Math.ceil(recipes.length / resultsPerPage);
-
-    // 根據分類篩選食譜
-    function filterRecipesByCategory(category) {
-        if (category === "all") return recipes; // 如果選擇"全部"，返回所有食譜
-        return recipes.filter((recipe) => recipe.category === category);
-    }
-
-    // 動態生成每個食譜的表格行
-    function renderRecipes(filteredRecipes) {
-        tbody.innerHTML = ""; // 清空表格內容
-        const start = (currentPage - 1) * resultsPerPage;
-        const end = start + resultsPerPage;
-        const visibleRecipes = filteredRecipes.slice(start, end);
-
-        visibleRecipes.forEach((recipe, index) => {
-            const tr = document.createElement("tr");
-
-            tr.innerHTML = `
-            <td><img src="${recipe.image}" alt="${recipe.name}" class="recipe-image"></td>
-            <td>${recipe.name}</td>
-            <td style="max-width: 40vw;">${recipe.description}</td>
-            <td class="actions">
-                <button class="edit-button" data-index="${start + index}">修改</button>
-                <button class="delete-button" data-index="${start + index}">刪除</button>
-            </td>
-        `;
-
-            tbody.appendChild(tr);
-        });
-
-        // 綁定「修改」按鈕事件
-        document.querySelectorAll(".edit-button").forEach((button) => {
-            button.addEventListener("click", function () {
-                const recipeIndex = this.getAttribute("data-index");
-                generateRecipeEditForm(recipes[recipeIndex]); // 調用食譜修改頁面並傳入對應食譜數據
-            });
-        });
-
-        // 綁定「刪除」按鈕事件
-        document.querySelectorAll(".delete-button").forEach((button) => {
-            button.addEventListener("click", function () {
-                const recipeIndex = this.getAttribute("data-index");
-                if (confirm("確定要刪除這個食譜嗎？")) {
-                    recipes.splice(recipeIndex, 1); // 刪除食譜
-                    generateRecipeManagementContent(); // 刷新食譜管理頁面
-                }
-            });
-        });
-    }
-
-    // 動態生成頁數選項
-    function updatePagination(filteredRecipes) {
-        pageSelect.innerHTML = ""; // 清空頁數選項
-        totalPages = Math.ceil(filteredRecipes.length / resultsPerPage); // 更新總頁數
-        for (let i = 1; i <= totalPages; i++) {
-            const option = document.createElement("option");
-            option.value = i;
-            option.textContent = `第 ${i} 頁`;
-            pageSelect.appendChild(option);
-        }
-        pageSelect.value = currentPage; // 設定當前頁數
-    }
-
-    // 搜尋食譜
-    searchInput.addEventListener("input", () => {
-        const searchTerm = searchInput.value.toLowerCase();
-        const filteredRecipes = recipes.filter((recipe) =>
-            recipe.name.toLowerCase().includes(searchTerm)
-        );
-        currentPage = 1; // 搜尋時將頁面重置到第 1 頁
-        updatePagination(filteredRecipes);
-        renderRecipes(filteredRecipes);
-    });
-
-    // 分類篩選食譜
-    categorySelect.addEventListener("change", () => {
-        const selectedCategory = categorySelect.value;
-        const filteredRecipes = filterRecipesByCategory(selectedCategory);
-        currentPage = 1; // 篩選時頁數重置
-        updatePagination(filteredRecipes);
-        renderRecipes(filteredRecipes);
-    });
-
-    // 更新顯示結果數時，重新計算頁數並渲染
-    resultsPerPageSelect.addEventListener("change", () => {
-        resultsPerPage = parseInt(resultsPerPageSelect.value);
-        currentPage = 1; // 切換每頁顯示數時，返回到第 1 頁
-        const filteredRecipes = filterRecipesByCategory(categorySelect.value);
-        updatePagination(filteredRecipes);
-        renderRecipes(filteredRecipes);
-    });
-
-    // 監聽頁數切換事件
-    pageSelect.addEventListener("change", () => {
-        currentPage = parseInt(pageSelect.value);
-        const filteredRecipes = filterRecipesByCategory(categorySelect.value);
-        renderRecipes(filteredRecipes);
-    });
-
-    // 初始化頁面
-    const filteredRecipes = filterRecipesByCategory(categorySelect.value);
-    updatePagination(filteredRecipes);
-    renderRecipes(filteredRecipes);
 }
 
 // 點擊"用戶管理"時生成內容的函數
@@ -2205,7 +1936,7 @@ function generateUserEditForm(user) {
         </div>
       </div>
     </div>
-    <button onclick="generateUserManagementContent()">返回用戶列表</button>
+    <button onclick="generateUserManagementContent()" class="btn" style="margin-top :10px; ">返回用戶列表</button>
   `;
 
     mainContent.innerHTML = userInfoHTML;
@@ -2486,7 +2217,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-    // 點擊"食譜上傳"按鈕時生成內容
+    // 點擊"食譜管理"按鈕時生成內容
     const uploadRecipeButton = document.getElementById("uploadRecipeButton");
     uploadRecipeButton.addEventListener("click", function (event) {
         event.preventDefault(); // 防止跳轉
