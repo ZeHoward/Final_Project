@@ -114,4 +114,14 @@ public class PageController {
 	public String resetPassword() {
 		return "resetPassword";
 	}
+	
+	@GetMapping("/sendPage")
+	public String sendPage() {
+		return "sendPage";
+	}
+	
+	@GetMapping("/receivePage")
+	public String receivePage() {
+		return "receivePage";
+	}
 }

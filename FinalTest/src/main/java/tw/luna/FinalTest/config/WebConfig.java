@@ -6,6 +6,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 
+
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
@@ -23,4 +24,5 @@ public class WebConfig implements WebMvcConfigurer {
                 //無需登入也能訪問的網址,不設置也可以
                 .excludePathPatterns("/loginPage", "/registPage");  
     }
+    
 }

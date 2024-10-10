@@ -112,8 +112,11 @@ window.onload = function () {
 					title:"註冊成功",
 					text:"感謝您成為我們的會員，請到註冊的電子信箱收去驗證信件！！",
 					icon:"success"
-				})
-				window.location.href = '/loginPage';
+				}).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = '/enjoyum';
+                    }
+                });
 			}
           }).catch(error => {
             console.log('error:', error)

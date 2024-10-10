@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WebSocket Client 2</title>
+</head>
+<body>
+    <h1>WebSocket Client 2</h1>
+    <button onclick="connect()">Connect</button>
+    <div id="messages"></div>
+
+    <script>
+        let socket;
+
+        function connect() {
+            socket = new WebSocket("ws://localhost:8080/myserver");
+
+            socket.onopen = function() {
+                console.log("Connected to server");
+                document.getElementById("messages").innerHTML += "<p>Connected</p>";
+            };
+
+            socket.onmessage = function(event) {
+                console.log("Message received: " + event.data);
+                document.getElementById("messages").innerHTML += "<p>Message: " + event.data + "</p>";
+            };
+
+            socket.onclose = function() {
+                console.log("Disconnected from server");
+                document.getElementById("messages").innerHTML += "<p>Disconnected</p>";
+            };
+
+            socket.onerror = function(error) {
+                console.log("Error: " + error.message);
+                document.getElementById("messages").innerHTML += "<p>Error: " + error.message + "</p>";
+            };
+        }
+    </script>
+</body>
+</html>

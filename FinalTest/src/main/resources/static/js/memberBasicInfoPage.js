@@ -244,7 +244,12 @@ window.onload = function () {
 		   return response.json();
 	     }).then(data => {
 			if(data){
-				alert('會員資料更新成功');
+				Swal.fire({
+					title:"會員資料更新成功",
+					text:"",
+					icon:"success",
+					timer:"2000"
+				})
 				fetch('http://localhost:8080/users/userAllInfo',{
 					method : 'GET'
 				  }).then(response => {
@@ -270,7 +275,11 @@ window.onload = function () {
 				  });
 
 			}else{
-				alert('會員資料更新失敗,請稍後在試!!');
+				Swal.fire({
+			        title: "更新失敗",
+			        text: "會員資料更新失敗,請稍後在試!!",
+			        icon: "error"
+			    });
 			}
 		 })
 	     
@@ -285,10 +294,17 @@ window.onload = function () {
 			}
 			return response.json();
 		}).then(data => {
-			console.log('返回的int:' + data);
 			if(data > 0){
 				alert('成功刪除');
-				window.location.href = '/enjoyum';
+				Swal.fire({
+					title:"刪除帳號成功",
+					text:"",
+					icon:"success"
+				}).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = '/enjoyum';
+                    }
+                });
 			}
 		}).catch(error => {
 			console.log('error:', error);
