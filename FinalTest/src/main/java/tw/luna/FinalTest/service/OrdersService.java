@@ -98,21 +98,25 @@ public class OrdersService {
 		orders.setOrderDetails(orderDetails);
 		System.out.println("d1");
 		System.out.println(ordersInsertDto.getCode());
-		if (ordersInsertDto.getCode() != null) {
+		if (ordersInsertDto.getCode() != null && !Objects.equals(ordersInsertDto.getCode(), "")) {
+			System.out.println(123);
 			Coupon coupon = couponRepository.findCouponByCode(ordersInsertDto.getCode());
+			System.out.println(1234);
 			System.out.println(coupon);
 			if (coupon.getDiscountType() == DiscountType.percentage) {
 				orders.setPercentageDiscount(coupon.getDiscountValue());
 
 				System.out.println(orders.getPercentageDiscount());
+				orders.setCoupon(coupon);
 
 			} else if (coupon.getDiscountType() == DiscountType.amount) {
+				System.out.println("d2");
 				orders.setAmountDiscount(coupon.getDiscountValue());
 
 				System.out.println(orders.getAmountDiscount());
+				orders.setCoupon(coupon);
 
 			}
-			orders.setCoupon(coupon);
 			System.out.println(orders);
 		}
 		orders.setOrderDate(LocalDateTime.now());
