@@ -16,7 +16,6 @@
 <body>
 
 <div th:replace="header"></div>
-<!-- header end -->
 
 <!-- content area start -->
 
@@ -54,13 +53,22 @@
 
         <div class="updateBtn">
             <!-- 修改資料按鈕 -->
+<!--            <button-->
+<!--                    type="button"-->
+<!--                    class="goBack"-->
+<!--                    onclick="window.location.href='/checkout';"-->
+<!--            >-->
+<!--                &lt;修改資料-->
+<!--            </button>-->
+
             <button
                     type="button"
                     class="goBack"
-                    onclick="window.location.href='/checkout';"
+                    onclick="window.history.back()"
             >
                 &lt;修改資料
             </button>
+
 
             <!-- 確認付款按鈕 -->
             <button type="button" class="checkBtn"  @click="addToOrders()" id="checkBtn">

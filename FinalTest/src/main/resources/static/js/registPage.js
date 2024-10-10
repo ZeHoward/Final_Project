@@ -75,7 +75,7 @@ window.onload = function () {
 			    Swal.showLoading();
 			  },
 			});
-        fetch('http://localhost:8080/users/regist',{
+        fetch('/users/regist',{
           method : 'POST',
           headers : {'Content-Type' : 'application/json'},
           body : JSON.stringify({

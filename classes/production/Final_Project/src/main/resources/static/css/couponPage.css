@@ -1,0 +1,64 @@
+.couponPage {
+  padding: 2% 0;
+  text-align: center;
+  margin: 0 auto;
+  width: 700px;
+  font-weight: bold;
+}
+
+.couponPage > p:first-child {
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+
+/* 優惠券背景圖片及卡片樣式 */
+.couponPageDiv {
+  background-image: url('../material/Coupon.jpg'); /* 使用你的背景圖片 */
+  margin-bottom: 20px;
+  width: 630px;
+  height: 300px;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  display: inline-block;
+}
+
+.couponPageDiv:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+.couponPageDiv:active {
+  transform: scale(1.03);
+}
+
+/* 優惠券名稱位置，讓名稱和代碼左對齊 */
+.title1 {
+  position: absolute;
+  top: 110px;  /* 調整這裡以控制垂直位置 */
+  left: 230px;  /* 確保名稱和代碼左對齊 */
+  font-size: 48px;  /* 根據需求調整字體大小 */
+  color: #ff4d4d;
+  font-weight: bold;
+}
+
+/* 優惠代碼位置，和名稱對齊 */
+.discountCode {
+  position: absolute;
+  top: 195px;  /* 調整這裡以控制垂直位置 */
+  left: 230px;  /* 確保和名稱對齊 */
+  font-size: 24px;
+  color: black;
+}
+
+/* 有效期位置，讓有效期位於卡片底部 */
+.validDate {
+  position: absolute;
+  bottom: 30px;  /* 將有效期放置在卡片底部 */
+  left: 240px;
+  font-size: 14px;
+  color: black;
+}

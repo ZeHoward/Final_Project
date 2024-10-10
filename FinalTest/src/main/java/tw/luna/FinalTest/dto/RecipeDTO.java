@@ -12,7 +12,6 @@ public class RecipeDTO {
     private Boolean isDel;
     private Integer productId; // 新增 productId 字段
 
-    // Getters and Setters
     public Integer getRecipeId() {
         return recipeId;
     }

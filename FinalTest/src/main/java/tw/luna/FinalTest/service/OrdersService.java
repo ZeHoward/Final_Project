@@ -98,21 +98,25 @@ public class OrdersService {
 		orders.setOrderDetails(orderDetails);
 		System.out.println("d1");
 		System.out.println(ordersInsertDto.getCode());
-		if (ordersInsertDto.getCode() != null) {
+		if (ordersInsertDto.getCode() != null && !Objects.equals(ordersInsertDto.getCode(), "")) {
+			System.out.println(123);
 			Coupon coupon = couponRepository.findCouponByCode(ordersInsertDto.getCode());
+			System.out.println(1234);
 			System.out.println(coupon);
 			if (coupon.getDiscountType() == DiscountType.percentage) {
 				orders.setPercentageDiscount(coupon.getDiscountValue());
 
 				System.out.println(orders.getPercentageDiscount());
+				orders.setCoupon(coupon);
 
 			} else if (coupon.getDiscountType() == DiscountType.amount) {
+				System.out.println("d2");
 				orders.setAmountDiscount(coupon.getDiscountValue());
 
 				System.out.println(orders.getAmountDiscount());
+				orders.setCoupon(coupon);
 
 			}
-			orders.setCoupon(coupon);
 			System.out.println(orders);
 		}
 		orders.setOrderDate(LocalDateTime.now());
@@ -261,9 +265,8 @@ public class OrdersService {
 	// 獲取每日的日期標籤
 	public List<String> getDailyLabels(LocalDateTime startDate, LocalDateTime endDate) {
 		List<Map<String, Object>> result = ordersRepository.aggregateRevenueByDay(startDate, endDate);
-		return result.stream().map(entry -> entry.get("orderDay").toString()) // 提取日期標籤
+		return result.stream().map(entry -> entry.get("orderDate").toString()) // 提取日期標籤
 				.collect(Collectors.toList());
-
 	}
 
 	// 獲取每日的營業額數據
@@ -285,10 +288,10 @@ public class OrdersService {
 
 	// 獲取每月的營業額數據
 	public List<Integer> getMonthlyRevenue(LocalDateTime startDate, LocalDateTime endDate) {
-	    List<Map<String, Object>> result = ordersRepository.aggregateRevenueByMonth(startDate, endDate);
-	    return result.stream()
-	        .map(entry -> Optional.ofNullable((Number) entry.get("totalRevenue")).orElse(0).intValue()) // 提取營業額數值
-	        .collect(Collectors.toList());
+		List<Map<String, Object>> result = ordersRepository.aggregateRevenueByMonth(startDate, endDate);
+		return result.stream()
+				.map(entry -> Optional.ofNullable((Number) entry.get("totalRevenue")).orElse(0).intValue()) // 提取營業額數值
+				.collect(Collectors.toList());
 	}
 
 	// 獲取每年的日期標籤
@@ -300,10 +303,10 @@ public class OrdersService {
 
 	// 獲取每年的營業額數據
 	public List<Integer> getYearlyRevenue(LocalDateTime startDate, LocalDateTime endDate) {
-	    List<Map<String, Object>> result = ordersRepository.aggregateRevenueByYear(startDate, endDate);
-	    return result.stream()
-	        .map(entry -> Optional.ofNullable((Number) entry.get("totalRevenue")).orElse(0).intValue()) // 提取營業額數值
-	        .collect(Collectors.toList());
+		List<Map<String, Object>> result = ordersRepository.aggregateRevenueByYear(startDate, endDate);
+		return result.stream()
+				.map(entry -> Optional.ofNullable((Number) entry.get("totalRevenue")).orElse(0).intValue()) // 提取營業額數值
+				.collect(Collectors.toList());
 	}
 
 	// 獲取每日訂單數量

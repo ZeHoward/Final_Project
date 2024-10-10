@@ -2,7 +2,7 @@ let finalEmail = '';
 document.getElementById("emailInput").addEventListener("blur", () => {
   finalEmail = '';
   let emailInput = document.getElementById("emailInput");
-  let checkEmailUrl = 'http://localhost:8080/users/checkEmail?email=' + emailInput.value
+  let checkEmailUrl = '/users/checkEmail?email=' + emailInput.value
   if(emailInput.value != null && emailInput.value != ''){
     fetch(checkEmailUrl, {
       method : 'GET'
@@ -31,7 +31,7 @@ document.getElementById("emailInput").addEventListener("blur", () => {
 document.getElementById("resetButton").addEventListener("click", () => {
 	if(finalEmail != '' || finalEmail != null){
 		let birthday = document.getElementById("birthday").value;
-		fetch('http://localhost:8080/users/forgetPassword',{
+		fetch('/users/forgetPassword',{
 			method : 'POST',
 			headers: {'Content-Type': 'application/json'},
 		    body: JSON.stringify({ 

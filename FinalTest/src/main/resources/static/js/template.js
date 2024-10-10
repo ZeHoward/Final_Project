@@ -112,7 +112,7 @@
   loginDiv.style.display = "none";
   logoutDiv.style.display = "none";
 
-  fetch("http://localhost:8080/users/checkSession", {
+  fetch("/users/checkSession", {
     method: "GET",
   })
     .then((response) => {
@@ -136,7 +136,7 @@
 
   //登出
   document.getElementById("logout").addEventListener("click", () => {
-    fetch("http://localhost:8080/users/logout", {
+    fetch("/users/logout", {
       method: "GET",
     })
       .then((response) => {
@@ -220,7 +220,7 @@
 
 		});
 
-          fetch('http://localhost:8080/users/consult', {
+          fetch('/users/consult', {
               method: 'POST',
               headers: {
                   'Content-Type': 'application/json'

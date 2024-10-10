@@ -15,47 +15,38 @@
     <a href="/">首頁</a> / <a href="/recipe">線上食譜</a> / <span id="recipeName"></span>
   </div>
   <div id="myContainer">
-    <!-- 主要內容容器 -->
     <div class="container">
-      <!-- 食譜標題 -->
       <h1 id="foodName" class="foodName"></h1>
 
-      <!-- 食譜基本信息 -->
       <div class="recipe-info">
-        <span id="cookingTime"></span>
+        <span id="cookingTime" class="fas fa-clock"></span>
         <span id="level"></span>
         <span id="servings"></span>
       </div>
 
-      <!-- 食譜內容容器 -->
+      <img id="recipeImage" src="" alt="食譜圖片">
+
+      <div class="main">
+        <div class="btns">
+          <button id="saveRecipe" class="btns btnRed">收藏食譜</button>
+          <button id="viewProduct" class="btns btnYellow">查看商品</button>
+        </div>
+      </div>
+
       <div class="recipe-container">
-        <!-- 按鈕區域 -->
-        <div class="main">
-          <div class="btns">
-            <button id="saveRecipe" class="btnRed">收藏食譜</button>
-            <button id="viewProduct" class="btnYellow">查看商品</button>
-          </div>
+        <div>
+          <h2 class="recipeTitle">食材：</h2>
+          <pre id="ingredientsList" class="recipeDetails" style="list-style-type: circle;"></pre>
         </div>
 
-        <!-- 食譜詳細信息 -->
-        <div class="details">
-          <!-- 食材部分 -->
-          <div>
-            <h2 class="recipeTitle">食材：</h2>
-            <ul id="ingredientsList"></ul>
-          </div>
+        <div>
+          <h2 class="recipeTitle">食譜步驟：</h2>
+          <pre id="stepsList" class="recipeDetails"></pre>
+        </div>
 
-          <!-- 步驟部分 -->
-          <div>
-            <h2 class="recipeTitle">食譜步驟：</h2>
-            <ol id="stepsList"></ol>
-          </div>
-
-          <!-- 小提醒部分 -->
-          <div>
-            <h2 class="recipeTitle">貼心小提醒：</h2>
-            <ul id="notesList"></ul>
-          </div>
+        <div>
+          <h2 class="recipeTitle">貼心小提醒：</h2>
+          <pre id="notesList" class="recipeDetails"></pre>
         </div>
       </div>
     </div>
@@ -63,7 +54,115 @@
 
   <div th:replace="footer"></div>
 
-  <script th:src="@{js/recipeDetails.js}"></script>
+  <!-- <script th:src="@{js/recipeDetails.js}"></script> -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      console.log("HI~");
+
+      // 從 URL 路徑中獲取 ID
+      const pathParts = window.location.pathname.split('/');
+      const recipeId = pathParts[pathParts.length - 1];
+
+      if (!recipeId) {
+        console.error('未提供食譜 ID');
+        alert('未提供食譜 ID，請檢查 URL');
+        return;
+      }
+
+      // 使用正確的 API 路徑來獲取食譜數據
+      fetch(`/api/recipes/view?id=${recipeId}`)
+              .then(response => {
+                if (!response.ok) {
+                  throw new Error(`HTTP 錯誤！狀態：${response.status}`);
+                }
+                return response.json();
+              })
+              .then(data => {
+                const recipe = data.recipe;
+
+                // 更新 DOM 元素
+                updateElement('recipeName', recipe.title);
+                updateElement('foodName', recipe.title);
+                updateElement('cookingTime', `烹飪時間：${recipe.cookTime} 分鐘`);
+                updateElement('level', `難度：${recipe.level}`);
+                updateElement('servings', `份量：${recipe.servings} 人份`);
+
+                // 使用修改後的 updateList 函數
+                updateList('ingredientsList', recipe.ingredients);
+                updateList('stepsList', recipe.steps);
+                updateList('notesList', recipe.notes);
+
+                // 添加事件監聽器
+                addButtonListener('saveRecipe', () => console.log('收藏食譜', recipe.recipeId));
+
+                // 更新"查看商品"按鈕的事件監聽器
+                addButtonListener('viewProduct', () => {
+                  window.location.href = `/detail?productId=${recipe.productId}`;
+                });
+
+                // 獲取並顯示圖片部分，使用 productId
+                const productId = recipe.productId;
+                fetch(`/productImages/product/${productId}`)
+                        .then(response => response.json())
+                        .then(imageUrls => {
+                          // 只顯示第一張圖片
+                          const firstImageUrl = imageUrls.length > 0 ? imageUrls[0] : '../material/icon/default.png';
+                          updateImage('recipeImage', firstImageUrl);
+                          console.log(firstImageUrl);
+                        })
+                        .catch(() => {
+                          // 如果請求圖片失敗，顯示預設圖片
+                          updateImage('recipeImage', '../material/icon/default.png');
+                        });
+              })
+              .catch(error => {
+                console.error('載入食譜數據時出錯：', error);
+                alert('載入食譜數據時出錯，請稍後再試');
+              });
+    });
+
+    // 輔助函數
+    function updateElement(id, content) {
+      const element = document.getElementById(id);
+      if (element) {
+        element.textContent = content;
+      } else {
+        console.warn(`未找到 ID 為 '${id}' 的元素`);
+      }
+    }
+
+    function updateList(id, content) {
+      const preElement = document.getElementById(id);
+      if (preElement) {
+        if (id === 'ingredientsList') {
+          const formattedContent = content.split(',').map(item => item.trim()).join('\n');
+          preElement.textContent = formattedContent;
+        } else {
+          preElement.textContent = content;
+        }
+      } else {
+        console.warn(`未找到 ID 為 '${id}' 的 pre 元素`);
+      }
+    }
+
+    function addButtonListener(id, callback) {
+      const button = document.getElementById(id);
+      if (button) {
+        button.addEventListener('click', callback);
+      } else {
+        console.warn(`未找到 ID 為 '${id}' 的按鈕`);
+      }
+    }
+
+    function updateImage(id, imageUrl) {
+      const imageElement = document.getElementById(id);
+      if (imageElement) {
+        imageElement.src = imageUrl;  // 更新圖片的 src 屬性
+      } else {
+        console.warn(`未找到 ID 為 '${id}' 的圖片元素`);
+      }
+    }
+  </script>
 </body>
 
 </html>

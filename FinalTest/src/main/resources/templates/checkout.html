@@ -17,8 +17,7 @@
     <!-- header end -->
 
     <!-- content area start -->
-    <div id="myContainer">
-      <div class="container">
+      <div class="container" id="myContainer">
         <!-- main-left -->
         <div class="left">
           <div class="header-row">
@@ -148,10 +147,18 @@
 
             <div style="margin-top: 15%">
               <!-- 返回購物按鈕-->
+<!--              <button-->
+<!--                type="button"-->
+<!--                class="gobackBtn"-->
+<!--                onclick="window.location.href='/shoppingCart';"-->
+<!--              >-->
+<!--                &lt; 返回購物車-->
+<!--              </button>-->
+
               <button
-                type="button"
-                class="gobackBtn"
-                onclick="window.location.href='/shoppingCart';"
+                      type="button"
+                      class="gobackBtn"
+                      onclick="window.history.back();"
               >
                 &lt; 返回購物車
               </button>
@@ -208,7 +215,6 @@
           </div>
         </div>
       </div>
-    </div>
     <!-- content area end -->
 
     <!-- footer start -->

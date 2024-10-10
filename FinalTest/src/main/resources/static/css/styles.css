@@ -592,8 +592,7 @@ canvas {
     margin-right: 10px;
 }
 
-
-.form-group button {
+.form-group button, .btn {
     padding: 10px 20px;
     background-color: #88BF4B;
     color: white;
@@ -603,7 +602,7 @@ canvas {
     margin-right: 10px;
 }
 
-.form-group button:hover {
+.form-group button:hover, .btn:hover {
     background-color: #77a73f;
 }
 
@@ -754,6 +753,14 @@ canvas {
 .recipeControls select {
     padding: 8px;
     margin-right: 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.recipeInput {
+    height: 17px; 
+    padding: 10px;
+    font-size: 16px;
     border-radius: 5px;
     border: 1px solid #ccc;
 }

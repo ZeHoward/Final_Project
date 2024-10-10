@@ -6,7 +6,7 @@ createApp({
     const finalAmount2 = params.get("finalAmount2");
     const couponCode = params.get("couponCode");
     const percentageDiscount = params.get("percentageDiscount");
-    const api = ref("http://localhost:8080/api");
+    const api = ref("/api");
     const img = ref(
       "https://plus.unsplash.com/premium_photo-1661322640130-f6a1e2c36653?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8YXBwbGV8ZW58MHx8MHx8fDA%3D"
     );
@@ -114,7 +114,7 @@ createApp({
       }
     })
 
-    //缺優惠券
+
     //將收件者資料及購物車商品資料存進資料庫
     const addToOrders = async () => {      
       try{
