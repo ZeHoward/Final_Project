@@ -291,6 +291,7 @@ body {
   text-align: start;
   border-radius: 10px;
   display: none;
+    z-index: 500;
 }
 
 .memerinfo-icon {
