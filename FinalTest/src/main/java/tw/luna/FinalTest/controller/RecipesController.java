@@ -5,15 +5,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tw.luna.FinalTest.dto.RecipeDTO;
-import tw.luna.FinalTest.model.Product;
 import tw.luna.FinalTest.model.Recipes;
-import tw.luna.FinalTest.service.ProductService;
 import tw.luna.FinalTest.service.RecipesService;
-
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/recipes")
