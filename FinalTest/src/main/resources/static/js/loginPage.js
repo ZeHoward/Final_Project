@@ -39,8 +39,7 @@ window.onload = function () {
 	           fetch('/users/googleLogin', {
 	               method: 'POST',
 	               headers: {
-	                   //'Content-Type': 'application/json',
-					   'Content-Type': 'application/x-www-form-urlencoded',
+	                   'Content-Type': 'application/json',
 	               },
 	               body: JSON.stringify({ idToken: idToken }),
 	           }).then(response => {

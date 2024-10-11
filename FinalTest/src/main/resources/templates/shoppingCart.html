@@ -107,7 +107,7 @@
 
       createApp({
         setup() {
-          const api = ref("http://localhost:8080/api");
+          const api = ref("/api");
           const userId = ref(0); // 使用者 ID
           const products = ref([]); // 用來儲存產品的數組
 
@@ -173,8 +173,12 @@
 
           //套用優惠碼
           const applyCoupon = async () => {
-            console.log(123);
-            
+            console.log("進入套用優惠券");
+
+          // 在套用新優惠券前，重置折扣狀態
+          percentageDiscountToNext.value = 0;
+          discountAmountToNext.value = 0;
+
             console.log(cartId.value);
             try {
               const response = await axios.post(
@@ -223,14 +227,43 @@
             getCartId();
           };
 
+
           //取得cartId
           const getCartId = async () => {
           const res =await axios.get(`${api.value}/cart/getCartId/${userId.value}`);
           cartId.value = res.data.cartId;
           console.log(cartId.value);          
           };
-          
-          
+
+
+          //驗證是否已登入
+          const checkLoginStatus = () => {
+            return axios.get('users/checkSession')
+              .then(response => response.data) // 獲取響應數據
+              .catch(error => {
+                console.error("檢查登入狀態時發生錯誤", error);
+                return false; // 返回 false 表示發生錯誤
+              });
+          };
+
+          const showLoginPrompt = () => {
+            Swal.fire({
+              title: "未登入",
+              text: "請先登入才能查看購物車",
+              icon: "warning",
+              showCancelButton: true,
+              confirmButtonText: '登入',
+              cancelButtonText: '取消',
+            }).then((result) => {
+              if (result.isConfirmed) {
+                window.location.href = "/loginPage"; // 確認後跳轉至登入頁
+              }else{
+              window.location.href = "/enjoyum";
+              }
+            });
+          };
+
+
           // 定義獲取購物車資料的函式
           const getCart = async () => {
             const res = await axios.get(`${api.value}/cart/${userId.value}`);
@@ -289,9 +322,14 @@
             window.location.href = `/checkout?${queryParams}`;
           };
 
-          onMounted(() => {
-            getUserId();
-          });
+          onMounted(async () => {
+          const loggedIn = await checkLoginStatus(); // 檢查登入狀態
+          if (!loggedIn) { // 如果未登入
+            showLoginPrompt(); // 顯示登入提示
+          } else {
+            await getUserId(); // 如果已登入，獲取用戶信息
+          }
+        });
 
           return {
             products, // 將 products 暴露給模板
