@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -61,9 +62,11 @@ public class CouponController {
 
 
 
-	// 發放優惠券給用戶
+	 //發放優惠券給用戶
 	@PostMapping("/issue")
 	public ResponseEntity<String> issueCoupon(@RequestParam long userId, @RequestParam String couponCode) {
+	
+		
 		try {
 			couponService.issueCouponToUser(userId, couponCode);
 			return ResponseEntity.ok("優惠券已成功發放");
@@ -71,7 +74,7 @@ public class CouponController {
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}
 	}
-
+	
 	// 查詢所有優惠券：後台
 	@GetMapping("/all")
 	public ResponseEntity<List<Coupon>> getAllCoupons() {

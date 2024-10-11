@@ -291,7 +291,7 @@ body {
   text-align: start;
   border-radius: 10px;
   display: none;
-    z-index: 500;
+  z-index: 500;
 }
 
 .memerinfo-icon {
@@ -404,4 +404,20 @@ body {
     font-size: 20px;
     font-weight: bold;
     cursor: pointer;
+}
+
+#webSocketIconDiv {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 500;
+}
+
+#webSocketIconDic{
+	cursor:pointer;
+}
+
+
+#webSocketIcon{
+	font-size:40px;
 }

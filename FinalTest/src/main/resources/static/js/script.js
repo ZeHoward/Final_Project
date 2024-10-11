@@ -1,4 +1,6 @@
+console.log('aaaaaa')
 generateOverviewContent(); // 預設總覽頁面為首頁
+
 
 // 點擊"總覽"時生成內容的函數
 function generateOverviewContent() {
@@ -2288,9 +2290,11 @@ function generateCouponManagementForm() {
                         .catch((error) => console.error("Error toggling coupon:", error));
                 }
             });
-        });
+        }	);
+		
     }
 
+	
 
     // 綁定禁用/啟用按鈕的事件
     document.querySelectorAll(".delete-coupon-button").forEach((button) => {

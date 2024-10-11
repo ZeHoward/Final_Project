@@ -1,5 +1,6 @@
 package tw.luna.FinalTest.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -16,11 +17,14 @@ public class MyWebSocketHandler extends TextWebSocketHandler {
 
     // 用來存儲使用者的 WebSocketSession
     private Map<String, WebSocketSession> sessions = new HashMap<>();
+    
+    @Autowired
+    private HttpSession httpSession;
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         // 從 WebSocket session attributes 中取出 HttpSession
-        HttpSession httpSession = (HttpSession) session.getAttributes().get("HTTP_SESSION");
+    	HttpSession httpSession = (HttpSession) session.getAttributes().get("HTTP_SESSION");
         if (httpSession != null) {
             // 從 HttpSession 中取得使用者的 ID 或者其他身份識別信息
             String userId = (String) httpSession.getAttribute("userId");
