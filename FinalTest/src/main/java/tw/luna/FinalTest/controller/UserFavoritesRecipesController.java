@@ -22,18 +22,6 @@ public class UserFavoritesRecipesController {
     @Autowired
     private HttpSession session;
 
-//    @GetMapping("/getUserId")
-//    public long getUserId() {
-//        Users loggedInUser = null;
-//        if(session != null) {
-//            loggedInUser = (Users)session.getAttribute("loggedInUser");
-//            if(loggedInUser != null) {
-//                System.out.println("在products中獲取UserID:" + loggedInUser.getUserId());
-//            }
-//        }
-//        return loggedInUser.getUserId();
-//    }
-
     @GetMapping("/getUserId")
     public ResponseEntity<Long> getUserId() {
         UserAllInfo loggedInUser = (UserAllInfo) session.getAttribute("loggedInUser");
@@ -55,12 +43,6 @@ public class UserFavoritesRecipesController {
         return ResponseEntity.ok(favorite);
     }
 
-//    @DeleteMapping("/remove")
-//    public ResponseEntity<Void> removeFavorite(@RequestParam Long userId, @RequestParam int recipeId) {
-//
-//        service.removeFavorite(userId, recipeId);
-//        return ResponseEntity.noContent().build();
-//    }
 
     @DeleteMapping("/remove")
     public ResponseEntity<Void> removeFavorite(@RequestParam Long userId, @RequestParam int productId) {
