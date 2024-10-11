@@ -168,7 +168,7 @@ public class CouponService {
 
 		List<Users> usersToIssueCoupon = users.stream()
 				.filter(user -> !existingUserIds.contains(user.getUserId()))
-				.collect(Collectors.toList());
+				.toList();
 
 		List<UserCoupon> userCoupons = new ArrayList<>();
 		for (Users user : usersToIssueCoupon) {
@@ -188,7 +188,6 @@ public class CouponService {
 	}
 
 	// 切換優惠券狀態
-	@Transactional
 	public Coupon toggleCouponStatus(long couponId) {
 		Coupon coupon = couponRepository.findById(couponId)
 				.orElseThrow(() -> new IllegalArgumentException("優惠券不存在"));
