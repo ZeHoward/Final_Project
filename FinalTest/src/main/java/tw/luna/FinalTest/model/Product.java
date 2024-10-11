@@ -52,7 +52,7 @@ public class Product {
 	
 	@ManyToOne
 	@JoinColumn(name = "categoryId", referencedColumnName = "categoryId" ,nullable = false)
-    @JsonBackReference
+	@JsonBackReference
 	private Category category;
 	
 	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
