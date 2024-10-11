@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
 @Service
 public class RecipesService {
 
@@ -25,7 +24,7 @@ public class RecipesService {
 
 	// 獲取所有未刪除的食譜
 	public List<Recipes> getAllRecipes() {
-		return recipesRepository.findByIsDelFalse();  // 假設有個自定義方法，只查詢未被刪除的食譜
+		return recipesRepository.findByIsDelFalse();
 	}
 
 	// 根據 ID 獲取單個食譜
@@ -35,55 +34,56 @@ public class RecipesService {
 	}
 
 	// 新增食譜
-//	@Transactional
-	public Recipes saveRecipe(Recipes recipe) {
-		// 確保新添加的食譜默認為未刪除
+	public Recipes createRecipe(RecipeDTO recipeDTO) {
+		Product product = productRepository.findById(recipeDTO.getProductId())
+				.orElseThrow(() -> new ResourceNotFoundException("產品未找到，無法創建食譜"));
+
+		Recipes recipe = new Recipes();
+		recipe.setTitle(recipeDTO.getTitle());
+		recipe.setSteps(recipeDTO.getSteps());
+		recipe.setIngredients(recipeDTO.getIngredients());
+		recipe.setNotes(recipeDTO.getNotes());
+		recipe.setServings(recipeDTO.getServings());
+		recipe.setCookTime(recipeDTO.getCookTime());
+		recipe.setLevel(recipeDTO.getLevel());
+		recipe.setIsDel(false);
+		recipe.setProduct(product);
+
 		return recipesRepository.save(recipe);
 	}
 
 	// 更新食譜
-	public ResponseEntity<Recipes> updateRecipe(Integer id, Recipes recipeDetails) {
-		Optional<Recipes> recipeData = recipesRepository.findById(id);
+	public Recipes updateRecipe(Integer id, RecipeDTO recipeDTO) {
+		Recipes existingRecipe = recipesRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("更新失敗，未找到該食譜"));
 
-		if (recipeData.isPresent()) {
-			Recipes recipe = recipeData.get();
-			recipe.setTitle(recipeDetails.getTitle());
-			recipe.setSteps(recipeDetails.getSteps());
-			recipe.setIngredients(recipeDetails.getIngredients());
-			recipe.setNotes(recipeDetails.getNotes());
-			recipe.setServings(recipeDetails.getServings());
-			recipe.setCookTime(recipeDetails.getCookTime());
-			recipe.setLevel(recipeDetails.getLevel());
-			recipe.setIsDel(recipeDetails.getIsDel());
+		existingRecipe.setTitle(recipeDTO.getTitle());
+		existingRecipe.setSteps(recipeDTO.getSteps());
+		existingRecipe.setIngredients(recipeDTO.getIngredients());
+		existingRecipe.setNotes(recipeDTO.getNotes());
+		existingRecipe.setServings(recipeDTO.getServings());
+		existingRecipe.setCookTime(recipeDTO.getCookTime());
+		existingRecipe.setLevel(recipeDTO.getLevel());
+		existingRecipe.setIsDel(recipeDTO.getIsDel());
 
-			Recipes updatedRecipe = recipesRepository.save(recipe);
-			return ResponseEntity.ok(updatedRecipe);
-		} else {
-			return ResponseEntity.notFound().build();
-		}
+		return recipesRepository.save(existingRecipe);
 	}
+
 	// 邏輯刪除食譜
-	public void deleteRecipe(Integer id) {
-		Optional<Recipes> recipe = recipesRepository.findById(id);
+	public Recipes deleteRecipe(Integer id) {
+		Recipes existingRecipe = recipesRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("刪除失敗，未找到該食譜"));
 
-		recipe.ifPresent(r -> {
-			r.setIsDel(true);  // 設置邏輯刪除標記
-			recipesRepository.save(r);
-		});
+		existingRecipe.setIsDel(true);
+		return recipesRepository.save(existingRecipe);
 	}
 
+	// 根據產品 ID 查詢食譜
 	public Map<String, Object> getRecipesByProductId(Integer productId) {
 		Product product = productRepository.findById(productId)
-				.orElseThrow(() -> new ResourceNotFoundException("Product not found with id: " + productId));
+				.orElseThrow(() -> new ResourceNotFoundException("產品未找到，無法查詢食譜"));
 
 		List<Recipes> recipes = recipesRepository.findByProduct_ProductIdAndIsDelFalse(productId);
-
-		if (recipes.isEmpty()) {
-			return Map.of(
-					"message", "沒有找到與此產品相關的有效食譜",
-					"productName", product.getName()
-			);
-		}
 
 		List<RecipeDTO> recipeDTOs = recipes.stream()
 				.map(this::convertToDTO)
@@ -96,6 +96,7 @@ public class RecipesService {
 		);
 	}
 
+	// 將 Recipes 實體轉換為 RecipeDTO
 	private RecipeDTO convertToDTO(Recipes recipe) {
 		RecipeDTO dto = new RecipeDTO();
 		dto.setRecipeId(recipe.getRecipeId());
