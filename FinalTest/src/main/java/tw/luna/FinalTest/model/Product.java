@@ -52,7 +52,7 @@ public class Product {
 	
 	@ManyToOne
 	@JoinColumn(name = "categoryId", referencedColumnName = "categoryId" ,nullable = false)
-	@JsonBackReference
+	@JsonManagedReference
 	private Category category;
 	
 	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -72,16 +72,6 @@ public class Product {
 	@LastModifiedDate
 	@Column(name = "updatedAt", nullable = false)
 	private Timestamp updatedAt;
-// 新增一對多關係，商品可以有多張圖片(這裡重複了，上面已經有圖片了...)
-//	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-//	private List<ProductImage> images;
-//	public List<ProductImage> getImages() {
-//		return images;
-//	}
-
-//	public void setImages(List<ProductImage> images) {
-//		this.images = images;
-//	}
 
 	public Product() {
 	}

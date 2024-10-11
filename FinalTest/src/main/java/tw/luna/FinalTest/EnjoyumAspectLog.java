@@ -58,7 +58,7 @@ public class EnjoyumAspectLog {
 	@Before("execution(* tw.luna.FinalTest.controller.UsersController.login(..))")
 	public void beforeLogin(JoinPoint joinPoint) {
 		Object[] args = joinPoint.getArgs();
-		Users users = (Users) args[0];
+		Map<String, String> users = (Map) args[0];
 
 		//獲取發送請求端的ip
 		ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
@@ -77,7 +77,7 @@ public class EnjoyumAspectLog {
 						
 			File file = new File("log/enjoyumLog.txt");
 			BufferedWriter br = new BufferedWriter(new FileWriter(file, true));
-			br.write(time + "，發送請求的IP : " + clientIpAddress + "，登入帳號：" + users.getEmail() + "\n");
+			br.write(time + "，發送請求的IP : " + clientIpAddress + "，登入帳號：" + users.get("email") + "\n");
 			br.flush();
 			br.close();
 			
@@ -137,7 +137,7 @@ public class EnjoyumAspectLog {
             //System.out.println("Client IP: " + clientIpAddress);
         }
         
-      //將要紀錄的訊息寫到本地的loning.txt
+      //將要紀錄的訊息寫到本地的enjoyumLog.txt
   		try {
   			SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss.SSS");
   			Date date = new Date();

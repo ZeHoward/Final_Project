@@ -50,14 +50,29 @@ window.onload = () => {
 				return response.json();
 			}).then(data => {
 				if( data == 1 ){
-					alert('密碼修改成功,請重新登入');
-					window.location.href = '/loginPage';
+					Swal.fire({
+						title:"修改成功",
+						text:"密碼修改成功,請重新登入!!",
+						icon:"success"
+					}).then((result) => {
+		                if (result.isConfirmed) {
+		                    window.location.href = '/loginPage';
+		                }
+		            });
 				}else if( data == 0){
-					alert('伺服器忙碌中,請稍後在試!!');
+					Swal.fire({
+				        title: "修改失敗",
+				        text: "伺服器忙線中，請稍後在試!!",
+				        icon: "error"
+				    });
 				}
 			})
 		}else{
-			alert('請正確輸入完整的新密碼!!')
+			Swal.fire({
+		        title: "修改失敗",
+		        text: "請正確輸入完整的新密碼!!",
+		        icon: "warning"
+		    });
 		}
 		
 	})

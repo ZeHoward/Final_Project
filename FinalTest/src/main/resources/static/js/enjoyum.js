@@ -42,14 +42,23 @@ const checkIsPaidWEN = async (merchantNo) => {
     });
     const PaidMerchantNo = extractMerchantTradeNo(res.data);
 //res拆出
-    PutOrdersStatus(PaidMerchantNo)
+   if (getTradeStatus(res.data) == 1 ) {
+       PutOrdersStatus(PaidMerchantNo)
+   }
+
+}
+
+const getTradeStatus = (data) => {
+    // 將字符串轉換為對象
+    const params = new URLSearchParams(data);
+    // 獲取 TradeStatus 的值
+    return params.get('TradeStatus');
 }
 
 const PutOrdersStatus = async (PaidMerchantNo) => {
     const res = await axios.put(`${apiWEN}/ECPAY/changeOrderStatus`, {
         merchantNo: PaidMerchantNo
     });
-    console.log("修改付款狀態成功");
 };
 
 function extractMerchantTradeNo(inputString) {

@@ -36,7 +36,6 @@ window.onload = function () {
 			   return user.getIdToken();
 	       }).then((idToken) => {
                // 將 ID Token 發送到後端進行驗證
-			   console.log(idToken);
 	           fetch('/users/googleLogin', {
 	               method: 'POST',
 	               headers: {
@@ -176,7 +175,6 @@ window.onload = function () {
 			  }).then(data => {
 				switch(data){
 					case 'NOT_EXIST':
-						alert('此帳號尚未註冊!!');
 						Swal.fire({
 					        title: "此帳號尚未註冊!!",
 					        text: "請前往註冊頁面註冊會員",

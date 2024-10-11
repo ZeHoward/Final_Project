@@ -89,35 +89,32 @@ public class OrdersService {
 			OrderDetails orderDetail = new OrderDetails();
 			orderDetail.setOrder(orders);
 			orderDetail.setProduct(cartItem.getProduct());
+
+
+			cartItem.getProduct().setStockQuantity(cartItem.getProduct().getStockQuantity() - cartItem.getQuantity());
+
+
 			orderDetail.setQuantity(cartItem.getQuantity());
 			orderDetail.setPrice(cartItem.getPrice());
 			orderDetails.add(orderDetail);
-			System.out.println("1" + orderDetail);
-			System.out.println(orderDetails);
 		}
 		orders.setOrderDetails(orderDetails);
-		System.out.println("d1");
-		System.out.println(ordersInsertDto.getCode());
+
 		if (ordersInsertDto.getCode() != null && !Objects.equals(ordersInsertDto.getCode(), "")) {
-			System.out.println(123);
 			Coupon coupon = couponRepository.findCouponByCode(ordersInsertDto.getCode());
-			System.out.println(1234);
-			System.out.println(coupon);
+
 			if (coupon.getDiscountType() == DiscountType.percentage) {
 				orders.setPercentageDiscount(coupon.getDiscountValue());
 
-				System.out.println(orders.getPercentageDiscount());
 				orders.setCoupon(coupon);
 
 			} else if (coupon.getDiscountType() == DiscountType.amount) {
-				System.out.println("d2");
-				orders.setAmountDiscount(coupon.getDiscountValue());
 
-				System.out.println(orders.getAmountDiscount());
+				orders.setAmountDiscount(coupon.getDiscountValue());
 				orders.setCoupon(coupon);
 
 			}
-			System.out.println(orders);
+
 		}
 		orders.setOrderDate(LocalDateTime.now());
 		orders.setTotalAmount(ordersInsertDto.getTotalAmount());
@@ -125,15 +122,7 @@ public class OrdersService {
 		orders.setStatus("pending");
 		orders.setAddress(ordersInsertDto.getAddress());
 
-//        Set<CartItems> cartItems = cart.getCartItems();
-//        cartItems.stream().map(cartItem -> {
-//            orderDetails.stream().map(orderDetails1 -> {
-//
-//            });
-//
-//        });
 
-//
 		Payment payment = new Payment();
 		payment.setOrder(orders);
 		payment.setPaymentAmount(ordersInsertDto.getPaymentAmount());

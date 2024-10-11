@@ -1,4 +1,6 @@
+console.log('aaaaaa')
 generateOverviewContent(); // 預設總覽頁面為首頁
+
 
 // 點擊"總覽"時生成內容的函數
 function generateOverviewContent() {
@@ -835,11 +837,11 @@ function generateProductUploadForm() {
                 <div class="form-group">
                     <label for="category">菜品分類</label>
                     <select id="category">
-                        <option value="1">家常料理</option>
-                        <option value="2">兒童友善</option>
-                        <option value="3">銀髮友善</option>
-                        <option value="4">異國料理</option>
-                        <option value="5">多人料理</option>
+                        <option value="1">異國料理</option>
+                        <option value="2">多人料理</option>
+                        <option value="3">兒童友善</option>
+                        <option value="4">銀髮友善</option>
+                        <option value="5">家常料理</option>
                     </select>
                 </div>
 
@@ -894,6 +896,7 @@ function generateProductUploadForm() {
                     uploadProductImage(result.productId, selectedFile);
                 } else {
                     showSuccessMessage(productData.name);
+                    console.log(productData);
                 }
             })
             .catch((error) => {
@@ -1371,35 +1374,25 @@ function generateProductManagementWithActionsContent() {
                   <label for="type">商品類型</label>
                   <select id="type">
                       <option value="preparedFood" ${
-            product.type === "preparedFood" ? "selected" : ""
-        }>調理包</option>
-                      <option value="mealkit " ${
-            product.type === "mealkit" ? "selected" : ""
-        }>生鮮食材包</option>
+                            product.type === "preparedFood" ? "selected" : ""
+                        }>調理包</option>
+                                      <option value="mealkit " ${
+                            product.type === "mealkit" ? "selected" : ""
+                        }>生鮮食材包</option>
                   </select>
               </div>
               
               <div class="form-group">
                   <label for="category">菜品分類</label>
                   <select id="category">
-                      <option value="5" ${
-            product.category === "家常料理" ? "selected" : ""
-        }>家常料理</option>
-                      <option value="3" ${
-            product.category === "兒童友善" ? "selected" : ""
-        }>兒童友善</option>
-                      <option value="4" ${
-            product.category === "銀髮友善" ? "selected" : ""
-        }>銀髮友善</option>
-                      <option value="1" ${
-            product.category === "異國料理" ? "selected" : ""
-        }>異國料理</option>
-                      <option value="2" ${
-            product.category === "多人料理" ? "selected" : ""
-        }>多人料理</option>
+                        <option value=1 ${product.category.categoryId === 1 ? "selected" : ""}>異國料理</option>
+                        <option value=2 ${product.category.categoryId === 2 ? "selected" : ""}>多人料理</option>
+                        <option value=3 ${product.category.categoryId === 3 ? "selected" : ""}>兒童友善</option>
+                        <option value=4 ${product.category.categoryId === 4 ? "selected" : ""}>銀髮友善</option>
+                        <option value=5 ${product.category.categoryId === 5 ? "selected" : ""}>家常料理</option>
                   </select>
               </div>
-
+              
               <div class="form-group">
                   <label for="description">商品描述</label>
                   <textarea id="description" rows="4">${
@@ -1492,7 +1485,6 @@ function generateProductManagementWithActionsContent() {
             stockQuantity: parseInt(document.getElementById("stockQuantity").value),
         };
         updateProduct(updatedProduct);
-
         console.log(updatedProduct);
     }
 
@@ -1519,6 +1511,7 @@ function generateProductManagementWithActionsContent() {
                     icon: "success",
                     timer: 1500,
                 });
+                console.log(result);
                 generateProductManagementWithActionsContent(); // 返回商品管理頁面
             })
             .catch((error) => {
@@ -1632,8 +1625,6 @@ function generateProductManagementWithActionsContent() {
     // setupImageUpload();
 }
 
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~``
 
 // 點擊"食譜管理"時生成內容的函數
 function generateRecipeUploadForm() {
@@ -2225,6 +2216,7 @@ function generateCouponManagementForm() {
 
         // 重置表單
         couponForm.reset();
+        displayCoupons(); // 提交表单后，刷新优惠券列表
     });
 
     // 顯示已新增的優惠券
@@ -2249,19 +2241,19 @@ function generateCouponManagementForm() {
 
             // 建立優惠券行
             tr.innerHTML = `
-            <td>${coupon.code}</td>
-            <td>${coupon.name}</td>
-            <td>${coupon.discountType === "percentage" ? "百分比" : "固定金額"}</td>
-            <td>${coupon.discountValue}</td>
-            <td>${coupon.expiryDate}</td>
-            <td>${status}</td>  <!-- 顯示優惠券狀態 -->
-            <td>
-                <button class="${coupon.active ? 'deactivate-button' : 'activate-button'}" data-index="${index}">
-                    ${coupon.active ? "禁用" : "啟用"}
-                </button>
-                <button class="send-button" data-index="${index}">發送</button>
-            </td>
-        `;
+        <td>${coupon.code}</td>
+        <td>${coupon.name}</td>
+        <td>${coupon.discountType === "percentage" ? "百分比" : "固定金額"}</td>
+        <td>${coupon.discountValue}</td>
+        <td>${coupon.expiryDate}</td>
+        <td>${status}</td>  <!-- 顯示優惠券狀態 -->
+        <td>
+            <button class="${coupon.active ? 'deactivate-button' : 'activate-button'}" data-index="${index}">
+                ${coupon.active ? "禁用" : "啟用"}
+            </button>
+            <button class="send-button" data-index="${index}">發送</button>
+        </td>
+    `;
             couponTableBody.appendChild(tr);
         });
 
@@ -2289,43 +2281,42 @@ function generateCouponManagementForm() {
                 }
             });
         });
-    }
 
+        // 綁定發送按鈕的事件
+        document.querySelectorAll(".send-button").forEach((button) => {
+            button.addEventListener("click", function () {
+                const index = this.getAttribute("data-index");
+                const couponId = coupons[index].couponId;
 
-    // 綁定禁用/啟用按鈕的事件
-    document.querySelectorAll(".delete-coupon-button").forEach((button) => {
-        button.addEventListener("click", function () {
-            const index = this.getAttribute("data-index");
-            const coupon = coupons[index];
-
-            // 顯示確認彈窗
-            const action = coupon.isDisabled ? "啟用" : "禁用";
-            const isConfirmed = confirm(`確定要${action}此優惠券嗎？`);
-
-            if (isConfirmed) {
-                // 發送請求切換優惠券狀態
-                fetch(`/api/coupons/toggle/${coupon.couponId}`, {
+                // 發送 POST 請求到 /api/coupons/issue/all
+                fetch(`/api/coupons/issue/all?couponId=${couponId}`, {
                     method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
                 })
                     .then((response) => {
                         if (!response.ok) {
-                            throw new Error("Failed to toggle coupon status");
+                            throw new Error("Failed to send coupon");
                         }
-                        return response.json();  // 解析 JSON 回應
+                        return response.text(); // 假設 API 返回一個字符串訊息
                     })
                     .then((data) => {
-                        alert(data.message);  // 顯示狀態消息
-                        // 根據返回的狀態更新表格
-                        coupons[index].isActive = data.isActive;
-                        displayCoupons();  // 刷新優惠券列表
+                        alert(`優惠券 ${couponId} 已成功發送: ${data}`);
                     })
                     .catch((error) => {
-                        console.error("Error toggling coupon:", error);
+                        console.error("Error sending coupon:", error);
+                        alert(`優惠券 ${couponId} 發送失敗，請稍後再試`);
                     });
-
-            }
+            });
         });
-    });
+    }
+
+
+
+
+
+
 }
 
 function logout() {
