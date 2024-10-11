@@ -137,7 +137,7 @@ public class EnjoyumAspectLog {
             //System.out.println("Client IP: " + clientIpAddress);
         }
         
-      //將要紀錄的訊息寫到本地的loning.txt
+      //將要紀錄的訊息寫到本地的enjoyumLog.txt
   		try {
   			SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss.SSS");
   			Date date = new Date();

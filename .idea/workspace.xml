@@ -2,9 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="46b205d8-494f-4239-b044-b0cf1023239f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/FinalTest/target/classes/static/js/productList.js" beforeDir="false" afterPath="$PROJECT_DIR$/FinalTest/target/classes/static/js/productList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/target/classes/static/js/template.js" beforeDir="false" afterPath="$PROJECT_DIR$/FinalTest/target/classes/static/js/template.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinalTest/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/FinalTest/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinalTest/src/main/java/tw/luna/FinalTest/EnjoyumAspectLog.java" beforeDir="false" afterPath="$PROJECT_DIR$/FinalTest/src/main/java/tw/luna/FinalTest/EnjoyumAspectLog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinalTest/target/classes/META-INF/maven/tw.luna/FinalTest/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/FinalTest/target/classes/META-INF/maven/tw.luna/FinalTest/pom.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FinalTest/target/classes/tw/luna/FinalTest/controller/PageController.class" beforeDir="false" afterPath="$PROJECT_DIR$/FinalTest/target/classes/tw/luna/FinalTest/controller/PageController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinalTest/target/classes/tw/luna/FinalTest/controller/RecipesController.class" beforeDir="false" afterPath="$PROJECT_DIR$/FinalTest/target/classes/tw/luna/FinalTest/controller/RecipesController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinalTest/target/classes/tw/luna/FinalTest/dto/cart/CartSelectDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/FinalTest/target/classes/tw/luna/FinalTest/dto/cart/CartSelectDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinalTest/target/classes/tw/luna/FinalTest/model/Users.class" beforeDir="false" afterPath="$PROJECT_DIR$/FinalTest/target/classes/tw/luna/FinalTest/model/Users.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinalTest/target/classes/tw/luna/FinalTest/service/OrdersService.class" beforeDir="false" afterPath="$PROJECT_DIR$/FinalTest/target/classes/tw/luna/FinalTest/service/OrdersService.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,24 +19,24 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 0
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
   <component name="ProjectId" id="2n6mAqpEwifOHGstTHBtPbH5gxj" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "testAPI2",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/NewFinalProject/Final_Project",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;testAPI2&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/NewFinalProject/Final_Project&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -49,6 +54,7 @@
       <option name="presentableId" value="Default" />
       <updated>1728301759203</updated>
       <workItem from="1728301760037" duration="30000" />
+      <workItem from="1728610595630" duration="67000" />
     </task>
     <servers />
   </component>

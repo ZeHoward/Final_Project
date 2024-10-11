@@ -128,11 +128,16 @@ public class ECPAYService {
         return dateTime.format(outputFormatter);
     }
 
-    public void changeOrderStatus(String merchantNo) {
+    public String changeOrderStatus(String merchantNo) {
 
         Orders orders = ordersRepository.findByMerchantNo(merchantNo);
 
-        orders.setStatus("completed");
-        ordersRepository.save(orders);
+        if(orders != null){
+            orders.setStatus("completed");
+            ordersRepository.save(orders);
+            return "paid";
+        }else{
+            return "no paid";
+        }
     }
 }

@@ -34,8 +34,8 @@ public class ECPAYController {
     }
 
     @PutMapping("/changeOrderStatus")
-    public void changeOrderStatus(@RequestBody MerchantByUserDto merchantNo) {
-        ecpayService.changeOrderStatus(merchantNo.getMerchantNo());
+    public String changeOrderStatus(@RequestBody MerchantByUserDto merchantNo) {
+        return  ecpayService.changeOrderStatus(merchantNo.getMerchantNo());
     }
 
 
