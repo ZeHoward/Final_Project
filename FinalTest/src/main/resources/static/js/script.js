@@ -1,4 +1,6 @@
+console.log('aaaaaa')
 generateOverviewContent(); // 預設總覽頁面為首頁
+
 
 // 點擊"總覽"時生成內容的函數
 function generateOverviewContent() {
@@ -1623,8 +1625,6 @@ function generateProductManagementWithActionsContent() {
     // setupImageUpload();
 }
 
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~``
 
 // 點擊"食譜管理"時生成內容的函數
 function generateRecipeUploadForm() {

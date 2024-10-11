@@ -1,6 +1,7 @@
 package tw.luna.FinalTest.service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -95,7 +96,13 @@ public class UsersServiceImpl {
 		
 	}
 	
-	public UsersResponse loginUsers(Users users) {
+	public UsersResponse loginUsers(Map<String, String> request) {
+		String email = request.get("email");
+		String password = request.get("password");
+		Users users = new Users();
+		users.setEmail(email);
+		users.setPassword(password);
+		
 		UsersResponse usersResponse = isExistUser(users.getEmail());
 		
 		if (usersResponse.getUsersStatus() == UsersStatus.NOT_EXIST) {

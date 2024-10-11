@@ -57,9 +57,9 @@ public class UsersController extends TextWebSocketHandler{
 	
 	
 	@PostMapping("/login")
-	public UsersResponse login(@RequestBody Users users) {
+	public UsersResponse login(@RequestBody Map<String, String> request) {
 		System.out.println("loginSession:" + session);
-		UsersResponse loginUsers = usersServiceImpl.loginUsers(users);
+		UsersResponse loginUsers = usersServiceImpl.loginUsers(request);
 		
 		if(loginUsers.getUsersStatus() == UsersStatus.LOGIN_SUCCESS && loginUsers.getMesg().equals("Login Success") ) {
 			Long userId = loginUsers.getUsers().getUserId();
