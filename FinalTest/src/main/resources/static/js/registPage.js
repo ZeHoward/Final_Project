@@ -54,7 +54,8 @@ window.onload = function () {
     document.getElementById('regist').addEventListener('click', () => {
       let userName = document.getElementById('registUserName').value;
 	  let birthday = document.getElementById('registBirthday').value || '';
-
+	  
+/*
       if(finallyEmail != '' && finallyPassword != '' && userName != '' && birthday != ''){
 		Swal.fire({
 			  title: '正在發送中...',
@@ -64,13 +65,13 @@ window.onload = function () {
 			   padding: '3em',
 			   color: '#716add',
 			   background: '#fff', 
-			   /*
+			   
 			   backdrop: `
 			     rgba(0,0,123,0.4)
 			     url("https://sweetalert2.github.io/images/nyan-cat.gif")
 			     left top
 			     no-repeat
-			   `,*/
+			   `,
 			  didOpen: () => {
 			    Swal.showLoading();
 			  },
@@ -133,7 +134,7 @@ window.onload = function () {
 			text:"請再檢查電子信箱、密碼、使用者名稱、生日是否輸入有誤!!",
 			icon:"warning"
 		})
-      }
+      }*/
       
     });
 	
