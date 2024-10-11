@@ -114,7 +114,7 @@ createApp({
       }
     })
 
-    //缺優惠券
+
     //將收件者資料及購物車商品資料存進資料庫
     const addToOrders = async () => {      
       try{

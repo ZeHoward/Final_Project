@@ -148,7 +148,6 @@
       .then((data) => {
         if (typeof data === "boolean") {
           if (data) {
-            alert("成功登出");
             window.location.href = "/enjoyum";
           }
         } else {
@@ -178,21 +177,36 @@
       let message = document.getElementById("message").value;
 
       if(name === '' || name == null){
-          alert('請輸入姓名');
+		  Swal.fire({
+			title:"請輸入姓名",
+			text:"",
+			icon:"warning",
+			timer:"1000"
+		})
       }else if(contactInfo === '' || contactInfo == null){
-          alert('請輸入聯絡方式');
+		  Swal.fire({
+  			title:"請輸入聯絡方式",
+  			text:"",
+  			icon:"warning",
+  			timer:"1000"
+  		})
       }else if(message === '' || message == null){
-          alert('請輸入諮詢內容');
+		  Swal.fire({
+  			title:"請輸入諮詢內容",
+  			text:"",
+  			icon:"warning",
+  			timer:"1000"
+  		})
       }else{
 
 		Swal.fire({
 		  title: '正在發送中...',
 		  text: '請稍後',
 		  allowOutsideClick: false,
-		  width: 600, // 设置宽度
-		   padding: '3em', // 设置内边距
-		   color: '#716add', // 设置文本颜色
-		   background: '#fff', // 背景设置
+		  width: 600,
+		   padding: '3em',
+		   color: '#716add',
+		   background: '#fff', 
 		   /*
 		   backdrop: `
 		     rgba(0,0,123,0.4)
@@ -201,7 +215,7 @@
 		     no-repeat
 		   `,*/
 		  didOpen: () => {
-		    Swal.showLoading(); // 顯示加載提示
+		    Swal.showLoading();
 		  },
 
 		});
@@ -236,7 +250,7 @@
 		    Swal.fire({
 		        title: "發送失敗",
 		        text: "伺服器忙碌中,請稍後再試!!",
-		        icon: "warning"
+		        icon: "error"
 		    });
               console.log('Error:', error);
           })

@@ -45,15 +45,35 @@ document.getElementById("resetButton").addEventListener("click", () => {
 			return response.json();
 		}).then(data => {
 			if(data){
-				alert("已將重設密碼連結發送至電子信箱!!");
-				window.location.href = '/enjoyum';
+				Swal.fire({
+				title:"發送成功",
+				text:"已將重設密碼連結發送至電子信箱!!",
+				icon:"success"
+			}).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = '/enjoyum';
+                }
+            });
 			}else{
-				alert('您輸入正確的生日!!')
+				Swal.fire({
+			        title: "請輸入正確的生日!!",
+			        text: "",
+			        icon: "warning"
+			    });
 			}
 		}).catch((error) => {
 			console.error('查詢失敗:', error);
+			Swal.fire({
+		        title: "發送失敗",
+		        text: "伺服器忙線中，請稍後在試!!",
+		        icon: "error"
+		    });
 		})
 	}else{
-		alert('請輸入已註冊過的電子信箱!!');
+		Swal.fire({
+	        title: "請輸入註冊過的帳號",
+	        text: "",
+	        icon: "warning"
+	    });
 	}
 })

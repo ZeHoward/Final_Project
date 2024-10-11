@@ -757,6 +757,14 @@ canvas {
     border: 1px solid #ccc;
 }
 
+.recipeInput {
+    height: 17px; 
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
 .recipe-table {
     width: 100%;
     border-collapse: collapse;

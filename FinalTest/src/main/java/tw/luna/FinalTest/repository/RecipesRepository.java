@@ -27,4 +27,6 @@ public interface RecipesRepository extends JpaRepository<Recipes, Integer> {
 
 	// 自定義查詢方法，僅返回未邏輯刪除的食譜
 	List<Recipes> findByIsDelFalse();
+
+	List<Recipes> findByProduct_ProductIdAndIsDelFalse(Integer productId);
 }
