@@ -2225,6 +2225,7 @@ function generateCouponManagementForm() {
 
         // 重置表單
         couponForm.reset();
+        displayCoupons(); // 提交表单后，刷新优惠券列表
     });
 
     // 顯示已新增的優惠券
@@ -2249,19 +2250,19 @@ function generateCouponManagementForm() {
 
             // 建立優惠券行
             tr.innerHTML = `
-            <td>${coupon.code}</td>
-            <td>${coupon.name}</td>
-            <td>${coupon.discountType === "percentage" ? "百分比" : "固定金額"}</td>
-            <td>${coupon.discountValue}</td>
-            <td>${coupon.expiryDate}</td>
-            <td>${status}</td>  <!-- 顯示優惠券狀態 -->
-            <td>
-                <button class="${coupon.active ? 'deactivate-button' : 'activate-button'}" data-index="${index}">
-                    ${coupon.active ? "禁用" : "啟用"}
-                </button>
-                <button class="send-button" data-index="${index}">發送</button>
-            </td>
-        `;
+        <td>${coupon.code}</td>
+        <td>${coupon.name}</td>
+        <td>${coupon.discountType === "percentage" ? "百分比" : "固定金額"}</td>
+        <td>${coupon.discountValue}</td>
+        <td>${coupon.expiryDate}</td>
+        <td>${status}</td>  <!-- 顯示優惠券狀態 -->
+        <td>
+            <button class="${coupon.active ? 'deactivate-button' : 'activate-button'}" data-index="${index}">
+                ${coupon.active ? "禁用" : "啟用"}
+            </button>
+            <button class="send-button" data-index="${index}">發送</button>
+        </td>
+    `;
             couponTableBody.appendChild(tr);
         });
 
@@ -2289,43 +2290,42 @@ function generateCouponManagementForm() {
                 }
             });
         });
-    }
 
+        // 綁定發送按鈕的事件
+        document.querySelectorAll(".send-button").forEach((button) => {
+            button.addEventListener("click", function () {
+                const index = this.getAttribute("data-index");
+                const couponId = coupons[index].couponId;
 
-    // 綁定禁用/啟用按鈕的事件
-    document.querySelectorAll(".delete-coupon-button").forEach((button) => {
-        button.addEventListener("click", function () {
-            const index = this.getAttribute("data-index");
-            const coupon = coupons[index];
-
-            // 顯示確認彈窗
-            const action = coupon.isDisabled ? "啟用" : "禁用";
-            const isConfirmed = confirm(`確定要${action}此優惠券嗎？`);
-
-            if (isConfirmed) {
-                // 發送請求切換優惠券狀態
-                fetch(`/api/coupons/toggle/${coupon.couponId}`, {
+                // 發送 POST 請求到 /api/coupons/issue/all
+                fetch(`/api/coupons/issue/all?couponId=${couponId}`, {
                     method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
                 })
                     .then((response) => {
                         if (!response.ok) {
-                            throw new Error("Failed to toggle coupon status");
+                            throw new Error("Failed to send coupon");
                         }
-                        return response.json();  // 解析 JSON 回應
+                        return response.text(); // 假設 API 返回一個字符串訊息
                     })
                     .then((data) => {
-                        alert(data.message);  // 顯示狀態消息
-                        // 根據返回的狀態更新表格
-                        coupons[index].isActive = data.isActive;
-                        displayCoupons();  // 刷新優惠券列表
+                        alert(`優惠券 ${couponId} 已成功發送: ${data}`);
                     })
                     .catch((error) => {
-                        console.error("Error toggling coupon:", error);
+                        console.error("Error sending coupon:", error);
+                        alert(`優惠券 ${couponId} 發送失敗，請稍後再試`);
                     });
-
-            }
+            });
         });
-    });
+    }
+
+
+
+
+
+
 }
 
 function logout() {
