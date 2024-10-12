@@ -1,4 +1,3 @@
-console.log('aaaaaa')
 generateOverviewContent(); // 預設總覽頁面為首頁
 
 
@@ -742,13 +741,13 @@ function generateOrderDetailsContent(order) {
         order.totalAmount
     }</p>
                         <p><strong>優惠券 ID:</strong> ${
-        order.couponId || "N/A"
+        order.couponId || "無使用"
     }</p>
                         <p><strong>百分比折扣:</strong> ${
-        order.percentageDiscount
+        order.percentageDiscount || 0
     }%</p>
                         <p><strong>折扣金額:</strong> $${
-        order.amountDiscount
+        order.amountDiscount || 0
     }</p>
                         <p><strong>最終金額:</strong> $${order.finalAmount}</p>
                         <p><strong>訂單狀態:</strong> ${order.status}</p>
