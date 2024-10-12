@@ -20,6 +20,39 @@ body {
   margin-bottom: 50px;
 }
 
+/*找商品 按鈕*/
+.productBtn{
+background-color:#D35B50;
+font-size: 20px;
+cursor: pointer;
+border: none;
+width:150px;
+border-radius:10px;
+color:white;
+margin-left:20px;
+margin-top:20px;
+}
+.productBtn:hover{
+background-color:#E0912F;
+}
+
+/*找食譜 按鈕*/
+.recipeBtn{
+background-color:#A1C14B;
+font-size: 20px;
+cursor: pointer;
+border: none;
+width:150px;
+border-radius:10px;
+color:white;
+margin-top:20px;
+margin-left:85px;
+}
+
+.recipeBtn:hover{
+background-color:#D1DE74;
+}
+
 /*返回購物按鈕*/
 .gobackButton {
   font-size: 16px;
