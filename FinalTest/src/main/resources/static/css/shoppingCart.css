@@ -164,8 +164,8 @@ th {
 .actions {
   display: flex;
   justify-content: flex-end;
-  margin-top: 50px;
-  min-height: 50px; /* 根据需要调整高度 */
+  margin-top: 20px;
+  min-height: 50px; /* 根據需要調整高度 */
 }
 .submitButton {
   background-color: #d35b50;
@@ -179,7 +179,7 @@ th {
   margin-left: 10px;
   width: 240px;
   font-weight: bold;
-  margin: 50px 0 100px 0;
+  margin: 10px 0 50px 0;
 }
 .submitButton:hover {
   background-color: #ca2a1c;
