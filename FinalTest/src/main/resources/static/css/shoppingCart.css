@@ -20,6 +20,24 @@ body {
   margin-bottom: 50px;
 }
 
+/*隱藏數字輸入框中的上下增減按鈕*/
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+-webkit-appearance: none;
+margin: 0;
+}
+/*數量*/
+ input.amount {
+   border: none;
+   outline: none;
+   padding: 10px; /* 添加內邊距 */
+   background-color: transparent; /* 背景顏色透明 */
+   font-size:16px;
+   font-weight:bolder;
+   width: 50px;
+   text-align: center;
+ }
+
 /*找商品 按鈕*/
 .productBtn{
 background-color:#D35B50;
