@@ -142,13 +142,25 @@
         </div>
     </div>
     
+    <!-- 聊天室 -->
     <div id="webSocketIconDiv" >
   		<i id="webSocketIcon" class="fa-brands fa-facebook-messenger"></i>
 	</div>
 	
-	<div>
-		
-	</div>
+	<div id="chatWindow">
+        <div id="chatHeader">
+            <h4>Chat</h4>
+            <span id="closeBtn">&times;</span>
+        </div>
+        <div id="chatBody">
+            <div class="message">Hello! How can I help you?</div>
+            <div class="message user">Hi! I need some help.</div>
+        </div>
+        <div id="chatFooter">
+            <input type="text" id="messageInput" placeholder="Type your message...">
+            <button id="sendBtn">Send</button>
+        </div>
+    </div>
 
 </body>
 <script th:src="@{js/template.js}" defer="defer"></script>

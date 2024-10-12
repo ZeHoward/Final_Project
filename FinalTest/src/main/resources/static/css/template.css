@@ -406,6 +406,7 @@ body {
     cursor: pointer;
 }
 
+/********聊天室*********/
 #webSocketIconDiv {
     position: fixed;
     bottom: 20px;
@@ -413,11 +414,86 @@ body {
     z-index: 500;
 }
 
-#webSocketIconDic{
+#webSocketIconDiv:hover{
 	cursor:pointer;
 }
 
 
 #webSocketIcon{
 	font-size:40px;
+}
+
+
+#chatWindow {
+    position: fixed;
+    bottom: 20px;
+    right: 50px;
+    width: 300px;
+    height: 400px;
+    background-color: #f1f1f1;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+#chatHeader {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    border-radius: 10px 10px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#chatHeader h4 {
+    margin: 0;
+}
+
+#closeBtn {
+    cursor: pointer;
+    font-size: 18px;
+}
+
+#chatBody {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+    background-color: #fff;
+}
+
+.message {
+    background-color: #e1e1e1;
+    padding: 8px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.message.user {
+    background-color: #007bff;
+    color: white;
+    text-align: right;
+}
+
+#chatFooter {
+    padding: 10px;
+    display: flex;
+}
+
+#messageInput {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+#sendBtn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
 }
