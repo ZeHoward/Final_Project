@@ -49,23 +49,25 @@ public class CartService {
 
         CartItems cartItem = cartItemsRepository.findByCartCartIdAndProductName(cart.getCartId(), cartInsertDto.getProductName());
 
+
         if (cartItem == null) {
             // Product doesn't exist in the cart, add new item
             cartItem = new CartItems();
             cartItem.setCart(cart);
             cartItem.setProduct(product);
-            cartItem.setQuantity(Math.max(cartInsertDto.getQuantity(), 1));
+            if (cartInsertDto.getQuantity() <= product.getStockQuantity()) {
+                cartItem.setQuantity(Math.max(cartInsertDto.getQuantity(), 1));
+            }
             cartItem.setPrice(product.getPrice());
         } else {
             // Product exists in the cart, update quantity
+            if (cartInsertDto.getQuantity() + cartItem.getQuantity() <= product.getStockQuantity()) {
             cartItem.setQuantity(cartItem.getQuantity() + Math.max(cartInsertDto.getQuantity(), 1));
         }
-
+        }
         cartItemsRepository.save(cartItem);
 
-
     }
-
 
     //根據用戶 ID 獲取該用戶的購物車項目
     public List<CartSelectDto> getCartItemsByUserId(Long userId) {
@@ -83,7 +85,8 @@ public class CartService {
                     cartItem.getPrice(),
                     cartItem.getQuantity(),
                     product.getName(),
-                    imageUrl
+                    imageUrl,
+                    product.getStockQuantity() //新增
             );
             result.add(dto);
         }
