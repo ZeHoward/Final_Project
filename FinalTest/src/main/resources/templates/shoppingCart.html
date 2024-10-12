@@ -21,7 +21,7 @@
     <div th:replace="header"></div>
     <!-- 開始編輯 -->
     <div id="myContainer">
-      <div class="container">
+      <div class="container" v-if="products.length != 0">
         <!-- 返回購物車的連結 -->
         <button
           type="button"
@@ -98,6 +98,10 @@
         </div>
       </div>
     </div>
+      <div v-else style="margin-bottom: 30%">
+        <h3>目前購物車內無商品</h3>
+
+      </div>
 
     <div th:replace="footer"></div>
 

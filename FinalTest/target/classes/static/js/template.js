@@ -256,5 +256,89 @@
           })
       }
   })
-  
+ 
+// ChatGPT小幫手聊天室
+function initChatApp() {
+  const chatWindow = document.getElementById('chatWindow');
+  const chatIcon = document.getElementById('webSocketIcon');
+  const chatInput = document.getElementById('chatInput');
+  const chatMessages = document.getElementById('chatMessages');
+  const sendButton = document.getElementById('sendButton');
+  const closeButton = document.getElementById('closeButton');
 
+  // 綁定點擊圖片事件，顯示對話框
+  chatIcon.addEventListener('click', function () {
+      toggleChatWindow('show');
+  });
+
+  // 綁定發送按鈕事件，發送訊息
+  sendButton.addEventListener('click', function () {
+      const userMessage = chatInput.value.trim();
+      if (userMessage !== '') {
+          appendMessage('user', userMessage);
+          sendMessageToGPT(userMessage);
+          chatInput.value = ''; // 清空輸入框
+      }
+  });
+
+  // 綁定關閉按鈕事件，隱藏對話框並恢復原狀
+  closeButton.addEventListener('click', function () {
+      toggleChatWindow('hide');
+  });
+
+  // 顯示或隱藏對話框
+  function toggleChatWindow(action) {
+      if (action === 'show') {
+          chatWindow.style.display = 'block';
+          chatIcon.style.display = 'none';  // 隱藏圖標
+      } else if (action === 'hide') {
+          chatWindow.style.display = 'none';
+          chatIcon.style.display = 'block';  // 恢復圖標
+      }
+  }
+
+  // 顯示訊息在對話框，帶有打字機效果
+  function appendMessage(role, message) {
+      const newMessage = document.createElement('div');
+      newMessage.textContent = role === 'user' ? '你: ' : '即食享熱小幫手： ';
+      chatMessages.appendChild(newMessage);
+
+      let i = 0;
+      const speed = 50; // 調整打字速度，單位為毫秒
+
+      function typeWriter() {
+          if (i < message.length) {
+              newMessage.textContent += message.charAt(i);
+              i++;
+              setTimeout(typeWriter, speed);
+          } else {
+              chatMessages.scrollTop = chatMessages.scrollHeight; // 自動滾動到底部
+          }
+      }
+
+      typeWriter(); // 開始打字效果
+  }
+
+  // 送出訊息給後端處理 GPT 回應
+  function sendMessageToGPT(userMessage) {
+    fetch(`/chat?prompt=${encodeURIComponent(userMessage)}`, {
+      method: 'GET',
+      headers: {
+          'accept': '*/*'
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+        // 根據 API 回應結構解析數據
+        const assistantMessage = data.choices[0].message.content;
+        appendMessage('AI', assistantMessage);  // 顯示 AI 回應，帶打字機效果
+    })
+    .catch(error => {
+        appendMessage('AI', '發生錯誤，請聯繫開發商');
+        console.error('Error:', error);
+    });
+  }
+}
+
+// 初始化聊天應用
+document.addEventListener("DOMContentLoaded", initChatApp);
