@@ -297,12 +297,26 @@ function initChatApp() {
       }
   }
 
-  // 顯示訊息在對話框
+  // 顯示訊息在對話框，帶有打字機效果
   function appendMessage(role, message) {
       const newMessage = document.createElement('div');
-      newMessage.textContent = role === 'user' ? '你: ' + message : '即食享熱小幫手： ' + message;
+      newMessage.textContent = role === 'user' ? '你: ' : '即食享熱小幫手： ';
       chatMessages.appendChild(newMessage);
-      chatMessages.scrollTop = chatMessages.scrollHeight;  // 自動滾動到底部
+
+      let i = 0;
+      const speed = 50; // 調整打字速度，單位為毫秒
+
+      function typeWriter() {
+          if (i < message.length) {
+              newMessage.textContent += message.charAt(i);
+              i++;
+              setTimeout(typeWriter, speed);
+          } else {
+              chatMessages.scrollTop = chatMessages.scrollHeight; // 自動滾動到底部
+          }
+      }
+
+      typeWriter(); // 開始打字效果
   }
 
   // 送出訊息給後端處理 GPT 回應
@@ -317,10 +331,10 @@ function initChatApp() {
     .then(data => {
         // 根據 API 回應結構解析數據
         const assistantMessage = data.choices[0].message.content;
-        appendMessage('即食享熱小幫手：', assistantMessage);  // 顯示 AI 回應
+        appendMessage('AI', assistantMessage);  // 顯示 AI 回應，帶打字機效果
     })
     .catch(error => {
-        appendMessage('即食享熱小幫手：', '發生錯誤，請聯繫開發商');
+        appendMessage('AI', '發生錯誤，請聯繫開發商');
         console.error('Error:', error);
     });
   }
