@@ -144,8 +144,19 @@
     
     <!-- 聊天室 -->
     <div id="webSocketIconDiv" >
-  		<i id="webSocketIcon" class="fa-brands fa-facebook-messenger"></i>
+<!--  		<i id="webSocketIcon" class="fa-brands fa-facebook-messenger"></i>-->
+        <img id="webSocketIcon" src="/material/icon/chatbot.png" style="height: 80px; width: 80px;" alt="WebSocket Icon">
 	</div>
+
+    <div id="chatWindow">
+        <div id="chatWindowHeader">
+            即食享熱小幫手
+            <button id="closeButton">×</button>
+        </div>
+        <div id="chatMessages"></div>
+        <input type="text" id="chatInput" placeholder="輸入訊息...">
+        <button id="sendButton">發送</button>
+    </div>
 	
 	<div id="chatWindow">
         <div id="chatHeader">
