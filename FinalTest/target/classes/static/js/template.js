@@ -263,9 +263,6 @@ function initChatApp() {
   const sendButton = document.getElementById('sendButton');
   const closeButton = document.getElementById('closeButton');
 
-<<<<<<< HEAD
-  
-=======
   // 綁定點擊圖片事件，顯示對話框
   chatIcon.addEventListener('click', function () {
       toggleChatWindow('show');
@@ -342,4 +339,3 @@ function initChatApp() {
 
 // 初始化聊天應用
 document.addEventListener("DOMContentLoaded", initChatApp);
->>>>>>> 4627a2b73b58bc7eb822a589e42d46f6ad871bcb
