@@ -12,9 +12,11 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- vue -->
     <script src="https://unpkg.com/vue@3.2.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
   </head>
 
   <body>
@@ -322,12 +324,31 @@
 
           //刪除單一品項商品
           const deleteProduct = async (product) => {
-            await axios.delete(
-              `${api.value}/cart/delete/${userId.value}/${product.name}`
-            );
-            getCart(); // 更新購物車資料
-          };
+          const result = await Swal.fire({
+          title: '您確定要刪除這個商品嗎？',
+          text: `${product.name}`,
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#d33',
+          cancelButtonColor: '#3085d6',
+          confirmButtonText: '確定',
+          cancelButtonText: '取消'
+        });
 
+        // 如果使用者按下確定
+        if (result.isConfirmed) {
+          await axios.delete(`${api.value}/cart/delete/${userId.value}/${product.name}`);
+          getCart(); // 更新購物車資料
+          // 顯示已刪除的提示框，自動在2秒後關閉
+          Swal.fire({
+            title: '已刪除!',
+            text: `${product.name} 已從購物車中刪除。`,
+            icon: 'success',
+            timer: 1500, // 1500毫秒後自動關閉
+            showConfirmButton: false // 不顯示確認按鈕
+          });
+        }
+      };
           //前往Checkout頁
           const toCheckout = () => {
             const totalAmount = products.value.reduce(
