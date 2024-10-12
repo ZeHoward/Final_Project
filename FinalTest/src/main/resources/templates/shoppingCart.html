@@ -98,26 +98,26 @@
         </div>
       </div>
     </div>
-      <div v-else style="margin-bottom: 30%">
-        <h3 style="margin-left: 20px;margin-top:20px">目前購物車內無商品，歡迎選購⁽⁽ ◟(∗ ˊωˋ ∗)◞ ⁾⁾</h3>
-        <div style="margin-bottom: 30%">
+    <div v-else style="margin-bottom: 10%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+      <h2 style="margin-top: 80px;font-size:24px">
+        目前購物車內無商品，歡迎選購！
+      </h2>
+      <div style="display: flex; justify-content: center; margin-top: 50px;">
         <button
-                type="button"
                 class="productBtn"
                 onclick="window.location.href='productList';"
         >
           前往選購商品
         </button>
         <button
-                type="button"
                 class="recipeBtn"
                 onclick="window.location.href='recipe';"
         >
           前往閱讀食譜
         </button>
-        </div>
-
       </div>
+    </div>
+
 
     <div th:replace="footer"></div>
 

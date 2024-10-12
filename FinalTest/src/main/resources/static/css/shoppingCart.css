@@ -29,11 +29,13 @@ border: none;
 width:150px;
 border-radius:10px;
 color:white;
-margin-left:20px;
-margin-top:20px;
+margin: 0 10px;
+height:50px;
+
 }
 .productBtn:hover{
 background-color:#E0912F;
+
 }
 
 /*找食譜 按鈕*/
@@ -45,8 +47,8 @@ border: none;
 width:150px;
 border-radius:10px;
 color:white;
-margin-top:20px;
-margin-left:85px;
+margin: 0 10px;
+height:50px;
 }
 
 .recipeBtn:hover{
