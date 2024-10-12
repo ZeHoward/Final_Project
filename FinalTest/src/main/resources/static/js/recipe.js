@@ -162,11 +162,69 @@ function handleRecipeActions(event) {
   if (target.closest(".add-to-favorite")) {
     event.preventDefault();
     event.stopPropagation();
-    const recipeElement = target.closest(".recipe-card");
-    const recipeId = recipeElement.dataset.recipeId;
-    const productId = recipeElement.dataset.productId;
-    const recipeName = recipeElement.dataset.recipeName;
-    toggleFavorite(recipeId, productId, recipeName, target.closest(".fa-heart"));
+    checkLoginStatus()
+        .then((isLoggedIn) => {
+          if (isLoggedIn) {
+            getUserId().then(userId => {
+              if (userId) {
+                const recipeElement = target.closest(".recipe-card");
+                const recipeId = recipeElement.dataset.recipeId;
+                const productId = recipeElement.dataset.productId;
+                const recipeName = recipeElement.dataset.recipeName;
+                const favoriteBtn = productElement.querySelector(".fa-heart");
+
+                if (favoriteBtn && favoriteBtn.classList.contains("active")) {
+                  fetch(`/api/favorites/recipes/remove?userId=${userId}&productId=${productId}`, {
+                    method: "DELETE",
+                  }).then(() => {
+                    favoriteBtn.classList.remove("active");
+                    Swal.fire({
+                      title: "已取消收藏",
+                      text: `已將${productName}移除收藏`,
+                      icon: "success",
+                      timer: 1500,
+                    });
+                  }).catch((error)=>{
+                    console.error("移除商品收藏遇到錯誤",error);
+                  })
+                } else {
+                  fetch(`/api/favorites/recipes/add?userId=${userId}&productId=${productId}`, {
+                    method: "POST",
+                  })
+                      .then(response => response.json())
+                      .then(() => {
+                        favoriteBtn.classList.add("active");
+                        Swal.fire({
+                          title: "成功",
+                          text: `已將${productName}加入收藏`,
+                          icon: "success",
+                          timer: 1500,
+                        });
+                        console.log(productId);
+                        console.log(productName);
+                      })
+                      .catch((error) => {
+                        console.error("加入收藏時發生錯誤:", error);
+                      });
+                }
+              }
+            });
+          } else {
+            Swal.fire({
+              title: "未登入",
+              text: `請先登入才能加入收藏`,
+              icon: "warning",
+              showCancelButton: true,
+              confirmButtonText: '登入',
+              cancelButtonText: '取消',
+            }).then((result) => {
+              if (result.isConfirmed) {
+                window.location.href = "/loginPage";
+              }
+            });
+          }
+        })
+    return; // 阻止後續的跳轉行為
   } else if (target.closest(".view-recipe")) {
     event.preventDefault();
     event.stopPropagation();
@@ -176,28 +234,7 @@ function handleRecipeActions(event) {
 }
 
 
-function toggleFavorite(recipeId, productId, recipeName, favoriteBtn) {
-  console.log(`Toggle favorite for Product ID: ${productId} - ${recipeName}`);
-  checkLoginStatus()
-      .then((isLoggedIn) => {
-        if (isLoggedIn) {
-          getUserId().then(userId => {
-            if (userId) {
-              console.log(`User ID retrieved: ${userId}`);
-              if (favoriteBtn.classList.contains("active")) {
-                removeFavorite(userId, productId, recipeName, favoriteBtn);
-              } else {
-                addFavorite(userId, recipeId, recipeName, favoriteBtn);
-              }
-            } else {
-              console.error("User ID is null or undefined");
-            }
-          }).catch(error => console.error("Error retrieving User ID:", error));
-        } else {
-          showLoginPrompt();
-        }
-      }).catch(error => console.error("Error checking login status:", error));
-}
+
 
 function addFavorite(userId, recipeId, recipeName, favoriteBtn) {
   console.log(`Adding to favorites - User ID: ${userId}, Recipe ID: ${recipeId}`);

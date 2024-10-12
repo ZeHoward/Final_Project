@@ -361,10 +361,8 @@ function checkLoginStatus() {
             throw new Error("無法檢查登入狀態");
         }
         return response.json();
-        console.log(data);
-    })
-        .catch(error => {
+    }).catch(error => {
             console.error("登入時發生錯誤", error);
             return false;
-        })
+    })
 }
