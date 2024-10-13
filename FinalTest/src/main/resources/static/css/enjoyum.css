@@ -149,7 +149,7 @@ h1 {
   font-size: 16px;
 }
 
-.fa-cart-shopping{
+.add-to-cart .fa-cart-shopping{
   color: #ffffff;
 }
 
@@ -163,7 +163,7 @@ h1 {
   font-size: 16px;
 }
 
-.fa-heart{
+.add-to-favorite .fa-heart{
   color: #bbbbbb;
 }
 

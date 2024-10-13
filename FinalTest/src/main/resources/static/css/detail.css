@@ -55,7 +55,7 @@
 .ship > h3 {
   margin: 10px 0;
   padding: 3px;
-  background-color: #cbb68c;
+  background-color: #ece2b3;
   border-radius: 5px;
   display: inline-block;
 }
@@ -72,9 +72,10 @@
   border-bottom: #d1de74 1px solid;
 }
 
-label {
-  font-size: 24px;
+label{
+  font-size: 30px;
   font-weight: 700;
+  margin: 5px 0;
 }
 
 input {
@@ -119,8 +120,18 @@ input,
   cursor: pointer;
 }
 
+.cart:hover,
+.cart:active{
+  background-color: #fb8c00;
+}
+
 .like {
   background-color: #F3CE6E;
+}
+
+.like:hover,
+.like:active{
+  background-color: #fdcf37;
 }
 
 .container {
@@ -210,7 +221,7 @@ h1 {
   font-size: 16px;
 }
 
-.fa-cart-shopping{
+.add-to-cart .fa-cart-shopping{
   color: #ffffff;
 }
 
@@ -224,7 +235,7 @@ h1 {
   font-size: 16px;
 }
 
-.fa-heart{
+.add-to-favorite .fa-heart{
   color: #bbbbbb;
 }
 
@@ -247,7 +258,7 @@ h1 {
 }
 
 .tab button {
-  background-color: #F3CE6E;
+  background-color: #D1DE74;
   text-align: center;
   border: none;
   outline: none;
@@ -261,15 +272,15 @@ h1 {
 }
 
 .tab button.hover {
-  background-color: #fdcf37;
+  background-color: #A1C14B;
 }
 .tab button.active {
-  background-color: #fdcf37;
+  background-color: #A1C14B;
 }
 
 .tabcontent {
   padding: 30px 12px;
-  border-bottom: 1px solid #f3ce6e;
+  border-bottom: 1px solid #D1DE74;
 }
 
 .tablinks {
