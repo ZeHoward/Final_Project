@@ -26,7 +26,7 @@
             <table>
                 <tbody>
                 <tr>
-                    <td>名字：</td>
+                    <td>名&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;字：</td>
                     <td id="name">{{lastName2}} {{name5}}</td>
                 </tr>
                 <tr>
@@ -38,7 +38,7 @@
                     <td id="phone">{{phone}}</td>
                 </tr>
                 <tr>
-                    <td>地址：</td>
+                    <td>地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址：</td>
                     <td id="address">{{ zipCode+ city +
                         area + address}}</td>
                 </tr>
@@ -101,13 +101,13 @@
                 </tbody>
             </table>
             <div id="items-container"></div>
-            <div id="total-container" class="total">
-                <p id="subtotal">商品總額：NT $ {{totalAmount}}</p>
+            <div id="total-container" class="total" v-if="isGetCart">
+                <p id="subtotal">商&nbsp;品&nbsp;&nbsp;總&nbsp;額：NT $ {{totalAmount}}</p>
                 <p id="discount" style="color: #d35b50">
                     優惠券折抵：NT $ {{discountAmount != 0 ?　discountAmount :
                         percentageDiscount != 0 ? percentageDiscount : 0}}
                 </p>
-                <p id="shipping">運費：NT $ {{160}}</p>
+                <p id="shipping">運&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;費：NT $ {{160}}</p>
                 <p id="finalAmount">付款總金額：NT $ {{finalAmount2}}</p>
                 <p id="total" style="font-size: large"></p>
             </div>

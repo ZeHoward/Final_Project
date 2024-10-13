@@ -339,4 +339,7 @@ function initChatApp() {
 
 // 初始化聊天應用
 document.addEventListener("DOMContentLoaded", initChatApp);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5499284ec16c97d21ae1a1f510676922ac844584

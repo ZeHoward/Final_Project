@@ -30,6 +30,10 @@ tbody td {
   object-fit: cover;
 }
 
+
+
+/* 以下為主畫面 */
+
 .infoTable {
   margin-top: 95px;
   border: 2px solid rgb(111, 184, 111); /* 整個外邊框 */
@@ -41,7 +45,14 @@ tbody td {
   padding: 10px;
 }
 
-/* 以下為主畫面 */
+.infoTable td:first-child {
+    width: 20%; /* 第一欄寬度 */
+}
+
+.infoTable td:nth-child(2) {
+    width: 80%; /* 第二欄寬度 */
+}
+
 .container {
   display: flex;
   flex: 1 1 100%;
@@ -99,6 +110,8 @@ h1 {
 .total {
   margin-top: 20px;
   font-weight: bolder;
+  /* margin-left:250px; */
+  margin-left: 55%;
 }
 
 .goBack {

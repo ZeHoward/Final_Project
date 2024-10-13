@@ -12,6 +12,7 @@ public class CartSelectDto {
     private Integer quantity;
     private String name;
     private String image;
+    private Integer stockQuantity;
 
     public CartSelectDto() {
     }
@@ -20,12 +21,23 @@ public class CartSelectDto {
         return image;
     }
 
-    public CartSelectDto(Integer cartitemsId, Integer price, Integer quantity, String name, String image) {
+
+    public CartSelectDto(Integer cartitemsId, Integer price, Integer quantity, String name, String image, Integer stockQuantity) {
         this.cartitemsId = cartitemsId;
         this.price = price;
         this.quantity = quantity;
         this.name = name;
         this.image = image;
+        this.stockQuantity=stockQuantity;
+    }
+
+
+    public Integer getStockQuantity() {
+        return stockQuantity;
+    }
+
+    public void setStockQuantity(Integer stockQuantity) {
+        this.stockQuantity = stockQuantity;
     }
 
     public void setImage(String image) {
