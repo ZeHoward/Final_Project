@@ -112,7 +112,7 @@ function handleProductActions(event) {
                             const productName = productElement.dataset.productName;
                             const favoriteBtn = productElement.querySelector(".fa-heart");
 
-                            if (favoriteBtn && favoriteBtn.classList.contains("active")) {
+                            if (favoriteBtn.classList.contains("active")) {
                                 fetch(`/api/favorites/remove?userId=${userId}&productId=${productId}`, {
                                     method: "DELETE",
                                 }).then(() => {
@@ -270,7 +270,7 @@ function displayProducts(productsToShow) {
             <p class="product-price">$NT${product.price}</p>
             <div class="home-product-btn">
                 <button class="add-to-favorite"><i class="fa-solid fa-heart"></i>&nbsp;&nbsp;收藏商品</button>
-                <button class="add-to-cart"><i class="fa-solid fa-cart-shopping"></i>&nbsp;&nbsp;&nbsp;加入購物車</button>
+                <button class="add-to-cart"><i class="fa-solid fa-cart-shopping"></i>&nbsp;&nbsp;加入購物車</button>
             </div>
         `;
         productDiv.innerHTML = productHtml;
@@ -482,4 +482,7 @@ function searchProducts(keyword) {
             console.error("搜尋過程發生錯誤", error);
         });
 }
+
+
+
 

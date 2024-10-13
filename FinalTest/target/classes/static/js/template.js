@@ -253,7 +253,7 @@
           })
       }
   })
- 
+
 // ChatGPT小幫手聊天室
 function initChatApp() {
   const chatWindow = document.getElementById('chatWindow');

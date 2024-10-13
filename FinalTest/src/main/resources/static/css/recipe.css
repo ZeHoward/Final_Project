@@ -1,17 +1,3 @@
-/* * {
-  font-family: "Noto Sans TC", system-ui;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: Arial, sans-serif;
-  width: 100vw;
-  max-width: 100%;
-  overflow-x: hidden;
-} */
-
 /* 中間區塊(食譜分類側邊欄位和食譜卡) */
 .mid {
     display: flex;
@@ -161,43 +147,44 @@ label{
     font-weight: 700;
 }
 
-.view-recipe {
-    background-color: #e0912f;
-    color: white;
-    padding: 10px 0;
-    cursor: pointer;
-    flex: 1 1 50%;
-    border: none;
-    height: 50px;
-    font-size: 16px;
-}
-
 .recipe-actions {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    height: 50px;
-    margin: 0 auto;
 }
 
-.add-to-favorite {
-    padding: 10px 0;
-    background-color: #f44336;
-    border: none;
-    color: white;
-    cursor: pointer;
+.add-to-favorite,
+.view-recipe{
     flex: 1 1 50%;
-    height: 50px;
+    height: 60px;
+}
+
+.view-recipe {
+    background-color: #e0912f;
+    color: #ffffff;
+    padding: 10px 0;
+    margin-top: 15px;
+    border:none;
+    cursor: pointer;
     font-size: 16px;
 }
 
-.add-to-favorite.active {
-    color: #cc4235;
+.add-to-favorite {
+    background-color: #fad04f;
+    color: #ffffff;
+    padding: 10px 0;
+    margin-top: 15px;
+    border:none;
+    cursor: pointer;
+    font-size: 16px;
 }
 
-.view-recipe:hover,
-.view-recipe:active {
-    background-color: #de8415;
+.add-to-favorite .fa-heart{
+    color: #bbbbbb;
+}
+
+i.active {
+    color: red !important;
 }
 
 .pagination {
