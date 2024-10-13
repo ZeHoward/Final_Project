@@ -406,6 +406,7 @@ body {
     cursor: pointer;
 }
 
+/********聊天室*********/
 #webSocketIconDiv {
     position: fixed;
     bottom: 20px;
@@ -413,7 +414,7 @@ body {
     z-index: 500;
 }
 
-#webSocketIconDic{
+#webSocketIconDiv:hover{
 	cursor:pointer;
 }
 

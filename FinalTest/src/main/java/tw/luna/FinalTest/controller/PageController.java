@@ -115,13 +115,13 @@ public class PageController {
 		return "resetPassword";
 	}
 	
-	@GetMapping("/sendPage")
+	@GetMapping("/userChatPage")
 	public String sendPage() {
-		return "sendPage";
+		return "userChatPage";
 	}
 	
-	@GetMapping("/receivePage")
+	@GetMapping("/managerChatPage")
 	public String receivePage() {
-		return "receivePage";
+		return "managerChatPage";
 	}
 }

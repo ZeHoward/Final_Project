@@ -45,6 +45,8 @@ document.addEventListener("DOMContentLoaded", function () {
           `;
                 infoSection.innerHTML = productHtml;
 
+                document.getElementById("productName").textContent = product.name;
+
                 // 購買數量加減
                 var stockQuantity = `${product.stockQuantity}`;
                 var quantityInput = document.getElementById("quantity");

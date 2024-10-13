@@ -844,7 +844,6 @@ function generateProductUploadForm() {
                     </select>
                 </div>
 
-
                 <!-- 商品描述 -->
                 <div class="form-group">
                     <label for="description">商品描述</label>
@@ -874,34 +873,32 @@ function generateProductUploadForm() {
 
     let selectedFile = null;
 
-    function uploadProduct(productData) {
+    function createProduct(productData) {
         fetch(`/products`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(productData),
-            mode: "cors",
         })
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error("上傳商品失敗");
-                }
-                return response.json();
-            })
-            .then((result) => {
-                console.log("商品上傳成功", result);
-                if (selectedFile) {
-                    uploadProductImage(result.productId, selectedFile);
-                } else {
-                    showSuccessMessage(productData.name);
-                    console.log(productData);
-                }
-            })
-            .catch((error) => {
-                console.error("上傳商品時發生錯誤", error);
-                showErrorMessage(productData.name);
-            });
+        .then((response) => {
+            if (!response.ok) {
+                return response.text().then(text => { throw new Error(text) });
+            }
+            return response.json();
+        })
+        .then((result) => {
+            console.log("商品上傳成功", result);
+            if (selectedFile) {
+                uploadProductImage(result.productId, selectedFile);
+            } else {
+                showSuccessMessage(result.name);
+            }
+        })
+        .catch((error) => {
+            console.error("上傳商品時發生錯誤", error);
+            showErrorMessage(productData.name, error.message);
+        });
     }
 
     function uploadProductImage(productId, file) {
@@ -913,20 +910,20 @@ function generateProductUploadForm() {
             method: 'POST',
             body: formData
         })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('圖片上傳失敗');
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log('圖片上傳成功:', data);
-                showSuccessMessage(document.getElementById("name").value);
-            })
-            .catch(error => {
-                console.error('圖片上傳錯誤:', error);
-                showErrorMessage(document.getElementById("name").value, '商品已創建，但圖片上傳失敗');
-            });
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('圖片上傳失敗');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('圖片上傳成功:', data);
+            showSuccessMessage(document.getElementById("name").value);
+        })
+        .catch(error => {
+            console.error('圖片上傳錯誤:', error);
+            showErrorMessage(document.getElementById("name").value, '商品已創建，但圖片上傳失敗');
+        });
     }
 
     function showSuccessMessage(productName) {
@@ -976,13 +973,10 @@ function generateProductUploadForm() {
                 name: document.getElementById("name").value,
                 description: document.getElementById("description").value,
                 price: parseInt(document.getElementById("price").value),
-                category: {
-                    categoryId: parseInt(document.getElementById("category").value),
-                },
-                stockQuantity: parseInt(document.getElementById("stockQuantity").value),
-                isDel: false,
+                categoryId: parseInt(document.getElementById("category").value),
+                stockQuantity: parseInt(document.getElementById("stockQuantity").value)
             };
-            uploadProduct(productData);
+            createProduct(productData);
         });
     } else {
         console.error("submitButton 元素未找到");
@@ -1472,56 +1466,49 @@ function generateProductManagementWithActionsContent() {
 
     function updateProductDetails(product) {
         const updatedProduct = {
-            productId: parseInt(document.getElementById("productId").value),
-            sku: document.getElementById("sku").value,
             name: document.getElementById("name").value,
             type: document.getElementById("type").value,
-            category: {
-                categoryId: parseInt(document.getElementById("category").value),
-            },
+            categoryId: parseInt(document.getElementById("category").value),
             price: parseInt(document.getElementById("price").value),
             description: document.getElementById("description").value,
             stockQuantity: parseInt(document.getElementById("stockQuantity").value),
         };
-        updateProduct(updatedProduct);
-        console.log(updatedProduct);
+        updateProduct(product.productId, updatedProduct);
     }
 
-    function updateProduct(productData) {
-        fetch(`/products`, {
-            method: "POST",
+    function updateProduct(productId, productData) {
+        fetch(`/products/${productId}`, {
+            method: "PUT",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(productData),
-            mode: "cors",
         })
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error("修改商品失敗");
-                }
-                return response.json();
-            })
-            .then((result) => {
-                console.log("商品修改成功", result);
-                Swal.fire({
-                    title: "成功",
-                    text: `成功修改「${productData.name}」商品資訊`,
-                    icon: "success",
-                    timer: 1500,
-                });
-                console.log(result);
-                generateProductManagementWithActionsContent(); // 返回商品管理頁面
-            })
-            .catch((error) => {
-                console.error("修改商品時發生錯誤", error);
-                Swal.fire({
-                    title: "錯誤",
-                    text: `修改${productData.name}商品資訊時發生錯誤`,
-                    icon: "error",
-                    timer: 1500,
-                });
+        .then((response) => {
+            if (!response.ok) {
+                return response.text().then(text => { throw new Error(text) });
+            }
+            return response.json();
+        })
+        .then((result) => {
+            console.log("商品修改成功", result);
+            Swal.fire({
+                title: "成功",
+                text: `成功修改「${productData.name}」商品資訊`,
+                icon: "success",
+                timer: 1500,
             });
+            generateProductManagementWithActionsContent();
+        })
+        .catch((error) => {
+            console.error("修改商品時發生錯誤", error);
+            Swal.fire({
+                title: "錯誤",
+                text: `修改商品資訊時發生錯誤: ${error.message}`,
+                icon: "error",
+                timer: 1500,
+            });
+        });
     }
 
     // 圖片上傳

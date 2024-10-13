@@ -42,7 +42,6 @@ body {
   overflow-x: hidden;
 }
 
-
 /* 以下為主畫面 */
 .container {
   display: flex;
@@ -53,7 +52,7 @@ body {
 
 .left,
 .right {
-  flex:1 1 50%;
+  flex: 1 1 50%;
   padding: 20px;
   margin: 10px 5%;
   border: none;
@@ -100,15 +99,18 @@ h1 {
 .item-price {
   text-align: right;
 }
+
 .total {
   margin-top: 20px;
   font-weight: bolder;
+  /* margin-left:250px; */
+  margin-left: 55%;
 }
 .form-row {
   display: flex;
   justify-content: space-between;
   margin-bottom: 15px;
-  flex-wrap: wrap; /* 允许子项在容器宽度不足时换行 */
+  flex-wrap: wrap; /* 允許子項在容器寬度不足時換行 */
 }
 .form-row label,
 .form-row input,

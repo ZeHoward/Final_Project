@@ -18,6 +18,8 @@
 
     <!-- content area start -->
       <div class="container" id="myContainer">
+
+<!--        <div v-if="isGetCart">-->
         <!-- main-left -->
         <div class="left">
           <div class="header-row">
@@ -146,15 +148,6 @@
             </div>
 
             <div style="margin-top: 15%">
-              <!-- 返回購物按鈕-->
-<!--              <button-->
-<!--                type="button"-->
-<!--                class="gobackBtn"-->
-<!--                onclick="window.location.href='/shoppingCart';"-->
-<!--              >-->
-<!--                &lt; 返回購物車-->
-<!--              </button>-->
-
               <button
                       type="button"
                       class="gobackBtn"
@@ -198,14 +191,14 @@
                 </tr>
               </tbody>
             </table>
-            <div id="items-container"></div>
-            <div id="total-container" class="total">
-              <p id="subtotal">商品總額：NT $ {{totalAmount2}}</p>
+            <div id="items-container" ></div>
+            <div id="total-container" class="total" v-if="isGetCart">
+              <p id="subtotal">商&nbsp;品&nbsp;&nbsp;總&nbsp;額：NT $ {{totalAmount2}}</p>
               <p id="discount" style="color: #d35b50">
                 優惠券折抵：NT $ {{discountAmount != 0 ?　discountAmount :
                 percentageDiscount != 0 ? percentageDiscount : 0}}
               </p>
-              <p id="shipping">運費：NT $ {{160}}</p>
+              <p id="shipping">運&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;費：NT $ {{160}}</p>
               <p id="finalAmount">
                 付款總金額：NT $ {{finalAmount - 　discountAmount -
                 percentageDiscount}}
@@ -214,6 +207,7 @@
             </div>
           </div>
         </div>
+<!--      </div>-->
       </div>
     <!-- content area end -->
 
@@ -662,6 +656,7 @@
           const cityName = ref("");
           const isSameInfo = ref(false); // 確保這個變量被定義
           const district = ref("");
+          const isGetCart = ref(false);
 
           const totalAmount2 = computed(() => {
             return products.value.reduce(
@@ -798,6 +793,7 @@
           // 定義獲取購物車資料的函式
           const getCart = async () => {
             const res = await axios.get(`${api.value}/cart/${userId.value}`);
+            isGetCart.value = true;
             products.value = res.data; // 將獲取的資料儲存到 products 中
           };
 
@@ -858,6 +854,7 @@
             discountAmount,
             percentageDiscount,
             totalAmount2,
+            isGetCart
 
             
           };

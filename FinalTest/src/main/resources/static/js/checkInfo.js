@@ -22,6 +22,8 @@ createApp({
     const zipCode = params.get("zipCode")
     const area = params.get("area")
     const city = params.get("city")
+
+    const isGetCart = ref(false);
     
     const address = params.get("address")
     const pay = ref(false)
@@ -55,6 +57,7 @@ createApp({
      // 定義獲取資料的函式
      const getCart = async () => {
       const res = await axios.get(`${api.value}/cart/${userId.value}`);
+      isGetCart.value = true;
       products.value = res.data
     };
 
@@ -159,7 +162,8 @@ createApp({
       merchantTradeNo,
       isSubmit,
       discountAmount,
-      percentageDiscount
+      percentageDiscount,
+      isGetCart
     }
     }
     }).mount("#myContainer")
