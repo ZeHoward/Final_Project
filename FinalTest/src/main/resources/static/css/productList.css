@@ -156,40 +156,38 @@ label,select{
   align-items: center;
 }
 
-.add-to-cart,.add-to-favorite{
+.add-to-cart,
+.add-to-favorite{
   flex: 1 1 50%;
   height: 60px;
 }
 
 .add-to-cart {
   background-color: #e0912f;
-  color: white;
-  border: none;
+  color: #ffffff;
   padding: 10px 0;
-  margin-top: 5px;
+  margin-top: 15px;
+  border:none;
   cursor: pointer;
   font-size: 16px;
+}
+
+.add-to-cart .fa-cart-shopping{
+  color: #ffffff;
 }
 
 .add-to-favorite {
-  margin-top: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  background-color: #f44336;
+  background-color: #fad04f;
   color: #ffffff;
+  padding: 10px 0;
+  margin-top: 15px;
+  border:none;
   cursor: pointer;
   font-size: 16px;
 }
 
-.add-to-favorite.favorited {
-  color: #cc4235; /* 收藏後的顏色 */
-}
-
-.add-to-cart:hover,
-.add-to-cart:active {
-  background-color: #de8415;
+.fa-heart{
+  color: #bbbbbb;
 }
 
 .pagination{

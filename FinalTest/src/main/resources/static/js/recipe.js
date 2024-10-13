@@ -171,24 +171,27 @@ function handleRecipeActions(event) {
                 const recipeId = recipeElement.dataset.recipeId;
                 const productId = recipeElement.dataset.productId;
                 const recipeName = recipeElement.dataset.recipeName;
-                const favoriteBtn = productElement.querySelector(".fa-heart");
+                const favoriteBtn = recipeElement.querySelector(".fa-heart");
 
-                if (favoriteBtn && favoriteBtn.classList.contains("active")) {
-                  fetch(`/api/favorites/recipes/remove?userId=${userId}&productId=${productId}`, {
+                if (favoriteBtn.classList.contains("active")) {
+                  fetch(`/api/favorites/recipes/remove?userId=${userId}&recipeId=${recipeId}`, {
                     method: "DELETE",
                   }).then(() => {
                     favoriteBtn.classList.remove("active");
                     Swal.fire({
                       title: "已取消收藏",
-                      text: `已將${productName}移除收藏`,
+                      text: `已將${recipeName}移除收藏`,
                       icon: "success",
                       timer: 1500,
                     });
+                    console.log(productId);
+                    console.log(recipeName);
+                    console.log(recipeId);
                   }).catch((error)=>{
                     console.error("移除商品收藏遇到錯誤",error);
                   })
                 } else {
-                  fetch(`/api/favorites/recipes/add?userId=${userId}&productId=${productId}`, {
+                  fetch(`/api/favorites/recipes/add?userId=${userId}&recipeId=${recipeId}`, {
                     method: "POST",
                   })
                       .then(response => response.json())
@@ -196,12 +199,13 @@ function handleRecipeActions(event) {
                         favoriteBtn.classList.add("active");
                         Swal.fire({
                           title: "成功",
-                          text: `已將${productName}加入收藏`,
+                          text: `已將${recipeName}加入收藏`,
                           icon: "success",
                           timer: 1500,
                         });
                         console.log(productId);
-                        console.log(productName);
+                        console.log(recipeName);
+                        console.log(recipeId);
                       })
                       .catch((error) => {
                         console.error("加入收藏時發生錯誤:", error);

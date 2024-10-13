@@ -74,9 +74,6 @@ body {
   background-color: #717171;
 }
 
-i.active {
-  color: red;
-}
 
 /* 生鮮食材包專區 */
 .container {
@@ -144,32 +141,32 @@ h1 {
 
 .add-to-cart {
   background-color: #e0912f;
-  color: white;
-  border: none;
+  color: #ffffff;
   padding: 10px 0;
-  margin-top: 5px;
+  margin-top: 15px;
+  border:none;
   cursor: pointer;
   font-size: 16px;
+}
+
+.fa-cart-shopping{
+  color: #ffffff;
 }
 
 .add-to-favorite {
-  margin-top: 5px;
-  padding: 10px 0;
-  border: none;
-  background-color: #f44336;
+  background-color: #fad04f;
   color: #ffffff;
+  padding: 10px 0;
+  margin-top: 15px;
+  border:none;
   cursor: pointer;
   font-size: 16px;
 }
 
-/*.add-to-favorite.favorited {*/
-/*  color: #cc4235; !* 收藏後的顏色 *!*/
-/*}*/
-
-.add-to-cart:hover,
-.add-to-cart:active {
-  background-color: #de8415;
+.fa-heart{
+  color: #bbbbbb;
 }
+
 
 .nav-button {
   position: relative;
@@ -343,4 +340,8 @@ h1 {
     font-size: 25px;
   }
 
+}
+
+i.active {
+  color: red;
 }
