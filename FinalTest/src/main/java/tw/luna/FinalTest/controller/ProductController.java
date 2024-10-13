@@ -92,7 +92,7 @@ public class ProductController {
 			Product createdProduct = productService.createProduct(productDTO);
 			return ResponseEntity.status(HttpStatus.CREATED).body(createdProduct);
 		} catch (Exception e) {
-			e.printStackTrace(); // 為了調試，記錄完整的錯誤堆棧
+			e.printStackTrace();
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
 					.body("Error creating product: " + e.getMessage());
 		}

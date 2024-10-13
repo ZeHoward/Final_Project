@@ -5,28 +5,43 @@
     <title>Chat Room - Page 2</title>
 </head>
 <body>
-    <h1>managerChatPage</h1>
+<!-- 包含header部分 -->
+<div th:replace="header"></div>
+    <h1>Chat Room - Page 2</h1>
     <div>
         <input type="text" id="messageInput" placeholder="Enter message" />
-        <button onclick="sendMessage()">Send</button>
+        <button id='sendMessage'>Send</button>
     </div>
     <div id="chatbox"></div>
 
-    <script type="text/javascript">
-        var socket = new WebSocket("ws://localhost:8080/chat");
+   <script>
+	   console.log('aaaa');
+	   let socket = new WebSocket("ws://localhost:8080/messageChat");
+	
+	   socket.onmessage = (event) => {
+	       let chatbox = document.getElementById('chatbox');
+	       let message = document.createElement('p');
+	       message.innerText = event.data;
+	       chatbox.appendChild(message);
+	   };
+	
+	   /*
+	   function sendMessage() {
+	       var input = document.getElementById('messageInput');
+	       socket.send("[Page 2] " + input.value);
+	       input.value = '';
+	   }*/
+	
+	   document.getElementById('sendMessage').addEventListener('click', () => {
+	   	console.log('點擊sendMessage');
+	   	let input = document.getElementById('messageInput');
+	   	console.log('input:' + input.value);
+	       socket.send("[Page 2] " + input.value);
+	       input.value = '';
+	   	
+	   })
+   
+   </script>	
 
-        socket.onmessage = function(event) {
-            var chatbox = document.getElementById('chatbox');
-            var message = document.createElement('p');
-            message.innerText = event.data;
-            chatbox.appendChild(message);
-        };
-
-        function sendMessage() {
-            var input = document.getElementById('messageInput');
-            socket.send("[Page 2] " + input.value);
-            input.value = '';
-        }
-    </script>
 </body>
 </html>

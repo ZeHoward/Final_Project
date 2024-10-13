@@ -424,7 +424,7 @@ body {
   cursor: pointer;
 }
 
-/* 彈出對話框樣式 */
+/* chatGPT彈出對話框樣式 */
 #chatWindow {
   display: none;
   position: fixed;
@@ -482,4 +482,52 @@ body {
   color: rgb(6, 53, 16);
   padding: 5px;
   cursor: pointer;
+}
+
+/*廣告區塊*/
+.ad-slide-container {
+  position: fixed;
+  left: -270px;
+  bottom: 20px;
+  transition: left 0.5s ease-in-out;
+  z-index: 1000;
+}
+
+.ad-container {
+  width: 250px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+.ad-content {
+  position: relative;
+}
+
+.ad-image {
+  width: 100%;
+  display: block;
+}
+
+.close-ad-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: rgba(0,0,0,0.5);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 2px;
+}
+
+.close-ad-btn:hover {
+  background: rgba(0,0,0,0.7);
 }

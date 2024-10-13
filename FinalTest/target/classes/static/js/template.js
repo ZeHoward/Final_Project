@@ -253,7 +253,7 @@
           })
       }
   })
- 
+
 // ChatGPT小幫手聊天室
 function initChatApp() {
   const chatWindow = document.getElementById('chatWindow');
@@ -339,3 +339,63 @@ function initChatApp() {
 
 // 初始化聊天應用
 document.addEventListener("DOMContentLoaded", initChatApp);
+
+// 廣告視窗
+document.addEventListener('DOMContentLoaded', function() {
+  const closeAdBtn = document.getElementById('closeAdBtn');
+  const adContainer = document.getElementById('adContainer');
+  const adImage = document.getElementById('adImage');
+  const adLink = document.getElementById('adLink');
+
+  // 廣告數據
+  const ads = [
+      { image: '/material/icon/DTlogo.png', link: 'https://www.youtube.com/@DietTomorrowFood/shorts' },
+      { image: '/material/icon/youtube.png', link: 'https://youtube.com' }
+      // { image: '/path/to/ad3.jpg', link: 'https://example3.com' },
+  ];
+
+  // 隨機選擇廣告
+  function chooseRandomAd() {
+      const randomIndex = Math.floor(Math.random() * ads.length);
+      return ads[randomIndex];
+  }
+
+  // 設置廣告
+  function setAd() {
+      const ad = chooseRandomAd();
+      adImage.src = ad.image;
+      adLink.href = ad.link;
+  }
+
+    // 在什麼頁面不顯示廣告
+    function shouldShowAd() {
+        const currentPath = window.location.pathname;
+        const excludedPaths = ['/enjoyum', '/loginPage', '/updatePasswordPage', '/about', '/registPage'];
+        return !excludedPaths.includes(currentPath);
+    }
+
+    // 顯示廣告
+    function showAd() {
+        if (shouldShowAd()) {
+            adSlideContainer.style.left = '20px';
+        }
+    }
+
+    // 隱藏廣告
+    function hideAd() {
+        adSlideContainer.style.left = '-320px';
+    }
+
+    // 初始化廣告
+    setAd();
+    showAd();
+
+  // 關閉廣告
+    closeAdBtn.addEventListener('click', function() {
+        hideAd();
+        setTimeout(function() {
+            setAd();
+            showAd();
+        }, 30000);
+    });
+});
