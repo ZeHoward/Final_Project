@@ -253,7 +253,7 @@
           })
       }
   })
- 
+
 // ChatGPT小幫手聊天室
 function initChatApp() {
   const chatWindow = document.getElementById('chatWindow');
@@ -322,7 +322,7 @@ function initChatApp() {
       method: 'GET',
       headers: {
           'accept': '*/*'
-      }
+     }
     })
     .then(response => response.json())
     .then(data => {
@@ -339,3 +339,4 @@ function initChatApp() {
 
 // 初始化聊天應用
 document.addEventListener("DOMContentLoaded", initChatApp);
+
