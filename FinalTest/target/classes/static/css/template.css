@@ -424,7 +424,7 @@ body {
   cursor: pointer;
 }
 
-/* 彈出對話框樣式 */
+/* chatGPT彈出對話框樣式 */
 #chatWindow {
   display: none;
   position: fixed;
@@ -484,6 +484,7 @@ body {
   cursor: pointer;
 }
 
+/*廣告區塊*/
 .ad-slide-container {
   position: fixed;
   left: -270px;

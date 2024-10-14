@@ -322,7 +322,7 @@ function initChatApp() {
       method: 'GET',
       headers: {
           'accept': '*/*'
-      }
+     }
     })
     .then(response => response.json())
     .then(data => {
