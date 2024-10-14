@@ -285,6 +285,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // 更新商品圖片
             const imgElement = productElement.querySelector(".related-product-image");
+
+            imgElement.onload = function() {
+                setTimeout(() => {
+                    productElement.classList.add("animate__animated", "animate__flipInY"); // 整個商品卡加入動畫效果
+                }, i * 200); // 每個商品卡延遲200ms進入
+            };
+
             fetch(`productImages/product/${product.productId}`)
                 .then((response) => response.json())
                 .then((images) => {

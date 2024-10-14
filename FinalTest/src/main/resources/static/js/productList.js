@@ -253,7 +253,7 @@ function handleProductActions(event) {
 function displayProducts(productsToShow) {
     const container = document.getElementById("productContainer");
     container.innerHTML = ""; // 清空現有的產品重新渲染
-    productsToShow.forEach((product) => {
+    productsToShow.forEach((product, index) => {
         //生成商品卡
         const productDiv = document.createElement("div");
         productDiv.className = "product";
@@ -277,6 +277,13 @@ function displayProducts(productsToShow) {
         productDiv.insertBefore(imgElement, productDiv.firstChild); // 將圖片放到最前面
         container.appendChild(productDiv);
 
+        // 加載圖片後設置延遲並添加動畫效果
+        imgElement.onload = function() {
+            setTimeout(() => {
+                productDiv.classList.add("animate__animated", "animate__flipInY"); // 整個商品卡加入動畫效果
+            }, index * 200); // 每個商品卡延遲200ms進入
+        };
+
         fetch(`/productImages/product/${product.productId}`)
             .then((response) => {
                 if (!response.ok) {
@@ -290,6 +297,7 @@ function displayProducts(productsToShow) {
                 } else {
                     imgElement.src = "../material/icon/default.png"; // 如果沒有圖片時使用預設圖片
                 }
+
             })
             .catch((error) => {
                 console.error(`Error fetching product image for product ${product.id}:`, error);
