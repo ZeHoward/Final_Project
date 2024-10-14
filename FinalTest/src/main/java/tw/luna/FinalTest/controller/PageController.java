@@ -44,9 +44,7 @@ public class PageController {
 		return "myCollection";
 	}
 	@GetMapping("/myOrderList")
-    public String myOrderList(Model model) {
-        return "orderManage"; // ordersService.getOrdersList(model);
-    }
+    public String myOrderList(Model model) { return "orderManage"; }
 
 	@GetMapping("shoppingCart")
 	public String shoppingCart() {
