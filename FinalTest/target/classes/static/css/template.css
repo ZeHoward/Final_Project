@@ -12,6 +12,15 @@ body {
   overflow-x: hidden;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:visited {
+  color: inherit; /* 訪問後保持原本的顏色 */
+}
+
 .tem-nav {
   height: 80px;
   display: block;
