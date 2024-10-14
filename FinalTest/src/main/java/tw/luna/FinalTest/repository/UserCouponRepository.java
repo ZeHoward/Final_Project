@@ -1,6 +1,7 @@
 package tw.luna.FinalTest.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -24,5 +25,8 @@ public interface UserCouponRepository extends JpaRepository<UserCoupon,UserCoupo
 
     @Query("SELECT uc.userId FROM UserCoupon uc WHERE uc.couponId = :couponId")
     List<Long> findUserIdsByCouponId(@Param("couponId") long couponId);
+
+    // 方法用來根據 userId 和 couponId 查詢 UserCoupon
+    UserCoupon findByUserIdAndCouponId(long userId, long couponId);
 
 }

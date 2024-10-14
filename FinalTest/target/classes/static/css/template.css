@@ -12,6 +12,15 @@ body {
   overflow-x: hidden;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:visited {
+  color: inherit; /* 訪問後保持原本的顏色 */
+}
+
 .tem-nav {
   height: 80px;
   display: block;
@@ -424,10 +433,7 @@ body {
   cursor: pointer;
 }
 
-<<<<<<< HEAD
 /* chatGPT彈出對話框樣式 */
-=======
->>>>>>> 40e89f1672cc33829672138115125695f8276040
 #chatWindow {
   display: none;
   position: fixed;
