@@ -9,7 +9,7 @@
         #chatDiv{
             /* border: 1px black solid; */
             width: 400px;
-            margin: 0 auto;
+            margin: 50px auto;
             flex-direction: column;
             box-sizing: border-box;
         }
@@ -81,10 +81,19 @@
 
     socket.onmessage = (event) => {
         let chatbox = document.getElementById('chatArea');
-        let message = document.createElement('p');
-        message.style.backgroundImage = 
+        let message = document.createElement('span');
+        if(event.data.includes('ご主人様')){
+    	   message.style.textAlign = 'right';
+    	   message.style.backgroundColor = '#D1DE74';
+    	   message.style.borderRadius = '5px';
+        }else{
+    	   message.style.backgroundColor = 'rgba(243, 243, 243, 0.933)';
+    	   message.style.borderRadius = '5px';
+        }
+	   
         message.innerText = event.data;
         chatbox.appendChild(message);
+        chatbox.appendChild(document.createElement('br'));
     };
 
     let sendMessage = () => {
