@@ -22,6 +22,65 @@
           }
       })();
     </script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/>
+    <style>
+    	#chatIconDiv{
+    	font-size:30px;
+    	position: fixed;
+	    bottom: 10px;
+	    left: 10px;
+	    z-index: 500px;
+	    padding: 10px;
+    	}
+    	
+    	#chatIconDiv:hover{
+		cursor: pointer;    	
+    	}
+    	
+    	#chatDiv{
+		border: 1px solid #a1c14b ;
+		border-radius: 5px;
+    	position: fixed;
+	    bottom: 50px;
+	    left: 50px;
+	    z-index: 500px;
+	    background-color: white;
+	    padding: 3px;
+    	}
+    	
+    	#chatArea{
+    	width: 100%;
+    	height: 300px;
+    	resize: none;
+        border: 1px solid #a1c14b;
+        overflow-y: scroll; 
+        padding: 10px; 
+        margin-bottom: 10px;
+        box-sizing: border-box;
+    	}
+    	
+    	#messageInput{
+    	border: 1px solid #a1c14b;
+        height: 20px;
+        width: 75%;
+        border-radius: 5px;
+    	}
+    	
+    	#sendButton{
+        border: 1px solid #a1c14b ;
+        background-color: white;
+        height: 20px;
+        border-radius: 5px;
+        width: 15%;
+        }
+        
+        #sendButton > i{
+        color: #a1c14b;
+        }
+    	
+    	
+    </style>
   </head>
 
   <body onload="checkAuth()">
@@ -67,5 +126,45 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./js/script.js"></script>
+    
+    <div id="chatIconDiv" onclick="showChatIcon()">
+    	<i class="fa-brands fa-facebook-messenger"></i>
+    </div>
+    <div id="chatDiv" style="display:none;">
+    	<div id="chatArea" readonly></div>
+        <input type="text" id="messageInput" placeholder="Enter message" />
+        <button id='sendButton' onclick="sendMessage()">
+        	<i class="fa-solid fa-play"></i> 
+        </button>
+    </div>
+    <script>
+	   let socket = new WebSocket("ws://localhost:8080/messageChat");
+	
+	   socket.onmessage = (event) => {
+	       let chatbox = document.getElementById('chatArea');
+	       let message = document.createElement('p');
+	       message.innerText = event.data;
+	       chatbox.appendChild(message);
+	   };
+	
+	   
+	   let sendMessage = () => {
+	       let input = document.getElementById('messageInput');
+	       if(input.value.trim() !== ''){
+		       socket.send("メイド:" + input.value);	    	   
+	       }
+	       input.value = '';
+	   }
+	   
+	   let showChatIcon = () => {
+		   let chatDiv = document.getElementById('chatDiv');
+		   if(chatDiv.style.display === 'none'){
+			   chatDiv.style.display = 'block';
+		   }else{
+			   chatDiv.style.display = 'none';
+		   }
+	   }
+    
+    </script>
   </body>
 </html>

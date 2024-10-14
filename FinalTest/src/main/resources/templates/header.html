@@ -73,20 +73,24 @@
                 >
                 </div>
                 <div>
-                    <i class="memerinfo-icon fa-solid fa-unlock"></i
-                    ><a href="/updatePasswordPage">更改密碼</a>
+                    <i class="memerinfo-icon fa-solid fa-unlock"></i>
+                    <a href="/updatePasswordPage">更改密碼</a>
                 </div>
                 <div>
-                    <i class="memerinfo-icon fa-solid fa-heart"></i
-                    ><a href="/myCollection">我的收藏</a>
+                    <i class="memerinfo-icon fa-solid fa-heart"></i>
+                    <a href="/myCollection">我的收藏</a>
                 </div>
                 <div>
-                    <i class="memerinfo-icon fa-solid fa-bars"></i
-                    ><a href="/myOrderList">訂單管理</a>
+                    <i class="memerinfo-icon fa-solid fa-bars"></i>
+                    <a href="/myOrderList">訂單管理</a>
                 </div>
                 <div>
-                    <i class="memerinfo-icon fa-solid fa-tag"></i
-                    ><a href="/couponPage">優惠券</a>
+                    <i class="memerinfo-icon fa-solid fa-tag"></i>
+                    <a href="/couponPage">優惠券</a>
+                </div>
+                <div>
+                	<i class="memerinfo-icon fa-brands fa-facebook-messenger"></i>
+                	<a style="margin-left:-8px;" href="/userChatPage">即食客服</a>
                 </div>
                 <div id="contactIcon">
 					<i class="memerinfo-icon fa-solid fa-comment"></i>					
@@ -97,15 +101,11 @@
                     <a style="margin-left:-4px" href="/loginPage">登入</a>
                 </div>
                 <div id="logoutDiv" style="display: none">
-                    <i class="memerinfo-icon fa-solid fa-right-from-bracket"></i
-                    ><a id="logout" style="margin-left:-4px">登出</a>
+                    <i class="memerinfo-icon fa-solid fa-right-from-bracket"></i>
+                    <a id="logout" style="margin-left:-4px">登出</a>
                 </div>
             </div>
         </div>
-    </div>
-
-    <div class="tem-breadcrumb">
-<!--        <a href="#">首頁</a>-->
     </div>
 </header>
 
@@ -136,7 +136,7 @@
             <textarea id="message" name="message" placeholder="若為已購買商品相關問題,麻煩請填寫訂單編號"></textarea><br>
 
             <div style="display:flex; flex:1 1 100%; justify-content:center;">
-            	<button id="contactBtn">送出</button>			
+            	<button id="contactBtn">送出</button>
 			</div>
             
         </div>
@@ -151,10 +151,11 @@
         <div id="chatWindowHeader">
             即食享熱小幫手
             <button id="closeButton">×</button>
+            <div id="maximizeButton">□</div>
         </div>
         <div id="chatMessages"></div>
         <input type="text" id="chatInput" placeholder="輸入訊息...">
-        <button id="sendButton">發送</button>
+        <button id="sendButton">發 送</button>
     </div>
 
     <div id="adSlideContainer" class="ad-slide-container">
@@ -164,6 +165,7 @@
                     <img id="adImage" src="" alt="AD" class="ad-image">
                 </a>
                 <button id="closeAdBtn" class="close-ad-btn">&times;</button>
+
             </div>
         </div>
     </div>
