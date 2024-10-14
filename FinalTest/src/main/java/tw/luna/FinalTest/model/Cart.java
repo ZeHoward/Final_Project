@@ -71,4 +71,8 @@ public class Cart {
                 "cartId=" + cartId +
                 '}';
     }
+
+    public long getUserId() {
+        return users.getUserId();
+    }
 }
