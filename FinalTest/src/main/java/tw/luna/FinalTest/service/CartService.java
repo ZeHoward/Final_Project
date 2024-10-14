@@ -9,11 +9,7 @@ import tw.luna.FinalTest.dto.cart.CartInsertDto;
 import tw.luna.FinalTest.dto.cart.CartSelectDto;
 import jakarta.transaction.Transactional;
 import tw.luna.FinalTest.model.*;
-import tw.luna.FinalTest.repository.CartItemsRepository;
-import tw.luna.FinalTest.repository.CartRepository;
-import tw.luna.FinalTest.repository.CouponRepository;
-import tw.luna.FinalTest.repository.ProductRepository;
-import tw.luna.FinalTest.repository.UsersRepository;
+import tw.luna.FinalTest.repository.*;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -35,6 +31,9 @@ public class CartService {
 
     @Autowired
     CouponRepository couponRepository;
+
+    @Autowired
+    UserCouponRepository userCouponRepository;
 
     @Transactional
     public void addToCart(CartInsertDto cartInsertDto, Long userId) {
@@ -146,7 +145,6 @@ public class CartService {
     }
 
 
-    // 應用優惠券到購物車 (不改動 Cart 模型)
     // 應用優惠券到購物車，並返回計算結果
     @Transactional
     public Map<String, Object> applyCouponToCart(Long cartId, String couponCode) {
@@ -160,6 +158,15 @@ public class CartService {
             throw new RuntimeException("找不到優惠券");
         }
 
+        // 查詢使用者的優惠券使用情況
+        UserCoupon userCoupon = userCouponRepository.findByUserIdAndCouponId(cart.getUserId(), coupon.getCouponId());
+
+        // 如果沒有找到 userCoupon 或者 userCoupon 已經使用過，拋出異常
+        if (userCoupon == null) {
+            throw new RuntimeException("用戶無此優惠券");
+        } else if (userCoupon.isUsed()) {
+            throw new RuntimeException("優惠券已被使用");
+        }
 
         // 確認優惠券是否有效
         if (!coupon.isActive() || coupon.getExpiryDate().isBefore(LocalDate.now())) {
@@ -185,7 +192,7 @@ public class CartService {
             finalAmount = totalAmount - amountDiscount;
         }
 
-        // 返回計算結果，並不將優惠券保存到購物車中
+        // 返回計算結果
         Map<String, Object> response = new HashMap<>();
         response.put("success", true);
         response.put("message", "優惠券已成功應用");
@@ -196,6 +203,7 @@ public class CartService {
 
         return response;
     }
+
 
     public Cart getCartIdByUserId(Long userId) {
         Cart cart =cartRepository.findByUsersUserId(userId);
