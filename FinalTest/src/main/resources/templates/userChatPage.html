@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>即時客服</title>
+    <title>即食享熱</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         #chatDiv{
@@ -36,19 +36,19 @@
             border-radius: 5px;
         }
 
-        #sendButton{
+        #sendBtn{
             border: 1px solid #a1c14b ;
             background-color: white;
-            height: 34px;
+            height: 30px;
             border-radius: 5px;
             width: 15%;
         }
 
-        #sendButton > i{
+        #sendBtn > i{
             color:#a1c14b ;
         }
 
-        #sendButton:hover{
+        #sendBtn:hover{
             cursor: pointer;
         }
 
@@ -57,57 +57,44 @@
 <body>
 <!-- 包含header部分 -->
 <div th:replace="header"></div>
-
+<div id="myContainer">
     <div id="chatDiv">
-        <h1>即時客服</h1>
+        <h1>即食客服</h1>
         <div id="chatArea" readonly>
         </div>
 
         <div style="display: flex; justify-content: space-between;">
             <input id="messageInput" type="text" placeholder="傳送訊息" />
-            <button id="sendButton" style="background-color: white; width: 15%; height: 34px;" onclick="sendMessage()">
+            <button id="sendBtn" onclick="sendMessage()">
                 <i class="fa-solid fa-play"></i>            
             </button>
         </div>
     </div>
+</div>
     
     <!-- 包含footer部分 -->
 <div th:replace="footer"></div>
 </body>
 
 <script type="text/javascript">
-    var socket = new WebSocket("ws://localhost:8080/messageChat");
+    let socket = new WebSocket("ws://localhost:8080/messageChat");
 
-    socket.onopen = function() {
-        console.log('WebSocket 已連接');
-    };
-    
-    socket.onerror = function(error) {
-        console.log('WebSocket 發生錯誤: ' + error.message);
-    };
-
-    socket.onclose = function() {
-        console.log('WebSocket 連接已關閉');
-    };
-
-    socket.onmessage = function(event) {
-        var chatbox = document.getElementById('chatArea');
-        var message = document.createElement('p');
+    socket.onmessage = (event) => {
+        let chatbox = document.getElementById('chatArea');
+        let message = document.createElement('p');
+        message.style.backgroundImage = 
         message.innerText = event.data;
         chatbox.appendChild(message);
     };
 
-    function sendMessage() {
-    	 var input = document.getElementById('messageInput');
-    	    let value = input.value;
-    	    console.log('input:' + value);
+    let sendMessage = () => {
+    	let input = document.getElementById('messageInput');
+   	    let value = input.value;
 
-    	    if (value.trim() !== '') {  // 確保輸入的值不為空
-    	        socket.send("客服人員:" + value); // 傳送輸入的值
-    	        input.value = ''; // 清空輸入框
-    	    } else {
-    	        console.log('請輸入訊息'); // 若輸入為空則提示
-    	    }
+   	    if (value.trim() !== '') { 
+   	        socket.send("ご主人様:" + value);
+   	        input.value = '';
+   	    }
     }
  
 </script>

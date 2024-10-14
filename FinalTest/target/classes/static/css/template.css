@@ -433,6 +433,10 @@ a:visited {
   cursor: pointer;
 }
 
+<<<<<<< HEAD
+/* chatGPT彈出對話框樣式 */
+=======
+>>>>>>> 40e89f1672cc33829672138115125695f8276040
 #chatWindow {
   display: none;
   position: fixed;
