@@ -383,6 +383,7 @@ function initChatApp() {
 // 初始化聊天應用
 document.addEventListener("DOMContentLoaded", initChatApp);
 
+
 // 廣告視窗
 document.addEventListener('DOMContentLoaded', function() {
   const closeAdBtn = document.getElementById('closeAdBtn');
