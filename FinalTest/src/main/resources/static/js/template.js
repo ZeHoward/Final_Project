@@ -289,12 +289,12 @@ function initChatApp() {
     // 綁定放大按鈕事件
     maximizeButton.addEventListener('click', function () {
         if (!isMaximized) {
-            chatWindow.style.width = '1000px';
-            chatWindow.style.height = '800px';
+            chatWindow.style.width = '60vw';
+            chatWindow.style.height = '80vh';
             isMaximized = true;
         } else {
-            chatWindow.style.width = '600px';
-            chatWindow.style.height = '400px';
+            chatWindow.style.width = '35vw';
+            chatWindow.style.height = '40vh';
             isMaximized = false;
         }
     });
