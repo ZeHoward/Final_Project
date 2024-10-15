@@ -9,40 +9,6 @@
     document.body.style.overflow = "";
   };
 
-  //展開菜單選項
-  // menu toggle up/down 圖案
-  // window.togglePic1 = function () {
-  //   var margin1 = document.getElementById("add");
-  //   var img1 = document.getElementById("updown1");
-  //   var childContent1 = document.getElementById("tem-dropdown-content1");
-  //
-  //   if (img1.src.includes("down.png")) {
-  //     img1.src = "./material/icon/up.png";
-  //     margin1.style.margin = "40px 0";
-  //     childContent1.style.display = "block";
-  //   } else if (img1.src.includes("up.png")) {
-  //     img1.src = "./material/icon/down.png";
-  //     margin1.style.margin = "";
-  //     childContent1.style.display = "none";
-  //   }
-  // };
-  //
-  // window.togglePic2 = function () {
-  //   var margin2 = document.getElementById("add");
-  //   var img2 = document.getElementById("updown2");
-  //   var childContent2 = document.getElementById("tem-dropdown-content2");
-  //
-  //   if (img2.src.includes("down.png")) {
-  //     img2.src = "./material/icon/up.png";
-  //     margin2.style.margin = "40px 0";
-  //     childContent2.style.display = "block";
-  //   } else if (img2.src.includes("up.png")) {
-  //     img2.src = "./material/icon/down.png";
-  //     margin2.style.margin = "";
-  //     childContent2.style.display = "none";
-  //   }
-  // };
-
   // 會員功能菜單顯示/隱藏
   let memberInfoDiv = document.getElementById("memberInfoDiv");
   let slideshowContainer = document.getElementById("slideshow-container");
@@ -70,23 +36,6 @@
       isMemberDivVisible = false;
     }
   });
-
-  // 搜索框顯示/隱藏
-  // let isOpen = false;
-  // let searchDiv = document.getElementById("searchDiv");
-  // let searchIcon = document.getElementById("searchIcon");
-  //
-  // searchIcon.addEventListener("click", () => {
-  //   if (!isOpen) {
-  //     searchDiv.style.width = "200px";
-  //     searchDiv.style.border = "1px solid #a1c14b";
-  //     isOpen = true;
-  //   } else {
-  //     searchDiv.style.width = "0";
-  //     searchDiv.style.border = "0";
-  //     isOpen = false;
-  //   }
-  // });
 
   // 點擊頁面其他地方時隱藏搜索框和會員功能菜單
   document.getElementById("myContainer").addEventListener("click", () => {
@@ -204,13 +153,13 @@
 		   padding: '3em',
 		   color: '#716add',
 		   background: '#fff', 
-		   
+		   /*
 		   backdrop: `
 		     rgba(0,0,123,0.4)
 		     url("https://sweetalert2.github.io/images/nyan-cat.gif")
 		     left top
 		     no-repeat
-		   `,
+		   `,*/
 		  didOpen: () => {
 		    Swal.showLoading();
 		  },
@@ -289,12 +238,12 @@ function initChatApp() {
     // 綁定放大按鈕事件
     maximizeButton.addEventListener('click', function () {
         if (!isMaximized) {
-            chatWindow.style.width = '1000px';
-            chatWindow.style.height = '800px';
+            chatWindow.style.width = '60vw';
+            chatWindow.style.height = '80vh';
             isMaximized = true;
         } else {
-            chatWindow.style.width = '600px';
-            chatWindow.style.height = '400px';
+            chatWindow.style.width = '35vw';
+            chatWindow.style.height = '40vh';
             isMaximized = false;
         }
     });
@@ -382,6 +331,7 @@ function initChatApp() {
 
 // 初始化聊天應用
 document.addEventListener("DOMContentLoaded", initChatApp);
+
 
 // 廣告視窗
 document.addEventListener('DOMContentLoaded', function() {

@@ -3,20 +3,17 @@ package tw.luna.FinalTest.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChatRequest {
+public class RemyChatRequest {
 
     private String model;
     private List<Message> messages;
     private double temperature;
 
-    public ChatRequest(String model, String prompt) {
+    public RemyChatRequest(String model, String prompt) {
         this.model = model;
         this.messages = new ArrayList<>();
         this.messages.add(new Message("system",
-                "你是一個美食助理，負責根據用戶需求推薦「即食享熱」平台上的料理包和食材包。" +
-                        "你還可以根據用戶的需求提供食譜或食材建議。當問題與料理、食材、食譜相關時，請給出詳細的建議或食譜。" +
-                        "對於與料理、食材無關的問題，例如科技、個人情感等，請委婉地拒絕" +
-                        "並推薦給用戶一道菜的食譜希望用戶會喜歡"
+                "你是料理鼠王Remy，"
         ));
         this.messages.add(new Message("user", prompt));
         this.temperature = 1.0;

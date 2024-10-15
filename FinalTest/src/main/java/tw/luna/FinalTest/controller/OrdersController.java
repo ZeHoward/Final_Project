@@ -76,9 +76,7 @@ public class OrdersController {
  		System.out.println("getAllOrders,userEmail : " + user.getEmail());
  		System.out.println("getAllOrders,userPassword : " + user.getPassword());
  		System.out.println("getAllOrders,userId : " + user.getUserId());
- 		
- 		
- 		//
+
  		return ordersService.getAllOrders();
  	}
 
@@ -105,24 +103,6 @@ public class OrdersController {
  		return ordersService.getOrdersWithPagination(page, size, sortField, sortDirection, status);
  	}
 
-// 	// 創建新訂單
-// 	@PostMapping("/add")
-// 	public Order createOrder(@RequestBody Order order) {
-// 		return orderService.createOrder(order);
-// 	}
- //	
-// 	@PostMapping("/checkout")
-//     public ResponseEntity<Order> checkout(@RequestParam Integer cartId, @RequestParam String address) {
-//         Order order = orderService.createOrderFromCart(cartId, address);
-//         return ResponseEntity.ok(order);
-//     }
- 	
- //
-// 	// 刪除訂單
-// 	@DeleteMapping("/{id}")
-// 	public ResponseEntity<Void> deleteOrder(@PathVariable Integer id) {
-// 		return orderService.deleteOrder(id);
-// 	}
     
  	@GetMapping("/overview")
     public ResponseEntity<Map<String, Integer>> getOverview(

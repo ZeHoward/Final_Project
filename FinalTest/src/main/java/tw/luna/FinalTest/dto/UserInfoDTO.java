@@ -13,7 +13,6 @@ public class UserInfoDTO {
     private String county;
     private String district;
 
-    // Constructor
     public UserInfoDTO(Long id, Long userId, String firstName, String lastName, String address, 
                        String birthday, String postalCode, String county, String district) {
         this.id = id;

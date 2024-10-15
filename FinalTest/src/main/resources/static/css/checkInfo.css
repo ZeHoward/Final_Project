@@ -139,8 +139,8 @@ h1 {
 }
 
 header.tem-header {
-  border: none; /* 确保没有边框 */
-  box-shadow: none; /* 确保没有阴影 */
+  border: none; /* 確保沒有邊框 */
+  box-shadow: none; /* 確保沒有陰影 */
   padding: 0;
 }
 

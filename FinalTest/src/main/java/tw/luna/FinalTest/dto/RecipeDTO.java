@@ -10,7 +10,7 @@ public class RecipeDTO {
     private Integer cookTime;
     private String level;
     private Boolean isDel;
-    private Integer productId; // 新增 productId 字段
+    private Integer productId;
 
     public Integer getRecipeId() {
         return recipeId;

@@ -33,7 +33,6 @@ public class UserFavoritesProducts {
     private UserFavoritesProductsId id;
 
 
-    // Constructors
     public UserFavoritesProducts() {}
 
     public UserFavoritesProducts(UserFavoritesProductsId id) {
@@ -44,7 +43,6 @@ public class UserFavoritesProducts {
         this.id = new UserFavoritesProductsId(userId, productId);
     }
 
-    // Getters and Setters
     public UserFavoritesProductsId getId() {
         return id;
     }
@@ -58,6 +56,4 @@ public class UserFavoritesProducts {
         return id.getProductId();
     }
 }
-	
-	
-//}
+

@@ -8,6 +8,8 @@
       @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap");
     </style>
     <link rel="stylesheet" th:href="@{css/checkout.css}" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <!-- vue -->
     <script src="https://unpkg.com/vue@3.2.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -721,43 +723,74 @@
 
  
           //針對每個欄位進行驗證並更新錯誤訊息
-          const validateForm = () => {
+        const validateForm = () => {
           if (!name.value) {
-            alert("請輸入姓名");
+            Swal.fire({
+              icon: 'warning',
+              title: '每個欄位皆為必填資訊',
+              text: '請輸入姓名',
+            });
             return false;
           }
           if (!lastName.value) {
-            alert("請輸入姓氏");
+            Swal.fire({
+             icon: 'warning',
+              title: '每個欄位皆為必填資訊',
+              text: '請輸入姓氏',
+            });
             return false;
           }
           if (!email.value) {
-            alert("請輸入電子郵件");
+            Swal.fire({
+             icon: 'warning',
+              title: '每個欄位皆為必填資訊',
+              text: '請輸入電子郵件',
+            });
             return false;
           }
           if (!phone.value) {
-            alert("請輸入電話號碼");
+            Swal.fire({
+              icon: 'warning',
+              title: '每個欄位皆為必填資訊',
+              text: '請輸入電話號碼',
+            });
             return false;
           }
           if (!city.value) {
-            alert("請選擇縣市");
+            Swal.fire({
+             icon: 'warning',
+              title: '每個欄位皆為必填資訊',
+              text: '請選擇縣市',
+            });
             return false;
           }
           if (!area.value) {
-            alert("請選擇區域");
+            Swal.fire({
+           icon: 'warning',
+              title: '每個欄位皆為必填資訊',
+              text: '請選擇區域',
+            });
             return false;
           }
           if (!zipCode.value) {
-            alert("請輸入郵遞區號");
+            Swal.fire({
+              icon: 'warning',
+              title: '每個欄位皆為必填資訊',
+              text: '請輸入郵遞區號',
+            });
             return false;
           }
           if (!address.value) {
-            alert("請輸入地址");
+            Swal.fire({
+              icon: 'warning',
+              title: '每個欄位皆為必填資訊',
+              text: '請輸入地址',
+            });
             return false;
           }
-        
+
           return true; // 如果所有欄位都已填寫，返回 true
         };
-          
           //要傳遞出去的參數
           const toCheckInfo = () => {
             if (!validateForm()) {

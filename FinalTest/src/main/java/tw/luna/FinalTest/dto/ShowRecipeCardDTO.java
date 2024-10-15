@@ -1,13 +1,11 @@
 package tw.luna.FinalTest.dto;
 
-//recipe、products、category、productImage
 public class ShowRecipeCardDTO {
     private Integer recipeId; // recipe
     private String title; //recipe
     private String level; //recipe
     private String categoryName; //category
-//    private String base64Image; //productImage
-    private Boolean isDel; // isDel 欄位 食譜是否刪除 //recipe
+    private Boolean isDel;
 
     public ShowRecipeCardDTO() {
     }

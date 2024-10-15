@@ -17,7 +17,6 @@ public class UserCouponId implements Serializable {
         this.couponId = couponId;
     }
 
-    // Getters and Setters
     public long getUserId() {
         return userId;
     }
@@ -34,7 +33,7 @@ public class UserCouponId implements Serializable {
         this.couponId = couponId;
     }
 
-    // 必須覆寫 equals 和 hashCode 方法，JPA 依賴這些方法來識別實體
+    // 覆寫 equals 和 hashCode 方法，JPA 依賴這些方法來識別實體
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

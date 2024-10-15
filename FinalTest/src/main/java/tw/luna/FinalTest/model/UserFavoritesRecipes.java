@@ -33,7 +33,6 @@ public class UserFavoritesRecipes {
     @EmbeddedId
     private UserFavoritesRecipesId id;
 
-    // Constructors
     public UserFavoritesRecipes() {}
 
     public UserFavoritesRecipes(UserFavoritesRecipesId id) {
@@ -44,7 +43,6 @@ public class UserFavoritesRecipes {
         this.id = new UserFavoritesRecipesId(userId, recipeId);
     }
 
-    // Getters and Setters
     public UserFavoritesRecipesId getId() {
         return id;
     }

@@ -45,7 +45,7 @@
     	position: fixed;
 	    bottom: 50px;
 	    left: 50px;
-	    z-index: 500px;
+	    z-index: 500;
 	    background-color: white;
 	    padding: 3px;
     	}
@@ -79,28 +79,35 @@
         #sendButton > i{
         color: #a1c14b;
         }
-        
-        .maidDiv{
-        display: flex;
-        justify-content: flex-end;
+
+        .maid{
+          display: flex;
+          justify-content: flex-end;
+          margin: 4px 0;
         }
-        
-        .masterDiv{
-        display: flex;
+
+        .maid p{
+          background-color: #c6e6a1;
+          padding: 3px;
+          display: inline-block;
+          margin: 0;
+          border-radius: 15px;
         }
-    	
-    	.maid p{
-    	background-color : #D1DE74;
-        border-radius : 5px;
-        margin: 0 ;
-    	}
-    	
-    	.master p{
-    	background-color : rgba(216, 212, 212, 0.933);
-        border-radius : 5px;
-        margin: 0 ;
-    	}
-    	
+
+        .master{
+          display: flex;
+          justify-content: flex-start;
+          margin: 4px 0;
+        }
+
+        .master p{
+          background-color: #dfdfdf;
+          padding: 3px;
+          display: inline-block;
+          margin: 0;
+          border-radius: 15px;
+        }
+
     </style>
   </head>
 
@@ -164,12 +171,13 @@
 	   socket.onmessage = (event) => {
 	       let chatbox = document.getElementById('chatArea');
 	       let message = document.createElement('div');
-	       if(event.data.includes('メイド')){
-	    	   message.classList.add('maidDiv');
-	    	   message.innerHTML = `<p>${event.data}</p>`;
+
+           let msgContent= `<p>${event.data}</p>`;
+           message.innerHTML=msgContent;
+	       if(event.data.includes('客服人員')){
+             message.classList.add("maid");
 	       }else{
-	           message.classList.add('masterDiv');
-	           message.innerHTML = `<p>${event.data}</p>`;
+             message.classList.add("master");
 	       }
 	       chatbox.appendChild(message);
 	   };
@@ -178,8 +186,9 @@
 	   let sendMessage = () => {
 	       let input = document.getElementById('messageInput');
 	       if(input.value.trim() !== ''){
-		       socket.send("メイド:" + input.value);	    	   
-	 	      }
+
+		       socket.send("客服人員:" + input.value);
+	       }
 	       input.value = '';
 	   }
 	   

@@ -297,7 +297,7 @@ h1 {
 }
 
 i.active {
-  color: red;
+  color: red !important;
 }
 
 .btn,

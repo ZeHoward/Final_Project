@@ -25,27 +25,28 @@
             border: 1px solid #a1c14b;
             overflow-y: scroll; 
             padding: 10px; 
-            margin-bottom: 10px;
+            margin: 20px 0;
             box-sizing: border-box;
         }
 
         #messageInput{
             border: 1px solid #a1c14b;
-            height: 30px;
+            height: 35px;
             width: 82%;
-            border-radius: 5px;
+            padding: 5px;
+            border-radius: 15px;
         }
 
         #sendBtn{
-            border: 1px solid #a1c14b ;
-            background-color: white;
-            height: 30px;
-            border-radius: 5px;
+            border: none;
+            background-color: #a1c14b;
+            height: 35px;
+            border-radius: 15px;
             width: 15%;
         }
 
         #sendBtn > i{
-            color:#a1c14b ;
+            color:white ;
         }
 
         #sendBtn:hover{
@@ -71,6 +72,30 @@
         background-color : rgba(216, 212, 212, 0.933);
         border-radius : 5px;
         margin: 0 ;
+        }
+
+        .maid{
+            display: flex;
+            justify-content: flex-start;
+            margin: 4px 0;
+        }
+
+        .master p{
+            background-color: #c6e6a1;
+            padding: 3px;
+            margin: 0;
+        }
+
+        .master{
+            display: flex;
+            justify-content: flex-end;
+            margin: 4px 0;
+        }
+
+        .maid p{
+            background-color: #dfdfdf;
+            padding: 3px;
+            margin: 0 ;
         }
 
     </style>
@@ -103,16 +128,14 @@
     socket.onmessage = (event) => {
         let chatbox = document.getElementById('chatArea');
         let message = document.createElement('div');
-        if(event.data.includes('ご主人様')){
-           message.classList.add('masterDiv');
-           message.innerHTML = `<p>${event.data}</p>`;
+
+        let msgContent= `<p>${event.data}</p>`;
+        message.innerHTML=msgContent;
+        if(event.data.includes('程昊則')){
+            message.classList.add("master");
         }else{
-    	   message.classList.add('maidDiv');
-    	   message.innerHTML = `<p>${event.data}</p>`;
-    	   
+            message.classList.add("maid");
         }
-	   
-//        message.innerText = event.data;
         chatbox.appendChild(message);
     };
 
@@ -121,7 +144,7 @@
    	    let value = input.value;
 
    	    if (value.trim() !== '') { 
-   	        socket.send("ご主人様:" + value);
+   	        socket.send("程昊則:" + value);
    	        input.value = '';
    	    }
     }
