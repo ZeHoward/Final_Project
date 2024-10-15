@@ -37,8 +37,7 @@ public class ProductImage implements Serializable{
 	
 	@Transient
 	private String base64Image;
-	
-	//建構式
+
 	public ProductImage() {
 		
 	}
