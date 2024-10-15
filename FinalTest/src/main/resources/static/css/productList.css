@@ -211,7 +211,7 @@ label,select{
 }
 
 i.active {
-  color: red;
+  color: red !important;
 }
 
 #nextPage,

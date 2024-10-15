@@ -25,31 +25,56 @@
             border: 1px solid #a1c14b;
             overflow-y: scroll; 
             padding: 10px; 
-            margin-bottom: 10px;
+            margin: 20px 0;
             box-sizing: border-box;
         }
 
         #messageInput{
             border: 1px solid #a1c14b;
-            height: 30px;
+            height: 35px;
             width: 82%;
-            border-radius: 5px;
+            padding: 5px;
+            border-radius: 15px;
         }
 
         #sendBtn{
-            border: 1px solid #a1c14b ;
-            background-color: white;
-            height: 30px;
-            border-radius: 5px;
+            border: none;
+            background-color: #a1c14b;
+            height: 35px;
+            border-radius: 15px;
             width: 15%;
         }
 
         #sendBtn > i{
-            color:#a1c14b ;
+            color:white ;
         }
 
         #sendBtn:hover{
             cursor: pointer;
+        }
+
+        .maid{
+            display: flex;
+            justify-content: flex-start;
+            margin: 4px 0;
+        }
+
+        .maid p{
+            background-color: #c6e6a1;
+            padding: 3px;
+            margin: 0;
+        }
+
+        .master{
+            display: flex;
+            justify-content: flex-end;
+            margin: 4px 0;
+        }
+
+        .master p{
+            background-color: #dfdfdf;
+            padding: 3px;
+            margin: 0 ;
         }
 
     </style>
@@ -81,19 +106,15 @@
 
     socket.onmessage = (event) => {
         let chatbox = document.getElementById('chatArea');
-        let message = document.createElement('span');
+        let message = document.createElement('div');
+        let msgContent= `<p>${event.data}</p>`;
+        message.innerHTML=msgContent;
         if(event.data.includes('ご主人様')){
-    	   message.style.textAlign = 'right';
-    	   message.style.backgroundColor = '#D1DE74';
-    	   message.style.borderRadius = '5px';
+            message.classList.add("master");
         }else{
-    	   message.style.backgroundColor = 'rgba(243, 243, 243, 0.933)';
-    	   message.style.borderRadius = '5px';
+            message.classList.add("maid");
         }
-	   
-        message.innerText = event.data;
         chatbox.appendChild(message);
-        chatbox.appendChild(document.createElement('br'));
     };
 
     let sendMessage = () => {
