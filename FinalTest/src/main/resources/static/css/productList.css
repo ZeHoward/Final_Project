@@ -201,17 +201,22 @@ label,select{
   background-color:#ece2b3 ;
   font-size: 20px;
   padding: 10px;
-  border-radius: 5px;
-  margin: 0 10px;
+  border-radius: 15px;
+  margin: 20px 10px;
+}
+
+#prevPage:active,
+#nextPage:active{
+  background-color: #ae9e7d;
 }
 
 i.active {
-  color: red;
+  color: red !important;
 }
 
 #nextPage,
 #prevPage{
-  box-shadow: 0 9px #999;
+  box-shadow: 0 9px #dfdfdf;
   border-radius: 15px;
 }
 

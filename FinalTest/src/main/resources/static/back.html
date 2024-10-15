@@ -45,7 +45,7 @@
     	position: fixed;
 	    bottom: 50px;
 	    left: 50px;
-	    z-index: 500px;
+	    z-index: 500;
 	    background-color: white;
 	    padding: 3px;
     	}
@@ -79,8 +79,35 @@
         #sendButton > i{
         color: #a1c14b;
         }
-    	
-    	
+
+        .maid{
+          display: flex;
+          justify-content: flex-end;
+          margin: 4px 0;
+        }
+
+        .maid p{
+          background-color: #c6e6a1;
+          padding: 3px;
+          display: inline-block;
+          margin: 0;
+          border-radius: 15px;
+        }
+
+        .master{
+          display: flex;
+          justify-content: flex-start;
+          margin: 4px 0;
+        }
+
+        .master p{
+          background-color: #dfdfdf;
+          padding: 3px;
+          display: inline-block;
+          margin: 0;
+          border-radius: 15px;
+        }
+
     </style>
   </head>
 
@@ -143,25 +170,22 @@
 	
 	   socket.onmessage = (event) => {
 	       let chatbox = document.getElementById('chatArea');
-	       let message = document.createElement('p');
+	       let message = document.createElement('div');
+           let msgContent= `<p>${event.data}</p>`;
+           message.innerHTML=msgContent;
 	       if(event.data.includes('メイド')){
-	    	   message.style.textAlign = 'right';
-	    	   message.style.backgroundColor = '#D1DE74';
-	    	   message.style.borderRadius = '5px';
+             message.classList.add("maid");
 	       }else{
-	    	   message.style.backgroundColor = 'rgba(243, 243, 243, 0.933)';
-	    	   message.style.borderRadius = '5px';
+             message.classList.add("master");
 	       }
-	       message.innerText = event.data;
 	       chatbox.appendChild(message);
-	       chatbox.appendChild(document.createElement('br'));
 	   };
 	
 	   
 	   let sendMessage = () => {
 	       let input = document.getElementById('messageInput');
 	       if(input.value.trim() !== ''){
-		       socket.send("メイド:" + input.value);	    	   
+		       socket.send("メイド:" + input.value);
 	       }
 	       input.value = '';
 	   }
