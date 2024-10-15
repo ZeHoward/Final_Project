@@ -11,7 +11,6 @@ public class CouponDTO {
     private LocalDate expiryDate;
     private boolean isActive;
 
-    // 完整构造函数
     public CouponDTO(long couponId, String code, String name, String discountType, int discountValue, LocalDate expiryDate, boolean isActive) {
         this.couponId = couponId;
         this.code = code;
@@ -22,12 +21,10 @@ public class CouponDTO {
         this.isActive = isActive;
     }
 
-    // 单个参数构造函数
     public CouponDTO(long couponId) {
         this.couponId = couponId;
     }
 
-    // Getters 和 Setters
     public long getCouponId() {
         return couponId;
     }

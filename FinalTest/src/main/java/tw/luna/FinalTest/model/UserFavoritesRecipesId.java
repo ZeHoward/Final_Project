@@ -14,7 +14,6 @@ public class UserFavoritesRecipesId  implements Serializable {
     @Column(name = "recipeId")
     private int recipeId;
 
-    // Constructors
     public UserFavoritesRecipesId() {}
 
     public UserFavoritesRecipesId(Long userId, int recipeId) {
@@ -22,7 +21,6 @@ public class UserFavoritesRecipesId  implements Serializable {
         this.recipeId = recipeId;
     }
 
-    // Getters and Setters
     public Long getUserId() {
         return userId;
     }
@@ -39,7 +37,6 @@ public class UserFavoritesRecipesId  implements Serializable {
         this.recipeId = recipeId;
     }
 
-    // hashCode and equals methods (required for @Embeddable)
     @Override
     public int hashCode() {
         return (int)(userId + recipeId);

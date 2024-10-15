@@ -303,6 +303,12 @@ function sortRecipes() {
         return (levelOrder[b.level] || 0) - (levelOrder[a.level] || 0);
       });
       break;
+    case "cookTimeASC":
+      sortedRecipes.sort((a, b) => b.cookTime - a.cookTime);
+      break;
+    case "cookTimeDesc":
+      sortedRecipes.sort((a, b) => a.cookTime - b.cookTime);
+      break;
   }
 
   // 更新頁面
