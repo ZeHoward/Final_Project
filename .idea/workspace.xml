@@ -4,152 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="46b205d8-494f-4239-b044-b0cf1023239f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/EcpayPayment.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/META-INF/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/META-INF/maven/tw.luna/FinalTest/pom.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/META-INF/maven/tw.luna/FinalTest/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/payment_conf.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/Pay.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/back.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/backlogin.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/css/about.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/css/backlogin.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/css/checkInfo.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/css/checkOrder.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/css/checkout.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/css/couponPage.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/css/detail.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/css/enjoyum.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/css/forgetPasswordPage.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/css/loginPage.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/css/memberBasicInfoPage.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/css/memberCenterPage.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/css/myCollection.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/css/orderManage.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/css/productList.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/css/recipe.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/css/recipeDetails.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/css/registPage.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/css/resetPassword.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/css/shoppingCart.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/css/styles.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/css/template.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/css/updatePasswordPage.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/donut.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/js/auth.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/js/backlogin.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/js/checkInfo.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/js/checkOrder.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/js/checkout.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/js/couponPage.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/js/detail.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/js/enjoyum.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/js/forgetPasswordPage.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/js/loginPage.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/js/memberBasicInfoPage.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/js/memberCenterPage.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/js/myCollection.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/js/newFile.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/js/ordermanage.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/js/productList.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/js/recipe.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/js/recipeDetails.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/js/registPage.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/js/resetPassword.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/js/script.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/js/template.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/js/updatePasswordPage.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/material/Coupon.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/material/CouponCanUseDISC10.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/material/CouponCanUseHALFPRICE.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/material/CouponCanUseSave50.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/material/CouponUsedDISC10.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/material/CouponUsedHALFPRICE.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/material/CouponUsedSave50.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/material/Vorderrhein3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/material/about.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/material/cook.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/material/cooking.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/material/darkgreenhead.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/material/ecosystem.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/material/express-delivery.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/material/farmer.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/material/healthyfood.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/material/icon/account.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/material/icon/cart.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/material/icon/close.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/material/icon/default.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/material/icon/donut.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/material/icon/down.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/material/icon/error.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/material/icon/facebook.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/material/icon/facebookIcon.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/material/icon/googleIcon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/material/icon/instagram.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/material/icon/lineIcon.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/material/icon/menu.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/material/icon/search.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/material/icon/up.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/material/icon/youtube.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/material/logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/material/mealkit/BeefPho.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/material/mealkit/ChickenBiryani.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/material/mealkit/CreamyRisotto.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/material/mealkit/HainaneseChickenRice.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/material/mealkit/KoreanBibimbap.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/material/mealkit/NasiLemak.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/material/mealkit/PotatoBalls.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/material/mealkit/SeafoodPaella.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/material/mealkit/SpicyRiceCakes.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/material/mealkit/SpinachSalmon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/material/mealkit/coupon.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/material/mealkit/dumpling.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/material/mealkit/katsudon.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/material/mealkit/katsudon2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/material/mealkit/laksa.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/material/mealkit/pasta.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/material/mealkit/soup.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/material/mealkit/thaiPork.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/material/orangehead.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/material/slide1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/material/slide2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/material/slide3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/material/slide4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/static/material/using-phone.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/templates/about.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/templates/checkInfo.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/templates/checkOrder.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/templates/checkout.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/templates/couponPage.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/templates/detail.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/templates/emailTest.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/templates/enjoyum.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/templates/footer.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/templates/forgetPasswordPage.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/templates/header.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/templates/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/templates/loginPage.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/templates/memberBasicInfoPage.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/templates/memberCenterPage.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/templates/myCollection.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/templates/orderManage.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/templates/productList.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/templates/recipe.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/templates/recipeDetails.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/templates/registPage.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/templates/resetPassword.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/templates/shoppingCart.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/templates/updatePasswordPage.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/templates/verifiedFail.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/bin/target/classes/templates/verifiedIsOK.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/log/enjoyumLog.txt" beforeDir="false" afterPath="$PROJECT_DIR$/FinalTest/log/enjoyumLog.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/src/main/java/tw/luna/FinalTest/controller/CouponController.java" beforeDir="false" afterPath="$PROJECT_DIR$/FinalTest/src/main/java/tw/luna/FinalTest/controller/CouponController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/src/main/resources/static/js/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/FinalTest/src/main/resources/static/js/script.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinalTest/target/classes/META-INF/maven/tw.luna/FinalTest/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/FinalTest/target/classes/META-INF/maven/tw.luna/FinalTest/pom.properties" afterDir="false" />
-    </list>
+    <list default="true" id="46b205d8-494f-4239-b044-b0cf1023239f" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -172,7 +27,7 @@
     "Spring Boot.FinalTest.executor": "Run",
     "git-widget-placeholder": "testAPI2",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/NewFinalProject/Final_Project/FinalTest",
+    "last_opened_file_path": "C:/Users/User/Desktop/Final_Project/FinalTest",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -184,14 +39,6 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-jdk-9f38398b9061-18abd8497189-intellij.indexing.shared.core-IU-241.14494.240" />
-        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-IU-241.14494.240" />
-      </set>
-    </attachedChunks>
-  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

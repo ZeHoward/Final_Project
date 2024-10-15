@@ -13,7 +13,6 @@ public class UserFavoritesProductsId implements Serializable {
 
     private int productId;
 
-    // Default constructor
     public UserFavoritesProductsId() {}
 
     public UserFavoritesProductsId(Long userId, int productId) {
@@ -21,7 +20,6 @@ public class UserFavoritesProductsId implements Serializable {
         this.productId = productId;
     }
 
-    // Getters, Setters, hashCode, equals
     public Long getUserId() {
         return userId;
     }

@@ -33,11 +33,9 @@ public class CartItems {
     @Column(name = "price", nullable = false)
     private Integer price;
 
-    // 無參數構造函數
     public CartItems() {
     }
 
-    // 全參數構造函數
     public CartItems(Integer cartitemsId, Cart cart, Product product, Integer quantity, Integer price) {
         this.cartitemsId = cartitemsId;
         this.cart = cart;

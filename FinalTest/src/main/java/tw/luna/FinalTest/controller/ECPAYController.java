@@ -7,8 +7,6 @@ import tw.luna.FinalTest.dto.PostMerchantDto;
 import tw.luna.FinalTest.dto.QueryOrderDTO;
 import tw.luna.FinalTest.dto.orders.MerchantByUserDto;
 import tw.luna.FinalTest.service.ECPAYService;
-import tw.luna.FinalTest.service.OrderService;
-import tw.luna.FinalTest.service.OrdersService;
 
 import java.io.IOException;
 

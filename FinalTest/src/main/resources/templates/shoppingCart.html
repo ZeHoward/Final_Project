@@ -132,7 +132,7 @@
             前往選購商品
           </button>
           <button class="recipeBtn" onclick="window.location.href='recipe';">
-            前往閱讀食譜
+            前往線上食譜
           </button>
         </div>
       </div>
@@ -176,6 +176,11 @@
           });
 
           const calculateDiscount = async (total) => {
+          // 如果優惠券代碼為空，直接返回，不做計算
+            if (!couponCode.value) {
+                discountAmountToNext.value = 0; // 確保折扣為 0
+                return; // 退出函式
+            }
             // 如果已經有優惠券，重新獲取折扣金額
             try {
               const response = await axios.post(
@@ -318,6 +323,10 @@
            // 將輸入的值限制為至少 1
           if (product.quantity < 1) {
             product.quantity = 1;
+            Swal.fire({
+            title: "數量必須至少為 1",
+            icon: "warning",
+          });
           } else if (product.quantity > product.stockQuantity) { // 檢查是否超過庫存
             Swal.fire({
               title: "選購數量超過庫存",
@@ -333,7 +342,9 @@
             });
 
             getCart(); // 更新購物車資料
+            if (product.quantity > 0) {
             calculateDiscount(totalAmount2.value); // 更新折扣金額 在此處調用折扣計算
+            }
           };
 
           // 增加產品數量

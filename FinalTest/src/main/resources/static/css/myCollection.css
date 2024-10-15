@@ -2,7 +2,7 @@
 
 .collection-container {
   display: flex;
-  justify-content: center; /* 水平居中 */
+  justify-content: center; /* 水平置中 */
 }
 
 .collection-tabs {
@@ -46,7 +46,7 @@
     margin-top: 20px;
     font-size: 16px;
     display: flex;
-    justify-content: center; /* 水平居中 */
+    justify-content: center; /* 水平置中 */
 }
 
 

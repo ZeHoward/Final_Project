@@ -67,8 +67,8 @@
 }
 
 .searchContainer {
-  display: flex;  /* 确保搜索输入框和图标在同一行 */
-  align-items: center;  /* 垂直居中 */
+  display: flex;  /* 確保搜尋輸入框和圖示在同一行 */
+  align-items: center;  /* 垂直置中 */
 }
 
 #searchDiv {

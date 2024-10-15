@@ -25,8 +25,6 @@ public class UserCoupon {
     private Coupon coupon;
 
 
-    // Getters and Setters
-
     public Coupon getCoupon() {
         return coupon;
     }
