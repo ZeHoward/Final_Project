@@ -561,3 +561,19 @@ a:visited {
 .close-ad-btn:hover {
   background: rgba(0,0,0,0.7);
 }
+
+#luckyWheel{
+  position: fixed;
+  bottom: 120px;
+  right: 20px;
+  z-index: 500;
+  cursor: pointer;
+}
+
+#luckyWheel:hover .fa-gamepad{
+  color: #6ebcf3;
+}
+
+.fa-gamepad{
+  font-size: 50px;
+}
