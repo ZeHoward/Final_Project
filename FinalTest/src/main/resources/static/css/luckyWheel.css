@@ -1,0 +1,124 @@
+* {
+  box-sizing: border-box;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(
+          circle,
+          rgba(243, 206, 110, 1) 0%,
+          rgba(219, 121, 88, 1) 85%,
+          rgba(211, 91, 80, 1) 100%
+  );
+}
+
+main>div{
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  margin: 150px 0 50px 0;
+  width: 500px;
+  height: 500px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  border: 15px solid #ffffff;
+  position: relative;
+  overflow: hidden;
+  transition: transform 3s ease-out;
+}
+
+.container div {
+  height: 50%;
+  width: 200px;
+  position: absolute;
+  clip-path: polygon(100% 0, 50% 100%, 0 0);
+  transform: translateX(-50%);
+  transform-origin: bottom;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: bold;
+  font-family: sans-serif;
+  color: #000000;
+  left: 135px;
+}
+
+.container .one {
+  background-color: #d35b50;
+  transform: rotate(22.5deg); /* 修正起始角度 */
+}
+
+.container .two {
+  background-color: #f3ce6e;
+  transform: rotate(67.5deg); /* 調整後角度 */
+}
+
+.container .three {
+  background-color: #d35b50;
+  transform: rotate(112.5deg); /* 調整後角度 */
+}
+
+.container .four {
+  background-color: #f3ce6e;
+  transform: rotate(157.5deg); /* 調整後角度 */
+}
+
+.container .five {
+  background-color: #d35b50;
+  transform: rotate(202.5deg); /* 調整後角度 */
+}
+
+.container .six {
+  background-color: #f3ce6e;
+  transform: rotate(247.5deg); /* 調整後角度 */
+}
+
+.container .seven {
+  background-color: #d35b50;
+  transform: rotate(292.5deg); /* 調整後角度 */
+}
+
+.container .eight {
+  background-color: #f3ce6e;
+  transform: rotate(337.5deg); /* 調整後角度 */
+}
+
+.arrow {
+  position: absolute;
+  top: 20vh;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #d35b50;
+}
+
+.arrow::before {
+  content: "\1F817";
+  font-size: 80px;
+}
+
+#spin {
+  z-index: 10;
+  background-color: #e0912f;
+  text-transform: uppercase;
+  border: 8px solid #fff;
+  font-weight: bold;
+  font-size: 20px;
+  color: #000000;
+  width: 80px;
+  height: 80px;
+  font-family: sans-serif;
+  border-radius: 50%;
+  cursor: pointer;
+  outline: none;
+  letter-spacing: 1px;
+  margin-bottom: 30px; /* 距離底部的間距 */
+}

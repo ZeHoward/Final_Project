@@ -1016,7 +1016,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     </schema>
     <schema id="290" parent="1" name="final">
       <Current>1</Current>
-      <LastIntrospectionLocalTimestamp>2024-10-08.12:19:59</LastIntrospectionLocalTimestamp>
+      <LastIntrospectionLocalTimestamp>2024-10-15.06:41:11</LastIntrospectionLocalTimestamp>
       <CollationName>utf8mb3_general_ci</CollationName>
     </schema>
     <schema id="291" parent="1" name="iii">
@@ -1126,7 +1126,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
     <column id="320" parent="305" name="cartId">
-      <AutoIncrement>6</AutoIncrement>
+      <AutoIncrement>7</AutoIncrement>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>int|0s</StoredType>
@@ -1156,7 +1156,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
     <column id="326" parent="306" name="cartitemsId">
-      <AutoIncrement>49</AutoIncrement>
+      <AutoIncrement>74</AutoIncrement>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>int unsigned|0s</StoredType>
@@ -1237,7 +1237,7 @@ productId</ColNames>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
     <column id="342" parent="308" name="couponId">
-      <AutoIncrement>5</AutoIncrement>
+      <AutoIncrement>13</AutoIncrement>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>bigint|0s</StoredType>
@@ -1281,7 +1281,7 @@ productId</ColNames>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
     <column id="351" parent="309" name="orderDetailsID">
-      <AutoIncrement>39</AutoIncrement>
+      <AutoIncrement>55</AutoIncrement>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>int unsigned|0s</StoredType>
@@ -1341,7 +1341,7 @@ productId</ColNames>
       <UnderlyingIndexName>orderDetails_index_0</UnderlyingIndexName>
     </key>
     <column id="363" parent="310" name="orderId">
-      <AutoIncrement>9</AutoIncrement>
+      <AutoIncrement>15</AutoIncrement>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>int|0s</StoredType>
@@ -1421,7 +1421,7 @@ productId</ColNames>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
     <column id="380" parent="311" name="paymentId">
-      <AutoIncrement>7</AutoIncrement>
+      <AutoIncrement>13</AutoIncrement>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>int unsigned|0s</StoredType>
@@ -1465,7 +1465,7 @@ productId</ColNames>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
     <column id="389" parent="312" name="id">
-      <AutoIncrement>114</AutoIncrement>
+      <AutoIncrement>122</AutoIncrement>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>bigint|0s</StoredType>
@@ -1499,7 +1499,7 @@ productId</ColNames>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
     <column id="396" parent="313" name="productId">
-      <AutoIncrement>130</AutoIncrement>
+      <AutoIncrement>132</AutoIncrement>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>int|0s</StoredType>
@@ -1588,7 +1588,7 @@ productId</ColNames>
       <Predicate>`level` in (_utf8mb4\&apos;å&#x9b;°é&#x9b;£\&apos;,_utf8mb4\&apos;ä¸­ç­&#x89;\&apos;,_utf8mb4\&apos;ç°¡æ&#x98;&#x93;\&apos;)</Predicate>
     </check>
     <column id="414" parent="314" name="recipeId">
-      <AutoIncrement>12</AutoIncrement>
+      <AutoIncrement>46</AutoIncrement>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>int|0s</StoredType>
@@ -1759,7 +1759,7 @@ recipeId</ColNames>
       <UnderlyingIndexName>userFavoritesRecipes_index_4</UnderlyingIndexName>
     </key>
     <column id="450" parent="318" name="id">
-      <AutoIncrement>10</AutoIncrement>
+      <AutoIncrement>12</AutoIncrement>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>int unsigned|0s</StoredType>
@@ -1828,7 +1828,7 @@ recipeId</ColNames>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
     <column id="465" parent="319" name="userId">
-      <AutoIncrement>9</AutoIncrement>
+      <AutoIncrement>11</AutoIncrement>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>bigint|0s</StoredType>
