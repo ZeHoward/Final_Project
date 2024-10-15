@@ -296,7 +296,31 @@ document.getElementById("luckyWheel").addEventListener("click", () => {
             if (isLoggedIn) {
                 getUserId().then(userId => {
                     console.log(userId);
-                    window.location.href="/luckyWheel"
+                    // 檢查使用者是否已經玩過旋轉盤領取過優惠券
+                    fetch(`/api/coupons/user/${userId}`)
+                        .then(response => response.json())
+                        .then(coupons => {
+                            console.log(coupons);
+                            const restrictedCoupons = [5, 6, 7, 8, 9, 10, 11, 12];
+                            const hasRestrictedCoupon = coupons.some(couponData =>
+                                restrictedCoupons.includes(couponData.coupon.couponId)
+                            );
+                            if (hasRestrictedCoupon) {
+                                Swal.fire({
+                                    title: "提示",
+                                    text: "您已經領取過特定優惠券，無法再次抽取。",
+                                    icon: "warning"
+                                });
+                                setTimeout(()=>{
+                                    window.location.href='/couponPage';
+                                },500)
+                            }else{
+                                window.location.href="/luckyWheel"
+                            }
+                        })
+                        .catch(error => {
+                            console.error('取得使用者優惠券資訊時發生錯誤:', error);
+                        });
                 })
             } else {
                 Swal.fire({

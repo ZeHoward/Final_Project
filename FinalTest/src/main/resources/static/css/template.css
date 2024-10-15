@@ -18,7 +18,7 @@ a {
 }
 
 a:visited {
-  color: inherit; /* 訪問後保持原本的顏色 */
+  color: inherit;
 }
 
 .tem-nav {
@@ -419,8 +419,8 @@ a:visited {
 #webSocketIconDiv {
     position: fixed;
     bottom: 20px;
-    right: 20px;
     z-index: 500;
+    right: 0;
 }
 
 #webSocketIconDiv:hover{
@@ -559,5 +559,16 @@ a:visited {
 }
 
 .close-ad-btn:hover {
-  background: rgba(0,0,0,0.7);
+  background: rgb(57, 88, 218);
+}
+
+#luckyWheel{
+  position: fixed;
+  color: #6ebcf3;
+  cursor: pointer;
+  right: 0;
+  bottom: 60px;
+  font-size: 40px;
+  z-index: 1000;
+
 }
