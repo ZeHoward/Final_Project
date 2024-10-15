@@ -108,6 +108,7 @@ document.getElementById("logout").addEventListener("click", () => {
 //聯絡我們
 let contactDiv = document.getElementById("contactDiv");
 
+
 document.getElementById("contactIcon").addEventListener("click", () => {
     contactDiv.style.display = 'block';
 })
@@ -153,13 +154,6 @@ document.getElementById("contactBtn").addEventListener("click", () => {
             padding: '3em',
             color: '#716add',
             background: '#fff',
-
-            backdrop: `
-		     rgba(0,0,123,0.4)
-		     url("https://sweetalert2.github.io/images/nyan-cat.gif")
-		     left top
-		     no-repeat
-		   `,
             didOpen: () => {
                 Swal.showLoading();
             },

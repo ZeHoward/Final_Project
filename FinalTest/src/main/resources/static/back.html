@@ -171,9 +171,10 @@
 	   socket.onmessage = (event) => {
 	       let chatbox = document.getElementById('chatArea');
 	       let message = document.createElement('div');
+
            let msgContent= `<p>${event.data}</p>`;
            message.innerHTML=msgContent;
-	       if(event.data.includes('メイド')){
+	       if(event.data.includes('客服人員')){
              message.classList.add("maid");
 	       }else{
              message.classList.add("master");
@@ -185,7 +186,8 @@
 	   let sendMessage = () => {
 	       let input = document.getElementById('messageInput');
 	       if(input.value.trim() !== ''){
-		       socket.send("メイド:" + input.value);
+
+		       socket.send("客服人員:" + input.value);
 	       }
 	       input.value = '';
 	   }
