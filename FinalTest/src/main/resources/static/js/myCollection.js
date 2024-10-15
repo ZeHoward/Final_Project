@@ -72,28 +72,47 @@ document.addEventListener("DOMContentLoaded", function () {
       favorites.forEach(favorite => {
         const imageSrc = favorite.imageUrl || '../material/icon/error.png';
         html += `
-          <div class="product" data-product-id="${favorite.productId}" data-type="${type}">
-            <img class="product-image" src="${imageSrc}" alt="${favorite.name}" onerror="this.src='../material/icon/error.png';">
-            <h3 class="product-name">${favorite.name}</h3>
-            <p class="product-price">$NT${favorite.price}</p>
-            <div class="home-product-btn">
-              <button class="add-to-favorite favorited" data-product-id="${favorite.productId}">
-                <i class="fa-solid fa-heart"></i>
-              </button>
-              <button class="add-to-cart" data-product-id="${favorite.productId}">
-                <i class="fa-solid fa-cart-shopping"></i>&nbsp;&nbsp;&nbsp;加入購物車
-              </button>
-            </div>
-          </div>`;
+        <div class="product" data-product-id="${favorite.productId || favorite.recipeId}" data-type="${type}">
+          <img class="product-image" src="${imageSrc}" alt="${favorite.name}" onerror="this.src='../material/icon/error.png';">
+          <h3 class="product-name">${favorite.name}</h3>
+          <p class="product-price">$NT${favorite.price}</p>
+          <div class="home-product-btn">
+            <button class="add-to-favorite favorited" data-product-id="${favorite.productId || favorite.recipeId}">
+              <i class="fa-solid fa-heart"></i>
+            </button>
+            <button class="add-to-cart" data-product-id="${favorite.productId || favorite.recipeId}">
+              <i class="fa-solid fa-cart-shopping"></i>&nbsp;&nbsp;&nbsp;加入購物車
+            </button>
+          </div>
+        </div>`;
       });
     }
 
     container.innerHTML = html;  // 一次性插入 DOM
 
-    // 事件代理 - 使用事件代理處理收藏和加入購物車按鈕
+    // 為每個商品或食譜卡片設置點擊事件監聽器
+    container.querySelectorAll('.product').forEach(productElement => {
+      productElement.addEventListener('click', (event) => {
+        if (event.target.closest('button')) return;  // 如果點擊的是按鈕，則不進行跳轉
+
+        const productId = productElement.getAttribute('data-product-id');
+        const type = productElement.getAttribute('data-type');
+
+        // 根據類型構建跳轉 URL
+        if (type === 'products') {
+          window.location.href = `/detail?productId=${productId}`;
+        } else if (type === 'recipes') {
+          window.location.href = `/recipeDetails/${productId}`;
+        }
+      });
+    });
+
+    // 按鈕事件代理 - 收藏和加入購物車按鈕
     container.addEventListener('click', function(event) {
       const target = event.target.closest('button');
       if (!target) return;  // 如果不是按鈕則退出
+
+      event.stopPropagation();  // 阻止冒泡
 
       const productId = target.getAttribute('data-product-id');
       const productElement = target.closest('.product');
@@ -107,6 +126,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   }
+
 
   // 彈出視窗詢問商品數量並將商品添加到購物車
   function promptQuantityAndAddToCart(productId, productName) {

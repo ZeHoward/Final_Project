@@ -94,13 +94,13 @@
                     <a href="/couponPage">優惠券</a>
                 </div>
                 <div>
-                	<i class="memerinfo-icon fa-brands fa-facebook-messenger"></i>
-                	<a style="margin-left:-8px;" href="/userChatPage">即食客服</a>
+                    <i class="memerinfo-icon fa-brands fa-facebook-messenger"></i>
+                    <a style="margin-left:-8px;" href="/userChatPage">即食客服</a>
                 </div>
                 <div id="contactIcon">
-					<i class="memerinfo-icon fa-solid fa-comment"></i>					
-					<a style="margin-left:-8px;">聯絡我們</a>
-				</div>
+                    <i class="memerinfo-icon fa-solid fa-comment"></i>
+                    <a style="margin-left:-8px;">聯絡我們</a>
+                </div>
                 <div id="loginDiv" style="display: none">
                     <i class="memerinfo-icon fa-solid fa-right-to-bracket"></i>
                     <a style="margin-left:-4px" href="/loginPage">登入</a>
@@ -115,65 +115,69 @@
 </header>
 
 <!-- 聯絡我們 -->
- 	<div id="contactDiv">
-        <div id="contactContent">
-        	<span id="close">&times;</span>
-            <h1 style="text-align:center;">聯絡我們</h1>
-            <div style="display:flex; flex:1 1 100%; justify-content:center;">
-            	  <img style="width:80px; height:auto;" th:src="@{/material/orangehead.png}" alt=""/>
-            </div>          
-            <p style="text-align:center;">謝謝您的主動聯絡，請留下要諮詢的問題，我們會用以下資訊進行回覆。</p>      
-            <p>姓名:</p>
-            <input id="name" class="contactInput" type="text"><br>
-            <p>聯絡方式:</p>
-            <input id="contactInfo" class="contactInput" type="text" placeholder="電子信箱 或 手機號碼">
-            <p>問題類型:</p>
-            <select id="questionType">
-            	<option value="請選擇問題類型">請選擇問題類型</option>
-            	<option value="無法完成購買">無法完成購買</option>
-            	<option value="看不到商品圖">看不到商品圖</option>
-            	<option value="無法顯示網頁">無法顯示網頁</option>
-            	<option value="商品文案有誤">商品文案有誤</option>
-            	<option value="商品文案有誤">商品瑕疵,退/換貨</option>            	
-            	<option value="其他問題">其他問題</option>
-            </select><br>
-            <p>諮詢內容:</p>
-            <textarea id="message" name="message" placeholder="若為已購買商品相關問題,麻煩請填寫訂單編號"></textarea><br>
+<div id="contactDiv">
+    <div id="contactContent">
+        <span id="close">&times;</span>
+        <h1 style="text-align:center;">聯絡我們</h1>
+        <div style="display:flex; flex:1 1 100%; justify-content:center;">
+            <img style="width:80px; height:auto;" th:src="@{/material/orangehead.png}" alt=""/>
+        </div>
+        <p style="text-align:center;">謝謝您的主動聯絡，請留下要諮詢的問題，我們會用以下資訊進行回覆。</p>
+        <p>姓名:</p>
+        <input id="name" class="contactInput" type="text"><br>
+        <p>聯絡方式:</p>
+        <input id="contactInfo" class="contactInput" type="text" placeholder="電子信箱 或 手機號碼">
+        <p>問題類型:</p>
+        <select id="questionType">
+            <option value="請選擇問題類型">請選擇問題類型</option>
+            <option value="無法完成購買">無法完成購買</option>
+            <option value="看不到商品圖">看不到商品圖</option>
+            <option value="無法顯示網頁">無法顯示網頁</option>
+            <option value="商品文案有誤">商品文案有誤</option>
+            <option value="商品文案有誤">商品瑕疵,退/換貨</option>
+            <option value="其他問題">其他問題</option>
+        </select><br>
+        <p>諮詢內容:</p>
+        <textarea id="message" name="message" placeholder="若為已購買商品相關問題,麻煩請填寫訂單編號"></textarea><br>
 
-            <div style="display:flex; flex:1 1 100%; justify-content:center;">
-            	<button id="contactBtn">送出</button>
-			</div>
-            
+        <div style="display:flex; flex:1 1 100%; justify-content:center;">
+            <button id="contactBtn">送出</button>
+        </div>
+
+    </div>
+</div>
+
+<div id="luckyWheel">
+    <i class="fa-solid fa-gamepad"></i>
+</div>
+
+<!-- 聊天室 -->
+<div id="webSocketIconDiv" >
+    <i class="fa-solid fa-robot" id="webSocketIcon"></i>
+</div>
+
+<div id="chatWindow">
+    <div id="chatWindowHeader">
+        即食享熱小幫手
+        <button id="closeButton">×</button>
+        <div id="maximizeButton">□</div>
+    </div>
+    <div id="chatMessages"></div>
+    <input type="text" id="chatInput" placeholder="輸入訊息...">
+    <button id="sendButton">發 送</button>
+</div>
+
+<div id="adSlideContainer" class="ad-slide-container">
+    <div id="adContainer" class="ad-container">
+        <div class="ad-content">
+            <a id="adLink" href="#" target="_blank">
+                <img id="adImage" src="" alt="AD" class="ad-image">
+            </a>
+            <button id="closeAdBtn" class="close-ad-btn">&times;</button>
+
         </div>
     </div>
-    
-    <!-- 聊天室 -->
-    <div id="webSocketIconDiv" >
-        <img id="webSocketIcon" src="/material/icon/chatbot.png" style="height: 80px; width: 80px;" alt="WebSocket Icon">
-	</div>
-
-    <div id="chatWindow">
-        <div id="chatWindowHeader">
-            即食享熱小幫手
-            <button id="closeButton">×</button>
-            <div id="maximizeButton">□</div>
-        </div>
-        <div id="chatMessages"></div>
-        <input type="text" id="chatInput" placeholder="輸入訊息...">
-        <button id="sendButton">發 送</button>
-    </div>
-
-    <div id="adSlideContainer" class="ad-slide-container">
-        <div id="adContainer" class="ad-container">
-            <div class="ad-content">
-                <a id="adLink" href="#" target="_blank">
-                    <img id="adImage" src="" alt="AD" class="ad-image">
-                </a>
-                <button id="closeAdBtn" class="close-ad-btn">&times;</button>
-
-            </div>
-        </div>
-    </div>
+</div>
 
 </body>
 <script th:src="@{js/template.js}" defer="defer"></script>

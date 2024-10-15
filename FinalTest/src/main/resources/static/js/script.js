@@ -106,16 +106,16 @@ function generateOverviewContent() {
         cardDiv.appendChild(p);
 
         // 為每個卡片添加事件監聽
-        // cardDiv.addEventListener("click", () => {
-        //     // 根據卡片類型切換圖表數據
-        //     if (card.type === "orders") {
-        //         // 如果點擊的是「訂單總量」卡片，更新圖表顯示訂單數據
-        //         fetchOrderChartData();
-        //     } else if (card.type === "revenue") {
-        //         // 如果點擊的是「營業額」卡片，更新圖表顯示營業額數據
-        //         fetchRevenueChartData();
-        //     }
-        // });
+        cardDiv.addEventListener("click", () => {
+            // 根據卡片類型切換圖表數據
+            if (card.type === "orders") {
+                // 如果點擊的是「訂單總量」卡片，更新圖表顯示訂單數據
+                fetchOrderChartData();
+            } else if (card.type === "revenue") {
+                // 如果點擊的是「營業額」卡片，更新圖表顯示營業額數據
+                fetchRevenueChartData();
+            }
+        });
 
         overviewSection.appendChild(cardDiv);
     });

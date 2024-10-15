@@ -1,0 +1,98 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale = 1.0"/>
+    <link rel="stylesheet" th:href="@{css/luckyWheel.css}"/>
+    <title>優惠券旋轉盤</title>
+</head>
+<body>
+
+<div th:replace="header"></div>
+
+
+<!-- 旋轉盤與按鈕的容器 -->
+<main>
+    <!-- 箭頭 -->
+    <div><span class="arrow"></span></div>
+
+
+    <!--轉盤-->
+    <div class="container">
+        <div
+                class="one coupon"
+                data-code="lucky1"
+                data-coupon-name="85折"
+                data-coupon-angle="337.5"
+        >
+            85折
+        </div>
+        <div
+                class="two coupon"
+                data-code="lucky2"
+                data-coupon-name="75折"
+                data-coupon-angle="22.5"
+        >
+            75折
+        </div>
+        <div
+                class="three coupon"
+                data-code="lucky3"
+                data-coupon-name="65折"
+                data-coupon-angle="67.5"
+        >
+            65折
+        </div>
+        <div
+                class="four coupon"
+                data-code="lucky4"
+                data-coupon-name="55折"
+                data-coupon-angle="112.5"
+        >
+            55折
+        </div>
+        <div
+                class="five coupon"
+                data-code="lucky5"
+                data-coupon-name="45折"
+                data-coupon-angle="157.5"
+        >
+            45折
+        </div>
+        <div
+                class="six coupon"
+                data-code="lucky6"
+                data-coupon-name="150元"
+                data-coupon-angle="202.5"
+        >
+            150元
+        </div>
+        <div
+                class="seven coupon"
+                data-code="lucky7"
+                data-coupon-name="300元"
+                data-coupon-angle="247.5"
+        >
+            300元
+        </div>
+        <div
+                class="eight coupon"
+                data-code="lucky8"
+                data-coupon-name="95折"
+                data-coupon-angle="292.5"
+        >
+            95折
+        </div>
+    </div>
+
+    <!-- 按鈕 -->
+    <div><button id="spin">點擊</button></div>
+
+</main>
+
+    <div th:replace="footer"></div>
+
+
+    <script th:src="@{js/luckyWheel.js}" defer="defer"></script>
+</main>
+</body>
+</html>
