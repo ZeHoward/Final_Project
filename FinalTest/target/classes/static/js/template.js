@@ -146,17 +146,24 @@ document.getElementById("contactBtn").addEventListener("click", () => {
         })
     } else {
 
-        Swal.fire({
-            title: '正在發送中...',
-            text: '請稍後',
-            allowOutsideClick: false,
-            width: 600,
-            padding: '3em',
-            color: '#716add',
-            background: '#fff',
-            didOpen: () => {
-                Swal.showLoading();
-            },
+		Swal.fire({
+		  title: '正在發送中...',
+		  text: '請稍後',
+		  allowOutsideClick: false,
+		  width: 600,
+		   padding: '3em',
+		   color: '#716add',
+		   background: '#fff',
+
+		   backdrop: `
+		     rgba(0,0,123,0.4)
+		     url("https://sweetalert2.github.io/images/nyan-cat.gif")
+		     left top
+		     no-repeat
+		   `,
+		  didOpen: () => {
+		    Swal.showLoading();
+		  },
 
         });
 
@@ -229,33 +236,74 @@ function initChatApp() {
         toggleChatWindow('hide');
     });
 
+    // 綁定放大按鈕事件
+    maximizeButton.addEventListener('click', function () {
+        if (!isMaximized) {
+            chatWindow.style.width = '60vw';
+            chatWindow.style.height = '80vh';
+            isMaximized = true;
+        } else {
+            chatWindow.style.width = '35vw';
+            chatWindow.style.height = '40vh';
+            isMaximized = false;
+        }
+    });
+
     // 顯示或隱藏對話框
     function toggleChatWindow(action) {
+        const chatWindow = document.getElementById('chatWindow');
+
         if (action === 'show') {
-            chatWindow.style.display = 'block';
-            chatIcon.style.display = 'none';  // 隱藏圖標
+            chatWindow.style.display = 'flex';  // 彈出對話框，使用 flexbox 布局
+            chatIcon.style.display = 'none';    // 隱藏聊天圖標
         } else if (action === 'hide') {
-            chatWindow.style.display = 'none';
-            chatIcon.style.display = 'block';  // 恢復圖標
+            chatWindow.style.display = 'none';  // 隱藏對話框
+            chatIcon.style.display = 'block';   // 顯示聊天圖標
         }
     }
 
-    // 顯示訊息在對話框，帶有打字機效果
+    document.addEventListener("DOMContentLoaded", function() {
+        chatWindow.style.display = 'none'; // 確保初始隱藏對話框
+    });
+
+    // 格式化訊息：處理換行和段落
+    function formatMessage(message) {
+        const paragraphs = message.split('\n\n');  // 將雙換行符視為段落
+        return paragraphs.map(p => `<p>${p.replace(/\n/g, '<br>')}</p>`).join('');  // 單換行符轉換為 <br>
+    }
+
+    // 顯示訊息在對話框，帶有逐字打字機效果並處理格式化
     function appendMessage(role, message) {
         const newMessage = document.createElement('div');
         newMessage.textContent = role === 'user' ? '你: ' : '料理鼠王： ';
         chatMessages.appendChild(newMessage);
 
-        let i = 0;
-        const speed = 50; // 調整打字速度，單位為毫秒
+        // 如果是用戶訊息，直接顯示
+        if (role === 'user') {
+            newMessage.textContent = '你: ' + message;
+            chatMessages.scrollTop = chatMessages.scrollHeight; // 自動滾動到底部
+            return;
+        }
+
+        // 將 GPT 回覆進行格式化並解析為純文本
+        const formattedMessage = formatMessage(message);
+        const tempElement = document.createElement('div');
+        tempElement.innerHTML = formattedMessage;
+
+        const fullText = tempElement.textContent;  // 獲取純文本內容
+        let charIndex = 0;  // 字符索引
+        const speed = 50;  // 調整打字速度，單位為毫秒
 
         function typeWriter() {
-            if (i < message.length) {
-                newMessage.textContent += message.charAt(i);
-                i++;
+            if (charIndex < fullText.length) {
+                newMessage.textContent += fullText.charAt(charIndex);  // 逐字添加
+                charIndex++;
+                chatMessages.scrollTop = chatMessages.scrollHeight;  // 自動滾動到底部
                 setTimeout(typeWriter, speed);
             } else {
-                chatMessages.scrollTop = chatMessages.scrollHeight; // 自動滾動到底部
+                // 當打字機效果結束後，將完整的 HTML 格式化應用
+                newMessage.innerHTML = formattedMessage;
+                chatMessages.scrollTop = chatMessages.scrollHeight;  // 自動滾動到底部
             }
         }
 
@@ -274,7 +322,7 @@ function initChatApp() {
             .then(data => {
                 // 根據 API 回應結構解析數據
                 const assistantMessage = data.choices[0].message.content;
-                appendMessage('AI', assistantMessage);  // 顯示 AI 回應，帶打字機效果
+                appendMessage('AI', assistantMessage);  // 顯示 AI 回應，帶打字機效果和格式化支援
             })
             .catch(error => {
                 appendMessage('AI', '發生錯誤，請聯繫開發商');
@@ -299,9 +347,75 @@ function initChatApp() {
 // 初始化聊天應用
 document.addEventListener("DOMContentLoaded", initChatApp);
 
+// 廣告視窗
+document.addEventListener('DOMContentLoaded', function() {
+    const closeAdBtn = document.getElementById('closeAdBtn');
+    const adSlideContainer = document.getElementById('adSlideContainer');
+    const adImage = document.getElementById('adImage');
+    const adLink = document.getElementById('adLink');
 
-	
-	
+    // 廣告數據
+    const ads = [
+        { image: '/material/icon/DTlogo.png', link: 'https://www.youtube.com/@DietTomorrowFood/shorts' },
+        { image: 'https://enjoyum.s3.amazonaws.com/632b0c41-db6a-4af6-955b-25c841669d7b-LOGO.png', link: 'https://shopee.tw/-%E6%A8%82%E4%B9%83%E8%BE%B2%E5%A0%B4-%E5%86%B7%E5%87%8D%E9%A6%99%E8%8A%8B%E7%8D%85%E5%AD%90%E9%A0%AD%E7%82%8A%E7%B2%89%E6%B9%AF%E8%AA%BF%E7%90%86%E5%8C%85(600%E5%85%AC%E5%85%8B)-i.82185121.25582336313?srsltid=AfmBOopkAN_W8fu5GCjX3c-D4OPr6tF1c7wgJTw9YRTvs6WW3R4zim7b' },
+        { image: 'https://down-tw.img.susercontent.com/file/tw-11134207-7r990-lx2rajtbrup209@resize_w450_nl.webp', link: 'https://shopee.tw/-%E6%A8%82%E4%B9%83%E8%BE%B2%E5%A0%B4-%E5%86%B7%E5%87%8D%E9%A6%99%E8%8A%8B%E7%8D%85%E5%AD%90%E9%A0%AD%E7%82%8A%E7%B2%89%E6%B9%AF%E8%AA%BF%E7%90%86%E5%8C%85(600%E5%85%AC%E5%85%8B)-i.82185121.25582336313?srsltid=AfmBOopkAN_W8fu5GCjX3c-D4OPr6tF1c7wgJTw9YRTvs6WW3R4zim7b' },
+        { image: 'https://down-tw.img.susercontent.com/file/tw-11134207-7r990-lykvpxdrk7ase9@resize_w450_nl.webp', link: 'https://shopee.tw/-%E6%A8%82%E4%B9%83%E8%BE%B2%E5%A0%B4-%E5%86%B7%E5%87%8D%E7%B6%93%E5%85%B8%E8%A5%BF%E9%A4%90%E7%8E%89%E7%B1%B3%E6%BF%83%E6%B9%AF%E8%AA%BF%E7%90%86%E5%8C%85(500g)-i.82185121.27057086799?srsltid=AfmBOoo0JgHZkpwUIl37pIT236BwhWIWAn00OYrn1kJhuwmxPSoqcC_S' },
+        { image: 'https://down-tw.img.susercontent.com/file/tw-11134207-7r98w-lwutn0ygpvdy5c@resize_w450_nl.webp', link: 'https://shopee.tw/-%E6%A8%82%E4%B9%83%E8%BE%B2%E5%A0%B4-%E7%B6%93%E5%85%B8%E8%BE%A6%E6%A1%8C%E5%86%B7%E5%87%8D%E6%AB%BB%E8%8A%B1%E8%9D%A6%E7%B1%B3%E7%B3%95(350%E5%85%8B-%E7%9B%92)-i.82185121.28553535006?srsltid=AfmBOooL2WdbPUfmS4UmuywDOsEjkvRBVy0nAl2YODX-kotBGxyp2YRb' }
+        // { image: '/material/icon/DTlogo.png', link: 'https://www.youtube.com/@DietTomorrowFood/shorts' },
+        // { image: '/material/icon/DTlogo.png', link: 'https://www.youtube.com/@DietTomorrowFood/shorts' },
+        // { image: '/material/icon/DTlogo.png', link: 'https://www.youtube.com/@DietTomorrowFood/shorts' },
+        // { image: '/material/icon/DTlogo.png', link: 'https://www.youtube.com/@DietTomorrowFood/shorts' },
+        // { image: '/material/icon/DTlogo.png', link: 'https://www.youtube.com/@DietTomorrowFood/shorts' },
+        // { image: '/material/icon/DTlogo.png', link: 'https://www.youtube.com/@DietTomorrowFood/shorts' },
+
+    ];
+
+    // 隨機選擇廣告
+    function chooseRandomAd() {
+        const randomIndex = Math.floor(Math.random() * ads.length);
+        return ads[randomIndex];
+    }
+
+    // 設置廣告
+    function setAd() {
+        const ad = chooseRandomAd();
+        adImage.src = ad.image;
+        adLink.href = ad.link;
+    }
+
+    // 在什麼頁面不顯示廣告
+    function shouldShowAd() {
+        const currentPath = window.location.pathname;
+        const excludedPaths = ['/enjoyum', '/loginPage', '/updatePasswordPage', '/about', '/registPage', '/forgetPasswordPage', '/', '/memberBasicInfoPage'];
+        return !excludedPaths.includes(currentPath);
+    }
+
+    // 顯示廣告
+    function showAd() {
+        if (shouldShowAd()) {
+            adSlideContainer.style.left = '20px';
+        }
+    }
+
+    // 隱藏廣告
+    function hideAd() {
+        adSlideContainer.style.left = '-320px';
+    }
+
+    // 初始化廣告
+    setAd();
+    showAd();
+
+    // 關閉廣告
+    closeAdBtn.addEventListener('click', function() {
+        hideAd();
+        setTimeout(function() {
+            setAd();
+            showAd();
+        }, 30000);
+    });
+});
+
 document.getElementById("luckyWheel").addEventListener("click", () => {
     checkLoginStatus()
         .then((isLoggedIn) => {

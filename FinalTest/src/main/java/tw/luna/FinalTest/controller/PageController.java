@@ -35,12 +35,13 @@ public class PageController {
 	public String detail() {
 		return "detail";
 	}
-
 	@GetMapping("/notice")
 	public String notice() {return "notice";}
 
 	@GetMapping("/luckyWheel")
 	public String luckyWheel() {return "luckyWheel";}
+
+
 
 	@GetMapping("/myCollection")
 	public String myCollection() {
