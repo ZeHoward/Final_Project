@@ -1,150 +1,149 @@
 // 菜單展開、關閉功能
-window.openSidenav = function () {
+  window.openSidenav = function () {
     document.getElementById("sidenav").style.width = "100%";
     document.body.style.overflow = "hidden";
-};
+  };
 
-window.closeSidenav = function () {
+  window.closeSidenav = function () {
     document.getElementById("sidenav").style.width = "0%";
     document.body.style.overflow = "";
-};
+  };
 
-// 會員功能菜單顯示&隱藏
-let memberInfoDiv = document.getElementById("memberInfoDiv");
-let slideshowContainer = document.getElementById("slideshow-container");
-let isMemberDivVisible = false; // 初始為隱藏
+  // 會員功能菜單顯示/隱藏
+  let memberInfoDiv = document.getElementById("memberInfoDiv");
+  let slideshowContainer = document.getElementById("slideshow-container");
+  let isMemberDivVisible = false; // 初始為隱藏
 
-document.getElementById("memberIcon").addEventListener("click", (e) => {
+  document.getElementById("memberIcon").addEventListener("click", (e) => {
     e.stopPropagation(); // 防止點擊會員圖標時觸發頁面其他地方的點擊事件
     if (isMemberDivVisible) {
-        memberInfoDiv.style.display = "none";
-        // slideshowContainer.style.zIndex = 5;
-        isMemberDivVisible = false;
+      memberInfoDiv.style.display = "none";
+      // slideshowContainer.style.zIndex = 5;
+      isMemberDivVisible = false;
     } else {
-        memberInfoDiv.style.display = "block";
-        isMemberDivVisible = true;
-        // slideshowContainer.style.zIndex = -1;
+      memberInfoDiv.style.display = "block";
+      isMemberDivVisible = true;
+      // slideshowContainer.style.zIndex = -1;
     }
-});
+  });
 
-// 點擊頁面其他地方時隱藏會員功能菜單
-document.addEventListener("click", function (e) {
+  // 點擊頁面其他地方時隱藏會員功能菜單
+  document.addEventListener("click", function (e) {
     e.stopPropagation();
     if (isMemberDivVisible && !memberInfoDiv.contains(e.target)) {
-        memberInfoDiv.style.display = "none";
-        // slideshowContainer.style.zIndex = 5;
-        isMemberDivVisible = false;
+      memberInfoDiv.style.display = "none";
+      // slideshowContainer.style.zIndex = 5;
+      isMemberDivVisible = false;
     }
-});
+  });
 
-// 點擊頁面其他地方時隱藏搜索框和會員功能菜單
-document.getElementById("myContainer").addEventListener("click", () => {
+  // 點擊頁面其他地方時隱藏搜索框和會員功能菜單
+  document.getElementById("myContainer").addEventListener("click", () => {
     if (isMemberDivVisible) {
-        memberInfoDiv.style.display = "none";
-        // slideshowContainer.style.zIndex = 5;
-        isMemberDivVisible = false;
+      memberInfoDiv.style.display = "none";
+      // slideshowContainer.style.zIndex = 5;
+      isMemberDivVisible = false;
     }
-});
+  });
 
-//header的logo點了會跳到首頁
-document.getElementById("logoDiv").addEventListener("click", () => {
+  //header的logo點了會跳到首頁
+  document.getElementById("logoDiv").addEventListener("click", () => {
     window.location.href = "/enjoyum";
-});
+  });
 
-//判斷使用者是否為登入狀態
-let loginDiv = document.getElementById("loginDiv");
-let logoutDiv = document.getElementById("logoutDiv");
+  //判斷使用者是否為登入狀態
+  let loginDiv = document.getElementById("loginDiv");
+  let logoutDiv = document.getElementById("logoutDiv");
 
-loginDiv.style.display = "none";
-logoutDiv.style.display = "none";
+  loginDiv.style.display = "none";
+  logoutDiv.style.display = "none";
 
-fetch("/users/checkSession", {
+  fetch("/users/checkSession", {
     method: "GET",
-})
+  })
     .then((response) => {
-        if (!response.ok) {
-            throw new Error("Error : ");
-        }
-        return response.json();
+      if (!response.ok) {
+        throw new Error("Error : ");
+      }
+      return response.json();
     })
     .then((data) => {
-        if (data) {
-            loginDiv.style.display = "none";
-            logoutDiv.style.display = "block";
-        } else {
-            loginDiv.style.display = "block";
-            logoutDiv.style.display = "none";
-        }
+      if (data) {
+        loginDiv.style.display = "none";
+        logoutDiv.style.display = "block";
+      } else {
+        loginDiv.style.display = "block";
+        logoutDiv.style.display = "none";
+      }
     })
     .catch((error) => {
-        console.log("Error :" + error);
+      console.log("Error :" + error);
     });
 
-//登出
-document.getElementById("logout").addEventListener("click", () => {
+  //登出
+  document.getElementById("logout").addEventListener("click", () => {
     fetch("/users/logout", {
-        method: "GET",
+      method: "GET",
     })
-        .then((response) => {
-            if (!response.ok) {
-                throw new Error("Error : ");
-            }
-            return response.json();
-        })
-        .then((data) => {
-            if (typeof data === "boolean") {
-                if (data) {
-                    window.location.href = "/enjoyum";
-                }
-            } else {
-                console.log("Unexpected response data:", data);
-            }
-        })
-        .catch((error) => {
-            console.error("Error:", error);
-        });
-});
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Error : ");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        if (typeof data === "boolean") {
+          if (data) {
+            window.location.href = "/enjoyum";
+          }
+        } else {
+          console.log("Unexpected response data:", data);
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  });
+  
+  //聯絡我們
+  let contactDiv = document.getElementById("contactDiv");
+  
+  document.getElementById("contactIcon").addEventListener("click", () => {
+	contactDiv.style.display = 'block';
+  })
 
-//聯絡我們
-let contactDiv = document.getElementById("contactDiv");
+  document.getElementById("close").addEventListener("click", () => {
+      contactDiv.style.display = 'none';
+  })
+  
+  document.getElementById("contactBtn").addEventListener("click", () => {
+      let name = document.getElementById("name").value;
+      let contactInfo = document.getElementById("contactInfo").value;
+	  let questionType = document.getElementById("questionType").value;
+      let message = document.getElementById("message").value;
 
-
-document.getElementById("contactIcon").addEventListener("click", () => {
-    contactDiv.style.display = 'block';
-})
-
-document.getElementById("close").addEventListener("click", () => {
-    contactDiv.style.display = 'none';
-})
-
-document.getElementById("contactBtn").addEventListener("click", () => {
-    let name = document.getElementById("name").value;
-    let contactInfo = document.getElementById("contactInfo").value;
-    let questionType = document.getElementById("questionType").value;
-    let message = document.getElementById("message").value;
-
-    if (name === '' || name == null) {
-        Swal.fire({
-            title: "請輸入姓名",
-            text: "",
-            icon: "warning",
-            timer: "1000"
-        })
-    } else if (contactInfo === '' || contactInfo == null) {
-        Swal.fire({
-            title: "請輸入聯絡方式",
-            text: "",
-            icon: "warning",
-            timer: "1000"
-        })
-    } else if (message === '' || message == null) {
-        Swal.fire({
-            title: "請輸入諮詢內容",
-            text: "",
-            icon: "warning",
-            timer: "1000"
-        })
-    } else {
+      if(name === '' || name == null){
+		  Swal.fire({
+			title:"請輸入姓名",
+			text:"",
+			icon:"warning",
+			timer:"1000"
+		})
+      }else if(contactInfo === '' || contactInfo == null){
+		  Swal.fire({
+  			title:"請輸入聯絡方式",
+  			text:"",
+  			icon:"warning",
+  			timer:"1000"
+  		})
+      }else if(message === '' || message == null){
+		  Swal.fire({
+  			title:"請輸入諮詢內容",
+  			text:"",
+  			icon:"warning",
+  			timer:"1000"
+  		})
+      }else{
 
 		Swal.fire({
 		  title: '正在發送中...',
@@ -165,44 +164,44 @@ document.getElementById("contactBtn").addEventListener("click", () => {
 		    Swal.showLoading();
 		  },
 
-        });
+		});
 
-        fetch('/users/consult', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                name: name,
-                contactInfo: contactInfo,
-                questionType: questionType,
-                message: message
-            })
-        }).then(response => {
-            Swal.close();
-            if (!response.ok) {
-                throw new Error('Error :');
+          fetch('/users/consult', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                  name: name,
+                  contactInfo: contactInfo,
+				  questionType : questionType,
+                  message : message
+              })
+          }).then(response => {
+			Swal.close();
+              if(!response.ok){
+                  throw new Error ('Error :');
 
-            } else {
-                contactDiv.style.display = 'none';
+              }else{
+				contactDiv.style.display = 'none';
                 Swal.fire({
-                    title: "已收到您的諮詢",
-                    text: "感謝您的諮詢，我們我盡快回復您的問題！！",
-                    icon: "success",
-                    timer: "2000"
-                })
-            }
-        }).catch(error => {
-            Swal.close();
-            Swal.fire({
-                title: "發送失敗",
-                text: "伺服器忙碌中,請稍後再試!!",
-                icon: "error"
-            });
-            console.log('Error:', error);
-        })
-    }
-})
+					title:"已收到您的諮詢",
+					text:"感謝您的諮詢，我們我盡快回復您的問題！！",
+					icon:"success",
+					timer:"2000"
+				})
+			  }
+          }).catch(error => {
+			Swal.close();
+		    Swal.fire({
+		        title: "發送失敗",
+		        text: "伺服器忙碌中,請稍後再試!!",
+		        icon: "error"
+		    });
+              console.log('Error:', error);
+          })
+      }
+  })
 
 // ChatGPT小幫手聊天室
 function initChatApp() {
@@ -212,9 +211,9 @@ function initChatApp() {
     const chatMessages = document.getElementById('chatMessages');
     const sendButton = document.getElementById('sendButton');
     const closeButton = document.getElementById('closeButton');
-	const maximizeButton = document.getElementById('maximizeButton');
-	
-	let isMaximized = false; // 狀態標誌，用來判斷是否放大視窗
+    const maximizeButton = document.getElementById('maximizeButton');  // 新增放大按鈕
+
+    let isMaximized = false; // 狀態標誌，用來判斷是否放大視窗
 
     // 綁定點擊圖片事件，顯示對話框
     chatIcon.addEventListener('click', function () {
@@ -307,7 +306,7 @@ function initChatApp() {
             }
         }
 
-        typeWriter(); // 開始打字效果
+        typeWriter();  // 開始打字效果
     }
 
     // 送出訊息給後端處理 GPT 回應
@@ -329,7 +328,7 @@ function initChatApp() {
                 console.error('Error:', error);
             });
     }
-	
+
 	maximizeButton.addEventListener('click', function () {
 		console.log('aaaaaaa')
 	        if (!isMaximized) {
@@ -347,41 +346,42 @@ function initChatApp() {
 // 初始化聊天應用
 document.addEventListener("DOMContentLoaded", initChatApp);
 
+
 // 廣告視窗
 document.addEventListener('DOMContentLoaded', function() {
-    const closeAdBtn = document.getElementById('closeAdBtn');
-    const adSlideContainer = document.getElementById('adSlideContainer');
-    const adImage = document.getElementById('adImage');
-    const adLink = document.getElementById('adLink');
+  const closeAdBtn = document.getElementById('closeAdBtn');
+  const adSlideContainer = document.getElementById('adSlideContainer');
+  const adImage = document.getElementById('adImage');
+  const adLink = document.getElementById('adLink');
 
-    // 廣告數據
-    const ads = [
-        { image: '/material/icon/DTlogo.png', link: 'https://www.youtube.com/@DietTomorrowFood/shorts' },
-        { image: 'https://enjoyum.s3.amazonaws.com/632b0c41-db6a-4af6-955b-25c841669d7b-LOGO.png', link: 'https://shopee.tw/-%E6%A8%82%E4%B9%83%E8%BE%B2%E5%A0%B4-%E5%86%B7%E5%87%8D%E9%A6%99%E8%8A%8B%E7%8D%85%E5%AD%90%E9%A0%AD%E7%82%8A%E7%B2%89%E6%B9%AF%E8%AA%BF%E7%90%86%E5%8C%85(600%E5%85%AC%E5%85%8B)-i.82185121.25582336313?srsltid=AfmBOopkAN_W8fu5GCjX3c-D4OPr6tF1c7wgJTw9YRTvs6WW3R4zim7b' },
-        { image: 'https://down-tw.img.susercontent.com/file/tw-11134207-7r990-lx2rajtbrup209@resize_w450_nl.webp', link: 'https://shopee.tw/-%E6%A8%82%E4%B9%83%E8%BE%B2%E5%A0%B4-%E5%86%B7%E5%87%8D%E9%A6%99%E8%8A%8B%E7%8D%85%E5%AD%90%E9%A0%AD%E7%82%8A%E7%B2%89%E6%B9%AF%E8%AA%BF%E7%90%86%E5%8C%85(600%E5%85%AC%E5%85%8B)-i.82185121.25582336313?srsltid=AfmBOopkAN_W8fu5GCjX3c-D4OPr6tF1c7wgJTw9YRTvs6WW3R4zim7b' },
-        { image: 'https://down-tw.img.susercontent.com/file/tw-11134207-7r990-lykvpxdrk7ase9@resize_w450_nl.webp', link: 'https://shopee.tw/-%E6%A8%82%E4%B9%83%E8%BE%B2%E5%A0%B4-%E5%86%B7%E5%87%8D%E7%B6%93%E5%85%B8%E8%A5%BF%E9%A4%90%E7%8E%89%E7%B1%B3%E6%BF%83%E6%B9%AF%E8%AA%BF%E7%90%86%E5%8C%85(500g)-i.82185121.27057086799?srsltid=AfmBOoo0JgHZkpwUIl37pIT236BwhWIWAn00OYrn1kJhuwmxPSoqcC_S' },
-        { image: 'https://down-tw.img.susercontent.com/file/tw-11134207-7r98w-lwutn0ygpvdy5c@resize_w450_nl.webp', link: 'https://shopee.tw/-%E6%A8%82%E4%B9%83%E8%BE%B2%E5%A0%B4-%E7%B6%93%E5%85%B8%E8%BE%A6%E6%A1%8C%E5%86%B7%E5%87%8D%E6%AB%BB%E8%8A%B1%E8%9D%A6%E7%B1%B3%E7%B3%95(350%E5%85%8B-%E7%9B%92)-i.82185121.28553535006?srsltid=AfmBOooL2WdbPUfmS4UmuywDOsEjkvRBVy0nAl2YODX-kotBGxyp2YRb' }
-        // { image: '/material/icon/DTlogo.png', link: 'https://www.youtube.com/@DietTomorrowFood/shorts' },
-        // { image: '/material/icon/DTlogo.png', link: 'https://www.youtube.com/@DietTomorrowFood/shorts' },
-        // { image: '/material/icon/DTlogo.png', link: 'https://www.youtube.com/@DietTomorrowFood/shorts' },
-        // { image: '/material/icon/DTlogo.png', link: 'https://www.youtube.com/@DietTomorrowFood/shorts' },
-        // { image: '/material/icon/DTlogo.png', link: 'https://www.youtube.com/@DietTomorrowFood/shorts' },
-        // { image: '/material/icon/DTlogo.png', link: 'https://www.youtube.com/@DietTomorrowFood/shorts' },
+  // 廣告數據
+  const ads = [
+      { image: '/material/icon/DTlogo.png', link: 'https://www.youtube.com/@DietTomorrowFood/shorts' },
+      { image: 'https://enjoyum.s3.amazonaws.com/632b0c41-db6a-4af6-955b-25c841669d7b-LOGO.png', link: 'https://shopee.tw/-%E6%A8%82%E4%B9%83%E8%BE%B2%E5%A0%B4-%E5%86%B7%E5%87%8D%E9%A6%99%E8%8A%8B%E7%8D%85%E5%AD%90%E9%A0%AD%E7%82%8A%E7%B2%89%E6%B9%AF%E8%AA%BF%E7%90%86%E5%8C%85(600%E5%85%AC%E5%85%8B)-i.82185121.25582336313?srsltid=AfmBOopkAN_W8fu5GCjX3c-D4OPr6tF1c7wgJTw9YRTvs6WW3R4zim7b' },
+      { image: 'https://down-tw.img.susercontent.com/file/tw-11134207-7r990-lx2rajtbrup209@resize_w450_nl.webp', link: 'https://shopee.tw/-%E6%A8%82%E4%B9%83%E8%BE%B2%E5%A0%B4-%E5%86%B7%E5%87%8D%E9%A6%99%E8%8A%8B%E7%8D%85%E5%AD%90%E9%A0%AD%E7%82%8A%E7%B2%89%E6%B9%AF%E8%AA%BF%E7%90%86%E5%8C%85(600%E5%85%AC%E5%85%8B)-i.82185121.25582336313?srsltid=AfmBOopkAN_W8fu5GCjX3c-D4OPr6tF1c7wgJTw9YRTvs6WW3R4zim7b' },
+      { image: 'https://down-tw.img.susercontent.com/file/tw-11134207-7r990-lykvpxdrk7ase9@resize_w450_nl.webp', link: 'https://shopee.tw/-%E6%A8%82%E4%B9%83%E8%BE%B2%E5%A0%B4-%E5%86%B7%E5%87%8D%E7%B6%93%E5%85%B8%E8%A5%BF%E9%A4%90%E7%8E%89%E7%B1%B3%E6%BF%83%E6%B9%AF%E8%AA%BF%E7%90%86%E5%8C%85(500g)-i.82185121.27057086799?srsltid=AfmBOoo0JgHZkpwUIl37pIT236BwhWIWAn00OYrn1kJhuwmxPSoqcC_S' },
+      { image: 'https://down-tw.img.susercontent.com/file/tw-11134207-7r98w-lwutn0ygpvdy5c@resize_w450_nl.webp', link: 'https://shopee.tw/-%E6%A8%82%E4%B9%83%E8%BE%B2%E5%A0%B4-%E7%B6%93%E5%85%B8%E8%BE%A6%E6%A1%8C%E5%86%B7%E5%87%8D%E6%AB%BB%E8%8A%B1%E8%9D%A6%E7%B1%B3%E7%B3%95(350%E5%85%8B-%E7%9B%92)-i.82185121.28553535006?srsltid=AfmBOooL2WdbPUfmS4UmuywDOsEjkvRBVy0nAl2YODX-kotBGxyp2YRb' }
+      // { image: '/material/icon/DTlogo.png', link: 'https://www.youtube.com/@DietTomorrowFood/shorts' },
+      // { image: '/material/icon/DTlogo.png', link: 'https://www.youtube.com/@DietTomorrowFood/shorts' },
+      // { image: '/material/icon/DTlogo.png', link: 'https://www.youtube.com/@DietTomorrowFood/shorts' },
+      // { image: '/material/icon/DTlogo.png', link: 'https://www.youtube.com/@DietTomorrowFood/shorts' },
+      // { image: '/material/icon/DTlogo.png', link: 'https://www.youtube.com/@DietTomorrowFood/shorts' },
+      // { image: '/material/icon/DTlogo.png', link: 'https://www.youtube.com/@DietTomorrowFood/shorts' },
 
-    ];
+  ];
 
-    // 隨機選擇廣告
-    function chooseRandomAd() {
-        const randomIndex = Math.floor(Math.random() * ads.length);
-        return ads[randomIndex];
-    }
+  // 隨機選擇廣告
+  function chooseRandomAd() {
+      const randomIndex = Math.floor(Math.random() * ads.length);
+      return ads[randomIndex];
+  }
 
-    // 設置廣告
-    function setAd() {
-        const ad = chooseRandomAd();
-        adImage.src = ad.image;
-        adLink.href = ad.link;
-    }
+  // 設置廣告
+  function setAd() {
+      const ad = chooseRandomAd();
+      adImage.src = ad.image;
+      adLink.href = ad.link;
+  }
 
     // 在什麼頁面不顯示廣告
     function shouldShowAd() {
@@ -406,7 +406,7 @@ document.addEventListener('DOMContentLoaded', function() {
     setAd();
     showAd();
 
-    // 關閉廣告
+  // 關閉廣告
     closeAdBtn.addEventListener('click', function() {
         hideAd();
         setTimeout(function() {
