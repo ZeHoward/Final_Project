@@ -328,17 +328,27 @@ h1 {
 }
 
 @media (min-width: 1600px) and (max-width: 3840px) {
-  .product{
-    width: 420px;
-  }
+	.product{
+	   width: 400px;
+	 }
 
-  .product-image{
-    height: 40vh;
-  }
+	 .product-image{
+	   height: 40vh;
+	   margin-bottom:40px;
+	 }
 
-  #productName{
-    font-size: 25px;
-  }
+	 #productName{
+	   margin:25px 0;
+	 }
+	 
+	 .product-name{
+		font-size: 20px;
+	 }
+	 
+	 .product-price{
+		margin:25px 0;
+	 }
+
 
 }
 

@@ -1015,7 +1015,7 @@ function generateProductManagementWithActionsContent() {
         if (status === "all") {// 如果選擇"全部"，返回所有商品
             return products;
         } else {
-            return products.filter((product) => product.stock === 0);
+            return products.filter((product) => product.stockQuantity === 0);
         }
     }
 
