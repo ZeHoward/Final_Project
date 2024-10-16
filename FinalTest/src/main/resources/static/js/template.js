@@ -336,7 +336,7 @@ document.addEventListener("DOMContentLoaded", initChatApp);
 // 廣告視窗
 document.addEventListener('DOMContentLoaded', function() {
   const closeAdBtn = document.getElementById('closeAdBtn');
-  const adContainer = document.getElementById('adContainer');
+  const adSlideContainer = document.getElementById('adSlideContainer');
   const adImage = document.getElementById('adImage');
   const adLink = document.getElementById('adLink');
 
