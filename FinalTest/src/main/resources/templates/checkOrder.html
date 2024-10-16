@@ -16,6 +16,7 @@
     <div th:replace="header"></div>
 
     <!-- 開始編輯 -->
+	<div id="myContainer">
     <div class="che-container">
         <h1 class="che-h1" id="orderId">訂單編號：</h1>
         <h2 class="che-h1" id="orderDate">訂單日期：</h2>
@@ -52,6 +53,7 @@
             </div>
         </div>
     </div>
+	</div>
 
     <div th:replace="footer"></div>
     <script th:src="@{/js/checkOrder.js}"></script>
