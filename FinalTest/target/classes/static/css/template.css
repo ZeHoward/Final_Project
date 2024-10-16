@@ -487,8 +487,8 @@ a:visited {
 
 #chatMessages {
   padding: 10px;
-  height: 100%;
-  overflow-y: auto;
+  height: 300px;
+  overflow-y: scroll;
   flex-grow: 1; /* 填滿剩餘空間 */
 }
 

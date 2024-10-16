@@ -109,8 +109,8 @@ main>div{
 
 #spin {
   position: absolute; /* 將按鈕置於旋轉盤的中央 */
-  top: 54%; /* 垂直居中 */
-  left: 50%; /* 水平居中 */
+  top: 54%; /* 垂直 */
+  left: 50%; /* 水平 */
   transform: translate(-50%, -50%); /* 使按鈕完美居中 */
   z-index: 10;
   background-color: #e0912f;
