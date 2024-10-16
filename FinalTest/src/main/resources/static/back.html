@@ -48,11 +48,25 @@
 	    z-index: 500;
 	    background-color: white;
 	    padding: 3px;
+	    display: flex;
+	    flex-direction: row;
+	    justify-content: space-between;
+	    
+    	}
+    	
+    	#chatDiv > div:first-child{
+    	width: 50%;
+    	background-color: red;
+    	}
+    	
+    	#chatDiv > div:second-child{
+    	width: 50%;
+    	color: blue;
     	}
     	
     	#chatArea{
     	width: 100%;
-    	height: 300px;
+    	height: 400px;
     	resize: none;
         border: 1px solid #a1c14b;
         overflow-y: scroll; 
@@ -64,20 +78,20 @@
     	#messageInput{
     	border: 1px solid #a1c14b;
         height: 20px;
-        width: 75%;
-        border-radius: 5px;
+        width: 80%;
+        border-radius: 15px;
     	}
     	
     	#sendButton{
-        border: 1px solid #a1c14b ;
-        background-color: white;
+        border: none ;
+        background-color: #a1c14b;
         height: 20px;
-        border-radius: 5px;
+        border-radius: 15px;
         width: 15%;
         }
         
         #sendButton > i{
-        color: #a1c14b;
+        color: white;
         }
 
         .maid{
@@ -107,6 +121,8 @@
           margin: 0;
           border-radius: 15px;
         }
+        
+        
 
     </style>
   </head>
@@ -158,13 +174,19 @@
     <div id="chatIconDiv" onclick="showChatIcon()">
     	<i class="fa-brands fa-facebook-messenger"></i>
     </div>
-    <div id="chatDiv" style="display:none;">
-    	<div id="chatArea" readonly></div>
-        <input type="text" id="messageInput" placeholder="Enter message" />
-        <button id='sendButton' onclick="sendMessage()">
-        	<i class="fa-solid fa-play"></i> 
-        </button>
-    </div>
+    <div id="chatDiv">
+	    <div>
+	    	<div id="chatArea" readonly></div>
+	        <input type="text" id="messageInput" placeholder="Enter message" />
+	        <button id='sendButton' onclick="sendMessage()">
+	        	<i class="fa-solid fa-play"></i> 
+	        </button>
+	    </div>
+	    <div>
+	    123
+	    </div>
+    	
+	</div>
     <script>
 	   let socket = new WebSocket("ws://localhost:8080/messageChat");
 	
@@ -193,7 +215,7 @@
 	   let showChatIcon = () => {
 		   let chatDiv = document.getElementById('chatDiv');
 		   if(chatDiv.style.display === 'none'){
-			   chatDiv.style.display = 'block';
+			   chatDiv.style.display = 'flex';
 		   }else{
 			   chatDiv.style.display = 'none';
 		   }
