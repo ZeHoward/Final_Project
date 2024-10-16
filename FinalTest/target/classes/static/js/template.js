@@ -366,11 +366,7 @@ function checkLoginStatus() {
         })
 }
 
-<<<<<<< HEAD
-
-=======
 //取得userId
->>>>>>> 28051998c1513d1c55714e34b5af0e64369e98ce
 function getUserId() {
     return fetch('/users/userAllInfo')
         .then(response => {
@@ -384,8 +380,4 @@ function getUserId() {
             console.error("獲取用戶 ID 時發生錯誤", error);
             return null;
         });
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 28051998c1513d1c55714e34b5af0e64369e98ce
