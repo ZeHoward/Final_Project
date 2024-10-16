@@ -205,6 +205,9 @@ function initChatApp() {
     const chatMessages = document.getElementById('chatMessages');
     const sendButton = document.getElementById('sendButton');
     const closeButton = document.getElementById('closeButton');
+	const maximizeButton = document.getElementById('maximizeButton');
+	
+	let isMaximized = false; // 狀態標誌，用來判斷是否放大視窗
 
     // 綁定點擊圖片事件，顯示對話框
     chatIcon.addEventListener('click', function () {
@@ -261,7 +264,7 @@ function initChatApp() {
 
     // 送出訊息給後端處理 GPT 回應
     function sendMessageToGPT(userMessage) {
-        fetch(`/chat?prompt=${encodeURIComponent(userMessage)}`, {
+        fetch(`/RemyChat?prompt=${encodeURIComponent(userMessage)}`, {
             method: 'GET',
             headers: {
                 'accept': '*/*'
@@ -278,12 +281,27 @@ function initChatApp() {
                 console.error('Error:', error);
             });
     }
+	
+	maximizeButton.addEventListener('click', function () {
+		console.log('aaaaaaa')
+	        if (!isMaximized) {
+				chatWindow.style.width = '60vw';
+	            chatWindow.style.height = '80vh';
+	            isMaximized = true;
+	        } else {
+				chatWindow.style.width = '35vw';
+	            chatWindow.style.height = '40vh';
+	            isMaximized = false;
+	        }
+	    });
 }
 
 // 初始化聊天應用
 document.addEventListener("DOMContentLoaded", initChatApp);
 
 
+	
+	
 document.getElementById("luckyWheel").addEventListener("click", () => {
     checkLoginStatus()
         .then((isLoggedIn) => {
@@ -345,4 +363,20 @@ function checkLoginStatus() {
             console.error("登入時發生錯誤", error);
             return false;
         })
+}
+
+
+function getUserId() {
+    return fetch('/users/userAllInfo')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("無法獲取用戶 ID");
+            }
+            return response.json(); // 返回 UserAllInfo 包含 userId
+        })
+        .then(data => data.userId) // 假設返回的數據中包含 userId
+        .catch(error => {
+            console.error("獲取用戶 ID 時發生錯誤", error);
+            return null;
+        });
 }
