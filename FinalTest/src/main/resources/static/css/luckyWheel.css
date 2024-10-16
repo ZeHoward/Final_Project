@@ -23,7 +23,7 @@ main>div{
 .container {
   display: flex;
   justify-content: center;
-  margin: 150px 0 50px 0;
+  margin: 50px 0;
   width: 500px;
   height: 500px;
   background-color: #ffffff;
@@ -45,7 +45,7 @@ main>div{
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 10px;
+  font-size: 25px;
   font-weight: bold;
   font-family: sans-serif;
   color: #000000;
@@ -54,50 +54,52 @@ main>div{
 
 .container .one {
   background-color: #d35b50;
-  transform: rotate(22.5deg); /* 修正起始角度 */
+  transform: rotate(22.5deg);
 }
 
 .container .two {
   background-color: #f3ce6e;
-  transform: rotate(67.5deg); /* 調整後角度 */
+  transform: rotate(67.5deg);
 }
 
 .container .three {
   background-color: #d35b50;
-  transform: rotate(112.5deg); /* 調整後角度 */
+  transform: rotate(112.5deg);
 }
 
 .container .four {
   background-color: #f3ce6e;
-  transform: rotate(157.5deg); /* 調整後角度 */
+  transform: rotate(157.5deg);
 }
 
 .container .five {
   background-color: #d35b50;
-  transform: rotate(202.5deg); /* 調整後角度 */
+  transform: rotate(202.5deg);
 }
 
 .container .six {
   background-color: #f3ce6e;
-  transform: rotate(247.5deg); /* 調整後角度 */
+  transform: rotate(247.5deg);
 }
 
 .container .seven {
   background-color: #d35b50;
-  transform: rotate(292.5deg); /* 調整後角度 */
+  transform: rotate(292.5deg);
 }
 
 .container .eight {
   background-color: #f3ce6e;
-  transform: rotate(337.5deg); /* 調整後角度 */
+  transform: rotate(337.5deg);
 }
 
 .arrow {
   position: absolute;
-  top: 20vh;
+  top: 10vh;
   left: 50%;
   transform: translateX(-50%);
-  color: #d35b50;
+  color: #a1c14b;
+  z-index: 10;
+  font-size: 70px;
 }
 
 .arrow::before {
@@ -106,13 +108,15 @@ main>div{
 }
 
 #spin {
+  position: absolute; /* 將按鈕置於旋轉盤的中央 */
+  top: 54%; /* 垂直 */
+  left: 50%; /* 水平 */
+  transform: translate(-50%, -50%); /* 使按鈕完美居中 */
   z-index: 10;
   background-color: #e0912f;
-  text-transform: uppercase;
   border: 8px solid #fff;
   font-weight: bold;
   font-size: 20px;
-  color: #000000;
   width: 75px;
   height: 75px;
   font-family: sans-serif;
@@ -120,5 +124,4 @@ main>div{
   cursor: pointer;
   outline: none;
   letter-spacing: 1px;
-  margin-bottom: 30px; /* 距離底部的間距 */
 }

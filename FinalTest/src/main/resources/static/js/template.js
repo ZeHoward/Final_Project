@@ -321,11 +321,12 @@ document.getElementById("luckyWheel").addEventListener("click", () => {
                                 Swal.fire({
                                     title: "提示",
                                     text: "您已經領取過特定優惠券，無法再次抽取。",
-                                    icon: "warning"
+                                    icon: "warning",
+                                    timer:1500
                                 });
                                 setTimeout(()=>{
                                     window.location.href='/couponPage';
-                                },500)
+                                },2500)
                             }else{
                                 window.location.href="/luckyWheel"
                             }
@@ -365,7 +366,7 @@ function checkLoginStatus() {
         })
 }
 
-
+//取得userId
 function getUserId() {
     return fetch('/users/userAllInfo')
         .then(response => {

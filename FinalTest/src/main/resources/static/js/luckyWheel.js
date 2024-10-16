@@ -66,11 +66,12 @@ btn.onclick = function () {
                         title: "恭喜",
                         html: `<i class="fa-solid fa-ticket" style="font-size: 50px;color: #eae2cb"></i>
                                 <br><br><p>恭喜您獲得「${couponName}」優惠券!</p>`,
-                        imageAlt: "coupon"
+                        imageAlt: "coupon",
+                        timer:1500
                     })
                     setTimeout(()=>{
                         window.location.href='/couponPage';
-                    },1000)
+                    },2500)
                 } else {
                     console.log("未找到對應的優惠券");
                 }

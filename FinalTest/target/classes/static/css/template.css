@@ -489,7 +489,11 @@ a:visited {
 
 #chatMessages {
   padding: 10px;
+<<<<<<< HEAD
   /*height: 100%;*/
+=======
+  height: 300px;
+>>>>>>> 28051998c1513d1c55714e34b5af0e64369e98ce
   overflow-y: scroll;
   flex-grow: 1; /* 填滿剩餘空間 */
   
