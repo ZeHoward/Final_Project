@@ -278,11 +278,11 @@ function displayProducts(productsToShow) {
         container.appendChild(productDiv);
 
         // 加載圖片後設置延遲並添加動畫效果
-        imgElement.onload = function() {
+        /*imgElement.onload = function() {
             setTimeout(() => {
                 productDiv.classList.add("animate__animated", "animate__flipInY"); // 整個商品卡加入動畫效果
             }, index * 200); // 每個商品卡延遲200ms進入
-        };
+        };*/
 
         fetch(`/productImages/product/${product.productId}`)
             .then((response) => {

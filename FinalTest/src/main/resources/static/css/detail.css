@@ -78,7 +78,7 @@ label{
   margin: 5px 0;
 }
 
-input {
+.quantity-input {
   height: 35px;
   width: 35px;
   text-align: center;
@@ -317,8 +317,20 @@ i.active {
     width: 400px;
   }
 
-  .product-image{
+  .related-product-image{
     height: 40vh;
+	margin-bottom:20px;
+  }
+  
+  .related-product-name{
+	font-weight:500;
+    margin:20px 0;
+	font-size:20px
+  }
+  
+  .related-product-price{
+	font-size:30px;
+	margin:20px 0;
   }
 
   #productName{

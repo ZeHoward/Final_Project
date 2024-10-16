@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
             <div class="quantity-selector">
                 <label for="quantity">數量選擇：</label>
                 <button id="decrease" class="btn-quantity"><i class="fa-solid fa-minus"></i></button>
-                <input type="text" id="quantity" value="1" readonly />
+                <input class="quantity-input" type="text" id="quantity" value="1" readonly />
                 <button id="increase" class="btn-quantity"><i class="fa-solid fa-plus"></i></button>
                 <span>&nbsp;&nbsp;商品剩最後 ${product.stockQuantity} 件</span>
             </div>
