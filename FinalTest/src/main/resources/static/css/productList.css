@@ -228,7 +228,7 @@ i.active {
 
 @media (min-width: 1600px) and (max-width: 3840px) {
   .product{
-    width: 420px;
+    width: 0px;
   }
 
   .product-image{
