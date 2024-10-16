@@ -81,15 +81,15 @@ btn.onclick = function () {
 
                 // 旋轉完後，將轉盤恢復至起始位置
                 setTimeout(function () {
-                    container.style.transition = "none"; // 移除過渡動畫
-                    container.style.transform = "rotate(0deg)"; // 將轉盤恢復到 0 度位置
-                    number = 0; // 重置累積角度
+                    container.style.transition = "none";
+                    container.style.transform = "rotate(0deg)"; // 將轉盤恢復到 0 度
+                    number = 0;
                 }, 1000); // 1 秒後回到初始位置
             }, 3000); // 3秒後顯示優惠券，與旋轉動畫時間一致
         })
         .catch(error => {
             console.error('取得使用者優惠券資訊時發生錯誤:', error);
-            isSpinning = false; // 發生錯誤時重置狀態
+            isSpinning = false;
         });
 };
 
@@ -121,7 +121,6 @@ function findNearestCoupon() {
         }
     });
 
-    // 返回最近的優惠券
     return nearest;
 }
 

@@ -240,7 +240,7 @@ function initChatApp() {
     // 顯示訊息在對話框，帶有打字機效果
     function appendMessage(role, message) {
         const newMessage = document.createElement('div');
-        newMessage.textContent = role === 'user' ? '你: ' : '即食享熱小幫手： ';
+        newMessage.textContent = role === 'user' ? '你: ' : '料理鼠王： ';
         chatMessages.appendChild(newMessage);
 
         let i = 0;
@@ -261,7 +261,7 @@ function initChatApp() {
 
     // 送出訊息給後端處理 GPT 回應
     function sendMessageToGPT(userMessage) {
-        fetch(`/chat?prompt=${encodeURIComponent(userMessage)}`, {
+        fetch(`/RemyChat?prompt=${encodeURIComponent(userMessage)}`, {
             method: 'GET',
             headers: {
                 'accept': '*/*'
