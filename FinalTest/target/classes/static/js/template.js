@@ -205,6 +205,9 @@ function initChatApp() {
     const chatMessages = document.getElementById('chatMessages');
     const sendButton = document.getElementById('sendButton');
     const closeButton = document.getElementById('closeButton');
+	const maximizeButton = document.getElementById('maximizeButton');
+	
+	let isMaximized = false; // 狀態標誌，用來判斷是否放大視窗
 
     // 綁定點擊圖片事件，顯示對話框
     chatIcon.addEventListener('click', function () {
@@ -278,12 +281,27 @@ function initChatApp() {
                 console.error('Error:', error);
             });
     }
+	
+	maximizeButton.addEventListener('click', function () {
+		console.log('aaaaaaa')
+	        if (!isMaximized) {
+				chatWindow.style.width = '60vw';
+	            chatWindow.style.height = '80vh';
+	            isMaximized = true;
+	        } else {
+				chatWindow.style.width = '35vw';
+	            chatWindow.style.height = '40vh';
+	            isMaximized = false;
+	        }
+	    });
 }
 
 // 初始化聊天應用
 document.addEventListener("DOMContentLoaded", initChatApp);
 
 
+	
+	
 document.getElementById("luckyWheel").addEventListener("click", () => {
     checkLoginStatus()
         .then((isLoggedIn) => {
@@ -348,7 +366,11 @@ function checkLoginStatus() {
         })
 }
 
+<<<<<<< HEAD
+
+=======
 //取得userId
+>>>>>>> 28051998c1513d1c55714e34b5af0e64369e98ce
 function getUserId() {
     return fetch('/users/userAllInfo')
         .then(response => {
@@ -362,4 +384,8 @@ function getUserId() {
             console.error("獲取用戶 ID 時發生錯誤", error);
             return null;
         });
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 28051998c1513d1c55714e34b5af0e64369e98ce
