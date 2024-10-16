@@ -487,13 +487,8 @@ a:visited {
 
 #chatMessages {
   padding: 10px;
-<<<<<<< HEAD
-  height: 300px;
-  overflow-y: scroll;
-=======
   height: 100%;
   overflow-y: auto;
->>>>>>> 2bfd1f8f41da83bf148c827a1858bd23ae983013
   flex-grow: 1; /* 填滿剩餘空間 */
 }
 
@@ -565,4 +560,13 @@ a:visited {
 
 .close-ad-btn:hover {
   background: rgba(0,0,0,0.7);
+}
+
+#lucky{
+  position: fixed;
+  cursor: pointer;
+  right: 20px;
+  bottom: 120px;
+  z-index: 1000;
+
 }

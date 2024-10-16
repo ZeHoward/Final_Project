@@ -152,8 +152,8 @@
 		  width: 600,
 		   padding: '3em',
 		   color: '#716add',
-		   background: '#fff', 
-		   
+		   background: '#fff',
+
 		   backdrop: `
 		     rgba(0,0,123,0.4)
 		     url("https://sweetalert2.github.io/images/nyan-cat.gif")
@@ -274,6 +274,7 @@ function initChatApp() {
     // 顯示訊息在對話框，帶有逐字打字機效果並處理格式化
     function appendMessage(role, message) {
         const newMessage = document.createElement('div');
+        newMessage.textContent = role === 'user' ? '你: ' : '料理鼠王： ';
         chatMessages.appendChild(newMessage);
 
         // 如果是用戶訊息，直接顯示
@@ -310,7 +311,7 @@ function initChatApp() {
 
     // 送出訊息給後端處理 GPT 回應
     function sendMessageToGPT(userMessage) {
-        fetch(`/chat?prompt=${encodeURIComponent(userMessage)}`, {  // 修正字符串模板語法錯誤
+        fetch(`/RemyChat?prompt=${encodeURIComponent(userMessage)}`, {
             method: 'GET',
             headers: {
                 'accept': '*/*'
@@ -327,6 +328,19 @@ function initChatApp() {
                 console.error('Error:', error);
             });
     }
+
+	maximizeButton.addEventListener('click', function () {
+		console.log('aaaaaaa')
+	        if (!isMaximized) {
+				chatWindow.style.width = '60vw';
+	            chatWindow.style.height = '80vh';
+	            isMaximized = true;
+	        } else {
+				chatWindow.style.width = '35vw';
+	            chatWindow.style.height = '40vh';
+	            isMaximized = false;
+	        }
+	    });
 }
 
 // 初始化聊天應用
@@ -336,7 +350,7 @@ document.addEventListener("DOMContentLoaded", initChatApp);
 // 廣告視窗
 document.addEventListener('DOMContentLoaded', function() {
   const closeAdBtn = document.getElementById('closeAdBtn');
-  const adContainer = document.getElementById('adContainer');
+  const adSlideContainer = document.getElementById('adSlideContainer');
   const adImage = document.getElementById('adImage');
   const adLink = document.getElementById('adLink');
 
@@ -401,3 +415,83 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 30000);
     });
 });
+
+document.getElementById("luckyWheel").addEventListener("click", () => {
+    checkLoginStatus()
+        .then((isLoggedIn) => {
+            if (isLoggedIn) {
+                getUserId().then(userId => {
+                    console.log(userId);
+                    // 檢查使用者是否已經玩過旋轉盤領取過優惠券
+                    fetch(`/api/coupons/user/${userId}`)
+                        .then(response => response.json())
+                        .then(coupons => {
+                            console.log(coupons);
+                            const restrictedCoupons = [5, 6, 7, 8, 9, 10, 11, 12];
+                            const hasRestrictedCoupon = coupons.some(couponData =>
+                                restrictedCoupons.includes(couponData.coupon.couponId)
+                            );
+                            if (hasRestrictedCoupon) {
+                                Swal.fire({
+                                    title: "提示",
+                                    text: "您已經領取過特定優惠券，無法再次抽取。",
+                                    icon: "warning",
+                                    timer:1500
+                                });
+                                setTimeout(()=>{
+                                    window.location.href='/couponPage';
+                                },2500)
+                            }else{
+                                window.location.href="/luckyWheel"
+                            }
+                        })
+                        .catch(error => {
+                            console.error('取得使用者優惠券資訊時發生錯誤:', error);
+                        });
+                })
+            } else {
+                Swal.fire({
+                    title: "尚未登入",
+                    text: "請先登入才能玩遊戲取得優惠券",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: '登入',
+                    cancelButtonText: '取消',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "/loginPage";
+                    }
+                });
+            }
+        })
+})
+
+function checkLoginStatus() {
+    return fetch('users/checkSession').then(response => {
+        if (!response.ok) {
+            throw new Error("無法檢查登入狀態");
+        }
+        return response.json();
+        console.log(data);
+    })
+        .catch(error => {
+            console.error("登入時發生錯誤", error);
+            return false;
+        })
+}
+
+//取得userId
+function getUserId() {
+    return fetch('/users/userAllInfo')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("無法獲取用戶 ID");
+            }
+            return response.json(); // 返回 UserAllInfo 包含 userId
+        })
+        .then(data => data.userId) // 假設返回的數據中包含 userId
+        .catch(error => {
+            console.error("獲取用戶 ID 時發生錯誤", error);
+            return null;
+        });
+}

@@ -561,3 +561,12 @@ a:visited {
 .close-ad-btn:hover {
   background: rgba(0,0,0,0.7);
 }
+
+#lucky{
+  position: fixed;
+  cursor: pointer;
+  right: 20px;
+  bottom: 120px;
+  z-index: 1000;
+
+}
