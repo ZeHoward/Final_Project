@@ -18,7 +18,7 @@ a {
 }
 
 a:visited {
-  color: inherit;
+  color: inherit; /* 訪問後保持原本的顏色 */
 }
 
 .tem-nav {
@@ -343,7 +343,7 @@ a:visited {
 #contactDiv {
     display: none;
     position: fixed; 
-    z-index: 2; 
+    z-index: 1; 
     left: 0;
     top: 0;
     width: 100%; 
@@ -419,8 +419,8 @@ a:visited {
 #webSocketIconDiv {
     position: fixed;
     bottom: 20px;
+    right: 20px;
     z-index: 500;
-    right: 0;
 }
 
 #webSocketIconDiv:hover{
@@ -446,8 +446,6 @@ a:visited {
   z-index: 1000;
   border-radius: 10px;
   flex-direction: column; /* 垂直排列元素 */
-  /*--*/
-  display: flex; /* 確保使用 flexbox */
 }
 
 #chatWindowHeader {
@@ -489,10 +487,14 @@ a:visited {
 
 #chatMessages {
   padding: 10px;
+<<<<<<< HEAD
   height: 300px;
   overflow-y: scroll;
+=======
+  height: 100%;
+  overflow-y: auto;
+>>>>>>> 2bfd1f8f41da83bf148c827a1858bd23ae983013
   flex-grow: 1; /* 填滿剩餘空間 */
-  
 }
 
 #chatInputContainer {
@@ -514,7 +516,7 @@ a:visited {
   color: rgb(6, 53, 16);
   padding: 5px;
   cursor: pointer;
-  /*width: 100%;*/
+  width: 100%;
 }
 
 /*廣告區塊*/
@@ -562,16 +564,5 @@ a:visited {
 }
 
 .close-ad-btn:hover {
-  background: rgb(57, 88, 218);
-}
-
-#luckyWheel{
-  position: fixed;
-  color: #6ebcf3;
-  cursor: pointer;
-  right: 0;
-  bottom: 60px;
-  font-size: 40px;
-  z-index: 1000;
-
+  background: rgba(0,0,0,0.7);
 }

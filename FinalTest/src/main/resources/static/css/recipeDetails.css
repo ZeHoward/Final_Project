@@ -23,7 +23,7 @@
 }
 
 .recipeImage>img{
-  width: 70%;
+  width: 25vw;
   border-radius: 15px;
   background-color: transparent;
 }
@@ -44,14 +44,14 @@
 
 .btnRed,
 .btnYellow {
-  width: 400px; /*佔用 48% 寬度，留有間距*/
-  height: 60px;
+  width: 250px; /*佔用 48% 寬度，留有間距*/
+  height: 40px;
   color: #fff;
   text-align: center;
   border-radius: 25px;
   margin: 5px 10px;
   border: none;
-  font-size: 35px;
+  font-size: 25px;
   transition: background-color 0.3s, transform 0.3s;
 }
 
@@ -79,7 +79,8 @@
 .tips{
   display: flex;
   justify-content: left;
-  margin: 30px;
+  margin-bottom: 30px;
+  margin-left: 250px;
   flex-direction: column;
 }
 

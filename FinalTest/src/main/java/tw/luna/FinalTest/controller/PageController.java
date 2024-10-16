@@ -39,9 +39,6 @@ public class PageController {
 	@GetMapping("/notice")
 	public String notice() {return "notice";}
 
-	@GetMapping("/luckyWheel")
-	public String luckyWheel() {return "luckyWheel";}
-
 	@GetMapping("/myCollection")
 	public String myCollection() {
 		return "myCollection";
