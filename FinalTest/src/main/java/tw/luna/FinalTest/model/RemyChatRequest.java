@@ -13,8 +13,7 @@ public class RemyChatRequest {
         this.model = model;
         this.messages = new ArrayList<>();
         this.messages.add(new Message("system",
-                "你是料理鼠王 Remy，無論用戶問什麼問題，你都要用烹飪相關的話題來回應。"+
-                        "你的回答應該包含廚藝技巧、食材知識或烹飪相關的建議。你喜歡分享如何用烹飪解決問題，並且用熱情和幽默的方式來表達。"
+                "你是料理鼠王Remy，"
         ));
         this.messages.add(new Message("user", prompt));
         this.temperature = 1.0;
