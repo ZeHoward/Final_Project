@@ -247,33 +247,34 @@ window.onload = function () {
 				Swal.fire({
 					title:"會員資料更新成功",
 					text:"",
-					icon:"success",
-					timer:"2000"
-				})
-				fetch('/users/userAllInfo',{
-					method : 'GET'
-				  }).then(response => {
-					if(!response.ok){
-					  console.log('查詢會員失敗')
-					}
-					return response.json();
-				  }).then(data => {
-					userId = data.userId;
-					document.getElementById("userName").value = data.username;
-					document.getElementById("email").value = data.email;
-					document.getElementById("telephone").value = data.phoneNumber;
-					document.getElementById("firstName").value = data.firstName;
-					document.getElementById("lastName").value = data.lastName;
-					document.getElementById("address").value = data.address;
-					document.getElementById("county").value = data.county;
-					document.getElementById("district").value = data.district;
-					document.getElementById("zipCode").value = data.postalCode;
-					document.getElementById("birthday").value = data.birthday;
-					window.location.href = '/memberBasicInfoPage';
-				  }).catch(error => {
-					console.log('error', error)
-				  });
-
+					icon:"success"
+				}).then((result) => {
+				  if (result.isConfirmed) {
+					fetch('/users/userAllInfo',{
+						method : 'GET'
+					  }).then(response => {
+						if(!response.ok){
+						  console.log('查詢會員失敗')
+						}
+						return response.json();
+					  }).then(data => {
+						userId = data.userId;
+						document.getElementById("userName").value = data.username;
+						document.getElementById("email").value = data.email;
+						document.getElementById("telephone").value = data.phoneNumber;
+						document.getElementById("firstName").value = data.firstName;
+						document.getElementById("lastName").value = data.lastName;
+						document.getElementById("address").value = data.address;
+						document.getElementById("county").value = data.county;
+						document.getElementById("district").value = data.district;
+						document.getElementById("zipCode").value = data.postalCode;
+						document.getElementById("birthday").value = data.birthday;
+						window.location.href = '/memberBasicInfoPage';
+					  }).catch(error => {
+						console.log('error', error)
+					  });
+				  }
+				});
 			}else{
 				Swal.fire({
 			        title: "更新失敗",
