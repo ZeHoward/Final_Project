@@ -16,8 +16,8 @@ public class PaymentService {
     PaymentRepository paymentRepository;
 
 
-    public List<MerchantByUserDto> findAllPayments(Long userId) {
-       List<MerchantByUserDto> paymentList = paymentRepository.findMerchantNoByUsersUserId(userId);
+    public List<String> findAllPayments(Long userId) {
+       List<String> paymentList = paymentRepository.findMerchantNoByUsersUserId(userId);
         return paymentList;
     }
 }

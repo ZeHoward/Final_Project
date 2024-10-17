@@ -25,7 +25,7 @@ const checkUserPaymentWEN = async () => {
     const res = await axios.get(`${apiWEN}/orders/pay/${userIdWEN}`);
     merchantNoList = res.data
     merchantNoList.forEach((merchantNo) => {
-        checkIsPaidWEN(merchantNo.merchantNo)
+        checkIsPaidWEN(merchantNo)
     })
     //用id找payment
     //寫controller

@@ -12,10 +12,8 @@ import java.util.List;
 @Repository
 public interface PaymentRepository extends JpaRepository<Payment, Integer> {
 
-    @Query("SELECT new tw.luna.FinalTest.dto.orders.MerchantByUserDto(p.merchantNo)\n" +
-            "FROM Payment p\n" +
-            "JOIN p.orders o\n" +
-            "JOIN o.user u\n" +
-            "WHERE u.userId = :userId")
-    List<MerchantByUserDto> findMerchantNoByUsersUserId(Long userId);
+    @Query(value = "SELECT p.merchantNo FROM Payment p JOIN orders o ON p.orderId = o.orderId JOIN users u ON o.userId = u.userId WHERE u.userId = :userId AND DATE(o.orderDate) >= CURDATE();",
+            nativeQuery = true)
+
+    List<String> findMerchantNoByUsersUserId(Long userId);
 }
