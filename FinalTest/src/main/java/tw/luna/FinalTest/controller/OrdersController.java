@@ -55,7 +55,7 @@ public class OrdersController {
 
 	//透過userId查找payment 更新ordre付款狀態
 	@GetMapping("/pay/{userId}")
-	public List<MerchantByUserDto> getPaymentByUserId (@PathVariable Long userId){
+	public List<String> getPaymentByUserId (@PathVariable Long userId){
 		return  paymentService.findAllPayments(userId);
 	}
 

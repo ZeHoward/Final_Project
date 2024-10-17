@@ -294,7 +294,7 @@ function initChatApp() {
                 setTimeout(typeWriter, speed);
             } else {
                 // 當打字機效果結束後，將完整的 HTML 格式化應用
-                newMessage.innerHTML = formattedMessage;
+                newMessage.innerHTML = '料理鼠王：' + formattedMessage;
                 chatMessages.scrollTop = chatMessages.scrollHeight;  // 自動滾動到底部
             }
         }
@@ -336,9 +336,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // 廣告數據
   const ads = [
-      { image: '/material/icon/DTlogo.png', link: 'https://www.youtube.com/@DietTomorrowFood/shorts' },
+      { image: 'https://enjoyum.s3.ap-northeast-1.amazonaws.com/DTad.png', link: 'https://www.youtube.com/@DietTomorrowFood/shorts' },
       { image: 'https://enjoyum.s3.amazonaws.com/632b0c41-db6a-4af6-955b-25c841669d7b-LOGO.png', link: 'https://shopee.tw/-%E6%A8%82%E4%B9%83%E8%BE%B2%E5%A0%B4-%E5%86%B7%E5%87%8D%E9%A6%99%E8%8A%8B%E7%8D%85%E5%AD%90%E9%A0%AD%E7%82%8A%E7%B2%89%E6%B9%AF%E8%AA%BF%E7%90%86%E5%8C%85(600%E5%85%AC%E5%85%8B)-i.82185121.25582336313?srsltid=AfmBOopkAN_W8fu5GCjX3c-D4OPr6tF1c7wgJTw9YRTvs6WW3R4zim7b' },
-      { image: 'https://down-tw.img.susercontent.com/file/tw-11134207-7r990-lx2rajtbrup209@resize_w450_nl.webp', link: 'https://shopee.tw/-%E6%A8%82%E4%B9%83%E8%BE%B2%E5%A0%B4-%E5%86%B7%E5%87%8D%E9%A6%99%E8%8A%8B%E7%8D%85%E5%AD%90%E9%A0%AD%E7%82%8A%E7%B2%89%E6%B9%AF%E8%AA%BF%E7%90%86%E5%8C%85(600%E5%85%AC%E5%85%8B)-i.82185121.25582336313?srsltid=AfmBOopkAN_W8fu5GCjX3c-D4OPr6tF1c7wgJTw9YRTvs6WW3R4zim7b' },
+      { image: 'https://enjoyum.s3.ap-northeast-1.amazonaws.com/%E6%A8%82%E4%B9%83ad.png', link: 'https://shopee.tw/-%E6%A8%82%E4%B9%83%E8%BE%B2%E5%A0%B4-%E5%86%B7%E5%87%8D%E9%A6%99%E8%8A%8B%E7%8D%85%E5%AD%90%E9%A0%AD%E7%82%8A%E7%B2%89%E6%B9%AF%E8%AA%BF%E7%90%86%E5%8C%85(600%E5%85%AC%E5%85%8B)-i.82185121.25582336313?srsltid=AfmBOopkAN_W8fu5GCjX3c-D4OPr6tF1c7wgJTw9YRTvs6WW3R4zim7b' },
       { image: 'https://down-tw.img.susercontent.com/file/tw-11134207-7r990-lykvpxdrk7ase9@resize_w450_nl.webp', link: 'https://shopee.tw/-%E6%A8%82%E4%B9%83%E8%BE%B2%E5%A0%B4-%E5%86%B7%E5%87%8D%E7%B6%93%E5%85%B8%E8%A5%BF%E9%A4%90%E7%8E%89%E7%B1%B3%E6%BF%83%E6%B9%AF%E8%AA%BF%E7%90%86%E5%8C%85(500g)-i.82185121.27057086799?srsltid=AfmBOoo0JgHZkpwUIl37pIT236BwhWIWAn00OYrn1kJhuwmxPSoqcC_S' },
       { image: 'https://down-tw.img.susercontent.com/file/tw-11134207-7r98w-lwutn0ygpvdy5c@resize_w450_nl.webp', link: 'https://shopee.tw/-%E6%A8%82%E4%B9%83%E8%BE%B2%E5%A0%B4-%E7%B6%93%E5%85%B8%E8%BE%A6%E6%A1%8C%E5%86%B7%E5%87%8D%E6%AB%BB%E8%8A%B1%E8%9D%A6%E7%B1%B3%E7%B3%95(350%E5%85%8B-%E7%9B%92)-i.82185121.28553535006?srsltid=AfmBOooL2WdbPUfmS4UmuywDOsEjkvRBVy0nAl2YODX-kotBGxyp2YRb' },
       { image: 'https://enjoyum.s3.ap-northeast-1.amazonaws.com/%E6%8A%BD%E7%8D%8E%E5%BB%A3%E5%91%8A.gif', link: '/luckyWheel' }
