@@ -60,9 +60,10 @@
         }
 
         .maid p{
-            background-color: #c6e6a1;
+            background-color: #dfdfdf;
             padding: 3px;
             margin: 0;
+            border-radius: 15px;
         }
 
         .master{
@@ -72,9 +73,10 @@
         }
 
         .master p{
-            background-color: #dfdfdf;
+            background-color: #c6e6a1;
             padding: 3px;
             margin: 0 ;
+            border-radius: 15px;
         }
 
     </style>
@@ -109,7 +111,7 @@
         let message = document.createElement('div');
         let msgContent= `<p>${event.data}</p>`;
         message.innerHTML=msgContent;
-        if(event.data.includes('ご主人様')){
+        if(event.data.includes('程昊則:')){
             message.classList.add("master");
         }else{
             message.classList.add("maid");
@@ -122,7 +124,7 @@
    	    let value = input.value;
 
    	    if (value.trim() !== '') { 
-   	        socket.send("ご主人様:" + value);
+   	        socket.send("程昊則:" + value);
    	        input.value = '';
    	    }
     }
