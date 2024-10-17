@@ -60,6 +60,7 @@ public class UserFavoritesRecipesService {
     }
 
     // 根據 userId 取得用戶收藏的食譜，並且返回產品信息
+    // 根據 userId 取得用戶收藏的食譜，並且返回食譜信息
     public List<FavoritesRecipeDTO> getFavoritesRecipesByUserId(Long userId) {
         List<UserFavoritesRecipes> favorites = repository.findByIdUserId(userId);
 
@@ -67,18 +68,26 @@ public class UserFavoritesRecipesService {
                 .map(favorite -> {
                     Optional<Recipes> recipe = recipesRepository.findById(favorite.getRecipeId());
                     if (recipe.isPresent()) {
-                        Product product = recipe.get().getProduct();  // 確保 Recipes 對應的 Product 存在
-                        if (product != null) {
-                            // 使用 S3 URL 而不是 Base64 編碼
-                            String imageUrl = getProductImageUrl(product.getProductImages());
-                            return new FavoritesRecipeDTO(product.getProductId(), product.getName(), product.getPrice(), imageUrl);
-                        }
+                        Product product = recipe.get().getProduct();
+                        String imageUrl = product != null ? getProductImageUrl(product.getProductImages()) : null;
+
+                        // 使用食譜的 title 作為名稱
+                        return new FavoritesRecipeDTO(
+                                product != null ? product.getProductId() : 0,
+                                recipe.get().getRecipeId(),
+                                recipe.get().getTitle(),  // 使用食譜名稱
+                                product != null ? product.getPrice() : 0,
+                                imageUrl
+                        );
                     }
                     return null;
                 })
-                .filter(Objects::nonNull)  // 過濾掉可能的空值
+                .filter(Objects::nonNull)
                 .collect(Collectors.toList());
     }
+
+
+
 
     // 獲取產品的第一張圖片的 S3 URL
     private String getProductImageUrl(List<ProductImage> productImages) {
