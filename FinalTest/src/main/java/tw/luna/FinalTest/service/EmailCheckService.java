@@ -47,13 +47,13 @@ public class EmailCheckService {
                     "                padding: 0;\n" +
                     "            }\n" +
                     "            .container {\n" +
-                    "                background-image: url('https://i.imgur.com/mYo4lqM.png');\n" +
+                    "                background-image: url('https://i.imgur.com/sF0D95G.gif');\n" +
                     "                background-size: cover;\n" +
                     "                background-position: center;\n" +
                     "                padding: 20px;\n" +
                     "                margin: 0 auto;\n" +
-                    "                width: 600px;\n" +
-                    "                height: 450px;\n" +
+                    "                width: 648px;\n" +
+                    "                height: 648px;\n" +
                     "                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);\n" +
                     "                border-radius: 8px;\n" +
                     "                text-align: center;\n" +
@@ -71,7 +71,7 @@ public class EmailCheckService {
                     "        </style>\n" +
                     "    </head>\n" +
                     "    <body>\n" +
-                    "        <div class=\"container\">\n <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>" +
+                    "        <div class=\"container\">\n <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>" +
                     "            <a id=\"key\" href=\"http://localhost:8080/verify?token=" + token + "\">驗證電子信箱</a>\n" +
                     "        </div>\n" +
                     "    </body>\n" +

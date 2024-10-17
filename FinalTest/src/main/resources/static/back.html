@@ -39,7 +39,7 @@
     	}
     	
     	#chatDiv{
-    	width: 300px;
+    	width: 400px;
 		border: 1px solid #a1c14b ;
 		border-radius: 5px;
     	position: fixed;
@@ -48,20 +48,18 @@
 	    z-index: 500;
 	    background-color: white;
 	    padding: 3px;
-	    display: flex;
+	    display: none;
 	    flex-direction: row;
 	    justify-content: space-between;
-	    
     	}
     	
     	#chatDiv > div:first-child{
-    	width: 50%;
-    	background-color: red;
+    	width: 80%;
+    	
     	}
     	
-    	#chatDiv > div:second-child{
-    	width: 50%;
-    	color: blue;
+    	#chatDiv > div:nth-child(2){
+    	width: 20%;    	
     	}
     	
     	#chatArea{
@@ -77,7 +75,7 @@
     	
     	#messageInput{
     	border: 1px solid #a1c14b;
-        height: 20px;
+        height: 35px;
         width: 80%;
         border-radius: 15px;
     	}
@@ -85,7 +83,7 @@
     	#sendButton{
         border: none ;
         background-color: #a1c14b;
-        height: 20px;
+        height: 35px;
         border-radius: 15px;
         width: 15%;
         }
@@ -120,6 +118,25 @@
           display: inline-block;
           margin: 0;
           border-radius: 15px;
+        }
+        
+        .consumer{
+        width:95%;
+        height: 35px;
+        border-radius: 5px;
+        margin-bottom: 2px;
+        margin-left: 5%;
+        border : 1px ;
+        background-color: #f3ce6e;
+        display: flex;
+   		align-items: center;
+    	justify-content: center;
+    	font-size: larger;
+    	 
+        }
+        
+        .consumer:hover{
+        cursor: pointer;
         }
         
         
@@ -183,7 +200,17 @@
 	        </button>
 	    </div>
 	    <div>
-	    123
+	    	<div class="consumer"><span>程昊則</span></div>
+	    	<div class="consumer"><span>曾毓珈</span></div>
+	    	<div class="consumer"><span>吳忻穎</span></div>
+	    	<div class="consumer"><span>潘仕杰</span></div>
+	    	<div class="consumer"><span>徐靖雯</span></div>
+	    	<div class="consumer"><span>林晨希</span></div>
+	    	<div class="consumer"><span>張若曦</span></div>
+	    	<div class="consumer"><span>陳宇寧</span></div>
+	    	<div class="consumer"><span>王芷嫣</span></div>
+	    	<div class="consumer"><span>李瀚翔</span></div>
+	    	<div class="consumer"><span>趙宥彤</span></div>
 	    </div>
     	
 	</div>
@@ -195,7 +222,7 @@
 	       let message = document.createElement('div');
            let msgContent= `<p>${event.data}</p>`;
            message.innerHTML=msgContent;
-	       if(event.data.includes('メイド')){
+	       if(event.data.includes('客服:')){
              message.classList.add("maid");
 	       }else{
              message.classList.add("master");
@@ -207,7 +234,7 @@
 	   let sendMessage = () => {
 	       let input = document.getElementById('messageInput');
 	       if(input.value.trim() !== ''){
-		       socket.send("メイド:" + input.value);
+		       socket.send("客服:" + input.value);
 	       }
 	       input.value = '';
 	   }
