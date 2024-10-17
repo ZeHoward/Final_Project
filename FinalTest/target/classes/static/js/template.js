@@ -294,7 +294,7 @@ function initChatApp() {
                 setTimeout(typeWriter, speed);
             } else {
                 // 當打字機效果結束後，將完整的 HTML 格式化應用
-                newMessage.innerHTML = formattedMessage;
+                newMessage.innerHTML = '料理鼠王：' + formattedMessage;
                 chatMessages.scrollTop = chatMessages.scrollHeight;  // 自動滾動到底部
             }
         }
