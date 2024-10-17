@@ -45,6 +45,12 @@ public class UserFavoritesRecipesController {
         return ResponseEntity.noContent().build();
     }
 
+    @DeleteMapping("/removeByRecipeId")
+    public ResponseEntity<Void> removeFavoriteByRecipeId(@RequestParam Long userId, @RequestParam int recipeId) {
+        service.removeFavoriteByRecipeId(userId, recipeId);
+        return ResponseEntity.noContent().build();
+    }
+
     @GetMapping("/user")
     public ResponseEntity<List<FavoritesRecipeDTO>> getFavoritesRecipesByUserId(@RequestParam Long userId) {
         List<FavoritesRecipeDTO> favorites = service.getFavoritesRecipesByUserId(userId);

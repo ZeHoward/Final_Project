@@ -157,7 +157,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function removeFavorite(id, type) {
     let apiUrl = type === 'products'
         ? `/api/favorites/remove?userId=${userId}&productId=${id}`
-        : `/api/favorites/recipes/remove?userId=${userId}&productId=${id}`;
+        : `/api/favorites/recipes/removeByRecipeId?userId=${userId}&recipeId=${id}`;
 
     fetch(apiUrl, {
       method: 'DELETE',
