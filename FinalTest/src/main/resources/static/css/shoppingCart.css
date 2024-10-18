@@ -180,6 +180,7 @@ th {
   width: 240px;
   font-weight: bold;
   margin: 10px 0 50px 0;
+  margin-bottom:130px;
 }
 .submitButton:hover {
   background-color: #ca2a1c;

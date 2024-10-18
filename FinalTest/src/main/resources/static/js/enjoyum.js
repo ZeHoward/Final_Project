@@ -25,7 +25,7 @@ const checkUserPaymentWEN = async () => {
     const res = await axios.get(`${apiWEN}/orders/pay/${userIdWEN}`);
     merchantNoList = res.data
     merchantNoList.forEach((merchantNo) => {
-        checkIsPaidWEN(merchantNo.merchantNo)
+        checkIsPaidWEN(merchantNo)
     })
     //用id找payment
     //寫controller
@@ -307,14 +307,14 @@ function updateProductInfo(products, containerId, currentIndex, productsPerPage)
 // 輪播圖自動播放
 let autoPlayInterval = setInterval(function () {
     plusSlides(1);
-}, 3000);
+}, 4500);
 
 function plusSlides(n) {
     clearInterval(autoPlayInterval); // 切換幻燈片時停止自動播放
     showSlides(slideIndex += n);
     autoPlayInterval = setInterval(function () { // 重啟自動播放
         plusSlides(1);
-    }, 3000);
+    }, 4500);
 }
 
 function currentSlide(n) {
@@ -322,7 +322,7 @@ function currentSlide(n) {
     showSlides(slideIndex = n);
     autoPlayInterval = setInterval(function () { // 重啟自動播放
         plusSlides(1);
-    }, 3000);
+    }, 4500);
 }
 
 function showSlides(n) {

@@ -231,18 +231,18 @@ i.active {
   }
 
   .product-image{
-    height: 50vh;
+    height: 40vh;
 	margin-bottom:20px;
   }
 
   #productName{
 	margin:5px 0;
   }
-  
+
   .product-name{
   		font-size: 20px;
   	 }
-  
+
   .product-price{
 	margin:5px 0;
   }

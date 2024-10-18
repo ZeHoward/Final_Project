@@ -86,6 +86,16 @@ public class UserFavoritesRecipesService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
+    public void removeFavoriteByRecipeId(Long userId, int recipeId) {
+        // 驗證 recipeId 是否存在
+        if (!recipesRepository.existsById(recipeId)) {
+            throw new RuntimeException("Recipe not found for the given recipeId");
+        }
+
+        // 刪除 UserFavoritesRecipes 中對應的記錄
+        repository.deleteByUserIdAndRecipeId(userId, recipeId);
+    }
 
 
 
